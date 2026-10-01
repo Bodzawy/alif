@@ -1,0 +1,46 @@
+{
+  "أسد": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة أسد بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة أسد"
+    }
+  },
+
+  "أرنب": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة أرنب بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة أرنب"
+    }
+  },
+
+  "أناناس": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة أناناس بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة أناناس"
+    }
+  }
+}
