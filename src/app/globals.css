@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+    --background: 40 38% 97%;          /* warm sand */
+    --foreground: 200 32% 12%;         /* ink */
+    --card: 0 0% 100%;
+    --card-foreground: 200 32% 12%;
+    --primary: 174 64% 27%;            /* deep teal */
+    --primary-foreground: 0 0% 100%;
+    --primary-soft: 168 42% 92%;
+    --accent: 36 92% 50%;              /* saffron */
+    --accent-foreground: 30 60% 14%;
+    --accent-soft: 42 96% 92%;
+    --success: 152 62% 30%;
+    --success-foreground: 0 0% 100%;
+    --success-soft: 148 48% 93%;
+    --warning: 28 86% 38%;
+    --warning-foreground: 0 0% 100%;
+    --warning-soft: 40 94% 92%;
+    --destructive: 0 68% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --destructive-soft: 0 84% 96%;
+    --muted: 40 22% 94%;
+    --muted-foreground: 200 10% 38%;
+    --border: 36 18% 87%;
+    --ring: 174 64% 32%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply min-h-dvh bg-background text-foreground font-sans;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.16);
+  }
+
+  /* Arabic islands inside the German (LTR) interface. */
+  [lang="ar"] {
+    font-family: "Noto Naskh Arabic", "Geeza Pro", serif;
+  }
+}
+
+@layer utilities {
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+
+  .pattern-dots {
+    background-image: radial-gradient(hsl(var(--primary) / 0.09) 1px, transparent 1px);
+    background-size: 18px 18px;
+  }
+}
+
+@keyframes record-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.record-progress {
+  transform-origin: left center;
+  animation: record-progress var(--record-ms, 3500ms) linear forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

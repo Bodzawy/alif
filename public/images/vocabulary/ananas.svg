@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Ananas">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%">
+      <stop offset="0" stop-color="#e6f7f3"/>
+      <stop offset="1" stop-color="#b9e6dc"/>
+    </radialGradient>
+    <linearGradient id="fruit" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffd54a"/>
+      <stop offset="1" stop-color="#f2a01f"/>
+    </linearGradient>
+    <clipPath id="body"><ellipse cx="200" cy="198" rx="62" ry="80"/></clipPath>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/>
+  <circle cx="70" cy="70" r="40" fill="#d3f0e9"/>
+  <circle cx="340" cy="230" r="54" fill="#d3f0e9"/>
+  <ellipse cx="200" cy="282" rx="80" ry="10" fill="#7cbfae" opacity="0.5"/>
+  <!-- crown -->
+  <g fill="#2f9e5b">
+    <path d="M200 128 C 186 96, 160 76, 132 70 C 156 92, 170 112, 182 134 Z"/>
+    <path d="M200 128 C 214 96, 240 76, 268 70 C 244 92, 230 112, 218 134 Z"/>
+  </g>
+  <g fill="#3fbf6d">
+    <path d="M200 132 C 190 94, 176 64, 160 40 C 186 58, 202 90, 208 132 Z"/>
+    <path d="M200 132 C 210 94, 224 64, 240 40 C 214 58, 198 90, 192 132 Z"/>
+  </g>
+  <path d="M200 134 C 196 96, 198 60, 200 22 C 206 60, 208 96, 204 134 Z" fill="#56d37f"/>
+  <!-- fruit -->
+  <ellipse cx="200" cy="198" rx="62" ry="80" fill="url(#fruit)"/>
+  <g clip-path="url(#body)" stroke="#d98a12" stroke-width="3.5" fill="none" opacity="0.85">
+    <path d="M100 120 l200 200 M100 150 l200 200 M100 90 l200 200 M100 180 l200 200 M100 60 l200 200 M100 210 l200 200 M100 30 l200 200"/>
+    <path d="M300 120 l-200 200 M300 150 l-200 200 M300 90 l-200 200 M300 180 l-200 200 M300 60 l-200 200 M300 210 l-200 200 M300 30 l-200 200"/>
+  </g>
+  <g clip-path="url(#body)" fill="#b86a0c" opacity="0.7">
+    <circle cx="200" cy="150" r="3"/><circle cx="179" cy="171" r="3"/><circle cx="221" cy="171" r="3"/>
+    <circle cx="158" cy="192" r="3"/><circle cx="200" cy="192" r="3"/><circle cx="242" cy="192" r="3"/>
+    <circle cx="179" cy="213" r="3"/><circle cx="221" cy="213" r="3"/><circle cx="200" cy="234" r="3"/>
+    <circle cx="158" cy="234" r="3"/><circle cx="242" cy="234" r="3"/><circle cx="179" cy="255" r="3"/><circle cx="221" cy="255" r="3"/>
+    <circle cx="179" cy="129" r="3"/><circle cx="221" cy="129" r="3"/>
+  </g>
+  <ellipse cx="176" cy="168" rx="12" ry="30" fill="#fff" opacity="0.22" transform="rotate(18 176 168)"/>
+</svg>

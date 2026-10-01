@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Löwe">
+  <defs>
+    <radialGradient id="sky" cx="50%" cy="40%" r="75%">
+      <stop offset="0" stop-color="#fff4d6"/>
+      <stop offset="1" stop-color="#ffd98a"/>
+    </radialGradient>
+    <radialGradient id="mane" cx="50%" cy="50%" r="50%">
+      <stop offset="0.55" stop-color="#d9771f"/>
+      <stop offset="1" stop-color="#a8521a"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#sky)"/>
+  <circle cx="330" cy="62" r="34" fill="#ffe7a8"/>
+  <path d="M0 252 C 80 230, 140 240, 200 236 C 270 232, 330 226, 400 240 L400 300 L0 300 Z" fill="#e9b45b"/>
+  <path d="M0 272 C 90 258, 170 266, 240 262 C 310 258, 360 254, 400 262 L400 300 L0 300 Z" fill="#d89c45"/>
+  <!-- mane -->
+  <g transform="translate(200 150)">
+    <g fill="url(#mane)">
+      <circle r="98"/>
+    </g>
+    <g fill="#c4621b">
+      <circle cx="0" cy="-92" r="26"/><circle cx="46" cy="-80" r="26"/><circle cx="80" cy="-46" r="26"/>
+      <circle cx="92" cy="0" r="26"/><circle cx="80" cy="46" r="26"/><circle cx="46" cy="80" r="26"/>
+      <circle cx="0" cy="92" r="26"/><circle cx="-46" cy="80" r="26"/><circle cx="-80" cy="46" r="26"/>
+      <circle cx="-92" cy="0" r="26"/><circle cx="-80" cy="-46" r="26"/><circle cx="-46" cy="-80" r="26"/>
+    </g>
+    <!-- ears -->
+    <circle cx="-48" cy="-54" r="20" fill="#f2c27a"/><circle cx="-48" cy="-54" r="10" fill="#e39a5a"/>
+    <circle cx="48" cy="-54" r="20" fill="#f2c27a"/><circle cx="48" cy="-54" r="10" fill="#e39a5a"/>
+    <!-- face -->
+    <ellipse cx="0" cy="4" rx="66" ry="62" fill="#f6cf8c"/>
+    <ellipse cx="0" cy="36" rx="40" ry="28" fill="#fde9c4"/>
+    <!-- eyes -->
+    <ellipse cx="-24" cy="-8" rx="8" ry="10" fill="#3b2412"/>
+    <ellipse cx="24" cy="-8" rx="8" ry="10" fill="#3b2412"/>
+    <circle cx="-21" cy="-12" r="3" fill="#fff"/><circle cx="27" cy="-12" r="3" fill="#fff"/>
+    <path d="M-36 -26 q12 -8 24 -2" stroke="#b5662a" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M36 -26 q-12 -8 -24 -2" stroke="#b5662a" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <!-- nose & mouth -->
+    <path d="M-12 18 h24 l-12 13 z" fill="#5a2f17" stroke="#5a2f17" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M0 32 v8 M0 40 q-9 10 -18 4 M0 40 q9 10 18 4" stroke="#5a2f17" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <g fill="#c99a62"><circle cx="-24" cy="34" r="2.5"/><circle cx="-30" cy="42" r="2.5"/><circle cx="24" cy="34" r="2.5"/><circle cx="30" cy="42" r="2.5"/></g>
+    <!-- cheeks -->
+    <ellipse cx="-44" cy="20" rx="10" ry="6" fill="#f3a77a" opacity="0.6"/>
+    <ellipse cx="44" cy="20" rx="10" ry="6" fill="#f3a77a" opacity="0.6"/>
+  </g>
+</svg>
