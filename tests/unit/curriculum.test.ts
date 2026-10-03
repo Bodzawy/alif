@@ -8,13 +8,18 @@ import { existsSync } from "node:fs";
 import path from "node:path";
 
 describe("curriculum", () => {
-  it("publishes A0 → Lesson 1 with a letter and three vocabulary cards", () => {
-    const found = getLesson("a0", "lesson-1");
-    expect(found?.level.code).toBe("A0");
+  it("publishes A1 → Lesson 1 with a letter and three vocabulary cards", () => {
+    const found = getLesson("a1", "lesson-1");
+    expect(found?.level.code).toBe("A1");
     expect(found?.lesson.letter.glyph).toBe("أَ");
-    expect(found?.lesson.vocabulary).toHaveLength(3);
-    expect(getLesson("a0", "lesson-99")).toBeUndefined();
-    expect(nextLesson("a0", "lesson-1")).toBeUndefined();
+    expect(found?.lesson.vocabulary.map((item) => item.exercise.target)).toEqual(["أسد", "أرنب", "أناناس"]);
+    expect(getLesson("a1", "lesson-99")).toBeUndefined();
+    expect(nextLesson("a1", "lesson-1")).toBeUndefined();
+  });
+
+  it("no longer serves the vocabulary lesson under A0 (A0 is the alphabet)", () => {
+    expect(getLesson("a0", "lesson-1")).toBeUndefined();
+    expect(LEVELS.map((level) => level.slug)).toEqual(["a1"]);
   });
 
   it("gives every exercise condition rules with an 'excellent' rule", () => {

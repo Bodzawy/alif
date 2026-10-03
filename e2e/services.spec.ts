@@ -15,7 +15,7 @@ test.use({ baseURL: "http://127.0.0.1:3211" });
 
 test("recording is sent to Azure, MASAAR and IQRA through Alif's API", async ({ page, request }) => {
   await request.post(`${MODELS}/__reset`);
-  await page.goto("/a0/lesson-1");
+  await page.goto("/a1/lesson-1");
 
   const apiCall = page.waitForResponse((r) => r.url().endsWith("/api/pronunciation") && r.request().method() === "POST", { timeout: 60_000 });
   await recordExercise(page, "letter");
@@ -47,5 +47,28 @@ test("recording is sent to Azure, MASAAR and IQRA through Alif's API", async ({ 
     await expect(page.getByTestId("exercise-letter-error")).toBeVisible();
     await expect(page.getByTestId("exercise-letter-feedback")).toHaveCount(0);
     test.info().annotations.push({ type: "azure", description: `NOT reachable – API answered ${response.status()}` });
+  }
+});
+
+test("A0 letter page uses the same /api/pronunciation pipeline (Azure, MASAAR, IQRA)", async ({ page, request }) => {
+  await request.post(`${MODELS}/__reset`);
+  await page.goto("/a0/letters/alif");
+  const apiCall = page.waitForResponse((r) => r.url().endsWith("/api/pronunciation") && r.request().method() === "POST", { timeout: 60_000 });
+  await recordExercise(page, "alif");
+  const response = await apiCall;
+
+  const hits = (await (await request.get(`${MODELS}/__hits`)).json()) as Array<Record<string, unknown>>;
+  for (const service of ["MASAAR", "IQRA"]) {
+    expect(hits.find((hit) => hit.service === service), service).toMatchObject({ apiKey: "e2e-internal-key", hasAudioField: true, wav: { channels: 1, sampleRate: 16000, bits: 16 } });
+  }
+
+  if (response.status() === 200) {
+    const body = await response.json();
+    await expect(page.getByTestId("exercise-alif-feedback-message")).toHaveText(body.conditionEvaluation.message.trim());
+    await expect(page.getByTestId("letter-next")).toBeEnabled({ enabled: body.passed === true });
+  } else {
+    expect(realAzure, `Azure was configured but the API answered ${response.status()}`).toBe(false);
+    await expect(page.getByTestId("exercise-alif-error")).toBeVisible();
+    await expect(page.getByTestId("letter-next")).toBeDisabled();
   }
 });

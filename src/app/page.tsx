@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, Ear, Mic, Sparkles } from "lucide-react";
 
 import { buttonClasses } from "@/components/ui/button";
+import { ALPHABET, ALPHABET_LEVEL } from "@/data/alphabet";
 import { LEVELS } from "@/data/curriculum";
 
 const STEPS = [
@@ -28,11 +29,11 @@ export default function HomePage() {
               Alif begleitet dich vom ersten Buchstaben an: hören, nachsprechen und sofort erfahren, wie gut deine Aussprache ist.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="/a0/lesson-1" className={buttonClasses({ size: "lg" })} data-testid="cta-start">
-                Mit Lektion 1 starten <ArrowRight className="h-5 w-5" aria-hidden />
+              <Link href="/a0" className={buttonClasses({ size: "lg" })} data-testid="cta-start">
+                Mit dem Alphabet starten <ArrowRight className="h-5 w-5" aria-hidden />
               </Link>
-              <Link href="/a0" className={buttonClasses({ size: "lg", variant: "secondary" })}>
-                Stufe A0 ansehen
+              <Link href="/a1" className={buttonClasses({ size: "lg", variant: "secondary" })}>
+                Zu A1 · Erste Wörter
               </Link>
             </div>
           </div>
@@ -47,8 +48,17 @@ export default function HomePage() {
         <h2 id="levels-heading" className="text-2xl font-bold tracking-tight">Dein Lernweg</h2>
         <p className="mt-1 text-muted-foreground">Starte bei null – Alif führt dich Schritt für Schritt.</p>
 
-        <div className="mt-6 grid gap-5 md:grid-cols-2">
-          {LEVELS.map((level) => (
+        <div className="mt-6 grid gap-5 md:grid-cols-3">
+          {[
+            { slug: ALPHABET_LEVEL.slug, code: ALPHABET_LEVEL.code, title: ALPHABET_LEVEL.title, description: ALPHABET_LEVEL.description, count: `${ALPHABET.length} Buchstaben` },
+            ...LEVELS.map((level) => ({
+              slug: level.slug,
+              code: level.code,
+              title: level.title,
+              description: level.description,
+              count: `${level.lessons.length} ${level.lessons.length === 1 ? "Lektion" : "Lektionen"} verfügbar`,
+            })),
+          ].map((level) => (
             <Link
               key={level.slug}
               href={`/${level.slug}`}
@@ -61,13 +71,11 @@ export default function HomePage() {
               </div>
               <h3 className="mt-5 text-xl font-bold">{level.title}</h3>
               <p className="mt-1 text-muted-foreground">{level.description}</p>
-              <p className="mt-4 text-sm font-medium text-primary">
-                {level.lessons.length} {level.lessons.length === 1 ? "Lektion" : "Lektionen"} verfügbar
-              </p>
+              <p className="mt-4 text-sm font-medium text-primary">{level.count}</p>
             </Link>
           ))}
           <div className="flex flex-col justify-center rounded-3xl border border-dashed p-6 text-muted-foreground">
-            <p className="font-semibold text-foreground">A1 und weitere Stufen</p>
+            <p className="font-semibold text-foreground">A2 und weitere Stufen</p>
             <p className="mt-1 text-sm">Neue Lektionen kommen bald dazu.</p>
           </div>
         </div>

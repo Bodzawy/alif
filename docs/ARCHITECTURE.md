@@ -45,32 +45,59 @@ The following Masaar parts were **not** taken over, because the pronunciation fe
 src/
   app/
     page.tsx                     home: level overview
-    [level]/page.tsx             lesson list (A0)
+    a0/page.tsx                  A0 alphabet overview (28 letters with status)
+    a0/letters/[letter]/page.tsx A0 letter practice (one page per Masaar letter id)
+    [level]/page.tsx             lesson list (A1)
     [level]/[lesson]/page.tsx    lesson (statically generated from the curriculum)
     api/pronunciation/route.ts   evaluation pipeline
     api/tts/route.ts             model pronunciation
     api/health/route.ts          configuration check (booleans only)
   components/
-    lessons/                     LessonPlayer, LetterHero, VocabularyCard, LessonComplete, status, progress hook
+    alphabet/                    A0: AlphabetOverview, LetterPractice, AlphabetComplete, status badge, progress hook
+    lessons/                     A1: LessonPlayer, LetterHero, VocabularyCard, LessonComplete, status, progress hook
     pronunciation/               exercise hook (state machine), record button, feedback panel
     audio/                       listen button
     ui/                          header, footer, button, logo
   data/
     types.ts                     Level / Lesson / VocabularyItem / PronunciationExercise
-    curriculum.ts                registry of all levels and lessons
-    lessons/a0/lesson-1.ts       Lesson 1 content
+    alphabet.ts                  A0 letters, derived from lib/pronunciation/letters.ts (Masaar data)
+    curriculum.ts                registry of the lesson-based levels (A1)
+    lessons/a1/lesson-1.ts       Lesson 1 content
   lib/
     audio/                       WAV encoding (browser), WAV header check (server), recording constants
     pronunciation/               condition engine, rules, letters, targets, assessment, client mapping, errors, config
     pronunciation/services/      azure.ts, models.ts (MASAAR + IQRA), server-only
     tts/                         SSML builder, browser player with cache
     progress.ts                  per-browser lesson progress (swap for a server store when accounts exist)
+    alphabet-progress.ts         A0 status per letter: mastered / skipped / available / locked
     rate-limit.ts
 ```
 
 Server-only modules import `server-only`. A production build check confirmed that no keys, rule data or SDK code end up in `.next/static`.
 
-## 5. Authentication later
+## 5. A0 and the permanent parity suite
+
+A0 adds no pronunciation logic. Each letter page sends the letter's Masaar
+`referenceText` to the existing `/api/pronunciation` and plays its `modelText`
+through `/api/tts`; recording uses the trainer settings (raw audio, ≤ 3.5 s,
+manual stop). Only `passed: true` marks a letter as mastered and unlocks the
+next one. With the Masaar rules, 26 of 28 letters cannot pass while IQRA is
+unavailable (ألف needs Azure only; ذال's rule "does not contain z" holds for an
+empty phoneme list); this is preserved as is, and *Überspringen* is the only
+way past a service outage. A skip never counts as mastery.
+
+`tests/fixtures/legacy-masaar/` holds a frozen, hash-checked copy of Masaar's
+pronunciation route, condition engine, letter rules and letter list
+(commit `edea012`). `tests/parity/` runs it side by side with Alif:
+
+- `legacy-fixture.test.ts`: the fixture is unchanged, Alif's `letter_conditions.json` is byte-identical, and A0 uses Masaar's letters, targets and TTS texts.
+- `engine-parity.test.ts`: 88,200 condition-engine cases.
+- `api-parity.test.ts`: both `/api/pronunciation` handlers with the same audio, Azure result (simulated SDK) and MASAAR/IQRA answers. It covers all 28 letters, accuracies around every threshold, every rule phoneme combination, IQRA and MASAAR failure modes, Azure edge results and missing configuration, all 74 rules reached, and compares status, full JSON, Azure SDK parameters and `/predict` requests.
+
+The suite runs in CI with `npm test`. Deliberately changing a threshold, an
+operator or a rule makes it fail.
+
+## 6. Authentication later
 
 Nothing in the lesson flow depends on a user identity. To add accounts:
 

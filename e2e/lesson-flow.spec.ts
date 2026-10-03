@@ -30,7 +30,7 @@ function apiAnswer(target: string, passed: boolean) {
   };
 }
 
-test("A0 → Lesson 1 → listen → record → feedback → retry → continue", async ({ page }) => {
+test("A1 → Lesson 1 → listen → record → feedback → retry → continue", async ({ page }) => {
   const errors = collectPageErrors(page);
   const uploads: UploadInfo[] = [];
   const ttsTexts: string[] = [];
@@ -48,13 +48,13 @@ test("A0 → Lesson 1 → listen → record → feedback → retry → continue"
     await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(apiAnswer(upload.target!, passed)) });
   });
 
-  // 1–3: open Alif, A0, Lesson 1 – all on Alif's own origin.
+  // 1–3: open Alif, A1, Lesson 1 – all on Alif's own origin.
   await page.goto("/");
   await expect(page.getByRole("heading", { name: /Arabisch lernen/ })).toBeVisible();
-  await page.getByTestId("level-card-a0").click();
-  await expect(page).toHaveURL(/\/a0$/);
+  await page.getByTestId("level-card-a1").click();
+  await expect(page).toHaveURL(/\/a1$/);
   await page.getByTestId("lesson-link-lesson-1").click();
-  await expect(page).toHaveURL(/\/a0\/lesson-1$/);
+  await expect(page).toHaveURL(/\/a1\/lesson-1$/);
   expect(new URL(page.url()).host).toBe("127.0.0.1:3210");
   expect(await page.locator("iframe").count()).toBe(0);
 
@@ -115,18 +115,18 @@ test("A0 → Lesson 1 → listen → record → feedback → retry → continue"
   await page.getByTestId("continue-button").click();
   await expect(page.getByTestId("lesson-complete")).toContainText("Lektion 1 geschafft!");
   await page.getByTestId("back-to-level").click();
-  await expect(page).toHaveURL(/\/a0$/);
+  await expect(page).toHaveURL(/\/a1$/);
   await expect(page.getByTestId("lesson-link-lesson-1")).toContainText("Abgeschlossen");
 
   // Progress survives a reload (per-browser storage).
-  await page.goto("/a0/lesson-1");
+  await page.goto("/a1/lesson-1");
   await expect(page.getByTestId("continue-button")).toBeEnabled();
 
   expect(errors).toEqual([]);
 });
 
 test("only one exercise records at a time", async ({ page }) => {
-  await page.goto("/a0/lesson-1");
+  await page.goto("/a1/lesson-1");
   await page.getByTestId("exercise-letter-record").click();
   await expect(page.getByTestId("exercise-letter")).toHaveAttribute("data-phase", "recording");
   await expect(page.getByTestId("exercise-asad-record")).toBeDisabled();
@@ -136,7 +136,7 @@ test("only one exercise records at a time", async ({ page }) => {
 test.describe("responsive layout", () => {
   test("desktop shows three cards in a row", async ({ page }) => {
     await page.setViewportSize({ width: 1366, height: 900 });
-    await page.goto("/a0/lesson-1");
+    await page.goto("/a1/lesson-1");
     const boxes = await Promise.all(["asad", "arnab", "ananas"].map((id) => page.getByTestId(`vocab-card-${id}`).boundingBox()));
     expect(new Set(boxes.map((b) => Math.round(b!.y))).size).toBe(1);
     expect(boxes[0]!.x).toBeLessThan(boxes[1]!.x);
@@ -145,7 +145,7 @@ test.describe("responsive layout", () => {
 
   test("mobile stacks cards vertically without horizontal scrolling", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
-    for (const path of ["/", "/a0", "/a0/lesson-1"]) {
+    for (const path of ["/", "/a0", "/a0/letters/alif", "/a1", "/a1/lesson-1"]) {
       await page.goto(path);
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
     }
@@ -156,7 +156,7 @@ test.describe("responsive layout", () => {
   });
 
   test("Arabic content is marked RTL", async ({ page }) => {
-    await page.goto("/a0/lesson-1");
+    await page.goto("/a1/lesson-1");
     await expect(page.getByTestId("lesson-letter")).toHaveAttribute("dir", "rtl");
     await expect(page.getByTestId("vocab-arabic-asad")).toHaveAttribute("dir", "rtl");
     await expect(page.locator("html")).toHaveAttribute("lang", "de");
@@ -164,7 +164,7 @@ test.describe("responsive layout", () => {
 });
 
 test("unknown routes show Alif's own 404", async ({ page }) => {
-  const response = await page.goto("/a0/lesson-99");
+  const response = await page.goto("/a1/lesson-99");
   expect(response?.status()).toBe(404);
   await expect(page.getByText("Diese Seite gibt es nicht.")).toBeVisible();
 });

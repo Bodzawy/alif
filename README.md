@@ -4,11 +4,20 @@
 
 ```
 Alif
-└── A0 · Erste Schritte
+├── A0 · Das arabische Alphabet          /a0, /a0/letters/<id>
+│   └── 28 letters أ … ي: letter · Arabic name · listen · record · result · Weiter (only after passing)
+└── A1 · Erste Wörter                    /a1, /a1/lesson-1
     └── Lektion 1 · Der Buchstabe Alif (أَ)
         ├── Schritt 1: the letter: listen · record · feedback
         └── Schritt 2: vocabulary: أَسَد · أَرْنَب · أَنَانَاس (image, German, transliteration, listen, record)
 ```
+
+A0 is a progression layer over the unchanged pronunciation pipeline: a letter
+counts as mastered only when `/api/pronunciation` answers `passed: true` (the
+legacy Masaar condition engine matched `excellent`). *Überspringen* is a
+technical escape hatch (e.g. IQRA unavailable): it opens the next letter, but
+the skipped letter stays "nicht gemeistert" and can be practised again later.
+`/a0/lesson-1` redirects permanently to `/a1/lesson-1`.
 
 The pronunciation system was taken over from the Masaar platform and reimplemented here. Alif has no dependency on the Masaar website. There is no redirect, no iframe and no shared login. Its only external dependencies are the evaluation services behind its own API.
 
@@ -61,7 +70,7 @@ npm run build       # production build
 npm start           # serve the production build (PORT env or -p)
 npm run typecheck   # tsc --noEmit
 npm run lint        # ESLint (next/core-web-vitals + next/typescript)
-npm test            # Vitest: unit + API integration tests
+npm test            # Vitest: unit, API integration and legacy-Masaar parity tests
 npm run test:e2e    # Playwright E2E (run `npm run build` first)
 ```
 
@@ -109,7 +118,7 @@ Notes:
 
 ## Adding a lesson
 
-1. Create `src/data/lessons/a0/lesson-2.ts` that exports a `Lesson` (letter, vocabulary, exercise targets).
+1. Create `src/data/lessons/a1/lesson-2.ts` that exports a `Lesson` (letter, vocabulary, exercise targets).
 2. Register it in `src/data/curriculum.ts`.
 3. For new vocabulary words, add rules to `src/lib/pronunciation/vocabulary_conditions.json`. Letters already have rules in `letter_conditions.json`.
 4. Put images in `public/images/vocabulary/`.

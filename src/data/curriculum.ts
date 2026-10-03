@@ -1,14 +1,15 @@
 import type { Lesson, Level, PronunciationExercise } from "@/data/types";
-import { lesson1 } from "@/data/lessons/a0/lesson-1";
+import { lesson1 } from "@/data/lessons/a1/lesson-1";
 
-// The single registry of all published content. Add a lesson by creating a
+// Registry of the lesson-based (vocabulary) levels. Add a lesson by creating a
 // data file under src/data/lessons/<level>/ and listing it here.
+// A0 – the alphabet – is a separate kind of level, see src/data/alphabet.ts.
 export const LEVELS: Level[] = [
   {
-    slug: "a0",
-    code: "A0",
-    title: "Erste Schritte",
-    description: "Die arabischen Buchstaben kennenlernen, richtig aussprechen und erste Wörter sagen.",
+    slug: "a1",
+    code: "A1",
+    title: "Erste Wörter",
+    description: "Erste arabische Wörter hören, nachsprechen und verstehen – mit Bildern und deutscher Übersetzung.",
     lessons: [lesson1],
   },
 ];

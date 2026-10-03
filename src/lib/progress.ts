@@ -4,7 +4,12 @@
 const STORAGE_KEY = "alif:progress:v1";
 const listeners = new Set<() => void>();
 
-export type LessonProgress = { passed: string[]; completedAt?: string };
+export type LessonProgress = {
+  passed: string[];
+  completedAt?: string;
+  /** Exercises the student skipped without passing them (A0 escape hatch). */
+  skipped?: string[];
+};
 type ProgressState = Record<string, LessonProgress>;
 
 export function lessonKey(levelSlug: string, lessonSlug: string) {
@@ -66,6 +71,15 @@ export function markExercisePassed(key: string, exerciseId: string) {
   const lesson = state[key] ?? EMPTY;
   if (lesson.passed.includes(exerciseId)) return;
   write({ ...state, [key]: { ...lesson, passed: [...lesson.passed, exerciseId] } });
+}
+
+/** Records a skip. A skip never counts as passed; passing later supersedes it. */
+export function markExerciseSkipped(key: string, exerciseId: string) {
+  const state = read();
+  const lesson = state[key] ?? EMPTY;
+  const skipped = lesson.skipped ?? [];
+  if (skipped.includes(exerciseId) || lesson.passed.includes(exerciseId)) return;
+  write({ ...state, [key]: { ...lesson, skipped: [...skipped, exerciseId] } });
 }
 
 export function markLessonCompleted(key: string) {

@@ -8,6 +8,12 @@ const nextConfig = {
   // production while the same code works under plain Node. Keeping it
   // external avoids that (same fix as in the original pronunciation system).
   serverExternalPackages: ["microsoft-cognitiveservices-speech-sdk"],
+  async redirects() {
+    return [
+      // The vocabulary lesson moved from A0 to A1 when A0 became the alphabet level.
+      { source: "/a0/lesson-1", destination: "/a1/lesson-1", permanent: true },
+    ];
+  },
   async headers() {
     return [
       {
