@@ -1,0 +1,12 @@
+{
+  "description": "Frozen copy of the legacy Masaar letter-pronunciation implementation. Test-only reference for the parity suite in tests/parity. Never imported by the application.",
+  "repository": "Bodzawy/masaar",
+  "branch": "master",
+  "commit": "edea01294b6efb06126a2e3c6eecc69e68086079",
+  "files": {
+    "src/app/api/pronunciation/route.ts": "940e206e40650f3c01f2e5dd56c2dfd41cf2112f307199fb68d66dbb3665c5c3",
+    "src/lib/pronunciation/condition-engine.ts": "ad474ae3c9590a749d2fc934ab7161e671de68a0531ab4ffc27daf1e751bdbd7",
+    "src/lib/pronunciation/letter_conditions.json": "ac869118b29b5406bd99196f9b5f8edc56562e1256c5b9984752a2186a3c0469",
+    "src/lib/pronunciation/letters.ts": "9384a2e6080f6b11fd822678908bfe3e52226b70d21bc36a754d4f4a8eb3bf91"
+  }
+}
