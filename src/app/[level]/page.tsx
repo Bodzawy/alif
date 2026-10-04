@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, Clock } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 
-import { LessonStatus } from "@/components/lessons/lesson-status";
-import { LEVELS, getLevel, lessonExercises } from "@/data/curriculum";
+import { LessonCard } from "@/components/lessons/lesson-card";
+import { LEVELS, getLevel, lessonEntryHref, lessonExercises } from "@/data/curriculum";
 
 type Params = { level: string };
 
@@ -36,33 +36,22 @@ export default async function LevelPage({ params }: { params: Promise<Params> })
       </header>
 
       <ol className="mt-8 space-y-4" aria-label="Lektionen">
-        {level.lessons.map((lesson) => (
+        {level.lessons.map((lesson, index) => (
           <li key={lesson.slug}>
-            <Link
-              href={lesson.introVideo ? `/${level.slug}/${lesson.slug}/intro` : `/${level.slug}/${lesson.slug}`}
-              data-testid={`lesson-link-${lesson.slug}`}
-              className="group flex items-center gap-4 rounded-3xl border bg-card p-4 shadow-card transition hover:-translate-y-0.5 hover:shadow-lift focus-ring sm:gap-6 sm:p-5"
-            >
-              <span
-                lang="ar"
-                aria-hidden
-                className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-primary-soft font-arabic text-5xl font-bold text-primary sm:h-24 sm:w-24 sm:text-6xl"
-              >
-                {lesson.letter.glyph}
-              </span>
-              <span className="min-w-0 flex-1">
-                <span className="text-sm font-semibold text-primary">Lektion {lesson.number}</span>
-                <span className="block text-lg font-bold sm:text-xl">{lesson.title}</span>
-                <span className="mt-1 hidden text-sm text-muted-foreground sm:block">{lesson.subtitle}</span>
-                <span className="mt-2 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-                  <LessonStatus levelSlug={level.slug} lessonSlug={lesson.slug} total={lessonExercises(lesson).length} />
-                  <span className="inline-flex items-center gap-1">
-                    <Clock className="h-3.5 w-3.5" aria-hidden /> ca. {lesson.minutes} Min.
-                  </span>
-                </span>
-              </span>
-              <ArrowRight className="h-6 w-6 shrink-0 text-muted-foreground transition group-hover:translate-x-1 group-hover:text-primary" aria-hidden />
-            </Link>
+            <LessonCard
+              levelSlug={level.slug}
+              lesson={{
+                slug: lesson.slug,
+                number: lesson.number,
+                title: lesson.title,
+                subtitle: lesson.subtitle,
+                minutes: lesson.minutes,
+                letter: lesson.letter,
+              }}
+              href={lessonEntryHref(level.slug, lesson)}
+              total={lessonExercises(lesson).length}
+              previousLessonSlug={level.lessons[index - 1]?.slug}
+            />
           </li>
         ))}
       </ol>

@@ -51,8 +51,8 @@ export const lesson1: Lesson = {
     },
   ],
   introVideo: {
-    src: "/videos/alif-intro/de.mp4",
-    poster: "/videos/alif-intro/poster.jpg",
+    src: "/videos/a1/lesson-1/de.mp4",
+    poster: "/videos/a1/lesson-1/poster.jpg",
     chapters: [
       { start: 0, title: "Einführung" },
       { start: 5, title: "Der erste Buchstabe" },

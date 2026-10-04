@@ -46,7 +46,7 @@ export type VocabularyItem = {
 
 /** Optional video shown on /<level>/<lesson>/intro before the lesson starts. */
 export type LessonIntroVideo = {
-  /** Under public/, e.g. "/videos/alif-intro/de.mp4". */
+  /** Under public/, e.g. "/videos/a1/lesson-1/de.mp4". */
   src: string;
   poster: string;
   /** Chapter marks; `start` in seconds. */

@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { LessonGate } from "@/components/lessons/lesson-gate";
 import { LessonPlayer } from "@/components/lessons/lesson-player";
-import { LEVELS, getLesson, nextLesson } from "@/data/curriculum";
+import { LEVELS, getLesson, lessonEntryHref, nextLesson, previousLesson } from "@/data/curriculum";
 
 type Params = { level: string; lesson: string };
 
@@ -24,13 +25,21 @@ export default async function LessonPage({ params }: { params: Promise<Params> }
   if (!found) notFound();
 
   const next = nextLesson(levelSlug, lessonSlug);
+  const previous = previousLesson(levelSlug, lessonSlug);
 
   return (
-    <LessonPlayer
+    <LessonGate
       levelSlug={found.level.slug}
       levelCode={found.level.code}
-      lesson={found.lesson}
-      nextLessonHref={next ? `/${found.level.slug}/${next.slug}` : undefined}
-    />
+      lessonNumber={found.lesson.number}
+      previous={previous && { slug: previous.slug, number: previous.number, title: previous.title, href: lessonEntryHref(found.level.slug, previous) }}
+    >
+      <LessonPlayer
+        levelSlug={found.level.slug}
+        levelCode={found.level.code}
+        lesson={found.lesson}
+        nextLessonHref={next ? lessonEntryHref(found.level.slug, next) : undefined}
+      />
+    </LessonGate>
   );
 }

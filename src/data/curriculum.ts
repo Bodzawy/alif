@@ -38,3 +38,19 @@ export function nextLesson(levelSlug: string, lessonSlug: string): Lesson | unde
   const index = level.lessons.findIndex((item) => item.slug === lessonSlug);
   return index >= 0 ? level.lessons[index + 1] : undefined;
 }
+
+export function previousLesson(levelSlug: string, lessonSlug: string): Lesson | undefined {
+  const level = getLevel(levelSlug);
+  if (!level) return undefined;
+  const index = level.lessons.findIndex((item) => item.slug === lessonSlug);
+  return index > 0 ? level.lessons[index - 1] : undefined;
+}
+
+export function lessonHref(levelSlug: string, lesson: Pick<Lesson, "slug">) {
+  return `/${levelSlug}/${lesson.slug}`;
+}
+
+/** Where a lesson starts: its intro video if it has one, otherwise the lesson itself. */
+export function lessonEntryHref(levelSlug: string, lesson: Pick<Lesson, "slug" | "introVideo">) {
+  return lesson.introVideo ? `${lessonHref(levelSlug, lesson)}/intro` : lessonHref(levelSlug, lesson);
+}

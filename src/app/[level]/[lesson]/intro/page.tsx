@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { LessonGate } from "@/components/lessons/lesson-gate";
 import { LessonIntro } from "@/components/lessons/lesson-intro";
-import { LEVELS, getLesson } from "@/data/curriculum";
+import { LEVELS, getLesson, lessonEntryHref, previousLesson } from "@/data/curriculum";
 
 type Params = { level: string; lesson: string };
 
@@ -25,7 +26,16 @@ export default async function LessonIntroPage({ params }: { params: Promise<Para
   const found = getLesson(levelSlug, lessonSlug);
   if (!found?.lesson.introVideo) notFound();
 
+  const previous = previousLesson(levelSlug, lessonSlug);
+
   return (
-    <LessonIntro levelSlug={found.level.slug} levelCode={found.level.code} lesson={found.lesson} video={found.lesson.introVideo} />
+    <LessonGate
+      levelSlug={found.level.slug}
+      levelCode={found.level.code}
+      lessonNumber={found.lesson.number}
+      previous={previous && { slug: previous.slug, number: previous.number, title: previous.title, href: lessonEntryHref(found.level.slug, previous) }}
+    >
+      <LessonIntro levelSlug={found.level.slug} levelCode={found.level.code} lesson={found.lesson} video={found.lesson.introVideo} />
+    </LessonGate>
   );
 }

@@ -56,7 +56,7 @@ test("A1 → Lesson 1 → listen → record → feedback → retry → continue"
   await page.getByTestId("lesson-link-lesson-1").click();
   await expect(page).toHaveURL(/\/a1\/lesson-1\/intro$/);
   const video = page.getByTestId("intro-video");
-  await expect(video).toHaveAttribute("src", "/videos/alif-intro/de.mp4");
+  await expect(video).toHaveAttribute("src", "/videos/a1/lesson-1/de.mp4");
   await page.getByRole("button", { name: /Der Laut/ }).click();
   await expect.poll(() => video.evaluate((v: HTMLVideoElement) => v.currentTime)).toBeGreaterThanOrEqual(12);
   await expect(page.getByTestId("intro-skip-seen")).toHaveCount(0);
