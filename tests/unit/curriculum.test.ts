@@ -38,6 +38,9 @@ describe("curriculum", () => {
         for (const item of lesson.vocabulary) {
           expect(existsSync(path.join(process.cwd(), "public", item.image.src)), item.image.src).toBe(true);
         }
+        for (const asset of lesson.introVideo ? [lesson.introVideo.src, lesson.introVideo.poster] : []) {
+          expect(existsSync(path.join(process.cwd(), "public", asset)), asset).toBe(true);
+        }
       }
     }
   });

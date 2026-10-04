@@ -44,6 +44,15 @@ export type VocabularyItem = {
   exercise: PronunciationExercise;
 };
 
+/** Optional video shown on /<level>/<lesson>/intro before the lesson starts. */
+export type LessonIntroVideo = {
+  /** Under public/, e.g. "/videos/alif-intro/de.mp4". */
+  src: string;
+  poster: string;
+  /** Chapter marks; `start` in seconds. */
+  chapters?: { start: number; title: string }[];
+};
+
 export type Lesson = {
   /** URL segment, e.g. "lesson-1". */
   slug: string;
@@ -54,6 +63,7 @@ export type Lesson = {
   minutes: number;
   letter: LessonLetter;
   vocabulary: VocabularyItem[];
+  introVideo?: LessonIntroVideo;
 };
 
 export type Level = {

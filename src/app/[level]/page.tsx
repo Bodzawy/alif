@@ -39,7 +39,7 @@ export default async function LevelPage({ params }: { params: Promise<Params> })
         {level.lessons.map((lesson) => (
           <li key={lesson.slug}>
             <Link
-              href={`/${level.slug}/${lesson.slug}`}
+              href={lesson.introVideo ? `/${level.slug}/${lesson.slug}/intro` : `/${level.slug}/${lesson.slug}`}
               data-testid={`lesson-link-${lesson.slug}`}
               className="group flex items-center gap-4 rounded-3xl border bg-card p-4 shadow-card transition hover:-translate-y-0.5 hover:shadow-lift focus-ring sm:gap-6 sm:p-5"
             >

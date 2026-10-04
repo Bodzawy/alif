@@ -54,7 +54,15 @@ test("A1 → Lesson 1 → listen → record → feedback → retry → continue"
   await page.getByTestId("level-card-a1").click();
   await expect(page).toHaveURL(/\/a1$/);
   await page.getByTestId("lesson-link-lesson-1").click();
+  await expect(page).toHaveURL(/\/a1\/lesson-1\/intro$/);
+  const video = page.getByTestId("intro-video");
+  await expect(video).toHaveAttribute("src", "/videos/alif-intro/de.mp4");
+  await page.getByRole("button", { name: /Der Laut/ }).click();
+  await expect.poll(() => video.evaluate((v: HTMLVideoElement) => v.currentTime)).toBeGreaterThanOrEqual(12);
+  await expect(page.getByTestId("intro-skip-seen")).toHaveCount(0);
+  await page.getByTestId("intro-continue").click();
   await expect(page).toHaveURL(/\/a1\/lesson-1$/);
+  await expect(page.getByTestId("intro-link")).toBeVisible();
   expect(new URL(page.url()).host).toBe("127.0.0.1:3210");
   expect(await page.locator("iframe").count()).toBe(0);
 
@@ -117,6 +125,13 @@ test("A1 → Lesson 1 → listen → record → feedback → retry → continue"
   await page.getByTestId("back-to-level").click();
   await expect(page).toHaveURL(/\/a1$/);
   await expect(page.getByTestId("lesson-link-lesson-1")).toContainText("Abgeschlossen");
+  // Second visit: the card still opens the intro, now with a prominent skip button.
+  await page.getByTestId("lesson-link-lesson-1").click();
+  await expect(page).toHaveURL(/\/a1\/lesson-1\/intro$/);
+  await expect(page.getByTestId("intro-video")).toBeVisible();
+  await expect(page.getByTestId("intro-seen-notice")).toContainText("Du hast dieses Video schon gesehen.");
+  await page.getByRole("link", { name: "Intro überspringen" }).click();
+  await expect(page).toHaveURL(/\/a1\/lesson-1$/);
 
   // Progress survives a reload (per-browser storage).
   await page.goto("/a1/lesson-1");

@@ -6,6 +6,7 @@ import {
   getLessonProgress,
   lessonKey,
   markExercisePassed,
+  markIntroSeen,
   markLessonCompleted,
   subscribeProgress,
   type LessonProgress,
@@ -23,6 +24,7 @@ export function useLessonProgress(levelSlug: string, lessonSlug: string) {
 
   const markPassed = useCallback((exerciseId: string) => markExercisePassed(key, exerciseId), [key]);
   const markCompleted = useCallback(() => markLessonCompleted(key), [key]);
+  const markIntroWatched = useCallback(() => markIntroSeen(key), [key]);
 
-  return { progress, markPassed, markCompleted };
+  return { progress, markPassed, markCompleted, markIntroWatched };
 }

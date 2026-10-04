@@ -9,6 +9,8 @@ export type LessonProgress = {
   completedAt?: string;
   /** Exercises the student skipped without passing them (A0 escape hatch). */
   skipped?: string[];
+  /** Set once the student finished or skipped the lesson's intro video. */
+  introSeenAt?: string;
 };
 type ProgressState = Record<string, LessonProgress>;
 
@@ -87,6 +89,13 @@ export function markLessonCompleted(key: string) {
   const lesson = state[key] ?? EMPTY;
   if (lesson.completedAt) return;
   write({ ...state, [key]: { ...lesson, completedAt: new Date().toISOString() } });
+}
+
+export function markIntroSeen(key: string) {
+  const state = read();
+  const lesson = state[key] ?? EMPTY;
+  if (lesson.introSeenAt) return;
+  write({ ...state, [key]: { ...lesson, introSeenAt: new Date().toISOString() } });
 }
 
 export function resetLessonProgress(key: string) {

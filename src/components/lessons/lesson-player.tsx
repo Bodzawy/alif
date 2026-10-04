@@ -2,7 +2,7 @@
 
 import { useCallback, useMemo, useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Lock } from "lucide-react";
+import { ArrowLeft, ArrowRight, Lock, PlayCircle } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import type { Lesson } from "@/data/types";
@@ -82,6 +82,16 @@ export function LessonPlayer({
         </Link>
         <span aria-hidden>/</span>
         <span className="font-medium text-foreground">Lektion {lesson.number}</span>
+        {lesson.introVideo ? (
+          <Link
+            href={`/${levelSlug}/${lesson.slug}/intro`}
+            className="ml-auto inline-flex items-center gap-1 rounded-md hover:text-foreground focus-ring"
+            data-testid="intro-link"
+          >
+            <PlayCircle className="h-4 w-4" aria-hidden />
+            Intro-Video ansehen
+          </Link>
+        ) : null}
       </nav>
 
       <header className="mb-6 flex flex-col gap-4 sm:mb-8 sm:flex-row sm:items-end sm:justify-between">

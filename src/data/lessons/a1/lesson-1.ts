@@ -50,4 +50,19 @@ export const lesson1: Lesson = {
       exercise: { id: "ananas", target: "أناناس", modelText: "أَنَانَاس" },
     },
   ],
+  introVideo: {
+    src: "/videos/alif-intro/de.mp4",
+    poster: "/videos/alif-intro/poster.jpg",
+    chapters: [
+      { start: 0, title: "Einführung" },
+      { start: 5, title: "Der erste Buchstabe" },
+      { start: 12, title: "Der Laut" },
+      { start: 27, title: "Erstes Wort" },
+      { start: 46, title: "Zweites Wort" },
+      { start: 60, title: "Drittes Wort" },
+      { start: 72, title: "Vergleich" },
+      { start: 91, title: "Du bist dran" },
+      { start: 114, title: "Los geht's" },
+    ],
+  },
 };
