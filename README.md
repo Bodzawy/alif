@@ -126,4 +126,6 @@ Notes:
 
 Lessons unlock in order (lesson N after lesson N-1 is completed). Switch to "all open" with `LESSONS_UNLOCK_IN_ORDER` in `src/data/lesson-unlock.ts`.
 
-Routes, the TTS allow-list and the API's accepted targets are all derived from the curriculum. `npm test` fails if any exercise is missing rules or an image.
+Routes, the TTS allow-list and the API's accepted targets are all derived from the curriculum. `npm test` fails if any lesson is incomplete (3 voweled words, rules, pictures, intro files) or if a word target collides with a letter name or another word.
+
+`npm run lessons:status` prints one line per lesson (words, audio, pictures, intro video) and exits with 1 on any problem. It only reads local files; nothing calls Azure. Content still waiting for native-speaker review is listed in `REVIEW.md`; decisions taken while building lessons 2–28 are in `DECISIONS.md`.

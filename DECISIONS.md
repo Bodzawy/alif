@@ -64,3 +64,23 @@ Each entry: what was decided, alternatives, why, and how to change it.
 ### D13. Pictures
 - **Decision:** 81 hand-drawn SVGs (400×300, lesson 1's palette, gradients, ground bands, eyes with highlights). Every picture was rendered and looked at; 7 were redrawn after the first look (teapot handle/spout, wolf chest, book page lines, banana, lemon, pillow, thumb). Sizes are 0.8–2.5 KB, slightly smaller than lesson 1's 2.4–3.1 KB because the shapes are simpler.
 - **Audio:** no files. Every word plays via `/api/tts` from its `modelText`, like lesson 1. Nothing calls Azure at build or test time.
+
+## Phase 3 – Verification
+
+### D14. Shared checks, one runner already installed
+- **Decision:** the content checks live in `scripts/lesson-checks.ts` and are used by both `tests/unit/lessons.test.ts` and `npm run lessons:status` (run with `vite-node`, which ships with vitest – no new dependency).
+- **"Audio ok"** means: the word's `modelText` is accepted by `/api/tts` (curriculum allow-list). There are no audio files to check. Nothing calls Azure, TTS or the pronunciation API in tests or at build time.
+- **Self-check:** removing a picture and giving a word a letter-name target were both reported and made the command exit with 1.
+
+### D15. No placeholders
+- **Decision:** every word got a drawable picture, so no placeholder mechanism was added. If one is ever needed, add a field to the word (e.g. `image.placeholder: true`) and let `lesson-checks.ts` report it as "placeholder" instead of "missing".
+
+### D16. How the locked intro page is tested
+- **Decision:** only lesson 1 has an intro video, and lesson 1 is never locked, so a locked intro page cannot be reached in the real app yet. The intro page uses the same `LessonGate` as the lesson page; `tests/unit/lesson-unlock.test.tsx` covers the gate (locked, unlocked, first lesson, card). The e2e tests cover the locked lesson URL, the 28 cards, lesson 2 without intro (direct start, `/intro` is 404) and lesson 28's "Zurück zu A1".
+
+### D17. Visual check
+- **Decision:** all 27 new lesson pages were rendered from the production build and looked at, plus close-ups of the letter forms of ب ج ح ع ك و (joining correct; و shows two shapes). No picture needed redrawing at page size; 7 had already been redrawn at the contact-sheet stage (D13).
+
+## Blocked
+
+Nothing was blocked. Not done on purpose: no push, no deploy, no server access, no `.env` changes.

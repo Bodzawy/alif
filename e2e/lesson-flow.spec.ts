@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 
 import { toneWav } from "./support/audio";
 import { collectPageErrors, parseUpload, recordExercise, type UploadInfo } from "./support/helpers";
@@ -122,8 +122,10 @@ test("A1 → Lesson 1 → listen → record → feedback → retry → continue"
   // 18: continue.
   await page.getByTestId("continue-button").click();
   await expect(page.getByTestId("lesson-complete")).toContainText("Lektion 1 geschafft!");
-  await page.getByTestId("back-to-level").click();
-  await expect(page).toHaveURL(/\/a1$/);
+  // Lesson 2 has no intro video: "Nächste Lektion" goes straight to it. "Zurück zu A1" is only on lesson 28.
+  await expect(page.getByRole("link", { name: /Nächste Lektion/ })).toHaveAttribute("href", "/a1/lesson-2");
+  await expect(page.getByTestId("back-to-level")).toHaveCount(0);
+  await page.goto("/a1");
   await expect(page.getByTestId("lesson-link-lesson-1")).toContainText("Abgeschlossen");
   // Second visit: the card still opens the intro, now with a prominent skip button.
   await page.getByTestId("lesson-link-lesson-1").click();
@@ -132,6 +134,14 @@ test("A1 → Lesson 1 → listen → record → feedback → retry → continue"
   await expect(page.getByTestId("intro-seen-notice")).toContainText("Du hast dieses Video schon gesehen.");
   await page.getByRole("link", { name: "Intro überspringen" }).click();
   await expect(page).toHaveURL(/\/a1\/lesson-1$/);
+
+  // Lesson 1 completed: lesson 2 is open and starts directly (no intro video), lesson 3 stays locked.
+  await page.goto("/a1");
+  await expect(page.getByTestId("lesson-link-lesson-3")).toHaveAttribute("data-locked", "true");
+  await page.getByTestId("lesson-link-lesson-2").click();
+  await expect(page).toHaveURL(/\/a1\/lesson-2$/);
+  await expect(page.getByTestId("lesson-letter")).toHaveText("ب");
+  await expect(page.getByTestId("intro-link")).toHaveCount(0);
 
   // Progress survives a reload (per-browser storage).
   await page.goto("/a1/lesson-1");
@@ -182,4 +192,63 @@ test("unknown routes show Alif's own 404", async ({ page }) => {
   const response = await page.goto("/a1/lesson-99");
   expect(response?.status()).toBe(404);
   await expect(page.getByText("Diese Seite gibt es nicht.")).toBeVisible();
+});
+
+const PROGRESS_KEY = "alif:progress:v1";
+
+/** Seeds per-browser progress before any page script runs. */
+async function seedProgress(page: Page, progress: Record<string, { passed: string[]; completedAt?: string }>) {
+  await page.addInitScript(([key, value]) => window.localStorage.setItem(key, value), [PROGRESS_KEY, JSON.stringify(progress)] as const);
+}
+
+test("/a1 lists all 28 letter lessons in alphabet order; at the start only lesson 1 is open", async ({ page }) => {
+  await page.goto("/a1");
+  const cards = page.locator('[data-testid^="lesson-link-lesson-"]');
+  await expect(cards).toHaveCount(28);
+  await expect(cards.first()).toContainText("Der Buchstabe Alif");
+  await expect(cards.nth(1)).toContainText("Der Buchstabe Ba");
+  await expect(cards.last()).toContainText("Der Buchstabe Ya");
+  await expect(page.getByTestId("lesson-link-lesson-1")).toHaveAttribute("href", "/a1/lesson-1/intro");
+  for (const n of [2, 15, 28]) {
+    await expect(page.getByTestId(`lesson-link-lesson-${n}`)).toHaveAttribute("data-locked", "true");
+    await expect(page.getByTestId(`lesson-link-lesson-${n}`)).toContainText("Gesperrt");
+  }
+});
+
+test("a locked lesson cannot be opened through its URL", async ({ page }) => {
+  await page.goto("/a1/lesson-2");
+  await expect(page.getByTestId("lesson-locked")).toContainText("Diese Lektion ist noch gesperrt.");
+  await expect(page.getByTestId("lesson-letter")).toHaveCount(0);
+  await expect(page.getByRole("link", { name: "Zu Lektion 1" })).toHaveAttribute("href", "/a1/lesson-1/intro");
+});
+
+test("a lesson without an intro video starts directly and has no /intro page", async ({ page }) => {
+  const errors = collectPageErrors(page);
+  await seedProgress(page, { "a1/lesson-1": { passed: [], completedAt: "2026-10-04T00:00:00.000Z" } });
+  await page.goto("/a1");
+  await expect(page.getByTestId("lesson-link-lesson-2")).toHaveAttribute("href", "/a1/lesson-2");
+  await page.getByTestId("lesson-link-lesson-2").click();
+  await expect(page).toHaveURL(/\/a1\/lesson-2$/);
+  await expect(page.getByTestId("lesson-letter")).toHaveText("ب");
+  for (const id of ["bait", "bab", "batta"]) await expect(page.getByTestId(`vocab-card-${id}`)).toBeVisible();
+  await expect(page.getByTestId("intro-link")).toHaveCount(0);
+  const response = await page.goto("/a1/lesson-2/intro");
+  expect(response?.status()).toBe(404);
+  expect(errors).toEqual([]);
+});
+
+test("the last lesson (28) ends with \"Zurück zu A1\"", async ({ page }) => {
+  const done = "2026-10-04T00:00:00.000Z";
+  const progress: Record<string, { passed: string[]; completedAt?: string }> = {};
+  for (let n = 1; n <= 27; n++) progress[`a1/lesson-${n}`] = { passed: [], completedAt: done };
+  progress["a1/lesson-28"] = { passed: ["letter", "yad", "yaqtin", "yamama"] };
+  await seedProgress(page, progress);
+  await page.goto("/a1/lesson-28");
+  await expect(page.getByTestId("lesson-letter")).toHaveText("ي");
+  await page.getByTestId("continue-button").click();
+  await expect(page.getByTestId("lesson-complete")).toContainText("Lektion 28 geschafft!");
+  await expect(page.getByRole("link", { name: /Nächste Lektion/ })).toHaveCount(0);
+  await page.getByTestId("back-to-level").click();
+  await expect(page).toHaveURL(/\/a1$/);
+  await expect(page.getByTestId("lesson-link-lesson-28")).toContainText("Abgeschlossen");
 });

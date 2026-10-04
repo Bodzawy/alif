@@ -15,7 +15,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "check": "npm run typecheck && npm run lint && npm test"
+    "check": "npm run typecheck && npm run lint && npm test",
+    "lessons:status": "vite-node -c vitest.config.mts scripts/lessons-status.ts"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.1.0",
