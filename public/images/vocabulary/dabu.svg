@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Hyäne">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff4d6"/><stop offset="1" stop-color="#ffd98a"/></radialGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="330" cy="62" r="34" fill="#ffe7a8"/><path d="M0 244 C 90 224, 170 232, 230 228 C 300 224, 350 220, 400 232 L400 300 L0 300 Z" fill="#e9b45b"/>
+  <path d="M0 270 C 100 256, 190 264, 270 258 C 330 254, 370 254, 400 260 L400 300 L0 300 Z" fill="#d89c45"/>
+  <ellipse cx="206" cy="262" rx="110" ry="14" fill="#a8652a" opacity="0.3"/>
+  <path d="M290 176 q24 8 26 34" stroke="#6b4a2a" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <g fill="#b38a55"><rect x="146" y="186" width="15" height="74" rx="6"/><rect x="256" y="200" width="15" height="60" rx="6"/></g>
+  <g fill="#c9a46b"><rect x="168" y="186" width="15" height="74" rx="6"/><rect x="276" y="200" width="15" height="60" rx="6"/></g>
+  <path d="M130 140 C 170 116, 260 146, 292 170 C 304 190, 292 212, 272 214 L 150 208 C 128 200, 118 168, 130 140 Z" fill="#c9a46b"/>
+  <path d="M130 140 C 170 116, 250 140, 288 166 C 250 150, 180 134, 136 156 Z" fill="#6b4a2a"/>
+  <g fill="#6b4a2a"><circle cx="180" cy="176" r="7"/><circle cx="210" cy="170" r="6"/><circle cx="240" cy="180" r="7"/><circle cx="196" cy="196" r="6"/><circle cx="262" cy="196" r="6"/><circle cx="226" cy="198" r="5"/><circle cx="160" cy="190" r="5"/></g>
+  <circle cx="114" cy="112" r="14" fill="#c9a46b"/><circle cx="114" cy="112" r="7" fill="#6b4a2a"/>
+  <ellipse cx="108" cy="140" rx="32" ry="24" fill="#c9a46b"/>
+  <ellipse cx="80" cy="150" rx="18" ry="13" fill="#4a3220"/><circle cx="68" cy="146" r="5" fill="#1e140c"/>
+  <circle cx="108" cy="132" r="5" fill="#2f2a26"/><circle cx="109.75" cy="130.25" r="1.7" fill="#fff"/>
+</svg>

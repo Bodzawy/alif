@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Telefon">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff1e6"/><stop offset="1" stop-color="#ffd2b0"/></radialGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="70" cy="70" r="40" fill="#ffe2cc"/><circle cx="340" cy="230" r="54" fill="#ffe2cc"/>
+  <ellipse cx="200" cy="262" rx="120" ry="15" fill="#c77a4a" opacity="0.25"/>
+  <path d="M110 254 L 132 150 L 268 150 L 290 254 Z" fill="#e53935"/>
+  <rect x="104" y="244" width="192" height="14" rx="6" fill="#c62828"/>
+  <circle cx="200" cy="200" r="38" fill="#fff4e6"/><circle cx="200" cy="200" r="12" fill="#c62828"/>
+  <g fill="#c62828"><circle cx="200" cy="172" r="6"/><circle cx="222" cy="180" r="6"/><circle cx="228" cy="200" r="6"/><circle cx="222" cy="220" r="6"/><circle cx="178" cy="180" r="6"/><circle cx="172" cy="200" r="6"/><circle cx="178" cy="220" r="6"/></g>
+  <path d="M96 136 C 92 108, 110 92, 130 96 L 270 96 C 290 92, 308 108, 304 136 L 272 144 C 268 130, 262 124, 250 124 L 150 124 C 138 124, 132 130, 128 144 Z" fill="#c62828"/>
+  <ellipse cx="160" cy="104" rx="30" ry="5" fill="#fff" opacity="0.3"/>
+</svg>

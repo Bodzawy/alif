@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Spatz">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dff3f7"/><stop offset="1" stop-color="#f4fbf2"/></linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><g fill="#fff" opacity="0.9"><ellipse cx="80" cy="60" rx="38" ry="14"/><ellipse cx="106" cy="52" rx="24" ry="14"/><ellipse cx="318" cy="44" rx="34" ry="12"/><ellipse cx="296" cy="38" rx="20" ry="12"/></g>
+  <path d="M30 222 C 130 206, 260 214, 380 190" stroke="#8b5a2b" stroke-width="12" fill="none" stroke-linecap="round"/>
+  <g fill="#5fae4a"><ellipse cx="80" cy="200" rx="22" ry="9" transform="rotate(-30 80 200)"/><ellipse cx="320" cy="180" rx="22" ry="9" transform="rotate(25 320 180)"/><ellipse cx="346" cy="206" rx="20" ry="8" transform="rotate(-20 346 206)"/></g>
+  <path d="M262 170 L 320 150 L 312 176 Z" fill="#7a5032"/>
+  <ellipse cx="216" cy="166" rx="62" ry="48" fill="#a0703f"/>
+  <ellipse cx="196" cy="182" rx="40" ry="32" fill="#efe0c4"/>
+  <path d="M224 140 q36 4 48 34 q-34 4 -48 -34 z" fill="#7a5032"/>
+  <path d="M232 150 l20 6 M236 162 l20 6" stroke="#5a3a22" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="168" cy="128" r="36" fill="#a0703f"/>
+  <path d="M140 108 C 150 88, 186 86, 200 106 C 180 100, 160 102, 140 108 Z" fill="#7d8a96"/>
+  <ellipse cx="158" cy="146" rx="18" ry="12" fill="#efe0c4"/>
+  <path d="M134 128 l-18 6 l18 6 z" fill="#3b2412"/><circle cx="152" cy="124" r="6" fill="#2f2a26"/><circle cx="154.1" cy="121.9" r="2.0" fill="#fff"/><ellipse cx="170" cy="142" rx="7" ry="4" fill="#f2a68a" opacity="0.6"/>
+  <g stroke="#e0a060" stroke-width="4" stroke-linecap="round"><path d="M200 212 v12 M222 212 v12"/></g>
+</svg>

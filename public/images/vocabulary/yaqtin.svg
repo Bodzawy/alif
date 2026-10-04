@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Kürbis">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff4d6"/><stop offset="1" stop-color="#ffd98a"/></radialGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="330" cy="62" r="34" fill="#ffe7a8"/><path d="M0 250 C 90 230, 170 238, 230 234 C 300 230, 350 226, 400 238 L400 300 L0 300 Z" fill="#9fd68a"/>
+  <path d="M0 276 C 100 262, 190 270, 270 264 C 330 260, 370 260, 400 266 L400 300 L0 300 Z" fill="#7cc26a"/>
+  <ellipse cx="200" cy="258" rx="120" ry="15" fill="#3f7f34" opacity="0.35"/>
+  <path d="M206 92 q-2 -30 20 -44" stroke="#5a7a2a" stroke-width="12" fill="none" stroke-linecap="round"/>
+  <ellipse cx="136" cy="176" rx="50" ry="76" fill="#e8760f"/><ellipse cx="264" cy="176" rx="50" ry="76" fill="#e8760f"/>
+  <ellipse cx="170" cy="176" rx="50" ry="82" fill="#f28c28"/><ellipse cx="230" cy="176" rx="50" ry="82" fill="#f28c28"/>
+  <ellipse cx="200" cy="176" rx="40" ry="84" fill="#ff9f43"/>
+  <path d="M232 100 C 260 70, 300 80, 306 104 C 280 110, 256 108, 232 100 Z" fill="#4caf50"/>
+  <path d="M290 112 q20 6 14 24 q-10 12 6 22" stroke="#5a7a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <ellipse cx="180" cy="140" rx="8" ry="30" fill="#fff" opacity="0.25"/>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Wolf">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#34477a"/><stop offset="1" stop-color="#1c2a4f"/></linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><g fill="#fff6c9"><circle cx="60" cy="50" r="2.5"/><circle cx="120" cy="90" r="1.8"/><circle cx="340" cy="60" r="2.2"/><circle cx="300" cy="120" r="1.6"/><circle cx="40" cy="150" r="1.8"/><circle cx="370" cy="170" r="2"/><circle cx="180" cy="40" r="1.6"/></g>
+  <circle cx="320" cy="64" r="36" fill="#fff6c9"/><circle cx="308" cy="56" r="6" fill="#f2e6a8"/><circle cx="330" cy="76" r="4" fill="#f2e6a8"/>
+  <path d="M0 236 C 90 220, 170 228, 230 224 C 300 220, 350 216, 400 226 L400 300 L0 300 Z" fill="#3e5482"/>
+  <path d="M0 262 C 100 250, 190 258, 270 252 C 330 248, 370 248, 400 254 L400 300 L0 300 Z" fill="#2c3e66"/>
+  <path d="M146 250 C 104 254, 86 232, 92 210 C 106 230, 124 236, 156 234 Z" fill="#6f7d94"/>
+  <path d="M136 252 C 126 210, 146 180, 186 166 C 206 152, 222 134, 232 120 L 254 138 C 248 164, 242 204, 238 252 Z" fill="#8e9bb0"/>
+  <ellipse cx="166" cy="232" rx="40" ry="24" fill="#7d8aa0"/>
+  <path d="M228 130 C 232 106, 246 92, 264 78 L 296 58 C 302 64, 298 74, 292 80 L 276 100 C 270 116, 262 130, 250 138 Z" fill="#8e9bb0"/>
+  <path d="M238 108 L 228 80 L 254 98 Z" fill="#6f7d94"/>
+  <path d="M280 84 l14 -8 l-6 14 z" fill="#2c3550"/><circle cx="297" cy="60" r="4" fill="#2c3550"/>
+  <path d="M252 98 q6 -4 12 0" stroke="#2c3550" stroke-width="3" fill="none" stroke-linecap="round"/>
+</svg>

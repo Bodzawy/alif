@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Knoblauch">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#e6f7f3"/><stop offset="1" stop-color="#b9e6dc"/></radialGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="70" cy="70" r="40" fill="#d3f0e9"/><circle cx="340" cy="230" r="54" fill="#d3f0e9"/>
+  <ellipse cx="200" cy="270" rx="76" ry="10" fill="#7cbfae" opacity="0.5"/>
+  <path d="M200 70 C 190 110, 128 132, 132 196 C 136 248, 178 264, 200 264 C 222 264, 264 248, 268 196 C 272 132, 210 110, 200 70 Z" fill="#f7f1e6"/>
+  <path d="M200 96 C 186 140, 164 170, 166 214 C 168 248, 186 262, 200 264 M200 96 C 214 140, 236 170, 234 214 C 232 248, 214 262, 200 264 M200 100 V262" stroke="#ddd0bc" stroke-width="4" fill="none"/>
+  <path d="M150 168 C 146 200, 150 232, 172 254 M250 168 C 254 200, 250 232, 228 254" stroke="#d7c3e8" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M196 72 q4 -30 -4 -46 h16 q-6 18 -4 46 z" fill="#c9d9a4"/>
+  <path d="M184 262 l-6 12 M196 264 l-2 14 M208 264 l2 14 M220 262 l6 12" stroke="#c9b48e" stroke-width="3" stroke-linecap="round"/>
+  <path d="M300 230 C 286 228, 282 198, 300 176 C 318 198, 314 228, 300 230 Z" fill="#f2ead9"/>
+  <ellipse cx="176" cy="160" rx="8" ry="24" fill="#fff" opacity="0.6"/>
+</svg>

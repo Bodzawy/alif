@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Weintrauben">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#f1ecfb"/><stop offset="1" stop-color="#d8ccf3"/></radialGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="70" cy="70" r="40" fill="#e6ddf8"/><circle cx="340" cy="230" r="54" fill="#e6ddf8"/>
+  <ellipse cx="196" cy="272" rx="70" ry="9" fill="#6f5a9c" opacity="0.25"/>
+  <path d="M200 70 q-4 -30 18 -44" stroke="#7a5a3a" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <path d="M214 60 C 230 30, 280 30, 296 54 C 284 56, 284 70, 296 78 C 276 96, 240 90, 214 60 Z" fill="#5fae4a"/><path d="M216 60 q40 -6 70 4" stroke="#3f8f3a" stroke-width="3" fill="none"/>
+  <g fill="#7b3fa0"><circle cx="160" cy="90" r="22"/><circle cx="202" cy="86" r="22"/><circle cx="244" cy="94" r="22"/><circle cx="140" cy="128" r="22"/><circle cx="182" cy="126" r="22"/><circle cx="224" cy="128" r="22"/><circle cx="264" cy="132" r="20"/><circle cx="160" cy="166" r="22"/><circle cx="202" cy="166" r="22"/><circle cx="244" cy="166" r="21"/><circle cx="182" cy="204" r="22"/><circle cx="224" cy="204" r="21"/><circle cx="202" cy="240" r="21"/></g>
+  <g fill="#c7a4e0" opacity="0.8"><circle cx="152" cy="82" r="6"/><circle cx="194" cy="78" r="6"/><circle cx="174" cy="118" r="6"/><circle cx="216" cy="120" r="6"/><circle cx="152" cy="158" r="6"/><circle cx="194" cy="158" r="6"/><circle cx="236" cy="158" r="6"/><circle cx="174" cy="196" r="6"/><circle cx="216" cy="196" r="6"/><circle cx="194" cy="232" r="6"/></g>
+</svg>

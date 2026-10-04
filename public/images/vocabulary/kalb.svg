@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Hund">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dff3f7"/><stop offset="1" stop-color="#f4fbf2"/></linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><g fill="#fff" opacity="0.9"><ellipse cx="80" cy="60" rx="38" ry="14"/><ellipse cx="106" cy="52" rx="24" ry="14"/><ellipse cx="318" cy="44" rx="34" ry="12"/><ellipse cx="296" cy="38" rx="20" ry="12"/></g><path d="M0 236 C 90 216, 170 224, 230 220 C 300 216, 350 212, 400 224 L400 300 L0 300 Z" fill="#9fd68a"/>
+  <path d="M0 262 C 100 248, 190 256, 270 250 C 330 246, 370 246, 400 252 L400 300 L0 300 Z" fill="#7cc26a"/>
+  <ellipse cx="200" cy="262" rx="90" ry="11" fill="#3f7f34" opacity="0.35"/>
+  <path d="M250 236 C 296 232, 304 200, 290 182 C 290 206, 276 222, 248 222 Z" fill="#c8874a"/>
+  <ellipse cx="200" cy="218" rx="56" ry="46" fill="#d99a5b"/>
+  <ellipse cx="200" cy="228" rx="30" ry="32" fill="#fff4e6"/>
+  <ellipse cx="176" cy="262" rx="18" ry="9" fill="#fff4e6"/><ellipse cx="224" cy="262" rx="18" ry="9" fill="#fff4e6"/>
+  <path d="M164 172 q36 14 72 0" stroke="#e53935" stroke-width="10" fill="none" stroke-linecap="round"/><circle cx="200" cy="182" r="7" fill="#ffd166"/>
+  <circle cx="200" cy="116" r="56" fill="#d99a5b"/>
+  <path d="M150 84 C 120 90, 112 150, 132 166 C 148 158, 154 120, 160 96 Z" fill="#8b5a2b"/>
+  <path d="M250 84 C 280 90, 288 150, 268 166 C 252 158, 246 120, 240 96 Z" fill="#8b5a2b"/>
+  <ellipse cx="226" cy="100" rx="20" ry="18" fill="#c8874a"/>
+  <ellipse cx="200" cy="142" rx="30" ry="24" fill="#fff4e6"/>
+  <ellipse cx="200" cy="130" rx="11" ry="8" fill="#3b2412"/>
+  <path d="M200 138 v8 M200 146 q-8 8 -14 2 M200 146 q8 8 14 2" stroke="#3b2412" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M194 152 q6 18 12 0 z" fill="#ef6f8a"/>
+  <circle cx="180" cy="106" r="7" fill="#2f2a26"/><circle cx="182.45" cy="103.55" r="2.4" fill="#fff"/><circle cx="222" cy="106" r="7" fill="#2f2a26"/><circle cx="224.45" cy="103.55" r="2.4" fill="#fff"/>
+</svg>

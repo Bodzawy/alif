@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Storch">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dff3f7"/><stop offset="1" stop-color="#f4fbf2"/></linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><g fill="#fff" opacity="0.9"><ellipse cx="80" cy="60" rx="38" ry="14"/><ellipse cx="106" cy="52" rx="24" ry="14"/><ellipse cx="318" cy="44" rx="34" ry="12"/><ellipse cx="296" cy="38" rx="20" ry="12"/></g><path d="M0 236 C 90 216, 170 224, 230 220 C 300 216, 350 212, 400 224 L400 300 L0 300 Z" fill="#9fd68a"/>
+  <path d="M0 262 C 100 248, 190 256, 270 250 C 330 246, 370 246, 400 252 L400 300 L0 300 Z" fill="#7cc26a"/>
+  <ellipse cx="214" cy="258" rx="70" ry="9" fill="#3f7f34" opacity="0.35"/>
+  <path d="M206 196 v60 M226 196 l-8 30 l8 4" stroke="#e5533d" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M200 254 h16" stroke="#e5533d" stroke-width="6" stroke-linecap="round"/>
+  <ellipse cx="226" cy="170" rx="62" ry="34" fill="#fff"/>
+  <path d="M238 146 C 270 150, 300 170, 310 196 C 280 196, 250 186, 236 172 Z" fill="#2b2d3a"/>
+  <path d="M176 166 C 168 130, 150 100, 140 78" stroke="#fff" stroke-width="18" fill="none" stroke-linecap="round"/>
+  <circle cx="140" cy="74" r="20" fill="#fff"/>
+  <path d="M124 72 L 58 100 L 126 84 Z" fill="#e5533d"/>
+  <circle cx="140" cy="70" r="5" fill="#2f2a26"/><circle cx="141.75" cy="68.25" r="1.7" fill="#fff"/>
+</svg>

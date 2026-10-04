@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Junge">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dff3f7"/><stop offset="1" stop-color="#f4fbf2"/></linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><g fill="#fff" opacity="0.9"><ellipse cx="80" cy="60" rx="38" ry="14"/><ellipse cx="106" cy="52" rx="24" ry="14"/><ellipse cx="318" cy="44" rx="34" ry="12"/><ellipse cx="296" cy="38" rx="20" ry="12"/></g>
+  <path d="M100 300 C 106 246, 146 224, 200 224 C 254 224, 294 246, 300 300 Z" fill="#f2a01f"/>
+  <path d="M166 226 q34 20 68 0" stroke="#e08a12" stroke-width="6" fill="none"/>
+  <rect x="186" y="196" width="28" height="32" fill="#e0a87a"/>
+  <ellipse cx="142" cy="146" rx="12" ry="16" fill="#eab58c"/><ellipse cx="258" cy="146" rx="12" ry="16" fill="#eab58c"/>
+  <circle cx="200" cy="140" r="62" fill="#f2c7a0"/>
+  <path d="M138 134 C 130 84, 166 66, 202 66 C 240 66, 272 86, 262 134 C 254 110, 240 98, 214 98 C 222 106, 220 112, 210 112 C 190 100, 160 104, 138 134 Z" fill="#2f2a26"/>
+  <circle cx="178" cy="144" r="8" fill="#2f2a26"/><circle cx="180.8" cy="141.2" r="2.7" fill="#fff"/><circle cx="222" cy="144" r="8" fill="#2f2a26"/><circle cx="224.8" cy="141.2" r="2.7" fill="#fff"/><ellipse cx="162" cy="168" rx="10" ry="6" fill="#f7a1a1" opacity="0.6"/><ellipse cx="238" cy="168" rx="10" ry="6" fill="#f7a1a1" opacity="0.6"/>
+  <path d="M200 150 v12" stroke="#d99a72" stroke-width="3" stroke-linecap="round"/>
+  <path d="M182 176 q18 16 36 0 z" fill="#c9534f"/>
+</svg>

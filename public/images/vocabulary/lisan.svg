@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Zunge">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff1e6"/><stop offset="1" stop-color="#ffd2b0"/></radialGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="70" cy="70" r="40" fill="#ffe2cc"/><circle cx="340" cy="230" r="54" fill="#ffe2cc"/>
+  <circle cx="200" cy="150" r="104" fill="#ffd166"/>
+  <path d="M152 118 q14 -14 28 0 M220 118 q14 -14 28 0" stroke="#5a2f17" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <ellipse cx="140" cy="156" rx="14" ry="8" fill="#f6a04d" opacity="0.6"/><ellipse cx="260" cy="156" rx="14" ry="8" fill="#f6a04d" opacity="0.6"/>
+  <path d="M146 166 C 166 192, 234 192, 254 166 C 240 184, 160 184, 146 166 Z" fill="#7a2f22"/>
+  <path d="M174 178 C 172 220, 186 244, 204 244 C 222 244, 234 220, 230 178 Z" fill="#ef6f8a"/>
+  <path d="M202 186 v38" stroke="#d94f6c" stroke-width="4" stroke-linecap="round"/>
+  <path d="M146 166 q54 30 108 0" stroke="#5a2f17" stroke-width="5" fill="none" stroke-linecap="round"/>
+</svg>

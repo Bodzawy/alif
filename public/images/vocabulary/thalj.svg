@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Schnee">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a9cfee"/><stop offset="1" stop-color="#e4f1fb"/></linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/>
+  <path d="M0 226 C 90 204, 170 214, 230 208 C 300 202, 350 198, 400 210 L400 300 L0 300 Z" fill="#fff"/>
+  <path d="M0 256 C 100 242, 190 252, 270 246 C 330 242, 370 242, 400 248 L400 300 L0 300 Z" fill="#eef5fb"/>
+  <path d="M320 226 l-22 0 l22 -40 l-16 0 l16 -32 l16 32 l-16 0 l22 40 z" fill="#3f8f5a"/><path d="M304 186 l16 -30 l16 30 q-16 -8 -32 0 z" fill="#fff"/><rect x="316" y="226" width="8" height="14" fill="#7a4a2a"/>
+  <g stroke="#fff" stroke-width="5" stroke-linecap="round" fill="none">
+    <g transform="translate(150 110)"><path d="M0 -44 V44 M-38 -22 L38 22 M-38 22 L38 -22"/><path d="M-10 -34 L0 -24 L10 -34 M-10 34 L0 24 L10 34 M-34 -8 L-21 -12 L-25 -26 M34 8 L21 12 L25 26 M-34 8 L-21 12 L-25 26 M34 -8 L21 -12 L25 -26"/></g>
+    <g transform="translate(262 92) scale(0.6)"><path d="M0 -44 V44 M-38 -22 L38 22 M-38 22 L38 -22"/><path d="M-10 -34 L0 -24 L10 -34 M-10 34 L0 24 L10 34"/></g>
+    <g transform="translate(66 176) scale(0.5)"><path d="M0 -44 V44 M-38 -22 L38 22 M-38 22 L38 -22"/></g>
+  </g>
+  <g fill="#fff"><circle cx="230" cy="160" r="5"/><circle cx="90" cy="70" r="4"/><circle cx="350" cy="130" r="5"/><circle cx="210" cy="50" r="4"/><circle cx="40" cy="110" r="3"/><circle cx="370" cy="60" r="4"/></g>
+</svg>

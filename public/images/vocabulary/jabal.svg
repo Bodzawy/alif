@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Berg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dff3f7"/><stop offset="1" stop-color="#f4fbf2"/></linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><g fill="#fff" opacity="0.9"><ellipse cx="80" cy="60" rx="38" ry="14"/><ellipse cx="106" cy="52" rx="24" ry="14"/><ellipse cx="318" cy="44" rx="34" ry="12"/><ellipse cx="296" cy="38" rx="20" ry="12"/></g>
+  <path d="M220 236 L300 120 L390 236 Z" fill="#9db7c9"/><path d="M300 120 L280 150 L292 146 L300 158 L310 146 L322 150 Z" fill="#fff"/>
+  <path d="M40 240 L180 64 L330 240 Z" fill="#7c93a8"/>
+  <path d="M180 64 L146 108 L162 102 L176 118 L192 102 L208 112 L214 106 Z" fill="#fff"/>
+  <path d="M180 64 L330 240 L220 240 Z" fill="#6a8096" opacity="0.6"/>
+  <path d="M0 240 C 90 220, 170 228, 230 224 C 300 220, 350 216, 400 228 L400 300 L0 300 Z" fill="#9fd68a"/>
+  <path d="M0 266 C 100 252, 190 260, 270 254 C 330 250, 370 250, 400 256 L400 300 L0 300 Z" fill="#7cc26a"/>
+  <g fill="#3f8f5a"><path d="M60 250 l14 -34 l14 34 z"/><path d="M84 254 l12 -28 l12 28 z"/><path d="M330 252 l14 -34 l14 34 z"/></g>
+</svg>

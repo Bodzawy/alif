@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Regenschirm">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c9dcea"/><stop offset="1" stop-color="#eef5fa"/></linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/>
+  <g fill="#9fb2c4" opacity="0.9"><ellipse cx="90" cy="50" rx="50" ry="18"/><ellipse cx="130" cy="40" rx="34" ry="18"/><ellipse cx="320" cy="44" rx="48" ry="16"/></g>
+  <g stroke="#6bbfe0" stroke-width="4" stroke-linecap="round"><path d="M40 90 l-6 16 M80 130 l-6 16 M330 100 l-6 16 M360 160 l-6 16 M60 200 l-6 16 M350 230 l-6 16 M40 150 l-6 16"/></g>
+  <path d="M200 140 V 250 a18 18 0 0 1 -36 0" stroke="#6b4226" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <path d="M80 150 C 86 90, 140 64, 200 64 C 260 64, 314 90, 320 150 C 300 136, 280 136, 260 150 C 240 136, 220 136, 200 150 C 180 136, 160 136, 140 150 C 120 136, 100 136, 80 150 Z" fill="#e53935"/>
+  <path d="M140 150 C 146 100, 170 70, 200 64 C 184 80, 172 110, 170 146 Z M260 150 C 254 100, 230 70, 200 64 C 216 80, 228 110, 230 146 Z" fill="#c62828"/>
+  <path d="M200 64 v-14" stroke="#6b4226" stroke-width="6" stroke-linecap="round"/>
+</svg>

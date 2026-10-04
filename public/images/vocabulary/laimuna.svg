@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Zitrone">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff4d6"/><stop offset="1" stop-color="#ffd98a"/></radialGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="330" cy="62" r="34" fill="#ffe7a8"/>
+  <ellipse cx="190" cy="258" rx="120" ry="15" fill="#a8652a" opacity="0.25"/>
+  <g transform="rotate(-12 180 160)">
+    <ellipse cx="180" cy="160" rx="98" ry="68" fill="#ffd93b"/>
+    <path d="M84 160 q-14 -10 -26 0 q12 10 26 0 z M276 160 q14 -10 26 0 q-12 10 -26 0 z" fill="#ffd93b"/>
+    <ellipse cx="150" cy="128" rx="40" ry="12" fill="#fff" opacity="0.35"/>
+    <g fill="#f2c12c" opacity="0.6"><circle cx="210" cy="180" r="3"/><circle cx="240" cy="160" r="3"/><circle cx="190" cy="200" r="3"/><circle cx="130" cy="180" r="3"/></g>
+  </g>
+  <path d="M200 98 C 214 66, 254 56, 274 66 C 258 86, 230 100, 200 98 Z" fill="#4caf50"/><path d="M204 96 q30 -20 66 -28" stroke="#2f8f3a" stroke-width="2.5" fill="none"/>
+  <circle cx="318" cy="236" r="40" fill="#f2c12c"/><circle cx="318" cy="236" r="34" fill="#fff6c9"/>
+  <g fill="#ffe066"><path d="M318 236 L 318 206 A30 30 0 0 1 344 221 Z"/><path d="M318 236 L 346 244 A30 30 0 0 1 329 264 Z"/><path d="M318 236 L 307 264 A30 30 0 0 1 288 242 Z"/><path d="M318 236 L 291 227 A30 30 0 0 1 308 207 Z"/></g>
+</svg>

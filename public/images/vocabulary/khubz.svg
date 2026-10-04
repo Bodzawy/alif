@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Brot">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff4d6"/><stop offset="1" stop-color="#ffd98a"/></radialGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="330" cy="62" r="34" fill="#ffe7a8"/>
+  <rect x="70" y="222" width="260" height="22" rx="10" fill="#b5803f"/>
+  <ellipse cx="200" cy="252" rx="130" ry="16" fill="#8a5a24" opacity="0.3"/>
+  <path d="M96 222 C 88 160, 144 116, 200 116 C 256 116, 312 160, 304 222 Z" fill="#d99a4e"/>
+  <path d="M110 190 C 120 150, 160 128, 200 128 C 240 128, 280 150, 290 190 C 250 166, 150 166, 110 190 Z" fill="#c4823a"/>
+  <g stroke="#f2cf96" stroke-width="7" stroke-linecap="round"><path d="M146 156 l20 -22"/><path d="M186 150 l20 -24"/><path d="M228 152 l20 -22"/></g>
+  <ellipse cx="140" cy="200" rx="18" ry="8" fill="#fff" opacity="0.2"/>
+</svg>

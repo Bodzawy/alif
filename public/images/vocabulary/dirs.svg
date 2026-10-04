@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Backenzahn">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#e6f7f3"/><stop offset="1" stop-color="#b9e6dc"/></radialGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="70" cy="70" r="40" fill="#d3f0e9"/><circle cx="340" cy="230" r="54" fill="#d3f0e9"/>
+  <ellipse cx="200" cy="268" rx="70" ry="9" fill="#7cbfae" opacity="0.5"/>
+  <path d="M130 106 C 128 60, 176 58, 200 76 C 224 58, 272 60, 270 106 C 272 152, 254 172, 250 212 C 246 258, 226 262, 220 222 C 216 198, 210 190, 200 190 C 190 190, 184 198, 180 222 C 174 262, 154 258, 150 212 C 146 172, 128 152, 130 106 Z" fill="#fff"/>
+  <path d="M240 90 C 262 104, 258 150, 244 176 C 240 150, 244 116, 240 90 Z" fill="#dff1f7"/>
+  <circle cx="178" cy="124" r="7" fill="#2f2a26"/><circle cx="180.45" cy="121.55" r="2.4" fill="#fff"/><circle cx="222" cy="124" r="7" fill="#2f2a26"/><circle cx="224.45" cy="121.55" r="2.4" fill="#fff"/><ellipse cx="162" cy="146" rx="9" ry="5" fill="#f7a1c4" opacity="0.6"/><ellipse cx="238" cy="146" rx="9" ry="5" fill="#f7a1c4" opacity="0.6"/>
+  <path d="M188 146 q12 10.8 24 0" stroke="#5a8fa8" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <g fill="#ffd166"><path d="M300 70 l5 14 l14 5 l-14 5 l-5 14 l-5 -14 l-14 -5 l14 -5 z"/><path d="M92 196 l3 9 l9 3 l-9 3 l-3 9 l-3 -9 l-9 -3 l9 -3 z"/></g>
+</svg>

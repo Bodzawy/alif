@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Krokodil">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dff3f7"/><stop offset="1" stop-color="#f4fbf2"/></linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><g fill="#fff" opacity="0.9"><ellipse cx="80" cy="60" rx="38" ry="14"/><ellipse cx="106" cy="52" rx="24" ry="14"/><ellipse cx="318" cy="44" rx="34" ry="12"/><ellipse cx="296" cy="38" rx="20" ry="12"/></g>
+  <path d="M0 230 C 90 218, 180 226, 250 222 C 320 218, 360 220, 400 226 L400 300 L0 300 Z" fill="#9fd68a"/>
+  <path d="M0 262 C 100 252, 200 262, 280 256 C 340 252, 380 254, 400 258 L400 300 L0 300 Z" fill="#6bbfe0"/>
+  <ellipse cx="210" cy="246" rx="130" ry="16" fill="#3f7f34" opacity="0.3"/>
+  <path d="M120 200 C 160 176, 260 172, 300 186 C 330 196, 360 214, 392 214 C 360 226, 320 226, 290 220 C 240 232, 160 232, 120 220 Z" fill="#5cae4f"/>
+  <g fill="#3f8f3a"><path d="M170 186 l10 -14 l10 14 z"/><path d="M204 182 l10 -14 l10 14 z"/><path d="M238 182 l10 -14 l10 14 z"/><path d="M272 186 l10 -13 l10 13 z"/></g>
+  <path d="M130 196 C 100 194, 50 198, 26 206 C 26 216, 60 222, 130 222 Z" fill="#6cc05d"/>
+  <path d="M32 208 h96" stroke="#3f8f3a" stroke-width="3"/>
+  <g fill="#fff"><path d="M44 208 l5 7 l5 -7 z"/><path d="M64 208 l5 7 l5 -7 z"/><path d="M84 208 l5 7 l5 -7 z"/><path d="M104 208 l5 7 l5 -7 z"/></g>
+  <circle cx="128" cy="188" r="15" fill="#6cc05d"/><circle cx="130" cy="186" r="7" fill="#2f2a26"/><circle cx="132.45" cy="183.55" r="2.4" fill="#fff"/>
+  <g fill="#4e9a43"><ellipse cx="160" cy="232" rx="14" ry="9"/><ellipse cx="262" cy="232" rx="14" ry="9"/></g>
+</svg>

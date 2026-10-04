@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Krone">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#f1ecfb"/><stop offset="1" stop-color="#d8ccf3"/></radialGradient><linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd54a"/><stop offset="1" stop-color="#f2a01f"/></linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="70" cy="70" r="40" fill="#e6ddf8"/><circle cx="340" cy="230" r="54" fill="#e6ddf8"/>
+  <ellipse cx="200" cy="252" rx="100" ry="13" fill="#6f5a9c" opacity="0.25"/>
+  <path d="M112 214 L106 112 L158 160 L200 92 L242 160 L294 112 L288 214 Z" fill="url(#gold)"/>
+  <rect x="106" y="206" width="188" height="36" rx="8" fill="#f2a01f"/>
+  <g fill="#ffe680"><circle cx="106" cy="108" r="11"/><circle cx="200" cy="88" r="12"/><circle cx="294" cy="108" r="11"/></g>
+  <circle cx="200" cy="224" r="10" fill="#e53950"/><circle cx="154" cy="224" r="8" fill="#3d8bfd"/><circle cx="246" cy="224" r="8" fill="#2fb36b"/>
+  <path d="M200 150 l12 18 l-12 18 l-12 -18 z" fill="#e53950"/>
+  <ellipse cx="148" cy="170" rx="8" ry="24" fill="#fff" opacity="0.3" transform="rotate(-20 148 170)"/>
+</svg>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Tür">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff1e6"/><stop offset="1" stop-color="#ffd2b0"/></radialGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/>
+  <rect x="0" y="262" width="400" height="38" fill="#e8b48a"/>
+  <path d="M128 266 V104 a72 72 0 0 1 144 0 V266 Z" fill="#7a4421"/>
+  <path d="M140 262 V108 a60 60 0 0 1 120 0 V262 Z" fill="#a8642f"/>
+  <g fill="#bf7a3e"><path d="M154 160 V112 a46 46 0 0 1 92 0 V160 Z"/><rect x="154" y="176" width="40" height="72" rx="6"/><rect x="206" y="176" width="40" height="72" rx="6"/></g>
+  <circle cx="244" cy="172" r="8" fill="#f2c14e"/><circle cx="246" cy="170" r="3" fill="#fff3c4"/>
+  <rect x="116" y="262" width="168" height="12" rx="4" fill="#c9a07a"/>
+  <path d="M60 266 h40 l-6 -40 h-28 z" fill="#d97a4a"/><circle cx="80" cy="210" r="22" fill="#6bbf6b"/><circle cx="66" cy="200" r="14" fill="#7fd07f"/>
+</svg>

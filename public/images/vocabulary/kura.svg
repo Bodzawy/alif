@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Ball">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dff3f7"/><stop offset="1" stop-color="#f4fbf2"/></linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><g fill="#fff" opacity="0.9"><ellipse cx="80" cy="60" rx="38" ry="14"/><ellipse cx="106" cy="52" rx="24" ry="14"/><ellipse cx="318" cy="44" rx="34" ry="12"/><ellipse cx="296" cy="38" rx="20" ry="12"/></g><path d="M0 236 C 90 216, 170 224, 230 220 C 300 216, 350 212, 400 224 L400 300 L0 300 Z" fill="#9fd68a"/>
+  <path d="M0 262 C 100 248, 190 256, 270 250 C 330 246, 370 246, 400 252 L400 300 L0 300 Z" fill="#7cc26a"/>
+  <ellipse cx="200" cy="256" rx="70" ry="9" fill="#3f7f34" opacity="0.4"/>
+  <circle cx="200" cy="168" r="80" fill="#fff"/>
+  <path d="M200 88 C 160 120, 150 210, 200 248 C 140 236, 120 140, 200 88 Z" fill="#e53935"/>
+  <path d="M200 88 C 240 120, 250 210, 200 248 C 260 236, 280 140, 200 88 Z" fill="#3d8bfd"/>
+  <path d="M200 88 C 120 100, 116 220, 200 248 C 144 220, 140 120, 200 88 Z" fill="#ffd166"/>
+  <path d="M200 88 C 280 100, 284 220, 200 248 C 256 220, 260 120, 200 88 Z" fill="#2fb36b"/>
+  <circle cx="200" cy="96" r="10" fill="#fff"/>
+  <ellipse cx="160" cy="124" rx="14" ry="26" fill="#fff" opacity="0.35" transform="rotate(30 160 124)"/>
+</svg>

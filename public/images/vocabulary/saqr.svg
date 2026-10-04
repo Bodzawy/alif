@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Falke">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dff3f7"/><stop offset="1" stop-color="#f4fbf2"/></linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><g fill="#fff" opacity="0.9"><ellipse cx="80" cy="60" rx="38" ry="14"/><ellipse cx="106" cy="52" rx="24" ry="14"/><ellipse cx="318" cy="44" rx="34" ry="12"/><ellipse cx="296" cy="38" rx="20" ry="12"/></g>
+  <path d="M60 236 C 160 226, 260 236, 360 222" stroke="#8b5a2b" stroke-width="14" fill="none" stroke-linecap="round"/>
+  <path d="M290 230 l40 -16 M300 232 l26 8" stroke="#8b5a2b" stroke-width="7" stroke-linecap="round"/>
+  <path d="M186 214 L 170 280 L 206 280 L 214 214 Z" fill="#6b4226"/>
+  <path d="M150 140 C 150 90, 250 80, 252 150 C 254 200, 236 232, 200 232 C 164 232, 150 196, 150 140 Z" fill="#8a5a3b"/>
+  <path d="M168 146 C 168 120, 232 114, 234 150 C 236 196, 222 222, 200 224 C 178 222, 166 196, 168 146 Z" fill="#f1e3c8"/>
+  <g stroke="#8a5a3b" stroke-width="4" stroke-linecap="round"><path d="M188 160 v8 M212 160 v8 M200 176 v8 M186 192 v8 M214 192 v8 M200 206 v8"/></g>
+  <path d="M234 120 C 270 150, 270 200, 230 232 C 240 196, 244 160, 226 132 Z" fill="#6b4226"/>
+  <circle cx="200" cy="96" r="40" fill="#8a5a3b"/>
+  <path d="M178 106 q-6 16 4 26 l6 -14 z" fill="#3b2412"/>
+  <circle cx="186" cy="94" r="12" fill="#ffd166"/><circle cx="186" cy="94" r="6" fill="#2f2a26"/><circle cx="188.1" cy="91.9" r="2.0" fill="#fff"/>
+  <path d="M160 96 q-26 2 -26 22 q12 -6 22 -4 z" fill="#ffb300"/><path d="M134 118 q2 6 8 6" stroke="#3b2412" stroke-width="3" fill="none"/>
+  <g stroke="#ffb300" stroke-width="6" stroke-linecap="round"><path d="M186 228 v8 M214 228 v8"/></g>
+</svg>

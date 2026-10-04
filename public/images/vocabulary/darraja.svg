@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Fahrrad">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dff3f7"/><stop offset="1" stop-color="#f4fbf2"/></linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><g fill="#fff" opacity="0.9"><ellipse cx="80" cy="60" rx="38" ry="14"/><ellipse cx="106" cy="52" rx="24" ry="14"/><ellipse cx="318" cy="44" rx="34" ry="12"/><ellipse cx="296" cy="38" rx="20" ry="12"/></g>
+  <rect x="0" y="262" width="400" height="38" fill="#c9d6c0"/>
+  <ellipse cx="204" cy="266" rx="130" ry="16" fill="#4f6f4a" opacity="0.25"/>
+  <g fill="none" stroke="#333" stroke-width="9"><circle cx="118" cy="204" r="54"/><circle cx="290" cy="204" r="54"/></g>
+  <g stroke="#9aa5ad" stroke-width="2"><path d="M118 150 V258 M64 204 H172 M80 166 L156 242 M80 242 L156 166"/><path d="M290 150 V258 M236 204 H344 M252 166 L328 242 M252 242 L328 166"/></g>
+  <g stroke="#e53935" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M118 204 L196 208 L170 138 Z"/><path d="M170 138 L262 140 L196 208"/><path d="M262 140 L290 204"/></g>
+  <path d="M170 138 l-6 -16" stroke="#333" stroke-width="7" stroke-linecap="round"/><ellipse cx="160" cy="118" rx="22" ry="8" fill="#333"/>
+  <path d="M262 140 l-6 -26 h26" stroke="#333" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <circle cx="196" cy="208" r="12" fill="#555"/><path d="M196 208 l14 18" stroke="#333" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="118" cy="204" r="6" fill="#555"/><circle cx="290" cy="204" r="6" fill="#555"/>
+</svg>

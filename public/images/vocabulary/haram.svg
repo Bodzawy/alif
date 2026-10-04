@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Pyramide">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff4d6"/><stop offset="1" stop-color="#ffd98a"/></radialGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="320" cy="62" r="34" fill="#ffe7a8"/>
+  <path d="M250 236 L 310 150 L 372 236 Z" fill="#d9a35b"/><path d="M310 150 L 372 236 L 330 236 Z" fill="#c4823a"/>
+  <path d="M40 240 L 170 70 L 300 240 Z" fill="#e9b45b"/>
+  <path d="M170 70 L 300 240 L 196 240 Z" fill="#c98f4a"/>
+  <g stroke="#d89c45" stroke-width="3" opacity="0.8"><path d="M70 200 h132 M100 160 h86 M130 120 h50"/></g>
+  <g stroke="#b5803f" stroke-width="3" opacity="0.7"><path d="M204 200 h66 M190 160 h50 M180 120 h22"/></g>
+  <path d="M0 248 C 90 228, 170 236, 230 232 C 300 228, 350 224, 400 236 L400 300 L0 300 Z" fill="#e9b45b"/>
+  <path d="M0 274 C 100 260, 190 268, 270 262 C 330 258, 370 258, 400 264 L400 300 L0 300 Z" fill="#d89c45"/>
+</svg>

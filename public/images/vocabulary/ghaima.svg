@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Wolke">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7ec8e3"/><stop offset="1" stop-color="#d8f1fb"/></linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/>
+  <g fill="#fff" opacity="0.7"><ellipse cx="70" cy="240" rx="40" ry="14"/><ellipse cx="96" cy="230" rx="26" ry="14"/><ellipse cx="340" cy="60" rx="34" ry="12"/></g>
+  <g fill="#e3eef5"><circle cx="130" cy="176" r="46"/><circle cx="200" cy="150" r="66"/><circle cx="270" cy="174" r="50"/><rect x="100" y="170" width="210" height="52" rx="26"/></g>
+  <g fill="#fff"><circle cx="130" cy="166" r="44"/><circle cx="200" cy="140" r="64"/><circle cx="268" cy="164" r="48"/><rect x="100" y="160" width="208" height="50" rx="25"/></g>
+  <ellipse cx="170" cy="112" rx="24" ry="12" fill="#fff" opacity="0.9"/>
+</svg>

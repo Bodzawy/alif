@@ -42,5 +42,1220 @@
       ],
       "message": "حاول مرة أخرى، نريد كلمة أناناس"
     }
+  },
+
+  "بيت": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة بيت بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة بيت"
+    }
+  },
+
+  "باب": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة باب بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة باب"
+    }
+  },
+
+  "بطة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة بطة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة بطة"
+    }
+  },
+
+  "تفاحة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة تفاحة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة تفاحة"
+    }
+  },
+
+  "تمساح": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة تمساح بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة تمساح"
+    }
+  },
+
+  "تاج": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة تاج بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة تاج"
+    }
+  },
+
+  "ثعلب": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة ثعلب بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة ثعلب"
+    }
+  },
+
+  "ثوم": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة ثوم بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة ثوم"
+    }
+  },
+
+  "ثلج": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة ثلج بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة ثلج"
+    }
+  },
+
+  "جمل": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة جمل بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة جمل"
+    }
+  },
+
+  "جزرة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة جزرة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة جزرة"
+    }
+  },
+
+  "جبل": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة جبل بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة جبل"
+    }
+  },
+
+  "حصان": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة حصان بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة حصان"
+    }
+  },
+
+  "حوت": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة حوت بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة حوت"
+    }
+  },
+
+  "حليب": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة حليب بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة حليب"
+    }
+  },
+
+  "خبز": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة خبز بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة خبز"
+    }
+  },
+
+  "خروف": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة خروف بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة خروف"
+    }
+  },
+
+  "خيار": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة خيار بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة خيار"
+    }
+  },
+
+  "دب": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة دب بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة دب"
+    }
+  },
+
+  "دجاجة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة دجاجة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة دجاجة"
+    }
+  },
+
+  "دراجة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة دراجة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة دراجة"
+    }
+  },
+
+  "ذئب": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة ذئب بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة ذئب"
+    }
+  },
+
+  "ذرة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة ذرة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة ذرة"
+    }
+  },
+
+  "ذبابة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة ذبابة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة ذبابة"
+    }
+  },
+
+  "رمانة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة رمانة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة رمانة"
+    }
+  },
+
+  "ريشة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة ريشة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة ريشة"
+    }
+  },
+
+  "رجل": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة رجل بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة رجل"
+    }
+  },
+
+  "زرافة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة زرافة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة زرافة"
+    }
+  },
+
+  "زيتونة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة زيتونة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة زيتونة"
+    }
+  },
+
+  "زهرة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة زهرة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة زهرة"
+    }
+  },
+
+  "سمكة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة سمكة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة سمكة"
+    }
+  },
+
+  "سيارة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة سيارة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة سيارة"
+    }
+  },
+
+  "ساعة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة ساعة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة ساعة"
+    }
+  },
+
+  "شمس": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة شمس بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة شمس"
+    }
+  },
+
+  "شجرة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة شجرة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة شجرة"
+    }
+  },
+
+  "شاي": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة شاي بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة شاي"
+    }
+  },
+
+  "صقر": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة صقر بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة صقر"
+    }
+  },
+
+  "صندوق": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة صندوق بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة صندوق"
+    }
+  },
+
+  "صابون": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة صابون بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة صابون"
+    }
+  },
+
+  "ضفدع": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة ضفدع بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة ضفدع"
+    }
+  },
+
+  "ضرس": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة ضرس بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة ضرس"
+    }
+  },
+
+  "ضبع": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة ضبع بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة ضبع"
+    }
+  },
+
+  "طائرة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة طائرة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة طائرة"
+    }
+  },
+
+  "طبل": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة طبل بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة طبل"
+    }
+  },
+
+  "طاووس": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة طاووس بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة طاووس"
+    }
+  },
+
+  "ظرف": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة ظرف بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة ظرف"
+    }
+  },
+
+  "ظفر": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة ظفر بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة ظفر"
+    }
+  },
+
+  "ظبي": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة ظبي بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة ظبي"
+    }
+  },
+
+  "عنب": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة عنب بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة عنب"
+    }
+  },
+
+  "عصفور": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة عصفور بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة عصفور"
+    }
+  },
+
+  "عسل": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة عسل بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة عسل"
+    }
+  },
+
+  "غراب": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة غراب بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة غراب"
+    }
+  },
+
+  "غيمة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة غيمة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة غيمة"
+    }
+  },
+
+  "غسالة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة غسالة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة غسالة"
+    }
+  },
+
+  "فيل": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة فيل بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة فيل"
+    }
+  },
+
+  "فراشة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة فراشة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة فراشة"
+    }
+  },
+
+  "فراولة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة فراولة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة فراولة"
+    }
+  },
+
+  "قطة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة قطة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة قطة"
+    }
+  },
+
+  "قمر": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة قمر بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة قمر"
+    }
+  },
+
+  "قلم": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة قلم بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة قلم"
+    }
+  },
+
+  "كلب": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة كلب بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة كلب"
+    }
+  },
+
+  "كتاب": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة كتاب بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة كتاب"
+    }
+  },
+
+  "كرة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة كرة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة كرة"
+    }
+  },
+
+  "ليمونة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة ليمونة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة ليمونة"
+    }
+  },
+
+  "لسان": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة لسان بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة لسان"
+    }
+  },
+
+  "لقلق": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة لقلق بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة لقلق"
+    }
+  },
+
+  "موزة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة موزة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة موزة"
+    }
+  },
+
+  "مفتاح": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة مفتاح بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة مفتاح"
+    }
+  },
+
+  "مظلة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة مظلة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة مظلة"
+    }
+  },
+
+  "نمر": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة نمر بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة نمر"
+    }
+  },
+
+  "نحلة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة نحلة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة نحلة"
+    }
+  },
+
+  "نجمة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة نجمة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة نجمة"
+    }
+  },
+
+  "هلال": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة هلال بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة هلال"
+    }
+  },
+
+  "هاتف": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة هاتف بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة هاتف"
+    }
+  },
+
+  "هرم": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة هرم بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة هرم"
+    }
+  },
+
+  "وردة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة وردة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة وردة"
+    }
+  },
+
+  "ولد": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة ولد بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة ولد"
+    }
+  },
+
+  "وسادة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة وسادة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة وسادة"
+    }
+  },
+
+  "يد": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة يد بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة يد"
+    }
+  },
+
+  "يقطين": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة يقطين بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة يقطين"
+    }
+  },
+
+  "يمامة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة يمامة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة يمامة"
+    }
   }
 }

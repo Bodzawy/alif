@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Seife">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#f1ecfb"/><stop offset="1" stop-color="#d8ccf3"/></radialGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="70" cy="70" r="40" fill="#e6ddf8"/><circle cx="340" cy="230" r="54" fill="#e6ddf8"/>
+  <ellipse cx="196" cy="254" rx="110" ry="14" fill="#6f5a9c" opacity="0.25"/>
+  <path d="M96 178 L 186 140 L 306 168 L 216 210 Z" fill="#fbc4da"/>
+  <path d="M96 178 L 216 210 L 216 248 L 96 214 Z" fill="#f7a1c4"/>
+  <path d="M216 210 L 306 168 L 306 204 L 216 248 Z" fill="#e985ae"/>
+  <ellipse cx="190" cy="176" rx="40" ry="12" fill="#fff" opacity="0.45" transform="rotate(8 190 176)"/>
+  <g fill="#fff" fill-opacity="0.55" stroke="#fff" stroke-width="3"><circle cx="150" cy="112" r="26"/><circle cx="214" cy="84" r="18"/><circle cx="262" cy="118" r="22"/><circle cx="118" cy="66" r="12"/><circle cx="300" cy="72" r="14"/><circle cx="176" cy="54" r="9"/></g>
+  <g fill="#fff"><circle cx="142" cy="102" r="6"/><circle cx="208" cy="78" r="4"/><circle cx="255" cy="110" r="5"/></g>
+</svg>

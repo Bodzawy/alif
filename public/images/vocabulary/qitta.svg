@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Katze">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff1e6"/><stop offset="1" stop-color="#ffd2b0"/></radialGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="70" cy="70" r="40" fill="#ffe2cc"/><circle cx="340" cy="230" r="54" fill="#ffe2cc"/>
+  <ellipse cx="200" cy="268" rx="90" ry="11" fill="#c77a4a" opacity="0.25"/>
+  <path d="M248 250 C 310 256, 330 210, 300 180 C 316 214, 296 238, 250 236 Z" fill="#f0a04b"/>
+  <ellipse cx="200" cy="216" rx="56" ry="50" fill="#f0a04b"/>
+  <ellipse cx="200" cy="228" rx="30" ry="34" fill="#fff4e6"/>
+  <ellipse cx="176" cy="262" rx="18" ry="9" fill="#fff4e6"/><ellipse cx="224" cy="262" rx="18" ry="9" fill="#fff4e6"/>
+  <path d="M146 92 L 150 40 L 186 74 Z M254 92 L 250 40 L 214 74 Z" fill="#f0a04b"/>
+  <path d="M154 80 L 156 54 L 176 74 Z M246 80 L 244 54 L 224 74 Z" fill="#f7b9c9"/>
+  <ellipse cx="200" cy="118" rx="62" ry="54" fill="#f0a04b"/>
+  <path d="M180 74 l6 16 M200 70 v18 M220 74 l-6 16" stroke="#d9772b" stroke-width="5" stroke-linecap="round"/>
+  <ellipse cx="200" cy="140" rx="26" ry="18" fill="#fff4e6"/>
+  <path d="M193 130 h14 l-7 8 z" fill="#ef8aa6"/><path d="M200 138 v6 M200 144 q-6 6 -12 2 M200 144 q6 6 12 2" stroke="#8a5a3a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <ellipse cx="176" cy="114" rx="8" ry="11" fill="#3b7d3a"/><ellipse cx="224" cy="114" rx="8" ry="11" fill="#3b7d3a"/><ellipse cx="176" cy="114" rx="3" ry="9" fill="#111"/><ellipse cx="224" cy="114" rx="3" ry="9" fill="#111"/>
+  <g stroke="#c9a07a" stroke-width="2" stroke-linecap="round"><path d="M172 140 l-34 -6 M172 146 l-34 4 M228 140 l34 -6 M228 146 l34 4"/></g>
+</svg>

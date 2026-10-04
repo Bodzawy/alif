@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Granatapfel">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fdeef2"/><stop offset="1" stop-color="#f7c9d6"/></radialGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="70" cy="70" r="40" fill="#fbdbe4"/><circle cx="340" cy="230" r="54" fill="#fbdbe4"/>
+  <ellipse cx="210" cy="266" rx="120" ry="15" fill="#b0475f" opacity="0.25"/>
+  <circle cx="160" cy="170" r="74" fill="#c62842"/>
+  <path d="M138 104 l6 -26 l10 16 l6 -22 l6 22 l10 -16 l6 26 z" fill="#a01e36"/>
+  <ellipse cx="124" cy="150" rx="12" ry="30" fill="#fff" opacity="0.22" transform="rotate(20 124 150)"/>
+  <circle cx="282" cy="210" r="52" fill="#c62842"/><circle cx="282" cy="210" r="45" fill="#fbe3e3"/>
+  <g fill="#d81b45"><ellipse cx="262" cy="190" rx="6" ry="7"/><ellipse cx="276" cy="186" rx="6" ry="7"/><ellipse cx="292" cy="188" rx="6" ry="7"/><ellipse cx="306" cy="196" rx="6" ry="7"/><ellipse cx="254" cy="206" rx="6" ry="7"/><ellipse cx="268" cy="204" rx="6" ry="7"/><ellipse cx="300" cy="212" rx="6" ry="7"/><ellipse cx="314" cy="214" rx="6" ry="7"/><ellipse cx="258" cy="222" rx="6" ry="7"/><ellipse cx="272" cy="226" rx="6" ry="7"/><ellipse cx="288" cy="230" rx="6" ry="7"/><ellipse cx="304" cy="230" rx="6" ry="7"/><ellipse cx="282" cy="242" rx="6" ry="7"/></g>
+  <path d="M282 170 v80 M246 210 h72" stroke="#f4cdd0" stroke-width="3"/>
+</svg>

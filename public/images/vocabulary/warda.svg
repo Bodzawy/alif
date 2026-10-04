@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Rose">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fdeef2"/><stop offset="1" stop-color="#f7c9d6"/></radialGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="70" cy="70" r="40" fill="#fbdbe4"/><circle cx="340" cy="230" r="54" fill="#fbdbe4"/>
+  <path d="M200 276 C 196 230, 204 190, 200 150" stroke="#3f9e4a" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <g fill="#3f9e4a"><path d="M199 222 l-10 -6 l10 -2 z"/><path d="M201 192 l10 -6 l-10 -2 z"/></g>
+  <path d="M200 236 C 166 210, 132 220, 122 232 C 150 246, 180 248, 200 236 Z" fill="#4caf50"/><path d="M202 206 C 236 182, 268 192, 278 204 C 250 218, 222 218, 202 206 Z" fill="#4caf50"/>
+  <path d="M180 156 l-20 10 l18 -4 l2 14 l10 -14 z M220 156 l20 10 l-18 -4 l-2 14 l-10 -14 z" fill="#3f9e4a"/>
+  <path d="M136 104 C 130 150, 160 172, 200 172 C 240 172, 270 150, 264 104 C 240 120, 160 120, 136 104 Z" fill="#c62842"/>
+  <path d="M150 90 C 150 50, 250 50, 250 90 C 250 130, 150 130, 150 90 Z" fill="#e53950"/>
+  <path d="M168 92 C 170 66, 230 66, 232 92 C 230 116, 170 116, 168 92 Z" fill="#c62842"/>
+  <path d="M184 92 C 186 76, 214 76, 216 92 C 214 104, 186 104, 184 92 Z" fill="#a01e36"/>
+  <path d="M136 104 C 150 136, 176 146, 200 146 M264 104 C 250 136, 224 146, 200 146" stroke="#a01e36" stroke-width="3" fill="none"/>
+</svg>

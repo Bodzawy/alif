@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Pferd">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dff3f7"/><stop offset="1" stop-color="#f4fbf2"/></linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><g fill="#fff" opacity="0.9"><ellipse cx="80" cy="60" rx="38" ry="14"/><ellipse cx="106" cy="52" rx="24" ry="14"/><ellipse cx="318" cy="44" rx="34" ry="12"/><ellipse cx="296" cy="38" rx="20" ry="12"/></g><path d="M0 236 C 90 216, 170 224, 230 220 C 300 216, 350 212, 400 224 L400 300 L0 300 Z" fill="#9fd68a"/>
+  <path d="M0 262 C 100 248, 190 256, 270 250 C 330 246, 370 246, 400 252 L400 300 L0 300 Z" fill="#7cc26a"/>
+  <ellipse cx="215" cy="262" rx="100" ry="13" fill="#3f7f34" opacity="0.35"/>
+  <g fill="#8a4a24"><rect x="150" y="180" width="15" height="76" rx="6"/><rect x="250" y="180" width="15" height="76" rx="6"/></g>
+  <g fill="#a0522d"><rect x="172" y="180" width="15" height="76" rx="6"/><rect x="272" y="180" width="15" height="76" rx="6"/></g>
+  <g fill="#3b2412"><rect x="148" y="250" width="19" height="9" rx="3"/><rect x="170" y="250" width="19" height="9" rx="3"/><rect x="248" y="250" width="19" height="9" rx="3"/><rect x="270" y="250" width="19" height="9" rx="3"/></g>
+  <path d="M290 160 C 330 160, 340 200, 326 236 C 318 210, 310 190, 290 180 Z" fill="#5a2f17"/>
+  <ellipse cx="218" cy="170" rx="78" ry="36" fill="#a0522d"/>
+  <path d="M168 158 C 150 120, 130 96, 116 80 L 92 100 C 120 130, 140 160, 150 186 Z" fill="#a0522d"/>
+  <path d="M120 74 C 100 70, 66 100, 60 116 C 58 128, 72 132, 84 126 C 96 120, 112 110, 128 98 Z" fill="#a0522d"/>
+  <path d="M112 74 l4 -22 l12 20 z" fill="#8a4a24"/>
+  <path d="M124 76 C 140 96, 156 120, 170 150 L 178 138 C 166 112, 150 90, 132 70 Z" fill="#5a2f17"/>
+  <circle cx="104" cy="92" r="5" fill="#2f2a26"/><circle cx="105.75" cy="90.25" r="1.7" fill="#fff"/><circle cx="68" cy="118" r="3" fill="#3b2412"/>
+</svg>

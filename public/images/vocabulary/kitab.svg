@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Buch">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#f1ecfb"/><stop offset="1" stop-color="#d8ccf3"/></radialGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="70" cy="70" r="40" fill="#e6ddf8"/><circle cx="340" cy="230" r="54" fill="#e6ddf8"/>
+  <ellipse cx="200" cy="256" rx="140" ry="18" fill="#6f5a9c" opacity="0.25"/>
+  <path d="M60 228 L 60 96 C 120 86, 170 92, 200 110 C 230 92, 280 86, 340 96 L 340 228 C 280 220, 230 226, 200 244 C 170 226, 120 220, 60 228 Z" fill="#3d7fc4"/>
+  <path d="M72 216 L 72 90 C 124 82, 170 88, 198 106 L 198 232 C 170 214, 124 210, 72 216 Z" fill="#fff"/>
+  <path d="M328 216 L 328 90 C 276 82, 230 88, 202 106 L 202 232 C 230 214, 276 210, 328 216 Z" fill="#fbf8f1"/>
+  <g stroke="#cfd6e0" stroke-width="4" stroke-linecap="round" fill="none"><path d="M92 116 q46 -6 88 8 M92 140 q46 -6 88 8 M92 164 q46 -6 88 8 M92 188 q30 -4 56 2"/><path d="M220 124 q42 -14 88 -8 M220 148 q42 -14 88 -8 M220 172 q42 -14 88 -8 M220 196 q30 -10 60 -8"/></g>
+  <path d="M200 110 v134" stroke="#e1d9c8" stroke-width="3"/>
+  <path d="M292 84 v50 l12 -10 l12 10 v-52" fill="#e53935"/>
+</svg>

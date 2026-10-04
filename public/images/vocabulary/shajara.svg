@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Baum">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dff3f7"/><stop offset="1" stop-color="#f4fbf2"/></linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><g fill="#fff" opacity="0.9"><ellipse cx="80" cy="60" rx="38" ry="14"/><ellipse cx="106" cy="52" rx="24" ry="14"/><ellipse cx="318" cy="44" rx="34" ry="12"/><ellipse cx="296" cy="38" rx="20" ry="12"/></g><path d="M0 236 C 90 216, 170 224, 230 220 C 300 216, 350 212, 400 224 L400 300 L0 300 Z" fill="#9fd68a"/>
+  <path d="M0 262 C 100 248, 190 256, 270 250 C 330 246, 370 246, 400 252 L400 300 L0 300 Z" fill="#7cc26a"/>
+  <ellipse cx="200" cy="252" rx="110" ry="14" fill="#3f7f34" opacity="0.35"/>
+  <path d="M184 252 L 190 160 L 210 160 L 216 252 Z" fill="#8b5a2b"/>
+  <path d="M200 190 l-30 -30 M204 176 l26 -24" stroke="#8b5a2b" stroke-width="10" stroke-linecap="round"/>
+  <g fill="#4caf50"><circle cx="200" cy="96" r="62"/><circle cx="140" cy="130" r="46"/><circle cx="262" cy="130" r="46"/><circle cx="168" cy="160" r="40"/><circle cx="234" cy="160" r="40"/></g>
+  <g fill="#66c46a"><circle cx="184" cy="80" r="26"/><circle cx="132" cy="122" r="18"/><circle cx="252" cy="112" r="20"/></g>
+</svg>

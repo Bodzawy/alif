@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Honig">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff4d6"/><stop offset="1" stop-color="#ffd98a"/></radialGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="330" cy="62" r="34" fill="#ffe7a8"/>
+  <ellipse cx="200" cy="268" rx="120" ry="15" fill="#8a5a24" opacity="0.3"/>
+  <path d="M120 120 h120 q18 0 18 18 v104 q0 26 -26 26 h-104 q-26 0 -26 -26 v-104 q0 -18 18 -18 z" fill="#fff" opacity="0.5"/>
+  <path d="M106 140 h148 v102 q0 22 -22 22 h-104 q-22 0 -22 -22 z" fill="#f2a01f"/>
+  <path d="M106 140 h148 v20 q-20 14 -40 0 q-20 -14 -40 0 q-20 14 -40 0 q-14 -10 -28 0 z" fill="#ffc94a"/>
+  <rect x="112" y="96" width="136" height="30" rx="8" fill="#c0392b"/><path d="M112 112 h136" stroke="#e05a4a" stroke-width="5" stroke-dasharray="10 8"/>
+  <path d="M144 190 l16 -10 l16 10 v18 l-16 10 l-16 -10 z" fill="#ffe066"/>
+  <ellipse cx="128" cy="196" rx="7" ry="28" fill="#fff" opacity="0.35"/>
+  <path d="M286 70 L 262 210" stroke="#b5803f" stroke-width="9" stroke-linecap="round"/>
+  <g fill="#d99a4e"><ellipse cx="262" cy="214" rx="20" ry="12" transform="rotate(-80 262 214)"/></g>
+  <path d="M262 214 m-12 -2 h24 M262 214 m-12 8 h24" stroke="#b5803f" stroke-width="3"/>
+  <path d="M258 234 q2 14 4 20 q4 -8 2 -20 z" fill="#f2a01f"/>
+</svg>

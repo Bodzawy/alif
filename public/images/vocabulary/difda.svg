@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Frosch">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d8f1fb"/><stop offset="1" stop-color="#8fd0ea"/></linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/>
+  <path d="M0 170 C 100 160, 200 172, 300 164 C 350 160, 380 162, 400 166 L400 300 L0 300 Z" fill="#6bbfe0"/>
+  <path d="M60 300 q-6 -60 10 -110 M340 300 q8 -60 -8 -120" stroke="#4c9a3c" stroke-width="7" fill="none"/>
+  <path d="M200 246 m-120 0 a120 34 0 1 0 240 0 a120 34 0 1 0 -240 0 Z M200 246 L 320 240 L 312 260 Z" fill="#4caf50"/>
+  <path d="M200 246 L 318 246 L 300 268 Z" fill="#6bbfe0"/>
+  <ellipse cx="150" cy="236" rx="30" ry="14" fill="#5cb85c"/><ellipse cx="250" cy="236" rx="30" ry="14" fill="#5cb85c"/>
+  <ellipse cx="200" cy="196" rx="70" ry="48" fill="#6cc05d"/>
+  <ellipse cx="200" cy="212" rx="44" ry="28" fill="#d7f0b0"/>
+  <circle cx="166" cy="146" r="24" fill="#6cc05d"/><circle cx="234" cy="146" r="24" fill="#6cc05d"/>
+  <circle cx="166" cy="144" r="15" fill="#fff"/><circle cx="234" cy="144" r="15" fill="#fff"/><circle cx="166" cy="146" r="8" fill="#2f2a26"/><circle cx="168.8" cy="143.2" r="2.7" fill="#fff"/><circle cx="234" cy="146" r="8" fill="#2f2a26"/><circle cx="236.8" cy="143.2" r="2.7" fill="#fff"/>
+  <path d="M174 186 q26 23.400000000000002 52 0" stroke="#2f7a38" stroke-width="4" fill="none" stroke-linecap="round"/><ellipse cx="160" cy="186" rx="9" ry="5" fill="#f7a1a1" opacity="0.6"/><ellipse cx="240" cy="186" rx="9" ry="5" fill="#f7a1a1" opacity="0.6"/>
+</svg>

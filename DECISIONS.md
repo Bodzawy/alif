@@ -29,3 +29,38 @@ Each entry: what was decided, alternatives, why, and how to change it.
 ### D5. Phase split
 - **Decision:** Phase 1 commit contains the structure only (unlock gate, card, entry links, video move) and still ships lesson 1 alone; the 27 new lessons are added with their content in Phase 2.
 - **Why:** a lesson file without its 3 words would fail validation and could not be practised; every commit stays green.
+
+## Phase 2 – Content for lessons 2–28
+
+### D6. Transliteration scheme (German-friendly)
+- **Decision:** words and the "Laut" field use a German-reader scheme: ج = dsch, خ = ch, ش = sch, ي = j, diphthongs ai/au, long vowels with macron (ā ī ū), and the usual dotted letters for sounds German lacks (ḥ ṣ ḍ ṭ ẓ, ʿ for ع, ʾ for hamza, q, gh, th, dh). ز stays "z" (the soundHint explains it is a voiced s).
+- **Alternatives:** English-style scholarly scheme (j, kh, sh, y) – reads wrongly for Germans ("j" = "y"); DMG (ǧ, ḫ, š) – precise but unfamiliar to beginners.
+- **Why:** matches the German letter names (Dschim, Cha, Schin) and lesson 1 ("asad", "ananās") which uses macrons. Listed in REVIEW.md §4.
+- **Change:** `transliteration` fields in `src/data/lessons/a1/lesson-N.ts`.
+
+### D7. Letter glyph on cards and in the hero
+- **Decision:** lessons 2–28 show the bare letter (ب, ت, …). Lesson 1 keeps "أَ" (alif with hamza and fatha) as before.
+- **Why:** a bare consonant is how the letter is named and drawn; Alif needed the hamza to have a sound at all.
+
+### D8. Titles of the look-alike names
+- **Decision:** "Der Buchstabe Ta · das normale T", "Der Buchstabe Ṭa · das dunkle T", "Der Buchstabe Ḥa · das gehauchte H", "Der Buchstabe Ha · das leichte H". All 28 titles are unique (checked by the validation test). The subtitle repeats the hint because the card hides the subtitle on phones.
+
+### D9. Word choices
+- **Decision:** 3 concrete, drawable, common nouns per letter, all starting with the letter itself (no hamza/alif start for letters other than Alif). Singular (nomen unitatis) where it is the normal beginner form: تُفَّاحَة, رُمَّانَة, زَيْتُونَة, لَيْمُونَة, مَوْزَة, قِطَّة; عِنَب is taught as "die Weintrauben".
+- **Avoided:** عَيْن (target equals the letter name عين; the rule merge would throw), animals that cannot be drawn clearly, and duplicate meanings (غَزَال was not used because ظَبْي already is a gazelle).
+- **Weak spots:** ض and ظ have very few simple nouns; ضَبُع (hyena), ضِرْس (molar), ظُفْر (fingernail), ظَبْي (gazelle) and لَقْلَق (stork) are less common. Flagged in REVIEW.md §4 with alternatives.
+- **Form:** pausal form without case endings, like lesson 1.
+
+### D10. Word pronunciation rules
+- **Decision:** one entry per word in `vocabulary_conditions.json`, exactly lesson 1's template (`azure_accuracy >= 70` → excellent, `< 70` → needs_improvement, same Arabic messages with the word). The target is the voweled word with harakat removed.
+- **Why:** lesson 1's words have no phoneme conditions either; there is nothing else to copy. No TODO-REVIEW fields were added because the format has no fields that need a speaker's judgement beyond the word itself (covered by REVIEW.md).
+
+### D11. Letter forms
+- **Decision:** forms built with Unicode joining and tatweel (ـ): Allein X, Anfang Xـ, Mitte ـXـ, Ende ـX. The six non-connecting letters (ا د ذ ر ز و) use X / X / ـX / ـX, exactly like Alif.
+
+### D12. How the lesson files were produced
+- **Decision:** the 27 lesson files and the 81 rule entries were written once by a throw-away script from one table, so all files have exactly lesson 1's shape. The script is not committed; the lesson files are the source of truth and are edited by hand from now on.
+
+### D13. Pictures
+- **Decision:** 81 hand-drawn SVGs (400×300, lesson 1's palette, gradients, ground bands, eyes with highlights). Every picture was rendered and looked at; 7 were redrawn after the first look (teapot handle/spout, wolf chest, book page lines, banana, lemon, pillow, thumb). Sizes are 0.8–2.5 KB, slightly smaller than lesson 1's 2.4–3.1 KB because the shapes are simpler.
+- **Audio:** no files. Every word plays via `/api/tts` from its `modelText`, like lesson 1. Nothing calls Azure at build or test time.

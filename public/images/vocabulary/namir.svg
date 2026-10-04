@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Tiger">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff4d6"/><stop offset="1" stop-color="#ffd98a"/></radialGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="330" cy="62" r="34" fill="#ffe7a8"/><path d="M0 252 C 90 232, 170 240, 230 236 C 300 232, 350 228, 400 240 L400 300 L0 300 Z" fill="#e9b45b"/>
+  <path d="M0 278 C 100 264, 190 272, 270 266 C 330 262, 370 262, 400 268 L400 300 L0 300 Z" fill="#d89c45"/>
+  <circle cx="132" cy="70" r="24" fill="#f28c28"/><circle cx="132" cy="70" r="12" fill="#fde9c4"/>
+  <circle cx="268" cy="70" r="24" fill="#f28c28"/><circle cx="268" cy="70" r="12" fill="#fde9c4"/>
+  <ellipse cx="200" cy="150" rx="96" ry="90" fill="#f28c28"/>
+  <path d="M104 150 C 120 210, 160 238, 200 238 C 240 238, 280 210, 296 150 C 270 190, 240 196, 200 196 C 160 196, 130 190, 104 150 Z" fill="#fde9c4"/>
+  <ellipse cx="200" cy="186" rx="44" ry="34" fill="#fde9c4"/>
+  <g fill="#2f2a26"><path d="M200 62 l-10 30 h20 z"/><path d="M168 66 l-2 24 l14 -6 z"/><path d="M232 66 l2 24 l-14 -6 z"/><path d="M106 130 l34 8 l-34 12 z"/><path d="M294 130 l-34 8 l34 12 z"/><path d="M110 170 l28 0 l-24 14 z"/><path d="M290 170 l-28 0 l24 14 z"/></g>
+  <circle cx="170" cy="138" r="9" fill="#2f2a26"/><circle cx="173.15" cy="134.85" r="3.1" fill="#fff"/><circle cx="230" cy="138" r="9" fill="#2f2a26"/><circle cx="233.15" cy="134.85" r="3.1" fill="#fff"/>
+  <path d="M188 168 h24 l-12 13 z" fill="#5a2f17" stroke="#5a2f17" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M200 182 v8 M200 190 q-9 10 -18 4 M200 190 q9 10 18 4" stroke="#5a2f17" stroke-width="4" fill="none" stroke-linecap="round"/>
+</svg>

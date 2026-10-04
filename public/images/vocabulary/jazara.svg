@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Karotte">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff1e6"/><stop offset="1" stop-color="#ffd2b0"/></radialGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="70" cy="70" r="40" fill="#ffe2cc"/><circle cx="340" cy="230" r="54" fill="#ffe2cc"/>
+  <ellipse cx="210" cy="270" rx="90" ry="11" fill="#c77a4a" opacity="0.25"/>
+  <g transform="rotate(-35 200 170)">
+    <path d="M160 92 q40 -12 80 0 l-40 180 z" fill="#f28c28"/>
+    <path d="M172 120 h22 M182 150 h20 M190 182 h16 M196 212 h10 M214 104 h14 M210 136 h12" stroke="#d9711a" stroke-width="4" stroke-linecap="round"/>
+    <path d="M200 92 q-24 -46 -6 -66 q10 30 6 66 M200 92 q10 -50 34 -60 q-8 36 -34 60 M200 92 q-34 -24 -48 -14 q18 14 48 14" fill="#4caf50"/>
+  </g>
+  <ellipse cx="170" cy="150" rx="6" ry="28" fill="#fff" opacity="0.3" transform="rotate(55 170 150)"/>
+</svg>

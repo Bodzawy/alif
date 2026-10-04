@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { LEVELS, allExercises, getLesson, lessonExercises, nextLesson } from "@/data/curriculum";
+import { LEVELS, allExercises, getLesson, getLevel, lessonEntryHref, lessonExercises, nextLesson, previousLesson } from "@/data/curriculum";
 import { ARABIC_LETTERS } from "@/lib/pronunciation/letters";
 import { CONDITION_RULES, LETTER_RULES, VOCABULARY_RULES } from "@/lib/pronunciation/rules";
 import { ALLOWED_TARGETS, isAllowedTarget, isAllowedTtsText } from "@/lib/pronunciation/targets";
@@ -14,7 +14,22 @@ describe("curriculum", () => {
     expect(found?.lesson.letter.glyph).toBe("أَ");
     expect(found?.lesson.vocabulary.map((item) => item.exercise.target)).toEqual(["أسد", "أرنب", "أناناس"]);
     expect(getLesson("a1", "lesson-99")).toBeUndefined();
-    expect(nextLesson("a1", "lesson-1")).toBeUndefined();
+    expect(nextLesson("a1", "lesson-1")?.slug).toBe("lesson-2");
+  });
+
+  it("publishes one A1 lesson per letter, in alphabet order; lesson 28 is the last", () => {
+    const lessons = getLevel("a1")!.lessons;
+    expect(lessons).toHaveLength(28);
+    expect(lessons.map((lesson) => lesson.number)).toEqual(Array.from({ length: 28 }, (_, i) => i + 1));
+    expect(lessons.map((lesson) => lesson.letter.exercise.target)).toEqual(ARABIC_LETTERS.map((letter) => letter.referenceText));
+    expect(nextLesson("a1", "lesson-28")).toBeUndefined();
+    expect(previousLesson("a1", "lesson-1")).toBeUndefined();
+    expect(previousLesson("a1", "lesson-2")?.slug).toBe("lesson-1");
+  });
+
+  it("starts a lesson at its intro video only when it has one", () => {
+    expect(lessonEntryHref("a1", getLesson("a1", "lesson-1")!.lesson)).toBe("/a1/lesson-1/intro");
+    expect(lessonEntryHref("a1", getLesson("a1", "lesson-2")!.lesson)).toBe("/a1/lesson-2");
   });
 
   it("no longer serves the vocabulary lesson under A0 (A0 is the alphabet)", () => {

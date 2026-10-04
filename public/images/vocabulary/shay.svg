@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Tee">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff1e6"/><stop offset="1" stop-color="#ffd2b0"/></radialGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="70" cy="70" r="40" fill="#ffe2cc"/><circle cx="340" cy="230" r="54" fill="#ffe2cc"/>
+  <ellipse cx="200" cy="262" rx="140" ry="18" fill="#c77a4a" opacity="0.25"/>
+  <path d="M78 176 C 40 176, 40 222, 82 226" stroke="#c0392b" stroke-width="11" fill="none" stroke-linecap="round"/>
+  <path d="M160 200 C 182 196, 192 170, 204 150 L 214 156 C 204 186, 190 220, 162 230 Z" fill="#e74c3c"/>
+  <path d="M74 250 C 56 220, 66 166, 120 160 C 174 166, 184 220, 166 250 Z" fill="#e74c3c"/>
+  <path d="M90 166 q30 -26 60 0 z" fill="#c0392b"/><circle cx="120" cy="140" r="9" fill="#c0392b"/>
+  <ellipse cx="96" cy="204" rx="8" ry="22" fill="#fff" opacity="0.3"/>
+  <ellipse cx="282" cy="254" rx="62" ry="10" fill="#e9d6b8"/>
+  <path d="M248 138 C 244 170, 262 186, 256 250 L 308 250 C 302 186, 320 170, 316 138 Z" fill="#fff" opacity="0.55"/>
+  <path d="M252 168 C 256 186, 264 200, 260 248 L 304 248 C 300 200, 308 186, 312 168 Z" fill="#b5541a"/>
+  <path d="M248 138 C 244 170, 262 186, 256 250 L 308 250 C 302 186, 320 170, 316 138" fill="none" stroke="#e0c8a8" stroke-width="3"/>
+  <path d="M300 156 q20 -24 34 -10 q-14 18 -34 10 z" fill="#4caf50"/>
+  <g stroke="#c9b8a4" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.8"><path d="M268 122 q-10 -14 0 -28 q10 -14 0 -28"/><path d="M292 122 q-10 -14 0 -28 q10 -14 0 -28"/></g>
+</svg>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Halbmond">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#34477a"/><stop offset="1" stop-color="#1c2a4f"/></linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><g fill="#fff6c9"><circle cx="60" cy="50" r="2.5"/><circle cx="120" cy="90" r="1.8"/><circle cx="340" cy="60" r="2.2"/><circle cx="300" cy="120" r="1.6"/><circle cx="40" cy="150" r="1.8"/><circle cx="370" cy="170" r="2"/><circle cx="180" cy="40" r="1.6"/></g>
+  <path d="M236 52 A 104 104 0 1 0 236 248 A 82 82 0 1 1 236 52 Z" fill="#fff1b8"/>
+  <g fill="#ffe066"><path d="M290 112 l6 16 l16 6 l-16 6 l-6 16 l-6 -16 l-16 -6 l16 -6 z"/><path d="M320 200 l4 10 l10 4 l-10 4 l-4 10 l-4 -10 l-10 -4 l10 -4 z"/></g>
+</svg>

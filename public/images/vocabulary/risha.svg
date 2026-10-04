@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Feder">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#f1ecfb"/><stop offset="1" stop-color="#d8ccf3"/></radialGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="70" cy="70" r="40" fill="#e6ddf8"/><circle cx="340" cy="230" r="54" fill="#e6ddf8"/>
+  <path d="M304 52 C 326 96, 296 168, 206 210 C 176 222, 154 232, 140 240 C 140 198, 168 140, 218 100 C 248 76, 280 60, 304 52 Z" fill="#6fb7d9"/>
+  <path d="M304 52 C 300 90, 270 140, 210 186 C 186 204, 164 222, 148 234 C 176 196, 220 140, 304 52 Z" fill="#4f98c4"/>
+  <g stroke="#e6ddf8" stroke-width="4" stroke-linecap="round"><path d="M282 112 l18 4"/><path d="M180 150 l-18 -10"/><path d="M246 168 l18 10"/></g>
+  <path d="M98 270 C 160 220, 240 130, 304 52" stroke="#2f6f96" stroke-width="5" fill="none" stroke-linecap="round"/>
+</svg>

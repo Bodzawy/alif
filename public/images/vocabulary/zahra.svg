@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Blume">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dff3f7"/><stop offset="1" stop-color="#f4fbf2"/></linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><g fill="#fff" opacity="0.9"><ellipse cx="80" cy="60" rx="38" ry="14"/><ellipse cx="106" cy="52" rx="24" ry="14"/><ellipse cx="318" cy="44" rx="34" ry="12"/><ellipse cx="296" cy="38" rx="20" ry="12"/></g><path d="M0 244 C 90 224, 170 232, 230 228 C 300 224, 350 220, 400 232 L400 300 L0 300 Z" fill="#9fd68a"/>
+  <path d="M0 270 C 100 256, 190 264, 270 258 C 330 254, 370 254, 400 260 L400 300 L0 300 Z" fill="#7cc26a"/>
+  <path d="M200 260 C 196 210, 204 170, 200 130" stroke="#4c9a3c" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <path d="M200 220 C 170 196, 140 204, 130 214 C 156 226, 182 228, 200 220 Z" fill="#5fae4a"/><path d="M202 196 C 232 172, 262 180, 272 190 C 246 202, 220 204, 202 196 Z" fill="#5fae4a"/>
+  <g fill="#f78fb3"><circle cx="200" cy="74" r="28"/><circle cx="242" cy="104" r="28"/><circle cx="226" cy="152" r="28"/><circle cx="174" cy="152" r="28"/><circle cx="158" cy="104" r="28"/></g>
+  <circle cx="200" cy="114" r="28" fill="#ffd166"/><circle cx="200" cy="114" r="18" fill="#f2a01f" opacity="0.5"/>
+  <circle cx="70" cy="256" r="6" fill="#ffd166"/><circle cx="330" cy="252" r="6" fill="#f7a1c4"/>
+</svg>

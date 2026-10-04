@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Hand">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff1e6"/><stop offset="1" stop-color="#ffd2b0"/></radialGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="70" cy="70" r="40" fill="#ffe2cc"/><circle cx="340" cy="230" r="54" fill="#ffe2cc"/>
+  <path d="M150 300 L 150 250 L 250 250 L 250 300 Z" fill="#e8b48a"/>
+  <g fill="#f2c7a0">
+    <rect x="132" y="66" width="34" height="120" rx="17"/><rect x="170" y="44" width="34" height="140" rx="17"/><rect x="208" y="52" width="34" height="134" rx="17"/><rect x="246" y="80" width="30" height="110" rx="15"/>
+    <path d="M132 150 C 130 230, 160 262, 204 262 C 252 262, 276 230, 276 168 L 276 150 Z"/>
+    <path d="M150 214 C 124 200, 96 168, 88 146 C 82 130, 100 120, 112 134 C 126 152, 140 166, 160 176 Z"/>
+  </g>
+  <g stroke="#d99a72" stroke-width="3" stroke-linecap="round" fill="none"><path d="M140 96 h18 M178 76 h18 M216 84 h18 M252 110 h16"/><path d="M168 216 q30 14 70 -6"/></g>
+</svg>

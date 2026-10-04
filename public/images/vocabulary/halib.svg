@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Milch">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#e6f7f3"/><stop offset="1" stop-color="#b9e6dc"/></radialGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="70" cy="70" r="40" fill="#d3f0e9"/><circle cx="340" cy="230" r="54" fill="#d3f0e9"/>
+  <ellipse cx="200" cy="268" rx="120" ry="15" fill="#7cbfae" opacity="0.5"/>
+  <path d="M108 110 h48 v24 q20 12 20 40 v86 q0 8 -8 8 h-72 q-8 0 -8 -8 v-86 q0 -28 20 -40 z" fill="#ffffff"/>
+  <rect x="104" y="96" width="56" height="18" rx="5" fill="#3d8bfd"/>
+  <rect x="92" y="190" width="80" height="44" rx="6" fill="#bfe0f7"/>
+  <path d="M132 198 q-14 18 0 26 q14 -8 0 -26 z" fill="#3d8bfd"/>
+  <path d="M210 120 L300 120 L290 262 L220 262 Z" fill="#e8f4f8" opacity="0.7"/>
+  <path d="M214 150 L296 150 L290 262 L220 262 Z" fill="#fff"/>
+  <path d="M210 120 L300 120 L290 262 L220 262 Z" fill="none" stroke="#b8d8e4" stroke-width="4" stroke-linejoin="round"/>
+  <ellipse cx="255" cy="150" rx="41" ry="6" fill="#f4f8fa"/>
+  <rect x="226" y="164" width="8" height="80" rx="4" fill="#e8f4f8"/>
+</svg>

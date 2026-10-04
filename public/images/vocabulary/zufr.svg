@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Fingernagel">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff1e6"/><stop offset="1" stop-color="#ffd2b0"/></radialGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="70" cy="70" r="40" fill="#ffe2cc"/><circle cx="340" cy="230" r="54" fill="#ffe2cc"/>
+  <path d="M120 300 C 116 250, 130 220, 160 214 L 248 214 C 290 220, 300 260, 296 300 Z" fill="#e8b48a"/>
+  <path d="M150 240 C 150 222, 182 222, 182 240 M218 240 C 218 222, 250 222, 250 240" stroke="#d99a72" stroke-width="4" fill="none"/>
+  <rect x="160" y="40" width="84" height="210" rx="42" fill="#f2c7a0"/>
+  <path d="M176 64 C 176 40, 228 40, 228 64 L 228 128 C 228 140, 176 140, 176 128 Z" fill="#f78fb3"/>
+  <path d="M176 64 C 176 40, 228 40, 228 64 L 228 72 C 210 64, 194 64, 176 72 Z" fill="#fff" opacity="0.85"/>
+  <ellipse cx="192" cy="96" rx="5" ry="18" fill="#fff" opacity="0.45"/>
+  <path d="M182 176 q20 8 40 0 M186 192 q16 6 32 0" stroke="#d99a72" stroke-width="4" fill="none" stroke-linecap="round"/>
+</svg>

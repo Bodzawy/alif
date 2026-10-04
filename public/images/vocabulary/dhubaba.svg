@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Fliege">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dff3f7"/><stop offset="1" stop-color="#f4fbf2"/></linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><g fill="#fff" opacity="0.9"><ellipse cx="80" cy="60" rx="38" ry="14"/><ellipse cx="106" cy="52" rx="24" ry="14"/><ellipse cx="318" cy="44" rx="34" ry="12"/><ellipse cx="296" cy="38" rx="20" ry="12"/></g>
+  <g stroke="#3a3f47" stroke-width="4" stroke-linecap="round" fill="none"><path d="M180 150 l-40 -12 l-12 -14"/><path d="M178 172 l-44 6 l-14 14"/><path d="M182 194 l-36 24 l-6 18"/><path d="M220 150 l40 -12 l12 -14"/><path d="M222 172 l44 6 l14 14"/><path d="M218 194 l36 24 l6 18"/></g>
+  <g fill="#e8f4fb" opacity="0.85" stroke="#9ec9de" stroke-width="3"><ellipse cx="140" cy="130" rx="58" ry="28" transform="rotate(-25 140 130)"/><ellipse cx="260" cy="130" rx="58" ry="28" transform="rotate(25 260 130)"/></g>
+  <path d="M110 140 q30 -6 56 -12 M290 140 q-30 -6 -56 -12" stroke="#9ec9de" stroke-width="2" fill="none"/>
+  <ellipse cx="200" cy="180" rx="32" ry="50" fill="#3a3f47"/>
+  <path d="M172 172 h56 M170 192 h60 M176 212 h48" stroke="#5a616b" stroke-width="5"/>
+  <circle cx="200" cy="120" r="26" fill="#2f343b"/>
+  <ellipse cx="184" cy="114" rx="14" ry="17" fill="#b5342b"/><ellipse cx="216" cy="114" rx="14" ry="17" fill="#b5342b"/>
+  <circle cx="180" cy="108" r="4" fill="#fff" opacity="0.8"/><circle cx="212" cy="108" r="4" fill="#fff" opacity="0.8"/>
+</svg>

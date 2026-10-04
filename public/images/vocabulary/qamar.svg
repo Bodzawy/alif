@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Mond">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#34477a"/><stop offset="1" stop-color="#1c2a4f"/></linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/><g fill="#fff6c9"><circle cx="60" cy="50" r="2.5"/><circle cx="120" cy="90" r="1.8"/><circle cx="340" cy="60" r="2.2"/><circle cx="300" cy="120" r="1.6"/><circle cx="40" cy="150" r="1.8"/><circle cx="370" cy="170" r="2"/><circle cx="180" cy="40" r="1.6"/></g>
+  <circle cx="200" cy="150" r="96" fill="#fff6c9" opacity="0.18"/>
+  <circle cx="200" cy="150" r="78" fill="#fff1b8"/>
+  <g fill="#ede0a0"><circle cx="170" cy="120" r="16"/><circle cx="228" cy="176" r="22"/><circle cx="232" cy="118" r="9"/><circle cx="168" cy="186" r="10"/><circle cx="200" cy="150" r="6"/></g>
+  <g fill="#fff" opacity="0.8"><ellipse cx="90" cy="250" rx="40" ry="10"/><ellipse cx="320" cy="244" rx="34" ry="8"/></g>
+</svg>
