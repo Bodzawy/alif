@@ -237,25 +237,25 @@ test("a locked lesson cannot be opened through its URL", async ({ page }) => {
 test("a lesson without an intro video starts directly and has no /intro page", async ({ page }) => {
   const errors = collectPageErrors(page);
   const done = "2026-10-04T00:00:00.000Z";
-  await seedProgress(page, Object.fromEntries([1, 2, 3, 4, 5].map((n) => [`a1/lesson-${n}`, { passed: [], completedAt: done }])));
+  await seedProgress(page, Object.fromEntries([1, 2, 3, 4, 5, 6, 7, 8].map((n) => [`a1/lesson-${n}`, { passed: [], completedAt: done }])));
   await page.goto("/a1");
-  await expect(page.getByTestId("lesson-link-lesson-6")).toHaveAttribute("href", "/a1/lesson-6");
-  await page.getByTestId("lesson-link-lesson-6").click();
-  await expect(page).toHaveURL(/\/a1\/lesson-6$/);
-  await expect(page.getByTestId("lesson-letter")).toHaveText("ح");
-  for (const id of ["hisan", "hut", "halib"]) await expect(page.getByTestId(`vocab-card-${id}`)).toBeVisible();
+  await expect(page.getByTestId("lesson-link-lesson-9")).toHaveAttribute("href", "/a1/lesson-9");
+  await page.getByTestId("lesson-link-lesson-9").click();
+  await expect(page).toHaveURL(/\/a1\/lesson-9$/);
+  await expect(page.getByTestId("lesson-letter")).toHaveText("ذ");
+  for (const id of ["dhib", "dhura", "dhubaba"]) await expect(page.getByTestId(`vocab-card-${id}`)).toBeVisible();
   await expect(page.getByTestId("intro-link")).toHaveCount(0);
-  const response = await page.goto("/a1/lesson-6/intro");
+  const response = await page.goto("/a1/lesson-9/intro");
   expect(response?.status()).toBe(404);
   expect(errors).toEqual([]);
 });
 
-test("Ba, Ta, Tha and Dschim open their own intro video: poster, metadata preload, no autoplay, no chapter list", async ({ page }) => {
+test("Ba, Ta, Tha, Dschim, Ḥa, Cha and Dal open their own intro video: poster, metadata preload, no autoplay, no chapter list", async ({ page }) => {
   const errors = collectPageErrors(page);
   const done = "2026-10-04T00:00:00.000Z";
-  await seedProgress(page, Object.fromEntries([1, 2, 3, 4].map((n) => [`a1/lesson-${n}`, { passed: [], completedAt: done }])));
+  await seedProgress(page, Object.fromEntries([1, 2, 3, 4, 5, 6, 7].map((n) => [`a1/lesson-${n}`, { passed: [], completedAt: done }])));
   await page.goto("/a1");
-  for (const [n, glyph] of [[2, "ب"], [3, "ت"], [4, "ث"], [5, "ج"]] as const) {
+  for (const [n, glyph] of [[2, "ب"], [3, "ت"], [4, "ث"], [5, "ج"], [6, "ح"], [7, "خ"], [8, "د"]] as const) {
     await expect(page.getByTestId(`lesson-link-lesson-${n}`)).toHaveAttribute("href", `/a1/lesson-${n}/intro`);
     await page.goto(`/a1/lesson-${n}/intro`);
     const video = page.getByTestId("intro-video");

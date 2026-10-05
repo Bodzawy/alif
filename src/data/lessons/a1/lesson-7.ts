@@ -51,4 +51,9 @@ export const lesson7: Lesson = {
       exercise: { id: "khiyar", target: "خيار", modelText: "خِيَار" },
     },
   ],
+  // No chapters: the video has no chapter marks to take them from.
+  introVideo: {
+    src: "/videos/a1/lesson-7/de.mp4",
+    poster: "/videos/a1/lesson-7/poster.jpg",
+  },
 };

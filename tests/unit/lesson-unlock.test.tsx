@@ -9,7 +9,7 @@ import { lessonKey, markLessonCompleted } from "@/lib/progress";
 
 const lesson1 = getLesson("a1", "lesson-1")!.lesson;
 const lesson2 = getLesson("a1", "lesson-2")!.lesson;
-const lesson6 = getLesson("a1", "lesson-6")!.lesson;
+const lesson9 = getLesson("a1", "lesson-9")!.lesson;
 const previous = { slug: lesson1.slug, number: 1, title: lesson1.title, href: lessonEntryHref("a1", lesson1) };
 
 beforeEach(() => window.localStorage.clear());
@@ -63,8 +63,8 @@ describe("lesson unlocking", () => {
   });
 
   it("links an open lesson without intro video straight to the lesson", () => {
-    markLessonCompleted(lessonKey("a1", "lesson-5"));
-    render(<LessonCard levelSlug="a1" lesson={lesson6} href={lessonEntryHref("a1", lesson6)} total={4} previousLessonSlug="lesson-5" />);
-    expect(screen.getByTestId("lesson-link-lesson-6")).toHaveAttribute("href", "/a1/lesson-6");
+    markLessonCompleted(lessonKey("a1", "lesson-8"));
+    render(<LessonCard levelSlug="a1" lesson={lesson9} href={lessonEntryHref("a1", lesson9)} total={4} previousLessonSlug="lesson-8" />);
+    expect(screen.getByTestId("lesson-link-lesson-9")).toHaveAttribute("href", "/a1/lesson-9");
   });
 });
