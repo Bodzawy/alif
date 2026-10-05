@@ -109,6 +109,7 @@ export async function assessWithAzure(
       SpeechSDK.PronunciationAssessmentGranularity.Phoneme,
       true
     );
+    pronunciationConfig.phonemeAlphabet = "IPA";
     pronunciationConfig.applyTo(recognizer);
 
     const result = await recognizeOnce(recognizer);
