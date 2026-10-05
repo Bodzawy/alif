@@ -32,7 +32,9 @@ describe("lesson content", () => {
     const words = LEVELS.flatMap((level) => level.lessons.flatMap((lesson) => lesson.vocabulary));
     expect(Object.keys(VOCABULARY_RULES)).toHaveLength(words.length);
     for (const word of words) {
-      expect(VOCABULARY_RULES[word.exercise.target]?.excellent?.conditions).toEqual(["azure_accuracy >= 70"]);
+      const conditions = VOCABULARY_RULES[word.exercise.target]?.excellent?.conditions;
+      expect(conditions?.[0]).toBe("azure_accuracy >= 70");
+      expect(conditions?.[1]).toMatch(/^iqra_phonemes contains \[.+\]$/);
       expect(CONDITION_RULES[word.exercise.target]).toBe(VOCABULARY_RULES[word.exercise.target]);
     }
   });

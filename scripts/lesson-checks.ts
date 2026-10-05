@@ -75,6 +75,10 @@ function checkLesson(levelSlug: string, lesson: Lesson): LessonCheck {
       wordIssues.push(`${label}: does not start with ${lesson.letter.glyph}`);
     }
     if (!isAllowedTarget(word.exercise.target)) wordIssues.push(`${label}: no pronunciation rules for ${word.exercise.target}`);
+    const excellent = CONDITION_RULES[word.exercise.target]?.excellent?.conditions ?? [];
+    if (!excellent.some((condition) => /^iqra_phonemes contains \[.+\]$/.test(condition))) {
+      wordIssues.push(`${label}: no IQRA gate in its "excellent" rule`);
+    }
     if (!isAllowedTtsText(word.exercise.modelText)) audioIssues.push(`${label}: not speakable through /api/tts`);
     if (!word.image.alt.trim()) pictureIssues.push(`${label}: picture has no alt text`);
     if (!publicFileExists(word.image.src)) pictureIssues.push(`${label}: missing ${word.image.src}`);

@@ -77,6 +77,19 @@ describe("condition engine – original behaviour", () => {
     expect(matchesCondition("unknown_condition", ctx(100))).toBe(false);
   });
 
+  it("accepts alternatives inside a phoneme list (Alif addition for shadda and r/rr)", () => {
+    expect(matchesCondition("iqra_phonemes contains ['b','T|TT']", ctx(0, ["b", "a", "TT", "a"]))).toBe(true);
+    expect(matchesCondition("iqra_phonemes contains ['b','T|TT']", ctx(0, ["b", "a", "T", "a"]))).toBe(true);
+    expect(matchesCondition("iqra_phonemes contains ['b','T|TT']", ctx(0, ["b", "a", "t", "a"]))).toBe(false);
+    expect(matchesCondition("iqra_phonemes does not contain ['b','T|TT']", ctx(0, ["b", "a", "t"]))).toBe(true);
+    expect(matchesCondition("iqra_phonemes does not contain ['b','T|TT']", ctx(0, ["b", "TT"]))).toBe(false);
+  });
+
+  it("checks whether IQRA returned any phonemes (Alif addition)", () => {
+    expect(matchesCondition("iqra_phonemes is not empty", ctx(0, ["a"]))).toBe(true);
+    expect(matchesCondition("iqra_phonemes is not empty", ctx(0, []))).toBe(false);
+  });
+
   it("covers all 28 letters, each with an 'excellent' rule reachable from its own phonemes", () => {
     expect(Object.keys(LETTER_RULES)).toHaveLength(28);
     for (const [target, rules] of Object.entries(LETTER_RULES)) {

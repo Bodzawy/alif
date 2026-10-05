@@ -66,13 +66,20 @@ describe("buildAssessment", () => {
     expect(result.scores).toEqual({ accuracy: 88, pronunciation: 85, fluency: 88, completeness: 100 });
   });
 
-  it("evaluates Lesson 1 vocabulary with its own rules (Azure-only, threshold 70)", () => {
-    const good = buildAssessment({ target: "أسد", primary: azure({ referenceText: "أسد", accuracy: 72 }), masaar: null, iqra: null });
+  it("evaluates Lesson 1 vocabulary with Azure >= 70 and the word's IQRA gate", () => {
+    const asad = { sequence: "< a s a d", phonemes: ["<", "a", "s", "a", "d"] };
+    const good = buildAssessment({ target: "أسد", primary: azure({ referenceText: "أسد", accuracy: 72 }), masaar: null, iqra: asad });
     expect(good.passed).toBe(true);
     expect(good.feedback.message).toBe(VOCABULARY_RULES["أسد"]!.excellent!.message);
-    const weak = buildAssessment({ target: "أسد", primary: azure({ referenceText: "أسد", accuracy: 64 }), masaar: null, iqra: null });
+    const wrongSound = buildAssessment({ target: "أسد", primary: azure({ referenceText: "أسد", accuracy: 92 }), masaar: null, iqra: { phonemes: ["<", "a", "s", "a", "t"] } });
+    expect(wrongSound.passed).toBe(false);
+    expect(wrongSound.conditionEvaluation.matchedRule).toBe("said_wrong_sound");
+    const weak = buildAssessment({ target: "أسد", primary: azure({ referenceText: "أسد", accuracy: 64 }), masaar: null, iqra: asad });
     expect(weak.passed).toBe(false);
     expect(weak.conditionEvaluation.matchedRule).toBe("needs_improvement");
+    const noIqra = buildAssessment({ target: "أسد", primary: azure({ referenceText: "أسد", accuracy: 92 }), masaar: null, iqra: null });
+    expect(noIqra.passed).toBe(false);
+    expect(noIqra.conditionEvaluation.matchedRule).toBe(NO_MATCHING_RULE);
   });
 });
 

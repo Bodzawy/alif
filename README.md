@@ -120,7 +120,7 @@ Notes:
 
 1. Create `src/data/lessons/a1/lesson-N.ts` that exports a `Lesson` (letter, vocabulary, exercise targets).
 2. Register it in `src/data/curriculum.ts`.
-3. For new vocabulary words, add rules to `src/lib/pronunciation/vocabulary_conditions.json`. Letters already have rules in `letter_conditions.json`.
+3. For new vocabulary words, add rules to `src/lib/pronunciation/vocabulary_conditions.json`: Azure ≥ 70 plus an IQRA gate with the word's important consonants (copy an existing word; see `docs/ARCHITECTURE.md`). Letters already have rules in `letter_conditions.json`.
 4. Put images in `public/images/vocabulary/`.
 5. Optional intro video: put `de.mp4` and `poster.jpg` in `public/videos/a1/lesson-N/` and set `introVideo` in the lesson. With a video, the lesson card opens `/a1/lesson-N/intro`; without one, it opens the lesson directly and `/intro` is a 404. The mp4 files are not committed (only posters are); in production nginx serves them from outside the repo – see `DEPLOY-VIDEOS.md` for compressing, uploading and cache busting.
 

@@ -133,10 +133,19 @@ describe("POST /api/pronunciation", () => {
     expect(body.feedback.rule).toBe("said_sin");
   });
 
-  it("evaluates Lesson 1 vocabulary words", async () => {
+  it("evaluates Lesson 1 vocabulary words with Azure and the word's IQRA gate", async () => {
     azureMock.assess.mockResolvedValue(azureResult({ referenceText: "أسد", recognized: "أسد", accuracy: 74 }));
-    const body = await (await post({ audio: await wavFile(), target: "أسد" })).json();
+    iqraReply = { status: 200, body: { sequence: "< a s a d", phonemes: ["<", "a", "s", "a", "d"], duration: 0.7 } };
+    let body = await (await post({ audio: await wavFile(), target: "أسد" })).json();
     expect(body).toMatchObject({ passed: true, feedback: { rule: "excellent" } });
+
+    iqraReply = { status: 200, body: { sequence: "< a s a t", phonemes: ["<", "a", "s", "a", "t"], duration: 0.7 } };
+    body = await (await post({ audio: await wavFile(), target: "أسد" })).json();
+    expect(body).toMatchObject({ passed: false, feedback: { rule: "said_wrong_sound" } });
+
+    iqraReply = { status: 500, body: { error: "boom" } };
+    body = await (await post({ audio: await wavFile(), target: "أسد" })).json();
+    expect(body).toMatchObject({ passed: false, feedback: { rule: "no_matching_rule" } });
   });
 
   it("continues without IQRA when it fails, but never reports a pass that needs its phonemes", async () => {
