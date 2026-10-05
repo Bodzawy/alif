@@ -9,6 +9,7 @@ import { lessonKey, markLessonCompleted } from "@/lib/progress";
 
 const lesson1 = getLesson("a1", "lesson-1")!.lesson;
 const lesson2 = getLesson("a1", "lesson-2")!.lesson;
+const lesson6 = getLesson("a1", "lesson-6")!.lesson;
 const previous = { slug: lesson1.slug, number: 1, title: lesson1.title, href: lessonEntryHref("a1", lesson1) };
 
 beforeEach(() => window.localStorage.clear());
@@ -49,7 +50,7 @@ describe("lesson unlocking", () => {
     expect(screen.getByText("Lektion 1 Inhalt")).toBeInTheDocument();
   });
 
-  it("shows a locked card without a link, and a link to the lesson itself when it has no intro", () => {
+  it("shows a locked card without a link; once open it links to the intro video", () => {
     const { rerender } = render(
       <LessonCard levelSlug="a1" lesson={lesson2} href={lessonEntryHref("a1", lesson2)} total={4} previousLessonSlug="lesson-1" />
     );
@@ -58,6 +59,12 @@ describe("lesson unlocking", () => {
 
     markLessonCompleted(lessonKey("a1", "lesson-1"));
     rerender(<LessonCard levelSlug="a1" lesson={lesson2} href={lessonEntryHref("a1", lesson2)} total={4} previousLessonSlug="lesson-1" />);
-    expect(screen.getByTestId("lesson-link-lesson-2")).toHaveAttribute("href", "/a1/lesson-2");
+    expect(screen.getByTestId("lesson-link-lesson-2")).toHaveAttribute("href", "/a1/lesson-2/intro");
+  });
+
+  it("links an open lesson without intro video straight to the lesson", () => {
+    markLessonCompleted(lessonKey("a1", "lesson-5"));
+    render(<LessonCard levelSlug="a1" lesson={lesson6} href={lessonEntryHref("a1", lesson6)} total={4} previousLessonSlug="lesson-5" />);
+    expect(screen.getByTestId("lesson-link-lesson-6")).toHaveAttribute("href", "/a1/lesson-6");
   });
 });

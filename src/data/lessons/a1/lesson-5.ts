@@ -51,4 +51,9 @@ export const lesson5: Lesson = {
       exercise: { id: "jabal", target: "جبل", modelText: "جَبَل" },
     },
   ],
+  // No chapters: the video has no chapter marks to take them from.
+  introVideo: {
+    src: "/videos/a1/lesson-5/de.mp4",
+    poster: "/videos/a1/lesson-5/poster.jpg",
+  },
 };

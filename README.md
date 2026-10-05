@@ -122,7 +122,7 @@ Notes:
 2. Register it in `src/data/curriculum.ts`.
 3. For new vocabulary words, add rules to `src/lib/pronunciation/vocabulary_conditions.json`. Letters already have rules in `letter_conditions.json`.
 4. Put images in `public/images/vocabulary/`.
-5. Optional intro video: put `de.mp4` and `poster.jpg` in `public/videos/a1/lesson-N/` and set `introVideo` in the lesson. With a video, the lesson card opens `/a1/lesson-N/intro`; without one, it opens the lesson directly and `/intro` is a 404.
+5. Optional intro video: put `de.mp4` and `poster.jpg` in `public/videos/a1/lesson-N/` and set `introVideo` in the lesson. With a video, the lesson card opens `/a1/lesson-N/intro`; without one, it opens the lesson directly and `/intro` is a 404. The mp4 files are not committed (only posters are); in production nginx serves them from outside the repo – see `DEPLOY-VIDEOS.md` for compressing, uploading and cache busting.
 
 Lessons unlock in order (lesson N after lesson N-1 is completed). Switch to "all open" with `LESSONS_UNLOCK_IN_ORDER` in `src/data/lesson-unlock.ts`.
 

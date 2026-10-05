@@ -1,3 +1,6 @@
+import { existsSync } from "node:fs";
+import path from "node:path";
+
 import { expect, test, type Page } from "@playwright/test";
 
 import { toneWav } from "./support/audio";
@@ -58,7 +61,8 @@ test("A1 → Lesson 1 → listen → record → feedback → retry → continue"
   const video = page.getByTestId("intro-video");
   await expect(video).toHaveAttribute("src", "/videos/a1/lesson-1/de.mp4");
   await page.getByRole("button", { name: /Der Laut/ }).click();
-  await expect.poll(() => video.evaluate((v: HTMLVideoElement) => v.currentTime)).toBeGreaterThanOrEqual(12);
+  // Intro mp4 files are not in git (DEPLOY-VIDEOS.md): only seek where the file exists, i.e. not in CI.
+  if (hasLocalVideo(1)) await expect.poll(() => video.evaluate((v: HTMLVideoElement) => v.currentTime)).toBeGreaterThanOrEqual(12);
   await expect(page.getByTestId("intro-skip-seen")).toHaveCount(0);
   await page.getByTestId("intro-continue").click();
   await expect(page).toHaveURL(/\/a1\/lesson-1$/);
@@ -122,8 +126,8 @@ test("A1 → Lesson 1 → listen → record → feedback → retry → continue"
   // 18: continue.
   await page.getByTestId("continue-button").click();
   await expect(page.getByTestId("lesson-complete")).toContainText("Lektion 1 geschafft!");
-  // Lesson 2 has no intro video: "Nächste Lektion" goes straight to it. "Zurück zu A1" is only on lesson 28.
-  await expect(page.getByRole("link", { name: /Nächste Lektion/ })).toHaveAttribute("href", "/a1/lesson-2");
+  // Lesson 2 has an intro video: "Nächste Lektion" opens it. "Zurück zu A1" is only on lesson 28.
+  await expect(page.getByRole("link", { name: /Nächste Lektion/ })).toHaveAttribute("href", "/a1/lesson-2/intro");
   await expect(page.getByTestId("back-to-level")).toHaveCount(0);
   await page.goto("/a1");
   await expect(page.getByTestId("lesson-link-lesson-1")).toContainText("Abgeschlossen");
@@ -135,13 +139,16 @@ test("A1 → Lesson 1 → listen → record → feedback → retry → continue"
   await page.getByRole("link", { name: "Intro überspringen" }).click();
   await expect(page).toHaveURL(/\/a1\/lesson-1$/);
 
-  // Lesson 1 completed: lesson 2 is open and starts directly (no intro video), lesson 3 stays locked.
+  // Lesson 1 completed: lesson 2 is open and starts with its intro video, lesson 3 stays locked.
   await page.goto("/a1");
   await expect(page.getByTestId("lesson-link-lesson-3")).toHaveAttribute("data-locked", "true");
   await page.getByTestId("lesson-link-lesson-2").click();
+  await expect(page).toHaveURL(/\/a1\/lesson-2\/intro$/);
+  await expect(page.getByTestId("intro-video")).toHaveAttribute("src", "/videos/a1/lesson-2/de.mp4");
+  await page.getByTestId("intro-continue").click();
   await expect(page).toHaveURL(/\/a1\/lesson-2$/);
   await expect(page.getByTestId("lesson-letter")).toHaveText("ب");
-  await expect(page.getByTestId("intro-link")).toHaveCount(0);
+  await expect(page.getByTestId("intro-link")).toBeVisible();
 
   // Progress survives a reload (per-browser storage).
   await page.goto("/a1/lesson-1");
@@ -196,6 +203,11 @@ test("unknown routes show Alif's own 404", async ({ page }) => {
 
 const PROGRESS_KEY = "alif:progress:v1";
 
+/** Intro mp4 files are gitignored; CI has only the posters. */
+function hasLocalVideo(lesson: number) {
+  return existsSync(path.join(process.cwd(), "public", "videos", "a1", `lesson-${lesson}`, "de.mp4"));
+}
+
 /** Seeds per-browser progress before any page script runs. */
 async function seedProgress(page: Page, progress: Record<string, { passed: string[]; completedAt?: string }>) {
   await page.addInitScript(([key, value]) => window.localStorage.setItem(key, value), [PROGRESS_KEY, JSON.stringify(progress)] as const);
@@ -224,16 +236,45 @@ test("a locked lesson cannot be opened through its URL", async ({ page }) => {
 
 test("a lesson without an intro video starts directly and has no /intro page", async ({ page }) => {
   const errors = collectPageErrors(page);
-  await seedProgress(page, { "a1/lesson-1": { passed: [], completedAt: "2026-10-04T00:00:00.000Z" } });
+  const done = "2026-10-04T00:00:00.000Z";
+  await seedProgress(page, Object.fromEntries([1, 2, 3, 4, 5].map((n) => [`a1/lesson-${n}`, { passed: [], completedAt: done }])));
   await page.goto("/a1");
-  await expect(page.getByTestId("lesson-link-lesson-2")).toHaveAttribute("href", "/a1/lesson-2");
-  await page.getByTestId("lesson-link-lesson-2").click();
-  await expect(page).toHaveURL(/\/a1\/lesson-2$/);
-  await expect(page.getByTestId("lesson-letter")).toHaveText("ب");
-  for (const id of ["bait", "bab", "batta"]) await expect(page.getByTestId(`vocab-card-${id}`)).toBeVisible();
+  await expect(page.getByTestId("lesson-link-lesson-6")).toHaveAttribute("href", "/a1/lesson-6");
+  await page.getByTestId("lesson-link-lesson-6").click();
+  await expect(page).toHaveURL(/\/a1\/lesson-6$/);
+  await expect(page.getByTestId("lesson-letter")).toHaveText("ح");
+  for (const id of ["hisan", "hut", "halib"]) await expect(page.getByTestId(`vocab-card-${id}`)).toBeVisible();
   await expect(page.getByTestId("intro-link")).toHaveCount(0);
-  const response = await page.goto("/a1/lesson-2/intro");
+  const response = await page.goto("/a1/lesson-6/intro");
   expect(response?.status()).toBe(404);
+  expect(errors).toEqual([]);
+});
+
+test("Ba, Ta, Tha and Dschim open their own intro video: poster, metadata preload, no autoplay, no chapter list", async ({ page }) => {
+  const errors = collectPageErrors(page);
+  const done = "2026-10-04T00:00:00.000Z";
+  await seedProgress(page, Object.fromEntries([1, 2, 3, 4].map((n) => [`a1/lesson-${n}`, { passed: [], completedAt: done }])));
+  await page.goto("/a1");
+  for (const [n, glyph] of [[2, "ب"], [3, "ت"], [4, "ث"], [5, "ج"]] as const) {
+    await expect(page.getByTestId(`lesson-link-lesson-${n}`)).toHaveAttribute("href", `/a1/lesson-${n}/intro`);
+    await page.goto(`/a1/lesson-${n}/intro`);
+    const video = page.getByTestId("intro-video");
+    await expect(video).toHaveAttribute("src", `/videos/a1/lesson-${n}/de.mp4`);
+    await expect(video).toHaveAttribute("poster", `/videos/a1/lesson-${n}/poster.jpg`);
+    await expect(video).toHaveAttribute("preload", "metadata");
+    expect(await video.evaluate((v: HTMLVideoElement) => v.autoplay)).toBe(false);
+    await expect(page.getByRole("heading", { name: "Kapitel" })).toHaveCount(0);
+    const poster = await page.request.get(`/videos/a1/lesson-${n}/poster.jpg`);
+    expect(poster.status()).toBe(200);
+    if (hasLocalVideo(n)) {
+      await expect.poll(() => video.evaluate((v: HTMLVideoElement) => v.readyState)).toBeGreaterThanOrEqual(1);
+      expect(await video.evaluate((v: HTMLVideoElement) => v.duration)).toBeGreaterThan(100);
+    }
+    await page.getByTestId("intro-continue").click();
+    await expect(page).toHaveURL(new RegExp(`/a1/lesson-${n}$`));
+    await expect(page.getByTestId("lesson-letter")).toHaveText(glyph);
+    await page.goto("/a1");
+  }
   expect(errors).toEqual([]);
 });
 

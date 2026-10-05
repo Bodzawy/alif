@@ -51,4 +51,9 @@ export const lesson3: Lesson = {
       exercise: { id: "taj", target: "تاج", modelText: "تَاج" },
     },
   ],
+  // No chapters: the video has no chapter marks to take them from.
+  introVideo: {
+    src: "/videos/a1/lesson-3/de.mp4",
+    poster: "/videos/a1/lesson-3/poster.jpg",
+  },
 };

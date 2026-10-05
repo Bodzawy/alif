@@ -15,6 +15,11 @@ export const WORDS_PER_LESSON = 3;
 const HARAKAT = /[\u064B-\u0652\u0670]/g;
 const HAS_HARAKA = /[\u064B-\u0652\u0670]/;
 const PUBLIC_DIR = path.join(process.cwd(), "public");
+/**
+ * Intro mp4 files are not in git (see .gitignore and DEPLOY-VIDEOS.md), so CI
+ * cannot check that they exist. Posters are in git and are always checked.
+ */
+export const SKIP_VIDEO_FILE_CHECK = Boolean(process.env.CI);
 
 export type LessonCheck = {
   level: string;
@@ -76,9 +81,9 @@ function checkLesson(levelSlug: string, lesson: Lesson): LessonCheck {
   }
 
   if (lesson.introVideo) {
-    for (const src of [lesson.introVideo.src, lesson.introVideo.poster]) {
-      if (!publicFileExists(src)) introIssues.push(`missing ${src}`);
-    }
+    if (!lesson.introVideo.src.endsWith(".mp4")) introIssues.push(`video ${lesson.introVideo.src} is not an .mp4`);
+    if (!SKIP_VIDEO_FILE_CHECK && !publicFileExists(lesson.introVideo.src)) introIssues.push(`missing ${lesson.introVideo.src}`);
+    if (!publicFileExists(lesson.introVideo.poster)) introIssues.push(`missing ${lesson.introVideo.poster}`);
   }
 
   return {

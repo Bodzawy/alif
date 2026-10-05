@@ -27,9 +27,18 @@ describe("curriculum", () => {
     expect(previousLesson("a1", "lesson-2")?.slug).toBe("lesson-1");
   });
 
+  it("has intro videos for Alif, Ba, Ta, Tha and Dschim, without invented chapters", () => {
+    const withVideo = getLevel("a1")!.lessons.filter((lesson) => lesson.introVideo);
+    expect(withVideo.map((lesson) => lesson.letter.glyph)).toEqual(["أَ", "ب", "ت", "ث", "ج"]);
+    for (const lesson of withVideo.slice(1)) {
+      expect(lesson.introVideo).toEqual({ src: `/videos/a1/${lesson.slug}/de.mp4`, poster: `/videos/a1/${lesson.slug}/poster.jpg` });
+    }
+  });
+
   it("starts a lesson at its intro video only when it has one", () => {
     expect(lessonEntryHref("a1", getLesson("a1", "lesson-1")!.lesson)).toBe("/a1/lesson-1/intro");
-    expect(lessonEntryHref("a1", getLesson("a1", "lesson-2")!.lesson)).toBe("/a1/lesson-2");
+    for (const n of [2, 3, 4, 5]) expect(lessonEntryHref("a1", getLesson("a1", `lesson-${n}`)!.lesson)).toBe(`/a1/lesson-${n}/intro`);
+    expect(lessonEntryHref("a1", getLesson("a1", "lesson-6")!.lesson)).toBe("/a1/lesson-6");
   });
 
   it("no longer serves the vocabulary lesson under A0 (A0 is the alphabet)", () => {

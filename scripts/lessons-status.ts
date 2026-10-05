@@ -1,6 +1,6 @@
 // `npm run lessons:status` – one line per lesson: words, audio, pictures and
 // intro video. Exits with code 1 when any lesson has a problem.
-import { checkAllLessons, crossLessonIssues, WORDS_PER_LESSON } from "./lesson-checks";
+import { SKIP_VIDEO_FILE_CHECK, checkAllLessons, crossLessonIssues, WORDS_PER_LESSON } from "./lesson-checks";
 
 const yes = (ok: boolean) => (ok ? "ok" : "MISSING");
 
@@ -28,6 +28,7 @@ problems.push(...crossLessonIssues());
 console.log("");
 console.log(`${rows.length} lessons · intro videos: ${rows.filter((row) => row.intro === "yes").length}`);
 console.log("Audio = the text is accepted by /api/tts (Azure text-to-speech at runtime); no audio files are needed.");
+if (SKIP_VIDEO_FILE_CHECK) console.log("CI: intro .mp4 files are not in git and were not checked; posters were.");
 if (problems.length > 0) {
   console.log(`\n${problems.length} problem(s):`);
   for (const problem of problems) console.log(`  - ${problem}`);

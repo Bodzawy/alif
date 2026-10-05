@@ -21,3 +21,6 @@ playwright-report/
 .DS_Store
 *.log
 .vercel
+
+# videos: mp4 files are served from outside the repo in production (see DEPLOY-VIDEOS.md); posters stay in git
+public/videos/**/*.mp4
