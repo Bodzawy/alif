@@ -5,7 +5,7 @@
 ```
 Alif
 ├── A0 · Das arabische Alphabet          /a0, /a0/letters/<id>
-│   └── 28 letters أ … ي: letter · Arabic name · listen · record · result · Weiter (only after passing)
+│   └── 28 letters أ … ي, hands-free: letter → its name is spoken → student speaks → result → next letter (only after passing)
 └── A1 · Erste Wörter                    /a1, /a1/lesson-1
     └── Lektion 1 · Der Buchstabe Alif (أَ)
         ├── Schritt 1: the letter: listen · record · feedback
@@ -14,9 +14,15 @@ Alif
 
 A0 is a progression layer over the unchanged pronunciation pipeline: a letter
 counts as mastered only when `/api/pronunciation` answers `passed: true` (the
-legacy Masaar condition engine matched `excellent`). *Überspringen* is a
-technical escape hatch (e.g. IQRA unavailable): it opens the next letter, but
-the skipped letter stays "nicht gemeistert" and can be practised again later.
+legacy Masaar condition engine matched `excellent`). Training is hands-free
+(`use-letter-drill.ts`): before every attempt the letter's name is spoken, then
+the microphone opens by itself and the attempt ends when the student stops
+speaking. A correct letter is followed by "مُمْتَاز" and the next letter, a
+wrong one by a new attempt – as often as needed. Each extra attempt costs 10 points for that letter (never below 0); the
+round score is the average (`src/lib/alphabet-score.ts`). Silence and unclear
+audio are not counted. Technical errors (microphone, network, Azure, IQRA
+unavailable) stop the loop with a message; only then is *Überspringen* offered:
+it opens the next letter, but the skipped letter stays "nicht gemeistert".
 `/a0/lesson-1` redirects permanently to `/a1/lesson-1`.
 
 The pronunciation system was taken over from the Masaar platform and reimplemented here. Alif has no dependency on the Masaar website. There is no redirect, no iframe and no shared login. Its only external dependencies are the evaluation services behind its own API.

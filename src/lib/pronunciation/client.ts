@@ -1,4 +1,4 @@
-import { API_ERROR_MESSAGES, isApiErrorCode } from "./errors";
+import { API_ERROR_MESSAGES, isApiErrorCode, type ApiErrorCode } from "./errors";
 import { NO_MATCHING_RULE, type PronunciationResponse } from "./types";
 
 // Browser-side access to Alif's /api/pronunciation and the mapping of its
@@ -7,7 +7,12 @@ import { NO_MATCHING_RULE, type PronunciationResponse } from "./types";
 export const REQUEST_TIMEOUT_MS = 30_000;
 
 export class PronunciationRequestError extends Error {
-  constructor(message: string, readonly status: number | null) {
+  constructor(
+    message: string,
+    readonly status: number | null,
+    /** Error code from the API body, when it sent one. */
+    readonly code: ApiErrorCode | null = null
+  ) {
     super(message);
     this.name = "PronunciationRequestError";
   }
@@ -53,7 +58,8 @@ export async function submitRecording(
   }
 
   if (!response.ok || !body || typeof body !== "object") {
-    throw new PronunciationRequestError(messageForFailedResponse(response.status, body), response.status);
+    const code = (body as { code?: unknown } | null)?.code;
+    throw new PronunciationRequestError(messageForFailedResponse(response.status, body), response.status, isApiErrorCode(code) ? code : null);
   }
 
   return body as PronunciationResponse;
@@ -73,6 +79,8 @@ export type StudentFeedback = {
   rule: string;
   /** Azure accuracy (0–100). */
   accuracy: number | null;
+  /** No rule matched because IQRA returned no phonemes: a service problem, not a pronunciation mistake. */
+  analysisUnavailable: boolean;
 };
 
 // German explanations for the rule names used in the condition files. The
@@ -105,5 +113,6 @@ export function toStudentFeedback(response: PronunciationResponse): StudentFeedb
     ruleMessage: (evaluation?.message ?? response.feedback?.message ?? "").trim(),
     rule,
     accuracy: evaluation?.azureAccuracy ?? response.scores?.accuracy ?? null,
+    analysisUnavailable: rule === NO_MATCHING_RULE && (evaluation?.iqraPhonemes?.length ?? 0) === 0,
   };
 }

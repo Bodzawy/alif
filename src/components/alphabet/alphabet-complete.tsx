@@ -1,12 +1,27 @@
 import Link from "next/link";
-import { ArrowRight, Trophy } from "lucide-react";
+import { ArrowRight, RotateCcw, Trophy } from "lucide-react";
 
-import { buttonClasses } from "@/components/ui/button";
+import { Button, buttonClasses } from "@/components/ui/button";
 import { ALPHABET, ALPHABET_LEVEL, alphabetLetterHref, getAlphabetLetter } from "@/data/alphabet";
 import type { alphabetSummary } from "@/lib/alphabet-progress";
+import { letterScore, roundScore, scoreRating, type LetterResult } from "@/lib/alphabet-score";
+import { cn } from "@/lib/utils";
 
-export function AlphabetComplete({ summary, nextLevelHref }: { summary: ReturnType<typeof alphabetSummary>; nextLevelHref: string }) {
+export function AlphabetComplete({
+  summary,
+  nextLevelHref,
+  round,
+  onRestart,
+}: {
+  summary: ReturnType<typeof alphabetSummary>;
+  nextLevelHref: string;
+  /** Letters of the training round that just ended, with their attempts. */
+  round: LetterResult[];
+  onRestart: () => void;
+}) {
   const open = summary.notMastered.map((id) => getAlphabetLetter(id)!);
+  const score = roundScore(round);
+  const rating = scoreRating(score);
 
   return (
     <div className="container max-w-2xl py-10 sm:py-16" data-testid="alphabet-complete" data-complete={summary.complete}>
@@ -20,6 +35,41 @@ export function AlphabetComplete({ summary, nextLevelHref }: { summary: ReturnTy
         <p className="mt-2 text-muted-foreground">
           Du hast {summary.masteredCount} von {ALPHABET.length} Buchstaben gemeistert.
         </p>
+
+        <div className="mt-6 rounded-2xl bg-muted p-5" data-testid="round-result" data-score={score}>
+          <p lang="ar" dir="rtl" className="font-arabic text-2xl font-bold">
+            أحسنت!
+          </p>
+          <p className="mt-1 text-4xl font-bold tracking-tight" data-testid="round-score">
+            Dein Ergebnis: {score} %
+          </p>
+          <p className="mt-2 font-semibold" data-testid="round-rating">
+            <span lang="ar" dir="rtl" className="font-arabic text-lg">{rating.arabic}</span> · {rating.german}
+          </p>
+          <p className="mt-2 text-xs text-muted-foreground">
+            Jeder zusätzliche Versuch kostet 10 Punkte pro Buchstabe. 100 % heißt: jeder Buchstabe beim ersten Versuch richtig.
+          </p>
+          <ul dir="rtl" className="mt-4 flex flex-wrap justify-center gap-1.5" aria-label="Ergebnis pro Buchstabe">
+            {round.map(({ id, attempts }) => {
+              const points = letterScore(attempts);
+              return (
+                <li
+                  key={id}
+                  data-testid={`round-letter-${id}`}
+                  data-attempts={attempts ?? "skipped"}
+                  title={attempts === null ? "Übersprungen" : `${attempts} ${attempts === 1 ? "Versuch" : "Versuche"} · ${points} Punkte`}
+                  className={cn(
+                    "flex w-11 flex-col items-center rounded-lg bg-card py-1 shadow-sm",
+                    points === 100 ? "text-success" : points >= 80 ? "text-primary" : "text-warning"
+                  )}
+                >
+                  <span lang="ar" className="font-arabic text-xl leading-snug">{getAlphabetLetter(id)!.glyph}</span>
+                  <span dir="ltr" className="text-[10px] font-semibold">{points}</span>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
 
         {open.length > 0 && (
           <div className="mt-6 rounded-2xl bg-warning-soft p-4 text-left" data-testid="alphabet-open-letters">
@@ -36,7 +86,10 @@ export function AlphabetComplete({ summary, nextLevelHref }: { summary: ReturnTy
           </div>
         )}
 
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center">
+          <Button variant="secondary" size="lg" onClick={onRestart} data-testid="round-restart">
+            <RotateCcw className="h-5 w-5" aria-hidden /> Runde wiederholen
+          </Button>
           <Link href={`/${ALPHABET_LEVEL.slug}`} className={buttonClasses({ variant: "secondary", size: "lg" })}>
             Zur Übersicht
           </Link>

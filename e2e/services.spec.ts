@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-import { recordExercise } from "./support/helpers";
+import { installFakeVoice, recordExercise } from "./support/helpers";
 
 // Real browser → real Alif API (:3211) → real Azure Speech SDK + MASAAR/IQRA.
 // MASAAR and IQRA are local stand-ins speaking the production contract
@@ -52,9 +52,9 @@ test("recording is sent to Azure, MASAAR and IQRA through Alif's API", async ({ 
 
 test("A0 letter page uses the same /api/pronunciation pipeline (Azure, MASAAR, IQRA)", async ({ page, request }) => {
   await request.post(`${MODELS}/__reset`);
-  await page.goto("/a0/letters/alif");
+  await installFakeVoice(page);
   const apiCall = page.waitForResponse((r) => r.url().endsWith("/api/pronunciation") && r.request().method() === "POST", { timeout: 60_000 });
-  await recordExercise(page, "alif");
+  await page.goto("/a0/letters/alif");
   const response = await apiCall;
 
   const hits = (await (await request.get(`${MODELS}/__hits`)).json()) as Array<Record<string, unknown>>;
@@ -64,11 +64,15 @@ test("A0 letter page uses the same /api/pronunciation pipeline (Azure, MASAAR, I
 
   if (response.status() === 200) {
     const body = await response.json();
-    await expect(page.getByTestId("exercise-alif-feedback-message")).toHaveText(body.conditionEvaluation.message.trim());
-    await expect(page.getByTestId("letter-next")).toBeEnabled({ enabled: body.passed === true });
+    await expect(page.getByTestId("drill-feedback").or(page.getByTestId("drill-error")).first()).toBeVisible();
+    if (body.passed) await expect(page.getByTestId("drill-feedback")).toHaveAttribute("data-result", "correct");
+  } else if (response.status() === 422) {
+    // Azure heard no speech in the synthetic tone: not counted, it listens again.
+    await expect(page.getByTestId("drill-status")).toContainText("nicht verstanden");
+    await expect(page.getByTestId("drill-attempt")).toHaveCount(0);
   } else {
     expect(realAzure, `Azure was configured but the API answered ${response.status()}`).toBe(false);
-    await expect(page.getByTestId("exercise-alif-error")).toBeVisible();
-    await expect(page.getByTestId("letter-next")).toBeDisabled();
+    await expect(page.getByTestId("drill-error")).toBeVisible();
+    await expect(page.getByTestId("drill-feedback")).toHaveCount(0);
   }
 });

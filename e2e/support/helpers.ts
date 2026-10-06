@@ -48,3 +48,35 @@ export function collectPageErrors(page: Page) {
   });
   return errors;
 }
+
+/**
+ * Hands-free A0: replaces the microphone with a synthetic "student" who says
+ * something shortly after each listening window opens (0.4 s silence, 0.5 s
+ * tone, then silence). Recording, voice detection, WAV conversion and upload
+ * stay real.
+ */
+export async function installFakeVoice(page: Page) {
+  await page.addInitScript(() => {
+    navigator.mediaDevices.getUserMedia = async () => {
+      const context = new AudioContext();
+      await context.resume();
+      const oscillator = context.createOscillator();
+      oscillator.frequency.value = 220;
+      const gain = context.createGain();
+      const destination = context.createMediaStreamDestination();
+      oscillator.connect(gain).connect(destination);
+      const t = context.currentTime;
+      gain.gain.setValueAtTime(0, t);
+      gain.gain.setValueAtTime(0.5, t + 0.4);
+      gain.gain.setValueAtTime(0, t + 0.9);
+      oscillator.start();
+      const track = destination.stream.getAudioTracks()[0]!;
+      const stopTrack = track.stop.bind(track);
+      track.stop = () => {
+        stopTrack();
+        void context.close();
+      };
+      return destination.stream;
+    };
+  });
+}
