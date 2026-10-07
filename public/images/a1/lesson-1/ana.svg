@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Ich – ein Kind zeigt auf sich selbst">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eef6ff"/><stop offset="1" stop-color="#c7defa"/></radialGradient></defs><rect width="400" height="300" fill="url(#bg)"/><circle cx="70" cy="70" r="40" fill="#dcebfd"/><circle cx="335" cy="235" r="52" fill="#dcebfd"/>
+  <path d="M110 300 C 114 232, 150 206, 200 206 C 250 206, 286 232, 290 300 Z" fill="#e85d75"/>
+  <rect x="186" y="182" width="28" height="30" fill="#e8b48a"/>
+  <ellipse cx="200" cy="126" rx="58" ry="64" fill="#f5cfaa"/>
+  <ellipse cx="142" cy="132" rx="11" ry="16" fill="#f5cfaa"/><ellipse cx="258" cy="132" rx="11" ry="16" fill="#f5cfaa"/>
+  <path d="M140 124 C 134 70, 172 54, 200 54 C 230 54, 268 70, 260 124 C 252 92, 232 82, 200 82 C 170 82, 148 92, 140 124 Z" fill="#2f2018"/>
+  <circle cx="180" cy="128" r="6" fill="#2f2a26"/><circle cx="182" cy="126" r="2" fill="#fff"/>
+  <circle cx="220" cy="128" r="6" fill="#2f2a26"/><circle cx="222" cy="126" r="2" fill="#fff"/>
+  <circle cx="166" cy="150" r="8" fill="#f4a3a3" opacity=".55"/><circle cx="234" cy="150" r="8" fill="#f4a3a3" opacity=".55"/>
+  <path d="M184 156 q16 14 32 0" stroke="#c9534f" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <!-- hand pointing at own chest -->
+  <path d="M286 300 C 284 274, 272 258, 250 252" stroke="#e85d75" stroke-width="30" fill="none" stroke-linecap="round"/>
+  <circle cx="240" cy="250" r="18" fill="#f5cfaa"/>
+  <path d="M228 248 L 206 246" stroke="#f5cfaa" stroke-width="12" stroke-linecap="round"/>
+  <path d="M234 262 q8 4 16 0" stroke="#e3ad84" stroke-width="3" fill="none" stroke-linecap="round"/>
+</svg>

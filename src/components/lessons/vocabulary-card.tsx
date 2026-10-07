@@ -11,12 +11,17 @@ export function VocabularyCard({
   locked,
   onBusyChange,
   onResult,
+  simpleFeedback,
+  hideControls = false,
 }: {
   item: VocabularyItem;
   passed: boolean;
   locked: boolean;
   onBusyChange: (busy: boolean) => void;
   onResult: (feedback: StudentFeedback) => void;
+  simpleFeedback?: boolean;
+  /** Guided mode (A1 · Schritt 2): no listen / record buttons. */
+  hideControls?: boolean;
 }) {
   return (
     <article
@@ -46,13 +51,16 @@ export function VocabularyCard({
           <p className="text-sm italic text-muted-foreground">{item.transliteration}</p>
         </div>
 
-        <PronunciationExercise
-          exercise={item.exercise}
-          locked={locked}
-          onBusyChange={onBusyChange}
-          onResult={onResult}
-          className="mt-auto"
-        />
+        {!hideControls && (
+          <PronunciationExercise
+            exercise={item.exercise}
+            locked={locked}
+            onBusyChange={onBusyChange}
+            onResult={onResult}
+            className="mt-auto"
+            simpleFeedback={simpleFeedback}
+          />
+        )}
       </div>
     </article>
   );

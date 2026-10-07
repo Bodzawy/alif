@@ -21,10 +21,48 @@ export function lessonKey(levelSlug: string, lessonSlug: string) {
 let cachedRaw: string | null | undefined;
 let cachedState: ProgressState = {};
 
+// The vocabulary lessons moved from A1 (/a1/lesson-N, key "a1/lesson-N") to
+// A0 → Wörter (/a0/words/lesson-N, key "a0/words/lesson-N"). Their progress is
+// copied to the new keys once per browser. Nothing is deleted: the old entries
+// stay as they were, and an entry already present under the new key wins.
+const MIGRATION_FLAG = "alif:progress:migrated:a1-lessons-to-a0-words";
+const LEGACY_LESSON_KEY = /^a1\/(lesson-\d+)$/;
+let migrationChecked = false;
+
+export function copyLegacyLessonProgress(state: ProgressState): ProgressState {
+  let next = state;
+  for (const [key, value] of Object.entries(state)) {
+    const lesson = LEGACY_LESSON_KEY.exec(key)?.[1];
+    const target = lesson && `a0/words/${lesson}`;
+    if (target && !state[target]) next = { ...next, [target]: value };
+  }
+  return next;
+}
+
+function migrateOnce(raw: string | null): string | null {
+  if (migrationChecked) return raw;
+  migrationChecked = true;
+  try {
+    if (window.localStorage.getItem(MIGRATION_FLAG)) return raw;
+    const parsed = raw ? (JSON.parse(raw) as unknown) : null;
+    if (parsed && typeof parsed === "object") {
+      const migrated = copyLegacyLessonProgress(parsed as ProgressState);
+      if (migrated !== parsed) {
+        raw = JSON.stringify(migrated);
+        window.localStorage.setItem(STORAGE_KEY, raw);
+      }
+    }
+    window.localStorage.setItem(MIGRATION_FLAG, new Date().toISOString());
+  } catch {
+    // Unreadable or blocked storage: leave everything as it is.
+  }
+  return raw;
+}
+
 function read(): ProgressState {
   let raw: string | null = null;
   try {
-    raw = window.localStorage.getItem(STORAGE_KEY);
+    raw = migrateOnce(window.localStorage.getItem(STORAGE_KEY));
   } catch {
     raw = null;
   }

@@ -15,7 +15,7 @@ test.use({ baseURL: "http://127.0.0.1:3211" });
 
 test("recording is sent to Azure, MASAAR and IQRA through Alif's API", async ({ page, request }) => {
   await request.post(`${MODELS}/__reset`);
-  await page.goto("/a1/lesson-1");
+  await page.goto("/a0/words/lesson-1");
 
   const apiCall = page.waitForResponse((r) => r.url().endsWith("/api/pronunciation") && r.request().method() === "POST", { timeout: 60_000 });
   await recordExercise(page, "letter");

@@ -25,6 +25,7 @@ export function PronunciationExercise({
   onBusyChange,
   onResult,
   className,
+  simpleFeedback,
 }: {
   exercise: Exercise;
   /** Another exercise is recording/processing – this one must wait. */
@@ -32,6 +33,8 @@ export function PronunciationExercise({
   onBusyChange?: (busy: boolean) => void;
   onResult?: (feedback: StudentFeedback) => void;
   className?: string;
+  /** Learner view without accuracy and rule details (see FeedbackPanel). */
+  simpleFeedback?: boolean;
 }) {
   const { phase, feedback, error, start, stop } = usePronunciationExercise({
     target: exercise.target,
@@ -68,7 +71,7 @@ export function PronunciationExercise({
       )}
 
       {phase === "result" && feedback && (
-        <FeedbackPanel feedback={feedback} onRetry={start} retryDisabled={locked} testId={`${testId}-feedback`} />
+        <FeedbackPanel feedback={feedback} onRetry={start} retryDisabled={locked} testId={`${testId}-feedback`} simple={simpleFeedback} />
       )}
     </div>
   );

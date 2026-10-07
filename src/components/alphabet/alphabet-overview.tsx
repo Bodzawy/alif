@@ -17,8 +17,8 @@ export function AlphabetOverview({ nextLevelHref }: { nextLevelHref: string }) {
 
   return (
     <div className="container max-w-5xl py-8 sm:py-12">
-      <Link href="/" className="mb-6 inline-flex items-center gap-1 rounded-md text-sm text-muted-foreground hover:text-foreground focus-ring">
-        <ArrowLeft className="h-4 w-4" aria-hidden /> Startseite
+      <Link href={`/${ALPHABET_LEVEL.slug}`} className="mb-6 inline-flex items-center gap-1 rounded-md text-sm text-muted-foreground hover:text-foreground focus-ring" data-testid="back-to-a0">
+        <ArrowLeft className="h-4 w-4" aria-hidden /> {ALPHABET_LEVEL.code}
       </Link>
 
       <header className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
@@ -46,7 +46,7 @@ export function AlphabetOverview({ nextLevelHref }: { nextLevelHref: string }) {
             <PartyPopper className="h-5 w-5" aria-hidden /> Du hast alle {total} Buchstaben gemeistert!
           </p>
           <Link href={nextLevelHref} className={buttonClasses({ size: "md" })}>
-            Weiter zu A1 <ArrowRight className="h-4 w-4" aria-hidden />
+            Weiter zu den Wörtern <ArrowRight className="h-4 w-4" aria-hidden />
           </Link>
         </div>
       )}

@@ -1,34 +1,27 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 
 import { LessonCard } from "@/components/lessons/lesson-card";
-import { LEVELS, getLevel, lessonEntryHref, lessonExercises } from "@/data/curriculum";
+import { A0_LEVEL, WORDS_LEVEL, lessonEntryHref, lessonExercises } from "@/data/curriculum";
 
-type Params = { level: string };
+export const metadata: Metadata = {
+  title: `${WORDS_LEVEL.code} – ${WORDS_LEVEL.title}`,
+  description: WORDS_LEVEL.description,
+};
 
-export function generateStaticParams(): Params[] {
-  return LEVELS.map((level) => ({ level: level.slug }));
-}
-
-export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
-  const level = getLevel((await params).level);
-  return level ? { title: `${level.code} – ${level.title}`, description: level.description } : {};
-}
-
-export default async function LevelPage({ params }: { params: Promise<Params> }) {
-  const level = getLevel((await params).level);
-  if (!level) notFound();
+// A0 → Wörter: the vocabulary lessons (formerly A1).
+export default function WordsPage() {
+  const level = WORDS_LEVEL;
 
   return (
     <div className="container max-w-4xl py-8 sm:py-12">
-      <Link href="/" className="mb-6 inline-flex items-center gap-1 rounded-md text-sm text-muted-foreground hover:text-foreground focus-ring">
-        <ArrowLeft className="h-4 w-4" aria-hidden /> Startseite
+      <Link href={`/${A0_LEVEL.slug}`} className="mb-6 inline-flex items-center gap-1 rounded-md text-sm text-muted-foreground hover:text-foreground focus-ring" data-testid="back-to-a0">
+        <ArrowLeft className="h-4 w-4" aria-hidden /> {A0_LEVEL.code}
       </Link>
 
       <header className="flex items-center gap-4">
-        <span className="rounded-2xl bg-primary px-4 py-3 text-3xl font-bold text-primary-foreground">{level.code}</span>
+        <span className="rounded-2xl bg-primary px-4 py-3 text-3xl font-bold text-primary-foreground">{A0_LEVEL.code}</span>
         <div>
           <h1 className="text-3xl font-bold tracking-tight">{level.title}</h1>
           <p className="mt-1 text-muted-foreground">{level.description}</p>

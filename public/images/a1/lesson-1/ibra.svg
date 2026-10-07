@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Nähnadel mit Faden">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#f0fbf4"/><stop offset="1" stop-color="#c6ecd3"/></radialGradient></defs><rect width="400" height="300" fill="url(#bg)"/><circle cx="72" cy="232" r="44" fill="#dcf4e4"/><circle cx="330" cy="70" r="40" fill="#dcf4e4"/>
+  <!-- thread -->
+  <path d="M276 66 C 330 40, 350 110, 300 130 C 250 150, 250 210, 300 226 C 330 236, 350 260, 330 280" stroke="#e85d75" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <!-- needle -->
+  <g transform="rotate(-38 200 150)">
+    <path d="M60 150 L 300 142 Q 330 150 300 158 Z" fill="#9aa7b4"/>
+    <path d="M60 150 L 300 146 Q 316 150 300 152 Z" fill="#dfe6ec"/>
+    <ellipse cx="280" cy="150" rx="13" ry="4" fill="#c6ecd3" stroke="#6e7b88" stroke-width="2"/>
+  </g>
+  <path d="M276 66 C 268 72, 262 80, 262 88" stroke="#e85d75" stroke-width="5" fill="none" stroke-linecap="round"/>
+</svg>

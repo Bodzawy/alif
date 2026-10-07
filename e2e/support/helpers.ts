@@ -80,3 +80,24 @@ export async function installFakeVoice(page: Page) {
     };
   });
 }
+
+/**
+ * A1 · Schritt 2 opens in guided mode. This refuses only guided mode's
+ * microphone request (the one with echo cancellation), so the start tap falls
+ * back to the button page – the button recordings still get the fake device.
+ * Call before page.goto, then `await openButtonMode(page)`.
+ */
+export async function refuseGuidedMicrophone(page: Page) {
+  await page.addInitScript(() => {
+    const original = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
+    navigator.mediaDevices.getUserMedia = (constraints) =>
+      (constraints?.audio as MediaTrackConstraints | undefined)?.echoCancellation === true
+        ? Promise.reject(new DOMException("denied", "NotAllowedError"))
+        : original(constraints);
+  });
+}
+
+export async function openButtonMode(page: Page) {
+  await page.getByTestId("start-button").click();
+  await expect(page.getByTestId("guided-fallback")).toBeVisible();
+}

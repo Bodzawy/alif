@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { evaluateLetterConditions, matchesCondition } from "@/lib/pronunciation/condition-engine";
+import { evaluateLetterConditions, initialVowel, matchesCondition } from "@/lib/pronunciation/condition-engine";
 import { LETTER_RULES } from "@/lib/pronunciation/rules";
 
 const ctx = (azureAccuracy: number, iqraPhonemes: string[] = [], azureRecognized = "") => ({
@@ -100,6 +100,45 @@ describe("condition engine – original behaviour", () => {
         .filter(Boolean)
         .flatMap((list) => list!.replace(/[\[\]'\s]/g, "").split(","));
       expect(evaluateLetterConditions({ target, ...ctx(95, phonemes) })?.rule, target).toBe("excellent");
+    }
+  });
+});
+
+describe("condition engine – iqra_initial_vowel (A1 words that begin with أَ / إِ / أُ)", () => {
+  it("reads the vowel right after the initial hamza in real IQRA output", () => {
+    // Recorded from the real IQRA service (A1 · Lesson 1 audio).
+    expect(initialVowel(["<", "aa", "b", "a"])).toBe("a"); // أَب
+    expect(initialVowel(["<", "a", "m", "ii", "r"])).toBe("a"); // أَمِير
+    expect(initialVowel(["<", "i", "S", "b", "a", "E"])).toBe("i"); // إِصْبَع
+    expect(initialVowel(["<", "u", "*", "u", "n", "aa"])).toBe("u"); // أُذُن
+    expect(initialVowel(["h", "uu"])).toBe("u"); // أُ – hamza heard as h
+    expect(initialVowel(["a", "m", "ii", "r"])).toBe("a"); // no hamza token
+    expect(initialVowel(["<<", "I", "b"])).toBe("i"); // doubled hamza, emphatic vowel
+    expect(initialVowel(["<", "UU", "s"])).toBe("u");
+  });
+
+  it("never takes a vowel from a later syllable when the initial vowel is missing", () => {
+    expect(initialVowel(["b", "r", "a"])).toBeNull(); // إِبْرَة without its i
+    expect(initialVowel(["<", "*", "u", "n"])).toBeNull(); // أَذُن: the u belongs to ذُن
+    expect(initialVowel(["E", "i", "n"])).toBeNull(); // ع is a consonant, not hamza
+    expect(initialVowel(["<"])).toBeNull();
+    expect(initialVowel([])).toBeNull();
+  });
+
+  it("== / != compare the vowel quality", () => {
+    const heard = (...phonemes: string[]) => ctx(90, phonemes);
+    expect(matchesCondition("iqra_initial_vowel == u", heard("<", "u", "*", "u", "n"))).toBe(true);
+    expect(matchesCondition("iqra_initial_vowel == u", heard("<", "a", "*", "u", "n"))).toBe(false);
+    expect(matchesCondition("iqra_initial_vowel == u", heard("<", "i", "*", "u", "n"))).toBe(false);
+    expect(matchesCondition("iqra_initial_vowel == u", heard("<", "*", "u", "n"))).toBe(false);
+    expect(matchesCondition("iqra_initial_vowel != u", heard("<", "a", "*", "u", "n"))).toBe(true);
+    expect(matchesCondition("iqra_initial_vowel != a", heard())).toBe(true);
+    expect(matchesCondition("iqra_initial_vowel == e", heard("e"))).toBe(false); // only a / i / u are valid
+  });
+
+  it("is not used by any letter rule (letters behave exactly as in Masaar)", () => {
+    for (const rules of Object.values(LETTER_RULES)) {
+      for (const condition of Object.values(rules).flatMap((rule) => rule.conditions)) expect(condition).not.toContain("iqra_initial_vowel");
     }
   });
 });

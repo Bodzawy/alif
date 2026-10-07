@@ -3,16 +3,18 @@ import { notFound } from "next/navigation";
 
 import { LessonGate } from "@/components/lessons/lesson-gate";
 import { LessonPlayer } from "@/components/lessons/lesson-player";
-import { LEVELS, getLesson, lessonEntryHref, nextLesson, previousLesson } from "@/data/curriculum";
+import { WORDS_LEVEL, getLesson, lessonEntryHref, nextLesson, previousLesson } from "@/data/curriculum";
 
-type Params = { level: string; lesson: string };
+type Params = { lesson: string };
+const LEVEL = WORDS_LEVEL.slug;
 
 export function generateStaticParams(): Params[] {
-  return LEVELS.flatMap((level) => level.lessons.map((lesson) => ({ level: level.slug, lesson: lesson.slug })));
+  return WORDS_LEVEL.lessons.map((lesson) => ({ lesson: lesson.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
-  const { level: levelSlug, lesson: lessonSlug } = await params;
+  const { lesson: lessonSlug } = await params;
+  const levelSlug = LEVEL;
   const found = getLesson(levelSlug, lessonSlug);
   return found
     ? { title: `${found.level.code} · Lektion ${found.lesson.number}: ${found.lesson.title}`, description: found.lesson.subtitle }
@@ -20,7 +22,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 }
 
 export default async function LessonPage({ params }: { params: Promise<Params> }) {
-  const { level: levelSlug, lesson: lessonSlug } = await params;
+  const { lesson: lessonSlug } = await params;
+  const levelSlug = LEVEL;
   const found = getLesson(levelSlug, lessonSlug);
   if (!found) notFound();
 

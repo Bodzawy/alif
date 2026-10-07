@@ -6,7 +6,7 @@ import { installFakeVoice, recordExercise } from "./support/helpers";
 // Verifies that failures reach the student as clear German messages.
 
 test("pronunciation: unconfigured services → clear message, retry possible", async ({ page }) => {
-  await page.goto("/a1/lesson-1");
+  await page.goto("/a0/words/lesson-1");
   const apiCall = page.waitForResponse((r) => r.url().endsWith("/api/pronunciation") && r.request().method() === "POST");
   await recordExercise(page, "letter");
   const response = await apiCall;
@@ -49,7 +49,7 @@ test("A0 letter: microphone denied → explained in German, no endless loop", as
 });
 
 test("listen: unconfigured TTS → clear message", async ({ page }) => {
-  await page.goto("/a1/lesson-1");
+  await page.goto("/a0/words/lesson-1");
   await page.getByTestId("exercise-asad-listen").click();
   await expect(page.getByTestId("vocab-card-asad")).toContainText("Die Aussprache konnte gerade nicht geladen werden");
 });
@@ -60,7 +60,7 @@ test("microphone denied → explained in German", async ({ browser }) => {
   await page.addInitScript(() => {
     navigator.mediaDevices.getUserMedia = () => Promise.reject(new DOMException("Permission denied", "NotAllowedError"));
   });
-  await page.goto("http://127.0.0.1:3210/a1/lesson-1");
+  await page.goto("http://127.0.0.1:3210/a0/words/lesson-1");
   await page.getByTestId("exercise-letter-record").click();
   await expect(page.getByTestId("exercise-letter-error")).toContainText("Mikrofonzugriff wurde nicht erlaubt");
   await context.close();

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Prinz mit Krone">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#f6efff"/><stop offset="1" stop-color="#dccbfa"/></radialGradient></defs><rect width="400" height="300" fill="url(#bg)"/><circle cx="66" cy="74" r="38" fill="#ece1fd"/><circle cx="338" cy="232" r="52" fill="#ece1fd"/>
+  <!-- cape -->
+  <path d="M96 300 C 104 236, 140 214, 200 214 C 260 214, 296 236, 304 300 Z" fill="#b8323f"/>
+  <path d="M150 300 C 154 250, 172 226, 200 226 C 228 226, 246 250, 250 300 Z" fill="#3555a8"/>
+  <path d="M188 226 l12 74 l12 -74 z" fill="#f5c542"/>
+  <rect x="186" y="186" width="28" height="32" fill="#e3ad84"/>
+  <ellipse cx="200" cy="138" rx="54" ry="58" fill="#efc49d"/>
+  <ellipse cx="146" cy="142" rx="10" ry="15" fill="#efc49d"/><ellipse cx="254" cy="142" rx="10" ry="15" fill="#efc49d"/>
+  <path d="M146 136 C 142 100, 170 88, 200 88 C 230 88, 258 100, 254 136 C 246 114, 228 108, 200 108 C 172 108, 154 114, 146 136 Z" fill="#3b2416"/>
+  <!-- crown -->
+  <path d="M150 96 L 150 50 L 174 72 L 200 40 L 226 72 L 250 50 L 250 96 Z" fill="#f5c542" stroke="#d9a520" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="200" cy="74" r="7" fill="#e85d75"/><circle cx="168" cy="84" r="5" fill="#4aa3df"/><circle cx="232" cy="84" r="5" fill="#4aa3df"/>
+  <circle cx="182" cy="140" r="5.5" fill="#2f2a26"/><circle cx="218" cy="140" r="5.5" fill="#2f2a26"/>
+  <path d="M186 166 q14 9 28 0" stroke="#c9534f" stroke-width="3" fill="none" stroke-linecap="round"/>
+</svg>

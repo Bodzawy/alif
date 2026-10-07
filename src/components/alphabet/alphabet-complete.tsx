@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRight, RotateCcw, Trophy } from "lucide-react";
 
 import { Button, buttonClasses } from "@/components/ui/button";
-import { ALPHABET, ALPHABET_LEVEL, alphabetLetterHref, getAlphabetLetter } from "@/data/alphabet";
+import { ALPHABET, ALPHABET_HREF, alphabetLetterHref, getAlphabetLetter } from "@/data/alphabet";
 import type { alphabetSummary } from "@/lib/alphabet-progress";
 import { letterScore, roundScore, scoreRating, type LetterResult } from "@/lib/alphabet-score";
 import { cn } from "@/lib/utils";
@@ -90,11 +90,11 @@ export function AlphabetComplete({
           <Button variant="secondary" size="lg" onClick={onRestart} data-testid="round-restart">
             <RotateCcw className="h-5 w-5" aria-hidden /> Runde wiederholen
           </Button>
-          <Link href={`/${ALPHABET_LEVEL.slug}`} className={buttonClasses({ variant: "secondary", size: "lg" })}>
+          <Link href={ALPHABET_HREF} className={buttonClasses({ variant: "secondary", size: "lg" })}>
             Zur Übersicht
           </Link>
-          <Link href={nextLevelHref} className={buttonClasses({ size: "lg" })} data-testid="go-to-a1">
-            Weiter zu A1 <ArrowRight className="h-5 w-5" aria-hidden />
+          <Link href={nextLevelHref} className={buttonClasses({ size: "lg" })} data-testid="go-to-words">
+            Weiter zu den Wörtern <ArrowRight className="h-5 w-5" aria-hidden />
           </Link>
         </div>
       </div>

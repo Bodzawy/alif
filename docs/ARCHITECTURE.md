@@ -46,24 +46,26 @@ The following Masaar parts were **not** taken over, because the pronunciation fe
 src/
   app/
     page.tsx                     home: level overview
-    a0/page.tsx                  A0 alphabet overview (28 letters with status)
+    a0/page.tsx                  A0: choose Buchstaben or Wörter
+    a0/letters/page.tsx          A0 → Buchstaben: alphabet overview (28 letters with status)
     a0/letters/[letter]/page.tsx A0 letter practice (one page per Masaar letter id)
-    [level]/page.tsx             lesson list (A1)
-    [level]/[lesson]/page.tsx    lesson (statically generated from the curriculum)
+    a0/words/page.tsx            A0 → Wörter: lesson list (formerly A1)
+    a0/words/[lesson]/…          lesson and intro (statically generated from the curriculum)
+    a1/page.tsx                  A1 placeholder (no lessons yet)
     api/pronunciation/route.ts   evaluation pipeline
     api/tts/route.ts             model pronunciation
     api/health/route.ts          configuration check (booleans only)
   components/
     alphabet/                    A0: AlphabetOverview, LetterPractice, AlphabetComplete, status badge, progress hook
-    lessons/                     A1: LessonPlayer, LetterHero, VocabularyCard, LessonComplete, status, progress hook
+    lessons/                     A0 → Wörter: LessonPlayer, LetterHero, VocabularyCard, LessonComplete, status, progress hook
     pronunciation/               exercise hook (state machine), record button, feedback panel
     audio/                       listen button
     ui/                          header, footer, button, logo
   data/
     types.ts                     Level / Lesson / VocabularyItem / PronunciationExercise
     alphabet.ts                  A0 letters, derived from lib/pronunciation/letters.ts (Masaar data)
-    curriculum.ts                registry of the lesson-based levels (A1)
-    lessons/a1/lesson-1.ts       Lesson 1 content
+    curriculum.ts                registry of the lesson-based levels (A0 → Wörter, A1)
+    lessons/words/lesson-N.ts    word lesson content
   lib/
     audio/                       WAV encoding (browser), WAV header check (server), recording constants
     pronunciation/               condition engine, rules, letters, targets, assessment, client mapping, errors, config

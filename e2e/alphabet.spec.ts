@@ -39,7 +39,7 @@ async function stubServices(page: Page, modes: Record<string, AnswerMode[]> = {}
 }
 
 test("overview lists all 28 letters in order; only أ is open at the start", async ({ page }) => {
-  await page.goto("/a0");
+  await page.goto("/a0/letters");
   await expect(page.getByRole("heading", { name: "Das arabische Alphabet" })).toBeVisible();
   const tiles = page.locator('[data-testid^="alphabet-tile-"]');
   await expect(tiles).toHaveCount(28);
@@ -63,13 +63,15 @@ test("a locked letter cannot be practised via its URL; unknown letters are 404",
   expect(response?.status()).toBe(404);
 });
 
-test("all 28 letters hands-free: speak → Masaar result → wrong: the name is spoken and it listens again → right: ممتاز and the next letter by itself → score → A1", async ({ page }) => {
+test("all 28 letters hands-free: speak → Masaar result → wrong: the name is spoken and it listens again → right: ممتاز and the next letter by itself → score → Wörter", async ({ page }) => {
   test.setTimeout(300_000);
   const errors = collectPageErrors(page);
   await installFakeVoice(page);
   const stub = await stubServices(page, { "ألف": ["incorrect", "correct"] });
 
   await page.goto("/a0");
+  await page.getByTestId("a0-part-letters").click();
+  await expect(page).toHaveURL(/\/a0\/letters$/);
   await page.getByTestId("alphabet-continue").click();
 
   for (const [index, [id, glyph, name, target]] of LETTERS.entries()) {
@@ -110,9 +112,9 @@ test("all 28 letters hands-free: speak → Masaar result → wrong: the name is 
   // Every letter name was requested before that letter's first upload (later repeats come from the player's cache).
   expect(stub.tts.filter((text) => text !== "مُمْتَاز")).toEqual(LETTERS.map((l) => l[2]));
 
-  await page.getByTestId("go-to-a1").click();
-  await expect(page).toHaveURL(/\/a1$/);
-  await page.goto("/a0");
+  await page.getByTestId("go-to-words").click();
+  await expect(page).toHaveURL(/\/a0\/words$/);
+  await page.goto("/a0/letters");
   await expect(page.getByTestId("alphabet-progress")).toContainText("28 / 28");
   await expect(page.getByTestId("alphabet-complete-banner")).toBeVisible();
   expect(errors).toEqual([]);
@@ -136,7 +138,7 @@ test("IQRA unavailable is a technical error, not a mistake: retry, then Überspr
   await expect(page).toHaveURL(/\/letters\/taa$/);
   await expect(page.getByTestId("letter-practice")).toHaveAttribute("data-status", "available");
 
-  await page.goto("/a0");
+  await page.goto("/a0/letters");
   await expect(page.getByTestId("alphabet-tile-baa")).toHaveAttribute("data-status", "skipped");
   await expect(page.getByTestId("alphabet-tile-baa")).toContainText("Nicht gemeistert");
   await expect(page.getByTestId("alphabet-tile-taa")).toHaveAttribute("data-status", "available");
@@ -147,7 +149,7 @@ test("IQRA unavailable is a technical error, not a mistake: retry, then Überspr
   // Return to the skipped letter later and master it.
   await page.getByTestId("alphabet-tile-baa").locator("a").click();
   await expect(page.getByTestId("drill-feedback")).toHaveAttribute("data-result", "correct");
-  await page.goto("/a0");
+  await page.goto("/a0/letters");
   await expect(page.getByTestId("alphabet-tile-baa")).toHaveAttribute("data-status", "mastered");
   await expect(page.getByTestId("alphabet-progress")).toContainText("2 / 28");
 });
@@ -164,14 +166,14 @@ test("skipping the last letter ends the alphabet without claiming mastery", asyn
   await expect(page.getByTestId("alphabet-complete")).toHaveAttribute("data-complete", "false");
   await expect(page.getByTestId("alphabet-open-letters")).toContainText("ي");
   await expect(page.getByTestId("round-score")).toHaveText("Dein Ergebnis: 0 %");
-  await expect(page.getByTestId("go-to-a1")).toBeVisible();
+  await expect(page.getByTestId("go-to-words")).toHaveAttribute("href", "/a0/words");
 });
 
-test("old /a0/lesson-1 URL redirects permanently to /a1/lesson-1", async ({ page, request }) => {
+test("old /a0/lesson-1 URL redirects to the word lesson under A0 → Wörter", async ({ page, request }) => {
   const response = await request.get("/a0/lesson-1", { maxRedirects: 0 });
-  expect(response.status()).toBe(308);
-  expect(response.headers()["location"]).toBe("/a1/lesson-1");
+  expect(response.status()).toBe(307);
+  expect(response.headers()["location"]).toBe("/a0/words/lesson-1");
   await page.goto("/a0/lesson-1");
-  await expect(page).toHaveURL(/\/a1\/lesson-1$/);
+  await expect(page).toHaveURL(/\/a0\/words\/lesson-1$/);
   await expect(page.getByTestId("vocab-card-asad")).toBeVisible();
 });

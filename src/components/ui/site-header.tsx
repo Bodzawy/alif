@@ -12,10 +12,10 @@ export function SiteHeader() {
         </Link>
         <nav aria-label="Hauptnavigation" className="flex items-center gap-1 text-sm font-medium">
           <Link href="/a0" className="rounded-lg px-3 py-2 text-muted-foreground transition hover:bg-muted hover:text-foreground focus-ring">
-            A0 · Alphabet
+            A0
           </Link>
           <Link href="/a1" className="rounded-lg px-3 py-2 text-muted-foreground transition hover:bg-muted hover:text-foreground focus-ring">
-            A1 · Wörter
+            A1
           </Link>
         </nav>
       </div>

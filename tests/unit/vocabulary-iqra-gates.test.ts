@@ -1,11 +1,12 @@
 import { describe, expect, it } from "vitest";
 
+import { a1Words } from "../support/a1-words";
 import { LEVELS } from "@/data/curriculum";
 import { buildAssessment, NO_MATCHING_RULE } from "@/lib/pronunciation/assessment";
 import { LETTER_RULES, VOCABULARY_RULES } from "@/lib/pronunciation/rules";
 import type { AzureAssessment, IqraResult } from "@/lib/pronunciation/types";
 
-// Every A1 word passes only with Azure accuracy >= 70 AND its own consonants in
+// Every word (A0 → Wörter and A1) passes only with Azure accuracy >= 70 AND its own consonants in
 // IQRA's phoneme output. Vowels, hamza, ث and ذ are not required (IQRA does not
 // output them reliably). "a|aa" means either token; IQRA writes shadda as a
 // doubled token (TT) and sometimes writes r as rr.
@@ -94,12 +95,30 @@ const EXPECTED_TOKENS: Record<string, string[]> = {
   "يد": ["y","d"],
   "يقطين": ["y","q","T","n"],
   "يمامة": ["y","m"],
+  // A1 · Lesson 1 (صباح الخير)
+  "أب": ["b"],
+  "أنا": ["n"],
+  "أمير": ["m","r|rr"],
+  "إبرة": ["b","r|rr"],
+  "إصبع": ["S","b","E"],
+  "إبريق": ["b","r|rr","q"],
+  "أذن": ["n"],
+  "أم": ["m|mm"],
+  "أسرة": ["s","r|rr"],
 };
 
 // IQRA's token inventory (sws_arabic.txt of the IqraEval phoneme model).
 const IQRA_TOKENS = new Set(
   "bb x yy s r k n ZZ hh EE AA t zz qq T g ww gg m H l I DD D SS j dd II S f nn uu kk y ^^ tt ** $ aa h UU ss u * A < q U z $$ d jj TT ii HH rr i E << xx ll w ^ a mm b ff Z".split(" ")
 );
+
+// A1 words that begin with أَ / إِ / أُ must also begin with that vowel in IQRA's
+// output (first vowel token: a|aa|A|AA, i|ii|I|II, u|uu|U|UU).
+const FIRST_VOWEL: Record<string, "a" | "i" | "u"> = {
+  "أب": "a", "أنا": "a", "أمير": "a",
+  "إبرة": "i", "إصبع": "i", "إبريق": "i",
+  "أذن": "u", "أم": "u", "أسرة": "u",
+};
 
 const IQRA_UNAVAILABLE_MESSAGE = "تعذر تحليل أصوات النطق. حاول مرة أخرى بعد التأكد من اتصال IQRA.";
 
@@ -112,16 +131,19 @@ function assess(target: string, accuracy: number, phonemes: string[] | null) {
   return buildAssessment({ target, primary: azure(target, accuracy), masaar: null, iqra });
 }
 
-/** A plausible, never-empty IQRA output: the required consonants (chosen alternative) with vowels around them. */
-function spoken(tokens: string[], pick: (alternatives: string[]) => string = (alternatives) => alternatives[0]!) {
-  return ["a", ...tokens.flatMap((token) => [pick(token.split("|")), "a"])];
+/** A plausible, never-empty IQRA output: hamza, the first vowel, then the required consonants (chosen alternative) with vowels around them. */
+function spoken(tokens: string[], pick: (alternatives: string[]) => string = (alternatives) => alternatives[0]!, first = "a") {
+  return ["<", first, ...tokens.flatMap((token) => [pick(token.split("|")), "a"])];
 }
 
-const words = LEVELS.flatMap((level) => level.lessons.flatMap((lesson) => lesson.vocabulary.map((word) => ({ lesson: lesson.slug, word }))));
+const words = [
+  ...LEVELS.flatMap((level) => level.lessons.flatMap((lesson) => lesson.vocabulary.map((word) => ({ lesson: lesson.slug, word })))),
+  ...a1Words().map((word) => ({ lesson: "a1", word })),
+];
 
 describe("vocabulary IQRA gates", () => {
-  it("cover all 84 curriculum words, each with its own gate", () => {
-    expect(words).toHaveLength(84);
+  it("cover all 93 curriculum words (84 in A0 → Wörter, 9 in A1), each with its own gate", () => {
+    expect(words).toHaveLength(93);
     expect(Object.keys(EXPECTED_TOKENS).sort()).toEqual(words.map(({ word }) => word.exercise.target).sort());
     expect(Object.keys(VOCABULARY_RULES).sort()).toEqual(Object.keys(EXPECTED_TOKENS).sort());
   });
@@ -145,32 +167,56 @@ describe("vocabulary IQRA gates", () => {
     const tokens = EXPECTED_TOKENS[target]!;
     const list = `[${tokens.map((token) => `'${token}'`).join(",")}]`;
 
-    it("has the agreed rule: Azure >= 70 and IQRA contains the word's consonants", () => {
-      expect(VOCABULARY_RULES[target]!.excellent!.conditions).toEqual(["azure_accuracy >= 70", `iqra_phonemes contains ${list}`]);
+    const vowel = FIRST_VOWEL[target];
+
+    it("has the agreed rule: Azure >= 70, IQRA contains the word's consonants (and, for A1, the right first vowel)", () => {
+      expect(VOCABULARY_RULES[target]!.excellent!.conditions).toEqual([
+        "azure_accuracy >= 70",
+        `iqra_phonemes contains ${list}`,
+        ...(vowel ? [`iqra_initial_vowel == ${vowel}`] : []),
+      ]);
     });
 
     it("1. passes with Azure >= 70 and every required sound", () => {
-      const result = assess(target, 70, spoken(tokens));
+      const result = assess(target, 70, spoken(tokens, undefined, vowel));
       expect(result.passed).toBe(true);
       expect(result.conditionEvaluation.matchedRule).toBe("excellent");
       if (tokens.some((token) => token.includes("|"))) {
-        expect(assess(target, 70, spoken(tokens, (alternatives) => alternatives.at(-1)!)).passed).toBe(true);
+        expect(assess(target, 70, spoken(tokens, (alternatives) => alternatives.at(-1)!, vowel)).passed).toBe(true);
       }
     });
 
     it("2. fails with Azure >= 70 when any single required sound is missing", () => {
       tokens.forEach((_, missing) => {
-        const result = assess(target, 95, spoken(tokens.filter((__, i) => i !== missing)));
+        const result = assess(target, 95, spoken(tokens.filter((__, i) => i !== missing), undefined, vowel));
         expect(result.passed, `${target} without ${tokens[missing]}`).toBe(false);
         expect(result.conditionEvaluation.matchedRule).toBe("said_wrong_sound");
       });
     });
 
     it("3. fails with Azure < 70 even when IQRA is right", () => {
-      const result = assess(target, 69, spoken(tokens));
+      const result = assess(target, 69, spoken(tokens, undefined, vowel));
       expect(result.passed).toBe(false);
       expect(result.conditionEvaluation.matchedRule).toBe("needs_improvement");
     });
+
+    if (vowel) {
+      it("5. A1: fails when the word begins with a different vowel – all consonants right, Azure 100", () => {
+        for (const wrong of (["a", "i", "u"] as const).filter((v) => v !== vowel)) {
+          for (const token of [wrong, wrong + wrong, wrong.toUpperCase()]) {
+            const result = assess(target, 100, spoken(tokens, undefined, token));
+            expect(result.passed, `${target} begun with ${token}`).toBe(false);
+            expect(result.conditionEvaluation.matchedRule).toBe("said_wrong_vowel");
+          }
+        }
+        // No initial vowel heard: the right vowel later in the word does not count.
+        const late = ["<", ...tokens.flatMap((token) => [token.split("|")[0]!, vowel])];
+        expect(assess(target, 100, late).passed, `${target} without initial vowel`).toBe(false);
+        expect(assess(target, 100, late).conditionEvaluation.matchedRule).toBe("said_wrong_vowel");
+        // Long and emphatic forms of the right vowel count as that vowel.
+        for (const token of [vowel + vowel, vowel.toUpperCase()]) expect(assess(target, 90, spoken(tokens, undefined, token)).passed).toBe(true);
+      });
+    }
 
     it("4. fails when IQRA returns nothing, through the service path (not a wrong-sound message)", () => {
       for (const phonemes of [null, []]) {

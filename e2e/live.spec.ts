@@ -13,7 +13,7 @@ test.skip(!liveUrl, "set ALIF_E2E_LIVE_URL to run against a deployment with real
 test.use({ baseURL: liveUrl });
 
 test("live: microphone → Alif API → Azure + MASAAR + IQRA → conditions → feedback", async ({ page }) => {
-  await page.goto("/a1/lesson-1");
+  await page.goto("/a0/words/lesson-1");
   const apiCall = page.waitForResponse((r) => r.url().endsWith("/api/pronunciation") && r.request().method() === "POST", { timeout: 60_000 });
   await recordExercise(page, "letter", 2500);
   const response = await apiCall;

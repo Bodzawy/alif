@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Ausgestreckter Zeigefinger">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff1e6"/><stop offset="1" stop-color="#ffd2b0"/></radialGradient></defs><rect width="400" height="300" fill="url(#bg)"/><circle cx="70" cy="70" r="40" fill="#ffe2cc"/><circle cx="335" cy="235" r="50" fill="#ffe2cc"/>
+  <!-- sleeve -->
+  <rect x="150" y="250" width="110" height="60" rx="14" fill="#3d7fc4"/>
+  <!-- fist -->
+  <rect x="146" y="164" width="118" height="96" rx="38" fill="#f2c7a0"/>
+  <!-- curled fingers -->
+  <path d="M176 182 q34 -6 72 0" stroke="#d99a72" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M176 208 q34 -6 72 0" stroke="#d99a72" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M176 234 q34 -6 72 0" stroke="#d99a72" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <!-- thumb -->
+  <path d="M150 196 C 128 190, 126 226, 152 232" fill="#f2c7a0" stroke="#d99a72" stroke-width="3"/>
+  <!-- index finger -->
+  <rect x="160" y="40" width="40" height="150" rx="20" fill="#f2c7a0"/>
+  <path d="M168 58 q12 -10 24 0 l0 10 q-12 -6 -24 0 z" fill="#fbe3cf"/>
+  <path d="M168 104 q12 5 24 0 M168 140 q12 5 24 0" stroke="#d99a72" stroke-width="3" fill="none" stroke-linecap="round"/>
+</svg>

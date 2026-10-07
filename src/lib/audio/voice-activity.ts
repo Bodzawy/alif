@@ -20,7 +20,9 @@ const POLL_MS = 30;
 
 export type SpeechEvent = "speech-start" | "speech-end" | null;
 
-export function createSpeechGate(options: Omit<typeof VOICE_ACTIVITY, "idleWindowMs"> = VOICE_ACTIVITY) {
+export type SpeechGateOptions = { endSilenceMs: number; minSpeechMs: number; minLevel: number; noiseFactor: number };
+
+export function createSpeechGate(options: SpeechGateOptions = VOICE_ACTIVITY) {
   let noise = options.minLevel / options.noiseFactor;
   let loudSince: number | null = null;
   let lastVoiceAt = 0;

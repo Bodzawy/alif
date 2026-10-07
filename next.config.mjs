@@ -10,8 +10,12 @@ const nextConfig = {
   serverExternalPackages: ["microsoft-cognitiveservices-speech-sdk"],
   async redirects() {
     return [
-      // The vocabulary lesson moved from A0 to A1 when A0 became the alphabet level.
-      { source: "/a0/lesson-1", destination: "/a1/lesson-1", permanent: true },
+      // The vocabulary lessons moved: /a0/lesson-1 → /a1/lesson-N → /a0/words/lesson-N.
+      // Temporary (307) on purpose: A1 is a new curriculum that reuses /a1/lesson-N.
+      // Old /a1/lesson-N URLs without an A1 lesson of that slug are redirected by
+      // src/app/a1/[lesson]/page.tsx; A1 lessons have no /intro page.
+      { source: "/a0/lesson-1", destination: "/a0/words/lesson-1", permanent: false },
+      { source: "/a1/:lesson(lesson-\\d+)/intro", destination: "/a0/words/:lesson/intro", permanent: false },
     ];
   },
   async headers() {

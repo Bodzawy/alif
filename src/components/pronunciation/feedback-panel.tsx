@@ -14,13 +14,24 @@ export function FeedbackPanel({
   onRetry,
   retryDisabled,
   testId,
+  simple,
 }: {
   feedback: StudentFeedback;
   onRetry: () => void;
   retryDisabled?: boolean;
   testId?: string;
+  /** Learner view (A1): only a short headline and tip – no accuracy, no rule or service message. */
+  simple?: boolean;
 }) {
   const style = toneStyles[feedback.tone];
+  const headline = simple && feedback.passed ? "مُمْتَاز! 👏" : feedback.headline;
+  const tip = simple
+    ? feedback.passed
+      ? null
+      : feedback.analysisUnavailable
+        ? "Deine Aussprache konnte gerade nicht bewertet werden. Versuch es gleich noch einmal."
+        : feedback.tip
+    : feedback.tip;
   const Icon = feedback.tone === "success" ? CheckCircle2 : feedback.tone === "retry" ? Sparkles : AlertCircle;
 
   return (
@@ -33,18 +44,24 @@ export function FeedbackPanel({
       <div className="flex items-start gap-3">
         <Icon className={cn("mt-0.5 h-6 w-6 shrink-0", style.text)} aria-hidden />
         <div className="min-w-0 flex-1">
-          <p className={cn("text-base font-bold", style.text)}>{feedback.headline}</p>
-          <p className="mt-1 text-sm text-foreground/80">{feedback.tip}</p>
+          <p
+            lang={simple && feedback.passed ? "ar" : undefined}
+            className={cn("text-base font-bold", simple && feedback.passed && "font-arabic text-xl", style.text)}
+            data-testid={testId ? `${testId}-headline` : undefined}
+          >
+            {headline}
+          </p>
+          {tip && <p className="mt-1 text-sm text-foreground/80">{tip}</p>}
         </div>
       </div>
 
-      {feedback.ruleMessage && (
+      {!simple && feedback.ruleMessage && (
         <p lang="ar" dir="rtl" className="mt-3 rounded-xl bg-card/70 px-3 py-2 text-right text-lg leading-relaxed" data-testid={testId ? `${testId}-message` : undefined}>
           {feedback.ruleMessage}
         </p>
       )}
 
-      {feedback.accuracy !== null && (
+      {!simple && feedback.accuracy !== null && (
         <div className="mt-3">
           <div className="flex items-center justify-between text-xs font-medium text-muted-foreground">
             <span>Genauigkeit</span>

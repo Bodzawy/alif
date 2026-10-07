@@ -4,7 +4,7 @@ import Link from "next/link";
 import { AlertTriangle, ArrowLeft, CheckCircle2, Loader2, Lock, Mic, RotateCcw, SkipForward, Volume2 } from "lucide-react";
 
 import { Button, buttonClasses } from "@/components/ui/button";
-import { ALPHABET, ALPHABET_LEVEL, alphabetLetterHref, getAlphabetLetter } from "@/data/alphabet";
+import { ALPHABET, ALPHABET_HREF, ALPHABET_LEVEL, alphabetLetterHref, getAlphabetLetter } from "@/data/alphabet";
 import { cn } from "@/lib/utils";
 
 import { AlphabetComplete } from "./alphabet-complete";
@@ -43,7 +43,7 @@ export function LetterPractice({ letterId, nextLevelHref }: { letterId: string; 
   return (
     <div className="container max-w-2xl py-6 sm:py-10">
       <nav aria-label="Brotkrumen" className="mb-5 flex items-center justify-between gap-2 text-sm text-muted-foreground">
-        <Link href={`/${ALPHABET_LEVEL.slug}`} className="inline-flex items-center gap-1 rounded-md hover:text-foreground focus-ring">
+        <Link href={ALPHABET_HREF} className="inline-flex items-center gap-1 rounded-md hover:text-foreground focus-ring">
           <ArrowLeft className="h-4 w-4" aria-hidden /> {ALPHABET_LEVEL.code} · Alphabet
         </Link>
         <span data-testid="letter-position">

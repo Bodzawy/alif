@@ -30,10 +30,18 @@ const config: Config = {
       keyframes: {
         "fade-in": { from: { opacity: "0", transform: "translateY(6px)" }, to: { opacity: "1", transform: "translateY(0)" } },
         "pulse-ring": { "0%": { transform: "scale(1)", opacity: "0.55" }, "100%": { transform: "scale(1.6)", opacity: "0" } },
+        "crossfade-in": { from: { opacity: "0" }, to: { opacity: "1" } },
+        pop: { "0%": { opacity: "0", transform: "scale(.6)" }, "20%": { opacity: "1", transform: "scale(1.08)" }, "35%": { transform: "scale(1)" }, "80%": { opacity: "1" }, "100%": { opacity: "0" } },
+        shake: { "0%, 100%": { transform: "translateX(0)" }, "20%, 60%": { transform: "translateX(-6px)" }, "40%, 80%": { transform: "translateX(6px)" } },
       },
       animation: {
         "fade-in": "fade-in .3s ease-out both",
         "pulse-ring": "pulse-ring 1.2s ease-out infinite",
+        shake: "shake .4s ease-in-out",
+        // Shaped word after the letter tiles slid together.
+        "crossfade-in": "crossfade-in .4s ease-out .35s both",
+        // Stars after a traced form (A1 · Schreiben).
+        pop: "pop 1.1s ease forwards",
       },
     },
   },

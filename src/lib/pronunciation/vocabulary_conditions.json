@@ -2013,5 +2013,302 @@
       ],
       "message": "حاول مرة أخرى، نريد كلمة يمامة"
     }
+  },
+
+  "أب": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['b']",
+        "iqra_initial_vowel == a"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة أب بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['b']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة أب"
+    },
+    "said_wrong_vowel": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_initial_vowel != a"
+      ],
+      "message": "حاول مرة أخرى، كلمة أب تبدأ بـ أَ"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة أب"
+    }
+  },
+
+  "أنا": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['n']",
+        "iqra_initial_vowel == a"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة أنا بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['n']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة أنا"
+    },
+    "said_wrong_vowel": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_initial_vowel != a"
+      ],
+      "message": "حاول مرة أخرى، كلمة أنا تبدأ بـ أَ"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة أنا"
+    }
+  },
+
+  "أمير": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['m','r|rr']",
+        "iqra_initial_vowel == a"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة أمير بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['m','r|rr']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة أمير"
+    },
+    "said_wrong_vowel": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_initial_vowel != a"
+      ],
+      "message": "حاول مرة أخرى، كلمة أمير تبدأ بـ أَ"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة أمير"
+    }
+  },
+
+  "إبرة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['b','r|rr']",
+        "iqra_initial_vowel == i"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة إبرة بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['b','r|rr']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة إبرة"
+    },
+    "said_wrong_vowel": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_initial_vowel != i"
+      ],
+      "message": "حاول مرة أخرى، كلمة إبرة تبدأ بـ إِ"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة إبرة"
+    }
+  },
+
+  "إصبع": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['S','b','E']",
+        "iqra_initial_vowel == i"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة إصبع بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['S','b','E']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة إصبع"
+    },
+    "said_wrong_vowel": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_initial_vowel != i"
+      ],
+      "message": "حاول مرة أخرى، كلمة إصبع تبدأ بـ إِ"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة إصبع"
+    }
+  },
+
+  "إبريق": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['b','r|rr','q']",
+        "iqra_initial_vowel == i"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة إبريق بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['b','r|rr','q']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة إبريق"
+    },
+    "said_wrong_vowel": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_initial_vowel != i"
+      ],
+      "message": "حاول مرة أخرى، كلمة إبريق تبدأ بـ إِ"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة إبريق"
+    }
+  },
+
+  "أذن": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['n']",
+        "iqra_initial_vowel == u"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة أذن بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['n']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة أذن"
+    },
+    "said_wrong_vowel": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_initial_vowel != u"
+      ],
+      "message": "حاول مرة أخرى، كلمة أذن تبدأ بـ أُ"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة أذن"
+    }
+  },
+
+  "أم": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['m|mm']",
+        "iqra_initial_vowel == u"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة أم بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['m|mm']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة أم"
+    },
+    "said_wrong_vowel": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_initial_vowel != u"
+      ],
+      "message": "حاول مرة أخرى، كلمة أم تبدأ بـ أُ"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة أم"
+    }
+  },
+
+  "أسرة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['s','r|rr']",
+        "iqra_initial_vowel == u"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة أسرة بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['s','r|rr']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة أسرة"
+    },
+    "said_wrong_vowel": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_initial_vowel != u"
+      ],
+      "message": "حاول مرة أخرى، كلمة أسرة تبدأ بـ أُ"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة أسرة"
+    }
   }
 }

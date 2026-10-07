@@ -82,4 +82,14 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+
+  /* A crossfade is not motion: it stays (A1 · Formen). */
+  .crossfade {
+    transition-property: opacity !important;
+    transition-duration: 400ms !important;
+  }
+
+  .animate-crossfade-in {
+    animation-duration: 400ms !important;
+  }
 }

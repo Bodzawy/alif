@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Mutter mit Baby">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff0f4"/><stop offset="1" stop-color="#fbc9d6"/></radialGradient></defs><rect width="400" height="300" fill="url(#bg)"/><circle cx="66" cy="70" r="38" fill="#fde1e9"/><circle cx="338" cy="236" r="50" fill="#fde1e9"/>
+  <!-- headscarf + body -->
+  <path d="M96 300 C 100 228, 140 196, 200 196 C 260 196, 300 228, 304 300 Z" fill="#8a5cb8"/>
+  <path d="M132 150 C 126 66, 166 46, 200 46 C 234 46, 274 66, 268 150 C 270 190, 244 214, 200 214 C 156 214, 130 190, 132 150 Z" fill="#8a5cb8"/>
+  <ellipse cx="200" cy="132" rx="50" ry="56" fill="#efc49d"/>
+  <circle cx="182" cy="128" r="5.5" fill="#2f2a26"/><circle cx="218" cy="128" r="5.5" fill="#2f2a26"/>
+  <path d="M174 114 q8 -4 16 0 M210 114 q8 -4 16 0" stroke="#5a3a22" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="170" cy="150" r="7" fill="#f4a3a3" opacity=".5"/><circle cx="230" cy="150" r="7" fill="#f4a3a3" opacity=".5"/>
+  <path d="M188 158 q12 9 24 0" stroke="#c9534f" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- baby in arms -->
+  <path d="M120 266 C 140 230, 262 230, 282 266 C 262 292, 140 292, 120 266 Z" fill="#fff6d8" stroke="#f0d78c" stroke-width="3"/>
+  <circle cx="168" cy="244" r="25" fill="#f5cfaa"/>
+  <path d="M146 236 q22 -24 44 0" fill="#5a3a22"/>
+  <path d="M158 246 q4 3 8 0 M172 246 q4 3 8 0" stroke="#2f2a26" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M162 256 q6 5 12 0" stroke="#c9534f" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M196 284 C 220 280, 246 274, 266 262" stroke="#efc49d" stroke-width="16" fill="none" stroke-linecap="round"/>
+</svg>

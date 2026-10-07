@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 
 import { LetterPractice } from "@/components/alphabet/letter-practice";
 import { ALPHABET, ALPHABET_LEVEL, getAlphabetLetter } from "@/data/alphabet";
-import { LEVELS } from "@/data/curriculum";
+import { WORDS_LEVEL } from "@/data/curriculum";
 
 type Params = { letter: string };
 
@@ -20,5 +20,5 @@ export default async function AlphabetLetterPage({ params }: { params: Promise<P
   const letter = getAlphabetLetter((await params).letter);
   if (!letter) notFound();
 
-  return <LetterPractice key={letter.id} letterId={letter.id} nextLevelHref={`/${LEVELS[0]!.slug}`} />;
+  return <LetterPractice key={letter.id} letterId={letter.id} nextLevelHref={`/${WORDS_LEVEL.slug}`} />;
 }

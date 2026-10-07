@@ -36,6 +36,9 @@ export const ALPHABET_LEVEL = {
   progressKey: "a0/alphabet",
 } as const;
 
+/** A0 → Buchstaben: the alphabet overview. */
+export const ALPHABET_HREF = `/${ALPHABET_LEVEL.slug}/letters`;
+
 export function alphabetLetterHref(id: string) {
   return `/${ALPHABET_LEVEL.slug}/letters/${id}`;
 }

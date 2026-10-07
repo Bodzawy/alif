@@ -35,6 +35,11 @@ function audioUrl(text: string): Promise<string> {
   return pending;
 }
 
+/** URL of the spoken text (same cached /api/tts audio as speakArabic), for players that reuse their own element. */
+export function speechUrl(text: string): Promise<string> {
+  return audioUrl(text);
+}
+
 export function stopSpeaking() {
   if (current) {
     current.pause();

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Familie: Vater, Mutter und Kind">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff7e8"/><stop offset="1" stop-color="#ffe0a8"/></radialGradient></defs><rect width="400" height="300" fill="url(#bg)"/><circle cx="60" cy="58" r="34" fill="#ffefcc"/><circle cx="350" cy="58" r="30" fill="#ffefcc"/>
+  <!-- father (left) -->
+  <path d="M30 300 C 34 240, 66 218, 106 218 C 146 218, 178 240, 182 300 Z" fill="#2f6f9f"/>
+  <ellipse cx="106" cy="160" rx="42" ry="48" fill="#efc49d"/>
+  <path d="M64 152 C 60 118, 84 104, 106 104 C 130 104, 152 118, 148 152 C 142 132, 128 128, 106 128 C 84 128, 70 132, 64 152 Z" fill="#3b2416"/>
+  <path d="M66 168 C 68 202, 92 208, 106 208 C 120 208, 144 202, 146 168 C 138 186, 124 190, 106 190 C 88 190, 74 186, 66 168 Z" fill="#3b2416"/>
+  <circle cx="92" cy="158" r="4.5" fill="#2f2a26"/><circle cx="120" cy="158" r="4.5" fill="#2f2a26"/>
+  <path d="M98 182 q8 6 16 0" stroke="#c9534f" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- mother (right) -->
+  <path d="M218 300 C 222 240, 254 218, 294 218 C 334 218, 366 240, 370 300 Z" fill="#8a5cb8"/>
+  <path d="M248 176 C 244 112, 270 98, 294 98 C 318 98, 344 112, 340 176 C 342 206, 322 222, 294 222 C 266 222, 246 206, 248 176 Z" fill="#8a5cb8"/>
+  <ellipse cx="294" cy="160" rx="36" ry="42" fill="#efc49d"/>
+  <circle cx="281" cy="158" r="4.5" fill="#2f2a26"/><circle cx="307" cy="158" r="4.5" fill="#2f2a26"/>
+  <path d="M286 180 q8 6 16 0" stroke="#c9534f" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- child (middle) -->
+  <path d="M150 300 C 152 262, 172 246, 200 246 C 228 246, 248 262, 250 300 Z" fill="#f2a83b"/>
+  <ellipse cx="200" cy="208" rx="32" ry="36" fill="#f5cfaa"/>
+  <path d="M168 202 C 166 174, 184 164, 200 164 C 218 164, 236 174, 232 202 C 224 188, 214 184, 200 184 C 186 184, 176 188, 168 202 Z" fill="#5a3a22"/>
+  <circle cx="189" cy="208" r="4" fill="#2f2a26"/><circle cx="211" cy="208" r="4" fill="#2f2a26"/>
+  <path d="M190 224 q10 7 20 0" stroke="#c9534f" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- hands held -->
+  <path d="M168 266 L 152 262 M232 266 L 248 262" stroke="#f5cfaa" stroke-width="12" stroke-linecap="round"/>
+</svg>

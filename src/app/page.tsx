@@ -2,8 +2,9 @@ import Link from "next/link";
 import { ArrowRight, Ear, Mic, Sparkles } from "lucide-react";
 
 import { buttonClasses } from "@/components/ui/button";
-import { ALPHABET, ALPHABET_LEVEL } from "@/data/alphabet";
-import { LEVELS } from "@/data/curriculum";
+import { ALPHABET, ALPHABET_HREF } from "@/data/alphabet";
+import { A1_LEVEL } from "@/data/a1";
+import { A0_LEVEL, WORDS_LEVEL } from "@/data/curriculum";
 
 const STEPS = [
   { icon: Ear, title: "Anhören", text: "Hör jeden Buchstaben und jedes Wort in klarer arabischer Aussprache." },
@@ -29,11 +30,11 @@ export default function HomePage() {
               Alif begleitet dich vom ersten Buchstaben an: hören, nachsprechen und sofort erfahren, wie gut deine Aussprache ist.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="/a0" className={buttonClasses({ size: "lg" })} data-testid="cta-start">
+              <Link href={ALPHABET_HREF} className={buttonClasses({ size: "lg" })} data-testid="cta-start">
                 Mit dem Alphabet starten <ArrowRight className="h-5 w-5" aria-hidden />
               </Link>
-              <Link href="/a1" className={buttonClasses({ size: "lg", variant: "secondary" })}>
-                Zu A1 · Erste Wörter
+              <Link href={`/${WORDS_LEVEL.slug}`} className={buttonClasses({ size: "lg", variant: "secondary" })} data-testid="cta-words">
+                Erste Wörter
               </Link>
             </div>
           </div>
@@ -50,14 +51,20 @@ export default function HomePage() {
 
         <div className="mt-6 grid gap-5 md:grid-cols-3">
           {[
-            { slug: ALPHABET_LEVEL.slug, code: ALPHABET_LEVEL.code, title: ALPHABET_LEVEL.title, description: ALPHABET_LEVEL.description, count: `${ALPHABET.length} Buchstaben` },
-            ...LEVELS.map((level) => ({
-              slug: level.slug,
-              code: level.code,
-              title: level.title,
-              description: level.description,
-              count: `${level.lessons.length} ${level.lessons.length === 1 ? "Lektion" : "Lektionen"} verfügbar`,
-            })),
+            {
+              slug: A0_LEVEL.slug,
+              code: A0_LEVEL.code,
+              title: A0_LEVEL.title,
+              description: A0_LEVEL.description,
+              count: `${ALPHABET.length} Buchstaben · ${WORDS_LEVEL.lessons.length} Lektionen Wörter`,
+            },
+            {
+              slug: A1_LEVEL.slug,
+              code: A1_LEVEL.code,
+              title: A1_LEVEL.title,
+              description: A1_LEVEL.description,
+              count: `${A1_LEVEL.lessons.length} ${A1_LEVEL.lessons.length === 1 ? "Lektion" : "Lektionen"} verfügbar`,
+            },
           ].map((level) => (
             <Link
               key={level.slug}

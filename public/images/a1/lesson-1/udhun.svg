@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Ohr">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff1e6"/><stop offset="1" stop-color="#ffd2b0"/></radialGradient></defs><rect width="400" height="300" fill="url(#bg)"/><circle cx="70" cy="230" r="44" fill="#ffe2cc"/><circle cx="334" cy="68" r="40" fill="#ffe2cc"/>
+  <!-- sound waves -->
+  <path d="M296 112 q22 38 0 76 M322 94 q36 56 0 112" stroke="#e8a06a" stroke-width="6" fill="none" stroke-linecap="round" opacity=".7"/>
+  <!-- outer ear -->
+  <path d="M200 34 C 262 34, 286 90, 276 138 C 268 176, 236 186, 230 216 C 224 252, 196 274, 166 264 C 140 256, 136 228, 150 214 C 120 180, 118 120, 140 80 C 156 50, 176 34, 200 34 Z" fill="#f2c7a0" stroke="#d99a72" stroke-width="5" stroke-linejoin="round"/>
+  <!-- inner fold -->
+  <path d="M176 92 C 200 66, 248 80, 244 124 C 240 156, 214 160, 206 186 C 200 206, 184 214, 172 204" stroke="#d99a72" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <path d="M190 128 C 204 116, 222 124, 218 142 C 214 158, 196 160, 190 150" fill="#e3a682"/>
+</svg>

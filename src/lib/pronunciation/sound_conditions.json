@@ -1,0 +1,50 @@
+{
+  "أَ": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['a|aa|A|AA']",
+        "iqra_phonemes does not contain ['i|ii|I|II']",
+        "iqra_phonemes does not contain ['u|uu|U|UU']"
+      ],
+      "message": "ممتاز 👏 نطقت أَ بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد أَ"
+    }
+  },
+  "إِ": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['i|ii|I|II']",
+        "iqra_phonemes does not contain ['a|aa|A|AA']",
+        "iqra_phonemes does not contain ['u|uu|U|UU']"
+      ],
+      "message": "ممتاز 👏 نطقت إِ بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد إِ"
+    }
+  },
+  "أُ": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['u|uu|U|UU']",
+        "iqra_phonemes does not contain ['a|aa|A|AA']",
+        "iqra_phonemes does not contain ['i|ii|I|II']"
+      ],
+      "message": "ممتاز 👏 نطقت أُ بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد أُ"
+    }
+  }
+}

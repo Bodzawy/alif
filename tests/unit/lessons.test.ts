@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 
+import { a1Words } from "../support/a1-words";
 import { LEVELS } from "@/data/curriculum";
 import { CONDITION_RULES, VOCABULARY_RULES } from "@/lib/pronunciation/rules";
 
@@ -29,7 +30,7 @@ describe("lesson content", () => {
   });
 
   it("merges letter and word rules without throwing and has a word rule for every word", () => {
-    const words = LEVELS.flatMap((level) => level.lessons.flatMap((lesson) => lesson.vocabulary));
+    const words = [...LEVELS.flatMap((level) => level.lessons.flatMap((lesson) => lesson.vocabulary)), ...a1Words()];
     expect(Object.keys(VOCABULARY_RULES)).toHaveLength(words.length);
     for (const word of words) {
       const conditions = VOCABULARY_RULES[word.exercise.target]?.excellent?.conditions;

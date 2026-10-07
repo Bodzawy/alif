@@ -4,12 +4,14 @@
 
 ```
 Alif
-├── A0 · Das arabische Alphabet          /a0, /a0/letters/<id>
-│   └── 28 letters أ … ي, hands-free: letter → its name is spoken → student speaks → result → next letter (only after passing)
-└── A1 · Erste Wörter                    /a1, /a1/lesson-1
-    └── Lektion 1 · Der Buchstabe Alif (أَ)
-        ├── Schritt 1: the letter: listen · record · feedback
-        └── Schritt 2: vocabulary: أَسَد · أَرْنَب · أَنَانَاس (image, German, transliteration, listen, record)
+├── A0 · Buchstaben und erste Wörter     /a0 (choose a part)
+│   ├── حروف · Buchstaben                 /a0/letters, /a0/letters/<id>
+│   │   └── 28 letters أ … ي, hands-free: letter → its name is spoken → student speaks → result → next letter (only after passing)
+│   └── كلمات · Wörter                    /a0/words, /a0/words/lesson-N[/intro]
+│       └── 28 lessons, one per letter, e.g. Lektion 1 · Der Buchstabe Alif (أَ)
+│           ├── Schritt 1: the letter: listen · record · feedback
+│           └── Schritt 2: vocabulary: أَسَد · أَرْنَب · أَنَانَاس (image, German, transliteration, listen, record)
+└── A1                                   /a1 – placeholder, new content to come
 ```
 
 A0 is a progression layer over the unchanged pronunciation pipeline: a letter
@@ -23,7 +25,11 @@ round score is the average (`src/lib/alphabet-score.ts`). Silence and unclear
 audio are not counted. Technical errors (microphone, network, Azure, IQRA
 unavailable) stop the loop with a message; only then is *Überspringen* offered:
 it opens the next letter, but the skipped letter stays "nicht gemeistert".
-`/a0/lesson-1` redirects permanently to `/a1/lesson-1`.
+The word lessons were A1 until October 2026. `/a1/lesson-N[/intro]` and the
+older `/a0/lesson-1` redirect (307, so A1 can reuse the URLs later) to
+`/a0/words/…`. Their progress (key `a1/lesson-N`) is copied once per browser to
+`a0/words/lesson-N` (`src/lib/progress.ts`); the old entries are not deleted.
+Intro videos keep their URLs `/videos/a1/lesson-N/…` (served by nginx).
 
 The pronunciation system was taken over from the Masaar platform and reimplemented here. Alif has no dependency on the Masaar website. There is no redirect, no iframe and no shared login. Its only external dependencies are the evaluation services behind its own API.
 
@@ -122,9 +128,67 @@ Notes:
 - `microsoft-cognitiveservices-speech-sdk` must stay in `serverExternalPackages` (see `next.config.mjs`). If it is bundled, Azure cancels every assessment in production.
 - The API rate limits (30 assessments/min and 60 TTS calls/min per IP) are kept in memory per instance. Use a shared store if you scale out and need strict limits.
 
+## A1 · Schritt 3 "Formen" (أ / ـأ): words and audio
+
+The step is data in `src/data/a1/lesson-1.ts` (`kind: "forms"`), rendered by
+`src/components/a1/forms/`. It has four parts: **Zuschauen** (an explanation of
+the four book words, one scene each – the exercises unlock after it), then
+Baue das Wort, Wer hält fest? and Mit Hand oder ohne?. Whether the Hamza-Alif
+is held, where it stands (start / middle / end / separate) and which narration
+fits are derived from the Arabic text by `src/lib/arabic/hamza-alif.ts` – never
+hard-coded. Content comes only from the lesson book (Lesson1.pdf, page 1).
+
+- **Add a word:** add a `formsWord(id, "<vocalised Arabic>", "<German>", "<audio name>", image?)`
+  and put it into `explain` (Zuschauen), `build` (Activity 1, in order) or `sort`
+  (Activity 3, shown shuffled). Tiles are the letters with their harakat. Give
+  `image` only if the picture exists. Neighbours for Activity 2 are in `neighbors`.
+- **Audio:** all recordings are WAV files in `public/audio/a1/lesson-1/formen/`
+  (`FORMS_AUDIO_BASE`): the 21 exercise clips and the 10 Zuschauen clips listed in
+  `components/a1/forms/content.ts`, and one file per word, named after its `audio`
+  field: `ana`, `saala`, `saba`, `qaraa`, `ras`.
+  The page lists the folder at build time; a missing file is simply never played
+  (no request, no error) – add the file and rebuild to enable it. Zuschauen then
+  runs on fallback times, so the animation always finishes.
+- **Zuschauen texts:** `EXPLAIN_TEXT` in `content.ts` holds the German text of every
+  Zuschauen clip. It is shown as the caption and is the script for (re-)recording.
+- All narration goes through one reused audio element, unlocked by the "Los geht's!"
+  tap, so iOS Safari can play the clips one after another.
+- Progress: finishing Activity 3 marks `a1/lesson-1/step-3` as completed (`src/lib/progress.ts`).
+
+## A1 · Schritt 4 "Schreiben": adding a letter
+
+The handwriting page (`src/components/a1/writing/`) is a port of the prototype
+`docs/reference/alif-uebung1.html`. It takes a **letter set** as a prop; a new
+letter needs only a data file – no component changes.
+
+1. **Data file:** create `src/data/letters/<letter>.ts` exporting a `WritingLetterSet`
+   (`src/data/types.ts`): `{ id, forms: [{ id, glyph, name, strokes: [{ d, arrow, thin? }] }] }`.
+   - `forms` in workbook order (right to left); `name` is German and completes
+     "Fahr {name} nach." (e.g. "das Alif am Wortende").
+   - `strokes` in writing order. A two-stroke form (e.g. أ) has the body first and
+     the Hamza second; tracing the second stroke first gives the hint "Zuerst …".
+2. **SVG paths (`d`):** drawn in the writing box 240 × 320 with the baseline at
+   y = 262 (`WRITING_BOX` in `src/lib/writing/trace.ts`), in the direction the pen
+   moves. Easiest: put the workbook screenshot into an SVG editor (Inkscape, Figma)
+   on a 240 × 320 artboard, draw each stroke with the pen tool in writing order, and
+   copy the path's `d`. Use absolute coordinates; the shapes are approximations that
+   the teacher should confirm.
+3. **Arrow:** `arrow: { a, b, off }` draws the guide arrow along the part `a → b` of
+   the stroke (0–1 of its length), `off` px to the side (negative = the other side).
+   Start with `{ a: 0.08, b: 0.55, off: -30 }` and adjust while looking at the page.
+4. **thin:** `thin: true` draws a stroke with a thinner pen (62 %), e.g. the Hamza.
+5. Add a `kind: "writing"` step with `letterSet` to the lesson in `src/data/a1/`.
+
+Tracing tolerances are in `TRACE_TOL` (`src/lib/writing/trace.ts`), one commented
+object, to be tuned on real children's handwriting. In development, `?debug=1`
+shows the sampled template points and the last check's values (off in production
+builds). Narration can be added in `writing-narration.ts`; the success chime is
+synthesised (`src/lib/audio/chime.ts`) and follows the app's mute setting.
+Finishing all forms marks `a1/lesson-1/step-4` as completed (`src/lib/progress.ts`).
+
 ## Adding a lesson
 
-1. Create `src/data/lessons/a1/lesson-N.ts` that exports a `Lesson` (letter, vocabulary, exercise targets).
+1. Create `src/data/lessons/words/lesson-N.ts` (A0 → Wörter) that exports a `Lesson` (letter, vocabulary, exercise targets).
 2. Register it in `src/data/curriculum.ts`.
 3. For new vocabulary words, add rules to `src/lib/pronunciation/vocabulary_conditions.json`: Azure ≥ 70 plus an IQRA gate with the word's important consonants (copy an existing word; see `docs/ARCHITECTURE.md`). Letters already have rules in `letter_conditions.json`.
 4. Put images in `public/images/vocabulary/`.
