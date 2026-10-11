@@ -162,7 +162,8 @@ const EXPECTED_TOKENS: Record<string, string[]> = {
   "كيف حالك": ["k","y","f","H","l"],
   "بخير الحمد لله": ["b","x","y","r|rr","H","m","d","l|ll"],
   "ما اسمك": ["m","s"],
-  "أنا علي وأنت": ["n","E","l","y|yy","w"],
+  // ʿAliyyun said like "ʿAlī": IQRA writes "l ii" without y (real IQRA output) – y is not required.
+  "أنا علي وأنت": ["n","E","l","w"],
   "وأنا أحمد": ["w","n","H","m","d"],
   "أنا فاطمة وأنت": ["n","f","T","m","w"],
   "وأنا نبيلة": ["w","n","b","l"],

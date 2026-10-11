@@ -3492,7 +3492,7 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['n','E','l','y|yy','w']"
+        "iqra_phonemes contains ['n','E','l','w']"
       ],
       "message": "ممتاز 👏 نطقت أنا علي وأنت بشكل صحيح"
     },
@@ -3500,7 +3500,7 @@
       "conditions": [
         "azure_accuracy >= 70",
         "iqra_phonemes is not empty",
-        "iqra_phonemes does not contain ['n','E','l','y|yy','w']"
+        "iqra_phonemes does not contain ['n','E','l','w']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات أنا علي وأنت"
     },
