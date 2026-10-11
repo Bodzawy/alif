@@ -56,26 +56,19 @@ test.describe("phone", () => {
     expect(errors).toEqual([]);
   });
 
-  test("صَبَاحُ الْخَيْر: say the phrase (evaluated), then find ب ح خ in it → Geschafft", async ({ page }) => {
+  test("صَبَاحُ الْخَيْر: the conversation opens with the dialogue; the letters ب ح خ are still found in step 7 → Geschafft", async ({ page }) => {
     test.setTimeout(120_000);
     const errors = collectPageErrors(page);
-    const calls = await mockServices(page);
+    await mockServices(page);
     await page.goto("/a1/lesson-1/sabah-al-khayr/step-1");
-    const card = page.getByTestId("vocab-card-sabah-al-khayr");
-    const img = card.getByTestId("vocab-image-sabah-al-khayr");
-    await expect.poll(() => img.evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth > 0)).toBe(true);
-    await card.getByTestId("exercise-sabah-al-khayr-listen").tap();
-    await expect.poll(() => calls.tts).toContain("صَبَاحُ الْخَيْر");
-    await recordExercise(page, "sabah-al-khayr", 900);
-    await expect(page.getByTestId("exercise-sabah-al-khayr-feedback-headline")).toHaveText("مُمْتَاز! 👏");
-    expect(calls.uploads).toEqual(["صباح الخير"]);
-    await expect(page.getByTestId("phrases-step")).toHaveAttribute("data-done", "true");
+    await expect(page.getByTestId("dialogue-lines").locator('[data-testid^="dialogue-line-"]')).toHaveCount(7);
     expect(await noHorizontalScroll(page)).toBe(true);
-    await page.getByTestId("step-next").tap();
+    await page.goto("/a1/lesson-1/sabah-al-khayr/step-7");
     await page.getByTestId("start-button").tap();
-    const [find] = gapsSteps(getA1Lesson("lesson-1", "sabah-al-khayr")!);
+    const find = getA1Lesson("lesson-1", "sabah-al-khayr")!.steps[6]!;
+    if (find.kind !== "gaps") throw new Error("step-7 must be the letters");
     await expect(page.getByTestId("gap-piece")).toHaveText(["صَـ", "ـاحُ الْخَيْر"]);
-    await answerGaps(page, find!.gaps.items);
+    await answerGaps(page, find.gaps.items);
     await expect(page.getByTestId("back-to-unit-end")).toBeVisible();
     await expect(page.getByTestId("next-entry")).toHaveCount(0);
     expect(errors).toEqual([]);

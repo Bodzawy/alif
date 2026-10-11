@@ -2,7 +2,7 @@ import { azureConfig } from "@/lib/pronunciation/config";
 import { apiError } from "@/lib/pronunciation/errors";
 import { isAllowedTtsText } from "@/lib/pronunciation/targets";
 import { clientKey, createRateLimiter } from "@/lib/rate-limit";
-import { TTS_OUTPUT_FORMAT, buildSsml } from "@/lib/tts/ssml";
+import { TTS_OUTPUT_FORMAT, buildSsml, isTtsVoiceKey } from "@/lib/tts/ssml";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -39,6 +39,12 @@ export async function POST(request: Request) {
     if (!isAllowedTtsText(text)) {
       return apiError("invalid_target", 400);
     }
+    // Optional: a dialogue speaker's voice ("male-1", "male-2"); anything else is refused.
+    const rawVoice = (body as { voice?: unknown }).voice;
+    if (rawVoice !== undefined && !isTtsVoiceKey(rawVoice)) {
+      return apiError("invalid_request", 400);
+    }
+    const voice = isTtsVoiceKey(rawVoice) ? rawVoice : undefined;
 
     const response = await fetch(`https://${azure.region}.tts.speech.microsoft.com/cognitiveservices/v1`, {
       method: "POST",
@@ -48,7 +54,7 @@ export async function POST(request: Request) {
         "X-Microsoft-OutputFormat": TTS_OUTPUT_FORMAT,
         "User-Agent": "Alif",
       },
-      body: buildSsml(text),
+      body: buildSsml(text, voice),
       signal: AbortSignal.timeout(TTS_TIMEOUT_MS),
       cache: "no-store",
     });

@@ -9,7 +9,6 @@ vi.mock("@/lib/tts/player", () => ({ speechUrl: tts.speechUrl, speakArabic: vi.f
 import A1LessonPage from "@/app/a1/[unit]/[lesson]/page";
 import A1UnitPage from "@/app/a1/[unit]/page";
 import { GapsStep } from "@/components/a1/gaps/gaps-step";
-import { PhrasesStep } from "@/components/a1/phrases-step";
 import { a1Entries, a1SpokenTexts, a1Unit1, getA1Lesson, movedStep } from "@/data/a1";
 import { SHARED_GAPS_TEXT } from "@/data/a1/letter-lesson";
 import { LEVELS } from "@/data/curriculum";
@@ -145,17 +144,29 @@ describe("مراجعة – the review", () => {
   });
 });
 
-describe("صَبَاحُ الْخَيْر – the phrase", () => {
+describe("صَبَاحُ الْخَيْر – the conversation", () => {
   const phrase = getA1Lesson("lesson-1", "sabah-al-khayr")!;
 
-  it("Sprechen (listen, say, evaluated) and Buchstaben finden (ب ح خ in the phrase)", () => {
-    const [speak, find] = phrase.steps;
-    if (speak!.kind !== "phrases" || find!.kind !== "gaps") throw new Error("phrase steps");
-    const [card] = speak!.phrases;
-    expect(card).toMatchObject({ arabic: "صَبَاحُ الْخَيْر", german: "Guten Morgen", exercise: { target: "صباح الخير", modelText: "صَبَاحُ الْخَيْر" } });
-    expect(CONDITION_RULES["صباح الخير"]?.excellent).toBeDefined();
-    expect(isAllowedTarget("صباح الخير")).toBe(true);
-    expect(find!.gaps.items.map((i) => gapTask(i).gaps.map((g) => g.answer))).toEqual([["بَ"], ["حُ"], ["خَ"]]);
+  it("two conversations (listen, repeat, role-play each), then Buchstaben finden (ب ح خ in the greeting)", () => {
+    expect(phrase.steps.map((s) => [s.slug, s.kind, s.kind === "dialogue" ? s.mode : null, s.title])).toEqual([
+      ["step-1", "dialogue", "listen", "Anhören 1: Ahmad und Ali"],
+      ["step-2", "dialogue", "repeat", "Nachsprechen 1: Ahmad und Ali"],
+      ["step-3", "dialogue", "roleplay", "Rollenspiel 1: Ahmad und Ali"],
+      ["step-4", "dialogue", "listen", "Anhören 2: Nabila und Fatima"],
+      ["step-5", "dialogue", "repeat", "Nachsprechen 2: Nabila und Fatima"],
+      ["step-6", "dialogue", "roleplay", "Rollenspiel 2: Nabila und Fatima"],
+      ["step-7", "gaps", null, "Buchstaben finden: ب · ح · خ"],
+    ]);
+    const dialogues = [...new Set(phrase.steps.flatMap((s) => (s.kind === "dialogue" ? [s.dialogue] : [])))];
+    expect(dialogues.map((d) => d.lines.length)).toEqual([7, 7]); // one object per conversation, three stages each
+    const find = phrase.steps[6]!;
+    if (find.kind !== "gaps") throw new Error();
+    expect(find.gaps.items.map((i) => gapTask(i).gaps.map((g) => g.answer))).toEqual([["بَ"], ["حُ"], ["خَ"]]);
+    for (const line of dialogues.flatMap((d) => d.lines)) {
+      expect(CONDITION_RULES[line.exercise.target]?.excellent, line.exercise.target).toBeDefined();
+      expect(isAllowedTarget(line.exercise.target), line.exercise.target).toBe(true);
+      expect(isAllowedTtsText(line.exercise.modelText), line.exercise.modelText).toBe(true);
+    }
   });
 });
 
@@ -171,9 +182,7 @@ describe("pictures of every vocabulary item", () => {
         lesson.steps.flatMap((s): Picture[] =>
           s.kind === "sound-words"
             ? s.groups.flatMap((g) => g.words.map((w): Picture => [`${lesson.slug} ${w.id}`, w.image]))
-            : s.kind === "phrases"
-              ? s.phrases.map((w): Picture => [`${lesson.slug} ${w.id}`, w.image])
-              : s.kind === "gaps" && s.gaps.mode === "picture"
+            : s.kind === "gaps" && s.gaps.mode === "picture"
                 ? s.gaps.items.map((w): Picture => [`${lesson.slug} gap ${w.id}`, w.image])
                 : s.kind === "forms"
                   ? [...s.forms.sort].filter((w) => !ABSTRACT.has(w.id)).map((w): Picture => [`${lesson.slug} forms ${w.id}`, w.image])
@@ -293,21 +302,5 @@ describe("gap flow – patterns", () => {
     drop(gapTask(rfill!.gaps.items[0]!).gaps[0]!.answer);
     fireEvent.click(await screen.findByTestId("gap-next"));
     await waitFor(() => expect(tiles()).toEqual(rfill!.gaps.items[1]!.choices));
-  });
-});
-
-describe("Sprechen – the phrase card", () => {
-  it("a large card: picture, Arabic, German, transliteration, listen and record", () => {
-    const [speak] = getA1Lesson("lesson-1", "sabah-al-khayr")!.steps;
-    if (speak!.kind !== "phrases") throw new Error();
-    render(<PhrasesStep phrases={speak!.phrases} progressKey="k" />);
-    const card = screen.getByTestId("vocab-card-sabah-al-khayr");
-    expect(within(card).getByTestId("vocab-image-sabah-al-khayr")).toHaveAttribute("src", "/images/a1/sabah-al-khayr/sabah-al-khayr.svg");
-    expect(card).toHaveTextContent("صَبَاحُ الْخَيْر");
-    expect(card).toHaveTextContent("Guten Morgen");
-    expect(card).toHaveTextContent("Ṣabāḥ al-khayr");
-    expect(within(card).getByTestId("exercise-sabah-al-khayr-listen")).toBeInTheDocument();
-    expect(within(card).getByTestId("exercise-sabah-al-khayr-record")).toBeInTheDocument();
-    cleanup();
   });
 });

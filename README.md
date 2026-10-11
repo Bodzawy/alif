@@ -16,7 +16,7 @@ Alif
         ├── أ ب ت ث ج ح خ                    /a1/lesson-1/<alif|ba|ta|tha|jim|hha|kha>/step-1 … step-5
         │   └── Wörter (each row starts with its sound) · Formen · Schreiben · Ergänzen · Hören
         ├── مراجعة                           /a1/lesson-1/review/step-1 … step-2 (Ergänzen · Hören over all seven letters)
-        └── صَبَاحُ الْخَيْر                    /a1/lesson-1/sabah-al-khayr/step-1 … step-2 (Sprechen · Buchstaben finden)
+        └── صَبَاحُ الْخَيْر                    /a1/lesson-1/sabah-al-khayr/step-1 … step-7 (two conversations: Anhören · Nachsprechen · Rollenspiel each; Buchstaben finden)
 ```
 
 A0 is a progression layer over the unchanged pronunciation pipeline: a letter
@@ -146,6 +146,32 @@ sound card (glyph, vowel name, transliteration, listen, speak, feedback). Old UR
 still work (307): `/a1/lesson-1/step-N` → `/a1/lesson-1/alif/step-(N−1)` (step 1 →
 Wörter), `/a1/<letter>` → `/a1/lesson-1/<letter>`. Saved progress of Alif's old
 steps is copied once per browser to the new keys (`copyMovedA1Progress`).
+
+## A1 · Lektion 1: the conversations "صَبَاحُ الْخَيْر"
+
+The two textbook conversations (Ahmad / Ali, Nabila / Fatima – seven lines
+each, with the feminine forms حَالُكِ، اسْمُكِ، أَنْتِ for the women) are one
+`Dialogue` object each (`src/data/a1/sabah-al-khayr.ts`: two speakers with a
+voice each, the lines with Arabic, transliteration, German and the exercise).
+Each serves three steps of type `dialogue` (`src/components/a1/dialogue/`):
+
+- **listen** – the whole dialogue or single lines, pause / continue / again,
+  translation and transliteration switches, then a comprehension question.
+- **repeat** – every line on the guided flow of "Wörter": the model, the
+  microphone listens, the SAME evaluation (`/api/pronunciation`: Azure, MASAAR,
+  IQRA, condition rules), "Super!", the next line; wrong or silent = again,
+  without limit. No microphone / repeated service errors → buttons
+  (`PronunciationExercise`).
+- **roleplay** – the learner picks a speaker; the app speaks the other role and
+  answers only after an accepted line; at the end it closes the conversation.
+
+Voices: `/api/tts` takes an optional `voice` – only `male-1`, `male-2`,
+`female-1`, `female-2` (`TTS_DIALOGUE_VOICES` in `src/lib/tts/ssml.ts`);
+without it, the lesson voice. Each line's target (unvocalised, no punctuation)
+has a rule in `vocabulary_conditions.json`; masculine and feminine lines that
+differ only in a vowel (كيف حالك، ما اسمك) share their target. The rules require
+only sounds IQRA reliably outputs: the suffix -ka / -ki and a final k / t are
+not required (tested against the real IQRA service).
 
 ## A1 · Formen (أ / ـأ): words and audio
 

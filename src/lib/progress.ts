@@ -57,9 +57,29 @@ export function copyMovedA1Progress(state: ProgressState): ProgressState {
   return next;
 }
 
+// The entry "صَبَاحُ الْخَيْر" got the two conversations (steps 1–6); its steps mean
+// something else now (published: step-1 "Sprechen", step-2 "Buchstaben finden").
+// The letters' progress moves to step-7 and the two old entries are removed, so
+// the new conversation steps are not shown as done.
+const SABAH_MIGRATION_FLAG = "alif:progress:migrated:a1-sabah-al-khayr-dialogue";
+const SABAH = "a1/lesson-1/sabah-al-khayr";
+export const SABAH_LETTERS_STEP = "step-7";
+
+export function moveSabahAlKhayrProgress(state: ProgressState): ProgressState {
+  const old1 = state[`${SABAH}/step-1`];
+  const old2 = state[`${SABAH}/step-2`];
+  if (!old1 && !old2) return state;
+  const next = { ...state };
+  delete next[`${SABAH}/step-1`];
+  delete next[`${SABAH}/step-2`];
+  if (old2 && !state[`${SABAH}/${SABAH_LETTERS_STEP}`]) next[`${SABAH}/${SABAH_LETTERS_STEP}`] = old2;
+  return next;
+}
+
 const MIGRATIONS: Array<[flag: string, migrate: (state: ProgressState) => ProgressState]> = [
   [MIGRATION_FLAG, copyLegacyLessonProgress],
   [A1_MIGRATION_FLAG, copyMovedA1Progress],
+  [SABAH_MIGRATION_FLAG, moveSabahAlKhayrProgress],
 ];
 
 function migrateOnce(raw: string | null): string | null {

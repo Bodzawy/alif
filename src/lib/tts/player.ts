@@ -3,6 +3,9 @@
 // not hit Azure again. Only one sound plays at a time.
 
 const cache = new Map<string, Promise<string>>();
+
+/** A dialogue speaker's voice (see TTS_DIALOGUE_VOICES); without it the default lesson voice. */
+export type SpeechVoice = "male-1" | "male-2" | "female-1" | "female-2";
 let current: HTMLAudioElement | null = null;
 
 export class TtsError extends Error {
@@ -12,11 +15,11 @@ export class TtsError extends Error {
   }
 }
 
-async function fetchAudioUrl(text: string): Promise<string> {
+async function fetchAudioUrl(text: string, voice?: SpeechVoice): Promise<string> {
   const response = await fetch("/api/tts", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ text }),
+    body: JSON.stringify(voice ? { text, voice } : { text }),
   });
   if (!response.ok) {
     throw new TtsError("Die Aussprache konnte gerade nicht geladen werden. Bitte versuche es gleich noch einmal.");
@@ -24,20 +27,21 @@ async function fetchAudioUrl(text: string): Promise<string> {
   return URL.createObjectURL(await response.blob());
 }
 
-function audioUrl(text: string): Promise<string> {
-  let pending = cache.get(text);
+function audioUrl(text: string, voice?: SpeechVoice): Promise<string> {
+  const key = voice ? `${voice}\u0000${text}` : text;
+  let pending = cache.get(key);
   if (!pending) {
-    pending = fetchAudioUrl(text);
-    cache.set(text, pending);
+    pending = fetchAudioUrl(text, voice);
+    cache.set(key, pending);
     // Failed requests must not be cached.
-    pending.catch(() => cache.delete(text));
+    pending.catch(() => cache.delete(key));
   }
   return pending;
 }
 
 /** URL of the spoken text (same cached /api/tts audio as speakArabic), for players that reuse their own element. */
-export function speechUrl(text: string): Promise<string> {
-  return audioUrl(text);
+export function speechUrl(text: string, voice?: SpeechVoice): Promise<string> {
+  return audioUrl(text, voice);
 }
 
 export function stopSpeaking() {

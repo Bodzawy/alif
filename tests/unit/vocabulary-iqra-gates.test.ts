@@ -155,8 +155,17 @@ const EXPECTED_TOKENS: Record<string, string[]> = {
   "خيام": ["x","y","m"],
   "خضار": ["x","D","r|rr"],
   "خوذة": ["x"],
-  // The phrase of Lektion 1
+  // The two conversations of Lektion 1 (صَبَاحُ الْخَيْر). Gates from real IQRA output: the
+  // suffix -ka / -ki and a final k / t are not output reliably, so they are not required.
   "صباح الخير": ["S","b","H","x","r|rr"],
+  "صباح النور": ["S","b","H","n|nn","r|rr"],
+  "كيف حالك": ["k","y","f","H","l"],
+  "بخير الحمد لله": ["b","x","y","r|rr","H","m","d","l|ll"],
+  "ما اسمك": ["m","s"],
+  "أنا علي وأنت": ["n","E","l","y|yy","w"],
+  "وأنا أحمد": ["w","n","H","m","d"],
+  "أنا فاطمة وأنت": ["n","f","T","m","w"],
+  "وأنا نبيلة": ["w","n","b","l"],
 };
 
 // IQRA's token inventory (sws_arabic.txt of the IqraEval phoneme model).
@@ -194,8 +203,8 @@ const words = [
 ];
 
 describe("vocabulary IQRA gates", () => {
-  it("cover all 148 curriculum words (84 in A0 → Wörter, 63 in A1 and the phrase صباح الخير), each target with its own gate", () => {
-    expect(words).toHaveLength(148);
+  it("cover all 161 curriculum words (84 in A0 → Wörter, 63 in A1, 14 lines of the two conversations), each target with its own gate", () => {
+    expect(words).toHaveLength(161);
     expect(Object.keys(EXPECTED_TOKENS).sort()).toEqual([...new Set(words.map(({ word }) => word.exercise.target))].sort());
     expect(Object.keys(VOCABULARY_RULES).sort()).toEqual(Object.keys(EXPECTED_TOKENS).sort());
   });

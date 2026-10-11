@@ -3390,5 +3390,197 @@
       ],
       "message": "حاول مرة أخرى، نريد صباح الخير"
     }
+  },
+
+  "صباح النور": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['S','b','H','n|nn','r|rr']"
+      ],
+      "message": "ممتاز 👏 نطقت صباح النور بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['S','b','H','n|nn','r|rr']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات صباح النور"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد صباح النور"
+    }
+  },
+
+  "كيف حالك": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['k','y','f','H','l']"
+      ],
+      "message": "ممتاز 👏 نطقت كيف حالك بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['k','y','f','H','l']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كيف حالك"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كيف حالك"
+    }
+  },
+
+  "بخير الحمد لله": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['b','x','y','r|rr','H','m','d','l|ll']"
+      ],
+      "message": "ممتاز 👏 نطقت بخير الحمد لله بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['b','x','y','r|rr','H','m','d','l|ll']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات بخير الحمد لله"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد بخير الحمد لله"
+    }
+  },
+
+  "ما اسمك": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['m','s']"
+      ],
+      "message": "ممتاز 👏 نطقت ما اسمك بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['m','s']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات ما اسمك"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد ما اسمك"
+    }
+  },
+
+  "أنا علي وأنت": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['n','E','l','y|yy','w']"
+      ],
+      "message": "ممتاز 👏 نطقت أنا علي وأنت بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['n','E','l','y|yy','w']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات أنا علي وأنت"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد أنا علي وأنت"
+    }
+  },
+
+  "وأنا أحمد": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['w','n','H','m','d']"
+      ],
+      "message": "ممتاز 👏 نطقت وأنا أحمد بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['w','n','H','m','d']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات وأنا أحمد"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد وأنا أحمد"
+    }
+  },
+
+  "أنا فاطمة وأنت": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['n','f','T','m','w']"
+      ],
+      "message": "ممتاز 👏 نطقت أنا فاطمة وأنت بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['n','f','T','m','w']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات أنا فاطمة وأنت"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد أنا فاطمة وأنت"
+    }
+  },
+
+  "وأنا نبيلة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['w','n','b','l']"
+      ],
+      "message": "ممتاز 👏 نطقت وأنا نبيلة بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['w','n','b','l']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات وأنا نبيلة"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد وأنا نبيلة"
+    }
   }
 }

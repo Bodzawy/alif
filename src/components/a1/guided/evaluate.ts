@@ -1,13 +1,19 @@
 import { blobTo16KhzMonoWav } from "@/lib/audio/wav";
 import type { Utterance } from "@/lib/audio/guided-mic";
-import { PronunciationRequestError, REQUEST_TIMEOUT_MS, submitRecording, toStudentFeedback } from "@/lib/pronunciation/client";
+import { PronunciationRequestError, REQUEST_TIMEOUT_MS, submitRecording, toStudentFeedback, type StudentFeedback } from "@/lib/pronunciation/client";
 
 /** right: passed (the rule that shows "مُمْتَاز" today); wrong: not passed or not understood; error: network / server. */
 export type Verdict = "right" | "wrong" | "error" | "aborted";
 
 // The same evaluation as the "Aufnehmen" button: 16 kHz mono WAV →
 // POST /api/pronunciation → `passed`. Nothing about the rules changes here.
-export async function evaluateUtterance(utterance: Extract<Utterance, { kind: "speech" }>, target: string, signal: AbortSignal): Promise<Verdict> {
+export async function evaluateUtterance(
+  utterance: Extract<Utterance, { kind: "speech" }>,
+  target: string,
+  signal: AbortSignal,
+  /** The learner feedback of an answered request (right or wrong), e.g. to show the hint. */
+  onFeedback?: (feedback: StudentFeedback) => void
+): Promise<Verdict> {
   const controller = new AbortController();
   const onAbort = () => controller.abort();
   signal.addEventListener("abort", onAbort);
@@ -15,7 +21,9 @@ export async function evaluateUtterance(utterance: Extract<Utterance, { kind: "s
   try {
     const wav = await blobTo16KhzMonoWav(utterance.blob);
     const response = await submitRecording(wav, target, { signal: controller.signal });
-    return toStudentFeedback(response).passed ? "right" : "wrong";
+    const feedback = toStudentFeedback(response);
+    onFeedback?.(feedback);
+    return feedback.passed ? "right" : "wrong";
   } catch (error) {
     if (signal.aborted) return "aborted";
     if (error instanceof PronunciationRequestError) {

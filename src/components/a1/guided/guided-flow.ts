@@ -57,6 +57,7 @@ type Action =
   | { type: "next" }
   | { type: "pause" }
   | { type: "resume" }
+  | { type: "replay" }
   | { type: "fallback" };
 
 export const initialGuidedState: GuidedState = { stage: "idle", queue: [], round: 1, attempts: 0, retry: false, marks: {}, practice: [], errors: 0, run: 0 };
@@ -100,6 +101,9 @@ export function guidedReducer(s: GuidedState, a: Action): GuidedState {
       return ["focus", "play", "listen", "check"].includes(s.stage) ? { ...s, stage: "paused" } : s;
     case "resume":
       return s.stage === "paused" ? { ...s, stage: "play", run: s.run + 1 } : s;
+    case "replay":
+      // "Nochmal anhören": stop listening (the model must not be recorded) and play the block again – no attempt is counted.
+      return ["focus", "play", "listen"].includes(s.stage) ? { ...s, stage: "play", run: s.run + 1 } : s;
     case "fallback":
       return { ...s, stage: "fallback" };
   }
@@ -190,5 +194,6 @@ export function useGuidedFlow(blocks: GuidedBlock[], deps: GuidedDeps, callbacks
       dispatch({ type: "start", order: blocks.map((b) => b.id), marks });
     },
     fallback: () => dispatch({ type: "fallback" }),
+    replay: () => dispatch({ type: "replay" }),
   };
 }

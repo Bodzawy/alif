@@ -171,10 +171,12 @@ export type A1Step =
       gaps: GapsContent;
     })
   | (A1StepBase & {
-      kind: "phrases";
-      /** Listen and speak, one card per phrase (picture, Arabic, German, transliteration). */
-      phrases: A1Word[];
-    });
+      kind: "dialogue";
+      /** listen: the whole dialogue (both voices); repeat: every line, one after another; roleplay: the learner speaks one role. */
+      mode: "listen" | "repeat" | "roleplay";
+      dialogue: Dialogue;
+    })
+;
 
 // ---------------------------------------------------------------------------
 // "Fill the gap" (Schritt 5 "Ergänzen", 6 "Hören"): each item is the FULL
@@ -276,6 +278,46 @@ export type A1Lesson = {
   /** The letter of a letter entry. */
   letter?: A1LessonLetter;
   steps: A1Step[];
+};
+
+// ---------------------------------------------------------------------------
+// A dialogue (e.g. the greeting of Lektion 1): two speakers, each with their
+// own voice, and the lines in order. One object serves "listen", "repeat" and
+// "roleplay".
+
+/** The TTS voices a dialogue may use (mapped to Azure voices in src/lib/tts/ssml.ts). */
+export type DialogueVoice = "male-1" | "male-2" | "female-1" | "female-2";
+
+export type DialogueSpeaker = {
+  id: string;
+  /** Shown above the speaker's lines, e.g. "Karim". */
+  name: string;
+  voice: DialogueVoice;
+  avatar: { src: string; alt: string };
+};
+
+export type DialogueLine = {
+  id: string;
+  /** DialogueSpeaker.id */
+  speaker: string;
+  /** Vocalised Arabic as shown. */
+  arabic: string;
+  transliteration: string;
+  german: string;
+  /** Literal meaning, when it helps (e.g. "Morgen des Lichts"). */
+  literal?: string;
+  /** Evaluated like every other A1 exercise (target = unvocalised, without punctuation). */
+  exercise: PronunciationExercise;
+};
+
+export type Dialogue = {
+  id: string;
+  /** One German sentence above the conversation, e.g. "Zwei Männer begrüßen sich." */
+  intro: string;
+  speakers: [DialogueSpeaker, DialogueSpeaker];
+  lines: DialogueLine[];
+  /** A comprehension question after listening (German). */
+  question?: { prompt: string; options: string[]; answer: number };
 };
 
 /** An A1 lesson of the book ("الدرس الأول – صَبَاحُ الْخَيْر"): its entries in book order. */

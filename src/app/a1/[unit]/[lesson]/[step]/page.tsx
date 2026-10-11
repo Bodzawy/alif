@@ -10,7 +10,7 @@ import { FormsStep } from "@/components/a1/forms/forms-step";
 import { GapsStep } from "@/components/a1/gaps/gaps-step";
 import { WritingStep } from "@/components/a1/writing/writing-step";
 import { GuidedSoundWords } from "@/components/a1/guided/guided-sound-words";
-import { PhrasesStep } from "@/components/a1/phrases-step";
+import { DialogueStep } from "@/components/a1/dialogue/dialogue-step";
 import { buttonClasses } from "@/components/ui/button";
 import { A1_LEVEL, a1Entries, a1LessonHref, a1StepHref, a1StepKey, a1UnitHref, getA1Unit } from "@/data/a1";
 import type { A1Step } from "@/data/types";
@@ -73,7 +73,7 @@ export default async function A1StepPage({ params }: { params: Promise<Params> }
   const next = lesson.steps[index + 1];
 
   return (
-    <div className={cn("container py-6 sm:py-10", step.kind === "phrases" ? "max-w-2xl" : step.kind === "forms" || step.kind === "gaps" ? "max-w-3xl" : step.kind === "writing" ? "max-w-5xl" : "max-w-7xl")}>
+    <div className={cn("container py-6 sm:py-10", step.kind === "dialogue" ? "max-w-3xl" : step.kind === "forms" || step.kind === "gaps" ? "max-w-3xl" : step.kind === "writing" ? "max-w-5xl" : "max-w-7xl")}>
       <nav aria-label="Brotkrumen" className="mb-4 flex items-center justify-between gap-2 text-sm text-muted-foreground">
         <Link href={a1UnitHref(unit)} className="inline-flex items-center gap-1 rounded-md hover:text-foreground focus-ring" data-testid="back-to-unit">
           <ArrowLeft className="h-4 w-4" aria-hidden /> Lektion {unit.number}
@@ -118,8 +118,8 @@ export default async function A1StepPage({ params }: { params: Promise<Params> }
         <FormsStep forms={step.forms} availableAudio={availableAudio(step.forms.audioBase)} progressKey={progressKey} />
       ) : step.kind === "writing" ? (
         <WritingStep letterSet={step.letterSet} progressKey={progressKey} />
-      ) : step.kind === "phrases" ? (
-        <PhrasesStep phrases={step.phrases} progressKey={progressKey} />
+      ) : step.kind === "dialogue" ? (
+        <DialogueStep dialogue={step.dialogue} mode={step.mode} progressKey={progressKey} />
       ) : (
         <GapsStep gaps={step.gaps} availableAudio={availableAudio(step.gaps.audioBase)} progressKey={progressKey} />
       )}

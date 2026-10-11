@@ -68,8 +68,8 @@ export function a1LessonExercises(lesson: A1Lesson): PronunciationExercise[] {
   const all = lesson.steps.flatMap((step) =>
     step.kind === "sound-words"
       ? step.groups.flatMap((group) => [group.sound.exercise, ...group.words.map((word) => word.exercise)])
-      : step.kind === "phrases"
-        ? step.phrases.map((phrase) => phrase.exercise)
+      : step.kind === "dialogue"
+        ? step.dialogue.lines.map((line) => line.exercise)
         : [] // "forms", "writing", "gaps": nothing is evaluated.
   );
   return all.filter((exercise, index) => all.findIndex((other) => other.id === exercise.id) === index);
