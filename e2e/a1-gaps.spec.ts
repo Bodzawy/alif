@@ -47,11 +47,11 @@ async function tapAnswer(page: Page, letter: string) {
 async function playStep(page: Page, step: string, answers: string[], wrongAt: number, wrongLetter: string, reveal: string) {
   const { played, requested } = await recordPlays(page);
   const errors = collectPageErrors(page);
-  await page.goto(`/a1/lesson-1/${step}`);
+  await page.goto(`/a1/lesson-1/alif/${step}`);
   await page.waitForTimeout(300);
   expect(played).toEqual([]);
   await page.getByTestId("start-button").tap();
-  await expect.poll(() => played[0]).toBe(step === "step-5" ? "g5_intro" : "g6_intro");
+  await expect.poll(() => played[0]).toBe(step === "step-4" ? "g5_intro" : "g6_intro");
 
   for (const [i, answer] of answers.entries()) {
     await expect(page.getByTestId("gap-progress")).toHaveText(`Aufgabe ${i + 1} von ${answers.length}`, { timeout: 15_000 });
@@ -78,9 +78,9 @@ async function playStep(page: Page, step: string, answers: string[], wrongAt: nu
   await expect(result).toBeVisible({ timeout: 15_000 });
   await expect(result).toHaveAttribute("data-first-try", String(answers.length - 1));
   await expect(result).toContainText("مُمْتَاز! 👏");
-  await expect.poll(() => played.at(-1)).toBe(step === "step-5" ? "g5_done" : "g6_done");
+  await expect.poll(() => played.at(-1)).toBe(step === "step-4" ? "g5_done" : "g6_done");
   const progress = await page.evaluate(() => JSON.parse(localStorage.getItem("alif:progress:v1") ?? "{}"));
-  expect(progress[`a1/lesson-1/${step}`].completedAt).toBeTruthy();
+  expect(progress[`a1/lesson-1/alif/${step}`].completedAt).toBeTruthy();
   expect(requested.filter((f) => WORD_FILES.test(`/${f}.wav`))).toEqual([]);
   expect(errors).toEqual([]);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
@@ -89,11 +89,11 @@ async function playStep(page: Page, step: string, answers: string[], wrongAt: nu
 
 test("Schritt 5 Ergänzen: picture, tap and drag, hint and reveal, Korrigieren", async ({ page }) => {
   test.setTimeout(180_000);
-  await page.goto("/a1/lesson-1/step-5");
-  await expect(page.getByTestId("step-position")).toHaveText("Schritt 5 von 6");
+  await page.goto("/a1/lesson-1/alif/step-4");
+  await expect(page.getByTestId("step-position")).toHaveText("Schritt 4 von 5");
   await expect(page.getByTestId("step-prev")).toHaveText(/Zurück: Schreiben/);
   await expect(page.getByTestId("step-next")).toHaveText(/Weiter: Hören/);
-  const { requested } = await playStep(page, "step-5", ["أَ", "أَ", "أَ", "إِ", "إِ", "إِ", "أُ", "أُ", "أُ"], 3, "أُ", "g_reveal_i");
+  const { requested } = await playStep(page, "step-4", ["أَ", "أَ", "أَ", "إِ", "إِ", "إِ", "أُ", "أُ", "أُ"], 3, "أُ", "g_reveal_i");
   for (const key of ["g5_intro", "g_hint", "g_reveal_i", "g_ok", "g5_done"]) expect(requested, key).toContain(key);
   await expect(page.getByTestId("result-ibra")).toHaveAttribute("data-first-try", "false");
   await expect(page.getByTestId("gap-stars")).toBeVisible();
@@ -101,17 +101,18 @@ test("Schritt 5 Ergänzen: picture, tap and drag, hint and reveal, Korrigieren",
 
 test("Schritt 6 Hören: no picture, the sukun item in the middle, reveal sukun, Korrigieren", async ({ page }) => {
   test.setTimeout(180_000);
-  await page.goto("/a1/lesson-1/step-6");
-  await expect(page.getByTestId("step-position")).toHaveText("Schritt 6 von 6");
+  await page.goto("/a1/lesson-1/alif/step-5");
+  await expect(page.getByTestId("step-position")).toHaveText("Schritt 5 von 5");
   await expect(page.getByTestId("step-prev")).toHaveText(/Zurück: Ergänzen/);
-  await expect(page.getByTestId("back-to-lessons")).toHaveText(/Zurück zu A1/);
-  const { requested } = await playStep(page, "step-6", ["أُ", "إِ", "أَ", "إِ", "أُ", "إِ", "أَ", "أَ", "أُ", "أْ"], 9, "أَ", "g_reveal_sukun");
+  await expect(page.getByTestId("back-to-unit-end")).toHaveText(/Zur Lektion 1/);
+  await expect(page.getByTestId("next-entry")).toHaveAttribute("href", "/a1/lesson-1/ba");
+  const { requested } = await playStep(page, "step-5", ["أُ", "إِ", "أَ", "إِ", "أُ", "إِ", "أَ", "أَ", "أُ", "أْ"], 9, "أَ", "g_reveal_sukun");
   for (const key of ["g6_intro", "g_hint", "g_reveal_sukun", "g_ok", "g6_done"]) expect(requested, key).toContain(key);
   await expect(page.getByTestId("result-ras")).toHaveAttribute("data-first-try", "false");
 });
 
 test("Hören shows رَ, the gap, then س; no picture; pills fit on two lines", async ({ page }) => {
-  await page.goto("/a1/lesson-1/step-6");
+  await page.goto("/a1/lesson-1/alif/step-5");
   const tops = await page.locator('[data-testid^="step-tab-"]').evaluateAll((els) => els.map((e) => Math.round(e.getBoundingClientRect().top)));
   expect(new Set(tops).size).toBe(2);
   await page.getByTestId("mute-toggle").tap();

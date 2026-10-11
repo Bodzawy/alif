@@ -8,9 +8,9 @@ import type { WritingLetterSet } from "@/data/types";
 import { playChime, unlockChime } from "@/lib/audio/chime";
 import { getLessonProgress, markLessonCompleted, subscribeProgress } from "@/lib/progress";
 import { cn } from "@/lib/utils";
-import { debugEnabled, demoTotal, evaluate, starsFor, WRITING_BOX, type FailReason, type Point, type StrokeTemplate, type TraceResult } from "@/lib/writing/trace";
+import { debugEnabled, demoTotal, evaluateStroke, starsFor, WRITING_BOX, type FailReason, type Point, type StrokeTemplate, type TraceResult } from "@/lib/writing/trace";
 
-import { arrowFor, baseline, drawDemo, poly, readPalette, startDot, strokeWidth, type Palette } from "./draw";
+import { AR_NUM, arrowFor, baseline, drawDemo, poly, readPalette, startDot, strokeStart, strokeWidth, type Palette } from "./draw";
 import { sampleLetterSet } from "./sample-path";
 import { useWritingNarration } from "./writing-narration";
 
@@ -36,7 +36,10 @@ const TXT = {
     end: "Fast! Zieh die Linie bis zum Ende.",
     cover: "Fast! Bleib auf der grauen Spur.",
     acc: "Fast! Bleib auf der grauen Spur.",
+    dot: "Tippe nur kurz auf den Punkt.",
   } satisfies Record<FailReason, string>,
+  /** The next stroke of a letter lesson (WritingStroke.label): a line or a dot. */
+  next: (label: string, i: number, dot: boolean) => `Gut! Jetzt ${label}. ${dot ? `Tippe auf den grünen Punkt ${AR_NUM[i]}.` : `Fang beim grünen Punkt ${AR_NUM[i]} an.`}`,
 };
 
 /** A finished form: the child's strokes and stars (0 = skipped). */
@@ -198,7 +201,7 @@ export function WritingStep({ letterSet, progressKey, onComplete }: { letterSet:
             s.committed.forEach((stroke, i) => poly(ctx, stroke, stroke.length, c.ok, strokeWidth(f, i, 14)));
             if (!s.busy && s.stroke < tpl.length) {
               arrowFor(ctx, f, tpl, s.stroke, c.muted, 0.9, false);
-              startDot(ctx, c, tpl[s.stroke]!.pts[0]!, s.stroke, now, reduceMotion.current);
+              startDot(ctx, c, strokeStart(f, tpl, s.stroke), s.stroke, now, reduceMotion.current);
             }
             if (s.user.length) {
               let color = c.ink;
@@ -275,7 +278,7 @@ export function WritingStep({ letterSet, progressKey, onComplete }: { letterSet:
     s.drawing = false;
     const f = forms[s.cur]!;
     const tpl = tpls.current[s.cur]!;
-    const r = evaluate(s.user, tpl, s.stroke);
+    const r = evaluateStroke(s.user, tpl, s.stroke, f.strokes.map((stroke) => Boolean(stroke.dot)));
     const now = performance.now();
     if (debugRef.current) setLastEval(r);
     if (r.ok) {
@@ -284,7 +287,8 @@ export function WritingStep({ letterSet, progressKey, onComplete }: { letterSet:
       s.scores = s.scores.concat(r.score);
       if (s.stroke < tpl.length - 1) {
         s.stroke++;
-        setInstr(TXT.hamza);
+        const next = f.strokes[s.stroke]!;
+        setInstr(next.label ? TXT.next(next.label, s.stroke, Boolean(next.dot)) : TXT.hamza);
         narrate({ type: "nextStroke", form: f, stroke: s.stroke });
         return;
       }
@@ -305,7 +309,7 @@ export function WritingStep({ letterSet, progressKey, onComplete }: { letterSet:
       s.ink = "bad";
       s.badAt = now;
       s.busy = true;
-      setInstr(TXT.fail[r.msg]);
+      setInstr(r.msg === "order" && letterSet.orderHint ? letterSet.orderHint : TXT.fail[r.msg]);
       narrate({ type: "fail", reason: r.msg });
       later(() => {
         resetAttempt();

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Orangen">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff4d6"/><stop offset="1" stop-color="#ffd98a"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#ffe7a8"/><circle cx="340" cy="236" r="50" fill="#ffe7a8"/>
+  
+<path d="M90 230 C90 270 310 270 310 230 Z" fill="#c98a2b"/><rect x="84" y="220" width="232" height="16" rx="8" fill="#e3a33d"/>
+  <circle cx="150" cy="186" r="44" fill="#ff9a1f"/><circle cx="250" cy="186" r="44" fill="#ff8c10"/><circle cx="200" cy="150" r="46" fill="#ffa52e"/>
+  <g fill="#e07800" opacity=".5"><circle cx="138" cy="196" r="3"/><circle cx="160" cy="176" r="3"/><circle cx="262" cy="200" r="3"/><circle cx="240" cy="172" r="3"/><circle cx="210" cy="160" r="3"/><circle cx="188" cy="140" r="3"/></g>
+  <path d="M200 104 C206 92 214 88 222 88" stroke="#5b3a29" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M206 98 C224 78 252 80 258 92 C240 104 220 106 206 98 Z" fill="#3fa34d"/>
+  <ellipse cx="184" cy="132" rx="10" ry="16" fill="#fff" opacity=".35" transform="rotate(-25 184 132)"/>
+</svg>

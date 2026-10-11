@@ -1,5 +1,5 @@
 import type { WritingForm } from "@/data/types";
-import { arrowPoints, DEMO_GAP_MS, strokeMs, WRITING_BOX, type Point, type StrokeTemplate } from "@/lib/writing/trace";
+import { arrowPoints, DEMO_GAP_MS, dotCenter, strokeMs, WRITING_BOX, type Point, type StrokeTemplate } from "@/lib/writing/trace";
 
 // Canvas drawing for the handwriting page – the prototype's primitives
 // (poly, baseline, arrowFor, startDot, drawDemo) with the same geometry, in
@@ -69,7 +69,28 @@ export function baseline(ctx: CanvasRenderingContext2D, c: Palette) {
   ctx.restore();
 }
 
+/** Where stroke i begins: its first point, or the centre of a dot. */
+export const strokeStart = (form: WritingForm, tpls: readonly StrokeTemplate[], i: number): Point =>
+  form.strokes[i]?.dot ? dotCenter(tpls[i]!) : tpls[i]!.pts[0]!;
+
+/** A dot has no arrow: only its number, beside it (to the right, where the hand comes from). */
+function dotNumber(ctx: CanvasRenderingContext2D, tpl: StrokeTemplate, i: number, color: string, alpha: number) {
+  const c = dotCenter(tpl);
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  ctx.fillStyle = color;
+  ctx.font = `700 20px ${FONT}`;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText(AR_NUM[i]!, c.x + 22, c.y);
+  ctx.restore();
+}
+
 export function arrowFor(ctx: CanvasRenderingContext2D, form: WritingForm, tpls: readonly StrokeTemplate[], i: number, color: string, alpha: number, withNum: boolean) {
+  if (form.strokes[i]!.dot) {
+    if (withNum) dotNumber(ctx, tpls[i]!, i, color, alpha);
+    return;
+  }
   const pts = arrowPoints(tpls[i]!.pts, form.strokes[i]!.arrow);
   if (pts.length === 0) return;
   ctx.save();
@@ -134,7 +155,7 @@ export function drawDemo(ctx: CanvasRenderingContext2D, c: Palette, form: Writin
     if (loc > 0) poly(ctx, tpl.pts, upto, c.ink, strokeWidth(form, i, width));
     if (loc < 1 && (t >= t0 || i === 0)) {
       arrowFor(ctx, form, tpls, i, c.muted, 0.9, false);
-      startDot(ctx, c, tpl.pts[0]!, i, now, reduceMotion);
+      startDot(ctx, c, strokeStart(form, tpls, i), i, now, reduceMotion);
     }
     if (loc > 0 && loc < 1) {
       const h = tpl.pts[upto - 1]!;

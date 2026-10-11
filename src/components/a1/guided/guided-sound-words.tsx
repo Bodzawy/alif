@@ -5,11 +5,12 @@ import { CheckCircle2, Loader2, Mic, Play, Volume2, VolumeX } from "lucide-react
 
 import { SoundWordsStep } from "@/components/a1/sound-words-step";
 import { Button } from "@/components/ui/button";
-import type { SoundItem, VocabularyItem } from "@/data/types";
+import type { A1Word, SoundItem } from "@/data/types";
 import { openGuidedMic, type GuidedMic } from "@/lib/audio/guided-mic";
 import { sleep } from "@/lib/audio/narrate";
 import { createNarrator, readMuted, type Narrator } from "@/lib/audio/narration";
 import { getLessonProgress, markExercisePassed, markExerciseSkipped, markLessonCompleted, subscribeProgress } from "@/lib/progress";
+import { GERMAN_CUES } from "@/lib/pronunciation/cues";
 import { speechUrl } from "@/lib/tts/player";
 import { cn } from "@/lib/utils";
 
@@ -22,7 +23,7 @@ import { useGuidedFlow, type BlockMark, type GuidedBlock, type GuidedDeps } from
 // checked by the same evaluation as "Aufnehmen". Without a microphone, or when
 // the evaluation keeps failing, the page falls back to the buttons.
 
-type Groups = { sound: SoundItem; words: VocabularyItem[] }[];
+type Groups = { sound: SoundItem; words: A1Word[] }[];
 
 /** The 12 blocks in the order the child sees them: per row the sound, then its words (RTL). */
 export function guidedBlocks(groups: Groups): GuidedBlock[] {
@@ -34,6 +35,8 @@ export function guidedBlocks(groups: Groups): GuidedBlock[] {
 
 /** When the model audio cannot play (muted, offline): give the child a moment before listening. */
 const SILENT_PLAY_MS = 800;
+/** Upper limit for fetching + playing one model word: a stalled request or player must not stop the flow. */
+const MAX_PLAY_MS = 8000;
 
 const CAPTION = {
   play: "Hör zu …",
@@ -76,31 +79,39 @@ export function GuidedSoundWords({ groups, progressKey }: { groups: Groups; prog
     };
   }, [releaseMic]);
 
-  const deps: GuidedDeps = useMemo(
-    () => ({
+  const deps: GuidedDeps = useMemo(() => {
+    /** Speaks a text through /api/tts on the one audio element; resolves when it ended (or could not play). */
+    async function speak(text: string, signal: AbortSignal) {
+      const n = narrator.current;
+      let result: "ended" | "skipped" | "interrupted" = "skipped";
+      if (n) {
+        const onAbort = () => n.stop();
+        signal.addEventListener("abort", onAbort);
+        const cap = new AbortController();
+        const playing = (async () => {
+          const url = await speechUrl(text);
+          if (signal.aborted || cap.signal.aborted) return "interrupted" as const;
+          return n.playUrl(url);
+        })().catch(() => "skipped" as const); // text-to-speech not reachable: go on without the audio
+        result = await Promise.race([playing, sleep(MAX_PLAY_MS, cap.signal).then(() => (cap.signal.aborted ? ("interrupted" as const) : ("skipped" as const)))]);
+        cap.abort();
+        if (result === "skipped" && !signal.aborted) n.stop();
+        signal.removeEventListener("abort", onAbort);
+      }
+      return result;
+    }
+    return {
       async play(block, signal) {
-        const n = narrator.current;
-        let result: "ended" | "skipped" | "interrupted" = "skipped";
-        if (n) {
-          const onAbort = () => n.stop();
-          signal.addEventListener("abort", onAbort);
-          try {
-            const url = await speechUrl(block.text);
-            if (signal.aborted) return;
-            result = await n.playUrl(url);
-          } catch {
-            result = "skipped"; // text-to-speech not reachable: go on without the model audio
-          } finally {
-            signal.removeEventListener("abort", onAbort);
-          }
-        }
-        if (result !== "ended") await sleep(SILENT_PLAY_MS, signal);
+        if ((await speak(block.text, signal)) !== "ended") await sleep(SILENT_PLAY_MS, signal);
+      },
+      // A right answer: "Super!" – the next block follows when it has finished.
+      async praise(signal) {
+        await speak(GERMAN_CUES.super, signal);
       },
       record: (signal) => mic.current?.record(signal) ?? Promise.resolve(null),
       evaluate: (utterance, block, signal) => evaluateUtterance(utterance, block.target, signal),
-    }),
-    []
-  );
+    };
+  }, []);
 
   const flow = useGuidedFlow(blocks, deps, {
     onMark: (id, mark) => (mark === "done" ? markExercisePassed(progressKey, id) : markExerciseSkipped(progressKey, id)),

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Karte">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eef8ff"/><stop offset="1" stop-color="#c4e2f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#dcefff"/><circle cx="340" cy="236" r="50" fill="#dcefff"/>
+  <ellipse cx="200" cy="248" rx="100" ry="10" fill="#000" opacity="0.12"/>
+<g transform="rotate(-8 200 150)">
+  <rect x="96" y="76" width="208" height="140" rx="16" fill="#fff"/>
+  <rect x="96" y="76" width="208" height="44" rx="16" fill="#3d8bfd"/><rect x="96" y="104" width="208" height="16" fill="#3d8bfd"/>
+  <circle cx="150" cy="166" r="22" fill="#ffd54a"/><circle cx="150" cy="160" r="9" fill="#e3a33d"/><path d="M134 182 C138 170 162 170 166 182 Z" fill="#e3a33d"/>
+  <rect x="186" y="150" width="96" height="10" rx="5" fill="#c8d3e6"/><rect x="186" y="170" width="72" height="10" rx="5" fill="#c8d3e6"/><rect x="186" y="190" width="84" height="10" rx="5" fill="#c8d3e6"/>
+  </g>
+</svg>

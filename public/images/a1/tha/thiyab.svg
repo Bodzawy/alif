@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Kleider">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#f1ecfb"/><stop offset="1" stop-color="#d8ccf3"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#e6ddf8"/><circle cx="340" cy="236" r="50" fill="#e6ddf8"/>
+  
+<rect x="50" y="56" width="300" height="8" rx="4" fill="#8a5a33"/>
+  <path d="M110 78 L110 64" stroke="#7e8a99" stroke-width="3"/><path d="M94 78 Q110 56 126 78" stroke="#7e8a99" stroke-width="3" fill="none"/>
+  <path d="M86 82 L134 82 L150 108 L140 116 L136 108 L148 208 L72 208 L84 108 L80 116 L70 108 Z" fill="#ff7aa2"/><path d="M200 78 L200 64" stroke="#7e8a99" stroke-width="3"/><path d="M184 78 Q200 56 216 78" stroke="#7e8a99" stroke-width="3" fill="none"/>
+  <path d="M176 82 L224 82 L240 108 L230 116 L226 108 L238 208 L162 208 L174 108 L170 116 L160 108 Z" fill="#7a8cff"/><path d="M290 78 L290 64" stroke="#7e8a99" stroke-width="3"/><path d="M274 78 Q290 56 306 78" stroke="#7e8a99" stroke-width="3" fill="none"/>
+  <path d="M266 82 L314 82 L330 108 L320 116 L316 108 L328 208 L252 208 L264 108 L260 116 L250 108 Z" fill="#ffb347"/>
+  <g fill="#fff" opacity=".5"><circle cx="110" cy="150" r="5"/><circle cx="110" cy="170" r="5"/><circle cx="200" cy="150" r="5"/><circle cx="200" cy="170" r="5"/></g>
+</svg>

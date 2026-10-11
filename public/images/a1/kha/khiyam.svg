@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Zelte">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+  
+<circle cx="330" cy="64" r="28" fill="#ffd54a"/>
+  <path d="M0 230 C120 220 280 220 400 230 L400 300 L0 300 Z" fill="#e9c27a"/>
+  <path d="M110 137.0 L181.5 236 L38.5 236 Z" fill="#c0503c"/><path d="M110 137.0 L129.8 236 L90.2 236 Z" fill="#7a2a1e"/><line x1="110" y1="137.0" x2="110" y2="120.5" stroke="#6b4226" stroke-width="4"/><path d="M270 128.0 L348.0 236 L192.0 236 Z" fill="#3d8bfd"/><path d="M270 128.0 L291.6 236 L248.4 236 Z" fill="#1f4f9a"/><line x1="270" y1="128.0" x2="270" y2="110.0" stroke="#6b4226" stroke-width="4"/><path d="M190 178.0 L242.0 250 L138.0 250 Z" fill="#f2b31f"/><path d="M190 178.0 L204.4 250 L175.6 250 Z" fill="#a86f1f"/><line x1="190" y1="178.0" x2="190" y2="166.0" stroke="#6b4226" stroke-width="4"/>
+</svg>

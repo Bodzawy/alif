@@ -44,6 +44,12 @@ export type VocabularyItem = {
   exercise: PronunciationExercise;
 };
 
+/**
+ * A word of A1 · Schritt 2. Like VocabularyItem, but the picture is optional:
+ * without one the card shows the word large with its German meaning.
+ */
+export type A1Word = Omit<VocabularyItem, "image"> & { image?: VocabularyItem["image"] };
+
 /** Optional video shown on /<level>/<lesson>/intro before the lesson starts. */
 export type LessonIntroVideo = {
   /** Under public/, e.g. "/videos/a1/lesson-1/de.mp4". */
@@ -105,6 +111,21 @@ export type FormsWord = {
   /** Recorded word: file name without extension in the step's audio folder, e.g. "ana". */
   audio: string;
   image?: { src: string; alt: string };
+  /** Letter lessons: which occurrence of the letter is meant when it appears twice (0 = first, -1 = last; default 0). */
+  occurrence?: number;
+};
+
+/**
+ * "Formen" of a letter that connects forward (ب ت ث ج ح خ). Without it the
+ * step is the Alif lesson's (أ / ـأ).
+ */
+export type FormsLetter = {
+  /** The bare letter, e.g. "ب". */
+  glyph: string;
+  /** German name, e.g. "Ba" ("das Ba"). */
+  name: string;
+  /** German text of every narration clip of the step: caption and recording script (file name → text). */
+  texts: Record<string, string>;
 };
 
 export type FormsContent = {
@@ -118,6 +139,8 @@ export type FormsContent = {
   neighbors: string[];
   /** Activity 3 "Mit Hand oder ohne?" (shown shuffled). */
   sort: FormsWord[];
+  /** Set for a letter lesson (four baskets, Hands on both sides); absent for the Alif lesson. */
+  letter?: FormsLetter;
 };
 
 type A1StepBase = {
@@ -131,14 +154,9 @@ type A1StepBase = {
 
 export type A1Step =
   | (A1StepBase & {
-      kind: "sounds";
-      /** Practised one after another. */
-      sounds: SoundItem[];
-    })
-  | (A1StepBase & {
       kind: "sound-words";
       /** One group per sound: the sound, then the words that begin with it. */
-      groups: { sound: SoundItem; words: VocabularyItem[] }[];
+      groups: { sound: SoundItem; words: A1Word[] }[];
     })
   | (A1StepBase & {
       kind: "forms";
@@ -151,6 +169,11 @@ export type A1Step =
   | (A1StepBase & {
       kind: "gaps";
       gaps: GapsContent;
+    })
+  | (A1StepBase & {
+      kind: "phrases";
+      /** Listen and speak, one card per phrase (picture, Arabic, German, transliteration). */
+      phrases: A1Word[];
     });
 
 // ---------------------------------------------------------------------------
@@ -163,8 +186,24 @@ export type GapItem = {
   arabic: string;
   german: string;
   image?: { src: string; alt: string };
-  /** Recorded word: file name without extension in the step's audio folder. */
+  /** Recorded word: file name without extension in the step's audio folder. Without a recording the word is spoken by /api/tts. */
   audio?: string;
+  /**
+   * The book pattern: "_" for each missing letter, e.g. "_ا_" for بَابْ. The
+   * answers are the tiles of `arabic` at the gaps (src/lib/arabic/gap.ts).
+   * Without a pattern the gap is the word's Hamza-Alif (the Alif lesson).
+   */
+  pattern?: string;
+  /** Answer tiles of this item (default: the step's `choices`), e.g. in the review. */
+  choices?: string[];
+};
+
+/** Narration clip names (in the step's audio folder) for answers and explanations. */
+export type GapsClips = {
+  ok: string;
+  hint: string;
+  /** Explanation of the right answer, by its vowel sign. */
+  reveal: { a: string; i: string; u: string; sukun: string };
 };
 
 export type GapsContent = {
@@ -178,6 +217,10 @@ export type GapsContent = {
   items: GapItem[];
   /** Narration keys of this step. */
   narration: { intro: string; done: string };
+  /** Answer and explanation clips (default: the Alif lesson's g_ok, g_hint, g_reveal_*). */
+  clips?: GapsClips;
+  /** Captions (= recording texts) of the clips, by clip name (default: the Alif lesson's GAPS_TEXT). */
+  texts?: Record<string, string>;
 };
 
 // ---------------------------------------------------------------------------
@@ -191,6 +234,13 @@ export type WritingStroke = {
   arrow: { a: number; b: number; off: number };
   /** Thinner pen, e.g. for the Hamza. */
   thin?: boolean;
+  /**
+   * A dot: `d` is a small circle around the dot's centre. A tap or a short
+   * scribble close to the centre counts (TRACE_TOL.dot); the arrow is not drawn.
+   */
+  dot?: boolean;
+  /** For a stroke after the first: what comes next, completing "Gut! Jetzt {label}.", e.g. "den Punkt unten". */
+  label?: string;
 };
 
 export type WritingForm = {
@@ -207,9 +257,29 @@ export type WritingForm = {
 export type WritingLetterSet = {
   id: string;
   forms: WritingForm[];
+  /** Hint when a later stroke is traced first (default: the Alif's "Zuerst das Alif, dann die Hamza."). */
+  orderHint?: string;
 };
 
+/**
+ * One entry of an A1 lesson (unit): a letter (أ ب ت ث ج ح خ), the review or
+ * the lesson's phrase. Its steps live at /a1/<unit>/<entry>/<step>.
+ */
 export type A1Lesson = {
+  /** URL segment, e.g. "alif", "ba", "review". */
+  slug: string;
+  kind: "letter" | "review" | "phrase";
+  /** As shown in the lesson's contents, e.g. "أ", "مراجعة", "صَبَاحُ الْخَيْر". */
+  label: string;
+  /** German name, e.g. "Alif", "Wiederholung", "Guten Morgen". */
+  labelGerman: string;
+  /** The letter of a letter entry. */
+  letter?: A1LessonLetter;
+  steps: A1Step[];
+};
+
+/** An A1 lesson of the book ("الدرس الأول – صَبَاحُ الْخَيْر"): its entries in book order. */
+export type A1Unit = {
   /** URL segment, e.g. "lesson-1". */
   slug: string;
   number: number;
@@ -217,5 +287,14 @@ export type A1Lesson = {
   title: string;
   /** German translation of the title. */
   titleGerman: string;
-  steps: A1Step[];
+  lessons: A1Lesson[];
+};
+
+export type A1LessonLetter = {
+  /** Same as the lesson slug, e.g. "ba". */
+  id: string;
+  /** The bare letter, e.g. "ب". */
+  glyph: string;
+  /** German name, e.g. "Ba". */
+  name: string;
 };

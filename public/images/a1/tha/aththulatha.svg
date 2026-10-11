@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Dienstag">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff0f3"/><stop offset="1" stop-color="#ffd0dc"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#ffe2e9"/><circle cx="340" cy="236" r="50" fill="#ffe2e9"/>
+  <ellipse cx="200" cy="252" rx="130" ry="10" fill="#000" opacity="0.12"/>
+<rect x="60" y="62" width="280" height="176" rx="16" fill="#fff"/>
+  <rect x="60" y="62" width="280" height="40" rx="16" fill="#e53950"/><rect x="60" y="86" width="280" height="16" fill="#e53950"/>
+  <g fill="#7e8a99"><rect x="104" y="48" width="12" height="30" rx="6"/><rect x="284" y="48" width="12" height="30" rx="6"/></g>
+  <g font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="20" text-anchor="middle" fill="#9aa3ad">
+    <text x="94" y="146">MO</text><text x="244" y="146">MI</text><text x="306" y="146">DO</text>
+    <text x="94" y="206">FR</text><text x="244" y="206">SA</text><text x="306" y="206">SO</text>
+  </g>
+  <rect x="134" y="118" width="76" height="96" rx="14" fill="#e53950"/>
+  <text x="172" y="182" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="40" fill="#fff">DI</text>
+</svg>

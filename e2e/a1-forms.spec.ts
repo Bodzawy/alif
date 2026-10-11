@@ -44,17 +44,17 @@ async function touchDrag(page: Page, from: Locator, to: Locator) {
 
 test.use({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true });
 
-test("Schritt 2 → Weiter: Formen; Schritt 3 of 4 with Zurück: Wörter and Weiter: Schreiben", async ({ page }) => {
-  await page.goto("/a1/lesson-1/step-2");
+test("Wörter (Schritt 1) → Weiter: Formen; Schritt 2 of 5 with Zurück: Wörter and Weiter: Schreiben", async ({ page }) => {
+  await page.goto("/a1/lesson-1/alif/step-1");
   await expect(page.getByTestId("step-next")).toHaveText(/Weiter: Formen/);
-  await expect(page.getByTestId("step-prev")).toHaveText(/Zurück: Laute: أَ · إِ · أُ/);
-  await expect(page.getByTestId("step-tab-step-3")).toHaveText(/3\s*Formen: أ · ـأ/);
+  await expect(page.getByTestId("step-prev")).toHaveCount(0);
+  await expect(page.getByTestId("step-tab-step-2")).toHaveText(/2\s*Formen: أ · ـأ/);
   await page.getByTestId("step-next").click();
-  await expect(page).toHaveURL(/\/a1\/lesson-1\/step-3$/);
-  await expect(page.getByTestId("step-position")).toHaveText("Schritt 3 von 6");
+  await expect(page).toHaveURL(/\/a1\/lesson-1\/alif\/step-2$/);
+  await expect(page.getByTestId("step-position")).toHaveText("Schritt 2 von 5");
   await expect(page.getByTestId("step-prev")).toHaveText(/Zurück: Wörter/);
   await expect(page.getByTestId("step-next")).toHaveText(/Weiter: Schreiben/);
-  await expect(page.getByTestId("step-next")).toHaveAttribute("href", "/a1/lesson-1/step-4");
+  await expect(page.getByTestId("step-next")).toHaveAttribute("href", "/a1/lesson-1/alif/step-3");
 });
 
 test("Zuschauen, then all three activities on a phone: narration chain, touch drag, book content only, progress", async ({ page }) => {
@@ -63,7 +63,7 @@ test("Zuschauen, then all three activities on a phone: narration chain, touch dr
   const wordRequests: string[] = [];
   page.on("request", (r) => WORD_FILES.test(r.url()) && wordRequests.push(r.url()));
   const played = await recordPlays(page);
-  await page.goto("/a1/lesson-1/step-3");
+  await page.goto("/a1/lesson-1/alif/step-2");
 
   // Autoplay: nothing before the tap. Then f_intro → e_intro → scene 1, with no tap in between.
   await page.waitForTimeout(300);
@@ -184,7 +184,7 @@ test("Zuschauen, then all three activities on a phone: narration chain, touch dr
   await expect.poll(() => played.at(-1)).toBe("s_done");
   await expect(page.getByTestId("step-completed")).toBeVisible();
   const progress = await page.evaluate(() => JSON.parse(localStorage.getItem("alif:progress:v1") ?? "{}"));
-  expect(progress["a1/lesson-1/step-3"].completedAt).toBeTruthy();
+  expect(progress["a1/lesson-1/alif/step-2"].completedAt).toBeTruthy();
 
   expect(wordRequests).toEqual([]);
   expect(errors).toEqual([]);
@@ -193,7 +193,7 @@ test("Zuschauen, then all three activities on a phone: narration chain, touch dr
 
 test("mute is remembered across visits; Nochmal hören restarts Zuschauen, later replays the exercise intro", async ({ page }) => {
   const played = await recordPlays(page);
-  await page.goto("/a1/lesson-1/step-3");
+  await page.goto("/a1/lesson-1/alif/step-2");
   await page.getByTestId("start-button").tap();
   await expect.poll(() => played[0]).toBe("f_intro");
   await page.getByTestId("replay-intro").tap();
@@ -216,7 +216,7 @@ test("mute is remembered across visits; Nochmal hören restarts Zuschauen, later
 
 test("reduced motion: tiles only fade in, the join is a crossfade, and the finished word still fades in", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/a1/lesson-1/step-3");
+  await page.goto("/a1/lesson-1/alif/step-2");
   await page.getByTestId("mute-toggle").tap();
   await page.getByTestId("start-button").tap();
   await page.getByTestId("explain-next").tap(); // skip the intro

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Glocke">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff4d6"/><stop offset="1" stop-color="#ffd98a"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#ffe7a8"/><circle cx="340" cy="236" r="50" fill="#ffe7a8"/>
+  <ellipse cx="200" cy="262" rx="90" ry="10" fill="#000" opacity="0.12"/>
+<path d="M200 40 L200 60" stroke="#8a5a33" stroke-width="8"/><circle cx="200" cy="40" r="12" fill="none" stroke="#8a5a33" stroke-width="6"/>
+  <path d="M200 60 C150 60 136 100 132 150 C128 190 112 206 96 216 L304 216 C288 206 272 190 268 150 C264 100 250 60 200 60 Z" fill="#f2b31f"/>
+  <rect x="90" y="208" width="220" height="18" rx="9" fill="#e09a10"/>
+  <circle cx="200" cy="240" r="16" fill="#c98a2b"/>
+  <path d="M166 90 C150 120 148 160 150 190" stroke="#ffe680" stroke-width="10" fill="none" stroke-linecap="round" opacity=".7"/>
+  <g stroke="#f2b31f" stroke-width="5" stroke-linecap="round"><path d="M72 120 C60 140 60 160 72 180"/><path d="M328 120 C340 140 340 160 328 180"/></g>
+</svg>

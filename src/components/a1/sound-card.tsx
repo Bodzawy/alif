@@ -7,8 +7,8 @@ import { cn } from "@/lib/utils";
 
 /**
  * A vocalised sound (e.g. أَ): big glyph, vowel name, listen and speak.
- *   lg   – step 1, the sound on its own;
- *   side – step 2, the sound at the start (right) of its word row, like the
+ *   lg   – the sound on its own (large);
+ *   side – "Wörter": the sound at the start (right) of its word row, like the
  *          lesson sheet; on small screens a compact strip above the words.
  */
 export function SoundCard({

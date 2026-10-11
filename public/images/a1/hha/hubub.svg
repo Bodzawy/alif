@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Körner">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff4d6"/><stop offset="1" stop-color="#ffd98a"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#ffe7a8"/><circle cx="340" cy="236" r="50" fill="#ffe7a8"/>
+  <ellipse cx="200" cy="236" rx="110" ry="8" fill="#000" opacity="0.12"/>
+<path d="M110 170 C110 250 290 250 290 170 Z" fill="#c98a2b"/><ellipse cx="200" cy="170" rx="90" ry="20" fill="#a86f1f"/>
+  <g fill="#f2c641">
+  <ellipse cx="170" cy="164" rx="9" ry="6" transform="rotate(20 170 164)"/><ellipse cx="190" cy="158" rx="9" ry="6" transform="rotate(-20 190 158)"/><ellipse cx="212" cy="162" rx="9" ry="6" transform="rotate(30 212 162)"/><ellipse cx="232" cy="168" rx="9" ry="6"/><ellipse cx="150" cy="172" rx="9" ry="6" transform="rotate(-30 150 172)"/><ellipse cx="200" cy="172" rx="9" ry="6"/><ellipse cx="252" cy="170" rx="9" ry="6" transform="rotate(10 252 170)"/><ellipse cx="180" cy="176" rx="9" ry="6" transform="rotate(15 180 176)"/><ellipse cx="222" cy="178" rx="9" ry="6" transform="rotate(-15 222 178)"/>
+  <ellipse cx="96" cy="250" rx="9" ry="6" transform="rotate(20 96 250)"/><ellipse cx="300" cy="254" rx="9" ry="6"/><ellipse cx="320" cy="244" rx="9" ry="6" transform="rotate(40 320 244)"/>
+  </g>
+  <g stroke="#c9a23a" stroke-width="4" fill="none" stroke-linecap="round"><path d="M280 140 C296 110 300 80 296 52"/><path d="M110 140 C100 110 100 84 108 56"/></g>
+  <g fill="#e3b341"><ellipse cx="300" cy="70" rx="7" ry="12" transform="rotate(20 300 70)"/><ellipse cx="290" cy="90" rx="7" ry="12" transform="rotate(-20 290 90)"/><ellipse cx="302" cy="104" rx="7" ry="12" transform="rotate(20 302 104)"/><ellipse cx="104" cy="74" rx="7" ry="12" transform="rotate(-20 104 74)"/><ellipse cx="114" cy="94" rx="7" ry="12" transform="rotate(20 114 94)"/><ellipse cx="102" cy="110" rx="7" ry="12" transform="rotate(-20 102 110)"/></g>
+</svg>

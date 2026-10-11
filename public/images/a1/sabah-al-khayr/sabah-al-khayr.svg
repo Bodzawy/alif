@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Guten Morgen">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+  
+<circle cx="300" cy="150" r="70" fill="#ffd54a"/>
+  <g stroke="#ffd54a" stroke-width="8" stroke-linecap="round"><line x1="300" y1="56" x2="300" y2="36"/><line x1="236" y1="84" x2="222" y2="70"/><line x1="364" y1="84" x2="378" y2="70"/><line x1="210" y1="140" x2="190" y2="140"/></g>
+  <path d="M0 200 C100 176 220 186 400 196 L400 300 L0 300 Z" fill="#8fd16f"/>
+  <path d="M0 236 C120 222 260 232 400 226 L400 300 L0 300 Z" fill="#6cbf55"/>
+<rect x="112.4" y="199.1" width="12.1" height="39.6" rx="5.5" fill="#efc49d"/><rect x="135.5" y="199.1" width="12.1" height="39.6" rx="5.5" fill="#efc49d"/>
+  <ellipse cx="117.9" cy="238.7" rx="11.0" ry="5.5" fill="#5b3a29"/><ellipse cx="142.1" cy="238.7" rx="11.0" ry="5.5" fill="#5b3a29"/>
+  <path d="M108.0 111.1 L152.0 111.1 L176.2 207.9 L83.8 207.9 Z" fill="#ff7aa2"/>
+  <path d="M108.0 119.9 C86.0 144.1, 83.8 166.1, 88.2 181.5" stroke="#efc49d" stroke-width="11.0" fill="none" stroke-linecap="round"/>
+  <path d="M152.0 119.9 C174.0 144.1, 176.2 166.1, 171.8 181.5" stroke="#efc49d" stroke-width="11.0" fill="none" stroke-linecap="round"/>
+  <path d="M86.6 132.8 C78.6 40.0, 111.3 30.0, 130 32.0 C148.7 30.0, 181.4 40.0, 173.4 132.8 Z" fill="#3b2416"/>
+  <ellipse cx="130" cy="77.4" rx="37.400000000000006" ry="39.3" fill="#efc49d"/>
+  <path d="M92.6 73.4 C92.6 34.0, 167.4 34.0, 167.4 73.4 C152.44 56.83, 107.56 56.83, 92.6 73.4 Z" fill="#3b2416"/>
+  <circle cx="163.4" cy="46.0" r="7" fill="#ff6f91"/><circle cx="173.4" cy="42.0" r="6" fill="#ff6f91"/>
+  <circle cx="116.9" cy="79.4" r="4.1" fill="#2f2a26"/><circle cx="143.1" cy="79.4" r="4.1" fill="#2f2a26"/>
+  <circle cx="106.4" cy="90.5" r="4.5" fill="#ff9d9d" opacity=".6"/><circle cx="153.6" cy="90.5" r="4.5" fill="#ff9d9d" opacity=".6"/>
+  <path d="M118.8 91.6 Q130 100.6 141.2 91.6" stroke="#8a3b2b" stroke-width="3.0" fill="none" stroke-linecap="round"/>
+  <path d="M168 128 C186 112 196 90 194 70" stroke="#efc49d" stroke-width="11" fill="none" stroke-linecap="round"/><circle cx="194" cy="64" r="9" fill="#efc49d"/>
+</svg>

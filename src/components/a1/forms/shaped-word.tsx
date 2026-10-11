@@ -2,21 +2,26 @@
 
 import { useLayoutEffect, useRef, useState } from "react";
 
-import { hamzaIndex, isHamzaHeld } from "@/lib/arabic/hamza-alif";
+import { hamzaIndex } from "@/lib/arabic/hamza-alif";
+import { joins } from "@/lib/arabic/letter-form";
 import { cn } from "@/lib/utils";
 
 type Box = { top: number; right: number; bottom: number; left: number };
 type Range2 = [from: number, to: number];
 /** What to colour inside one run of text (character offsets into that run). */
-type Mark = { kind: "alif"; at: Range2 } | { kind: "muted"; at: Range2 } | { kind: "hand"; alif: Range2; neighbor: Range2 };
+type Mark = { kind: "alif"; at: Range2 } | { kind: "muted"; at: Range2 } | { kind: "hand"; alif: Range2; neighbor: Range2 } | { kind: "own"; alif: Range2 };
 
-const MARK_CLASS = { alif: "text-primary", hand: "text-accent", muted: "text-muted-foreground" } as const;
+const MARK_CLASS = { alif: "text-primary", hand: "text-accent", own: "text-accent", muted: "text-muted-foreground" } as const;
 
 // An Arabic word written as ONE string, so the browser shapes every join itself.
 // Highlights never split the text into spans (that can break the shaping in
 // some browsers): the same string is drawn again on top, in colour, and clipped
 // to the measured box of the Hamza-Alif ("alif") and of the connecting stroke
 // of the letter before it ("hand").
+//
+// `target`: a letter lesson's letter (tile index) instead of the Hamza-Alif.
+// A letter that connects forward also has its own Hand ("own"): the joining
+// stroke on its left, towards the next letter.
 //
 // `gap`: when the Alif is NOT held by the letter before it, show that with a
 // visible gap and the neighbour muted (as in "Wer hält fest?"). Splitting the
@@ -27,8 +32,11 @@ export function ShapedWord({
   gap = false,
   className,
   testId,
+  target,
 }: {
   tiles: readonly string[];
+  /** Tile index of the letter to highlight (default: the Hamza-Alif). */
+  target?: number;
   /** Colour the Hamza-Alif and, when it is held, the neighbour's Hand. */
   highlight?: boolean;
   /** Show a gap and a muted neighbour when the Alif is not held. */
@@ -36,8 +44,9 @@ export function ShapedWord({
   className?: string;
   testId?: string;
 }) {
-  const index = hamzaIndex(tiles);
-  const held = index > 0 && isHamzaHeld(tiles, index);
+  const index = target ?? hamzaIndex(tiles);
+  const held = index > 0 && joins(tiles, index).previous;
+  const own = index >= 0 && joins(tiles, index).next;
   const split = highlight && gap && index > 0 && !held;
   const before = tiles.slice(0, Math.max(0, index)).join("");
   const [measured, setMeasured] = useState<Record<number, boolean>>({});
@@ -48,14 +57,16 @@ export function ShapedWord({
     runs = [{ text: tiles.join(""), marks: [] }];
   } else if (split) {
     const neighbor = tiles[index - 1]!;
+    const alone: Range2 = [0, tiles[index]!.length];
     runs = [
       { text: before, marks: [{ kind: "muted", at: [before.length - neighbor.length, before.length] }] },
-      { text: tiles.slice(index).join(""), marks: [{ kind: "alif", at: [0, tiles[index]!.length] }] },
+      { text: tiles.slice(index).join(""), marks: [{ kind: "alif", at: alone }, ...(own ? [{ kind: "own" as const, alif: alone }] : [])] },
     ];
   } else {
     const alif: Range2 = [before.length, before.length + tiles[index]!.length];
     const marks: Mark[] = [{ kind: "alif", at: alif }];
     if (held) marks.push({ kind: "hand", alif, neighbor: [before.length - tiles[index - 1]!.length, before.length] });
+    if (own) marks.push({ kind: "own", alif });
     runs = [{ text: tiles.join(""), marks }];
   }
 
@@ -67,18 +78,19 @@ export function ShapedWord({
       dir="rtl"
       data-testid={testId}
       data-held={index > 0 ? held : undefined}
+      data-holds-next={target !== undefined ? own : undefined}
       data-gap={split ? "true" : undefined}
       data-highlighted={highlighted ? "true" : "false"}
       className={cn("relative inline-flex items-baseline whitespace-nowrap font-arabic font-bold", split && "gap-[0.35em]", className)}
     >
       {runs.map((run, i) => (
-        <Run key={`${runs.length}-${i}`} text={run.text} marks={run.marks} onMeasured={onMeasured(i)} handTestId={testId ? `${testId}-hand` : undefined} />
+        <Run key={`${runs.length}-${i}`} text={run.text} marks={run.marks} onMeasured={onMeasured(i)} handTestId={testId ? `${testId}-hand` : undefined} ownTestId={testId ? `${testId}-own-hand` : undefined} />
       ))}
     </span>
   );
 }
 
-function Run({ text, marks, onMeasured, handTestId }: { text: string; marks: Mark[]; onMeasured: (ok: boolean) => void; handTestId?: string }) {
+function Run({ text, marks, onMeasured, handTestId, ownTestId }: { text: string; marks: Mark[]; onMeasured: (ok: boolean) => void; handTestId?: string; ownTestId?: string }) {
   const wrapper = useRef<HTMLSpanElement>(null);
   const base = useRef<HTMLSpanElement>(null);
   const baseline = useRef<HTMLSpanElement>(null);
@@ -112,7 +124,23 @@ function Run({ text, marks, onMeasured, handTestId }: { text: string; marks: Mar
         right: Math.max(0, outer.right - right),
       });
       const result: Array<{ kind: Mark["kind"]; box: Box }> = [];
+      /** The baseline band of a box: only the joining stroke, not the dots and harakat. */
+      const toBaseline = (box: Box) => {
+        const line = baseline.current?.getBoundingClientRect().top;
+        const size = parseFloat(getComputedStyle(wrapper.current!).fontSize) || 0;
+        if (line !== undefined && size > 0) {
+          box.top = Math.max(0, line - outer.top - size * 0.24);
+          box.bottom = Math.max(0, outer.bottom - (line + size * 0.1));
+        }
+        return box;
+      };
       for (const mark of wanted) {
+        if (mark.kind === "own") {
+          // RTL: the letter's own Hand is its left end, reaching to the next letter.
+          const letter = rect(mark.alif);
+          if (letter) result.push({ kind: "own", box: toBaseline(toBox(letter.left - 2, letter.left + Math.max(6, letter.width * 0.42))) });
+          continue;
+        }
         if (mark.kind !== "hand") {
           const r = rect(mark.at);
           if (r) result.push({ kind: mark.kind, box: toBox(r.left - 1, r.right + 1) });
@@ -123,14 +151,7 @@ function Run({ text, marks, onMeasured, handTestId }: { text: string; marks: Mar
         const alif = rect(mark.alif);
         const neighbor = rect(mark.neighbor);
         if (!alif || !neighbor) continue;
-        const box = toBox(alif.right - 2, alif.right + Math.max(6, neighbor.width * 0.42));
-        const line = baseline.current?.getBoundingClientRect().top;
-        const size = parseFloat(getComputedStyle(wrapper.current!).fontSize) || 0;
-        if (line !== undefined && size > 0) {
-          box.top = Math.max(0, line - outer.top - size * 0.24);
-          box.bottom = Math.max(0, outer.bottom - (line + size * 0.1));
-        }
-        result.push({ kind: "hand", box });
+        result.push({ kind: "hand", box: toBaseline(toBox(alif.right - 2, alif.right + Math.max(6, neighbor.width * 0.42))) });
       }
       setBoxes(result);
       onMeasuredRef.current(result.length > 0);
@@ -147,8 +168,8 @@ function Run({ text, marks, onMeasured, handTestId }: { text: string; marks: Mar
   }, [markKey, text]);
 
   const clip = (box: Box) => `inset(${box.top}px ${box.right}px ${box.bottom}px ${box.left}px)`;
-  // Muted first, then the Alif, then the Hand on top.
-  const order = { muted: 0, alif: 1, hand: 2 } as const;
+  // Muted first, then the Alif, then the Hands on top.
+  const order = { muted: 0, alif: 1, hand: 2, own: 2 } as const;
 
   return (
     <span ref={wrapper} className="relative inline-block">
@@ -162,7 +183,7 @@ function Run({ text, marks, onMeasured, handTestId }: { text: string; marks: Mar
             key={kind}
             aria-hidden
             data-mark={kind}
-            data-testid={kind === "hand" ? handTestId : undefined}
+            data-testid={kind === "hand" ? handTestId : kind === "own" ? ownTestId : undefined}
             className={cn("pointer-events-none absolute inset-0", MARK_CLASS[kind])}
             style={{ clipPath: clip(box) }}
           >

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Thunfisch">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eef8ff"/><stop offset="1" stop-color="#c4e2f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#dcefff"/><circle cx="340" cy="236" r="50" fill="#dcefff"/>
+  
+<path d="M0 230 C60 220 120 240 200 230 C280 220 340 240 400 230 L400 300 L0 300 Z" fill="#7fb8e0" opacity=".6"/>
+  <path d="M80 150 C120 96 240 92 300 140 C320 150 334 150 348 140 L340 150 L348 162 C334 152 320 152 300 162 C240 206 120 204 80 150 Z" fill="#3a5f8a"/>
+  <path d="M84 156 C130 196 236 200 296 160 C240 176 140 176 84 156 Z" fill="#cfdbe6"/>
+  <path d="M170 104 L200 78 L214 108 Z" fill="#2c4a6d"/><path d="M182 196 L206 220 L214 192 Z" fill="#2c4a6d"/>
+  <g fill="#ffd54a"><path d="M240 112 l8 -10 l4 12 z"/><path d="M256 118 l8 -10 l4 12 z"/><path d="M240 190 l8 10 l4 -12 z"/><path d="M256 184 l8 10 l4 -12 z"/></g>
+  <circle cx="112" cy="140" r="8" fill="#fff"/><circle cx="112" cy="140" r="4" fill="#1d2b3a"/>
+  <path d="M126 160 C140 150 150 150 160 156" stroke="#2c4a6d" stroke-width="3" fill="none"/>
+</svg>

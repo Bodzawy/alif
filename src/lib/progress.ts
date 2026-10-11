@@ -39,22 +39,47 @@ export function copyLegacyLessonProgress(state: ProgressState): ProgressState {
   return next;
 }
 
+// A1 · Lektion 1 became a lesson with entries (/a1/lesson-1/<entry>/step-N),
+// and Alif's step 1 "Laute" became part of "Wörter": Alif's old steps
+// a1/lesson-1/step-N (N ≥ 2) are a1/lesson-1/alif/step-(N − 1) now. Copied the
+// same way (once, nothing deleted, an existing new entry wins). The old
+// "Laute" step has no new place.
+const A1_MIGRATION_FLAG = "alif:progress:migrated:a1-lesson-1-entries";
+const OLD_ALIF_STEP_KEY = /^a1\/lesson-1\/step-(\d+)$/;
+
+export function copyMovedA1Progress(state: ProgressState): ProgressState {
+  let next = state;
+  for (const [key, value] of Object.entries(state)) {
+    const n = Number(OLD_ALIF_STEP_KEY.exec(key)?.[1] ?? 0);
+    const target = n >= 2 && `a1/lesson-1/alif/step-${n - 1}`;
+    if (target && !state[target]) next = { ...next, [target]: value };
+  }
+  return next;
+}
+
+const MIGRATIONS: Array<[flag: string, migrate: (state: ProgressState) => ProgressState]> = [
+  [MIGRATION_FLAG, copyLegacyLessonProgress],
+  [A1_MIGRATION_FLAG, copyMovedA1Progress],
+];
+
 function migrateOnce(raw: string | null): string | null {
   if (migrationChecked) return raw;
   migrationChecked = true;
-  try {
-    if (window.localStorage.getItem(MIGRATION_FLAG)) return raw;
-    const parsed = raw ? (JSON.parse(raw) as unknown) : null;
-    if (parsed && typeof parsed === "object") {
-      const migrated = copyLegacyLessonProgress(parsed as ProgressState);
-      if (migrated !== parsed) {
-        raw = JSON.stringify(migrated);
-        window.localStorage.setItem(STORAGE_KEY, raw);
+  for (const [flag, migrate] of MIGRATIONS) {
+    try {
+      if (window.localStorage.getItem(flag)) continue;
+      const parsed = raw ? (JSON.parse(raw) as unknown) : null;
+      if (parsed && typeof parsed === "object") {
+        const migrated = migrate(parsed as ProgressState);
+        if (migrated !== parsed) {
+          raw = JSON.stringify(migrated);
+          window.localStorage.setItem(STORAGE_KEY, raw);
+        }
       }
+      window.localStorage.setItem(flag, new Date().toISOString());
+    } catch {
+      // Unreadable or blocked storage: leave everything as it is.
     }
-    window.localStorage.setItem(MIGRATION_FLAG, new Date().toISOString());
-  } catch {
-    // Unreadable or blocked storage: leave everything as it is.
   }
   return raw;
 }

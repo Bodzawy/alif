@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Palme">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+  
+<path d="M0 252 C120 242 280 242 400 252 L400 300 L0 300 Z" fill="#e9c27a"/>
+  <path d="M196 254 C186 200 190 140 206 92 L222 94 C210 140 208 200 218 254 Z" fill="#a86f1f"/>
+  <g stroke="#8a5a1a" stroke-width="3"><line x1="196" y1="230" x2="216" y2="226"/><line x1="194" y1="200" x2="214" y2="196"/><line x1="196" y1="170" x2="214" y2="166"/><line x1="200" y1="140" x2="216" y2="136"/><line x1="204" y1="112" x2="220" y2="110"/></g>
+  <g fill="#3fa34d">
+  <path d="M212 92 C170 60 120 64 86 96 C130 84 170 88 212 100 Z"/><path d="M212 92 C254 60 304 64 338 96 C294 84 254 88 212 100 Z"/>
+  <path d="M212 90 C190 50 150 36 116 40 C156 56 184 72 210 100 Z"/><path d="M212 90 C234 50 274 36 308 40 C268 56 240 72 214 100 Z"/>
+  <path d="M212 92 C200 130 150 150 120 150 C160 136 190 116 210 94 Z"/><path d="M212 92 C224 130 274 150 304 150 C264 136 234 116 214 94 Z"/>
+  </g>
+  <g fill="#8b3d19"><circle cx="202" cy="108" r="8"/><circle cx="216" cy="110" r="8"/><circle cx="208" cy="120" r="8"/></g>
+</svg>

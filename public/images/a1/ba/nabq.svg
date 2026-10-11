@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Nabk-Frucht">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#effaea"/><stop offset="1" stop-color="#cdeec0"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#e0f5d6"/><circle cx="340" cy="236" r="50" fill="#e0f5d6"/>
+  
+<path d="M60 110 C140 96 230 104 340 140" stroke="#6b4226" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <g fill="#4f9e48"><ellipse cx="110" cy="92" rx="22" ry="12" transform="rotate(-20 110 92)"/><ellipse cx="190" cy="88" rx="22" ry="12" transform="rotate(10 190 88)"/><ellipse cx="270" cy="104" rx="22" ry="12" transform="rotate(25 270 104)"/><ellipse cx="320" cy="150" rx="20" ry="11" transform="rotate(40 320 150)"/></g>
+  <g stroke="#6b4226" stroke-width="3"><line x1="120" y1="104" x2="122" y2="140"/><line x1="170" y1="102" x2="166" y2="150"/><line x1="214" y1="108" x2="220" y2="146"/><line x1="262" y1="118" x2="258" y2="166"/><line x1="300" y1="130" x2="304" y2="172"/></g>
+  <g><circle cx="122" cy="156" r="20" fill="#c9862c"/><circle cx="166" cy="168" r="22" fill="#b5531f"/><circle cx="220" cy="162" r="20" fill="#d39a33"/><circle cx="258" cy="184" r="22" fill="#a8471b"/><circle cx="304" cy="188" r="18" fill="#c9862c"/></g>
+  <g fill="#fff" opacity=".35"><circle cx="114" cy="148" r="5"/><circle cx="158" cy="158" r="6"/><circle cx="212" cy="154" r="5"/><circle cx="250" cy="174" r="6"/><circle cx="298" cy="180" r="5"/></g>
+</svg>

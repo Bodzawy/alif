@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Schlange">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff6e8"/><stop offset="1" stop-color="#f6dcb0"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#fbe8c8"/><circle cx="340" cy="236" r="50" fill="#fbe8c8"/>
+  
+<path d="M0 250 C120 240 280 240 400 250 L400 300 L0 300 Z" fill="#e9c27a"/>
+  <path d="M70 230 C110 200 160 250 200 222 C240 194 210 160 250 150 C290 140 300 110 290 92" stroke="#4f9e48" stroke-width="30" fill="none" stroke-linecap="round"/>
+  <path d="M70 230 C110 200 160 250 200 222 C240 194 210 160 250 150 C290 140 300 110 290 92" stroke="#7cc35a" stroke-width="10" fill="none" stroke-dasharray="6 14" stroke-linecap="round"/>
+  <ellipse cx="292" cy="80" rx="30" ry="22" fill="#4f9e48"/>
+  <circle cx="282" cy="72" r="6" fill="#fff"/><circle cx="283" cy="72" r="3" fill="#1d2b1d"/><circle cx="302" cy="72" r="6" fill="#fff"/><circle cx="303" cy="72" r="3" fill="#1d2b1d"/>
+  <path d="M312 90 L330 96 L322 100 L332 106" stroke="#e53950" stroke-width="3" fill="none"/>
+</svg>

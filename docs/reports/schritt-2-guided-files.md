@@ -1,35 +1,25 @@
-# Schritt 2 guided mode – files
+# A1 · Lektion 1 · Schritt 2 – geführter Modus: Dateien
 
-## New
+Nichts wurde committet; der Git-Zustand wurde nicht angefasst.
 
-- `src/components/a1/guided/evaluate.ts` — adapts the existing WAV conversion and pronunciation API to guided verdicts without changing evaluation rules.
-- `src/components/a1/guided/guided-flow.ts` — explicit cancellable state machine, retries, round two, visibility pause, and cleanup.
-- `src/components/a1/guided/guided-sound-words.tsx` — start card, guided block frames, narration, microphone lifecycle, progress, and fallback.
-- `src/lib/audio/guided-mic.ts` — one permission request and RMS based single utterance recording.
-- `src/lib/audio/narration.ts` — shared reusable audio element narrator with mute, unlock, and URL playback.
-- `src/lib/audio/narrate.ts` — abortable narration wait helpers.
-- `tests/unit/a1-guided.test.tsx` — guided state and flow tests with mocked microphone and evaluation.
-- `e2e/a1-guided.spec.ts` — phone viewport guided and fallback tests with mocked services.
-- `docs/reports/schritt-2-guided-files.md` — this change inventory.
+## Neu
 
-## Modified
+- `src/lib/audio/guided-mic.ts` – Mikrofon für den geführten Modus: einmal beim Start-Tipp geöffnet (`echoCancellation`, `noiseSuppression`, `autoGainControl` = true), Sprach-Erkennung per RMS aus einem `AnalyserNode` (Werte in `GUIDED_VAD`), `release()` stoppt die Spuren.
+- `src/components/a1/guided/evaluate.ts` – schickt eine Aufnahme an dieselbe Auswertung wie „Aufnehmen“ (`blobTo16KhzMonoWav` → `submitRecording` → `toStudentFeedback(...).passed`); unterscheidet richtig / falsch / Dienstfehler.
+- `src/components/a1/guided/guided-flow.ts` – Zustandsmaschine (Reducer + `useGuidedFlow`): focus → play → listen → check → right („Super!“) / noch einmal – unbegrenzt viele Versuche (kein „needs practice“ mehr), Pause bei `visibilitychange`, Rückfall nach 2 Dienstfehlern.
+- `src/components/a1/guided/guided-sound-words.tsx` – Start-Karte „Los geht's!“, Blöcke (Unschärfe, Vergrößerung, Tönungen, Hör-Zeichen, Beschriftungen, aria-live), Speichern / Fortsetzen, Rückfall auf die Knopf-Seite.
+- `tests/unit/a1-guided.test.tsx` – Unit-Tests (falsche Uhr, falsches Mikrofon, gemockte Auswertung).
+- `e2e/a1-guided.spec.ts` – E2E bei 390 px mit Fake-Media und gemockten Routen `/api/pronunciation` und `/api/tts`.
+- `docs/reports/schritt-2-guided-files.md` – diese Liste.
 
-- `src/components/a1/sound-card.tsx` — added optional `hideControls` for guided frames; button mode remains the default.
-- `src/components/a1/sound-words-step.tsx` — added guided frame/passed hooks while preserving the existing button layout.
-- `src/components/lessons/vocabulary-card.tsx` — added optional hidden controls and simple feedback for guided mode.
-- `src/lib/audio/voice-activity.ts` — generalized speech gate option types so guided mode can set its own timing.
-- `src/lib/tts/player.ts` — exported the cached speech URL used for playback through the shared narrator.
-- `src/app/a1/[lesson]/[step]/page.tsx` — renders guided mode for sound-word steps with the existing progress key.
-- `e2e/a1.spec.ts` — opens button fallback before legacy mobile button layout checks.
-- `e2e/support/helpers.ts` — helpers to refuse the guided mic request and open the fallback page.
-- `src/components/a1/guided/guided-sound-words.tsx` — after speech URL resolution, checks cancellation before starting playback; scrolls only the focused block into view.
+## Geändert
 
-## Verification
-
-- Typecheck, lint, production build, and all unit tests passed: 703 tests.
-- Guided e2e passed in Chromium (6/6) and Firefox (6/6); the 390 px initial guided layout passed in WebKit (1/1).
-- The Playwright WebKit build here rejects microphone access before the guided flow can start, so only its visual entry-layout case can run in this environment.
-- The related A1 guided and legacy layout e2e checks passed in Chromium (10/10). The whole existing e2e suite was attempted: 20 passed, 8 failed, 1 interrupted, and 23 were not run. Failures were in existing A1 API validation and A0 alphabet/API flows outside this guided-mode change.
-- Voice detection uses RMS 0.015, a 120 ms speech onset, 1,000 ms trailing silence, a 4,000 ms speech cap, a 5,000 ms no-speech timeout, and 30 ms polling. Layout uses 6 px blur, 0.60 opacity, 1.05 scale, 10% success/accent tints, and 400 ms transitions.
-- A successful full run makes 12 evaluation calls; the maximum before the run ends is 72 (three wrong spoken attempts for each of 12 blocks in each of two rounds). Silence is never submitted, and two consecutive service errors trigger fallback sooner.
-- Real microphone, iPhone/iPad, children's voices, and noisy-room behavior remain unverified.
+- `src/app/a1/[lesson]/[step]/page.tsx` – Schritt-Art „sound-words“ rendert jetzt `GuidedSoundWords` (statt direkt `SoundWordsStep`) mit dem bestehenden Fortschritts-Schlüssel `a1/lesson-1/step-2`.
+- `src/components/a1/sound-words-step.tsx` – optionale Eigenschaft `guided` (Rahmen um jede Karte, Knöpfe versteckt). Ohne sie ist die Seite unverändert (so im Rückfall).
+- `src/components/a1/sound-card.tsx` – optionale Eigenschaft `hideControls` (Standard: false → unverändert).
+- `src/components/lessons/vocabulary-card.tsx` (geteilt mit A0 · Wörter) – optionale Eigenschaft `hideControls` (Standard: false → A0 unverändert).
+- `src/lib/audio/narration.ts` (geteilt) – neue Methode `playUrl(url)`: spielt eine beliebige URL über dasselbe eine Audio-Element mit denselben Stumm- und Unterbrechungs-Regeln. Bestehende Methoden unverändert.
+- `src/lib/tts/player.ts` (geteilt) – neuer Export `speechUrl(text)`: liefert die bereits vorhandene, gecachte `/api/tts`-URL. `speakArabic` unverändert.
+- `src/lib/audio/voice-activity.ts` (geteilt, A0) – nur der Typ der Optionen von `createSpeechGate` wurde zu `SpeechGateOptions` erweitert (vorher an die festen A0-Werte gebunden); Logik und A0-Werte unverändert.
+- `e2e/support/helpers.ts` – zwei Helfer: `refuseGuidedMicrophone` (lehnt nur die Mikrofon-Anfrage des geführten Modus ab) und `openButtonMode`.
+- `e2e/a1.spec.ts` – die bestehenden Schritt-2-Tests der Knöpfe öffnen jetzt zuerst die Knopf-Seite (Rückfall); der Desktop-Layout-Test prüft die Reihen in beiden Modi. Die Prüfungen selbst sind gleich geblieben.

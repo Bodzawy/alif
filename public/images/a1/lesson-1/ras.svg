@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Kopf">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff4d6"/><stop offset="1" stop-color="#ffd98a"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#ffe7a8"/><circle cx="340" cy="236" r="50" fill="#ffe7a8"/>
+  
+<ellipse cx="200" cy="146" rx="92" ry="96.6" fill="#efc49d"/>
+  <path d="M108 142 C108 48, 292 48, 292 142 C255.2 95.4, 144.8 95.4, 108 142 Z" fill="#3b2416"/>
+  <circle cx="167.8" cy="148" r="10.1" fill="#2f2a26"/><circle cx="232.2" cy="148" r="10.1" fill="#2f2a26"/>
+  <circle cx="142.0" cy="178.2" r="11.0" fill="#ff9d9d" opacity=".6"/><circle cx="258.0" cy="178.2" r="11.0" fill="#ff9d9d" opacity=".6"/>
+  <path d="M172.4 181.0 Q200 203.0 227.6 181.0" stroke="#8a3b2b" stroke-width="7.4" fill="none" stroke-linecap="round"/>
+  <g fill="#efc49d"><ellipse cx="106" cy="150" rx="14" ry="22"/><ellipse cx="294" cy="150" rx="14" ry="22"/></g>
+</svg>

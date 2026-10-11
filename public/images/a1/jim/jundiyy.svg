@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Soldat">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#effaea"/><stop offset="1" stop-color="#cdeec0"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#e0f5d6"/><circle cx="340" cy="236" r="50" fill="#e0f5d6"/>
+  <ellipse cx="200" cy="252" rx="70" ry="8" fill="#000" opacity="0.12"/>
+<g>
+  <rect x="185.3" y="206.4" width="12" height="42.0" rx="5" fill="#4d5a37"/><rect x="202.1" y="206.4" width="12" height="42.0" rx="5" fill="#4d5a37"/>
+  <g fill="#2f2a26"><ellipse cx="190.55" cy="248.4" rx="12" ry="6"/><ellipse cx="209.45" cy="248.4" rx="12" ry="6"/></g>
+  <rect x="168.5" y="109.8" width="63.0" height="102.9" rx="14.700000000000001" fill="#6b7a45"/>
+  <rect x="168.5" y="160.20000000000002" width="63.0" height="9.450000000000001" fill="#4d5a37"/>
+  <path d="M172.7 120.3 C153.8 145.5 153.8 177.0 160.1 198.0" stroke="#6b7a45" stroke-width="14.700000000000001" fill="none" stroke-linecap="round"/>
+  <path d="M227.3 120.3 C246.2 145.5 246.2 177.0 239.9 198.0" stroke="#6b7a45" stroke-width="14.700000000000001" fill="none" stroke-linecap="round"/>
+  <g fill="#efc49d"><circle cx="160.1" cy="202.20000000000002" r="7.3500000000000005"/><circle cx="239.9" cy="202.20000000000002" r="7.3500000000000005"/></g>
+  <ellipse cx="200" cy="78.30000000000001" rx="31.5" ry="33.1" fill="#efc49d"/>
+  <path d="M168.5 74.30000000000001 C168.5 40.80000000000001, 231.5 40.80000000000001, 231.5 74.30000000000001 C218.9 60.97500000000001, 181.1 60.97500000000001, 168.5 74.30000000000001 Z" fill="#3b2416"/>
+  <circle cx="189.0" cy="80.30000000000001" r="3.5" fill="#2f2a26"/><circle cx="211.0" cy="80.30000000000001" r="3.5" fill="#2f2a26"/>
+  <circle cx="180.2" cy="89.3" r="3.8" fill="#ff9d9d" opacity=".6"/><circle cx="219.8" cy="89.3" r="3.8" fill="#ff9d9d" opacity=".6"/>
+  <path d="M190.6 90.3 Q200 97.8 209.4 90.3" stroke="#8a3b2b" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M164.5 72.0 C166.5 34.2 233.5 34.2 235.5 72.0 Z" fill="#4d5a37"/>
+  <rect x="160.5" y="65.7" width="79.0" height="9.450000000000001" rx="4" fill="#3c4729"/>
+  </g>
+</svg>

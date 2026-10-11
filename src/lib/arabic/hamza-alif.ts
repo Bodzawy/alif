@@ -3,35 +3,13 @@
 // it holds it – if that letter connects forward (has a "Hand").
 // Used by A1 · Lektion 1 · Schritt 3 and meant for later lessons.
 
-/** Letters that never connect to the following letter (no "Hand"). */
-export const NON_CONNECTING: ReadonlySet<string> = new Set(["ا", "أ", "إ", "آ", "د", "ذ", "ر", "ز", "و", "ؤ", "ة", "ء"]);
+import { baseLetter, joins } from "./letter-form";
+
+// The tile helpers live in the general util; re-exported for the Alif code.
+export { baseLetter, hasHand, NON_CONNECTING, splitTiles } from "./letter-form";
 
 /** Alif forms carrying a hamza. */
 const HAMZA_ALIF: ReadonlySet<string> = new Set(["أ", "إ"]);
-
-// Harakat, tanwin, shadda, sukun, dagger alif and the other Arabic combining marks.
-const MARK = /[ؐ-ًؚ-ٰٟۖ-ۭ]/;
-
-/** Splits a word into tiles: each letter together with its harakat. */
-export function splitTiles(word: string): string[] {
-  const tiles: string[] = [];
-  for (const char of word) {
-    if (MARK.test(char) && tiles.length > 0) tiles[tiles.length - 1] += char;
-    else tiles.push(char);
-  }
-  return tiles;
-}
-
-/** The letter of a tile without its harakat. */
-export function baseLetter(tile: string): string {
-  return Array.from(tile).find((char) => !MARK.test(char)) ?? "";
-}
-
-/** Does this letter (tile) reach out to the next letter? */
-export function hasHand(tile: string): boolean {
-  const letter = baseLetter(tile);
-  return letter !== "" && !NON_CONNECTING.has(letter);
-}
 
 /** Index of the Hamza-Alif tile, or -1. */
 export function hamzaIndex(tiles: readonly string[]): number {
@@ -40,7 +18,7 @@ export function hamzaIndex(tiles: readonly string[]): number {
 
 /** The Hamza-Alif is held when it is not first and the tile before it has a Hand. */
 export function isHamzaHeld(tiles: readonly string[], index = hamzaIndex(tiles)): boolean {
-  return index > 0 && hasHand(tiles[index - 1]!);
+  return index >= 0 && joins(tiles, index).previous;
 }
 
 /**

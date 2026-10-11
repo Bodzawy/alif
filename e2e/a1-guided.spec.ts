@@ -83,7 +83,7 @@ const step = (page: Page) => page.getByTestId("guided-step");
 const block = (page: Page, id: string) => page.getByTestId(`block-${id}`);
 
 test("guided entry layout: start card and blurred inactive blocks", async ({ page }) => {
-  await page.goto("/a1/lesson-1/step-2");
+  await page.goto("/a1/lesson-1/alif/step-1");
   await expect(page.getByTestId("start-button")).toBeVisible();
   await expect(block(page, "alif-fatha")).toHaveAttribute("data-state", "next");
   await expect(block(page, "ab")).toHaveAttribute("data-state", "waiting");
@@ -97,7 +97,7 @@ test("blurred blocks, the active block grows, wrong → again, right → light g
   const errors = collectPageErrors(page);
   await syntheticVoice(page);
   const calls = await mockServices(page, [false, true, true]);
-  await page.goto("/a1/lesson-1/step-2");
+  await page.goto("/a1/lesson-1/alif/step-1");
 
   // Before the start: only the first block is sharp, all others are blurred and not clickable.
   await expect(block(page, "alif-fatha")).toHaveAttribute("data-state", "next");
@@ -127,34 +127,39 @@ test("blurred blocks, the active block grows, wrong → again, right → light g
   await expect(step(page)).toHaveAttribute("data-active", "ana", { timeout: 20_000 });
 
   expect(calls.evaluate).toBe(3);
-  expect(calls.tts.slice(0, 2)).toEqual(["أَ", "أَب"]);
+  // After each right answer "Super!" (German voice) is spoken before the next block.
+  expect(calls.tts.slice(0, 3)).toEqual(["أَ", "Super!", "أَب"]);
   const progress = await page.evaluate(() => JSON.parse(localStorage.getItem("alif:progress:v1") ?? "{}"));
-  expect(progress["a1/lesson-1/step-2"].passed).toEqual(["alif-fatha", "ab"]);
+  expect(progress["a1/lesson-1/alif/step-1"].passed).toEqual(["alif-fatha", "ab"]);
 
   // Leaving the page (client-side navigation) turns the microphone off.
-  await page.getByTestId("step-prev").click();
-  await expect(page).toHaveURL(/step-1$/);
+  await page.getByTestId("back-to-unit").click();
+  await expect(page).toHaveURL(/\/a1\/lesson-1$/);
   await expect.poll(() => page.evaluate(() => (window as unknown as { __micReleased?: boolean }).__micReleased)).toBe(true);
   expect(errors).toEqual([]);
 });
 
-test("no speech: no evaluation call, 3 attempts → amber, next block", async ({ page }) => {
+test("no speech: no evaluation call; unlimited retries – the block is asked again and again, never amber, never skipped", async ({ page }) => {
   test.setTimeout(120_000);
   await silentVoice(page);
   const calls = await mockServices(page);
-  await page.goto("/a1/lesson-1/step-2");
+  await page.goto("/a1/lesson-1/alif/step-1");
   await page.getByTestId("start-button").tap();
-  await expect(step(page)).toHaveAttribute("data-active", "ab", { timeout: 60_000 });
-  await expect(block(page, "alif-fatha")).toHaveAttribute("data-state", "practice");
-  expect(await page.getByTestId("tint-alif-fatha").evaluate((e) => getComputedStyle(e).backgroundColor)).toMatch(/0\.1\)$/);
+  await expect(step(page)).toHaveAttribute("data-active", "alif-fatha");
+  // Well beyond the former three attempts (5 s listening window each).
+  await page.waitForTimeout(25_000);
+  await expect(step(page)).toHaveAttribute("data-active", "alif-fatha");
+  await expect(block(page, "alif-fatha")).not.toHaveAttribute("data-state", "practice");
+  // The model audio was played again for every new attempt (cached /api/tts URL, so one request).
+  expect(calls.tts.filter((t) => t === "أَ").length).toBeGreaterThanOrEqual(1);
   expect(calls.evaluate).toBe(0);
 });
 
 test("resume: done blocks stay green, the flow continues at the first open block", async ({ page }) => {
   await syntheticVoice(page);
   await mockServices(page);
-  await page.goto("/a1/lesson-1/step-2");
-  await page.evaluate(() => localStorage.setItem("alif:progress:v1", JSON.stringify({ "a1/lesson-1/step-2": { passed: ["alif-fatha", "ab", "ana", "amir"] } })));
+  await page.goto("/a1/lesson-1/alif/step-1");
+  await page.evaluate(() => localStorage.setItem("alif:progress:v1", JSON.stringify({ "a1/lesson-1/alif/step-1": { passed: ["alif-fatha", "ab", "ana", "amir"] } })));
   await page.reload();
   for (const id of ORDER.slice(0, 4)) await expect(block(page, id)).toHaveAttribute("data-state", "done");
   await expect(block(page, "alif-kasra")).toHaveAttribute("data-state", "next");
@@ -166,7 +171,7 @@ test("reduced motion: the active block does not grow, the listening sign does no
   await page.emulateMedia({ reducedMotion: "reduce" });
   await syntheticVoice(page);
   await mockServices(page);
-  await page.goto("/a1/lesson-1/step-2");
+  await page.goto("/a1/lesson-1/alif/step-1");
   await page.getByTestId("start-button").tap();
   await expect(page.getByTestId("listening-sign")).toBeVisible({ timeout: 10_000 });
   expect(await block(page, "alif-fatha").evaluate((e) => getComputedStyle(e).transform)).toBe("none");
@@ -178,7 +183,7 @@ test("fallback: microphone not available → today's page with buttons and a not
   await syntheticVoice(page);
   await refuseGuidedMicrophone(page);
   const calls = await mockServices(page);
-  await page.goto("/a1/lesson-1/step-2");
+  await page.goto("/a1/lesson-1/alif/step-1");
   await openButtonMode(page);
   await expect(page.getByTestId("guided-note")).toHaveText("Das Mikrofon ist nicht verfügbar. Du kannst die Knöpfe benutzen.");
   await expect(page.getByTestId("exercise-ab-record")).toBeVisible();

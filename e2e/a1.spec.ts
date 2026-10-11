@@ -60,63 +60,38 @@ async function stubServices(page: Page, wrongOnce: string[] = []) {
   return stub;
 }
 
-test("/a1 lists الدرس الأول – صباح الخير; the card opens step 1", async ({ page }) => {
+test("/a1 shows الدرس الأول – صباح الخير; its contents list أ ب ت ث ج ح خ, مراجعة, صباح الخير; أ opens Wörter", async ({ page }) => {
   await page.goto("/a1");
   const card = page.getByTestId("a1-lesson-lesson-1");
   await expect(card).toContainText("الدرس الأول");
   await expect(card).toContainText("صَبَاحُ الْخَيْر");
   await expect(card).toContainText("Lektion 1 · Guten Morgen");
-  await expect(page.locator('[data-testid^="a1-lesson-"]')).toHaveCount(1);
+  // One lesson card; the letters are its contents, not lessons of their own.
+  await expect(page.locator('a[data-testid^="a1-lesson-"]')).toHaveCount(1);
   await card.click();
-  await expect(page).toHaveURL(/\/a1\/lesson-1\/step-1$/);
+  await expect(page).toHaveURL(/\/a1\/lesson-1$/);
+  const entries = page.getByTestId("unit-contents").getByRole("link");
+  await expect(entries).toHaveCount(9);
+  expect(await entries.evaluateAll((els) => els.map((el) => el.querySelector("[data-testid$='-label']")!.textContent))).toEqual(["أ", "ب", "ت", "ث", "ج", "ح", "خ", "مُرَاجَعَة", "صَبَاحُ الْخَيْر"]);
+  await page.getByTestId("unit-entry-alif").click();
+  await expect(page).toHaveURL(/\/a1\/lesson-1\/alif\/step-1$/);
   await expect(page.getByTestId("lesson-title")).toHaveText("صَبَاحُ الْخَيْر");
-  await expect(page.getByTestId("step-position")).toHaveText("Schritt 1 von 6");
-});
-
-test("step 1: أَ → إِ → أُ, each with listen and speak through /api/tts and /api/pronunciation, then step 2", async ({ page }) => {
-  const errors = collectPageErrors(page);
-  const stub = await stubServices(page, ["إِ"]);
+  await expect(page.getByTestId("step-position")).toHaveText("Schritt 1 von 5");
+  await expect(page.getByTestId("step-tab-step-1")).toContainText("Wörter");
+  // The old step URLs lead to the new places (Laute is part of Wörter).
   await page.goto("/a1/lesson-1/step-1");
-
-  for (const [index, [id, glyph]] of SOUNDS.entries()) {
-    await expect(page.getByTestId(`sound-glyph-${id}`)).toHaveText(glyph);
-
-    const tts = page.waitForRequest((r) => r.url().endsWith("/api/tts") && r.postDataJSON().text === glyph);
-    await page.getByTestId(`exercise-${id}-listen`).click();
-    await tts;
-
-    await recordExercise(page, id, 600);
-    if (glyph === "إِ") {
-      const feedback = page.getByTestId(`exercise-${id}-feedback`);
-      await expect(feedback).toHaveAttribute("data-passed", "false");
-      // Simple learner feedback: no accuracy, no rule text, no service names.
-      await expect(feedback).not.toContainText("%");
-      await expect(feedback).not.toContainText(/IQRA|Azure|نريد/);
-      await page.getByTestId(`exercise-${id}-feedback-retry`).click();
-      await expect(page.getByTestId(`exercise-${id}`)).toHaveAttribute("data-phase", "recording");
-      await page.waitForTimeout(600);
-      await page.getByTestId(`exercise-${id}-record`).click();
-    }
-    await expect(page.getByTestId(`exercise-${id}-feedback-headline`)).toHaveText("مُمْتَاز! 👏");
-    await expect(page.getByTestId(`exercise-${id}-feedback`)).not.toContainText("%");
-    expect(stub.uploads.at(-1)).toMatchObject({ target: glyph, fileName: "voice.wav", riff: "RIFF", wave: "WAVE", channels: 1, sampleRate: 16000, bits: 16 });
-
-    if (index < SOUNDS.length - 1) await page.getByTestId("sound-next").click();
-  }
-
-  await page.getByTestId("step-next").click();
-  await expect(page).toHaveURL(/\/a1\/lesson-1\/step-2$/);
-  expect(stub.uploads.map((u) => u.target)).toEqual(["أَ", "إِ", "إِ", "أُ"]);
-  expect(errors).toEqual([]);
+  await expect(page).toHaveURL(/\/a1\/lesson-1\/alif\/step-1$/);
+  await page.goto("/a1/lesson-1/step-4");
+  await expect(page).toHaveURL(/\/a1\/lesson-1\/alif\/step-3$/);
 });
 
-test("step 2: three vowel sections, nine word cards (image, Arabic, German, Franco), listen and speak for every vowel and word", async ({ page }) => {
+test("Wörter: three vowel sections (the former Laute), nine word cards (image, Arabic, German, Franco), listen and speak for every vowel and word", async ({ page }) => {
   test.setTimeout(180_000);
   const errors = collectPageErrors(page);
   const stub = await stubServices(page);
   // The button page (guided mode has its own tests in a1-guided.spec.ts).
   await refuseGuidedMicrophone(page);
-  await page.goto("/a1/lesson-1/step-2");
+  await page.goto("/a1/lesson-1/alif/step-1");
   await openButtonMode(page);
 
   const sections = page.locator('[data-testid^="word-group-"]');
@@ -154,10 +129,10 @@ test("step 2: three vowel sections, nine word cards (image, Arabic, German, Fran
   }
 
   expect(stub.uploads).toHaveLength(12);
-  await expect(page.getByTestId("step-next")).toHaveAttribute("href", "/a1/lesson-1/step-3");
+  await expect(page.getByTestId("step-next")).toHaveAttribute("href", "/a1/lesson-1/alif/step-2");
   await expect(page.getByTestId("step-next")).toHaveText(/Weiter: Formen/);
-  await page.getByTestId("step-prev").click();
-  await expect(page).toHaveURL(/\/a1\/lesson-1\/step-1$/);
+  await page.getByTestId("back-to-unit").click();
+  await expect(page).toHaveURL(/\/a1\/lesson-1$/);
   expect(errors).toEqual([]);
 });
 
@@ -184,7 +159,7 @@ test.describe("A1 layout", () => {
   test("desktop: one row per vowel, like the lesson sheet – vowel on the right, then its three words right to left", async ({ page }) => {
     await page.setViewportSize({ width: 1366, height: 900 });
     await refuseGuidedMicrophone(page);
-    await page.goto("/a1/lesson-1/step-2");
+    await page.goto("/a1/lesson-1/alif/step-1");
     // The same rows in guided mode (before the start) and on the button page.
     for (const mode of ["guided", "buttons"]) {
       if (mode === "buttons") await openButtonMode(page);
@@ -219,7 +194,7 @@ test.describe("A1 layout", () => {
   test("mobile: cards stack, images stay large, no horizontal scrolling", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await refuseGuidedMicrophone(page);
-    for (const path of ["/a1", "/a1/lesson-1/step-1", "/a1/lesson-1/step-2"]) {
+    for (const path of ["/a1", "/a1/lesson-1", "/a1/lesson-1/alif/step-1"]) {
       await page.goto(path);
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), path).toBe(true);
     }

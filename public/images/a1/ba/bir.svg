@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Brunnen">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+  
+<path d="M0 248 C120 236 280 236 400 248 L400 300 L0 300 Z" fill="#9fd27f"/>
+  <rect x="126" y="70" width="14" height="120" fill="#8a5a33"/><rect x="260" y="70" width="14" height="120" fill="#8a5a33"/>
+  <path d="M108 78 L200 30 L292 78 Z" fill="#c0503c"/><rect x="104" y="74" width="192" height="10" rx="4" fill="#9b3a2a"/>
+  <rect x="134" y="104" width="132" height="8" rx="4" fill="#6b4226"/>
+  <line x1="200" y1="112" x2="200" y2="150" stroke="#6b4226" stroke-width="3"/>
+  <path d="M184 150 L216 150 L212 176 L188 176 Z" fill="#7e8a99"/><rect x="182" y="146" width="36" height="6" rx="3" fill="#5f6b7a"/>
+  <ellipse cx="200" cy="186" rx="96" ry="18" fill="#3e6fa8"/>
+  <path d="M104 186 L104 252 C104 268 296 268 296 252 L296 186 C296 204 104 204 104 186 Z" fill="#b8b1a5"/>
+  <g fill="#9d958a"><rect x="116" y="210" width="40" height="18" rx="4"/><rect x="166" y="216" width="40" height="18" rx="4"/><rect x="216" y="212" width="40" height="18" rx="4"/><rect x="138" y="234" width="40" height="16" rx="4"/><rect x="190" y="238" width="40" height="16" rx="4"/><rect x="242" y="234" width="40" height="16" rx="4"/></g>
+</svg>

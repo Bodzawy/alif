@@ -3,7 +3,7 @@
 import type { ReactNode } from "react";
 
 import { VocabularyCard } from "@/components/lessons/vocabulary-card";
-import type { SoundItem, VocabularyItem } from "@/data/types";
+import type { A1Word, SoundItem } from "@/data/types";
 
 import { SoundCard } from "./sound-card";
 import { usePracticeSession } from "./use-practice-session";
@@ -22,7 +22,7 @@ export type GuidedView = {
   passed: (id: string) => boolean;
 };
 
-export function SoundWordsStep({ groups, guided }: { groups: { sound: SoundItem; words: VocabularyItem[] }[]; guided?: GuidedView }) {
+export function SoundWordsStep({ groups, guided }: { groups: { sound: SoundItem; words: A1Word[] }[]; guided?: GuidedView }) {
   const session = usePracticeSession();
   const passed = (id: string) => (guided ? guided.passed(id) : session.passed.has(id));
 

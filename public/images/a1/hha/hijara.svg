@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Steine">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+  
+<path d="M0 250 C120 240 280 240 400 250 L400 300 L0 300 Z" fill="#cfe7b8"/>
+  <path d="M70 240 C64 200 96 176 134 180 C170 184 180 214 174 240 Z" fill="#9c9488"/>
+  <path d="M160 240 C156 186 204 150 250 160 C292 170 300 214 292 240 Z" fill="#857d72"/>
+  <path d="M280 240 C280 214 300 200 324 204 C346 208 352 228 348 240 Z" fill="#b8b1a5"/>
+  <path d="M120 250 C120 232 140 224 156 228 C170 232 174 244 170 250 Z" fill="#a9a196"/>
+  <g fill="#fff" opacity=".25"><ellipse cx="110" cy="198" rx="16" ry="6"/><ellipse cx="216" cy="176" rx="22" ry="8"/><ellipse cx="314" cy="214" rx="10" ry="4"/></g>
+</svg>

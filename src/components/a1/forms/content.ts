@@ -9,6 +9,16 @@ import type { HamzaPosition, HamzaReason } from "@/lib/arabic/hamza-alif";
  */
 export const LETTER_TILE = "flex h-20 min-w-16 items-center justify-center rounded-2xl border-2 border-primary/30 bg-primary-soft px-2 font-arabic text-5xl font-bold sm:h-24 sm:min-w-20";
 
+/**
+ * Words with more than five tiles (e.g. الثُّلَاثَاءُ, تِلِيفُونُ) do not fit a phone
+ * with the normal tiles: their tiles (and slots) share the row instead. Words
+ * up to five tiles – all of Alif and Ba – keep the normal classes.
+ */
+export const isLongWord = (tiles: readonly string[]) => tiles.length > 5;
+/** The row of a long word's tiles, and each tile (overrides LETTER_TILE and the slot sizes). */
+export const LONG_ROW = "w-full gap-1 sm:gap-2";
+export const LONG_TILE = "h-16 min-w-0 max-w-16 flex-1 basis-0 px-0 text-3xl sm:h-24 sm:min-w-0 sm:max-w-20 sm:w-auto sm:text-5xl";
+
 /** The lesson book's labels for where the Hamza-Alif stands. */
 export const POSITION_LABEL: Record<HamzaPosition, string> = {
   start: "في أول الكلمة",
@@ -85,4 +95,53 @@ export const NARRATION_FILES = [
   ...Object.values(NARRATION.neighbors),
   NARRATION.sort.intro, NARRATION.sort.hint, NARRATION.sort.hintStart, NARRATION.sort.replay, NARRATION.sort.done,
   ...(["start", "nohand", "hold"] as const).map(NARRATION.sort.ok),
+];
+
+// ---------------------------------------------------------------------------
+// Letter lessons (ب ت ث ج ح خ): the letter has a Hand of its own. The German
+// texts of every clip are in the lesson data (FormsLetter.texts); the file
+// names are the same for every letter (one folder per letter).
+
+/** The rule card of "Wer hält fest?", e.g. for the Ba. */
+export const letterRuleText = (name: string) =>
+  `Das ${name} hat eine Hand. Es hält immer den nächsten Buchstaben fest. Und der Nachbar davor hält das ${name} fest, wenn er eine Hand hat.`;
+
+/** Activity 3: one basket per form, labelled like the book (German) with the letter's shape. */
+export const BASKET_LABEL: Record<HamzaPosition, string> = {
+  start: "Am Anfang",
+  middle: "In der Mitte",
+  end: "Am Ende",
+  separate: "Allein",
+};
+
+export const LETTER_NARRATION = {
+  neighbors: {
+    intro: "n_intro",
+    /** Right side: the neighbour with a Hand holds the letter. */
+    hold: "n_hold",
+    /** Right side: the neighbour without a Hand stays apart. */
+    nohold: "n_nohold",
+    /** Left side: the letter's own Hand holds the next letter. */
+    next: "n_next",
+    rule: "n_rule",
+  },
+  sort: {
+    intro: "s_intro",
+    ok: (position: HamzaPosition) => `s_ok_${position}`,
+    hint: "s_hint",
+    replay: "s_replay",
+    done: "s_done",
+  },
+} as const;
+
+/** Every narration clip of a letter's Formen step, in recording order (word recordings come from the data). */
+export const LETTER_NARRATION_FILES = [
+  NARRATION.pageIntro,
+  ...EXPLAIN_FILES,
+  NARRATION.build.intro, NARRATION.build.wrong, NARRATION.build.all,
+  ...POSITIONS.map(NARRATION.build.done),
+  ...Object.values(LETTER_NARRATION.neighbors),
+  LETTER_NARRATION.sort.intro,
+  ...POSITIONS.map(LETTER_NARRATION.sort.ok),
+  LETTER_NARRATION.sort.hint, LETTER_NARRATION.sort.replay, LETTER_NARRATION.sort.done,
 ];

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Ring">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#f1ecfb"/><stop offset="1" stop-color="#d8ccf3"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#e6ddf8"/><circle cx="340" cy="236" r="50" fill="#e6ddf8"/>
+  <ellipse cx="200" cy="260" rx="80" ry="8" fill="#000" opacity="0.12"/>
+<ellipse cx="200" cy="182" rx="74" ry="62" fill="none" stroke="#f2a01f" stroke-width="20"/>
+  <ellipse cx="200" cy="182" rx="74" ry="62" fill="none" stroke="#ffd54a" stroke-width="8"/>
+  <path d="M170 116 L200 82 L230 116 L200 140 Z" fill="#7fd3f7"/><path d="M170 116 L230 116 L200 140 Z" fill="#4fb3e0"/><path d="M186 104 L200 88 L200 116 Z" fill="#fff" opacity=".6"/>
+  <rect x="180" y="122" width="40" height="12" rx="4" fill="#f2a01f"/>
+  <g fill="#fff"><path d="M260 80 l4 10 l10 4 l-10 4 l-4 10 l-4 -10 l-10 -4 l10 -4 z"/><path d="M130 96 l3 7 l7 3 l-7 3 l-3 7 l-3 -7 l-7 -3 l7 -3 z"/></g>
+</svg>

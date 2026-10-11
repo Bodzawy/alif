@@ -11,8 +11,8 @@ import type { Verdict } from "./evaluate";
 // themselves. One stage at a time; each stage's effect starts its work and
 // cancels it in its cleanup (next stage, pause, unmount).
 //
-//   focus ─▶ play ─▶ listen ─▶ check ─▶ right ─▶ (next block) focus …
-//                      │          └──▶ wrong / no answer ─▶ play again (max 3 per block and round)
+//   focus ─▶ play ─▶ listen ─▶ check ─▶ right ("Super!") ─▶ (next block) focus …
+//                      │          └──▶ wrong / no answer ─▶ play again (no limit: until it is right)
 //                      └── no speech in 5 s = no answer (no evaluation call)
 //   after the last block: one extra round for the "needs practice" blocks, then finished.
 
@@ -22,13 +22,13 @@ export type Stage = "idle" | "focus" | "play" | "listen" | "check" | "right" | "
 
 export const GUIDED_TIMING = {
   /** Blur fades, the block grows. */
-  focusMs: 400,
+  focusMs: 150,
   /** Pause between the end of the model audio and the start of recording (the speaker must not be recorded). */
-  afterPlayMs: 300,
+  afterPlayMs: 0,
   /** The green tint is shown before the next block. */
   rightMs: 700,
   /** Wrong / no answer attempts per block and round. */
-  maxAttempts: 3,
+  //maxAttempts: 3,
   /** Evaluation errors in a row before falling back to the buttons. */
   maxErrors: 2,
 } as const;
@@ -62,12 +62,13 @@ type Action =
 export const initialGuidedState: GuidedState = { stage: "idle", queue: [], round: 1, attempts: 0, retry: false, marks: {}, practice: [], errors: 0, run: 0 };
 
 function fail(s: GuidedState): GuidedState {
-  const attempts = s.attempts + 1;
-  if (attempts < GUIDED_TIMING.maxAttempts) return { ...s, stage: "play", attempts, retry: true, run: s.run + 1 };
-  // Three times without success: "needs practice", then move on.
-  const id = s.queue[0]!;
-  const marked = { ...s, marks: { ...s.marks, [id]: "practice" as const }, practice: s.round === 1 ? [...s.practice, id] : s.practice };
-  return next(marked);
+  return {
+    ...s,
+    stage: "play",
+    attempts: s.attempts + 1,
+    retry: true,
+    run: s.run + 1,
+  };
 }
 
 function next(s: GuidedState): GuidedState {
@@ -109,6 +110,8 @@ export type GuidedDeps = {
   play: (block: GuidedBlock, signal: AbortSignal) => Promise<void>;
   record: (signal: AbortSignal) => Promise<Utterance | null>;
   evaluate: (utterance: Extract<Utterance, { kind: "speech" }>, block: GuidedBlock, signal: AbortSignal) => Promise<Verdict>;
+  /** After a right answer: the encouragement; the next block starts when it has finished. */
+  praise?: (signal: AbortSignal) => Promise<void>;
 };
 
 export function useGuidedFlow(blocks: GuidedBlock[], deps: GuidedDeps, callbacks: { onMark: (id: string, mark: BlockMark) => void; onFinished: () => void; onFallback: () => void }) {
@@ -149,7 +152,7 @@ export function useGuidedFlow(blocks: GuidedBlock[], deps: GuidedDeps, callbacks
         void d.evaluate(utterance.current, block, signal).then((verdict) => live() && verdict !== "aborted" && dispatch({ type: "verdict", verdict }));
         break;
       case "right":
-        void sleep(GUIDED_TIMING.rightMs, signal).then(() => live() && dispatch({ type: "next" }));
+        void Promise.all([sleep(GUIDED_TIMING.rightMs, signal), d.praise?.(signal)]).then(() => live() && dispatch({ type: "next" }));
         break;
     }
     return () => controller.abort();

@@ -32,3 +32,34 @@ export async function narrateWithFallback(narrator: Narrator, name: string, fall
   if (signal.aborted || result === "ended") return;
   await sleep(fallbackMs - (Date.now() - started), signal);
 }
+
+/**
+ * A word: its recording when there is one (narrator.has), otherwise the model
+ * pronunciation of `text` from /api/tts – through the same audio element. If
+ * neither can play, waits `fallbackMs` like a missing clip.
+ */
+export async function sayWithFallback(
+  narrator: Narrator,
+  word: { audio?: string; text: string },
+  fallbackMs: number,
+  signal: AbortSignal,
+  speech: (text: string) => Promise<string>
+): Promise<void> {
+  if (signal.aborted) return;
+  if (word.audio && narrator.has(word.audio)) return narrateWithFallback(narrator, word.audio, fallbackMs, signal);
+  const started = Date.now();
+  const onAbort = () => narrator.stop();
+  signal.addEventListener("abort", onAbort);
+  try {
+    const url = await speech(word.text);
+    if (!signal.aborted) {
+      const result = await Promise.race([narrator.playUrl(url), sleep(MAX_CLIP_MS, signal).then(() => "ended" as const)]);
+      if (result === "ended") return;
+    }
+  } catch {
+    // /api/tts unavailable: like a missing recording.
+  } finally {
+    signal.removeEventListener("abort", onAbort);
+  }
+  await sleep(fallbackMs - (Date.now() - started), signal);
+}

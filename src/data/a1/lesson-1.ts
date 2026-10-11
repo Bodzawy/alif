@@ -29,11 +29,11 @@ export const FORMS_AUDIO_BASE = "/audio/a1/lesson-1/formen";
 const formsWord = (id: string, arabic: string, german: string, audio: string, image?: FormsWord["image"]): FormsWord => ({ id, arabic, german, audio, image });
 
 const ana = formsWord("ana", "أَنَا", "ich", "ana", { src: `${IMG}/ana.svg`, alt: "Ein Kind zeigt auf sich selbst" });
-const saala = formsWord("saala", "سَأَلَ", "er fragte", "saala");
+const saala = formsWord("saala", "سَأَلَ", "er fragte", "saala", { src: `${IMG}/saala.svg`, alt: "Ein Junge fragt etwas" });
 const saba = formsWord("saba", "سَبَأَ", "Saba (Königreich)", "saba");
-const qaraa = formsWord("qaraa", "قَرَأَ", "er las", "qaraa");
+const qaraa = formsWord("qaraa", "قَرَأَ", "er las", "qaraa", { src: `${IMG}/qaraa.svg`, alt: "Ein Junge liest ein Buch" });
 // From the book section "النطق مع السكون".
-const ras = formsWord("ras", "رَأْس", "Kopf", "ras");
+const ras = formsWord("ras", "رَأْس", "Kopf", "ras", { src: `${IMG}/ras.svg`, alt: "Ein Kopf" });
 
 const fatha: SoundItem = {
   id: "alif-fatha",
@@ -63,21 +63,21 @@ function word(id: string, arabic: string, target: string, german: string, transl
   return { id, arabic, german, transliteration, image: { src: `${IMG}/${id}.svg`, alt }, exercise: { id, target, modelText: arabic } };
 }
 
-export const a1Lesson1: A1Lesson = {
-  slug: "lesson-1",
-  number: 1,
-  title: "صَبَاحُ الْخَيْر",
-  titleGerman: "Guten Morgen",
+/**
+ * Alif, the first entry of Lektion 1. The former step 1 "Laute" (أَ إِ أُ on
+ * their own) is part of "Wörter": every word row starts with its sound card
+ * (glyph, vowel name, transliteration, listen and speak), so nothing is lost.
+ */
+export const a1Alif: A1Lesson = {
+  slug: "alif",
+  kind: "letter",
+  label: "أ",
+  labelGerman: "Alif",
+  letter: { id: "alif", glyph: "أ", name: "Alif" },
   steps: [
     {
-      kind: "sounds",
-      slug: "step-1",
-      title: "Laute: أَ · إِ · أُ",
-      sounds: [fatha, kasra, damma],
-    },
-    {
       kind: "sound-words",
-      slug: "step-2",
+      slug: "step-1",
       title: "Wörter mit أَ · إِ · أُ",
       navLabel: "Wörter",
       groups: [
@@ -109,7 +109,7 @@ export const a1Lesson1: A1Lesson = {
     },
     {
       kind: "forms",
-      slug: "step-3",
+      slug: "step-2",
       title: "Formen: أ · ـأ",
       navLabel: "Formen",
       forms: {
@@ -124,7 +124,7 @@ export const a1Lesson1: A1Lesson = {
     },
     {
       kind: "writing",
-      slug: "step-4",
+      slug: "step-3",
       title: "Schreiben: ا · ـا · أ · ـأ",
       navLabel: "Schreiben",
       letterSet: alifWriting,
@@ -132,7 +132,7 @@ export const a1Lesson1: A1Lesson = {
     {
       // Book exercise "تدريب (٢)" (Lesson1.pdf, page 2), in book order.
       kind: "gaps",
-      slug: "step-5",
+      slug: "step-4",
       title: "Ergänzen: أَ · إِ · أُ",
       navLabel: "Ergänzen",
       gaps: {
@@ -156,7 +156,7 @@ export const a1Lesson1: A1Lesson = {
     {
       // Book exercise "تدريب (٣)" (Lesson1.pdf, page 2), in book order. No pictures: the child listens.
       kind: "gaps",
-      slug: "step-6",
+      slug: "step-5",
       title: "Hören: أْ · أَ · إِ · أُ",
       navLabel: "Hören",
       gaps: {

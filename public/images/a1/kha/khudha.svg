@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Helm">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eef8ff"/><stop offset="1" stop-color="#c4e2f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#dcefff"/><circle cx="340" cy="236" r="50" fill="#dcefff"/>
+  <ellipse cx="200" cy="236" rx="120" ry="10" fill="#000" opacity="0.12"/>
+<path d="M108 196 C108 112 160 76 214 76 C268 76 300 116 300 170 L300 196 Z" fill="#f2b31f"/>
+  <path d="M196 76 C188 110 188 160 196 196" stroke="#e09a10" stroke-width="18" fill="none"/>
+  <path d="M92 196 L316 196 C330 196 334 214 320 216 L84 216 C70 214 76 196 92 196 Z" fill="#e09a10"/>
+  <path d="M140 120 C150 100 170 90 186 88" stroke="#ffe680" stroke-width="10" fill="none" stroke-linecap="round" opacity=".7"/>
+</svg>

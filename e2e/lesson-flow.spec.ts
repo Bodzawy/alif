@@ -179,7 +179,7 @@ test.describe("responsive layout", () => {
 
   test("mobile stacks cards vertically without horizontal scrolling", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
-    for (const path of ["/", "/a0", "/a0/letters", "/a0/letters/alif", "/a1", "/a1/lesson-1/step-1", "/a1/lesson-1/step-2", "/a0/words", "/a0/words/lesson-1"]) {
+    for (const path of ["/", "/a0", "/a0/letters", "/a0/letters/alif", "/a1", "/a1/lesson-1", "/a1/lesson-1/alif/step-1", "/a0/words", "/a0/words/lesson-1"]) {
       await page.goto(path);
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
     }

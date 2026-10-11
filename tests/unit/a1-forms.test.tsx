@@ -13,8 +13,8 @@ import { hamzaPosition, hasHand, isHamzaHeld, splitTiles } from "@/lib/arabic/ha
 import { createNarrator } from "@/lib/audio/narration";
 import { getLessonProgress } from "@/lib/progress";
 
-const step = getA1Lesson("lesson-1")!.steps.find((s) => s.slug === "step-3")!;
-if (step.kind !== "forms") throw new Error("step-3 must be the forms step");
+const step = getA1Lesson("lesson-1", "alif")!.steps.find((s) => s.slug === "step-2")!;
+if (step.kind !== "forms") throw new Error("step-2 must be the forms step");
 const forms: FormsContent = step.forms;
 const PUBLIC = path.join(process.cwd(), "public");
 const BOOK_WORDS = ["أَنَا", "سَأَلَ", "سَبَأَ", "قَرَأَ"];
@@ -50,7 +50,8 @@ describe("A1 · Schritt 3 Formen – content (lesson book only)", () => {
     const sort = Object.fromEntries(forms.sort.map((w) => [w.arabic, isHamzaHeld(splitTiles(w.arabic)) ? "held" : "alone"]));
     expect(sort).toEqual({ "أَنَا": "alone", "قَرَأَ": "alone", "رَأْس": "alone", "سَأَلَ": "held", "سَبَأَ": "held" });
     expect(forms.sort.map((w) => [w.german, w.audio])).toEqual([["ich", "ana"], ["er fragte", "saala"], ["Saba (Königreich)", "saba"], ["er las", "qaraa"], ["Kopf", "ras"]]);
-    expect([...forms.build, ...forms.sort].filter((w) => w.image).map((w) => w.id)).toEqual(["ana", "ana"]);
+    // Pictures for every concrete word; "Saba (Königreich)" has none.
+    expect([...forms.build, ...forms.sort].filter((w) => w.image).map((w) => w.id)).toEqual(["ana", "saala", "qaraa", "ana", "saala", "qaraa", "ras"]);
   });
 
   it("expects five word recordings and no others", () => {
@@ -281,7 +282,7 @@ async function skipExplain() {
 
 describe("A1 · Schritt 3 Formen – the four parts", () => {
   it("start → Zuschauen (exercises locked) → build four words → who holds → sort five words → Geschafft", async () => {
-    render(<FormsStep forms={forms} availableAudio={[...EXERCISE_AUDIO, ...EXPLAIN_FILES]} progressKey="a1/lesson-1/step-3" />);
+    render(<FormsStep forms={forms} availableAudio={[...EXERCISE_AUDIO, ...EXPLAIN_FILES]} progressKey="a1/lesson-1/alif/step-2" />);
 
     // Start: autoplay needs a tap; then f_intro, e_intro and scene 1.
     expect(played).toEqual([]);
@@ -397,7 +398,7 @@ describe("A1 · Schritt 3 Formen – the four parts", () => {
     const done = await screen.findByTestId("sort-done");
     expect(within(done).getByText("مُمْتَاز! 👏")).toBeInTheDocument();
     await waitFor(() => expect(played).toContain("s_done"));
-    expect(getLessonProgress("a1/lesson-1/step-3").completedAt).toBeTruthy();
+    expect(getLessonProgress("a1/lesson-1/alif/step-2").completedAt).toBeTruthy();
     expect(created).toBe(1);
   }, 40_000);
 

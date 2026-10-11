@@ -40,8 +40,11 @@ test("old URLs of the former A1 word lessons lead to A0 → Wörter unless A1 ha
     ["/a1/lesson-28", "/a0/words/lesson-28"],
     ["/a1/lesson-1/intro", "/a0/words/lesson-1/intro"],
     ["/a1/lesson-5/intro", "/a0/words/lesson-5/intro"],
-    // lesson-1 is the new A1 lesson: it starts at its first step.
-    ["/a1/lesson-1", "/a1/lesson-1/step-1"],
+    // lesson-1 is the new A1 lesson (its contents page); its old step URLs lead to Alif's steps,
+    // the letters' own URLs to their entry, and an entry to its first step.
+    ["/a1/lesson-1/step-3", "/a1/lesson-1/alif/step-2"],
+    ["/a1/ba", "/a1/lesson-1/ba"],
+    ["/a1/lesson-1/ba", "/a1/lesson-1/ba/step-1"],
   ]) {
     const response = await request.get(from!, { maxRedirects: 0 });
     expect(response.status(), from).toBe(307);
@@ -80,12 +83,12 @@ test("progress saved under the old A1 keys shows up in A0 → Wörter and is not
 
 test("no broken internal links on the level pages", async ({ page, request }) => {
   const seen = new Set<string>();
-  for (const path of ["/", "/a0", "/a0/letters", "/a0/letters/alif", "/a0/words", "/a0/words/lesson-1", "/a0/words/lesson-1/intro", "/a1", "/a1/lesson-1/step-1", "/a1/lesson-1/step-2", "/a1/lesson-1/step-3", "/a1/lesson-1/step-4", "/a1/lesson-1/step-5", "/a1/lesson-1/step-6"]) {
+  for (const path of ["/", "/a0", "/a0/letters", "/a0/letters/alif", "/a0/words", "/a0/words/lesson-1", "/a0/words/lesson-1/intro", "/a1", "/a1/lesson-1", "/a1/lesson-1/alif/step-1", "/a1/lesson-1/alif/step-2", "/a1/lesson-1/alif/step-3", "/a1/lesson-1/alif/step-4", "/a1/lesson-1/alif/step-5"]) {
     await page.goto(path);
     const hrefs = await page.locator("a[href^='/']").evaluateAll((links) => links.map((a) => a.getAttribute("href")!));
     hrefs.forEach((href) => seen.add(href.split("#")[0]!));
   }
-  for (const href of ["/", "/a0", "/a0/letters", "/a0/letters/alif", "/a0/words", "/a0/words/lesson-1", "/a1", "/a1/lesson-1/step-1", "/a1/lesson-1/step-2", "/a1/lesson-1/step-3", "/a1/lesson-1/step-4", "/a1/lesson-1/step-5", "/a1/lesson-1/step-6"]) expect(seen, href).toContain(href);
+  for (const href of ["/", "/a0", "/a0/letters", "/a0/letters/alif", "/a0/words", "/a0/words/lesson-1", "/a1", "/a1/lesson-1", "/a1/lesson-1/alif/step-1", "/a1/lesson-1/alif/step-2", "/a1/lesson-1/alif/step-3", "/a1/lesson-1/alif/step-4", "/a1/lesson-1/alif/step-5", ...["alif", "ba", "ta", "tha", "jim", "hha", "kha", "review", "sabah-al-khayr"].map((e) => `/a1/lesson-1/${e}`)]) expect(seen, href).toContain(href);
   for (const href of seen) {
     const response = await request.get(href);
     expect(response.status(), href).toBe(200);

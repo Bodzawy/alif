@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Tasche">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff0f3"/><stop offset="1" stop-color="#ffd0dc"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#ffe2e9"/><circle cx="340" cy="236" r="50" fill="#ffe2e9"/>
+  <ellipse cx="200" cy="252" rx="110" ry="10" fill="#000" opacity="0.12"/>
+<path d="M150 110 C150 64 250 64 250 110" stroke="#7a3416" stroke-width="14" fill="none"/>
+  <rect x="96" y="104" width="208" height="140" rx="22" fill="#c0503c"/>
+  <rect x="96" y="104" width="208" height="48" rx="22" fill="#a8432f"/><rect x="96" y="132" width="208" height="20" fill="#a8432f"/>
+  <rect x="184" y="140" width="32" height="26" rx="6" fill="#ffd54a"/>
+  <g stroke="#e8846f" stroke-width="3" stroke-dasharray="6 6"><line x1="110" y1="230" x2="290" y2="230"/></g>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Feigen">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#f1ecfb"/><stop offset="1" stop-color="#d8ccf3"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#e6ddf8"/><circle cx="340" cy="236" r="50" fill="#e6ddf8"/>
+  <ellipse cx="206" cy="238" rx="120" ry="10" fill="#000" opacity="0.12"/>
+<g transform="translate(150 160)">
+  <path d="M0 -70 C40 -60 60 -10 50 30 C40 66 -40 66 -50 30 C-60 -10 -40 -60 0 -70 Z" fill="#6d3a6e"/>
+  <path d="M-4 -70 L-2 -88 L6 -86 L4 -70 Z" fill="#4f7d3a"/>
+  <ellipse cx="-22" cy="-10" rx="10" ry="24" fill="#fff" opacity=".2"/>
+  </g>
+  <g transform="translate(262 178)">
+  <path d="M0 -58 C34 -50 52 -8 44 24 C36 56 -36 56 -44 24 C-52 -8 -34 -50 0 -58 Z" fill="#7b4479"/>
+  <ellipse cx="0" cy="12" rx="34" ry="36" fill="#e85a6a"/><ellipse cx="0" cy="12" rx="24" ry="27" fill="#f29a8f"/>
+  <g fill="#fff3c4"><circle cx="-8" cy="4" r="2.5"/><circle cx="6" cy="0" r="2.5"/><circle cx="0" cy="14" r="2.5"/><circle cx="-10" cy="22" r="2.5"/><circle cx="10" cy="20" r="2.5"/><circle cx="2" cy="30" r="2.5"/></g>
+  </g>
+  <path d="M230 90 C250 60 290 64 300 84 C276 96 250 98 230 90 Z" fill="#5c9a3e"/>
+</svg>

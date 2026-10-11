@@ -46,5 +46,308 @@
       ],
       "message": "حاول مرة أخرى، نريد أُ"
     }
+  },
+  "بَ": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['b']",
+        "iqra_phonemes contains ['a|aa|A|AA']",
+        "iqra_phonemes does not contain ['i|ii|I|II']",
+        "iqra_phonemes does not contain ['u|uu|U|UU']"
+      ],
+      "message": "ممتاز 👏 نطقت بَ بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد بَ"
+    }
+  },
+  "بِ": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['b']",
+        "iqra_phonemes contains ['i|ii|I|II']",
+        "iqra_phonemes does not contain ['a|aa|A|AA']",
+        "iqra_phonemes does not contain ['u|uu|U|UU']"
+      ],
+      "message": "ممتاز 👏 نطقت بِ بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد بِ"
+    }
+  },
+  "بُ": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['b']",
+        "iqra_phonemes contains ['u|uu|U|UU']",
+        "iqra_phonemes does not contain ['a|aa|A|AA']",
+        "iqra_phonemes does not contain ['i|ii|I|II']"
+      ],
+      "message": "ممتاز 👏 نطقت بُ بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد بُ"
+    }
+  },
+  "تَ": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['t']",
+        "iqra_phonemes contains ['a|aa|A|AA']",
+        "iqra_phonemes does not contain ['i|ii|I|II']",
+        "iqra_phonemes does not contain ['u|uu|U|UU']"
+      ],
+      "message": "ممتاز 👏 نطقت تَ بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد تَ"
+    }
+  },
+  "تِ": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['t']",
+        "iqra_phonemes contains ['i|ii|I|II']",
+        "iqra_phonemes does not contain ['a|aa|A|AA']",
+        "iqra_phonemes does not contain ['u|uu|U|UU']"
+      ],
+      "message": "ممتاز 👏 نطقت تِ بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد تِ"
+    }
+  },
+  "تُ": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['t']",
+        "iqra_phonemes contains ['u|uu|U|UU']",
+        "iqra_phonemes does not contain ['a|aa|A|AA']",
+        "iqra_phonemes does not contain ['i|ii|I|II']"
+      ],
+      "message": "ممتاز 👏 نطقت تُ بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد تُ"
+    }
+  },
+  "ثَ": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['a|aa|A|AA']",
+        "iqra_phonemes does not contain ['i|ii|I|II']",
+        "iqra_phonemes does not contain ['u|uu|U|UU']"
+      ],
+      "message": "ممتاز 👏 نطقت ثَ بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد ثَ"
+    }
+  },
+  "ثِ": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['i|ii|I|II']",
+        "iqra_phonemes does not contain ['a|aa|A|AA']",
+        "iqra_phonemes does not contain ['u|uu|U|UU']"
+      ],
+      "message": "ممتاز 👏 نطقت ثِ بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد ثِ"
+    }
+  },
+  "ثُ": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['u|uu|U|UU']",
+        "iqra_phonemes does not contain ['a|aa|A|AA']",
+        "iqra_phonemes does not contain ['i|ii|I|II']"
+      ],
+      "message": "ممتاز 👏 نطقت ثُ بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد ثُ"
+    }
+  },
+  "جَ": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['j']",
+        "iqra_phonemes contains ['a|aa|A|AA']",
+        "iqra_phonemes does not contain ['i|ii|I|II']",
+        "iqra_phonemes does not contain ['u|uu|U|UU']"
+      ],
+      "message": "ممتاز 👏 نطقت جَ بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد جَ"
+    }
+  },
+  "جِ": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['j']",
+        "iqra_phonemes contains ['i|ii|I|II']",
+        "iqra_phonemes does not contain ['a|aa|A|AA']",
+        "iqra_phonemes does not contain ['u|uu|U|UU']"
+      ],
+      "message": "ممتاز 👏 نطقت جِ بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد جِ"
+    }
+  },
+  "جُ": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['j']",
+        "iqra_phonemes contains ['u|uu|U|UU']",
+        "iqra_phonemes does not contain ['a|aa|A|AA']",
+        "iqra_phonemes does not contain ['i|ii|I|II']"
+      ],
+      "message": "ممتاز 👏 نطقت جُ بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد جُ"
+    }
+  },
+  "حَ": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['H']",
+        "iqra_phonemes contains ['a|aa|A|AA']",
+        "iqra_phonemes does not contain ['i|ii|I|II']",
+        "iqra_phonemes does not contain ['u|uu|U|UU']"
+      ],
+      "message": "ممتاز 👏 نطقت حَ بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد حَ"
+    }
+  },
+  "حِ": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['H']",
+        "iqra_phonemes contains ['i|ii|I|II']",
+        "iqra_phonemes does not contain ['a|aa|A|AA']",
+        "iqra_phonemes does not contain ['u|uu|U|UU']"
+      ],
+      "message": "ممتاز 👏 نطقت حِ بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد حِ"
+    }
+  },
+  "حُ": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['H']",
+        "iqra_phonemes contains ['u|uu|U|UU']",
+        "iqra_phonemes does not contain ['a|aa|A|AA']",
+        "iqra_phonemes does not contain ['i|ii|I|II']"
+      ],
+      "message": "ممتاز 👏 نطقت حُ بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد حُ"
+    }
+  },
+  "خَ": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['x']",
+        "iqra_phonemes contains ['a|aa|A|AA']",
+        "iqra_phonemes does not contain ['i|ii|I|II']",
+        "iqra_phonemes does not contain ['u|uu|U|UU']"
+      ],
+      "message": "ممتاز 👏 نطقت خَ بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد خَ"
+    }
+  },
+  "خِ": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['x']",
+        "iqra_phonemes contains ['i|ii|I|II']",
+        "iqra_phonemes does not contain ['a|aa|A|AA']",
+        "iqra_phonemes does not contain ['u|uu|U|UU']"
+      ],
+      "message": "ممتاز 👏 نطقت خِ بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد خِ"
+    }
+  },
+  "خُ": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['x']",
+        "iqra_phonemes contains ['u|uu|U|UU']",
+        "iqra_phonemes does not contain ['a|aa|A|AA']",
+        "iqra_phonemes does not contain ['i|ii|I|II']"
+      ],
+      "message": "ممتاز 👏 نطقت خُ بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد خُ"
+    }
   }
 }

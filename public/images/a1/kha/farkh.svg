@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Küken">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+  
+<path d="M0 250 C120 240 280 240 400 250 L400 300 L0 300 Z" fill="#9fd27f"/>
+  <ellipse cx="206" cy="186" rx="76" ry="66" fill="#ffd54a"/>
+  <circle cx="186" cy="110" r="46" fill="#ffd54a"/>
+  <path d="M232 170 C262 160 280 176 276 200 C256 196 240 188 232 170 Z" fill="#f2c02f"/>
+  <circle cx="172" cy="104" r="7" fill="#2f2a26"/><circle cx="174" cy="102" r="2" fill="#fff"/>
+  <path d="M140 112 L118 120 L140 128 Z" fill="#ff8c1a"/>
+  <path d="M184 66 C180 52 194 46 196 60 C200 48 212 52 206 66" stroke="#f2c02f" stroke-width="6" fill="none"/>
+  <g stroke="#ff8c1a" stroke-width="6" stroke-linecap="round" fill="none"><path d="M186 248 L186 262 M178 266 L194 266"/><path d="M226 248 L226 262 M218 266 L234 266"/></g>
+</svg>

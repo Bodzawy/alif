@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="er kochte">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff4d6"/><stop offset="1" stop-color="#ffd98a"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#ffe7a8"/><circle cx="340" cy="236" r="50" fill="#ffe7a8"/>
+  
+<rect x="80" y="214" width="240" height="40" rx="8" fill="#7e8a99"/>
+  <g fill="#ff6a00"><path d="M150 214 C140 200 146 188 154 182 C154 194 162 196 160 206 Z"/><path d="M200 214 C190 198 198 184 206 178 C206 192 214 196 212 206 Z"/><path d="M250 214 C240 200 246 188 254 182 C254 194 262 196 260 206 Z"/></g>
+  <path d="M120 120 L280 120 L270 200 C268 210 132 210 130 200 Z" fill="#c0503c"/>
+  <rect x="110" y="110" width="180" height="16" rx="8" fill="#a8432f"/>
+  <g fill="#a8432f"><rect x="84" y="128" width="40" height="12" rx="6"/><rect x="276" y="128" width="40" height="12" rx="6"/></g>
+  <path d="M184 110 C184 96 216 96 216 110" fill="#7a2a1e"/>
+  <g stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round" opacity=".8"><path d="M160 90 C150 76 170 66 160 50"/><path d="M200 84 C190 70 210 60 200 44"/><path d="M240 90 C230 76 250 66 240 50"/></g>
+</svg>

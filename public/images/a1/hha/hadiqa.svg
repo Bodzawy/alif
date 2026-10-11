@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Garten">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+  
+<path d="M0 200 C120 186 280 186 400 200 L400 300 L0 300 Z" fill="#7cc35a"/>
+  <g stroke="#a86f1f" stroke-width="6"><line x1="20" y1="170" x2="20" y2="232"/><line x1="380" y1="170" x2="380" y2="232"/></g>
+  <g fill="#e3a33d"><rect x="0" y="180" width="400" height="8"/><rect x="0" y="206" width="400" height="8"/></g>
+  <g fill="#c98a2b"><rect x="40" y="160" width="12" height="70" rx="4"/><rect x="80" y="160" width="12" height="70" rx="4"/><rect x="308" y="160" width="12" height="70" rx="4"/><rect x="348" y="160" width="12" height="70" rx="4"/></g>
+  <rect x="290" y="96" width="16" height="110" fill="#6b4226"/><circle cx="298" cy="86" r="50" fill="#4f9e48"/><g fill="#e53950"><circle cx="280" cy="80" r="7"/><circle cx="312" cy="96" r="7"/><circle cx="300" cy="66" r="7"/></g>
+  <g>
+   <line x1="130" y1="250" x2="130" y2="212" stroke="#4f9e48" stroke-width="5"/><g fill="#ff6f91"><circle cx="130" cy="204" r="9"/><circle cx="142" cy="208" r="9"/><circle cx="118" cy="208" r="9"/><circle cx="136" cy="196" r="9"/><circle cx="124" cy="196" r="9"/></g><circle cx="130" cy="202" r="6" fill="#ffd54a"/>
+   <line x1="190" y1="256" x2="190" y2="220" stroke="#4f9e48" stroke-width="5"/><g fill="#ffd54a"><circle cx="190" cy="212" r="9"/><circle cx="202" cy="216" r="9"/><circle cx="178" cy="216" r="9"/><circle cx="196" cy="204" r="9"/><circle cx="184" cy="204" r="9"/></g><circle cx="190" cy="210" r="6" fill="#ff9a1f"/>
+   <line x1="240" y1="252" x2="240" y2="216" stroke="#4f9e48" stroke-width="5"/><g fill="#7a8cff"><circle cx="240" cy="208" r="9"/><circle cx="252" cy="212" r="9"/><circle cx="228" cy="212" r="9"/><circle cx="246" cy="200" r="9"/><circle cx="234" cy="200" r="9"/></g><circle cx="240" cy="206" r="6" fill="#fff"/>
+  </g>
+</svg>

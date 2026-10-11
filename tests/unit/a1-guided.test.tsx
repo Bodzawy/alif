@@ -33,18 +33,19 @@ vi.mock("@/lib/tts/player", () => ({ speechUrl: vi.fn(async (text: string) => `b
 vi.mock("@/lib/audio/wav", () => ({ blobTo16KhzMonoWav: vi.fn(async () => new Blob(["RIFF"], { type: "audio/wav" })) }));
 
 import { GuidedSoundWords, guidedBlocks } from "@/components/a1/guided/guided-sound-words";
-import { GUIDED_TIMING, guidedReducer, initialGuidedState } from "@/components/a1/guided/guided-flow";
+import { guidedReducer, initialGuidedState } from "@/components/a1/guided/guided-flow";
 import { getA1Lesson } from "@/data/a1";
 import { getLessonProgress } from "@/lib/progress";
 
-const step2 = getA1Lesson("lesson-1")!.steps[1]!;
-if (step2.kind !== "sound-words") throw new Error("step-2 must be sound-words");
+const step2 = getA1Lesson("lesson-1", "alif")!.steps[0]!;
+if (step2.kind !== "sound-words") throw new Error("step-1 must be sound-words");
 const groups = step2.groups;
-const KEY = "a1/lesson-1/step-2";
+const KEY = "a1/lesson-1/alif/step-1";
 const ORDER = ["alif-fatha", "ab", "ana", "amir", "alif-kasra", "ibra", "isba", "ibriq", "alif-damma", "udhun", "umm", "usra"];
 
 // One reused audio element; "ends" 20 ms after play.
 const played: string[] = [];
+let audioStalls = false;
 class FakeAudio {
   onended: (() => void) | null = null;
   onerror: (() => void) | null = null;
@@ -54,6 +55,7 @@ class FakeAudio {
     const src = this.src;
     if (!src.startsWith("data:")) played.push(src.replace("blob:", ""));
     this.paused = false;
+    if (audioStalls && !src.startsWith("data:")) return new Promise<void>(() => undefined); // neither starts nor fails
     setTimeout(() => !this.paused && this.src === src && this.onended?.(), 20);
     return Promise.resolve();
   }
@@ -91,6 +93,7 @@ beforeEach(() => {
   vi.useFakeTimers();
   Object.assign(mic, { script: [], records: 0, released: 0, aborted: 0, deny: false });
   played.length = 0;
+  audioStalls = false;
   verdicts = [];
   fetchMock.mockClear();
   window.localStorage.clear();
@@ -150,6 +153,15 @@ describe("Schritt 2 guided mode", () => {
     expect(fetchMock).toHaveBeenCalledTimes(2);
   });
 
+  it("a stalled player does not stop the flow: after 8 s the child is asked anyway", async () => {
+    audioStalls = true;
+    await startGuided();
+    await until(() => stage() === "play");
+    await at(7_000);
+    expect(stage()).toBe("play");
+    await until(() => stage() === "listen", 3_000);
+  });
+
   it("no speech within the time does not call the evaluation", async () => {
     mic.script = ["silence"];
     await startGuided();
@@ -158,42 +170,51 @@ describe("Schritt 2 guided mode", () => {
     expect(active()).toBe("alif-fatha");
   });
 
-  it("three failures (any mix) → amber, saved as 'needs practice', next block", async () => {
-    mic.script = ["silence", "speech", "silence"];
-    verdicts = [false];
+  it("unlimited retries: any number of failures (any mix) – the same block is asked again until it is right; never amber", async () => {
+    mic.script = ["silence", "speech", "silence", "silence", "speech", "silence"];
+    verdicts = [false, false, true];
     await startGuided();
+    await until(() => mic.records === 5);
+    expect(active()).toBe("alif-fatha"); // still the first block after five failed attempts
+    expect(screen.getByTestId("block-alif-fatha")).not.toHaveAttribute("data-state", "practice");
     await until(() => active() === "ab");
-    expect(screen.getByTestId("block-alif-fatha")).toHaveAttribute("data-state", "practice");
-    expect(screen.getByTestId("tint-alif-fatha").className).toContain("bg-accent/10");
-    expect(getLessonProgress(KEY).skipped).toEqual(["alif-fatha"]);
-    expect(fetchMock).toHaveBeenCalledTimes(1); // the two silent attempts were not sent
-  });
-
-  it("extra round for the amber blocks, then the step ends and is marked completed", async () => {
-    mic.script = ["silence", "silence", "silence"]; // block 1 fails in round 1
-    await startGuided();
-    await until(() => active() === "ab");
-    await until(() => active() === "alif-fatha", 120_000); // round 2: only the amber block
-    expect(step()).toHaveAttribute("data-stage", "focus");
-    await until(() => stage() === "finished", 30_000);
     expect(screen.getByTestId("block-alif-fatha")).toHaveAttribute("data-state", "done");
-    expect(getLessonProgress(KEY).completedAt).toBeTruthy();
-    expect(getLessonProgress(KEY).passed).toHaveLength(12);
-    expect(screen.getByTestId("guided-done")).toHaveTextContent("Geschafft");
-    expect(mic.released).toBe(1); // microphone off at the end
+    expect(getLessonProgress(KEY).passed).toEqual(["alif-fatha"]);
+    expect(getLessonProgress(KEY).skipped ?? []).toEqual([]);
+    expect(fetchMock).toHaveBeenCalledTimes(3); // the silent attempts were not sent
   }, 30_000);
 
-  it("the extra round ends anyway: a block that fails again stays amber", () => {
+  it("unlimited retries (reducer): failing never moves on and never marks 'needs practice'; a right answer moves on", () => {
     let s = guidedReducer(initialGuidedState, { type: "start", order: ["x", "y"], marks: {} });
-    for (let i = 0; i < GUIDED_TIMING.maxAttempts; i++) s = guidedReducer(s, { type: "heard", silence: true });
+    for (let i = 0; i < 10; i++) {
+      s = guidedReducer(s, { type: "heard", silence: i % 2 === 0 });
+      if (s.stage === "check") s = guidedReducer(s, { type: "verdict", verdict: "wrong" });
+      expect([s.stage, s.queue[0], s.retry]).toEqual(["play", "x", true]);
+    }
+    expect(s.attempts).toBe(10);
+    expect(s.marks).toEqual({});
+    expect(s.practice).toEqual([]);
     s = guidedReducer(s, { type: "heard", silence: false });
     s = guidedReducer(s, { type: "verdict", verdict: "right" });
     s = guidedReducer(s, { type: "next" });
-    expect([s.round, s.queue]).toEqual([2, ["x"]]);
-    for (let i = 0; i < GUIDED_TIMING.maxAttempts; i++) s = guidedReducer(s, { type: "heard", silence: true });
-    expect(s.stage).toBe("finished");
-    expect(s.marks).toEqual({ x: "practice", y: "done" });
+    expect([s.stage, s.queue, s.attempts, s.retry]).toEqual(["focus", ["y"], 0, false]);
+    expect(s.marks).toEqual({ x: "done" });
   });
+
+  it("the step ends after the last block and is marked completed", async () => {
+    window.localStorage.setItem("alif:progress:v1", JSON.stringify({ [KEY]: { passed: ORDER.slice(0, 11) } }));
+    mic.script = ["silence", "silence"];
+    render(<GuidedSoundWords groups={groups} progressKey={KEY} />);
+    await at(0);
+    fireEvent.click(screen.getByTestId("start-button"));
+    await at(0);
+    expect(active()).toBe("usra");
+    await until(() => stage() === "finished", 30_000);
+    expect(getLessonProgress(KEY).passed).toHaveLength(12);
+    expect(getLessonProgress(KEY).completedAt).toBeTruthy();
+    expect(screen.getByTestId("guided-done")).toHaveTextContent("Geschafft");
+    expect(mic.released).toBe(1); // microphone off at the end
+  }, 30_000);
 
   it("resumes at the first block that is not done", async () => {
     window.localStorage.setItem("alif:progress:v1", JSON.stringify({ [KEY]: { passed: ["alif-fatha", "ab", "ana"] } }));

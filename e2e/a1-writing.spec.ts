@@ -60,8 +60,8 @@ const instruction = (page: Page) => page.getByTestId("writing-instruction");
 test("trace with mouse and finger, get hints for wrong strokes, finish → Geschafft", async ({ page }) => {
   test.setTimeout(120_000);
   const errors = collectPageErrors(page);
-  await page.goto("/a1/lesson-1/step-4");
-  await expect(page.getByTestId("step-position")).toHaveText("Schritt 4 von 6");
+  await page.goto("/a1/lesson-1/alif/step-3");
+  await expect(page.getByTestId("step-position")).toHaveText("Schritt 3 von 5");
   await expect(page.getByTestId("step-next")).toHaveText(/Weiter: Ergänzen/);
   // A fresh visit is not "Geschafft" – step 4 completes only after the last form.
   await expect(step(page)).toHaveAttribute("data-ready", "true");
@@ -110,7 +110,7 @@ test("trace with mouse and finger, get hints for wrong strokes, finish → Gesch
   await expect(page.getByTestId("step-completed")).toBeVisible();
   await expect(page.getByTestId("writing-skip")).toBeDisabled();
   const progress = await page.evaluate(() => JSON.parse(localStorage.getItem("alif:progress:v1") ?? "{}"));
-  expect(progress["a1/lesson-1/step-4"].completedAt).toBeTruthy();
+  expect(progress["a1/lesson-1/alif/step-3"].completedAt).toBeTruthy();
 
   // Still "Geschafft" after a reload.
   await page.reload();
@@ -121,7 +121,7 @@ test("trace with mouse and finger, get hints for wrong strokes, finish → Gesch
 });
 
 test("tapping a grey letter loads it and brings the board into view; the model letter plays the demo", async ({ page }) => {
-  await page.goto("/a1/lesson-1/step-4");
+  await page.goto("/a1/lesson-1/alif/step-3");
   await page.evaluate(() => window.scrollTo(0, 0));
   await page.getByTestId("gray-alif-hamza").tap();
   await expect(step(page)).toHaveAttribute("data-current", "alif-hamza");
@@ -141,7 +141,7 @@ test("tapping a grey letter loads it and brings the board into view; the model l
 
 test("production build: ?debug=1 shows no debug panel; reduced motion: no pop animation", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/a1/lesson-1/step-4?debug=1");
+  await page.goto("/a1/lesson-1/alif/step-3?debug=1");
   await expect(step(page)).toHaveAttribute("data-ready", "true");
   await expect(page.getByTestId("writing-debug")).toHaveCount(0);
   await mouseStroke(page, form("alif").strokes[0]!.d);

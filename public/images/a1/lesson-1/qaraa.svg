@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="er las">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#effaea"/><stop offset="1" stop-color="#cdeec0"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#e0f5d6"/><circle cx="340" cy="236" r="50" fill="#e0f5d6"/>
+  
+<rect x="0" y="236" width="400" height="64" fill="#c98a2b" opacity=".4"/>
+<rect x="181.6" y="192.3" width="12.6" height="41.4" rx="5.8" fill="#efc49d"/><rect x="205.8" y="192.3" width="12.6" height="41.4" rx="5.8" fill="#efc49d"/>
+  <ellipse cx="187.3" cy="233.7" rx="11.5" ry="5.8" fill="#5b3a29"/><ellipse cx="212.7" cy="233.7" rx="11.5" ry="5.8" fill="#5b3a29"/>
+  <rect x="170.1" y="100.3" width="59.8" height="69.0" rx="13.8" fill="#2fb36b"/><rect x="172.4" y="164.7" width="55.2" height="34.5" rx="6.9" fill="#3c5a8a"/>
+  <path d="M177.0 109.5 C154.0 134.8, 151.7 157.8, 156.3 173.9" stroke="#efc49d" stroke-width="11.5" fill="none" stroke-linecap="round"/>
+  <path d="M223.0 109.5 C246.0 134.8, 248.3 157.8, 243.7 173.9" stroke="#efc49d" stroke-width="11.5" fill="none" stroke-linecap="round"/>
+  <ellipse cx="200" cy="65.1" rx="39.099999999999994" ry="41.1" fill="#efc49d"/>
+  <path d="M160.9 61.099999999999994 C160.9 20.0, 239.1 20.0, 239.1 61.099999999999994 C223.46 43.595, 176.54 43.595, 160.9 61.099999999999994 Z" fill="#3b2416"/>
+  <circle cx="186.3" cy="67.1" r="4.3" fill="#2f2a26"/><circle cx="213.7" cy="67.1" r="4.3" fill="#2f2a26"/>
+  <circle cx="175.4" cy="78.8" r="4.7" fill="#ff9d9d" opacity=".6"/><circle cx="224.6" cy="78.8" r="4.7" fill="#ff9d9d" opacity=".6"/>
+  <path d="M188.3 80.0 Q200 89.3 211.7 80.0" stroke="#8a3b2b" stroke-width="3.1" fill="none" stroke-linecap="round"/>
+  <g transform="translate(200 172)">
+  <path d="M-74 -30 L0 -16 L0 40 L-74 26 Z" fill="#fff"/><path d="M74 -30 L0 -16 L0 40 L74 26 Z" fill="#f7f5ef"/>
+  <path d="M-74 -30 L0 -16 L74 -30 L74 -22 L0 -8 L-74 -22 Z" fill="#e53950" opacity="0"/>
+  <g stroke="#9aa3ad" stroke-width="3"><line x1="-62" y1="-14" x2="-12" y2="-4"/><line x1="-62" y1="-2" x2="-12" y2="8"/><line x1="-62" y1="10" x2="-12" y2="20"/><line x1="12" y1="-4" x2="62" y2="-14"/><line x1="12" y1="8" x2="62" y2="-2"/><line x1="12" y1="20" x2="62" y2="10"/></g>
+  <path d="M-76 -32 L0 -18 L76 -32 L76 30 L0 44 L-76 30 Z" fill="none" stroke="#3d8bfd" stroke-width="5"/>
+  </g>
+</svg>

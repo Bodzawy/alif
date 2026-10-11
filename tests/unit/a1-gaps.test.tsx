@@ -3,7 +3,7 @@ import { existsSync } from "node:fs";
 import path from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import A1StepPage from "@/app/a1/[lesson]/[step]/page";
+import A1StepPage from "@/app/a1/[unit]/[lesson]/[step]/page";
 import { GAPS_FALLBACK_MS, GAPS_NARRATION, GAPS_TEXT, gapStars } from "@/components/a1/gaps/content";
 import { GapsStep } from "@/components/a1/gaps/gaps-step";
 import { getA1Lesson } from "@/data/a1";
@@ -11,14 +11,15 @@ import type { GapsContent } from "@/data/types";
 import { gapPieces, gapWord, piecesAreSafe } from "@/lib/arabic/gap";
 import { getLessonProgress } from "@/lib/progress";
 
-const lesson = getA1Lesson("lesson-1")!;
+const lesson = getA1Lesson("lesson-1", "alif")!;
 const stepOf = (slug: string) => {
   const step = lesson.steps.find((s) => s.slug === slug)!;
   if (step.kind !== "gaps") throw new Error(`${slug} must be a gaps step`);
   return step;
 };
-const step5 = stepOf("step-5");
-const step6 = stepOf("step-6");
+// Alif's "Ergänzen" and "Hören" (steps 4 and 5 since "Laute" is part of "Wörter").
+const step5 = stepOf("step-4");
+const step6 = stepOf("step-5");
 const PUBLIC = path.join(process.cwd(), "public");
 
 // The book's table: word, answer, rest (after the gap) – checked against the computed values.
@@ -49,8 +50,8 @@ const BOOK6: Array<[string, string, string]> = [
 describe("Schritt 5 Ergänzen / 6 Hören – content from the book", () => {
   it("are registered with their titles, choices and book order", () => {
     expect([step5, step6].map((s) => [s.slug, s.title, s.navLabel])).toEqual([
-      ["step-5", "Ergänzen: أَ · إِ · أُ", "Ergänzen"],
-      ["step-6", "Hören: أْ · أَ · إِ · أُ", "Hören"],
+      ["step-4", "Ergänzen: أَ · إِ · أُ", "Ergänzen"],
+      ["step-5", "Hören: أْ · أَ · إِ · أُ", "Hören"],
     ]);
     expect(step5.gaps.choices).toEqual(["أَ", "إِ", "أُ"]);
     expect(step6.gaps.choices).toEqual(["أْ", "أَ", "إِ", "أُ"]);
@@ -89,12 +90,12 @@ describe("Schritt 5 Ergänzen / 6 Hören – content from the book", () => {
     expect(piecesAreSafe(gapWord("سَأَلَ"))).toBe(false);
   });
 
-  it("uses the pictures of Schritt 2 (same files, same spelling) in Ergänzen only", () => {
-    const step2 = lesson.steps[1]!;
+  it("uses the pictures of Wörter (same files, same spelling) in Ergänzen only", () => {
+    const step2 = lesson.steps[0]!;
     if (step2.kind !== "sound-words") throw new Error();
     const words = new Map(step2.groups.flatMap((g) => g.words).map((w) => [w.arabic, w]));
     for (const item of step5.gaps.items) {
-      expect(words.get(item.arabic)?.image.src, item.arabic).toBe(item.image?.src);
+      expect(words.get(item.arabic)?.image?.src, item.arabic).toBe(item.image?.src);
       expect(words.get(item.arabic)?.german).toBe(item.german);
       expect(existsSync(path.join(PUBLIC, item.image!.src))).toBe(true);
     }
@@ -164,7 +165,7 @@ const answerWith = (choice: string) => {
 
 describe("the gap flow", () => {
   it("wrong → hint, wrong again → reveal (still to be placed), right → word shaped, g_ok, next; result counts helped items", async () => {
-    render(<GapsStep gaps={step5.gaps} availableAudio={ALL_FILES} progressKey="a1/lesson-1/step-5" />);
+    render(<GapsStep gaps={step5.gaps} availableAudio={ALL_FILES} progressKey="a1/lesson-1/alif/step-4" />);
     fireEvent.click(await screen.findByTestId("start-button"));
     await waitFor(() => expect(played).toEqual(["g5_intro"]));
     expect(screen.getByTestId("gap-caption")).toHaveTextContent(GAPS_TEXT.g5_intro!);
@@ -203,7 +204,7 @@ describe("the gap flow", () => {
     expect(screen.getByTestId("result-umm")).toHaveAttribute("data-first-try", "true");
     expect(result).toHaveTextContent("مُمْتَاز! 👏");
     await waitFor(() => expect(played.at(-1)).toBe("g5_done"));
-    expect(getLessonProgress("a1/lesson-1/step-5").completedAt).toBeTruthy();
+    expect(getLessonProgress("a1/lesson-1/alif/step-4").completedAt).toBeTruthy();
 
     // "Nochmal" restarts.
     fireEvent.click(screen.getByTestId("gap-restart"));
@@ -212,7 +213,7 @@ describe("the gap flow", () => {
 
   it("reaches the result screen with every audio file missing, on the fallback timers (fake timers)", async () => {
     vi.useFakeTimers();
-    render(<GapsStep gaps={step6.gaps} availableAudio={[]} progressKey="a1/lesson-1/step-6" />);
+    render(<GapsStep gaps={step6.gaps} availableAudio={[]} progressKey="a1/lesson-1/alif/step-5" />);
     const at = (ms: number) => act(() => vi.advanceTimersByTimeAsync(ms));
     await at(0);
     fireEvent.click(screen.getByTestId("start-button"));
@@ -225,7 +226,7 @@ describe("the gap flow", () => {
       await at(GAPS_FALLBACK_MS.clip * 2 + 10);
     }
     expect(screen.getByTestId("gap-result")).toHaveAttribute("data-stars", "3");
-    expect(getLessonProgress("a1/lesson-1/step-6").completedAt).toBeTruthy();
+    expect(getLessonProgress("a1/lesson-1/alif/step-5").completedAt).toBeTruthy();
     expect(played).toEqual([]);
   });
 
@@ -260,35 +261,36 @@ describe("the gap flow", () => {
 });
 
 describe("navigation and progress keys", () => {
-  const renderStep = async (slug: string) => render(await A1StepPage({ params: Promise.resolve({ lesson: "lesson-1", step: slug }) }));
+  const renderStep = async (slug: string) => render(await A1StepPage({ params: Promise.resolve({ unit: "lesson-1", lesson: "alif", step: slug }) }));
 
-  it("step-4 → Weiter: Ergänzen; step-5 → Zurück: Schreiben / Weiter: Hören; step-6 → Zurück: Ergänzen / Zurück zu A1", async () => {
+  it("Schreiben → Weiter: Ergänzen; Ergänzen → Zurück: Schreiben / Weiter: Hören; Hören → Zurück: Ergänzen / Zur Lektion 1 / Weiter: ب", async () => {
     vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue(null);
     vi.spyOn(console, "warn").mockImplementation(() => undefined);
-    await renderStep("step-4");
+    await renderStep("step-3");
     expect(screen.getByTestId("step-next")).toHaveTextContent("Weiter: Ergänzen");
     cleanup();
-    await renderStep("step-5");
-    expect(screen.getByTestId("step-position")).toHaveTextContent("Schritt 5 von 6");
+    await renderStep("step-4");
+    expect(screen.getByTestId("step-position")).toHaveTextContent("Schritt 4 von 5");
     expect(screen.getByTestId("step-prev")).toHaveTextContent("Zurück: Schreiben");
     expect(screen.getByTestId("step-next")).toHaveTextContent("Weiter: Hören");
-    expect(screen.getByTestId("step-next")).toHaveAttribute("href", "/a1/lesson-1/step-6");
+    expect(screen.getByTestId("step-next")).toHaveAttribute("href", "/a1/lesson-1/alif/step-5");
     cleanup();
-    await renderStep("step-6");
-    expect(screen.getByTestId("step-position")).toHaveTextContent("Schritt 6 von 6");
+    await renderStep("step-5");
+    expect(screen.getByTestId("step-position")).toHaveTextContent("Schritt 5 von 5");
     expect(screen.getByTestId("step-prev")).toHaveTextContent("Zurück: Ergänzen");
-    expect(screen.getByTestId("back-to-lessons")).toHaveTextContent("Zurück zu A1");
+    expect(screen.getByTestId("back-to-unit-end")).toHaveAttribute("href", "/a1/lesson-1");
+    expect(screen.getByTestId("next-entry")).toHaveAttribute("href", "/a1/lesson-1/ba");
     vi.restoreAllMocks();
   });
 
-  it("completes a1/lesson-1/step-5 and step-6 only on the result screen", async () => {
-    render(<GapsStep gaps={{ ...step5.gaps, items: step5.gaps.items.slice(0, 1) }} availableAudio={ALL_FILES} progressKey="a1/lesson-1/step-5" />);
+  it("completes a1/lesson-1/alif/step-4 and step-6 only on the result screen", async () => {
+    render(<GapsStep gaps={{ ...step5.gaps, items: step5.gaps.items.slice(0, 1) }} availableAudio={ALL_FILES} progressKey="a1/lesson-1/alif/step-4" />);
     fireEvent.click(await screen.findByTestId("start-button"));
-    expect(getLessonProgress("a1/lesson-1/step-5").completedAt).toBeUndefined();
+    expect(getLessonProgress("a1/lesson-1/alif/step-4").completedAt).toBeUndefined();
     answerWith("أَ");
     fireEvent.click(screen.getByTestId("gap-next"));
     await screen.findByTestId("gap-result");
-    expect(getLessonProgress("a1/lesson-1/step-5").completedAt).toBeTruthy();
-    expect(getLessonProgress("a1/lesson-1/step-6").completedAt).toBeUndefined();
+    expect(getLessonProgress("a1/lesson-1/alif/step-4").completedAt).toBeTruthy();
+    expect(getLessonProgress("a1/lesson-1/alif/step-5").completedAt).toBeUndefined();
   });
 });

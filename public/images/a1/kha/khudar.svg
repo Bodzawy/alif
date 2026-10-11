@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Gemüse">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#effaea"/><stop offset="1" stop-color="#cdeec0"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#e0f5d6"/><circle cx="340" cy="236" r="50" fill="#e0f5d6"/>
+  <ellipse cx="220" cy="250" rx="140" ry="8" fill="#000" opacity="0.12"/>
+<path d="M96 190 C80 150 110 116 150 120" fill="none"/>
+  <path d="M90 236 L150 100 C156 88 172 92 170 106 L118 244 C112 256 86 250 90 236 Z" fill="#ff8c1a"/>
+  <g stroke="#4f9e48" stroke-width="6" stroke-linecap="round"><line x1="162" y1="98" x2="170" y2="70"/><line x1="162" y1="98" x2="186" y2="78"/><line x1="162" y1="98" x2="152" y2="72"/></g>
+  <circle cx="230" cy="196" r="50" fill="#e53950"/><path d="M212 150 L230 160 L248 150 L240 164 L254 170 L230 168 L206 170 L220 164 Z" fill="#3fa34d"/>
+  <ellipse cx="212" cy="184" rx="10" ry="16" fill="#fff" opacity=".3"/>
+  <path d="M300 236 C278 236 272 208 280 180 C286 160 300 150 314 150 C328 150 342 160 346 180 C352 208 346 236 324 236 Z" fill="#ffd54a"/>
+  <path d="M310 150 L312 132 C314 124 322 124 324 132" stroke="#3fa34d" stroke-width="6" fill="none"/>
+</svg>

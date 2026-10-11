@@ -31,7 +31,8 @@ describe("lesson content", () => {
 
   it("merges letter and word rules without throwing and has a word rule for every word", () => {
     const words = [...LEVELS.flatMap((level) => level.lessons.flatMap((lesson) => lesson.vocabulary)), ...a1Words()];
-    expect(Object.keys(VOCABULARY_RULES)).toHaveLength(words.length);
+    // One rule per target: A1 · Ba's بَيْت and بَاب share the rule of A0's بيت and باب.
+    expect(Object.keys(VOCABULARY_RULES)).toHaveLength(new Set(words.map((word) => word.exercise.target)).size);
     for (const word of words) {
       const conditions = VOCABULARY_RULES[word.exercise.target]?.excellent?.conditions;
       expect(conditions?.[0]).toBe("azure_accuracy >= 70");

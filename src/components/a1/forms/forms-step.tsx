@@ -10,10 +10,13 @@ import { getLessonProgress, markLessonCompleted, subscribeProgress } from "@/lib
 import { cn } from "@/lib/utils";
 
 import { BuildActivity } from "./build-activity";
-import { NARRATION } from "./content";
+import { LETTER_NARRATION, NARRATION } from "./content";
 import { ExplainActivity } from "./explain-activity";
+import { LetterNeighborsActivity } from "./letter-neighbors-activity";
+import { LetterSortActivity } from "./letter-sort-activity";
 import { NeighborsActivity } from "./neighbors-activity";
 import { SortActivity } from "./sort-activity";
+import { formGlyph, LETTER_FORMS } from "@/lib/arabic/letter-form";
 
 // Part 0 is "Zuschauen" (explanation only); it plays its own intro.
 const PARTS = [
@@ -23,6 +26,14 @@ const PARTS = [
   { title: "Mit Hand oder ohne?", intro: NARRATION.sort.intro },
 ] as const;
 
+/** A letter lesson: the same four parts; Activity 3 sorts into the letter's four forms. */
+const letterParts = (name: string) => [
+  PARTS[0],
+  PARTS[1],
+  { title: "Wer hält fest?", intro: LETTER_NARRATION.neighbors.intro },
+  { title: `Wo steht das ${name}?`, intro: LETTER_NARRATION.sort.intro },
+];
+
 const noop = () => () => undefined;
 
 // Step type "forms" (A1 · Lektion 1 · Schritt 3): the Alif with Hamza alone
@@ -31,6 +42,10 @@ const noop = () => () => undefined;
 // to the end. The narration is pre-recorded; browsers only allow sound after a
 // tap, hence the start overlay. `availableAudio` lists the files that exist
 // (checked at build time).
+//
+// With `forms.letter` the step is a letter lesson's (ب ت ث ج ح خ – a letter
+// with a Hand of its own): Zuschauen and Baue das Wort are shared, "Wer hält
+// fest?" and the sorting have their own variants (two sides, four baskets).
 export function FormsStep({ forms, availableAudio, progressKey }: { forms: FormsContent; availableAudio: string[]; progressKey: string }) {
   const narrator = useRef<Narrator | null>(null);
   const [muted, setMuted] = useState(false);
@@ -42,6 +57,8 @@ export function FormsStep({ forms, availableAudio, progressKey }: { forms: Forms
   const completed = useSyncExternalStore(subscribeProgress, () => Boolean(getLessonProgress(progressKey).completedAt), () => false);
   const hydrated = useSyncExternalStore(noop, () => true, () => false);
   const exercisesOpen = explainDone || completed;
+  const letter = forms.letter;
+  const parts = letter ? letterParts(letter.name) : PARTS;
 
   // Created after hydration (it needs the browser), so server and client render alike.
   if (!narrator.current && hydrated) {
@@ -62,12 +79,12 @@ export function FormsStep({ forms, availableAudio, progressKey }: { forms: Forms
   function goTo(next: number) {
     setPart(next);
     if (next === 0) setExplainRun((run) => run + 1);
-    else void narrator.current?.play([PARTS[next]!.intro]);
+    else void narrator.current?.play([parts[next]!.intro]);
   }
 
   function replayIntro() {
     if (part === 0) setExplainRun((run) => run + 1);
-    else void narrator.current?.play([PARTS[part]!.intro]);
+    else void narrator.current?.play([parts[part]!.intro]);
   }
 
   function toggleMute() {
@@ -82,7 +99,7 @@ export function FormsStep({ forms, availableAudio, progressKey }: { forms: Forms
     <div data-testid="forms-step" data-part={part} data-started={started}>
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
         <ol className="flex flex-wrap gap-2" aria-label="Teile">
-          {PARTS.map((item, i) => {
+          {parts.map((item, i) => {
             const locked = i > 0 && !exercisesOpen;
             return (
               <li key={item.title}>
@@ -130,10 +147,26 @@ export function FormsStep({ forms, availableAudio, progressKey }: { forms: Forms
       <div className="relative">
         {!started || !n ? (
           <div className="flex min-h-80 flex-col items-center justify-center gap-4 rounded-3xl border bg-card p-8 text-center shadow-card" data-testid="start-overlay">
-            <p lang="ar" dir="rtl" className="font-arabic text-7xl font-bold leading-[1.6]">
-              <span className="text-primary">أ</span> · <span className="text-primary">ـأ</span>
-            </p>
-            <p className="max-w-sm text-muted-foreground">Das Alif mit Hamza sieht nicht immer gleich aus. Hör gut zu und mach mit!</p>
+            {letter ? (
+              <>
+                <p lang="ar" dir="rtl" className="font-arabic text-5xl font-bold leading-[1.8] sm:text-7xl">
+                  {LETTER_FORMS.map((form, i) => (
+                    <span key={form}>
+                      {i > 0 && " · "}
+                      <span className="text-primary">{formGlyph(letter.glyph, form)}</span>
+                    </span>
+                  ))}
+                </p>
+                <p className="max-w-sm text-muted-foreground">Das {letter.name} sieht nicht immer gleich aus. Hör gut zu und mach mit!</p>
+              </>
+            ) : (
+              <>
+                <p lang="ar" dir="rtl" className="font-arabic text-7xl font-bold leading-[1.6]">
+                  <span className="text-primary">أ</span> · <span className="text-primary">ـأ</span>
+                </p>
+                <p className="max-w-sm text-muted-foreground">Das Alif mit Hamza sieht nicht immer gleich aus. Hör gut zu und mach mit!</p>
+              </>
+            )}
             <Button size="lg" onClick={start} disabled={!n} data-testid="start-button" className="min-h-14">
               <Play className="h-5 w-5" aria-hidden /> Los geht&apos;s!
             </Button>
@@ -142,6 +175,7 @@ export function FormsStep({ forms, availableAudio, progressKey }: { forms: Forms
           <ExplainActivity
             key={explainRun}
             words={forms.explain}
+            letter={letter}
             narrator={n}
             withPageIntro={explainRun === 0}
             onReachedEnd={() => setExplainDone(true)}
@@ -151,9 +185,15 @@ export function FormsStep({ forms, availableAudio, progressKey }: { forms: Forms
             }}
           />
         ) : part === 1 ? (
-          <BuildActivity words={forms.build} narrator={n} onComplete={() => goTo(2)} />
+          <BuildActivity words={forms.build} letter={letter} narrator={n} onComplete={() => goTo(2)} />
         ) : part === 2 ? (
-          <NeighborsActivity neighbors={forms.neighbors} narrator={n} onComplete={() => goTo(3)} />
+          letter ? (
+            <LetterNeighborsActivity letter={letter} neighbors={forms.neighbors} narrator={n} onComplete={() => goTo(3)} />
+          ) : (
+            <NeighborsActivity neighbors={forms.neighbors} narrator={n} onComplete={() => goTo(3)} />
+          )
+        ) : letter ? (
+          <LetterSortActivity letter={letter} words={forms.sort} narrator={n} onComplete={() => markLessonCompleted(progressKey)} />
         ) : (
           <SortActivity words={forms.sort} narrator={n} onComplete={() => markLessonCompleted(progressKey)} />
         )}

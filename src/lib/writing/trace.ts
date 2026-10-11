@@ -40,6 +40,12 @@ export const TRACE_TOL = {
   resamplePoints: 64,
   /** Average score above which a form gets 3 / 2 stars (otherwise 1). */
   stars: { three: 0.96, two: 0.9 },
+  /**
+   * Dots (stroke type "dot"): a tap or a short scribble counts when every point
+   * lies within `radius` of the dot's centre and the trace is at most `maxLength`
+   * long (a long stroke does not count).
+   */
+  dot: { radius: 28, maxLength: 60 },
 } as const;
 
 export type TraceTolerances = typeof TRACE_TOL;
@@ -47,7 +53,7 @@ export type TraceTolerances = typeof TRACE_TOL;
 /** A stroke template: its sampled points and their length. */
 export type StrokeTemplate = { pts: Point[]; len: number };
 
-export type FailReason = "tooShort" | "reverse" | "start" | "order" | "end" | "cover" | "acc";
+export type FailReason = "tooShort" | "reverse" | "start" | "order" | "end" | "cover" | "acc" | "dot";
 
 /** Measured values for the debug view (in box units; tolerances already scaled). */
 export type TraceDebug = {
@@ -140,6 +146,51 @@ export function evaluate(user: readonly Point[], strokes: readonly StrokeTemplat
   if (cover < tol.cover) return fail(dist(ue, e) > c.endTol ? "end" : "cover");
   if (acc < tol.acc) return fail("acc");
   return { ok: true, score: (cover + acc) / 2, debug };
+}
+
+/** Centre of a dot stroke (the mean of its template points, which lie on a small circle). */
+export function dotCenter(tpl: StrokeTemplate): Point {
+  const n = tpl.pts.length || 1;
+  return { x: tpl.pts.reduce((s, p) => s + p.x, 0) / n, y: tpl.pts.reduce((s, p) => s + p.y, 0) / n };
+}
+
+/**
+ * Checks a dot: a tap (a single point is enough) or a short scribble, all
+ * within TRACE_TOL.dot.radius of the centre. Starting outside → "start";
+ * leaving the dot or drawing too long a line → "dot". Score 0.9–1 by how
+ * close to the centre the farthest point stayed.
+ */
+export function evaluateDot(user: readonly Point[], tpl: StrokeTemplate, tol: TraceTolerances = TRACE_TOL): TraceResult {
+  const c = dotCenter(tpl);
+  const us = user[0] ?? { x: NaN, y: NaN };
+  const ue = user[user.length - 1] ?? us;
+  const far = user.reduce((m, p) => Math.max(m, dist(p, c)), 0);
+  const debug: TraceDebug = {
+    startDist: dist(us, c),
+    endDist: dist(ue, c),
+    startTol: tol.dot.radius,
+    endTol: tol.dot.radius,
+    cover: null,
+    acc: null,
+    coverMin: tol.cover,
+    accMin: tol.acc,
+  };
+  if (!(dist(us, c) <= tol.dot.radius)) return { ok: false, msg: "start", debug };
+  if (far > tol.dot.radius || pathLen(user) > tol.dot.maxLength) return { ok: false, msg: "dot", debug };
+  return { ok: true, score: 1 - 0.1 * (far / tol.dot.radius), debug };
+}
+
+/**
+ * Checks stroke `idx` of a form whose strokes may include dots (`dots[i]`):
+ * dots go to evaluateDot, all other strokes to evaluate() unchanged. A failed
+ * line that is really a tap on a LATER dot becomes "order" ("Zuerst …").
+ */
+export function evaluateStroke(user: readonly Point[], strokes: readonly StrokeTemplate[], idx: number, dots: readonly boolean[], tol: TraceTolerances = TRACE_TOL): TraceResult {
+  if (dots[idx]) return evaluateDot(user, strokes[idx]!, tol);
+  const result = evaluate(user, strokes, idx, tol);
+  if (result.ok) return result;
+  const tappedLaterDot = strokes.some((tpl, j) => j > idx && dots[j] && evaluateDot(user, tpl, tol).ok);
+  return tappedLaterDot ? { ok: false, msg: "order", debug: result.debug } : result;
 }
 
 /** Stars for a form from the average score of its strokes (prototype thresholds). */

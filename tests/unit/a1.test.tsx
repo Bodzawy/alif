@@ -10,26 +10,27 @@ const tts = vi.hoisted(() => ({ speak: vi.fn(async (_text: string) => undefined)
 vi.mock("@/lib/tts/player", () => ({ speakArabic: tts.speak, stopSpeaking: tts.stop }));
 
 import { SoundWordsStep } from "@/components/a1/sound-words-step";
-import { SoundsStep } from "@/components/a1/sounds-step";
-import { A1_LEVEL, a1Exercises, a1StepHref, getA1Lesson } from "@/data/a1";
+import { A1_LEVEL, a1LessonExercises, a1StepHref, a1Unit1, getA1Lesson } from "@/data/a1";
 import { arabicLessonLabel } from "@/data/a1/ordinals";
 import { buildAssessment } from "@/lib/pronunciation/assessment";
 import { CONDITION_RULES, SOUND_RULES } from "@/lib/pronunciation/rules";
 import { isAllowedTarget, isAllowedTtsText } from "@/lib/pronunciation/targets";
 
-import { a1Words } from "../support/a1-words";
 
-const lesson = getA1Lesson("lesson-1")!;
-const [soundsStep, wordsStep] = lesson.steps;
+const lesson = getA1Lesson("lesson-1", "alif")!;
+const [wordsStep] = lesson.steps;
 
 describe("A1 · Lesson 1 content", () => {
-  it("is الدرس الأول – صباح الخير with six steps: vowels, words, forms of أ, writing, filling gaps, listening", () => {
-    expect(A1_LEVEL.lessons.map((l) => l.slug)).toEqual(["lesson-1"]);
-    expect(arabicLessonLabel(lesson.number)).toBe("الدرس الأول");
-    expect(lesson.title).toBe("صَبَاحُ الْخَيْر");
-    expect(lesson.steps.map((s) => [s.slug, s.kind])).toEqual([["step-1", "sounds"], ["step-2", "sound-words"], ["step-3", "forms"], ["step-4", "writing"], ["step-5", "gaps"], ["step-6", "gaps"]]);
-    expect(soundsStep!.kind === "sounds" && soundsStep!.sounds.map((s) => s.glyph)).toEqual(["أَ", "إِ", "أُ"]);
-    expect(a1StepHref(lesson, "step-2")).toBe("/a1/lesson-1/step-2");
+  it("Alif is the first entry of الدرس الأول – صباح الخير, with five steps: words (with the vowels), forms of أ, writing, filling gaps, listening", () => {
+    expect(A1_LEVEL.units.map((u) => u.slug)).toEqual(["lesson-1"]);
+    expect(a1Unit1.lessons.map((l) => l.slug)).toEqual(["alif", "ba", "ta", "tha", "jim", "hha", "kha", "review", "sabah-al-khayr"]);
+    expect(arabicLessonLabel(a1Unit1.number)).toBe("الدرس الأول");
+    expect(a1Unit1.title).toBe("صَبَاحُ الْخَيْر");
+    expect(lesson).toMatchObject({ slug: "alif", kind: "letter", label: "أ", labelGerman: "Alif" });
+    expect(lesson.steps.map((s) => [s.slug, s.kind])).toEqual([["step-1", "sound-words"], ["step-2", "forms"], ["step-3", "writing"], ["step-4", "gaps"], ["step-5", "gaps"]]);
+    // The former step 1 "Laute": every word row starts with its vowel (listen and speak).
+    expect(wordsStep!.kind === "sound-words" && wordsStep!.groups.map((g) => g.sound.glyph)).toEqual(["أَ", "إِ", "أُ"]);
+    expect(a1StepHref(a1Unit1, lesson, "step-2")).toBe("/a1/lesson-1/alif/step-2");
   });
 
   it("has exactly the words of the lesson sheet, in its order, grouped by vowel", () => {
@@ -77,14 +78,16 @@ describe("A1 · Lesson 1 content", () => {
   });
 
   it("every image exists under public/images/a1/lesson-1", () => {
-    for (const word of a1Words()) {
-      expect(word.image.src).toBe(`/images/a1/lesson-1/${word.id}.svg`);
-      expect(existsSync(path.join(process.cwd(), "public", word.image.src)), word.image.src).toBe(true);
+    // Lesson 1's words (the letter lessons have no pictures yet, see a1-letters.test.tsx).
+    if (wordsStep!.kind !== "sound-words") throw new Error();
+    for (const word of wordsStep!.groups.flatMap((g) => g.words)) {
+      expect(word.image!.src).toBe(`/images/a1/lesson-1/${word.id}.svg`);
+      expect(existsSync(path.join(process.cwd(), "public", word.image!.src)), word.image!.src).toBe(true);
     }
   });
 
   it("every sound and word is accepted by /api/pronunciation (with rules) and /api/tts", () => {
-    const exercises = a1Exercises();
+    const exercises = a1LessonExercises(lesson);
     expect(exercises).toHaveLength(12);
     for (const exercise of exercises) {
       expect(CONDITION_RULES[exercise.target]?.excellent, exercise.target).toBeDefined();
@@ -94,7 +97,7 @@ describe("A1 · Lesson 1 content", () => {
   });
 
   it("vowel rules: decided by the vowel IQRA hears, not by Azure accuracy", () => {
-    expect(Object.keys(SOUND_RULES)).toEqual(["أَ", "إِ", "أُ"]);
+    expect(Object.keys(SOUND_RULES)).toEqual(["أَ", "إِ", "أُ", ...["ب", "ت", "ث", "ج", "ح", "خ"].flatMap((l) => [l + "َ", l + "ِ", l + "ُ"])]);
     const heard = { "أَ": ["<", "aa"], "إِ": ["<", "i"], "أُ": ["h", "uu"] } as const;
     const assess = (target: string, phonemes: string[] | null, accuracy = 90) =>
       buildAssessment({
@@ -103,7 +106,8 @@ describe("A1 · Lesson 1 content", () => {
         masaar: null,
         iqra: phonemes && { phonemes },
       });
-    for (const target of Object.keys(SOUND_RULES) as Array<keyof typeof heard>) {
+    // Alif's vowels (the letter lessons' sounds are tested in a1-letters.test.tsx).
+    for (const target of Object.keys(heard) as Array<keyof typeof heard>) {
       // Its own vowel passes – even with a low Azure score.
       expect(assess(target, [...heard[target]], 40).passed, target).toBe(true);
       // Any other vowel fails, even with a perfect Azure score.
@@ -176,42 +180,7 @@ afterEach(() => {
   vi.unstubAllGlobals();
 });
 
-describe("A1 step 1: the vowels one after another", () => {
-  it("listen and speak each vowel; simple feedback without accuracy; Weiter leads to إِ, أُ and then step 2", async () => {
-    if (soundsStep!.kind !== "sounds") throw new Error();
-    render(<SoundsStep sounds={soundsStep!.sounds} nextHref="/a1/lesson-1/step-2" nextLabel="Weiter: Wörter" />);
-
-    for (const [i, sound] of soundsStep!.sounds.entries()) {
-      expect(screen.getByTestId(`sound-glyph-${sound.id}`)).toHaveTextContent(sound.glyph);
-      fireEvent.click(screen.getByTestId(`exercise-${sound.id}-listen`));
-      await waitFor(() => expect(tts.speak).toHaveBeenCalledWith(sound.exercise.modelText));
-
-      if (i === 0) fetchMock.mockResolvedValueOnce(answer(false));
-      await record(sound.id);
-      if (i === 0) {
-        const feedback = await screen.findByTestId(`exercise-${sound.id}-feedback`);
-        expect(feedback).toHaveAttribute("data-passed", "false");
-        expect(feedback).not.toHaveTextContent("%");
-        expect(feedback).not.toHaveTextContent("نريد");
-        fireEvent.click(screen.getByTestId(`exercise-${sound.id}-feedback-retry`));
-        await waitFor(() => expect(screen.getByTestId(`exercise-${sound.id}`).dataset.phase).toBe("recording"));
-        await act(() => wait(450));
-        fireEvent.click(screen.getByTestId(`exercise-${sound.id}-record`));
-      }
-      await waitFor(() => expect(screen.getByTestId(`exercise-${sound.id}-feedback-headline`)).toHaveTextContent("مُمْتَاز! 👏"));
-      expect(screen.getByTestId(`exercise-${sound.id}-feedback`)).not.toHaveTextContent("%");
-      expect(screen.getByTestId(`sound-card-${sound.id}`)).toHaveTextContent("Geschafft");
-
-      const form = (fetchMock.mock.calls.at(-1)![1] as RequestInit).body as FormData;
-      expect(form.get("target")).toBe(sound.exercise.target);
-
-      if (i < 2) fireEvent.click(screen.getByTestId("sound-next"));
-    }
-    expect(screen.getByTestId("step-next")).toHaveAttribute("href", "/a1/lesson-1/step-2");
-  });
-});
-
-describe("A1 step 2: each vowel with its three word cards", () => {
+describe("A1 Wörter: each vowel with its three word cards", () => {
   it("shows image, Arabic, German, transliteration, listen and speak for every word; one recording at a time", async () => {
     if (wordsStep!.kind !== "sound-words") throw new Error();
     render(<SoundWordsStep groups={wordsStep!.groups} />);
@@ -222,7 +191,7 @@ describe("A1 step 2: each vowel with its three word cards", () => {
       expect(within(section).getByTestId(`exercise-${group.sound.id}-record`)).toBeInTheDocument();
       for (const word of group.words) {
         const card = within(section).getByTestId(`vocab-card-${word.id}`);
-        expect(card.querySelector("img")).toHaveAttribute("src", word.image.src);
+        expect(card.querySelector("img")).toHaveAttribute("src", word.image!.src);
         expect(card).toHaveTextContent(word.arabic);
         expect(card).toHaveTextContent(word.german);
         expect(card).toHaveTextContent(word.transliteration);

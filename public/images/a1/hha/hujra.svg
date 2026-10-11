@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Zimmer">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff6e8"/><stop offset="1" stop-color="#f6dcb0"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#fbe8c8"/><circle cx="340" cy="236" r="50" fill="#fbe8c8"/>
+  
+<rect x="0" y="0" width="400" height="216" fill="#f7e3c4"/><rect x="0" y="216" width="400" height="84" fill="#c98a2b"/>
+  <rect x="236" y="40" width="110" height="96" rx="6" fill="#8a5a33"/><rect x="246" y="50" width="90" height="76" fill="#a9d6f5"/><rect x="288" y="50" width="6" height="76" fill="#8a5a33"/><circle cx="314" cy="72" r="10" fill="#ffd54a"/>
+  <rect x="40" y="150" width="176" height="56" rx="10" fill="#7a8cff"/><rect x="40" y="110" width="20" height="110" rx="6" fill="#6b4226"/><rect x="196" y="140" width="20" height="80" rx="6" fill="#6b4226"/>
+  <rect x="64" y="132" width="52" height="26" rx="10" fill="#fff"/>
+  <path d="M60 156 L196 156 L196 206 L60 206 Z" fill="#5a6ee8"/>
+  <rect x="256" y="200" width="100" height="30" rx="6" fill="#ff7aa2" opacity=".7"/>
+</svg>

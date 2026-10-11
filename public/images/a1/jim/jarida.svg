@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Zeitung">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eef8ff"/><stop offset="1" stop-color="#c4e2f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#dcefff"/><circle cx="340" cy="236" r="50" fill="#dcefff"/>
+  <ellipse cx="200" cy="262" rx="100" ry="10" fill="#000" opacity="0.12"/>
+<g transform="rotate(-6 200 150)">
+  <rect x="96" y="52" width="208" height="200" rx="6" fill="#f7f5ef"/><rect x="200" y="52" width="104" height="200" fill="#ecE8de"/>
+  <rect x="112" y="68" width="176" height="22" rx="3" fill="#2f2a26"/>
+  <rect x="112" y="102" width="76" height="56" fill="#8fb8de"/><circle cx="134" cy="122" r="10" fill="#ffd54a"/><path d="M112 158 L140 132 L162 150 L188 128 L188 158 Z" fill="#5ea844"/>
+  <g fill="#9aa3ad"><rect x="112" y="170" width="76" height="6" rx="3"/><rect x="112" y="184" width="70" height="6" rx="3"/><rect x="112" y="198" width="76" height="6" rx="3"/><rect x="112" y="212" width="60" height="6" rx="3"/><rect x="112" y="226" width="72" height="6" rx="3"/>
+  <rect x="210" y="104" width="78" height="6" rx="3"/><rect x="210" y="118" width="70" height="6" rx="3"/><rect x="210" y="132" width="78" height="6" rx="3"/><rect x="210" y="146" width="64" height="6" rx="3"/><rect x="210" y="160" width="78" height="6" rx="3"/><rect x="210" y="174" width="70" height="6" rx="3"/><rect x="210" y="188" width="78" height="6" rx="3"/><rect x="210" y="202" width="56" height="6" rx="3"/></g>
+  </g>
+</svg>

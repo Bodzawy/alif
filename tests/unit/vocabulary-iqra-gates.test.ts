@@ -105,6 +105,58 @@ const EXPECTED_TOKENS: Record<string, string[]> = {
   "أذن": ["n"],
   "أم": ["m|mm"],
   "أسرة": ["s","r|rr"],
+  // A1 · Lesson 1 · Ba (بَيْت and بَاب share the A0 rules of بيت and باب)
+  "بنات": ["b","n","t"],
+  "بنت": ["b","n","t"],
+  "بئر": ["b","r|rr"],
+  "بطاقة": ["b","T","q"],
+  "بندقية": ["b","n","d","q","y|yy"],
+  "برتقال": ["b","r|rr","t","q","l"],
+  "برج": ["b","r|rr","j"],
+  // Ta (تَاج and تُفَّاحَة share the A0 rules)
+  "تمر": ["t","m","r|rr"],
+  "تل": ["t","l|ll"],
+  "تليفون": ["t","l","f","n"],
+  "تمثال": ["t","m","l"],
+  "تين": ["t","n"],
+  "توت": ["t"],
+  "تونة": ["t","n"],
+  // Tha (ثَوْم shares the A0 rule; ث itself is not required)
+  "ثوب": ["b"],
+  "ثلاثة": ["l"],
+  "ثياب": ["y","b"],
+  "ثمار": ["m","r|rr"],
+  "ثقاب": ["q","b"],
+  "ثلث": ["l"],
+  "ثعبان": ["E","b","n"],
+  "ثقب": ["q","b"],
+  // Dschim (جَمَل shares the A0 rule)
+  "جريدة": ["j","r|rr","d"],
+  "جرس": ["j","r|rr","s"],
+  "جلباب": ["j","l","b"],
+  "جبال": ["j","b","l"],
+  "جمال": ["j","m","l"],
+  "جنود": ["j","n","d"],
+  "جبن": ["j","b","n"],
+  "جندي": ["j","n","d"],
+  // Ha (حِصَان and حُوت share the A0 rules)
+  "حقيبة": ["H","q","b"],
+  "حديقة": ["H","d","q"],
+  "حفلة": ["H","f","l"],
+  "حذاء": ["H"],
+  "حجارة": ["H","j","r|rr"],
+  "حجرة": ["H","j","r|rr"],
+  "حبوب": ["H","b"],
+  // Cha (خِيَار and خُبْز share the A0 rules)
+  "خس": ["x","s"],
+  "خمسة": ["x","m","s"],
+  "خاتم": ["x","t","m"],
+  "خطاب": ["x","T","b"],
+  "خيام": ["x","y","m"],
+  "خضار": ["x","D","r|rr"],
+  "خوذة": ["x"],
+  // The phrase of Lektion 1
+  "صباح الخير": ["S","b","H","x","r|rr"],
 };
 
 // IQRA's token inventory (sws_arabic.txt of the IqraEval phoneme model).
@@ -142,9 +194,9 @@ const words = [
 ];
 
 describe("vocabulary IQRA gates", () => {
-  it("cover all 93 curriculum words (84 in A0 → Wörter, 9 in A1), each with its own gate", () => {
-    expect(words).toHaveLength(93);
-    expect(Object.keys(EXPECTED_TOKENS).sort()).toEqual(words.map(({ word }) => word.exercise.target).sort());
+  it("cover all 148 curriculum words (84 in A0 → Wörter, 63 in A1 and the phrase صباح الخير), each target with its own gate", () => {
+    expect(words).toHaveLength(148);
+    expect(Object.keys(EXPECTED_TOKENS).sort()).toEqual([...new Set(words.map(({ word }) => word.exercise.target))].sort());
     expect(Object.keys(VOCABULARY_RULES).sort()).toEqual(Object.keys(EXPECTED_TOKENS).sort());
   });
 

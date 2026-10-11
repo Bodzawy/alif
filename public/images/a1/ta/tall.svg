@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Hügel">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+  
+<circle cx="320" cy="70" r="30" fill="#ffd54a"/>
+  <path d="M0 300 L0 220 C80 120 200 90 260 150 C300 190 360 200 400 190 L400 300 Z" fill="#7cc35a"/>
+  <path d="M0 300 L0 250 C100 230 220 240 400 230 L400 300 Z" fill="#5ea844"/>
+  <g fill="#3f8a34"><circle cx="150" cy="140" r="16"/><rect x="146" y="150" width="8" height="18" fill="#6b4226"/><circle cx="210" cy="124" r="14"/><rect x="206" y="132" width="7" height="16" fill="#6b4226"/></g>
+  <g fill="#fff"><circle cx="90" cy="232" r="4"/><circle cx="250" cy="200" r="4"/><circle cx="320" cy="236" r="4"/></g>
+</svg>

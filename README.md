@@ -11,7 +11,12 @@ Alif
 │       └── 28 lessons, one per letter, e.g. Lektion 1 · Der Buchstabe Alif (أَ)
 │           ├── Schritt 1: the letter: listen · record · feedback
 │           └── Schritt 2: vocabulary: أَسَد · أَرْنَب · أَنَانَاس (image, German, transliteration, listen, record)
-└── A1                                   /a1 – placeholder, new content to come
+└── A1 · Lektionen                       /a1 (one card per lesson)
+    └── الدرس الأول – صَبَاحُ الْخَيْر        /a1/lesson-1 (the lesson's contents)
+        ├── أ ب ت ث ج ح خ                    /a1/lesson-1/<alif|ba|ta|tha|jim|hha|kha>/step-1 … step-5
+        │   └── Wörter (each row starts with its sound) · Formen · Schreiben · Ergänzen · Hören
+        ├── مراجعة                           /a1/lesson-1/review/step-1 … step-2 (Ergänzen · Hören over all seven letters)
+        └── صَبَاحُ الْخَيْر                    /a1/lesson-1/sabah-al-khayr/step-1 … step-2 (Sprechen · Buchstaben finden)
 ```
 
 A0 is a progression layer over the unchanged pronunciation pipeline: a letter
@@ -128,7 +133,21 @@ Notes:
 - `microsoft-cognitiveservices-speech-sdk` must stay in `serverExternalPackages` (see `next.config.mjs`). If it is bundled, Azure cancels every assessment in production.
 - The API rate limits (30 assessments/min and 60 TTS calls/min per IP) are kept in memory per instance. Use a shared store if you scale out and need strict limits.
 
-## A1 · Schritt 3 "Formen" (أ / ـأ): words and audio
+## A1 · Lektion 1: structure, routes, old URLs
+
+`src/data/a1/index.ts` holds the lessons (`A1Unit`): Lektion 1 has nine entries
+(`A1Lesson`, `kind` letter / review / phrase). Routes: `/a1` → `/a1/<unit>` (contents)
+→ `/a1/<unit>/<entry>` (redirects to its first step) → `/a1/<unit>/<entry>/step-N`.
+Progress key = the step URL without the leading slash (`a1/lesson-1/ba/step-2`).
+The last step of an entry links back to the lesson and on to its next entry.
+
+There is no separate "Laute" step any more: each row of "Wörter" starts with its
+sound card (glyph, vowel name, transliteration, listen, speak, feedback). Old URLs
+still work (307): `/a1/lesson-1/step-N` → `/a1/lesson-1/alif/step-(N−1)` (step 1 →
+Wörter), `/a1/<letter>` → `/a1/lesson-1/<letter>`. Saved progress of Alif's old
+steps is copied once per browser to the new keys (`copyMovedA1Progress`).
+
+## A1 · Formen (أ / ـأ): words and audio
 
 The step is data in `src/data/a1/lesson-1.ts` (`kind: "forms"`), rendered by
 `src/components/a1/forms/`. It has four parts: **Zuschauen** (an explanation of
@@ -153,9 +172,9 @@ hard-coded. Content comes only from the lesson book (Lesson1.pdf, page 1).
   Zuschauen clip. It is shown as the caption and is the script for (re-)recording.
 - All narration goes through one reused audio element, unlocked by the "Los geht's!"
   tap, so iOS Safari can play the clips one after another.
-- Progress: finishing Activity 3 marks `a1/lesson-1/step-3` as completed (`src/lib/progress.ts`).
+- Progress: finishing Activity 3 marks `a1/lesson-1/alif/step-2` as completed (`src/lib/progress.ts`).
 
-## A1 · Schritt 4 "Schreiben": adding a letter
+## A1 · Schreiben: adding a letter
 
 The handwriting page (`src/components/a1/writing/`) is a port of the prototype
 `docs/reference/alif-uebung1.html`. It takes a **letter set** as a prop; a new
@@ -184,7 +203,53 @@ object, to be tuned on real children's handwriting. In development, `?debug=1`
 shows the sampled template points and the last check's values (off in production
 builds). Narration can be added in `writing-narration.ts`; the success chime is
 synthesised (`src/lib/audio/chime.ts`) and follows the app's mute setting.
-Finishing all forms marks `a1/lesson-1/step-4` as completed (`src/lib/progress.ts`).
+Finishing all forms marks the step (e.g. `a1/lesson-1/alif/step-3`) as completed (`src/lib/progress.ts`).
+
+## A1 · Lektion 1: adding a letter (ب ت ث ج ح خ)
+
+Alif is `src/data/a1/lesson-1.ts`; every further letter is a small spec in
+`src/data/a1/letters/<id>.ts`, turned into the same five steps as Alif by
+`letterLesson()` in `src/data/a1/letter-lesson.ts`: Wörter, Formen, Schreiben,
+Ergänzen, Hören. The review (`review.ts`) and the phrase (`sabah-al-khayr.ts`)
+reuse the same step types with words of the lesson.
+
+To add a letter – data only:
+
+1. `src/data/a1/letters/<id>.ts`: `letterLesson({ letter, words, forms, writing, formsPictures, gaps })` –
+   the words exactly as in the book (`[id, Arabic, German, transliteration, picture]`),
+   the four Formen words by position plus the sukun word (`occurrence: -1` when the
+   letter appears twice and the book means the last one), and the book's "Ergänzen" /
+   "Hören" items as `[pattern, full word, id]` – `"_"` per missing letter, e.g.
+   `["_ا_", "بَابْ", "bab"]`; the answers are computed (`src/lib/arabic/gap.ts`).
+   List the letter in `a1Unit1.lessons` in `src/data/a1/index.ts`.
+2. `src/data/letters/<id>.ts`: the writing set (four forms, book order right to left;
+   body first, then `dot: true` strokes with a `label`, e.g. "den Punkt unten", and an
+   `orderHint`). Dots are a tap or a short scribble within `TRACE_TOL.dot.radius`
+   (`dotStroke()` in `src/data/letters/dots.ts`). Letters with the same body share it:
+   ت ث use `BA_BODY` (ba.ts), ج خ use `HAA_BODY` (hha.ts: 1 the top part, 2 the curve).
+3. Pronunciation rules: `sound_conditions.json` (the three vocalised sounds) and
+   `vocabulary_conditions.json` (each word: Azure ≥ 70 and its consonants in IQRA –
+   no initial-vowel gate, which only works for words that begin with a hamza).
+   A word that already has a rule (e.g. بيت from A0) shares it.
+4. Pictures: `public/images/a1/<id>/<word id>.svg` (400 × 300 illustrations), the
+   picture spec is its alt text – or `[src, alt]` for an existing picture of the same
+   thing (e.g. an A0 word). `tests/unit/a1-lesson-structure.test.tsx` fails for a
+   word without a picture file. If a picture cannot load, the card shows the word
+   instead (never a broken image) and logs `Vocabulary picture missing: …`.
+5. Recordings: `public/audio/a1/<id>/formen/` – the narration clips
+   (`LETTER_NARRATION_FILES`) and one file per Formen word (`<audio id>.wav`).
+   The German texts come from `letterFormsTexts()` (caption = recording script;
+   override single texts with `texts`). Write the recording script with
+   `npx vite-node -c vitest.config.mts scripts/letter-audio-script.ts <id>`
+   (→ `docs/audio-scripts/<id>.md`; `… letter-audio-script.ts shared` writes
+   `shared.md`). "Ergänzen" / "Hören" use the SHARED clips in `public/audio/a1/shared/`
+   and the letter's word recordings in `public/audio/a1/<id>/uebungen/<id>.wav`;
+   a word without a recording is spoken by `/api/tts`.
+
+Form, neighbours and basket answers are computed by `src/lib/arabic/letter-form.ts`
+(a letter is joined to the one before it when that one has a Hand, and to the next
+one when it has a Hand itself). Formen uses the letter variants of "Wer hält fest?"
+(slots on both sides) and of the sorting (four baskets) when the step has `forms.letter`.
 
 ## Adding a lesson
 

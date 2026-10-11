@@ -1,0 +1,648 @@
+{
+  "slug": "lesson-1",
+  "number": 1,
+  "title": "صَبَاحُ الْخَيْر",
+  "titleGerman": "Guten Morgen",
+  "steps": [
+    {
+      "kind": "sounds",
+      "slug": "step-1",
+      "title": "Laute: أَ · إِ · أُ",
+      "sounds": [
+        {
+          "id": "alif-fatha",
+          "glyph": "أَ",
+          "transliteration": "a",
+          "vowelName": {
+            "arabic": "فَتْحَة",
+            "german": "Fatha"
+          },
+          "exercise": {
+            "id": "alif-fatha",
+            "target": "أَ",
+            "modelText": "أَ"
+          }
+        },
+        {
+          "id": "alif-kasra",
+          "glyph": "إِ",
+          "transliteration": "i",
+          "vowelName": {
+            "arabic": "كَسْرَة",
+            "german": "Kasra"
+          },
+          "exercise": {
+            "id": "alif-kasra",
+            "target": "إِ",
+            "modelText": "إِ"
+          }
+        },
+        {
+          "id": "alif-damma",
+          "glyph": "أُ",
+          "transliteration": "u",
+          "vowelName": {
+            "arabic": "ضَمَّة",
+            "german": "Damma"
+          },
+          "exercise": {
+            "id": "alif-damma",
+            "target": "أُ",
+            "modelText": "أُ"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "sound-words",
+      "slug": "step-2",
+      "title": "Wörter mit أَ · إِ · أُ",
+      "navLabel": "Wörter",
+      "groups": [
+        {
+          "sound": {
+            "id": "alif-fatha",
+            "glyph": "أَ",
+            "transliteration": "a",
+            "vowelName": {
+              "arabic": "فَتْحَة",
+              "german": "Fatha"
+            },
+            "exercise": {
+              "id": "alif-fatha",
+              "target": "أَ",
+              "modelText": "أَ"
+            }
+          },
+          "words": [
+            {
+              "id": "ab",
+              "arabic": "أَب",
+              "german": "Vater",
+              "transliteration": "Ab",
+              "image": {
+                "src": "/images/a1/lesson-1/ab.svg",
+                "alt": "Ein Vater"
+              },
+              "exercise": {
+                "id": "ab",
+                "target": "أب",
+                "modelText": "أَب"
+              }
+            },
+            {
+              "id": "ana",
+              "arabic": "أَنَا",
+              "german": "ich",
+              "transliteration": "Anā",
+              "image": {
+                "src": "/images/a1/lesson-1/ana.svg",
+                "alt": "Ein Kind zeigt auf sich selbst"
+              },
+              "exercise": {
+                "id": "ana",
+                "target": "أنا",
+                "modelText": "أَنَا"
+              }
+            },
+            {
+              "id": "amir",
+              "arabic": "أَمِير",
+              "german": "Prinz",
+              "transliteration": "Amīr",
+              "image": {
+                "src": "/images/a1/lesson-1/amir.svg",
+                "alt": "Ein Prinz mit Krone"
+              },
+              "exercise": {
+                "id": "amir",
+                "target": "أمير",
+                "modelText": "أَمِير"
+              }
+            }
+          ]
+        },
+        {
+          "sound": {
+            "id": "alif-kasra",
+            "glyph": "إِ",
+            "transliteration": "i",
+            "vowelName": {
+              "arabic": "كَسْرَة",
+              "german": "Kasra"
+            },
+            "exercise": {
+              "id": "alif-kasra",
+              "target": "إِ",
+              "modelText": "إِ"
+            }
+          },
+          "words": [
+            {
+              "id": "ibra",
+              "arabic": "إِبْرَة",
+              "german": "Nadel",
+              "transliteration": "Ibra",
+              "image": {
+                "src": "/images/a1/lesson-1/ibra.svg",
+                "alt": "Eine Nähnadel mit Faden"
+              },
+              "exercise": {
+                "id": "ibra",
+                "target": "إبرة",
+                "modelText": "إِبْرَة"
+              }
+            },
+            {
+              "id": "isba",
+              "arabic": "إِصْبَع",
+              "german": "Finger",
+              "transliteration": "Iṣbaʿ",
+              "image": {
+                "src": "/images/a1/lesson-1/isba.svg",
+                "alt": "Ein ausgestreckter Zeigefinger"
+              },
+              "exercise": {
+                "id": "isba",
+                "target": "إصبع",
+                "modelText": "إِصْبَع"
+              }
+            },
+            {
+              "id": "ibriq",
+              "arabic": "إِبْرِيق",
+              "german": "Kanne",
+              "transliteration": "Ibrīq",
+              "image": {
+                "src": "/images/a1/lesson-1/ibriq.svg",
+                "alt": "Eine Kanne"
+              },
+              "exercise": {
+                "id": "ibriq",
+                "target": "إبريق",
+                "modelText": "إِبْرِيق"
+              }
+            }
+          ]
+        },
+        {
+          "sound": {
+            "id": "alif-damma",
+            "glyph": "أُ",
+            "transliteration": "u",
+            "vowelName": {
+              "arabic": "ضَمَّة",
+              "german": "Damma"
+            },
+            "exercise": {
+              "id": "alif-damma",
+              "target": "أُ",
+              "modelText": "أُ"
+            }
+          },
+          "words": [
+            {
+              "id": "udhun",
+              "arabic": "أُذُن",
+              "german": "Ohr",
+              "transliteration": "Udhun",
+              "image": {
+                "src": "/images/a1/lesson-1/udhun.svg",
+                "alt": "Ein Ohr"
+              },
+              "exercise": {
+                "id": "udhun",
+                "target": "أذن",
+                "modelText": "أُذُن"
+              }
+            },
+            {
+              "id": "umm",
+              "arabic": "أُمّ",
+              "german": "Mutter",
+              "transliteration": "Umm",
+              "image": {
+                "src": "/images/a1/lesson-1/umm.svg",
+                "alt": "Eine Mutter"
+              },
+              "exercise": {
+                "id": "umm",
+                "target": "أم",
+                "modelText": "أُمّ"
+              }
+            },
+            {
+              "id": "usra",
+              "arabic": "أُسْرَة",
+              "german": "Familie",
+              "transliteration": "Usra",
+              "image": {
+                "src": "/images/a1/lesson-1/usra.svg",
+                "alt": "Eine Familie: Vater, Mutter und Kind"
+              },
+              "exercise": {
+                "id": "usra",
+                "target": "أسرة",
+                "modelText": "أُسْرَة"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "forms",
+      "slug": "step-3",
+      "title": "Formen: أ · ـأ",
+      "navLabel": "Formen",
+      "forms": {
+        "audioBase": "/audio/a1/lesson-1/formen",
+        "explain": [
+          {
+            "id": "ana",
+            "arabic": "أَنَا",
+            "german": "ich",
+            "audio": "ana",
+            "image": {
+              "src": "/images/a1/lesson-1/ana.svg",
+              "alt": "Ein Kind zeigt auf sich selbst"
+            }
+          },
+          {
+            "id": "saala",
+            "arabic": "سَأَلَ",
+            "german": "er fragte",
+            "audio": "saala"
+          },
+          {
+            "id": "saba",
+            "arabic": "سَبَأَ",
+            "german": "Saba (Königreich)",
+            "audio": "saba"
+          },
+          {
+            "id": "qaraa",
+            "arabic": "قَرَأَ",
+            "german": "er las",
+            "audio": "qaraa"
+          }
+        ],
+        "build": [
+          {
+            "id": "ana",
+            "arabic": "أَنَا",
+            "german": "ich",
+            "audio": "ana",
+            "image": {
+              "src": "/images/a1/lesson-1/ana.svg",
+              "alt": "Ein Kind zeigt auf sich selbst"
+            }
+          },
+          {
+            "id": "saala",
+            "arabic": "سَأَلَ",
+            "german": "er fragte",
+            "audio": "saala"
+          },
+          {
+            "id": "saba",
+            "arabic": "سَبَأَ",
+            "german": "Saba (Königreich)",
+            "audio": "saba"
+          },
+          {
+            "id": "qaraa",
+            "arabic": "قَرَأَ",
+            "german": "er las",
+            "audio": "qaraa"
+          }
+        ],
+        "neighbors": [
+          "س",
+          "ب",
+          "ن",
+          "ق",
+          "ر"
+        ],
+        "sort": [
+          {
+            "id": "ana",
+            "arabic": "أَنَا",
+            "german": "ich",
+            "audio": "ana",
+            "image": {
+              "src": "/images/a1/lesson-1/ana.svg",
+              "alt": "Ein Kind zeigt auf sich selbst"
+            }
+          },
+          {
+            "id": "saala",
+            "arabic": "سَأَلَ",
+            "german": "er fragte",
+            "audio": "saala"
+          },
+          {
+            "id": "saba",
+            "arabic": "سَبَأَ",
+            "german": "Saba (Königreich)",
+            "audio": "saba"
+          },
+          {
+            "id": "qaraa",
+            "arabic": "قَرَأَ",
+            "german": "er las",
+            "audio": "qaraa"
+          },
+          {
+            "id": "ras",
+            "arabic": "رَأْس",
+            "german": "Kopf",
+            "audio": "ras"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "writing",
+      "slug": "step-4",
+      "title": "Schreiben: ا · ـا · أ · ـأ",
+      "navLabel": "Schreiben",
+      "letterSet": {
+        "id": "alif",
+        "forms": [
+          {
+            "id": "alif",
+            "glyph": "ا",
+            "name": "das Alif",
+            "strokes": [
+              {
+                "d": "M121 92 C120 150 118 210 117 262",
+                "arrow": {
+                  "a": 0.08,
+                  "b": 0.55,
+                  "off": -30
+                }
+              }
+            ]
+          },
+          {
+            "id": "alif-end",
+            "glyph": "ـا",
+            "name": "das Alif am Wortende",
+            "strokes": [
+              {
+                "d": "M200 262 L114 262 Q98 262 98 246 C98 190 99 140 100 92",
+                "arrow": {
+                  "a": 0.06,
+                  "b": 0.62,
+                  "off": 26
+                }
+              }
+            ]
+          },
+          {
+            "id": "alif-hamza",
+            "glyph": "أ",
+            "name": "das Alif mit Hamza",
+            "strokes": [
+              {
+                "d": "M121 122 C120 172 118 218 117 262",
+                "arrow": {
+                  "a": 0.08,
+                  "b": 0.55,
+                  "off": -30
+                }
+              },
+              {
+                "d": "M140 46 C128 30 104 36 108 54 C111 66 128 68 150 59 L104 100",
+                "arrow": {
+                  "a": 0,
+                  "b": 0.38,
+                  "off": 20
+                },
+                "thin": true
+              }
+            ]
+          },
+          {
+            "id": "alif-hamza-end",
+            "glyph": "ـأ",
+            "name": "das Alif mit Hamza am Wortende",
+            "strokes": [
+              {
+                "d": "M200 262 L114 262 Q98 262 98 246 C98 200 99 160 100 122",
+                "arrow": {
+                  "a": 0.06,
+                  "b": 0.62,
+                  "off": 26
+                }
+              },
+              {
+                "d": "M119 46 C107 30 83 36 87 54 C90 66 107 68 129 59 L83 100",
+                "arrow": {
+                  "a": 0,
+                  "b": 0.38,
+                  "off": 20
+                },
+                "thin": true
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "kind": "gaps",
+      "slug": "step-5",
+      "title": "Ergänzen: أَ · إِ · أُ",
+      "navLabel": "Ergänzen",
+      "gaps": {
+        "audioBase": "/audio/a1/lesson-1/uebungen",
+        "mode": "picture",
+        "choices": [
+          "أَ",
+          "إِ",
+          "أُ"
+        ],
+        "narration": {
+          "intro": "g5_intro",
+          "done": "g5_done"
+        },
+        "items": [
+          {
+            "id": "ab",
+            "arabic": "أَب",
+            "german": "Vater",
+            "audio": "ab",
+            "image": {
+              "src": "/images/a1/lesson-1/ab.svg",
+              "alt": "Vater"
+            }
+          },
+          {
+            "id": "ana",
+            "arabic": "أَنَا",
+            "german": "ich",
+            "audio": "ana",
+            "image": {
+              "src": "/images/a1/lesson-1/ana.svg",
+              "alt": "ich"
+            }
+          },
+          {
+            "id": "amir",
+            "arabic": "أَمِير",
+            "german": "Prinz",
+            "audio": "amir",
+            "image": {
+              "src": "/images/a1/lesson-1/amir.svg",
+              "alt": "Prinz"
+            }
+          },
+          {
+            "id": "ibra",
+            "arabic": "إِبْرَة",
+            "german": "Nadel",
+            "audio": "ibra",
+            "image": {
+              "src": "/images/a1/lesson-1/ibra.svg",
+              "alt": "Nadel"
+            }
+          },
+          {
+            "id": "isba",
+            "arabic": "إِصْبَع",
+            "german": "Finger",
+            "audio": "isba",
+            "image": {
+              "src": "/images/a1/lesson-1/isba.svg",
+              "alt": "Finger"
+            }
+          },
+          {
+            "id": "ibriq",
+            "arabic": "إِبْرِيق",
+            "german": "Kanne",
+            "audio": "ibriq",
+            "image": {
+              "src": "/images/a1/lesson-1/ibriq.svg",
+              "alt": "Kanne"
+            }
+          },
+          {
+            "id": "udhun",
+            "arabic": "أُذُن",
+            "german": "Ohr",
+            "audio": "udhun",
+            "image": {
+              "src": "/images/a1/lesson-1/udhun.svg",
+              "alt": "Ohr"
+            }
+          },
+          {
+            "id": "umm",
+            "arabic": "أُمّ",
+            "german": "Mutter",
+            "audio": "umm",
+            "image": {
+              "src": "/images/a1/lesson-1/umm.svg",
+              "alt": "Mutter"
+            }
+          },
+          {
+            "id": "usra",
+            "arabic": "أُسْرَة",
+            "german": "Familie",
+            "audio": "usra",
+            "image": {
+              "src": "/images/a1/lesson-1/usra.svg",
+              "alt": "Familie"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "gaps",
+      "slug": "step-6",
+      "title": "Hören: أْ · أَ · إِ · أُ",
+      "navLabel": "Hören",
+      "gaps": {
+        "audioBase": "/audio/a1/lesson-1/uebungen",
+        "mode": "listen",
+        "choices": [
+          "أْ",
+          "أَ",
+          "إِ",
+          "أُ"
+        ],
+        "narration": {
+          "intro": "g6_intro",
+          "done": "g6_done"
+        },
+        "items": [
+          {
+            "id": "udhun",
+            "arabic": "أُذُن",
+            "german": "Ohr",
+            "audio": "udhun"
+          },
+          {
+            "id": "isba",
+            "arabic": "إِصْبَع",
+            "german": "Finger",
+            "audio": "isba"
+          },
+          {
+            "id": "ab",
+            "arabic": "أَب",
+            "german": "Vater",
+            "audio": "ab"
+          },
+          {
+            "id": "ibra",
+            "arabic": "إِبْرَة",
+            "german": "Nadel",
+            "audio": "ibra"
+          },
+          {
+            "id": "umm",
+            "arabic": "أُمّ",
+            "german": "Mutter",
+            "audio": "umm"
+          },
+          {
+            "id": "ibriq",
+            "arabic": "إِبْرِيق",
+            "german": "Kanne",
+            "audio": "ibriq"
+          },
+          {
+            "id": "ana",
+            "arabic": "أَنَا",
+            "german": "ich",
+            "audio": "ana"
+          },
+          {
+            "id": "amir",
+            "arabic": "أَمِير",
+            "german": "Prinz",
+            "audio": "amir"
+          },
+          {
+            "id": "usra",
+            "arabic": "أُسْرَة",
+            "german": "Familie",
+            "audio": "usra"
+          },
+          {
+            "id": "ras",
+            "arabic": "رَأْس",
+            "german": "Kopf",
+            "audio": "ras"
+          }
+        ]
+      }
+    }
+  ]
+}

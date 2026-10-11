@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Gewehr">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff6e8"/><stop offset="1" stop-color="#f6dcb0"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#fbe8c8"/><circle cx="340" cy="236" r="50" fill="#fbe8c8"/>
+  <ellipse cx="210" cy="246" rx="130" ry="10" fill="#000" opacity="0.12"/>
+<g transform="rotate(-12 200 150)">
+  <rect x="70" y="138" width="200" height="14" rx="4" fill="#4b4f57"/>
+  <rect x="60" y="140" width="20" height="8" rx="3" fill="#33363c"/>
+  <path d="M230 136 L330 130 C344 130 350 140 350 150 L346 190 C344 198 330 200 322 192 L300 162 L230 160 Z" fill="#9b5f2e"/>
+  <path d="M232 136 L300 133 L300 146 L232 148 Z" fill="#b77a42"/>
+  <path d="M262 160 C262 178 280 182 290 172" stroke="#33363c" stroke-width="6" fill="none"/>
+  <rect x="150" y="128" width="40" height="10" rx="3" fill="#33363c"/>
+  </g>
+</svg>

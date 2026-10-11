@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Käse">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff4d6"/><stop offset="1" stop-color="#ffd98a"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#ffe7a8"/><circle cx="340" cy="236" r="50" fill="#ffe7a8"/>
+  
+<ellipse cx="200" cy="232" rx="130" ry="20" fill="#c98a2b"/><ellipse cx="200" cy="226" rx="124" ry="16" fill="#e3a33d"/>
+  <path d="M96 210 L304 210 L304 150 L96 210 Z" fill="#ffc531"/>
+  <path d="M96 210 L304 150 L240 106 Z" fill="#ffe066"/>
+  <path d="M304 150 L304 210 L240 106 Z" fill="#f2b31f" opacity=".0"/>
+  <g fill="#f2b31f"><circle cx="160" cy="194" r="9"/><circle cx="214" cy="190" r="12"/><circle cx="268" cy="176" r="8"/><circle cx="250" cy="198" r="6"/></g>
+  <g fill="#f2c641"><ellipse cx="230" cy="140" rx="8" ry="5"/><ellipse cx="196" cy="160" rx="10" ry="6"/><ellipse cx="262" cy="132" rx="6" ry="4"/></g>
+</svg>

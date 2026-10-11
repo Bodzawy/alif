@@ -4,13 +4,14 @@ import { useEffect, useMemo, useReducer, useRef, useState } from "react";
 import { ArrowRight, RotateCcw } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import type { FormsWord } from "@/data/types";
-import { hamzaPosition, splitTiles, type HamzaPosition } from "@/lib/arabic/hamza-alif";
+import type { FormsLetter, FormsWord } from "@/data/types";
+import type { HamzaPosition } from "@/lib/arabic/hamza-alif";
 import type { Narrator } from "@/lib/audio/narration";
 import { cn } from "@/lib/utils";
 
-import { EXPLAIN_TEXT, LETTER_TILE, NARRATION, POSITION_LABEL, POSITION_LABEL_GERMAN } from "./content";
+import { EXPLAIN_TEXT, isLongWord, LETTER_TILE, LONG_ROW, LONG_TILE, NARRATION, POSITION_LABEL, POSITION_LABEL_GERMAN } from "./content";
 import { ShapedWord } from "./shaped-word";
+import { wordShape } from "./word-shape";
 
 // "Zuschauen": the four book words, explained one per scene – no exercise.
 // Each scene runs through stages; every stage starts its sound and timers in
@@ -87,7 +88,7 @@ async function narrate(narrator: Narrator, name: string, fallbackMs: number, sig
   await sleep(fallbackMs - (Date.now() - started), signal);
 }
 
-type Scene = { word: FormsWord; tiles: string[]; position: HamzaPosition };
+type Scene = { word: FormsWord; tiles: string[]; target: number | undefined; position: HamzaPosition };
 
 export function ExplainActivity({
   words,
@@ -95,8 +96,11 @@ export function ExplainActivity({
   withPageIntro,
   onReachedEnd,
   onFinish,
+  letter,
 }: {
   words: FormsWord[];
+  /** Letter lesson: its letter and caption texts (absent: the Alif lesson). */
+  letter?: FormsLetter;
   narrator: Narrator;
   /** First visit right after "Los geht's!": play f_intro before e_intro. */
   withPageIntro: boolean;
@@ -106,8 +110,8 @@ export function ExplainActivity({
   onFinish: () => void;
 }) {
   const scenes: Scene[] = useMemo(
-    () => words.map((word) => ({ word, tiles: splitTiles(word.arabic), position: hamzaPosition(splitTiles(word.arabic)) })),
-    [words]
+    () => words.map((word) => ({ word, ...wordShape(word, letter) })),
+    [words, letter]
   );
   const [state, dispatch] = useReducer(explainReducer, { scene: 0, stage: "intro", run: 0 });
   const [shown, setShown] = useState(0);
@@ -190,13 +194,15 @@ export function ExplainActivity({
       </ol>
 
       {/* Tiles and the finished word share one place: the tiles slide together, then the word fades in. */}
-      <div className="grid min-h-36 place-items-center" aria-hidden={stage === "intro"}>
+      <div className={cn("grid min-h-36 place-items-center", isLongWord(scene.tiles) && "grid-cols-1")} aria-hidden={stage === "intro"}>
         {stage !== "intro" && (
           <div
             dir="rtl"
             className={cn(
               "crossfade col-start-1 row-start-1 flex justify-center transition-all duration-500 motion-reduce:transition-none",
               stage === "join" ? "gap-0" : "gap-5 sm:gap-8",
+              isLongWord(scene.tiles) && LONG_ROW,
+              isLongWord(scene.tiles) && stage === "join" && "gap-0 sm:gap-0",
               !tilesVisible && "opacity-0"
             )}
             data-testid="explain-tiles"
@@ -208,6 +214,7 @@ export function ExplainActivity({
                 data-shown={i < shown}
                 className={cn(
                   LETTER_TILE,
+                  isLongWord(scene.tiles) && LONG_TILE,
                   "crossfade transition-all duration-500",
                   i < shown ? "opacity-100" : "opacity-0 motion-safe:-translate-x-3",
                   stage === "join" && "rounded-none border-transparent bg-transparent"
@@ -223,6 +230,7 @@ export function ExplainActivity({
             <ShapedWord
               key={`${scene.word.id}-${explained}`}
               tiles={scene.tiles}
+              target={scene.target}
               highlight={explained}
               gap
               className="text-6xl leading-[1.8] text-foreground sm:text-7xl"
@@ -247,7 +255,7 @@ export function ExplainActivity({
       </div>
 
       <p aria-live="polite" data-testid="explain-caption" data-key={captionKey} className="mx-auto mt-4 min-h-12 max-w-md rounded-2xl bg-muted/60 px-4 py-3 text-sm leading-relaxed">
-        {EXPLAIN_TEXT[captionKey]}
+        {(letter?.texts ?? EXPLAIN_TEXT)[captionKey]}
       </p>
 
       <div className="mt-5 flex flex-wrap justify-center gap-3">

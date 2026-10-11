@@ -7,27 +7,37 @@ import { ArrowRight, Check, CheckCircle2, Circle, Play, RotateCcw, Volume2, Volu
 import { ShapedWord } from "@/components/a1/forms/shaped-word";
 import { usePickAndDrop } from "@/components/a1/forms/use-pick-and-drop";
 import { Button } from "@/components/ui/button";
-import type { GapsContent } from "@/data/types";
-import { gapPieces, gapWord } from "@/lib/arabic/gap";
+import type { GapsClips, GapsContent } from "@/data/types";
+import { gapTask, type GapTask } from "@/lib/arabic/gap";
 import { playChime, unlockChime } from "@/lib/audio/chime";
-import { narrateWithFallback } from "@/lib/audio/narrate";
+import { narrateWithFallback, sayWithFallback } from "@/lib/audio/narrate";
 import { createNarrator, readMuted, type Narrator } from "@/lib/audio/narration";
 import { getLessonProgress, markLessonCompleted, subscribeProgress } from "@/lib/progress";
+import { speechUrl } from "@/lib/tts/player";
 import { cn } from "@/lib/utils";
 
 import { GAPS_FALLBACK_MS, GAPS_NARRATION, GAPS_TEXT, gapStars } from "./content";
 
-// Step type "gaps" (Schritt 5 "Ergänzen", 6 "Hören"): one word at a time with
-// its Hamza-Alif left out; the child puts the right tile into the gap – drag,
-// tap tile then gap, or keyboard (as in "Baue das Wort"). First wrong answer:
-// a hint; second: the right tile is shown with the reason, and the child still
-// places it. The result screen ("Korrigieren") lists every word.
-// Differences between the two steps come only from the data (`mode`).
+// Step type "gaps" ("Ergänzen", "Hören"): one word at a time with letters left
+// out – the Alif lesson's Hamza-Alif, or the gaps of the book pattern (one or
+// more, filled from right to left). The child puts the right tile into the
+// gap – drag, tap tile then gap, or keyboard (as in "Baue das Wort"). First
+// wrong answer: a hint; second: the right tile is shown with the reason, and
+// the child still places it. The result screen ("Korrigieren") lists every word.
+// Differences between the steps come only from the data (`mode`, choices,
+// clips). A word without a recording is spoken by /api/tts.
 
 type Phase = "ask" | "correct" | "result";
 type Result = { id: string; firstTry: boolean };
 
 const noop = () => () => undefined;
+
+/** The Alif lesson's clips (GapsContent.clips is not set there). */
+const ALIF_CLIPS: GapsClips = {
+  ok: GAPS_NARRATION.ok,
+  hint: GAPS_NARRATION.hint,
+  reveal: { a: GAPS_NARRATION.reveal("a"), i: GAPS_NARRATION.reveal("i"), u: GAPS_NARRATION.reveal("u"), sukun: GAPS_NARRATION.reveal("sukun") },
+};
 
 export function GapsStep({ gaps, availableAudio, progressKey }: { gaps: GapsContent; availableAudio: string[]; progressKey: string }) {
   const narrator = useRef<Narrator | null>(null);
@@ -38,6 +48,10 @@ export function GapsStep({ gaps, availableAudio, progressKey }: { gaps: GapsCont
   const [index, setIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>("ask");
   const [wrong, setWrong] = useState(0);
+  /** Gaps of the current word filled so far (right to left). */
+  const [filled, setFilled] = useState(0);
+  /** A wrong answer anywhere in the current word. */
+  const [missed, setMissed] = useState(false);
   const [shake, setShake] = useState<string | null>(null);
   const [caption, setCaption] = useState<string | null>(null);
   const [results, setResults] = useState<Result[]>([]);
@@ -59,20 +73,37 @@ export function GapsStep({ gaps, availableAudio, progressKey }: { gaps: GapsCont
     };
   }, []);
 
-  const items = useMemo(() => gaps.items.map((item) => ({ item, gap: gapWord(item.arabic) })), [gaps.items]);
+  const items = useMemo(() => gaps.items.map((item) => ({ item, task: gapTask(item) })), [gaps.items]);
   const current = items[index]!;
+  const gap = current.task.gaps[Math.min(filled, current.task.gaps.length - 1)]!;
+  const choices = current.item.choices ?? gaps.choices;
+  const clips = gaps.clips ?? ALIF_CLIPS;
+  const texts = gaps.texts ?? GAPS_TEXT;
   const revealed = wrong >= 2;
   const listen = gaps.mode === "listen";
+  /** The finished word: the letter lessons highlight their (first) gap; Alif its Hamza-Alif. */
+  const target = current.item.pattern ? current.task.gaps[0]!.index : undefined;
+  /** Long items (e.g. the phrase صَبَاحُ الْخَيْر) get smaller letters, so they fit a phone. */
+  const long = current.task.tiles.length > 7;
 
   const newFlow = () => {
     flow.current?.abort();
     flow.current = new AbortController();
     return flow.current.signal;
   };
+  const sayWord = useCallback(
+    (signal: AbortSignal, fallbackMs: number = GAPS_FALLBACK_MS.clip) => {
+      const nr = narrator.current;
+      const { item } = items[index]!;
+      return nr ? sayWithFallback(nr, { audio: item.audio, text: item.arabic }, fallbackMs, signal, speechUrl) : Promise.resolve();
+    },
+    [items, index]
+  );
   const playWord = useCallback(() => {
-    const audio = items[index]!.item.audio;
-    if (audio) void narrator.current?.play([audio]);
-  }, [items, index]);
+    void sayWord(newFlow(), 0);
+    // newFlow only reads a ref.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sayWord]);
 
   // Intro on the first item; in "Hören" every item starts with its word.
   const introDone = useRef(false);
@@ -86,7 +117,7 @@ export function GapsStep({ gaps, availableAudio, progressKey }: { gaps: GapsCont
         setCaption(gaps.narration.intro);
         await narrateWithFallback(nr, gaps.narration.intro, GAPS_FALLBACK_MS.intro, signal);
       }
-      if (!signal.aborted && listen) playWord();
+      if (!signal.aborted && listen) void sayWord(signal, 0);
     })();
     // Runs when an item appears (or after "Nochmal"), not on every answer.
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -105,34 +136,52 @@ export function GapsStep({ gaps, availableAudio, progressKey }: { gaps: GapsCont
     if (index === items.length - 1) return finishStep(all);
     setIndex(index + 1);
     setWrong(0);
+    setFilled(0);
+    setMissed(false);
     setPhase("ask");
   }
 
   function answer(choice: string) {
     if (phase !== "ask" || !narrator.current) return;
     const nr = narrator.current;
-    if (choice === current.gap.answer) {
-      const all = [...results, { id: current.item.id, firstTry: wrong === 0 }];
+    if (choice === gap.answer) {
+      // More gaps in this word: on to the next one (right to left).
+      if (filled < current.task.gaps.length - 1) {
+        flow.current?.abort();
+        nr.stop();
+        playChime();
+        setFilled(filled + 1);
+        setWrong(0);
+        setCaption(null);
+        return;
+      }
+      const all = [...results, { id: current.item.id, firstTry: wrong === 0 && !missed }];
       setResults(all);
+      setFilled(current.task.gaps.length);
       setPhase("correct");
-      setCaption(GAPS_NARRATION.ok);
+      setCaption(clips.ok);
       playChime();
       const signal = newFlow();
       void (async () => {
-        if (current.item.audio) await narrateWithFallback(nr, current.item.audio, GAPS_FALLBACK_MS.clip, signal);
-        await narrateWithFallback(nr, GAPS_NARRATION.ok, GAPS_FALLBACK_MS.clip, signal);
+        await sayWord(signal);
+        await narrateWithFallback(nr, clips.ok, GAPS_FALLBACK_MS.clip, signal);
         if (!signal.aborted) next(all);
       })();
       return;
     }
     const count = wrong + 1;
     setWrong(count);
+    setMissed(true);
     setShake(choice);
     if (count === 1) {
-      setCaption(GAPS_NARRATION.hint);
-      void nr.play([GAPS_NARRATION.hint, ...(current.item.audio ? [current.item.audio] : [])]);
+      setCaption(clips.hint);
+      const signal = newFlow();
+      void (async () => {
+        const complete = await nr.play([clips.hint]);
+        if (complete && !signal.aborted) await sayWord(signal, 0);
+      })();
     } else {
-      const reveal = GAPS_NARRATION.reveal(current.gap.vowel);
+      const reveal = clips.reveal[gap.vowel];
       setCaption(reveal);
       void nr.play([reveal]);
     }
@@ -153,6 +202,8 @@ export function GapsStep({ gaps, availableAudio, progressKey }: { gaps: GapsCont
     setResults([]);
     setIndex(0);
     setWrong(0);
+    setFilled(0);
+    setMissed(false);
     setCaption(null);
     setPhase("ask");
     setRun((r) => r + 1);
@@ -223,32 +274,41 @@ export function GapsStep({ gaps, availableAudio, progressKey }: { gaps: GapsCont
               aria-hidden={phase === "correct"}
               className={cn("crossfade col-start-1 row-start-1 flex items-center justify-center gap-2 transition-opacity duration-500", phase === "correct" && "opacity-0")}
             >
-              {gapPieces(current.gap).map((piece, i) =>
-                piece.kind === "text" ? (
-                  <span key={i} lang="ar" data-testid="gap-piece" className="font-arabic text-6xl font-bold leading-[1.8]">
-                    {piece.text}
-                  </span>
-                ) : (
+              {current.task.pieces.map((piece, i) => {
+                if (piece.kind === "text")
+                  return (
+                    <span key={i} lang="ar" data-testid="gap-piece" className={cn("whitespace-nowrap font-arabic font-bold leading-[1.8]", long ? "text-4xl sm:text-6xl" : "text-6xl")}>
+                      {piece.text}
+                    </span>
+                  );
+                const done = piece.gap < filled || phase === "correct";
+                const active = piece.gap === filled && phase !== "correct";
+                const answer = current.task.gaps[piece.gap]!.answer;
+                return (
                   <button
                     key={i}
                     type="button"
-                    {...targetProps("gap")}
+                    {...(active ? targetProps("gap") : {})}
+                    disabled={!active}
                     data-testid="gap-slot"
-                    data-filled={phase === "correct"}
-                    aria-label={phase === "correct" ? `Lücke: ${current.gap.answer}` : "Lücke: hier ablegen"}
+                    data-gap={piece.gap}
+                    data-active={active}
+                    data-filled={done}
+                    aria-label={done ? `Lücke: ${answer}` : active ? "Lücke: hier ablegen" : "Lücke: danach"}
                     className={cn(
-                      "flex h-20 w-16 items-center justify-center rounded-2xl border-2 font-arabic text-4xl font-bold transition focus-ring sm:h-24 sm:w-20 sm:text-5xl",
-                      phase === "correct" ? "border-primary/30 bg-primary-soft" : selectedKey ? "border-dashed border-primary bg-primary-soft/60" : "border-dashed border-primary bg-card"
+                      "flex h-20 w-16 shrink-0 items-center justify-center rounded-2xl border-2 font-arabic text-4xl font-bold transition focus-ring sm:h-24 sm:w-20 sm:text-5xl",
+                      long && "h-16 w-14 text-3xl",
+                      done ? "border-primary/30 bg-primary-soft" : !active ? "border-dashed border-border bg-muted/40" : selectedKey ? "border-dashed border-primary bg-primary-soft/60" : "border-dashed border-primary bg-card"
                     )}
                   >
-                    {phase === "correct" && <span lang="ar">{current.gap.answer}</span>}
+                    {done && <span lang="ar">{answer}</span>}
                   </button>
-                )
-              )}
+                );
+              })}
             </div>
             {phase === "correct" && (
               <span className="col-start-1 row-start-1 animate-crossfade-in">
-                <ShapedWord tiles={current.gap.tiles} highlight className="text-6xl leading-[1.8] text-foreground" testId="gap-shaped" />
+                <ShapedWord tiles={current.task.tiles} target={target} highlight className={cn("leading-[1.8] text-foreground", long ? "text-5xl sm:text-6xl" : "text-6xl")} testId="gap-shaped" />
               </span>
             )}
           </div>
@@ -263,8 +323,8 @@ export function GapsStep({ gaps, availableAudio, progressKey }: { gaps: GapsCont
           </div>
 
           <ul className="mt-5 flex flex-wrap justify-center gap-3" aria-label="Buchstaben">
-            {gaps.choices.map((choice, i) => {
-              const isAnswer = choice === current.gap.answer;
+            {choices.map((choice, i) => {
+              const isAnswer = choice === gap.answer;
               return (
                 <li key={choice}>
                   <button
@@ -290,7 +350,7 @@ export function GapsStep({ gaps, availableAudio, progressKey }: { gaps: GapsCont
           </ul>
 
           <p aria-live="polite" data-testid="gap-caption" data-key={caption ?? ""} className="mx-auto mt-5 min-h-12 max-w-md rounded-2xl bg-muted/60 px-4 py-3 text-sm leading-relaxed">
-            {caption ? GAPS_TEXT[caption] : ""}
+            {caption ? (texts[caption] ?? "") : ""}
           </p>
 
           {phase === "correct" && (
@@ -305,14 +365,14 @@ export function GapsStep({ gaps, availableAudio, progressKey }: { gaps: GapsCont
 
       {phase === "result" && caption && (
         <p aria-live="polite" data-testid="gap-caption" data-key={caption} className="mx-auto mt-4 max-w-md rounded-2xl bg-muted/60 px-4 py-3 text-center text-sm leading-relaxed">
-          {GAPS_TEXT[caption]}
+          {texts[caption]}
         </p>
       )}
     </div>
   );
 }
 
-function ResultScreen({ items, results, onRestart }: { items: Array<{ item: GapsContent["items"][number]; gap: ReturnType<typeof gapWord> }>; results: Result[]; onRestart: () => void }) {
+function ResultScreen({ items, results, onRestart }: { items: Array<{ item: GapsContent["items"][number]; task: GapTask }>; results: Result[]; onRestart: () => void }) {
   const firstTry = results.filter((r) => r.firstTry).length;
   const stars = gapStars(firstTry, items.length);
   return (
@@ -322,14 +382,14 @@ function ResultScreen({ items, results, onRestart }: { items: Array<{ item: Gaps
         <Check className="inline h-4 w-4 text-success" aria-hidden /> beim ersten Versuch richtig · <Circle className="inline h-3 w-3 fill-warning text-warning" aria-hidden /> mit Hilfe
       </p>
       <ul dir="rtl" className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
-        {items.map(({ item, gap }, i) => {
+        {items.map(({ item, task }, i) => {
           const ok = results[i]?.firstTry ?? false;
           return (
             <li key={`${item.id}-${i}`} data-testid={`result-${item.id}`} data-first-try={ok} className="relative flex flex-col items-center rounded-2xl border bg-background/60 px-2 py-3">
               <span className="absolute end-2 top-2" aria-label={ok ? "beim ersten Versuch richtig" : "mit Hilfe"}>
                 {ok ? <Check className="h-5 w-5 text-success" aria-hidden /> : <Circle className="h-3 w-3 fill-warning text-warning" aria-hidden />}
               </span>
-              <ShapedWord tiles={gap.tiles} highlight className="text-4xl leading-[1.8] text-foreground" />
+              <ShapedWord tiles={task.tiles} target={item.pattern ? task.gaps[0]!.index : undefined} highlight className="text-4xl leading-[1.8] text-foreground" />
               <span dir="ltr" className="text-sm font-medium">
                 {item.german}
               </span>

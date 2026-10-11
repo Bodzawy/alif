@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Loch">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff6e8"/><stop offset="1" stop-color="#f6dcb0"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#fbe8c8"/><circle cx="340" cy="236" r="50" fill="#fbe8c8"/>
+  
+<rect x="40" y="40" width="320" height="220" fill="#d9c7a3"/>
+  <g stroke="#c4ae86" stroke-width="4"><line x1="40" y1="96" x2="360" y2="96"/><line x1="40" y1="152" x2="360" y2="152"/><line x1="40" y1="208" x2="360" y2="208"/><line x1="120" y1="40" x2="120" y2="96"/><line x1="260" y1="40" x2="260" y2="96"/><line x1="190" y1="96" x2="190" y2="152"/><line x1="320" y1="96" x2="320" y2="152"/><line x1="100" y1="152" x2="100" y2="208"/><line x1="240" y1="208" x2="240" y2="260"/></g>
+  <path d="M150 118 C170 92 236 96 250 126 C266 160 240 196 200 194 C160 192 132 150 150 118 Z" fill="#2a1d14"/>
+  <path d="M150 118 C170 92 236 96 250 126" stroke="#a68b62" stroke-width="6" fill="none"/>
+  <g fill="#b39b74"><path d="M246 190 l14 8 l-10 6 z"/><path d="M146 176 l-12 10 l14 2 z"/></g>
+</svg>

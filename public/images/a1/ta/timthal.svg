@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Statue">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+  
+<rect x="140" y="214" width="120" height="40" rx="6" fill="#9c9488"/><rect x="128" y="246" width="144" height="16" rx="5" fill="#857d72"/>
+  <rect x="168" y="196" width="64" height="22" rx="4" fill="#b8b1a5"/>
+  <path d="M176 198 L184 128 L216 128 L224 198 Z" fill="#cfc9be"/>
+  <path d="M184 132 C166 140 156 112 160 90" stroke="#cfc9be" stroke-width="14" fill="none" stroke-linecap="round"/>
+  <circle cx="160" cy="84" r="10" fill="#cfc9be"/>
+  <path d="M216 132 C230 150 232 170 226 186" stroke="#cfc9be" stroke-width="14" fill="none" stroke-linecap="round"/>
+  <circle cx="200" cy="102" r="26" fill="#d9d4ca"/>
+  <path d="M176 96 C178 72 222 72 224 96 C214 86 186 86 176 96 Z" fill="#b8b1a5"/>
+  <path d="M190 160 L210 160" stroke="#b8b1a5" stroke-width="3"/><path d="M188 176 L212 176" stroke="#b8b1a5" stroke-width="3"/>
+</svg>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Mädchen">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff0f3"/><stop offset="1" stop-color="#ffd0dc"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#ffe2e9"/><circle cx="340" cy="236" r="50" fill="#ffe2e9"/>
+  <ellipse cx="200" cy="247" rx="80" ry="10" fill="#000" opacity="0.12"/>
+<rect x="179.8" y="196.2" width="13.9" height="45.4" rx="6.3" fill="#efc49d"/><rect x="206.3" y="196.2" width="13.9" height="45.4" rx="6.3" fill="#efc49d"/>
+  <ellipse cx="186.1" cy="241.6" rx="12.6" ry="6.3" fill="#5b3a29"/><ellipse cx="213.9" cy="241.6" rx="12.6" ry="6.3" fill="#5b3a29"/>
+  <path d="M174.8 95.4 L225.2 95.4 L252.9 206.3 L147.1 206.3 Z" fill="#ff7aa2"/>
+  <path d="M174.8 105.5 C149.6 133.2, 147.1 158.4, 152.1 176.0" stroke="#efc49d" stroke-width="12.6" fill="none" stroke-linecap="round"/>
+  <path d="M225.2 105.5 C250.4 133.2, 252.9 158.4, 247.9 176.0" stroke="#efc49d" stroke-width="12.6" fill="none" stroke-linecap="round"/>
+  <path d="M151.16 117.68 C143.16 14.0, 178.57999999999998 4.0, 200 6.0 C221.42000000000002 4.0, 256.84000000000003 14.0, 248.84 117.68 Z" fill="#3b2416"/>
+  <ellipse cx="200" cy="56.84" rx="42.84" ry="45.0" fill="#efc49d"/>
+  <path d="M157.16 52.84 C157.16 8.0, 242.84 8.0, 242.84 52.84 C225.704 33.278, 174.296 33.278, 157.16 52.84 Z" fill="#3b2416"/>
+  <circle cx="238.84" cy="20.0" r="7" fill="#ff6f91"/><circle cx="248.84" cy="16.0" r="6" fill="#ff6f91"/>
+  <circle cx="185.0" cy="58.84" r="4.7" fill="#2f2a26"/><circle cx="215.0" cy="58.84" r="4.7" fill="#2f2a26"/>
+  <circle cx="173.0" cy="71.8" r="5.1" fill="#ff9d9d" opacity=".6"/><circle cx="227.0" cy="71.8" r="5.1" fill="#ff9d9d" opacity=".6"/>
+  <path d="M187.1 73.1 Q200 83.4 212.9 73.1" stroke="#8a3b2b" stroke-width="3.4" fill="none" stroke-linecap="round"/>
+</svg>

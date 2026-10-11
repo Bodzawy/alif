@@ -5,14 +5,14 @@ import Image from "next/image";
 import { ArrowRight, CheckCircle2, Volume2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import type { FormsWord } from "@/data/types";
-import { hamzaIndex, hamzaPosition, splitTiles } from "@/lib/arabic/hamza-alif";
+import type { FormsLetter, FormsWord } from "@/data/types";
 import type { Narrator } from "@/lib/audio/narration";
 import { cn } from "@/lib/utils";
 
-import { NARRATION, POSITION_LABEL } from "./content";
+import { isLongWord, LONG_ROW, LONG_TILE, NARRATION, POSITION_LABEL } from "./content";
 import { ShapedWord } from "./shaped-word";
 import { shuffled, usePickAndDrop } from "./use-pick-and-drop";
+import { wordShape } from "./word-shape";
 
 type BankTile = { key: string; tile: string };
 const JOIN_MS = 450;
@@ -21,7 +21,7 @@ const JOIN_MS = 450;
 // shuffled tile bank. Tiles go in from the right; a wrong tile shakes back to
 // the bank. A full word slides together and fades into the real, browser-
 // shaped word with the Hamza-Alif (and the Hand that holds it) highlighted.
-export function BuildActivity({ words, narrator, onComplete }: { words: FormsWord[]; narrator: Narrator; onComplete: () => void }) {
+export function BuildActivity({ words, narrator, onComplete, letter }: { words: FormsWord[]; narrator: Narrator; onComplete: () => void; letter?: FormsLetter }) {
   const [wordIndex, setWordIndex] = useState(0);
   const word = words[wordIndex]!;
   return (
@@ -39,6 +39,7 @@ export function BuildActivity({ words, narrator, onComplete }: { words: FormsWor
       <BuildWord
         key={word.id}
         word={word}
+        letter={letter}
         narrator={narrator}
         last={wordIndex === words.length - 1}
         onNext={async () => {
@@ -55,9 +56,8 @@ export function BuildActivity({ words, narrator, onComplete }: { words: FormsWor
   );
 }
 
-function BuildWord({ word, narrator, last, onNext }: { word: FormsWord; narrator: Narrator; last: boolean; onNext: () => void }) {
-  const tiles = useMemo(() => splitTiles(word.arabic), [word.arabic]);
-  const position = hamzaPosition(tiles);
+function BuildWord({ word, letter, narrator, last, onNext }: { word: FormsWord; letter?: FormsLetter; narrator: Narrator; last: boolean; onNext: () => void }) {
+  const { tiles, target, position } = useMemo(() => wordShape(word, letter), [word, letter]);
   const [placed, setPlaced] = useState<(string | null)[]>(() => tiles.map(() => null));
   const [bank, setBank] = useState<BankTile[]>(() => shuffled(tiles.map((tile, i) => ({ key: `${i}`, tile }))));
   const [shake, setShake] = useState<string | null>(null);
@@ -100,12 +100,14 @@ function BuildWord({ word, narrator, last, onNext }: { word: FormsWord; narrator
   return (
     <section aria-label={`Baue das Wort: ${word.german}`} data-testid={`build-word-${word.id}`} data-phase={phase} className="rounded-3xl border bg-card p-5 text-center shadow-card sm:p-8">
       {/* Slots and the finished word share one place: the tiles slide together, then the word fades in. */}
-      <div className="grid min-h-28 place-items-center">
+      <div className={cn("grid min-h-28 place-items-center", isLongWord(tiles) && "grid-cols-1")}>
         <div
           dir="rtl"
           className={cn(
             "crossfade col-start-1 row-start-1 flex justify-center transition-all duration-500 motion-reduce:transition-none",
             joined ? "gap-0" : "gap-2 sm:gap-3",
+            isLongWord(tiles) && LONG_ROW,
+            isLongWord(tiles) && joined && "gap-0 sm:gap-0",
             done && "opacity-0"
           )}
           aria-hidden={done}
@@ -122,7 +124,8 @@ function BuildWord({ word, narrator, last, onNext }: { word: FormsWord; narrator
               className={cn(
                 "flex h-20 w-16 items-center justify-center rounded-2xl border-2 font-arabic text-4xl font-bold transition focus-ring sm:h-24 sm:w-20 sm:text-5xl",
                 placed[i] ? "border-primary/30 bg-primary-soft text-foreground" : i === active ? "border-dashed border-primary bg-card" : "border-dashed border-border bg-muted/40",
-                joined && "rounded-none border-transparent bg-transparent first:rounded-r-2xl last:rounded-l-2xl"
+                joined && "rounded-none border-transparent bg-transparent first:rounded-r-2xl last:rounded-l-2xl",
+                isLongWord(tiles) && LONG_TILE
               )}
             >
               <span lang="ar">{placed[i]}</span>
@@ -130,7 +133,7 @@ function BuildWord({ word, narrator, last, onNext }: { word: FormsWord; narrator
           ))}
         </div>
         <div className={cn("crossfade col-start-1 row-start-1 transition-opacity duration-500", done ? "opacity-100" : "pointer-events-none opacity-0")} aria-hidden={!done}>
-          {done && <ShapedWord tiles={tiles} highlight className="text-6xl leading-[1.8] text-foreground sm:text-7xl" testId={`built-word-${word.id}`} />}
+          {done && <ShapedWord tiles={tiles} target={target} highlight className="text-6xl leading-[1.8] text-foreground sm:text-7xl" testId={`built-word-${word.id}`} />}
         </div>
       </div>
 
@@ -188,7 +191,7 @@ function BuildWord({ word, narrator, last, onNext }: { word: FormsWord; narrator
           </div>
         </div>
       )}
-      <span className="sr-only" aria-live="polite">{hamzaIndex(tiles) >= 0 && done ? `${word.german}: ${POSITION_LABEL[position]}` : ""}</span>
+      <span className="sr-only" aria-live="polite">{done ? `${word.german}: ${POSITION_LABEL[position]}` : ""}</span>
     </section>
   );
 }

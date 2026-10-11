@@ -1,6 +1,7 @@
+import { a1SpokenTexts } from "@/data/a1";
 import { allExercises } from "@/data/curriculum";
 import { ARABIC_LETTERS } from "./letters";
-import { FEEDBACK_CUES } from "./cues";
+import { FEEDBACK_CUES, GERMAN_CUES } from "./cues";
 import { hasRulesFor } from "./rules";
 
 // Targets /api/pronunciation accepts: every letter of the alphabet (as in the
@@ -22,7 +23,10 @@ export function isAllowedTarget(target: unknown): target is string {
 export const ALLOWED_TTS_TEXTS: ReadonlySet<string> = new Set([
   ...ARABIC_LETTERS.map((letter) => letter.modelText),
   ...allExercises().map((exercise) => exercise.modelText),
+  // The words of A1 "Ergänzen" / "Hören" without a recording (e.g. بَابْ).
+  ...a1SpokenTexts(),
   ...Object.values(FEEDBACK_CUES),
+  ...Object.values(GERMAN_CUES),
 ]);
 
 export function isAllowedTtsText(text: unknown): text is string {

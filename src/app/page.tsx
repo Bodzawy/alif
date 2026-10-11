@@ -63,7 +63,7 @@ export default function HomePage() {
               code: A1_LEVEL.code,
               title: A1_LEVEL.title,
               description: A1_LEVEL.description,
-              count: `${A1_LEVEL.lessons.length} ${A1_LEVEL.lessons.length === 1 ? "Lektion" : "Lektionen"} verfügbar`,
+              count: `${A1_LEVEL.units.length} ${A1_LEVEL.units.length === 1 ? "Lektion" : "Lektionen"} verfügbar`,
             },
           ].map((level) => (
             <Link
