@@ -17,6 +17,11 @@ Alif
         │   └── Wörter (each row starts with its sound) · Formen · Schreiben · Ergänzen · Hören
         ├── مراجعة                           /a1/lesson-1/review/step-1 … step-2 (Ergänzen · Hören over all seven letters)
         └── صَبَاحُ الْخَيْر                    /a1/lesson-1/sabah-al-khayr/step-1 … step-7 (two conversations: Anhören · Nachsprechen · Rollenspiel each; Buchstaben finden)
+    └── الدرس الثاني – مَسَاءُ الْخَيْر        /a1/lesson-2 (the lesson's contents)
+        ├── د ذ و ي                          /a1/lesson-2/<dal|dhal|waw|ya>/step-1 … step-8
+        │   └── Wörter · Formen · Schreiben · Ergänzen · Hören · Nachsprechen & schreiben · Aussprechen · Diktat
+        ├── حُرُوفُ الْمَدّ                      /a1/lesson-2/huruf-al-madd/step-1 … step-11 (lang ā ū ī, Übungen 1–9)
+        └── مَسَاءُ الْخَيْر                    /a1/lesson-2/masa-al-khayr/step-1 … step-11 (two conversations, grammar, Übungen 1–3, تذكر)
 ```
 
 A0 is a progression layer over the unchanged pronunciation pipeline: a letter
@@ -135,7 +140,7 @@ Notes:
 
 ## A1 · Lektion 1: structure, routes, old URLs
 
-`src/data/a1/index.ts` holds the lessons (`A1Unit`): Lektion 1 has nine entries
+`src/data/a1/index.ts` holds the lessons (`A1Unit`): Lektion 1 has ten entries
 (`A1Lesson`, `kind` letter / review / phrase). Routes: `/a1` → `/a1/<unit>` (contents)
 → `/a1/<unit>/<entry>` (redirects to its first step) → `/a1/<unit>/<entry>/step-N`.
 Progress key = the step URL without the leading slash (`a1/lesson-1/ba/step-2`).
@@ -172,6 +177,43 @@ has a rule in `vocabulary_conditions.json`; masculine and feminine lines that
 differ only in a vowel (كيف حالك، ما اسمك) share their target. The rules require
 only sounds IQRA reliably outputs: the suffix -ka / -ki and a final k / t are
 not required (tested against the real IQRA service).
+
+## A1 · Lektion 2: "مَسَاءُ الْخَيْر"
+
+The second book lesson ("مساء الخير.pdf", book pages 23–41), in book order:
+`src/data/a1/lesson-2/` (`a1Unit2`, slug `lesson-2`; listed after Lektion 1 in
+`A1_LEVEL.units`). The last step of Lektion 1 links on to its first entry
+(`nextA1Entry`). The old URL `/a1/lesson-2` (a former word lesson) is now this
+lesson; `/a1/lesson-3` … still lead to A0 → Wörter.
+
+- **د ذ و ي** (`dal.ts` … `ya.ts`, built by `lesson2Letter()` in `letter-entry.ts`):
+  (١) النطق → Wörter · (٢) كتابة + (٣) سكون → Formen · تدريب ١ → Schreiben ·
+  ٢ → Ergänzen · ٣ → Hören · ٤ → Nachsprechen & schreiben (the word plays, the
+  learner says it – not evaluated – and writes the letter) · ٨ → Aussprechen
+  (evaluated by `sound_conditions.json`) · ٩ → Diktat (each gap has its own
+  tiles: the letter with every sign and its look-alikes, `dictationChoices`).
+  تدريب ٥–٧ only send the learner to the publisher's website and have no content.
+  د ذ و have no "Hand": their Formen step is the book's table (`kind: "positions"` –
+  tap the letter in each example word); ي uses the Formen step of Lektion 1.
+  Writing sets: `src/data/letters/{dal,dhal,waw,ya}.ts`.
+- **حُرُوفُ الْمَدّ** (`huruf-al-madd.ts`): listen and compare (`kind: "compare"`),
+  then exercises 1, 2, 3, 5 (`match`), 6, 7 (`word-pick`), 8 (`match`), 9.
+  Whether a word has a Dehnungsbuchstabe is computed (`src/lib/arabic/madd.ts`).
+  A gap may be a letter without a sign (`GapItem.bare`): a long ا و ي.
+- **مَسَاءُ الْخَيْر** (`masa-al-khayr.ts`): Adnan / Khalid and Nazik / Dina
+  (seven lines each, feminine forms for the women), Anhören and Nachsprechen
+  each, the grammar (`kind: "table"` with a short check), Übung 1 = role-play of
+  both, Übung 2 / 3 (`letter-find` over both conversations; Übung 3 offers the
+  other letters as practice), the long vowels in the conversations, تذكر.
+
+Pronunciation: one rule per new word and line in `vocabulary_conditions.json`
+(same pattern; ذ, a long ī / ū, a final k are not required) and the sounds
+دَ … يُ in `sound_conditions.json` (ذ: the vowel only). These gates were NOT yet
+checked against real IQRA output. Long vs. short vowels and the -ka / -ki
+ending are not evaluated. Every text the new steps speak is on the TTS
+allow-list (`a1SpokenTexts`). Pictures: `public/images/a1/{dal,dhal,waw,ya,huruf-al-madd,masa-al-khayr}/`
+(hand-drawn SVGs; existing pictures reused where the word is the same).
+No recordings exist yet: words are spoken by `/api/tts`, narration clips show as captions.
 
 ## A1 · Formen (أ / ـأ): words and audio
 

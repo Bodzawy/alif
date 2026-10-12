@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Schublade">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+  <ellipse cx="200" cy="272" rx="140" ry="10" fill="#000" opacity="0.12"/>
+<rect x="40" y="96" width="320" height="22" rx="4" fill="#8a5a2b"/>
+  <rect x="300" y="118" width="22" height="150" fill="#6b4226"/><rect x="70" y="118" width="22" height="150" fill="#6b4226"/>
+  <path d="M120 140 L300 118 L300 172 L120 196 Z" fill="#a0703c"/>
+  <path d="M120 140 L120 196 L104 206 L104 152 Z" fill="#7a4a2a"/>
+  <path d="M104 152 L284 128 L300 118 L120 140 Z" fill="#c49a6c"/>
+  <path d="M110 160 L280 138 L280 156 L110 180 Z" fill="#f4ecdf"/>
+  <rect x="174" y="166" width="54" height="8" rx="4" fill="#3b2416" transform="rotate(-7 200 170)"/>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Dina">
+  <defs><clipPath id="c"><circle cx="100" cy="100" r="100"/></clipPath></defs><g clip-path="url(#c)">
+<circle cx="100" cy="100" r="100" fill="#e3f2fd"/>
+  <path d="M28 200 C32 160 62 146 100 146 C138 146 168 160 172 200 Z" fill="#eceff1"/>
+  <rect x="88" y="128" width="24" height="24" fill="#efc49d"/>
+  <path d="M58 130 C50 70 70 50 100 50 C130 50 150 70 142 130 C136 120 134 106 132 96 L68 96 C66 106 64 120 58 130 Z" fill="#c17f3e"/>
+  <ellipse cx="100" cy="100" rx="34" ry="40" fill="#efc49d"/>
+  <path d="M64 92 C62 56 140 54 136 92 C122 70 96 70 80 78 C72 82 66 86 64 92 Z" fill="#c17f3e"/>
+  <g fill="#2f2a26"><circle cx="86" cy="100" r="4.5"/><circle cx="114" cy="100" r="4.5"/></g>
+  <circle cx="76" cy="114" r="5" fill="#ff9d9d" opacity=".6"/><circle cx="124" cy="114" r="5" fill="#ff9d9d" opacity=".6"/>
+  <path d="M88 122 Q100 132 112 122" stroke="#8a3b2b" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <path d="M52 160 L84 200" stroke="#4e342e" stroke-width="6"/><rect x="28" y="176" width="40" height="30" rx="6" fill="#4e342e"/>
+  </g>
+</svg>

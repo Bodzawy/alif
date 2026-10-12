@@ -2,7 +2,9 @@ import { act, cleanup, fireEvent, render, screen, within } from "@testing-librar
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 // A1 · Lektion 1 · "صَبَاحُ الْخَيْر": the two textbook conversations (Ahmad / Ali,
-// Nabila / Fatima), each: Anhören → Nachsprechen → Rollenspiel.
+// Nabila / Fatima), each: Anhören → Nachsprechen → Rollenspiel – and the same for
+// the two evening conversations of Lektion 2 · "مَسَاءُ الْخَيْر" (Adnan / Khalid,
+// Nazik / Dina).
 // MOCKED here: microphone (speech / silence per attempt), /api/tts (speechUrl:
 // records text and voice) and the answer of /api/pronunciation (passed / not
 // passed / server error). Real: the app's client evaluation code (WAV →
@@ -36,6 +38,8 @@ import { DialogueListen } from "@/components/a1/dialogue/dialogue-listen";
 import { DialogueSpeaking } from "@/components/a1/dialogue/dialogue-speaking";
 import { getA1Lesson } from "@/data/a1";
 import { menDialogue, womenDialogue } from "@/data/a1/sabah-al-khayr";
+import { majidFatimaDialogue } from "@/data/a1/tahiyya";
+import { adnanKhalidDialogue, nazikDinaDialogue } from "@/data/a1/lesson-2/masa-al-khayr";
 import type { Dialogue } from "@/data/types";
 import { getLessonProgress, moveSabahAlKhayrProgress } from "@/lib/progress";
 import { CONDITION_RULES } from "@/lib/pronunciation/rules";
@@ -164,6 +168,8 @@ describe("the two textbook conversations", () => {
   it.each([
     ["men", menDialogue],
     ["women", womenDialogue],
+    ["evening men", adnanKhalidDialogue],
+    ["evening women", nazikDinaDialogue],
   ])("%s: every line – Arabic with vowel signs, Latin transliteration, German; a rule, allowed target and TTS text", (_, d) => {
     expect(d.lines).toHaveLength(7);
     expect(d.lines.map((l) => l.speaker)).toEqual([0, 1, 0, 1, 0, 1, 0].map((k) => d.speakers[k]!.id)); // turns alternate
@@ -195,6 +201,8 @@ describe("the two textbook conversations", () => {
 describe.each([
   ["men", menDialogue],
   ["women", womenDialogue],
+  ["evening men", adnanKhalidDialogue],
+  ["evening women", nazikDinaDialogue],
 ])("Anhören – %s", (_, d) => {
   it("every line is shown; the whole dialogue plays in order, each speaker in their own voice; then the question", async () => {
     render(<DialogueListen dialogue={d} progressKey={KEY} />);
@@ -281,6 +289,8 @@ async function startRepeat(d: Dialogue) {
 describe.each([
   ["men", menDialogue],
   ["women", womenDialogue],
+  ["evening men", adnanKhalidDialogue],
+  ["evening women", nazikDinaDialogue],
 ])("Nachsprechen – %s", (_, d) => {
   it("ALL seven lines, one at a time: model (speaker's voice) → listen → evaluation → \"Super!\" → next; then done", async () => {
     await startRepeat(d);
@@ -360,6 +370,8 @@ async function startRoleplay(d: Dialogue, role: string) {
 describe.each([
   ["men", menDialogue],
   ["women", womenDialogue],
+  ["evening men", adnanKhalidDialogue],
+  ["evening women", nazikDinaDialogue],
 ])("Rollenspiel – %s", (_, d) => {
   const [first, second] = d.speakers;
   const linesOf = (id: string) => d.lines.map((l, i) => [l, i] as const).filter(([l]) => l.speaker === id);
@@ -379,6 +391,28 @@ describe.each([
     await until(() => screen.queryByTestId("dialogue-done") !== null);
     expect(targets()).toEqual(linesOf(first.id).map(([l]) => l.exercise.target));
     expect(played).toEqual([SUPER, said(d, 1), SUPER, said(d, 3), SUPER, said(d, 5), SUPER]);
+    expect(getLessonProgress(KEY).completedAt).toBeTruthy();
+  });
+});
+
+// The next textbook page, Übung 1: Majid and Fatima (a man and a woman). One
+// speaker may have two lines in a row (Fatima answers and asks back).
+describe("Rollenspiel – Majid und Fatima (Übung 1: nach dem Namen fragen)", () => {
+  const d = majidFatimaDialogue;
+  it("as Majid: the learner asks a woman (حَالُكِ، وَأَنْتِ؟); the app speaks Fatima, two lines in a row where she has them", async () => {
+    await startRoleplay(d, "majid");
+    await until(() => screen.queryByTestId("dialogue-done") !== null);
+    expect(targets()).toEqual(["صباح الخير", "كيف حالك", "بخير الحمد لله", "أنا ماجد وأنت"]);
+    expect(played).toEqual([SUPER, said(d, 1), SUPER, said(d, 3), said(d, 4), SUPER, said(d, 6), SUPER, said(d, 8)]);
+    expect(played.filter((p) => p.startsWith("male-1|"))).toEqual([]); // never the learner's voice
+    expect(getLessonProgress(KEY).completedAt).toBeTruthy();
+  });
+
+  it("as Fatima: the learner asks a man (حَالُكَ، مَا اسْمُكَ؟) and ends with وَأَنَا فَاطِمَةُ", async () => {
+    await startRoleplay(d, "fatima");
+    await until(() => screen.queryByTestId("dialogue-done") !== null);
+    expect(targets()).toEqual(["صباح النور", "بخير الحمد لله", "كيف حالك", "ما اسمك", "وأنا فاطمة"]);
+    expect(played).toEqual([said(d, 0), SUPER, said(d, 2), SUPER, SUPER, said(d, 5), SUPER, said(d, 7), SUPER]);
     expect(getLessonProgress(KEY).completedAt).toBeTruthy();
   });
 });

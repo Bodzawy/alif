@@ -41,7 +41,7 @@ function reviewItem(id: string, pattern: string, withPicture: boolean): GapItem 
       const word = step.groups.flatMap((group) => group.words).find((w) => w.id === id);
       if (!word) continue;
       const [gap] = alignPattern(word.arabic, pattern);
-      if (!gap || gap.index !== 0 || gap.vowel === "sukun") throw new Error(`review: "${pattern}" must leave out the first letter with its vowel`);
+      if (!gap || gap.index !== 0 || gap.vowel === "sukun" || gap.vowel === "none") throw new Error(`review: "${pattern}" must leave out the first letter with its vowel`);
       const letter = baseLetter(gap.answer) === "إ" ? "أ" : baseLetter(gap.answer);
       const vowel = gap.vowel;
       return {

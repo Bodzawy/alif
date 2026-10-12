@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Medizin">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+  <ellipse cx="200" cy="268" rx="120" ry="10" fill="#000" opacity="0.12"/>
+<rect x="96" y="110" width="104" height="120" rx="8" fill="#fff"/><rect x="96" y="110" width="104" height="26" rx="8" fill="#5aa7e0"/>
+  <rect x="136" y="152" width="24" height="64" rx="4" fill="#e53950"/><rect x="116" y="172" width="64" height="24" rx="4" fill="#e53950"/>
+  <rect x="236" y="90" width="44" height="22" rx="4" fill="#6b4226"/><path d="M226 112 L290 112 L296 136 L296 232 C296 240 290 244 282 244 L234 244 C226 244 220 240 220 232 L220 136 Z" fill="#8a5a2b"/>
+  <rect x="226" y="160" width="64" height="48" rx="6" fill="#fff4d6"/><rect x="236" y="172" width="44" height="6" rx="3" fill="#c98d6a"/><rect x="236" y="186" width="30" height="6" rx="3" fill="#c98d6a"/>
+  <rect x="110" y="238" width="120" height="30" rx="10" fill="#cfe3f2"/>
+  <g fill="#fff" stroke="#9fbfd8" stroke-width="2"><circle cx="128" cy="253" r="8"/><circle cx="152" cy="253" r="8"/><circle cx="176" cy="253" r="8"/><circle cx="200" cy="253" r="8"/></g>
+  <g fill="#fff" stroke="#c7cfd6" stroke-width="2"><ellipse cx="270" cy="262" rx="12" ry="7"/><ellipse cx="298" cy="258" rx="12" ry="7"/></g>
+</svg>

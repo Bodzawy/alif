@@ -15,16 +15,16 @@ const gapsSteps = (lesson: A1Lesson) => lesson.steps.filter((s): s is Extract<A1
 test.describe("phone", () => {
   test.use({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true });
 
-  test("the contents list the nine entries in book order; each opens its first step and leads back", async ({ page }) => {
+  test("the contents list the ten entries in book order; each opens its first step and leads back", async ({ page }) => {
     const errors = collectPageErrors(page);
     await page.goto("/a1");
-    await expect(page.locator('a[data-testid^="a1-lesson-"]')).toHaveCount(1);
+    await expect(page.locator('a[data-testid^="a1-lesson-"]')).toHaveCount(2); // Lektion 1 and 2
     expect(await noHorizontalScroll(page)).toBe(true);
     await page.getByTestId("a1-lesson-lesson-1").tap();
     await expect(page).toHaveURL(/\/a1\/lesson-1$/);
     expect(await noHorizontalScroll(page)).toBe(true);
     const labels = await page.locator('[data-testid^="unit-entry-"][data-testid$="-label"]').allTextContents();
-    expect(labels).toEqual(["أ", "ب", "ت", "ث", "ج", "ح", "خ", "مُرَاجَعَة", "صَبَاحُ الْخَيْر"]);
+    expect(labels).toEqual(["أ", "ب", "ت", "ث", "ج", "ح", "خ", "مُرَاجَعَة", "صَبَاحُ الْخَيْر", "التَّحِيَّةُ وَتَقْدِيمُ النَّفْسِ"]);
     for (const lesson of a1Unit1.lessons) {
       await page.getByTestId(`unit-entry-${lesson.slug}`).tap();
       await expect(page).toHaveURL(new RegExp(`/a1/lesson-1/${lesson.slug}/step-1$`));
@@ -70,7 +70,8 @@ test.describe("phone", () => {
     await expect(page.getByTestId("gap-piece")).toHaveText(["صَـ", "ـاحُ الْخَيْر"]);
     await answerGaps(page, find.gaps.items);
     await expect(page.getByTestId("back-to-unit-end")).toBeVisible();
-    await expect(page.getByTestId("next-entry")).toHaveCount(0);
+    // On to the next textbook page: greeting, introducing oneself, exercises.
+    await expect(page.getByTestId("next-entry")).toHaveAttribute("href", "/a1/lesson-1/tahiyya-wa-taqdim");
     expect(errors).toEqual([]);
   });
 

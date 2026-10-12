@@ -76,7 +76,7 @@ export function GapsStep({ gaps, availableAudio, progressKey }: { gaps: GapsCont
   const items = useMemo(() => gaps.items.map((item) => ({ item, task: gapTask(item) })), [gaps.items]);
   const current = items[index]!;
   const gap = current.task.gaps[Math.min(filled, current.task.gaps.length - 1)]!;
-  const choices = current.item.choices ?? gaps.choices;
+  const choices = current.item.gapChoices?.[Math.min(filled, current.task.gaps.length - 1)] ?? current.item.choices ?? gaps.choices;
   const clips = gaps.clips ?? ALIF_CLIPS;
   const texts = gaps.texts ?? GAPS_TEXT;
   const revealed = wrong >= 2;
@@ -85,6 +85,14 @@ export function GapsStep({ gaps, availableAudio, progressKey }: { gaps: GapsCont
   const target = current.item.pattern ? current.task.gaps[0]!.index : undefined;
   /** Long items (e.g. the phrase صَبَاحُ الْخَيْر) get smaller letters, so they fit a phone. */
   const long = current.task.tiles.length > 7;
+  /**
+   * A word written letter by letter (3 or more gaps, e.g. a dictation of Lektion 2):
+   * narrower slots and letters, so the whole row fits a phone (390 px). Items
+   * with one or two gaps keep the normal sizes.
+   */
+  const slotCount = current.task.gaps.length;
+  const textLetters = current.task.pieces.reduce((n, piece) => n + (piece.kind === "text" ? piece.text.replace(/[\u064B-\u0652\u0640]/g, "").length : 0), 0);
+  const density = slotCount < 3 ? "normal" : slotCount + 0.6 * textLetters <= 4.5 ? "dense" : "tight";
 
   const newFlow = () => {
     flow.current?.abort();
@@ -95,7 +103,7 @@ export function GapsStep({ gaps, availableAudio, progressKey }: { gaps: GapsCont
     (signal: AbortSignal, fallbackMs: number = GAPS_FALLBACK_MS.clip) => {
       const nr = narrator.current;
       const { item } = items[index]!;
-      return nr ? sayWithFallback(nr, { audio: item.audio, text: item.arabic }, fallbackMs, signal, speechUrl) : Promise.resolve();
+      return nr ? sayWithFallback(nr, { audio: item.audio, text: item.spoken ?? item.arabic }, fallbackMs, signal, speechUrl) : Promise.resolve();
     },
     [items, index]
   );
@@ -181,7 +189,7 @@ export function GapsStep({ gaps, availableAudio, progressKey }: { gaps: GapsCont
         if (complete && !signal.aborted) await sayWord(signal, 0);
       })();
     } else {
-      const reveal = clips.reveal[gap.vowel];
+      const reveal = (gap.vowel === "none" ? clips.reveal.none : clips.reveal[gap.vowel]) ?? clips.hint;
       setCaption(reveal);
       void nr.play([reveal]);
     }
@@ -272,12 +280,13 @@ export function GapsStep({ gaps, availableAudio, progressKey }: { gaps: GapsCont
               dir="rtl"
               data-testid="gap-pieces"
               aria-hidden={phase === "correct"}
-              className={cn("crossfade col-start-1 row-start-1 flex items-center justify-center gap-2 transition-opacity duration-500", phase === "correct" && "opacity-0")}
+              data-density={density}
+              className={cn("crossfade col-start-1 row-start-1 flex items-center justify-center transition-opacity duration-500", density === "tight" ? "gap-1" : density === "dense" ? "gap-1.5" : "gap-2", phase === "correct" && "opacity-0")}
             >
               {current.task.pieces.map((piece, i) => {
                 if (piece.kind === "text")
                   return (
-                    <span key={i} lang="ar" data-testid="gap-piece" className={cn("whitespace-nowrap font-arabic font-bold leading-[1.8]", long ? "text-4xl sm:text-6xl" : "text-6xl")}>
+                    <span key={i} lang="ar" data-testid="gap-piece" className={cn("whitespace-nowrap font-arabic font-bold leading-[1.8]", long || density !== "normal" ? "text-4xl sm:text-6xl" : "text-6xl")}>
                       {piece.text}
                     </span>
                   );
@@ -298,6 +307,8 @@ export function GapsStep({ gaps, availableAudio, progressKey }: { gaps: GapsCont
                     className={cn(
                       "flex h-20 w-16 shrink-0 items-center justify-center rounded-2xl border-2 font-arabic text-4xl font-bold transition focus-ring sm:h-24 sm:w-20 sm:text-5xl",
                       long && "h-16 w-14 text-3xl",
+                      density === "dense" && "h-16 w-12 text-3xl sm:h-20 sm:w-16 sm:text-4xl",
+                      density === "tight" && "h-14 w-10 text-2xl sm:h-20 sm:w-14 sm:text-4xl",
                       done ? "border-primary/30 bg-primary-soft" : !active ? "border-dashed border-border bg-muted/40" : selectedKey ? "border-dashed border-primary bg-primary-soft/60" : "border-dashed border-primary bg-card"
                     )}
                   >
@@ -315,6 +326,12 @@ export function GapsStep({ gaps, availableAudio, progressKey }: { gaps: GapsCont
           <p className="font-semibold" data-testid="gap-german">
             {current.item.german}
           </p>
+
+          {gaps.repeat && (
+            <p className="mx-auto mt-3 max-w-md rounded-2xl border border-primary/15 bg-primary-soft px-4 py-2 text-sm" data-testid="gap-repeat">
+              Sprich das Wort laut nach – dann schreib den Buchstaben. <span className="text-muted-foreground">(Das Nachsprechen wird hier nicht bewertet.)</span>
+            </p>
+          )}
 
           <div className="mt-3 flex justify-center">
             <Button variant="secondary" onClick={playWord} className="min-h-12" data-testid="gap-listen" aria-label={`${listen ? "Nochmal hören" : "Anhören"}: ${current.item.german}`}>

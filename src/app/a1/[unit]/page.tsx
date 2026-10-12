@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
-import { ArrowLeft, ArrowRight, BookOpenCheck, MessageCircle } from "lucide-react";
+import { ArrowLeft, ArrowRight, AudioLines, BookOpenCheck, MessageCircle } from "lucide-react";
 
 import { A1_LEVEL, a1Entries, a1LessonHref, getA1Unit } from "@/data/a1";
 import { arabicLessonLabel } from "@/data/a1/ordinals";
@@ -65,6 +65,8 @@ export default async function A1UnitPage({ params }: { params: Promise<Params> }
                 <BookOpenCheck className="h-8 w-8 text-primary" aria-hidden />
               ) : lesson.kind === "phrase" ? (
                 <MessageCircle className="h-8 w-8 text-primary" aria-hidden />
+              ) : lesson.kind === "topic" ? (
+                <AudioLines className="h-8 w-8 text-primary" aria-hidden />
               ) : null}
               <span lang="ar" className={lesson.kind === "letter" ? "font-arabic text-6xl font-bold leading-[1.6] text-primary" : "font-arabic text-3xl font-bold leading-[1.8] text-primary"} data-testid={`unit-entry-${lesson.slug}-label`}>
                 {lesson.label}

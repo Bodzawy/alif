@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Tag">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fffbe8"/><stop offset="1" stop-color="#ffe7a3"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#fff2c2"/><circle cx="340" cy="236" r="50" fill="#fff2c2"/>
+  <ellipse cx="200" cy="256" rx="90" ry="10" fill="#000" opacity="0.12"/>
+<rect x="120" y="62" width="160" height="186" rx="10" fill="#fff" stroke="#c7cfd6" stroke-width="3"/>
+  <rect x="120" y="62" width="160" height="40" rx="10" fill="#e74c3c"/><rect x="120" y="86" width="160" height="16" fill="#e74c3c"/>
+  <circle cx="160" cy="62" r="8" fill="#7f8c8d"/><circle cx="240" cy="62" r="8" fill="#7f8c8d"/>
+  <text x="200" y="196" font-family="Georgia, serif" font-size="88" font-weight="bold" text-anchor="middle" fill="#2f2a26">11</text>
+  <g fill="#bdc3c7"><rect x="140" y="214" width="120" height="6" rx="3"/><rect x="160" y="228" width="80" height="6" rx="3"/></g>
+</svg>

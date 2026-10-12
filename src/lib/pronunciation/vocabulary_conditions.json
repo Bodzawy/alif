@@ -3582,5 +3582,787 @@
       ],
       "message": "حاول مرة أخرى، نريد وأنا نبيلة"
     }
+  },
+  "أنا ماجد": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['n','m','j','d']"
+      ],
+      "message": "ممتاز 👏 نطقت أنا ماجد بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['n','m','j','d']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات أنا ماجد"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد أنا ماجد"
+    }
+  },
+  "أنا ماجد وأنت": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['n','m','j','d','w']"
+      ],
+      "message": "ممتاز 👏 نطقت أنا ماجد وأنت بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['n','m','j','d','w']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات أنا ماجد وأنت"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد أنا ماجد وأنت"
+    }
+  },
+  "وأنا فاطمة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['w','n','f','T','m']"
+      ],
+      "message": "ممتاز 👏 نطقت وأنا فاطمة بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['w','n','f','T','m']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات وأنا فاطمة"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد وأنا فاطمة"
+    }
+  },
+  "دواء": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['d','w']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة دواء بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['d','w']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة دواء"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة دواء"
+    }
+  },
+  "دقيق": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['d','q']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة دقيق بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['d','q']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة دقيق"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة دقيق"
+    }
+  },
+  "ديك": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['d']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة ديك بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['d']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة ديك"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة ديك"
+    }
+  },
+  "دهان": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['d','h','n']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة دهان بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['d','h','n']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة دهان"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة دهان"
+    }
+  },
+  "دينا": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['d','n']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة دينا بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['d','n']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة دينا"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة دينا"
+    }
+  },
+  "درج": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['d','r|rr','j']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة درج بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['d','r|rr','j']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة درج"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة درج"
+    }
+  },
+  "دولاب": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['d','l','b']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة دولاب بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['d','l','b']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة دولاب"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة دولاب"
+    }
+  },
+  "ذقن": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['q','n']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة ذقن بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['q','n']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة ذقن"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة ذقن"
+    }
+  },
+  "ذهب": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['h','b']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة ذهب بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['h','b']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة ذهب"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة ذهب"
+    }
+  },
+  "ذيل": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['y','l']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة ذيل بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['y','l']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة ذيل"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة ذيل"
+    }
+  },
+  "ذراع": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['r|rr','E']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة ذراع بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['r|rr','E']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة ذراع"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة ذراع"
+    }
+  },
+  "ذئاب": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['b']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة ذئاب بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['b']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة ذئاب"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة ذئاب"
+    }
+  },
+  "ذباب": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['b']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة ذباب بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['b']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة ذباب"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة ذباب"
+    }
+  },
+  "ورقة": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['w','r|rr','q']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة ورقة بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['w','r|rr','q']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة ورقة"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة ورقة"
+    }
+  },
+  "وئام": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['w','m']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة وئام بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['w','m']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة وئام"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة وئام"
+    }
+  },
+  "وعاء": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['w','E']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة وعاء بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['w','E']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة وعاء"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة وعاء"
+    }
+  },
+  "ورود": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['w','r|rr','d']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة ورود بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['w','r|rr','d']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة ورود"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة ورود"
+    }
+  },
+  "وصول": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['w','S','l']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة وصول بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['w','S','l']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة وصول"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة وصول"
+    }
+  },
+  "وجوه": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['w','j']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة وجوه بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['w','j']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة وجوه"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة وجوه"
+    }
+  },
+  "يمين": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['y','m','n']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة يمين بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['y','m','n']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة يمين"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة يمين"
+    }
+  },
+  "يوم": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['y','w','m']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة يوم بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['y','w','m']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة يوم"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة يوم"
+    }
+  },
+  "ين": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['y','n']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة ين بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['y','n']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة ين"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة ين"
+    }
+  },
+  "يوسفي": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['y','s','f']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة يوسفي بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['y','s','f']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة يوسفي"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة يوسفي"
+    }
+  },
+  "يسرا": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['y','s','r|rr']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة يسرا بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['y','s','r|rr']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة يسرا"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة يسرا"
+    }
+  },
+  "اليونان": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['l','y','n']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة اليونان بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['l','y','n']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة اليونان"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة اليونان"
+    }
+  },
+  "مساء الخير": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['m','s','x','r|rr']"
+      ],
+      "message": "ممتاز 👏 نطقت مساء الخير بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['m','s','x','r|rr']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات مساء الخير"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد مساء الخير"
+    }
+  },
+  "مساء النور": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['m','s','n','r|rr']"
+      ],
+      "message": "ممتاز 👏 نطقت مساء النور بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['m','s','n','r|rr']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات مساء النور"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد مساء النور"
+    }
+  },
+  "اسمي خالد وأنت": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['s','m','x','l','d','w']"
+      ],
+      "message": "ممتاز 👏 نطقت اسمي خالد وأنت بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['s','m','x','l','d','w']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات اسمي خالد وأنت"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد اسمي خالد وأنت"
+    }
+  },
+  "اسمي عدنان": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['s','m','E','d','n']"
+      ],
+      "message": "ممتاز 👏 نطقت اسمي عدنان بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['s','m','E','d','n']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات اسمي عدنان"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد اسمي عدنان"
+    }
+  },
+  "اسمي دينا وأنت": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['s','m','d','n','w']"
+      ],
+      "message": "ممتاز 👏 نطقت اسمي دينا وأنت بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['s','m','d','n','w']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات اسمي دينا وأنت"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد اسمي دينا وأنت"
+    }
+  },
+  "اسمي نازك": {
+    "excellent": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes contains ['s','m','n','z']"
+      ],
+      "message": "ممتاز 👏 نطقت اسمي نازك بشكل صحيح"
+    },
+    "said_wrong_sound": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['s','m','n','z']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات اسمي نازك"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "azure_accuracy < 70"
+      ],
+      "message": "حاول مرة أخرى، نريد اسمي نازك"
+    }
   }
 }

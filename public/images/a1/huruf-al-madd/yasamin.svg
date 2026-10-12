@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Yasmin">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff0f3"/><stop offset="1" stop-color="#ffd0dc"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#ffe2e9"/><circle cx="340" cy="236" r="50" fill="#ffe2e9"/>
+<path d="M110 300 C116 236 152 214 200 214 C248 214 284 236 290 300 Z" fill="#f6f6f6"/>
+  <rect x="186" y="186" width="28" height="34" fill="#efc49d"/>
+  <path d="M134 230 C110 140 140 76 200 76 C262 76 292 140 266 230 C252 200 254 170 250 150 L150 150 C146 170 148 200 134 230 Z" fill="#a0522d"/>
+  <ellipse cx="200" cy="140" rx="52" ry="54.6" fill="#efc49d"/>
+  <circle cx="181.8" cy="140" r="5.7" fill="#2f2a26"/><circle cx="218.2" cy="140" r="5.7" fill="#2f2a26"/>
+  <circle cx="168.8" cy="155.6" r="6.2" fill="#ff9d9d" opacity=".6"/><circle cx="231.2" cy="155.6" r="6.2" fill="#ff9d9d" opacity=".6"/>
+  <path d="M184.4 158.2 Q200 171.2 215.6 158.2" stroke="#8a3b2b" stroke-width="4.2" fill="none" stroke-linecap="round"/>
+  <path d="M146 136 C140 84 258 80 254 136 C240 96 200 100 176 112 C164 118 152 126 146 136 Z" fill="#a0522d"/>
+</svg>

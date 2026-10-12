@@ -19,14 +19,14 @@ import { copyMovedA1Progress } from "@/lib/progress";
 import { CONDITION_RULES } from "@/lib/pronunciation/rules";
 import { isAllowedTarget, isAllowedTtsText } from "@/lib/pronunciation/targets";
 
-// A1 · Lektion 1 as one lesson with nine entries; the review; the phrase;
+// A1 · Lektion 1 as one lesson with ten entries; the review; the phrase;
 // pattern gaps; and the pictures of every vocabulary item.
 
 type Step = A1Lesson["steps"][number];
 const gapsSteps = (lesson: A1Lesson) => lesson.steps.filter((s): s is Extract<Step, { kind: "gaps" }> => s.kind === "gaps");
 const PUBLIC = path.join(process.cwd(), "public");
 
-describe("Lektion 1: nine entries in book order", () => {
+describe("Lektion 1: ten entries in book order", () => {
   it("أ ب ت ث ج ح خ, the review, the phrase – every letter with the same five steps as Alif", () => {
     expect(a1Unit1.lessons.map((l) => [l.slug, l.kind, l.label])).toEqual([
       ["alif", "letter", "أ"],
@@ -38,6 +38,7 @@ describe("Lektion 1: nine entries in book order", () => {
       ["kha", "letter", "خ"],
       ["review", "review", "مُرَاجَعَة"],
       ["sabah-al-khayr", "phrase", "صَبَاحُ الْخَيْر"],
+      ["tahiyya-wa-taqdim", "phrase", "التَّحِيَّةُ وَتَقْدِيمُ النَّفْسِ"],
     ]);
     for (const lesson of a1Unit1.lessons.filter((l) => l.kind === "letter")) {
       expect(lesson.steps.map((s) => [s.slug, s.kind]), lesson.slug).toEqual([["step-1", "sound-words"], ["step-2", "forms"], ["step-3", "writing"], ["step-4", "gaps"], ["step-5", "gaps"]]);
@@ -62,7 +63,9 @@ describe("Lektion 1: nine entries in book order", () => {
     expect(await redirected(A1LessonPage({ params: Promise.resolve({ unit: "lesson-1", lesson: "ba" }) }))).toBe("/a1/lesson-1/ba/step-1");
     expect(await redirected(A1LessonPage({ params: Promise.resolve({ unit: "ba", lesson: "step-4" }) }))).toBe("/a1/lesson-1/ba/step-3");
     expect(await redirected(A1UnitPage({ params: Promise.resolve({ unit: "kha" }) }))).toBe("/a1/lesson-1/kha");
-    expect(await redirected(A1UnitPage({ params: Promise.resolve({ unit: "lesson-2" }) }))).toBe("/a0/words/lesson-2");
+    // lesson-2 is A1 · Lektion 2 now ("مَسَاءُ الْخَيْر"); the next old word-lesson URL still leads to A0.
+    expect(await redirected(A1UnitPage({ params: Promise.resolve({ unit: "lesson-2" }) }))).toBeUndefined();
+    expect(await redirected(A1UnitPage({ params: Promise.resolve({ unit: "lesson-3" }) }))).toBe("/a0/words/lesson-3");
   });
 
   it("saved progress of Alif's old steps moves along (step-N → alif/step-(N − 1)); nothing is deleted; Laute has no new place", () => {
@@ -99,7 +102,7 @@ describe("pattern gaps", () => {
 
   it("every gap item of Lektion 1 fits its pattern, and its answers are among its choices", () => {
     let count = 0;
-    for (const { lesson } of a1Entries()) {
+    for (const lesson of a1Unit1.lessons) {
       for (const { gaps } of gapsSteps(lesson)) {
         for (const item of gaps.items) {
           const task = gapTask(item);
@@ -172,7 +175,7 @@ describe("صَبَاحُ الْخَيْر – the conversation", () => {
 
 describe("pictures of every vocabulary item", () => {
   // Formen words that are not things (verbs, adjectives, "during", a kingdom): no picture on purpose.
-  const ABSTRACT = new Set(["saba", "athna", "nudj", "faraj", "ajmal", "nasaha"]);
+  const ABSTRACT = new Set(["saba", "athna", "nudj", "faraj", "ajmal", "nasaha", "majdi"]);
 
   it("A0 → Wörter and every A1 word, phrase, Ergänzen item and concrete Formen word has a picture whose file exists", () => {
     type Picture = [id: string, image: { src: string; alt: string } | undefined];
@@ -183,7 +186,8 @@ describe("pictures of every vocabulary item", () => {
           s.kind === "sound-words"
             ? s.groups.flatMap((g) => g.words.map((w): Picture => [`${lesson.slug} ${w.id}`, w.image]))
             : s.kind === "gaps" && s.gaps.mode === "picture"
-                ? s.gaps.items.map((w): Picture => [`${lesson.slug} gap ${w.id}`, w.image])
+                ? // Lektion 2 · حروف المد · تدريب ٦ ("Ordne die Buchstaben"): the book has no pictures there.
+                  s.gaps.items.filter((w) => !w.id.startsWith("arrange-")).map((w): Picture => [`${lesson.slug} gap ${w.id}`, w.image])
                 : s.kind === "forms"
                   ? [...s.forms.sort].filter((w) => !ABSTRACT.has(w.id)).map((w): Picture => [`${lesson.slug} forms ${w.id}`, w.image])
                   : []

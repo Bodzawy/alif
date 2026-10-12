@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Ankunft">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+<rect x="0" y="236" width="400" height="64" fill="#cfd8dc"/>
+  <rect x="236" y="70" width="140" height="120" fill="#d6ecfa" stroke="#90a4ae" stroke-width="4"/>
+  <path d="M262 120 L330 102 L338 110 L300 124 L316 150 L306 152 L286 128 L264 134 Z" fill="#607d8b"/>
+  <rect x="40" y="40" width="150" height="40" rx="6" fill="#2e7d32"/>
+  <path d="M60 50 L60 70 M60 70 L72 62 M60 70 L48 62" stroke="#fff" stroke-width="4" stroke-linecap="round" transform="rotate(-45 60 60)"/>
+  <rect x="82" y="54" width="92" height="12" rx="6" fill="#fff"/>
+  <g transform="translate(80 156) scale(1.0)">
+    <rect x="-14" y="56" width="10" height="44" rx="4" fill="#34495e"/><rect x="4" y="56" width="10" height="44" rx="4" fill="#34495e"/>
+    <path d="M-20 14 C-20 4 20 4 20 14 L22 60 L-22 60 Z" fill="#e67e22"/>
+    <circle cx="0" cy="-6" r="14" fill="#e3ad84"/><path d="M-14 -8 C-14 -24 14 -24 14 -8 C8 -14 -8 -14 -14 -8 Z" fill="#2a1a10"/>
+  </g><g transform="translate(130 150) scale(1.05)">
+    <rect x="-14" y="56" width="10" height="44" rx="4" fill="#34495e"/><rect x="4" y="56" width="10" height="44" rx="4" fill="#34495e"/>
+    <path d="M-20 14 C-20 4 20 4 20 14 L22 60 L-22 60 Z" fill="#2980b9"/>
+    <circle cx="0" cy="-6" r="14" fill="#e3ad84"/><path d="M-14 -8 C-14 -24 14 -24 14 -8 C8 -14 -8 -14 -14 -8 Z" fill="#2a1a10"/>
+  </g><g transform="translate(178 160) scale(0.95)">
+    <rect x="-14" y="56" width="10" height="44" rx="4" fill="#34495e"/><rect x="4" y="56" width="10" height="44" rx="4" fill="#34495e"/>
+    <path d="M-20 14 C-20 4 20 4 20 14 L22 60 L-22 60 Z" fill="#8e44ad"/>
+    <circle cx="0" cy="-6" r="14" fill="#e3ad84"/><path d="M-14 -8 C-14 -24 14 -24 14 -8 C8 -14 -8 -14 -14 -8 Z" fill="#6b4226"/>
+  </g><g transform="translate(226 154) scale(1.0)">
+    <rect x="-14" y="56" width="10" height="44" rx="4" fill="#34495e"/><rect x="4" y="56" width="10" height="44" rx="4" fill="#34495e"/>
+    <path d="M-20 14 C-20 4 20 4 20 14 L22 60 L-22 60 Z" fill="#c0392b"/>
+    <circle cx="0" cy="-6" r="14" fill="#e3ad84"/><path d="M-14 -8 C-14 -24 14 -24 14 -8 C8 -14 -8 -14 -14 -8 Z" fill="#2a1a10"/>
+  </g>
+  <rect x="236" y="214" width="26" height="22" rx="4" fill="#5d4037"/><rect x="100" y="210" width="22" height="26" rx="4" fill="#455a64"/>
+</svg>

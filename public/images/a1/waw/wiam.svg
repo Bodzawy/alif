@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Wiam">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#f6f0ff"/><stop offset="1" stop-color="#dccbfb"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#ece2fd"/><circle cx="340" cy="236" r="50" fill="#ece2fd"/>
+<path d="M110 300 C116 236 152 214 200 214 C248 214 284 236 290 300 Z" fill="#9b8bb4"/>
+  <rect x="186" y="186" width="28" height="34" fill="#efc49d"/>
+  <path d="M138 210 C120 110 150 76 200 76 C254 76 284 110 262 210 Z" fill="#e0b25c"/>
+  <ellipse cx="200" cy="140" rx="52" ry="54.6" fill="#efc49d"/>
+  <circle cx="181.8" cy="140" r="5.7" fill="#2f2a26"/><circle cx="218.2" cy="140" r="5.7" fill="#2f2a26"/>
+  <circle cx="168.8" cy="155.6" r="6.2" fill="#ff9d9d" opacity=".6"/><circle cx="231.2" cy="155.6" r="6.2" fill="#ff9d9d" opacity=".6"/>
+  <path d="M184.4 158.2 Q200 171.2 215.6 158.2" stroke="#8a3b2b" stroke-width="4.2" fill="none" stroke-linecap="round"/>
+  <path d="M146 132 C146 80 254 80 254 132 C232 100 168 100 146 132 Z" fill="#e0b25c"/>
+  <path d="M186 226 C176 232 172 248 182 254 C192 250 198 236 196 226 Z" fill="#efc49d"/>
+</svg>

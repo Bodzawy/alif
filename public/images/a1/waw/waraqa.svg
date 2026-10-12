@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Blatt Papier">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+<path d="M110 92 L300 72 L322 222 L130 244 Z" fill="#7f8c8d" opacity=".35" transform="translate(8 10)"/>
+  <path d="M110 92 L300 72 L322 222 L130 244 Z" fill="#ffffff" stroke="#c7d3dc" stroke-width="3"/>
+  <path d="M286 74 L300 72 L302 88 Z" fill="#e3e9ee"/>
+</svg>

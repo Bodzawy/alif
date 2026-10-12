@@ -11,8 +11,16 @@ import { GapsStep } from "@/components/a1/gaps/gaps-step";
 import { WritingStep } from "@/components/a1/writing/writing-step";
 import { GuidedSoundWords } from "@/components/a1/guided/guided-sound-words";
 import { DialogueStep } from "@/components/a1/dialogue/dialogue-step";
+import { LetterFindStep } from "@/components/a1/letter-find/letter-find-step";
+import { PhrasesStep } from "@/components/a1/phrases/phrases-step";
+import { CompareStep } from "@/components/a1/compare/compare-step";
+import { MatchStep } from "@/components/a1/match/match-step";
+import { PositionsStep } from "@/components/a1/positions/positions-step";
+import { TableStep } from "@/components/a1/table/table-step";
+import { WordPickStep } from "@/components/a1/word-pick/word-pick-step";
 import { buttonClasses } from "@/components/ui/button";
-import { A1_LEVEL, a1Entries, a1LessonHref, a1StepHref, a1StepKey, a1UnitHref, getA1Unit } from "@/data/a1";
+import { MixedText } from "@/components/ui/mixed-text";
+import { A1_LEVEL, a1Entries, a1LessonHref, a1StepHref, a1StepKey, a1UnitHref, getA1Unit, nextA1Entry } from "@/data/a1";
 import type { A1Step } from "@/data/types";
 import { cn } from "@/lib/utils";
 
@@ -27,7 +35,8 @@ function find(params: Params) {
   const at = unit?.lessons.findIndex((lesson) => lesson.slug === params.lesson) ?? -1;
   const lesson = unit?.lessons[at];
   const index = lesson?.steps.findIndex((step) => step.slug === params.step) ?? -1;
-  return unit && lesson && index >= 0 ? { unit, lesson, nextLesson: unit.lessons[at + 1], step: lesson.steps[index]!, index } : undefined;
+  // The next entry: in this lesson, or the first entry of the next lesson (Lektion 1 → Lektion 2).
+  return unit && lesson && index >= 0 ? { unit, lesson, next: nextA1Entry(unit.slug, lesson.slug), step: lesson.steps[index]!, index } : undefined;
 }
 
 /**
@@ -67,13 +76,26 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 export default async function A1StepPage({ params }: { params: Promise<Params> }) {
   const found = find(await params);
   if (!found) notFound();
-  const { unit, lesson, nextLesson, step, index } = found;
+  const { unit, lesson, next: nextEntry, step, index } = found;
   const progressKey = a1StepKey(unit, lesson, step.slug);
   const previous = lesson.steps[index - 1];
   const next = lesson.steps[index + 1];
 
   return (
-    <div className={cn("container py-6 sm:py-10", step.kind === "dialogue" ? "max-w-3xl" : step.kind === "forms" || step.kind === "gaps" ? "max-w-3xl" : step.kind === "writing" ? "max-w-5xl" : "max-w-7xl")}>
+    <div
+      className={cn(
+        "container py-6 sm:py-10",
+        step.kind === "dialogue" || step.kind === "letter-find" || step.kind === "word-pick"
+          ? "max-w-3xl"
+          : step.kind === "phrases" || step.kind === "positions" || step.kind === "compare" || step.kind === "table"
+            ? "max-w-4xl"
+            : step.kind === "forms" || step.kind === "gaps"
+              ? "max-w-3xl"
+              : step.kind === "writing" || step.kind === "match"
+                ? "max-w-5xl"
+                : "max-w-7xl"
+      )}
+    >
       <nav aria-label="Brotkrumen" className="mb-4 flex items-center justify-between gap-2 text-sm text-muted-foreground">
         <Link href={a1UnitHref(unit)} className="inline-flex items-center gap-1 rounded-md hover:text-foreground focus-ring" data-testid="back-to-unit">
           <ArrowLeft className="h-4 w-4" aria-hidden /> Lektion {unit.number}
@@ -112,6 +134,24 @@ export default async function A1StepPage({ params }: { params: Promise<Params> }
         </ol>
       </header>
 
+      {step.instruction && (
+        <div className="mb-6 rounded-3xl border border-primary/15 bg-primary-soft/60 px-4 py-4 text-center sm:px-6" data-testid="step-instruction">
+          {step.instruction.arabic && (
+            <p lang="ar" dir="rtl" className="font-arabic text-2xl font-bold leading-[1.9] text-primary sm:text-3xl" data-testid="step-instruction-arabic">
+              {step.instruction.arabic}
+            </p>
+          )}
+          <p className="mt-1 font-semibold" data-testid="step-instruction-german">
+            <MixedText text={step.instruction.german} />
+          </p>
+          {step.instruction.note && (
+            <p className="mt-1 text-sm text-muted-foreground" data-testid="step-instruction-note">
+              <MixedText text={step.instruction.note} />
+            </p>
+          )}
+        </div>
+      )}
+
       {step.kind === "sound-words" ? (
         <GuidedSoundWords groups={step.groups} progressKey={progressKey} />
       ) : step.kind === "forms" ? (
@@ -120,6 +160,20 @@ export default async function A1StepPage({ params }: { params: Promise<Params> }
         <WritingStep letterSet={step.letterSet} progressKey={progressKey} />
       ) : step.kind === "dialogue" ? (
         <DialogueStep dialogue={step.dialogue} mode={step.mode} progressKey={progressKey} />
+      ) : step.kind === "phrases" ? (
+        <PhrasesStep groups={step.groups} progressKey={progressKey} />
+      ) : step.kind === "letter-find" ? (
+        <LetterFindStep find={step.find} progressKey={progressKey} />
+      ) : step.kind === "positions" ? (
+        <PositionsStep positions={step.positions} progressKey={progressKey} />
+      ) : step.kind === "compare" ? (
+        <CompareStep sections={step.sections} progressKey={progressKey} />
+      ) : step.kind === "match" ? (
+        <MatchStep match={step.match} progressKey={progressKey} />
+      ) : step.kind === "word-pick" ? (
+        <WordPickStep pick={step.pick} progressKey={progressKey} />
+      ) : step.kind === "table" ? (
+        <TableStep tables={step.tables} quiz={step.quiz} progressKey={progressKey} />
       ) : (
         <GapsStep gaps={step.gaps} availableAudio={availableAudio(step.gaps.audioBase)} progressKey={progressKey} />
       )}
@@ -143,9 +197,10 @@ export default async function A1StepPage({ params }: { params: Promise<Params> }
               <Link href={a1UnitHref(unit)} className={buttonClasses({ variant: "secondary", size: "lg" })} data-testid="back-to-unit-end">
                 Zur Lektion {unit.number}
               </Link>
-              {nextLesson && (
-                <Link href={a1LessonHref(unit, nextLesson)} className={buttonClasses({ size: "lg" })} data-testid="next-entry">
-                  Weiter: <span lang="ar" className="font-arabic text-xl leading-none">{nextLesson.label}</span> {nextLesson.labelGerman} <ArrowRight className="h-5 w-5" aria-hidden />
+              {nextEntry && (
+                <Link href={a1LessonHref(nextEntry.unit, nextEntry.lesson)} className={buttonClasses({ size: "lg" })} data-testid="next-entry">
+                  Weiter: {nextEntry.unit.slug !== unit.slug && <>Lektion {nextEntry.unit.number} · </>}
+                  <span lang="ar" className="font-arabic text-xl leading-none">{nextEntry.lesson.label}</span> {nextEntry.lesson.labelGerman} <ArrowRight className="h-5 w-5" aria-hidden />
                 </Link>
               )}
             </div>

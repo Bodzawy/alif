@@ -31,7 +31,7 @@ const step = <K extends A1Lesson["steps"][number]["kind"]>(lesson: A1Lesson, slu
 
 describe("Ba – lesson data", () => {
   it("is the entry after Alif in Lektion 1 (الدرس الأول – صَبَاحُ الْخَيْر)", () => {
-    expect(a1Unit1.lessons.map((l) => l.slug)).toEqual(["alif", "ba", "ta", "tha", "jim", "hha", "kha", "review", "sabah-al-khayr"]);
+    expect(a1Unit1.lessons.map((l) => l.slug)).toEqual(["alif", "ba", "ta", "tha", "jim", "hha", "kha", "review", "sabah-al-khayr", "tahiyya-wa-taqdim"]);
     expect(a1Unit1).toMatchObject({ slug: "lesson-1", number: 1, title: "صَبَاحُ الْخَيْر", titleGerman: "Guten Morgen" });
     expect(ba).toMatchObject({ slug: "ba", kind: "letter", label: "ب", labelGerman: "Ba", letter: { id: "ba", glyph: "ب", name: "Ba" } });
   });
@@ -168,16 +168,16 @@ describe("/a1 and the step pages of a letter", () => {
     vi.restoreAllMocks();
   });
 
-  it("/a1 shows ONE lesson card: الدرس الأول – صَبَاحُ الْخَيْر, leading to its contents", () => {
+  it("/a1 shows the lesson cards: الدرس الأول – صَبَاحُ الْخَيْر first, leading to its contents", () => {
     render(<A1Page />);
     const cards = screen.getAllByTestId(/^a1-lesson-[^-]+-\d+$/);
-    expect(cards.map((c) => c.getAttribute("data-testid"))).toEqual(["a1-lesson-lesson-1"]);
+    expect(cards.map((c) => c.getAttribute("data-testid"))).toEqual(["a1-lesson-lesson-1", "a1-lesson-lesson-2"]);
     const card = cards[0]!;
     expect(card).toHaveAttribute("href", "/a1/lesson-1");
     expect(card).toHaveTextContent("الدرس الأول");
     expect(card).toHaveTextContent("صَبَاحُ الْخَيْر");
     expect(card).toHaveTextContent("Lektion 1 · Guten Morgen");
-    expect(card).toHaveTextContent("9 Teile");
+    expect(card).toHaveTextContent("10 Teile");
     expect(within(card).getByTestId("a1-lesson-lesson-1-letters")).toHaveTextContent("أ · ب · ت · ث · ج · ح · خ");
   });
 
@@ -185,8 +185,8 @@ describe("/a1 and the step pages of a letter", () => {
     render(await A1UnitPage({ params: Promise.resolve({ unit: "lesson-1" }) }));
     expect(screen.getByTestId("unit-title")).toHaveTextContent("صَبَاحُ الْخَيْر");
     const entries = within(screen.getByTestId("unit-contents")).getAllByRole("link");
-    expect(entries.map((e) => e.querySelector("[data-testid$='-label']")!.textContent)).toEqual(["أ", "ب", "ت", "ث", "ج", "ح", "خ", "مُرَاجَعَة", "صَبَاحُ الْخَيْر"]);
-    expect(entries.map((e) => e.getAttribute("href"))).toEqual(["alif", "ba", "ta", "tha", "jim", "hha", "kha", "review", "sabah-al-khayr"].map((slug) => `/a1/lesson-1/${slug}`));
+    expect(entries.map((e) => e.querySelector("[data-testid$='-label']")!.textContent)).toEqual(["أ", "ب", "ت", "ث", "ج", "ح", "خ", "مُرَاجَعَة", "صَبَاحُ الْخَيْر", "التَّحِيَّةُ وَتَقْدِيمُ النَّفْسِ"]);
+    expect(entries.map((e) => e.getAttribute("href"))).toEqual(["alif", "ba", "ta", "tha", "jim", "hha", "kha", "review", "sabah-al-khayr", "tahiyya-wa-taqdim"].map((slug) => `/a1/lesson-1/${slug}`));
     expect(screen.getByTestId("back-to-a1")).toHaveAttribute("href", "/a1");
   });
 

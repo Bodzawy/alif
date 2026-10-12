@@ -9,12 +9,17 @@ import { a1Ta } from "./letters/ta";
 import { a1Tha } from "./letters/tha";
 import { a1Review } from "./review";
 import { a1SabahAlKhayr } from "./sabah-al-khayr";
+import { a1Unit2 } from "./lesson-2";
+import { a1Tahiyya } from "./tahiyya";
 
 // A1 – the new curriculum, built lesson by lesson (one book unit each). /a1
 // lists the lessons; a lesson's page (/a1/<unit>) lists its entries in book
 // order; every entry has its own steps (/a1/<unit>/<entry>/<step>).
 // Lektion 1 "صَبَاحُ الْخَيْر": the letters أ ب ت ث ج ح خ (Alif in lesson-1.ts,
-// the others in letters/, see letter-lesson.ts), the review and the phrase.
+// the others in letters/, see letter-lesson.ts), the review, the phrase and
+// the next textbook page: greeting, introducing oneself, exercises (tahiyya.ts).
+// Lektion 2 "مَسَاءُ الْخَيْر": the letters د ذ و ي, the long vowels and the
+// evening conversations (lesson-2/).
 // (The former A1 word lessons are A0 → Wörter, see src/data/curriculum.ts.)
 
 export const a1Unit1: A1Unit = {
@@ -22,7 +27,7 @@ export const a1Unit1: A1Unit = {
   number: 1,
   title: "صَبَاحُ الْخَيْر",
   titleGerman: "Guten Morgen",
-  lessons: [a1Alif, a1Ba, a1Ta, a1Tha, a1Jim, a1Hha, a1Kha, a1Review, a1SabahAlKhayr],
+  lessons: [a1Alif, a1Ba, a1Ta, a1Tha, a1Jim, a1Hha, a1Kha, a1Review, a1SabahAlKhayr, a1Tahiyya],
 };
 
 export const A1_LEVEL = {
@@ -30,7 +35,7 @@ export const A1_LEVEL = {
   code: "A1",
   title: "Lektionen",
   description: "Lerne Lektion für Lektion – hören, nachsprechen und sofort Feedback bekommen.",
-  units: [a1Unit1] as A1Unit[],
+  units: [a1Unit1, a1Unit2] as A1Unit[],
 } as const;
 
 export function getA1Unit(slug: string): A1Unit | undefined {
@@ -63,6 +68,13 @@ export function a1StepKey(unit: Pick<A1Unit, "slug">, lesson: Pick<A1Lesson, "sl
   return a1StepHref(unit, lesson, stepSlug).slice(1);
 }
 
+/** The entry after this one: the next entry of the lesson, or the first entry of the next lesson. */
+export function nextA1Entry(unitSlug: string, slug: string): { unit: A1Unit; lesson: A1Lesson } | undefined {
+  const entries = a1Entries();
+  const at = entries.findIndex(({ unit, lesson }) => unit.slug === unitSlug && lesson.slug === slug);
+  return at >= 0 ? entries[at + 1] : undefined;
+}
+
 /** Every exercise of an A1 entry; each exercise once. */
 export function a1LessonExercises(lesson: A1Lesson): PronunciationExercise[] {
   const all = lesson.steps.flatMap((step) =>
@@ -70,7 +82,9 @@ export function a1LessonExercises(lesson: A1Lesson): PronunciationExercise[] {
       ? step.groups.flatMap((group) => [group.sound.exercise, ...group.words.map((word) => word.exercise)])
       : step.kind === "dialogue"
         ? step.dialogue.lines.map((line) => line.exercise)
-        : [] // "forms", "writing", "gaps": nothing is evaluated.
+        : step.kind === "phrases"
+          ? step.groups.flatMap((group) => group.items.map((item) => item.exercise))
+          : [] // "forms", "writing", "gaps", "letter-find": nothing is evaluated.
   );
   return all.filter((exercise, index) => all.findIndex((other) => other.id === exercise.id) === index);
 }
@@ -80,11 +94,34 @@ export function a1Exercises(): PronunciationExercise[] {
 }
 
 /**
- * Words the A1 steps speak through /api/tts besides the exercises: the full
- * words of "Ergänzen" / "Hören" (e.g. بَابْ) as long as they have no recording.
+ * Texts the A1 steps speak through /api/tts besides the exercises: the full
+ * words of "Ergänzen" / "Hören" (e.g. بَابْ) as long as they have no recording,
+ * and the "Anhören" texts of the steps of Lektion 2 (positions, compare, match,
+ * word-pick, table).
  */
 export function a1SpokenTexts(): string[] {
-  return [...new Set(a1Entries().flatMap(({ lesson }) => lesson.steps.flatMap((step) => (step.kind === "gaps" ? step.gaps.items.map((item) => item.arabic) : []))))];
+  return [...new Set(a1Entries().flatMap(({ lesson }) => lesson.steps.flatMap(stepSpokenTexts)))];
+}
+
+const PUNCT = /[.،؟!:]+$/;
+
+function stepSpokenTexts(step: A1Lesson["steps"][number]): string[] {
+  switch (step.kind) {
+    case "gaps":
+      return step.gaps.items.map((item) => item.spoken ?? item.arabic);
+    case "positions":
+      return [...step.positions.items.map((item) => item.word), step.positions.sukun.word];
+    case "compare":
+      return step.sections.flatMap((section) => section.rows.flat().map((item) => item.arabic));
+    case "match":
+      return step.match.prompts.flatMap((prompt) => (prompt.result ? [prompt.result.arabic] : []));
+    case "word-pick":
+      return (step.pick.words ?? []).map((word) => word.arabic.replace(PUNCT, ""));
+    case "table":
+      return step.tables.flatMap((table) => table.rows.flat().filter((cell) => cell.listen !== false).map((cell) => cell.arabic));
+    default:
+      return [];
+  }
 }
 
 /**

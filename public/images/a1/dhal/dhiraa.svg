@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Arm">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff0f3"/><stop offset="1" stop-color="#ffd0dc"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#ffe2e9"/><circle cx="340" cy="236" r="50" fill="#ffe2e9"/>
+<path d="M40 250 C90 236 150 206 214 166 C232 154 246 142 260 132" stroke="#efc49d" stroke-width="44" fill="none" stroke-linecap="round"/>
+  <path d="M40 250 C90 236 150 206 214 166" stroke="#4f8fd0" stroke-width="50" fill="none" stroke-linecap="butt" stroke-dasharray="120 999"/>
+  <path d="M248 104 C262 94 288 92 300 104 L346 100 C356 100 356 114 346 116 L306 118 L350 120 C362 120 362 136 350 136 L304 136 L344 142 C356 144 354 158 342 158 L300 152 C306 164 296 172 284 166 C266 158 252 150 244 138 Z" fill="#efc49d"/>
+  <path d="M276 100 C268 84 278 72 290 84 L300 104" fill="#efc49d"/>
+</svg>

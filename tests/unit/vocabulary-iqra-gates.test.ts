@@ -167,6 +167,44 @@ const EXPECTED_TOKENS: Record<string, string[]> = {
   "وأنا أحمد": ["w","n","H","m","d"],
   "أنا فاطمة وأنت": ["n","f","T","m","w"],
   "وأنا نبيلة": ["w","n","b","l"],
+  // The next textbook page: introducing oneself (أنا ماجد / وأنا فاطمة) and Majid's line of Übung 1.
+  "أنا ماجد": ["n","m","j","d"],
+  "أنا ماجد وأنت": ["n","m","j","d","w"],
+  "وأنا فاطمة": ["w","n","f","T","m"],
+  // A1 · Lektion 2 (مَسَاءُ الْخَيْر): the words of د ذ و ي and the two evening conversations.
+  // Gates built the same way (the word's consonants that IQRA outputs; no ذ / ث, no final k / t,
+  // no y / w for a long ī / ū) – NOT yet checked against real IQRA output.
+  "دواء": ["d","w"],
+  "دقيق": ["d","q"],
+  "ديك": ["d"],
+  "دهان": ["d","h","n"],
+  "دينا": ["d","n"],
+  "درج": ["d","r|rr","j"],
+  "دولاب": ["d","l","b"],
+  "ذقن": ["q","n"],
+  "ذهب": ["h","b"],
+  "ذيل": ["y","l"],
+  "ذراع": ["r|rr","E"],
+  "ذئاب": ["b"],
+  "ذباب": ["b"],
+  "ورقة": ["w","r|rr","q"],
+  "وئام": ["w","m"],
+  "وعاء": ["w","E"],
+  "ورود": ["w","r|rr","d"],
+  "وصول": ["w","S","l"],
+  "وجوه": ["w","j"],
+  "يمين": ["y","m","n"],
+  "يوم": ["y","w","m"],
+  "ين": ["y","n"],
+  "يوسفي": ["y","s","f"],
+  "يسرا": ["y","s","r|rr"],
+  "اليونان": ["l","y","n"],
+  "مساء الخير": ["m","s","x","r|rr"],
+  "مساء النور": ["m","s","n","r|rr"],
+  "اسمي خالد وأنت": ["s","m","x","l","d","w"],
+  "اسمي عدنان": ["s","m","E","d","n"],
+  "اسمي دينا وأنت": ["s","m","d","n","w"],
+  "اسمي نازك": ["s","m","n","z"],
 };
 
 // IQRA's token inventory (sws_arabic.txt of the IqraEval phoneme model).
@@ -204,8 +242,8 @@ const words = [
 ];
 
 describe("vocabulary IQRA gates", () => {
-  it("cover all 161 curriculum words (84 in A0 → Wörter, 63 in A1, 14 lines of the two conversations), each target with its own gate", () => {
-    expect(words).toHaveLength(161);
+  it("cover all 225 curriculum words (84 in A0 → Wörter; Lektion 1: 63 words, 14 lines of the two conversations, 7 greeting / introduction expressions and 9 lines of Übung 1; Lektion 2: 34 words and 14 lines of the two evening conversations), each target with its own gate", () => {
+    expect(words).toHaveLength(225);
     expect(Object.keys(EXPECTED_TOKENS).sort()).toEqual([...new Set(words.map(({ word }) => word.exercise.target))].sort());
     expect(Object.keys(VOCABULARY_RULES).sort()).toEqual(Object.keys(EXPECTED_TOKENS).sort());
   });

@@ -60,19 +60,19 @@ async function stubServices(page: Page, wrongOnce: string[] = []) {
   return stub;
 }
 
-test("/a1 shows الدرس الأول – صباح الخير; its contents list أ ب ت ث ج ح خ, مراجعة, صباح الخير; أ opens Wörter", async ({ page }) => {
+test("/a1 shows الدرس الأول – صباح الخير; its contents list أ ب ت ث ج ح خ, مراجعة, صباح الخير, التحية وتقديم النفس; أ opens Wörter", async ({ page }) => {
   await page.goto("/a1");
   const card = page.getByTestId("a1-lesson-lesson-1");
   await expect(card).toContainText("الدرس الأول");
   await expect(card).toContainText("صَبَاحُ الْخَيْر");
   await expect(card).toContainText("Lektion 1 · Guten Morgen");
-  // One lesson card; the letters are its contents, not lessons of their own.
-  await expect(page.locator('a[data-testid^="a1-lesson-"]')).toHaveCount(1);
+  // One card per book lesson (Lektion 1 and 2); the letters are their contents, not lessons of their own.
+  await expect(page.locator('a[data-testid^="a1-lesson-"]')).toHaveCount(2);
   await card.click();
   await expect(page).toHaveURL(/\/a1\/lesson-1$/);
   const entries = page.getByTestId("unit-contents").getByRole("link");
-  await expect(entries).toHaveCount(9);
-  expect(await entries.evaluateAll((els) => els.map((el) => el.querySelector("[data-testid$='-label']")!.textContent))).toEqual(["أ", "ب", "ت", "ث", "ج", "ح", "خ", "مُرَاجَعَة", "صَبَاحُ الْخَيْر"]);
+  await expect(entries).toHaveCount(10);
+  expect(await entries.evaluateAll((els) => els.map((el) => el.querySelector("[data-testid$='-label']")!.textContent))).toEqual(["أ", "ب", "ت", "ث", "ج", "ح", "خ", "مُرَاجَعَة", "صَبَاحُ الْخَيْر", "التَّحِيَّةُ وَتَقْدِيمُ النَّفْسِ"]);
   await page.getByTestId("unit-entry-alif").click();
   await expect(page).toHaveURL(/\/a1\/lesson-1\/alif\/step-1$/);
   await expect(page.getByTestId("lesson-title")).toHaveText("صَبَاحُ الْخَيْر");

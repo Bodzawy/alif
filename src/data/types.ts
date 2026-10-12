@@ -150,6 +150,8 @@ type A1StepBase = {
   title: string;
   /** Short name for the back / next buttons, e.g. "Formen" (default: title). */
   navLabel?: string;
+  /** The textbook's instruction (Arabic, as printed) and what it asks in German, shown above the step. */
+  instruction?: { arabic?: string; german: string; note?: string };
 };
 
 export type A1Step =
@@ -176,7 +178,225 @@ export type A1Step =
       mode: "listen" | "repeat" | "roleplay";
       dialogue: Dialogue;
     })
+  | (A1StepBase & {
+      kind: "phrases";
+      /** Expressions to listen to and practise, in book order (e.g. a greeting and its answer). */
+      groups: PhraseGroup[];
+    })
+  | (A1StepBase & {
+      kind: "letter-find";
+      find: LetterFind;
+    })
+  | (A1StepBase & {
+      kind: "positions";
+      positions: LetterPositions;
+    })
+  | (A1StepBase & {
+      kind: "compare";
+      /** Listen and compare (e.g. long and short vowels), section by section in book order. */
+      sections: CompareSection[];
+    })
+  | (A1StepBase & {
+      kind: "match";
+      match: MatchContent;
+    })
+  | (A1StepBase & {
+      kind: "word-pick";
+      pick: WordPick;
+    })
+  | (A1StepBase & {
+      kind: "table";
+      tables: TableBlock[];
+      /** A short check over the tables (German questions, Arabic answers); the step is done when every answer is right. */
+      quiz: TableQuiz[];
+    })
 ;
+
+// ---------------------------------------------------------------------------
+// "positions": the book's "كتابة الحرف" – where the letter stands in a word,
+// with one example word each – and "النطق مع السكون". The learner finds the
+// letter in every example word.
+
+export type PositionItem = {
+  id: string;
+  /** The book's label, e.g. "في أول الكلمة". */
+  label: string;
+  /** German, e.g. "am Wortanfang". */
+  labelGerman: string;
+  /** The printed shape, e.g. "د" or "ـد". */
+  shape: string;
+  /** Vocalised example word. */
+  word: string;
+  german: string;
+  /** Which occurrence of the letter is meant (0 = first, -1 = last; default 0). */
+  occurrence?: number;
+};
+
+export type LetterPositions = {
+  /** The bare letter, e.g. "د". */
+  letter: string;
+  /** German name, e.g. "Dal". */
+  name: string;
+  /** The book's note (e.g. "يُلَاحَظُ الْحَرْفُ لَا يَقْبَلُ الِاتِّصَالَ إِلَّا مِنَ الْيَمِينِ") and its German meaning. */
+  rule?: { arabic: string; german: string };
+  items: PositionItem[];
+  /** "النطق مع السكون": the letter with sukun and the book's word. */
+  sukun: { glyph: string; word: string; german: string; occurrence?: number };
+};
+
+// ---------------------------------------------------------------------------
+// "compare": listen and notice the difference (long and short vowels).
+
+export type CompareItem = {
+  id: string;
+  /** Vocalised Arabic as shown and spoken. */
+  arabic: string;
+  transliteration?: string;
+  german?: string;
+  /** The book's label of this example, e.g. "يَاءُ الْمَدِّ". */
+  label?: string;
+  /** What the item shows: a long vowel (Dehnungsbuchstabe), a short vowel, a Hamza, a consonant. */
+  tag?: "long" | "short" | "hamza" | "consonant";
+};
+
+export type CompareSection = {
+  id: string;
+  /** The book's heading, e.g. "اِسْمَعْ وَلَاحِظِ الْفَرْقَ فِي الصَّوْتِ". */
+  titleArabic?: string;
+  /** German heading. */
+  title: string;
+  /** German explanation (may contain Arabic). */
+  note?: string;
+  /** The book's pictures of this section. */
+  pictures?: Array<{ src: string; alt: string; label: string }>;
+  /** Rows; a row of two items is a pair (long – short). */
+  rows: CompareItem[][];
+};
+
+// ---------------------------------------------------------------------------
+// "match": connect each prompt with its answer (pictures, or the joined word).
+
+export type MatchOption = {
+  id: string;
+  /** Label as in the book, e.g. "أ" for picture (أ). */
+  label: string;
+  image?: { src: string; alt: string };
+  /** An Arabic word as the option (instead of a picture). */
+  arabic?: string;
+};
+
+export type MatchPrompt = {
+  id: string;
+  /** What the learner reads: a word, or separated letters ("ت – و – ت"). */
+  arabic: string;
+  /** The right option. */
+  answer: string;
+  /** The book's model answer: shown solved from the start. */
+  example?: boolean;
+  /** Shown once matched, e.g. the joined word "تُوت" (with its German meaning). */
+  result?: { arabic: string; german: string };
+};
+
+export type MatchContent = {
+  /** German heading of the prompt column and the option column. */
+  promptTitle: string;
+  optionTitle: string;
+  prompts: MatchPrompt[];
+  options: MatchOption[];
+};
+
+// ---------------------------------------------------------------------------
+// "word-pick": tap whole words, e.g. "underline the words WITHOUT a long vowel".
+
+export type WordPick = {
+  /** Which words count: those with a Dehnungsbuchstabe (ا و ي), or those without one. */
+  find: "madd" | "no-madd";
+  /** Words to read (each one tappable and listenable) … */
+  words?: Array<{ id: string; arabic: string; german?: string }>;
+  /** … or the lines of these dialogues. */
+  dialogues?: Dialogue[];
+  /** German goal, e.g. "Unterstreiche die Wörter ohne Dehnungsbuchstaben." */
+  goal: string;
+};
+
+// ---------------------------------------------------------------------------
+// "table": the book's grammar tables ("لاحظ القواعد", "تذكر").
+
+export type TableCell = {
+  /** Vocalised Arabic as shown; spoken by "Anhören" unless `listen` is false. */
+  arabic: string;
+  german?: string;
+  transliteration?: string;
+  /** Masculine / feminine form. */
+  gender?: "m" | "f";
+  /** A placeholder (e.g. "اسْمِي …") is not spoken. */
+  listen?: boolean;
+};
+
+export type TableBlock = {
+  id: string;
+  /** The book's heading, e.g. "لِلتَّحِيَّةِ فِي الْمَسَاءِ". */
+  titleArabic: string;
+  title: string;
+  /** Column headings (book order, right to left). */
+  columns: Array<{ arabic: string; german: string }>;
+  rows: TableCell[][];
+  note?: string;
+};
+
+export type TableQuiz = {
+  id: string;
+  prompt: string;
+  options: string[];
+  answer: number;
+};
+
+
+// ---------------------------------------------------------------------------
+// "phrases": the expressions of a textbook table, each with listen + practise.
+
+export type PhraseItem = {
+  id: string;
+  /** Vocalised Arabic as shown. */
+  arabic: string;
+  transliteration: string;
+  german: string;
+  literal?: string;
+  /** Who says it / to whom, e.g. "Antwort" or "zu einem Mann". */
+  tag?: string;
+  /** Grammatical gender of the person addressed (masculine / feminine form). */
+  gender?: "m" | "f";
+  /** Evaluated like every other A1 exercise (target = unvocalised, without punctuation). */
+  exercise: PronunciationExercise;
+};
+
+export type PhraseGroup = {
+  id: string;
+  /** German heading, e.g. "Wie geht es dir?" */
+  title: string;
+  /** Arabic heading as in the book, e.g. "التَّحِيَّةُ فِي الصَّبَاحِ". */
+  titleArabic?: string;
+  /** A short German explanation below the expressions. */
+  note?: string;
+  items: PhraseItem[];
+};
+
+// ---------------------------------------------------------------------------
+// "letter-find": read a dialogue and underline every occurrence of one letter.
+
+export type LetterFind = {
+  /** The letter as named in the book, e.g. "ا". */
+  letter: string;
+  /** German name, e.g. "Alif". */
+  name: string;
+  /** Characters that count as this letter, e.g. ا أ إ آ for the Alif. */
+  accepts: string[];
+  dialogue: Dialogue;
+  /** Further dialogues of the same exercise (e.g. both conversations of "مَسَاءُ الْخَيْر"). */
+  more?: Dialogue[];
+  /** "يكرر التمرين على باقي الحروف": optional further letters to look for once the book's letters are found. */
+  extra?: Array<{ letter: string; name: string; accepts: string[] }>;
+};
 
 // ---------------------------------------------------------------------------
 // "Fill the gap" (Schritt 5 "Ergänzen", 6 "Hören"): each item is the FULL
@@ -198,14 +418,20 @@ export type GapItem = {
   pattern?: string;
   /** Answer tiles of this item (default: the step's `choices`), e.g. in the review. */
   choices?: string[];
+  /** Gaps may be letters without a vowel sign: a Dehnungsbuchstabe (ا و ي) or an unvocalised word. */
+  bare?: boolean;
+  /** Answer tiles per gap (right to left), when the gaps need different tiles (e.g. a dictation). */
+  gapChoices?: string[][];
+  /** What /api/tts speaks when `arabic` is not vocalised (e.g. "Ordne die Buchstaben": تاج → تَاج). */
+  spoken?: string;
 };
 
 /** Narration clip names (in the step's audio folder) for answers and explanations. */
 export type GapsClips = {
   ok: string;
   hint: string;
-  /** Explanation of the right answer, by its vowel sign. */
-  reveal: { a: string; i: string; u: string; sukun: string };
+  /** Explanation of the right answer, by its vowel sign ("none": a letter without a sign, e.g. a Dehnungsbuchstabe). */
+  reveal: { a: string; i: string; u: string; sukun: string; none?: string };
 };
 
 export type GapsContent = {
@@ -223,6 +449,8 @@ export type GapsContent = {
   clips?: GapsClips;
   /** Captions (= recording texts) of the clips, by clip name (default: the Alif lesson's GAPS_TEXT). */
   texts?: Record<string, string>;
+  /** "Hör zu, sprich nach und schreib": after the word, the learner is asked to say it aloud (not evaluated). */
+  repeat?: boolean;
 };
 
 // ---------------------------------------------------------------------------
@@ -270,7 +498,7 @@ export type WritingLetterSet = {
 export type A1Lesson = {
   /** URL segment, e.g. "alif", "ba", "review". */
   slug: string;
-  kind: "letter" | "review" | "phrase";
+  kind: "letter" | "review" | "phrase" | "topic";
   /** As shown in the lesson's contents, e.g. "أ", "مراجعة", "صَبَاحُ الْخَيْر". */
   label: string;
   /** German name, e.g. "Alif", "Wiederholung", "Guten Morgen". */

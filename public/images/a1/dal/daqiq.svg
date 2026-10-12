@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Mehl">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fffbe8"/><stop offset="1" stop-color="#ffe7a3"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#fff2c2"/><circle cx="340" cy="236" r="50" fill="#fff2c2"/>
+  <ellipse cx="200" cy="260" rx="100" ry="10" fill="#000" opacity="0.12"/>
+<rect x="140" y="70" width="120" height="30" rx="12" fill="#d8d2c6"/><rect x="132" y="92" width="136" height="16" rx="8" fill="#bdb5a6"/>
+  <path d="M138 108 L262 108 C272 108 278 116 278 126 L278 236 C278 248 270 256 258 256 L142 256 C130 256 122 248 122 236 L122 126 C122 116 128 108 138 108 Z" fill="#f4efe6" stroke="#d8cfbf" stroke-width="3"/>
+  <rect x="140" y="150" width="120" height="58" rx="10" fill="#fff" stroke="#e0c98a" stroke-width="3"/>
+  <g stroke="#c9a227" stroke-width="5" stroke-linecap="round" fill="none"><path d="M200 196 L200 160"/><path d="M200 172 L188 162"/><path d="M200 172 L212 162"/><path d="M200 184 L188 174"/><path d="M200 184 L212 174"/></g>
+  <path d="M300 240 C306 220 340 220 346 240 Z" fill="#fbf8f2"/><path d="M60 246 C64 232 90 232 94 246 Z" fill="#fbf8f2"/>
+</svg>

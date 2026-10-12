@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Dina">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff0f3"/><stop offset="1" stop-color="#ffd0dc"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#ffe2e9"/><circle cx="340" cy="236" r="50" fill="#ffe2e9"/>
+<path d="M110 300 C116 236 152 214 200 214 C248 214 284 236 290 300 Z" fill="#5b6b7f"/>
+  <rect x="186" y="186" width="28" height="34" fill="#efc49d"/>
+  <path d="M146 150 C140 74 170 70 200 70 C230 70 260 74 254 150 Z" fill="#3b2416"/>
+  <ellipse cx="200" cy="140" rx="52" ry="54.6" fill="#efc49d"/>
+  <circle cx="181.8" cy="140" r="5.7" fill="#2f2a26"/><circle cx="218.2" cy="140" r="5.7" fill="#2f2a26"/>
+  <circle cx="168.8" cy="155.6" r="6.2" fill="#ff9d9d" opacity=".6"/><circle cx="231.2" cy="155.6" r="6.2" fill="#ff9d9d" opacity=".6"/>
+  <path d="M184.4 158.2 Q200 171.2 215.6 158.2" stroke="#8a3b2b" stroke-width="4.2" fill="none" stroke-linecap="round"/>
+  <path d="M148 128 C150 82 250 82 252 128 C236 104 164 104 148 128 Z" fill="#3b2416"/><path d="M150 112 C170 86 230 86 250 112" stroke="#ff6f91" stroke-width="9" fill="none" stroke-linecap="round"/>
+</svg>

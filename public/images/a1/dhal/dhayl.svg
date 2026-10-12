@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Schwanz">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#f0fbec"/><stop offset="1" stop-color="#c6e8b9"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#e1f4d9"/><circle cx="340" cy="236" r="50" fill="#e1f4d9"/>
+<path d="M0 250 C120 240 280 240 400 250 L400 300 L0 300 Z" fill="#9fd27f"/>
+  <g fill="#8b4513"><rect x="140" y="160" width="16" height="86" rx="6"/><rect x="166" y="164" width="16" height="82" rx="6"/><rect x="246" y="164" width="16" height="82" rx="6"/><rect x="270" y="160" width="16" height="86" rx="6"/></g>
+  <g fill="#3b2416"><rect x="138" y="240" width="20" height="10" rx="3"/><rect x="164" y="240" width="20" height="10" rx="3"/><rect x="244" y="240" width="20" height="10" rx="3"/><rect x="268" y="240" width="20" height="10" rx="3"/></g>
+  <ellipse cx="214" cy="150" rx="86" ry="42" fill="#a0522d"/>
+  <path d="M272 130 C284 100 296 76 312 66 L340 80 C330 96 316 112 300 150 Z" fill="#a0522d"/>
+  <path d="M306 60 C320 52 346 58 356 76 C360 86 354 94 344 92 L326 88 Z" fill="#a0522d"/>
+  <path d="M310 56 L314 40 L322 54 Z" fill="#8b4513"/><circle cx="330" cy="70" r="3.5" fill="#2f2a26"/>
+  <path d="M300 62 C290 80 282 100 276 124" stroke="#3b2416" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <path d="M132 134 C104 138 92 170 96 206 C98 226 104 240 112 246 C110 222 114 196 122 176 C126 164 132 152 140 146 Z" fill="#3b2416"/>
+  <path d="M120 150 C104 176 102 206 108 232" stroke="#6b4226" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M40 120 L90 168" stroke="#e53950" stroke-width="6" stroke-linecap="round"/><path d="M90 168 L68 162 M90 168 L84 146" stroke="#e53950" stroke-width="6" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Farbe">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#f6f0ff"/><stop offset="1" stop-color="#dccbfb"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#ece2fd"/><circle cx="340" cy="236" r="50" fill="#ece2fd"/>
+  <ellipse cx="200" cy="258" rx="120" ry="10" fill="#000" opacity="0.12"/>
+<ellipse cx="190" cy="96" rx="76" ry="16" fill="#9aa5b1"/>
+  <path d="M114 96 L114 220 C114 236 266 236 266 220 L266 96 Z" fill="#cfd8dc"/>
+  <path d="M114 96 C114 112 266 112 266 96 C266 112 250 140 240 120 C232 150 216 150 214 124 C206 144 190 146 188 120 C176 140 160 140 158 118 C146 136 128 130 114 96 Z" fill="#3fa7d6"/>
+  <rect x="134" y="150" width="112" height="50" rx="8" fill="#fff"/><rect x="146" y="164" width="88" height="8" rx="4" fill="#3fa7d6"/><rect x="146" y="180" width="60" height="8" rx="4" fill="#9aa5b1"/>
+  <rect x="240" y="38" width="16" height="74" rx="6" fill="#8a5a2b" transform="rotate(30 248 75)"/>
+  <rect x="262" y="96" width="34" height="26" rx="4" fill="#5d6d7e" transform="rotate(30 279 109)"/>
+  <rect x="62" y="226" width="96" height="30" rx="12" fill="#e74c3c"/><rect x="152" y="232" width="20" height="18" rx="4" fill="#2f2a26"/>
+  <rect x="290" y="210" width="60" height="44" rx="8" fill="#f5b041"/><rect x="298" y="200" width="44" height="14" rx="4" fill="#7e5109"/>
+</svg>

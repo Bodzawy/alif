@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { CheckCircle2, Pause, Play, RotateCcw, Volume2, VolumeX } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { MixedText } from "@/components/ui/mixed-text";
 import type { Dialogue } from "@/data/types";
 import { sleep } from "@/lib/audio/narrate";
 import { createNarrator, readMuted, type Narrator } from "@/lib/audio/narration";
@@ -170,7 +171,9 @@ export function DialogueListen({ dialogue, progressKey }: { dialogue: Dialogue; 
 
       {dialogue.question && allHeard && (
         <section className="mt-6 animate-fade-in rounded-3xl border bg-card p-5 shadow-card sm:p-6" aria-label="Frage" data-testid="dialogue-question">
-          <p className="text-lg font-semibold">{dialogue.question.prompt}</p>
+          <p className="text-lg font-semibold">
+            <MixedText text={dialogue.question.prompt} />
+          </p>
           <ul className="mt-4 flex flex-col gap-2">
             {dialogue.question.options.map((option, i) => {
               const chosen = answer === i;

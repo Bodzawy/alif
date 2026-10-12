@@ -8,7 +8,8 @@
 import { hamzaIndex, hasHand, splitTiles } from "./hamza-alif";
 import { joins } from "./letter-form";
 
-export type GapVowel = "a" | "i" | "u" | "sukun";
+/** "none": a gap letter without a vowel sign – a Dehnungsbuchstabe (ا و ي) or an unvocalised word. */
+export type GapVowel = "a" | "i" | "u" | "sukun" | "none";
 
 const VOWEL_MARK: Record<string, GapVowel> = {
   "\u064E": "a", // fatha
@@ -88,10 +89,16 @@ export type GapTask = {
   pieces: GapPiece[];
 };
 
-function vowelOf(tile: string, word: string): GapVowel {
+/**
+ * The vowel sign of a gap tile. A gap without one is an error (the book asks
+ * for the letter WITH its sign) unless the item allows `bare` gaps: a
+ * Dehnungsbuchstabe (ا و ي) or an unvocalised word – then "none".
+ */
+function vowelOf(tile: string, word: string, bare: boolean): GapVowel {
   const mark = Array.from(tile).find((char) => VOWEL_MARK[char]);
-  if (!mark) throw new Error(`The gap "${tile}" of "${word}" has no vowel sign`);
-  return VOWEL_MARK[mark]!;
+  if (mark) return VOWEL_MARK[mark]!;
+  if (bare) return "none";
+  throw new Error(`The gap "${tile}" of "${word}" has no vowel sign`);
 }
 
 /**
@@ -99,13 +106,13 @@ function vowelOf(tile: string, word: string): GapVowel {
  * for exactly one tile (the answer), every other tile of the pattern must be
  * the word's tile at that place. Throws when they do not fit.
  */
-export function alignPattern(word: string, pattern: string): GapSlot[] {
+export function alignPattern(word: string, pattern: string, bare = false): GapSlot[] {
   const tiles = splitTiles(word);
   const parts = splitTiles(pattern);
   if (parts.length !== tiles.length) throw new Error(`Pattern "${pattern}" does not fit "${word}" (${parts.length} ≠ ${tiles.length} tiles)`);
   const gaps: GapSlot[] = [];
   parts.forEach((part, i) => {
-    if (part === "_") gaps.push({ index: i, answer: tiles[i]!, vowel: vowelOf(tiles[i]!, word) });
+    if (part === "_") gaps.push({ index: i, answer: tiles[i]!, vowel: vowelOf(tiles[i]!, word, bare) });
     else if (part !== tiles[i]) throw new Error(`Pattern "${pattern}" does not fit "${word}" at tile ${i}: "${part}" ≠ "${tiles[i]}"`);
   });
   if (gaps.length === 0) throw new Error(`Pattern "${pattern}" has no gap`);
@@ -144,10 +151,10 @@ export function patternPieces(tiles: readonly string[], gaps: readonly GapSlot[]
 }
 
 /** A gap item as the step shows it: by its pattern, or (Alif) by its Hamza-Alif. */
-export function gapTask(item: { arabic: string; pattern?: string }): GapTask {
+export function gapTask(item: { arabic: string; pattern?: string; bare?: boolean }): GapTask {
   if (item.pattern) {
     const tiles = splitTiles(item.arabic);
-    const gaps = alignPattern(item.arabic, item.pattern);
+    const gaps = alignPattern(item.arabic, item.pattern, item.bare);
     return { tiles, gaps, pieces: patternPieces(tiles, gaps) };
   }
   const gap = gapWord(item.arabic);

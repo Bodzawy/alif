@@ -17,9 +17,9 @@ import { sharedGapsContent } from "./letter-lesson";
 const IMG = "/images/a1/sabah-al-khayr";
 const GREETING = "صَبَاحُ الْخَيْر";
 
-type LineSpec = [id: string, speaker: string, arabic: string, target: string, transliteration: string, german: string, literal?: string];
+export type LineSpec = [id: string, speaker: string, arabic: string, target: string, transliteration: string, german: string, literal?: string];
 
-const lines = (specs: LineSpec[]): DialogueLine[] =>
+export const lines = (specs: LineSpec[]): DialogueLine[] =>
   specs.map(([id, speaker, arabic, target, transliteration, german, literal]) => ({
     id,
     speaker,

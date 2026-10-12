@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Nazik">
+  <defs><clipPath id="c"><circle cx="100" cy="100" r="100"/></clipPath></defs><g clip-path="url(#c)">
+<circle cx="100" cy="100" r="100" fill="#fff0e0"/>
+  <path d="M28 200 C32 160 62 146 100 146 C138 146 168 160 172 200 Z" fill="#8d6e63"/>
+  <path d="M46 170 C40 110 52 46 100 44 C148 46 160 110 154 170 C140 160 130 158 100 158 C70 158 60 160 46 170 Z" fill="#f0e6d8"/>
+  <ellipse cx="100" cy="102" rx="34" ry="40" fill="#efc49d"/>
+  <path d="M64 94 C64 58 136 58 136 94 C128 72 72 72 64 94 Z" fill="#f0e6d8"/>
+  <g fill="#2f2a26"><circle cx="86" cy="100" r="4.5"/><circle cx="114" cy="100" r="4.5"/></g>
+  <circle cx="76" cy="114" r="5" fill="#ff9d9d" opacity=".6"/><circle cx="124" cy="114" r="5" fill="#ff9d9d" opacity=".6"/>
+  <path d="M88 122 Q100 132 112 122" stroke="#8a3b2b" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <path d="M150 160 L118 200" stroke="#3e2723" stroke-width="6"/><rect x="132" y="176" width="40" height="30" rx="6" fill="#3e2723"/>
+  </g>
+</svg>
