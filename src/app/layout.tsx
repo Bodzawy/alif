@@ -5,6 +5,7 @@ import "@fontsource/noto-naskh-arabic/700.css";
 import "./globals.css";
 
 import { SiteFooter } from "@/components/ui/site-footer";
+import { HideOnHome } from "@/components/ui/hide-on-home";
 import { SiteHeader } from "@/components/ui/site-header";
 
 export const metadata: Metadata = {
@@ -25,7 +26,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="de">
       <body className="flex min-h-dvh flex-col">
-        <SiteHeader />
+        <HideOnHome>
+          <SiteHeader />
+        </HideOnHome>
         <main className="flex-1">{children}</main>
         <SiteFooter />
       </body>

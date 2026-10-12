@@ -17,6 +17,8 @@ const config: Config = {
         destructive: { DEFAULT: "hsl(var(--destructive))", foreground: "hsl(var(--destructive-foreground))", soft: "hsl(var(--destructive-soft))" },
         muted: { DEFAULT: "hsl(var(--muted))", foreground: "hsl(var(--muted-foreground))" },
         card: { DEFAULT: "hsl(var(--card))", foreground: "hsl(var(--card-foreground))" },
+        // Homepage identity (src/components/home): emerald, gold, navy on cream.
+        brand: { emerald: "#0e5a47", "emerald-dark": "#0a4436", gold: "#c39a45", "gold-soft": "#ead8ad", navy: "#14213d", cream: "#fbf6ec", ivory: "#fffdf8" },
       },
       borderRadius: { xl: "1rem", "2xl": "1.25rem", "3xl": "1.75rem" },
       fontFamily: {
