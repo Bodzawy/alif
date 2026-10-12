@@ -18,12 +18,12 @@ export const HOME_NAV = [
 export function HomeLogo({ className }: { className?: string }) {
   return (
     <Link href="/" className={cn("flex items-center gap-3 rounded-2xl focus-ring", className)} aria-label="Alif – Startseite" data-testid="home-logo">
-      <span aria-hidden className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-emerald pb-1 font-arabic text-3xl font-bold leading-none text-white shadow-[0_6px_16px_-6px_rgb(14_90_71/0.6)] sm:h-14 sm:w-14 sm:text-4xl">
+      <span aria-hidden className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand-emerald pb-1 font-arabic text-3xl font-bold leading-none text-white shadow-[0_6px_16px_-6px_rgb(14_90_71/0.6)] sm:h-12 sm:w-12 sm:text-4xl">
         أ
       </span>
       <span className="leading-tight">
-        <span className="block text-2xl font-bold tracking-tight text-brand-navy sm:text-[1.75rem]">Alif</span>
-        <span className="block text-sm text-brand-navy/70 sm:text-[0.95rem]">Arabisch lernen. Für jedes Alter.</span>
+        <span className="block text-xl font-bold tracking-tight text-brand-navy sm:text-[1.55rem]">Alif</span>
+        <span className="block text-xs text-brand-navy/70 sm:text-[0.82rem]">Arabisch lernen. Für jedes Alter.</span>
       </span>
     </Link>
   );
@@ -70,7 +70,7 @@ function LoginInfo() {
 export function HomeHeader() {
   return (
     <header className="relative z-30" data-testid="home-header">
-      <div className="mx-auto flex max-w-[92rem] items-center justify-between gap-4 px-4 py-5 sm:px-8 lg:px-12">
+      <div className="mx-auto flex max-w-[92rem] items-center justify-between gap-4 px-4 py-4 sm:px-8 lg:px-12">
         <HomeLogo />
 
         <nav aria-label="Hauptnavigation" className="hidden items-center gap-8 lg:flex">

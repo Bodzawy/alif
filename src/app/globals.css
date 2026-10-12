@@ -65,6 +65,44 @@
   }
 }
 
+/* Keep the landing screen close to the compact editorial layout in the
+   reference while letting the longer explanatory sections follow below. */
+.home-hero {
+  min-height: 31rem;
+}
+
+.home-hero-art {
+  width: min(70vw, 66rem);
+  object-fit: cover;
+  object-position: center right;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 34%);
+  mask-image: linear-gradient(90deg, transparent 0%, black 34%);
+}
+
+@media (min-width: 1024px) {
+  .home-hero-inner > div:first-child {
+    max-width: 35rem;
+  }
+}
+
+.home-levels-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.home-learning-path li > a,
+.home-learning-path li > div {
+  min-height: 12rem;
+}
+
+@media (max-width: 1199px) {
+  .home-levels-grid {
+    grid-template-columns: repeat(7, minmax(10rem, 1fr));
+    overflow-x: auto;
+    padding-bottom: 0.6rem;
+  }
+}
+
 @keyframes record-progress {
   from { transform: scaleX(0); }
   to { transform: scaleX(1); }

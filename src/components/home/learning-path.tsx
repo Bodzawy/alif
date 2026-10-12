@@ -16,15 +16,15 @@ export type LearningLevel = {
   tone: { card: string; badge: string; footer: string };
 };
 
-export function LearningPath({ levels }: { levels: LearningLevel[] }) {
+export function LearningPath({ levels, standalone = false }: { levels: LearningLevel[]; standalone?: boolean }) {
   return (
-    <section id="lernweg" aria-labelledby="lernweg-heading" className="relative z-20 mx-auto -mt-16 max-w-[92rem] scroll-mt-6 px-3 sm:-mt-20 sm:px-6 lg:-mt-28">
-      <div className="rounded-[2rem] border border-white/70 bg-brand-ivory/95 p-4 shadow-[0_24px_60px_-24px_rgb(20_33_61/0.25)] backdrop-blur sm:p-7 lg:p-8">
-        <h2 id="lernweg-heading" className="px-2 text-[1.7rem] font-bold tracking-tight text-brand-navy sm:text-3xl">
+    <section id="lernweg" aria-labelledby="lernweg-heading" className={cn("relative z-20 mx-auto max-w-[92rem] scroll-mt-6 home-learning-path", standalone ? "px-4 py-12 sm:px-8 lg:px-12" : "-mt-16 px-3 sm:-mt-20 sm:px-6 lg:-mt-24")}>
+      <div className="rounded-[2rem] border border-white/70 bg-brand-ivory/95 p-4 shadow-[0_24px_60px_-24px_rgb(20_33_61/0.15)] backdrop-blur sm:p-7 lg:p-8">
+        <h2 id="lernweg-heading" className="px-2 text-[1.5rem] font-bold tracking-tight text-brand-navy sm:text-2xl">
           Dein Lernweg
         </h2>
-        <p className="mt-1 px-2 text-brand-navy/70 sm:text-lg">Von den ersten Buchstaben bis zur sicheren Kommunikation.</p>
-        <ol className="mt-6 grid grid-cols-1 gap-3 min-[460px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-7 2xl:gap-3.5" aria-label="Stufen">
+        <p className="mt-0.5 px-2 text-sm text-brand-navy/70 sm:text-base">Von den ersten Buchstaben bis zur sicheren Kommunikation.</p>
+        <ol className="home-levels-grid mt-5 gap-3 2xl:gap-3.5" aria-label="Stufen">
           {levels.map((level) => (
             <li key={level.code} className="flex">
               <LevelCard level={level} />
@@ -41,7 +41,7 @@ function LevelCard({ level }: { level: LearningLevel }) {
   const body = (
     <>
       <span className="flex items-start justify-between gap-2">
-        <span className={cn("flex h-[3.25rem] w-[3.25rem] items-center justify-center rounded-full text-xl font-bold text-white shadow-sm", level.tone.badge)} aria-hidden>
+        <span className={cn("flex h-[2.65rem] w-[2.65rem] items-center justify-center rounded-full text-lg font-bold text-white shadow-sm", level.tone.badge)} aria-hidden>
           {level.code}
         </span>
         {!available && (
@@ -50,16 +50,16 @@ function LevelCard({ level }: { level: LearningLevel }) {
           </span>
         )}
       </span>
-      <h3 className="mt-5 text-lg font-bold leading-snug text-brand-navy">
+      <h3 className="mt-3 text-[0.98rem] font-bold leading-snug text-brand-navy">
         <span className="sr-only">{level.code}: </span>
         {level.title}
       </h3>
-      <p className="mt-2 text-[0.92rem] leading-relaxed text-brand-navy/70">{level.description}</p>
-      <div className="mt-auto flex items-center justify-between gap-2 pt-6">
-        <span className={cn("whitespace-nowrap text-[0.92rem] font-medium", level.tone.footer)}>{level.footer}</span>
+      <p className="mt-1.5 text-[0.78rem] leading-[1.45] text-brand-navy/70">{level.description}</p>
+      <div className="mt-auto flex items-center justify-between gap-2 pt-5">
+        <span className={cn("whitespace-nowrap text-[0.78rem] font-medium", level.tone.footer)}>{level.footer}</span>
         {available ? (
-          <span aria-hidden className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-brand-navy shadow-sm transition group-hover:translate-x-0.5 group-hover:bg-brand-emerald group-hover:text-white">
-            <ChevronRight className="h-5 w-5" />
+          <span aria-hidden className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white text-brand-navy shadow-sm transition group-hover:translate-x-0.5 group-hover:bg-brand-emerald group-hover:text-white">
+            <ChevronRight className="h-4 w-4" />
           </span>
         ) : (
           <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/60 text-brand-navy/40" title="Bald verfügbar">
@@ -70,7 +70,7 @@ function LevelCard({ level }: { level: LearningLevel }) {
       </div>
     </>
   );
-  const card = cn("group flex w-full flex-col rounded-3xl p-5 transition", level.tone.card);
+  const card = cn("group flex w-full flex-col rounded-[1.6rem] p-4 transition min-[1500px]:min-h-[12rem]", level.tone.card);
   return available ? (
     <Link href={level.href!} className={cn(card, "hover:-translate-y-1 hover:shadow-[0_16px_30px_-16px_rgb(20_33_61/0.35)] focus-ring motion-reduce:transition-none motion-reduce:hover:translate-y-0")} data-testid={`level-card-${level.code.toLowerCase()}`}>
       {body}

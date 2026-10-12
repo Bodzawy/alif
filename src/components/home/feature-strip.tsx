@@ -9,7 +9,7 @@ const FEATURES = [
 
 export function FeatureStrip() {
   return (
-    <section aria-label="Was Alif bietet" className="mx-auto max-w-[92rem] px-4 py-10 sm:px-8 lg:px-12">
+    <section aria-label="Was Alif bietet" className="mx-auto max-w-[92rem] px-4 py-8 sm:px-8 lg:px-12 home-feature-strip">
       <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-0 lg:divide-x lg:divide-brand-navy/10" data-testid="feature-strip">
         {FEATURES.map(({ icon: Icon, title, text }) => (
           <li key={title} className="flex items-center gap-4 lg:justify-center lg:px-6">
