@@ -1,4 +1,5 @@
 import { GERMAN_CUES } from "@/lib/pronunciation/cues";
+import { longVowelSound } from "@/lib/tts/long-vowel";
 import { endsInTanwin, withCutTail } from "@/lib/tts/tanwin-cut";
 
 // Same voice, prosody and output format as the original /api/tts.
@@ -36,6 +37,13 @@ function escapeXml(value: string) {
     .replaceAll("'", "&apos;");
 }
 
+/** What Azure reads: a letter with a short vowel long (long-vowel.ts), a word with Tanwin with the cut tail (tanwin-cut.ts). */
+function speechText(text: string): string {
+  const long = longVowelSound(text);
+  if (long) return escapeXml(long);
+  return endsInTanwin(text) ? withCutTail(escapeXml(text)) : escapeXml(text);
+}
+
 export function buildSsml(text: string, voice?: TtsVoiceKey): string {
   const german = GERMAN_TEXTS.has(text);
   return `
@@ -44,7 +52,7 @@ export function buildSsml(text: string, voice?: TtsVoiceKey): string {
              xml:lang="${german ? "de-DE" : "ar-SA"}">
         <voice name="${german ? TTS_VOICE_GERMAN : voice ? TTS_DIALOGUE_VOICES[voice] : TTS_VOICE}">
           <prosody rate="-8%">
-            ${endsInTanwin(text) ? withCutTail(escapeXml(text)) : escapeXml(text)}
+            ${speechText(text)}
           </prosody>
         </voice>
       </speak>
