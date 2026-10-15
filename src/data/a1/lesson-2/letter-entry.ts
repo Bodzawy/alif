@@ -88,6 +88,12 @@ const LOOK_ALIKE: string[][] = [
   ["ب", "ت", "ث"],
   ["ج", "ح", "خ"],
   ["د", "ذ"],
+  ["ر", "ز"],
+  ["س", "ش"],
+  ["ص", "ض"],
+  ["ط", "ظ"],
+  ["ع", "غ"],
+  ["ف", "ق"],
 ];
 
 /** The Dehnungsbuchstaben (and a plain letter without sign). */

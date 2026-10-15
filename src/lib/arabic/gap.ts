@@ -16,6 +16,10 @@ const VOWEL_MARK: Record<string, GapVowel> = {
   "\u0650": "i", // kasra
   "\u064F": "u", // damma
   "\u0652": "sukun",
+  // Tanwin (-an, -in, -un): heard as its vowel, e.g. the ذً of شَذًا.
+  "\u064B": "a",
+  "\u064D": "i",
+  "\u064C": "u",
 };
 
 export type GapWord = {

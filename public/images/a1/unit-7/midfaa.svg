@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Ein Heizgerät">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff0f3"/><stop offset="1" stop-color="#ffd0dc"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#ffe2e9"/><circle cx="340" cy="236" r="50" fill="#ffe2e9"/>
+<rect x="100" y="110" width="180" height="120" rx="10" fill="#d5dbdb"/><rect x="115" y="125" width="12" height="90" rx="6" fill="#e74c3c"/><rect x="137" y="125" width="12" height="90" rx="6" fill="#e74c3c"/><rect x="159" y="125" width="12" height="90" rx="6" fill="#e74c3c"/><rect x="181" y="125" width="12" height="90" rx="6" fill="#e74c3c"/><rect x="203" y="125" width="12" height="90" rx="6" fill="#e74c3c"/><rect x="225" y="125" width="12" height="90" rx="6" fill="#e74c3c"/><rect x="247" y="125" width="12" height="90" rx="6" fill="#e74c3c"/><rect x="290" y="180" width="50" height="50" rx="8" fill="#5d6d7e"/>
+</svg>

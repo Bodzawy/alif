@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Chips">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fffbe8"/><stop offset="1" stop-color="#ffe7a3"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#fff2c2"/><circle cx="340" cy="236" r="50" fill="#fff2c2"/>
+  <ellipse cx="200" cy="272" rx="100" ry="10" fill="#000" opacity="0.12"/>
+<path d="M120 50 L280 50 L292 70 L284 250 L296 268 L104 268 L116 250 L108 70 Z" fill="#f39c12"/>
+  <path d="M120 50 L280 50 L292 70 L108 70 Z" fill="#e67e22"/><path d="M104 268 L296 268 L284 250 L116 250 Z" fill="#e67e22"/>
+  <text x="200" y="120" font-family="Arial, sans-serif" font-size="34" font-weight="bold" text-anchor="middle" fill="#c0392b">CHIPS</text>
+  <g fill="#ffe082" stroke="#d4a017" stroke-width="2"><ellipse cx="170" cy="190" rx="34" ry="22" transform="rotate(-15 170 190)"/><ellipse cx="232" cy="200" rx="34" ry="22" transform="rotate(12 232 200)"/><ellipse cx="200" cy="168" rx="30" ry="18"/></g>
+</svg>

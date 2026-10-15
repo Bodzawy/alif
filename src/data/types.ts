@@ -161,6 +161,11 @@ export type A1Step =
       groups: { sound: SoundItem; words: A1Word[] }[];
     })
   | (A1StepBase & {
+      kind: "words";
+      /** Picture words to hear and say, in book order (no sound row), e.g. the words with Shadda. */
+      groups: WordGroup[];
+    })
+  | (A1StepBase & {
       kind: "forms";
       forms: FormsContent;
     })
@@ -205,6 +210,23 @@ export type A1Step =
       pick: WordPick;
     })
   | (A1StepBase & {
+      kind: "spell";
+      /** "اكتبها بحروف منفصلة": listen, read and write each word as separate letters. */
+      words: SpellWord[];
+    })
+  | (A1StepBase & {
+      kind: "quiz";
+      items: QuizItem[];
+    })
+  | (A1StepBase & {
+      kind: "cloze";
+      items: ClozeItem[];
+    })
+  | (A1StepBase & {
+      kind: "order";
+      order: OrderContent;
+    })
+  | (A1StepBase & {
       kind: "table";
       tables: TableBlock[];
       /** A short check over the tables (German questions, Arabic answers); the step is done when every answer is right. */
@@ -240,8 +262,8 @@ export type LetterPositions = {
   /** The book's note (e.g. "يُلَاحَظُ الْحَرْفُ لَا يَقْبَلُ الِاتِّصَالَ إِلَّا مِنَ الْيَمِينِ") and its German meaning. */
   rule?: { arabic: string; german: string };
   items: PositionItem[];
-  /** "النطق مع السكون": the letter with sukun and the book's word. */
-  sukun: { glyph: string; word: string; german: string; occurrence?: number };
+  /** "النطق مع السكون": the letter with sukun and the book's word (and further words, when the book gives more). */
+  sukun: { glyph: string; word: string; german: string; occurrence?: number; more?: Array<{ word: string; german: string; occurrence?: number }> };
 };
 
 // ---------------------------------------------------------------------------
@@ -291,6 +313,8 @@ export type MatchPrompt = {
   arabic: string;
   /** The right option. */
   answer: string;
+  /** Further options that are just as right (e.g. two identical words in the book's column). */
+  accept?: string[];
   /** The book's model answer: shown solved from the start. */
   example?: boolean;
   /** Shown once matched, e.g. the joined word "تُوت" (with its German meaning). */
@@ -424,6 +448,8 @@ export type GapItem = {
   gapChoices?: string[][];
   /** What /api/tts speaks when `arabic` is not vocalised (e.g. "Ordne die Buchstaben": تاج → تَاج). */
   spoken?: string;
+  /** Arabic shown above the word, as printed in the book (e.g. the letters "س ب ب و ر ة" to be written as one word). */
+  hint?: string;
 };
 
 /** Narration clip names (in the step's audio folder) for answers and explanations. */
@@ -538,11 +564,28 @@ export type DialogueLine = {
   exercise: PronunciationExercise;
 };
 
+/**
+ * A role of the role-play that is spoken by several speakers, e.g. "the
+ * people who answer" in a conversation where one person asks several groups.
+ * Without roles, every speaker is a role of its own.
+ */
+export type DialogueRole = {
+  id: string;
+  /** German, e.g. "Die Antwortenden". */
+  name: string;
+  /** DialogueSpeaker ids. */
+  speakers: string[];
+  avatar: { src: string; alt: string };
+};
+
 export type Dialogue = {
   id: string;
   /** One German sentence above the conversation, e.g. "Zwei Männer begrüßen sich." */
   intro: string;
-  speakers: [DialogueSpeaker, DialogueSpeaker];
+  /** Two or more speakers; the first one is shown on the right. */
+  speakers: [DialogueSpeaker, DialogueSpeaker, ...DialogueSpeaker[]];
+  /** Role-play roles (default: one per speaker). */
+  roles?: DialogueRole[];
   lines: DialogueLine[];
   /** A comprehension question after listening (German). */
   question?: { prompt: string; options: string[]; answer: number };
@@ -553,6 +596,8 @@ export type A1Unit = {
   /** URL segment, e.g. "lesson-1". */
   slug: string;
   number: number;
+  /** The book's own label when it is not "الدرس …", e.g. "الوحدة الثانية – تقديم (١)". */
+  bookLabel?: string;
   /** Arabic lesson title, e.g. "صَبَاحُ الْخَيْر". */
   title: string;
   /** German translation of the title. */
@@ -568,3 +613,60 @@ export type A1LessonLetter = {
   /** German name, e.g. "Ba". */
   name: string;
 };
+
+// ---------------------------------------------------------------------------
+// "spell" (Unit 2 · تدريب ١٠): a word as separate letters, e.g. جَرَس → ج – ر – س.
+
+export type SpellWord = {
+  id: string;
+  /** Vocalised as spoken and shown, e.g. "جَرَس". */
+  arabic: string;
+  german: string;
+};
+
+// ---------------------------------------------------------------------------
+// "quiz": a word to listen to (and read), with one or more questions about it.
+
+export type QuizItem = {
+  id: string;
+  /** Vocalised Arabic, spoken by "Anhören". */
+  arabic: string;
+  german?: string;
+  /** Show the word (false: listen only, e.g. "Hör zu und …"). */
+  show?: boolean;
+  /** What "Anhören" speaks when it differs from `arabic` (e.g. a phone number read digit by digit). */
+  spoken?: string;
+  /** A picture above the questions (e.g. a clock). */
+  image?: { src: string; alt: string };
+  /** Options may be pictures: an option starting with "/images/" is shown as an image. */
+  questions: Array<{ prompt: string; options: string[]; answer: number }>;
+};
+
+// ---------------------------------------------------------------------------
+// "cloze": lines of a short exchange with gaps to fill by choosing a tile.
+
+export type ClozePart = string | { options: string[]; /** Every option that is right (several when the book leaves the choice free, e.g. a name). */ accept: string[] };
+
+export type ClozeItem = {
+  id: string;
+  /** The book's picture of the situation (optional). */
+  image?: { src: string; alt: string };
+  /** German hint, e.g. "Ein Mann fragt drei Frauen." */
+  hint?: string;
+  /** The lines (speaker label "أ" / "ب"), each a sequence of text and gaps. */
+  lines: Array<{ label: string; parts: ClozePart[] }>;
+};
+
+// ---------------------------------------------------------------------------
+// "order": the book's "اقرأ ورتب الحوار" – lines printed out of order, to be
+// put in the order of the conversation.
+
+export type OrderContent = {
+  /** The lines as the book prints them (its numbering). */
+  items: Array<{ id: string; arabic: string; german: string; transliteration?: string }>;
+  /** Every right order (ids); several when the book allows more than one. */
+  solutions: string[][];
+};
+
+/** A group of picture words of the step "words" (optional heading as in the book). */
+export type WordGroup = { id: string; title?: string; titleArabic?: string; words: A1Word[] };

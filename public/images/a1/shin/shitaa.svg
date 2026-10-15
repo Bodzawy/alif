@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Winter (Regen)">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+<g fill="#90a4ae"><ellipse cx="150" cy="80" rx="70" ry="36"/><ellipse cx="230" cy="70" rx="80" ry="44"/><ellipse cx="290" cy="90" rx="56" ry="30"/></g>
+  <g fill="#78909c"><ellipse cx="200" cy="100" rx="120" ry="24"/></g>
+  <g stroke="#5dade2" stroke-width="4" stroke-linecap="round"><path d="M100 140 L90 170"/><path d="M130 160 L120 190"/><path d="M160 180 L150 210"/><path d="M190 140 L180 170"/><path d="M220 160 L210 190"/><path d="M250 180 L240 210"/><path d="M280 140 L270 170"/><path d="M310 160 L300 190"/></g>
+  <g><rect x="259.5" y="233.8" width="9.0" height="56.2" rx="3.0" fill="#34495e"/><rect x="271.5" y="233.8" width="9.0" height="56.2" rx="3.0" fill="#34495e"/>
+  <path d="M253.5 198.5 C253.5 191.0 286.5 191.0 286.5 198.5 L285.0 237.5 L255.0 237.5 Z" fill="#2c3e50"/>
+  <path d="M285.0 200.0 L289.5 233.8" stroke="#2c3e50" stroke-width="7.5" stroke-linecap="round"/><path d="M255.0 200.0 L250.5 233.8" stroke="#2c3e50" stroke-width="7.5" stroke-linecap="round"/>
+  <rect x="265.5" y="185.0" width="9.0" height="9.0" fill="#efc49d"/>
+  <ellipse cx="270" cy="176.0" rx="12.75" ry="13.8" fill="#efc49d"/>
+  <circle cx="265.4" cy="176.0" r="1.4" fill="#2f2a26"/><circle cx="274.6" cy="176.0" r="1.4" fill="#2f2a26"/>
+  <circle cx="262.4" cy="179.8" r="1.5" fill="#ff9d9d" opacity=".55"/><circle cx="277.6" cy="179.8" r="1.5" fill="#ff9d9d" opacity=".55"/>
+  <path d="M266.2 180.8 Q270 183.9 273.8 180.8" stroke="#8a3b2b" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M257.25 174.7 C257.25 158.8 282.75 158.8 282.75 174.7 C277.6 168.3 262.4 168.3 257.25 174.7 Z" fill="#3b2416"/></g>
+  <path d="M220 160 C230 130 310 130 320 160 Z" fill="#e74c3c"/><path d="M270 160 L270 196" stroke="#2c3e50" stroke-width="4"/>
+</svg>

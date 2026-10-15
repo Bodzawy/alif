@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Priester">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#f6f0ff"/><stop offset="1" stop-color="#dccbfb"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#ece2fd"/><circle cx="340" cy="236" r="50" fill="#ece2fd"/>
+<path d="M103.4 256.0 C108.0 187.0 154.0 170.9 200 170.9 C246.0 170.9 292.0 187.0 296.6 256.0 Z" fill="#1b1b1b"/>
+  <rect x="186.2" y="154.8" width="27.6" height="20.7" fill="#efc49d"/>
+  <ellipse cx="200" cy="118" rx="46" ry="49.7" fill="#efc49d"/>
+  <circle cx="183.4" cy="118" r="5.1" fill="#2f2a26"/><circle cx="216.6" cy="118" r="5.1" fill="#2f2a26"/>
+  <circle cx="172.4" cy="131.8" r="5.5" fill="#ff9d9d" opacity=".55"/><circle cx="227.6" cy="131.8" r="5.5" fill="#ff9d9d" opacity=".55"/>
+  <path d="M186.2 135.5 Q200 146.5 213.8 135.5" stroke="#8a3b2b" stroke-width="3.7" fill="none" stroke-linecap="round"/>
+  <path d="M158.6 124.9 C163.2 187.0 236.8 187.0 241.4 124.9 C223.0 159.4 177.0 159.4 158.6 124.9 Z" fill="#9e9e9e"/>
+  <path d="M150 92 C148 40 252 40 250 92 Z" fill="#1b1b1b"/><rect x="146" y="86" width="108" height="12" rx="4" fill="#1b1b1b"/>
+  <path d="M200 200 L200 260 M184 220 L216 220" stroke="#f1c40f" stroke-width="7" stroke-linecap="round"/>
+</svg>

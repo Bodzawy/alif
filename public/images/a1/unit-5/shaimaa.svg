@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Schaimaa">
+  <defs><clipPath id="c"><circle cx="100" cy="100" r="100"/></clipPath></defs><g clip-path="url(#c)"><circle cx="100" cy="100" r="100" fill="#fdedec"/>
+<path d="M37.0 186.0 C40.0 141.0 70.0 130.5 100 130.5 C130.0 130.5 160.0 141.0 163.0 186.0 Z" fill="#c0392b"/>
+  <rect x="91.0" y="120.0" width="18.0" height="13.5" fill="#efc49d"/>
+  <path d="M62.5 144.0 C58.0 51.0 142.0 51.0 137.5 144.0 L128.5 108.0 C128.5 72.0 71.5 72.0 71.5 108.0 Z" fill="#5b2c6f"/>
+  <ellipse cx="100" cy="96" rx="30" ry="32.4" fill="#efc49d"/>
+  <circle cx="89.2" cy="96" r="3.3" fill="#2f2a26"/><circle cx="110.8" cy="96" r="3.3" fill="#2f2a26"/>
+  <circle cx="82.0" cy="105.0" r="3.6" fill="#ff9d9d" opacity=".55"/><circle cx="118.0" cy="105.0" r="3.6" fill="#ff9d9d" opacity=".55"/>
+  <path d="M91.0 107.4 Q100 114.6 109.0 107.4" stroke="#8a3b2b" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  <path d="M68.5 100.5 C67.0 52.5 133.0 52.5 131.5 100.5 C125.5 79.5 74.5 79.5 68.5 100.5 Z" fill="#5b2c6f"/>
+  </g>
+</svg>

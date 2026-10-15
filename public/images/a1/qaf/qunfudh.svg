@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Igel">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fffbe8"/><stop offset="1" stop-color="#ffe7a3"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#fff2c2"/><circle cx="340" cy="236" r="50" fill="#fff2c2"/>
+<ellipse cx="200" cy="240" rx="120" ry="12" fill="#000" opacity=".12"/>
+  <path d="M110 170 L104 120 L122 168 Z" fill="#5d4037"/><path d="M126 170 L120 112 L138 168 Z" fill="#5d4037"/><path d="M142 170 L136 104 L154 168 Z" fill="#5d4037"/><path d="M158 152 L152 96 L170 150 Z" fill="#5d4037"/><path d="M174 152 L168 88 L186 150 Z" fill="#5d4037"/><path d="M190 152 L184 80 L202 150 Z" fill="#5d4037"/><path d="M206 152 L200 72 L218 150 Z" fill="#5d4037"/><path d="M222 152 L216 80 L234 150 Z" fill="#5d4037"/><path d="M238 152 L232 88 L250 150 Z" fill="#5d4037"/><path d="M254 152 L248 96 L266 150 Z" fill="#5d4037"/><path d="M270 170 L264 104 L282 168 Z" fill="#5d4037"/><path d="M286 170 L280 112 L298 168 Z" fill="#5d4037"/><path d="M302 170 L296 120 L314 168 Z" fill="#5d4037"/>
+  <path d="M100 230 C90 160 140 120 210 122 C270 124 310 170 300 230 Z" fill="#6d4c41"/>
+  <path d="M290 200 C310 196 336 204 344 220 C336 232 306 234 288 230 Z" fill="#d7b899"/><circle cx="344" cy="220" r="6" fill="#2f2a26"/><circle cx="310" cy="208" r="4" fill="#2f2a26"/>
+  <g fill="#d7b899"><rect x="140" y="226" width="14" height="16" rx="5"/><rect x="250" y="226" width="14" height="16" rx="5"/></g>
+</svg>

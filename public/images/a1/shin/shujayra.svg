@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Strauch, kleiner Baum">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#f0fbec"/><stop offset="1" stop-color="#c6e8b9"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#e1f4d9"/><circle cx="340" cy="236" r="50" fill="#e1f4d9"/>
+  <ellipse cx="200" cy="282" rx="50" ry="10" fill="#000" opacity="0.12"/>
+<path d="M160 250 L240 250 L230 280 L170 280 Z" fill="#8d6e63"/><ellipse cx="200" cy="252" rx="46" ry="8" fill="#5d4037"/>
+  <path d="M200 252 C198 200 204 140 200 70" stroke="#4e8a2f" stroke-width="6" fill="none"/>
+  <g fill="#66bb6a"><ellipse cx="172" cy="90" rx="24" ry="11" transform="rotate(25 172 90)"/><ellipse cx="228" cy="90" rx="24" ry="11" transform="rotate(-25 228 90)"/><ellipse cx="172" cy="130" rx="24" ry="11" transform="rotate(25 172 130)"/><ellipse cx="228" cy="130" rx="24" ry="11" transform="rotate(-25 228 130)"/><ellipse cx="172" cy="170" rx="24" ry="11" transform="rotate(25 172 170)"/><ellipse cx="228" cy="170" rx="24" ry="11" transform="rotate(-25 228 170)"/><ellipse cx="172" cy="210" rx="24" ry="11" transform="rotate(25 172 210)"/><ellipse cx="228" cy="210" rx="24" ry="11" transform="rotate(-25 228 210)"/></g>
+  <ellipse cx="200" cy="66" rx="12" ry="20" fill="#81c784"/>
+</svg>

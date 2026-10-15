@@ -1,3 +1,4 @@
+import { LETTER_NAME_WORDS } from "../support/a1-units";
 import { describe, expect, it } from "vitest";
 
 import { a1Words } from "../support/a1-words";
@@ -30,7 +31,8 @@ describe("lesson content", () => {
   });
 
   it("merges letter and word rules without throwing and has a word rule for every word", () => {
-    const words = [...LEVELS.flatMap((level) => level.lessons.flatMap((lesson) => lesson.vocabulary)), ...a1Words()];
+    // A word that is also a letter name (عَيْن) is evaluated by the letter's own rule.
+    const words = [...LEVELS.flatMap((level) => level.lessons.flatMap((lesson) => lesson.vocabulary)), ...a1Words()].filter((word) => !LETTER_NAME_WORDS.includes(word.exercise.target));
     // One rule per target: A1 · Ba's بَيْت and بَاب share the rule of A0's بيت and باب.
     expect(Object.keys(VOCABULARY_RULES)).toHaveLength(new Set(words.map((word) => word.exercise.target)).size);
     for (const word of words) {

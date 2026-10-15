@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Viertel">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#f6f0ff"/><stop offset="1" stop-color="#dccbfb"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#ece2fd"/><circle cx="340" cy="236" r="50" fill="#ece2fd"/>
+<circle cx="200" cy="150" r="96" fill="#fff" stroke="#7b61ff" stroke-width="6"/>
+  <path d="M200 150 L200 54 A96 96 0 0 1 296 150 Z" fill="#7b61ff"/>
+  <path d="M104 150 L296 150 M200 54 L200 246" stroke="#7b61ff" stroke-width="4"/>
+  <text x="330" y="80" font-family="Arial, sans-serif" font-size="40" font-weight="bold" fill="#5b3fd1">¼</text>
+</svg>

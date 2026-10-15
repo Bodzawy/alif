@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Ein Laptop">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+<rect x="110" y="60" width="180" height="120" rx="8" fill="#2c3e50"/><rect x="120" y="70" width="160" height="100" fill="#5dade2"/><path d="M80 190 L320 190 L300 230 L100 230 Z" fill="#bdc3c7"/>
+</svg>

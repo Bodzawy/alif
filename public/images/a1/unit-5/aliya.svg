@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Aliya">
+  <defs><clipPath id="c"><circle cx="100" cy="100" r="100"/></clipPath></defs><g clip-path="url(#c)"><circle cx="100" cy="100" r="100" fill="#fef9e7"/>
+<path d="M37.0 182.0 C40.0 137.0 70.0 126.5 100 126.5 C130.0 126.5 160.0 137.0 163.0 182.0 Z" fill="#16a085"/>
+  <rect x="91.0" y="116.0" width="18.0" height="13.5" fill="#efc49d"/>
+  <path d="M67.0 134.0 C61.0 50.0 139.0 50.0 133.0 134.0 L124.0 134.0 L124.0 86.0 C112.0 72.5 88.0 72.5 76.0 86.0 L76.0 134.0 Z" fill="#5a3825"/>
+  <ellipse cx="100" cy="92" rx="30" ry="32.4" fill="#efc49d"/>
+  <circle cx="89.2" cy="92" r="3.3" fill="#2f2a26"/><circle cx="110.8" cy="92" r="3.3" fill="#2f2a26"/>
+  <circle cx="82.0" cy="101.0" r="3.6" fill="#ff9d9d" opacity=".55"/><circle cx="118.0" cy="101.0" r="3.6" fill="#ff9d9d" opacity=".55"/>
+  <path d="M91.0 103.4 Q100 110.6 109.0 103.4" stroke="#8a3b2b" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  <path d="M69.4 95.0 C68.5 50.0 131.5 50.0 130.6 95.0 C121.0 78.5 94.0 69.5 69.4 95.0 Z" fill="#5a3825"/>
+  </g>
+</svg>

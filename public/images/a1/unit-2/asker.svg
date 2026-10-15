@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Der Fragende">
+  <defs><clipPath id="c"><circle cx="100" cy="100" r="100"/></clipPath></defs><g clip-path="url(#c)"><circle cx="100" cy="100" r="100" fill="#dcefff"/>
+<path d="M24.4 200.0 C28.0 146.0 64.0 133.4 100 133.4 C136.0 133.4 172.0 146.0 175.6 200.0 Z" fill="#263238"/>
+  <rect x="89.2" y="120.8" width="21.6" height="16.2" fill="#efc49d"/>
+  <ellipse cx="100" cy="92" rx="36" ry="38.9" fill="#efc49d"/>
+  <circle cx="87.0" cy="92" r="4.0" fill="#2f2a26"/><circle cx="113.0" cy="92" r="4.0" fill="#2f2a26"/>
+  <circle cx="78.4" cy="102.8" r="4.3" fill="#ff9d9d" opacity=".55"/><circle cx="121.6" cy="102.8" r="4.3" fill="#ff9d9d" opacity=".55"/>
+  <path d="M89.2 105.7 Q100 114.3 110.8 105.7" stroke="#8a3b2b" stroke-width="2.9" fill="none" stroke-linecap="round"/>
+  <circle cx="69.4" cy="79.4" r="11.5" fill="#1b1b1b"/><circle cx="78.4" cy="63.2" r="11.5" fill="#1b1b1b"/><circle cx="94.6" cy="56.0" r="11.5" fill="#1b1b1b"/><circle cx="110.8" cy="57.8" r="11.5" fill="#1b1b1b"/><circle cx="127.0" cy="66.8" r="11.5" fill="#1b1b1b"/><circle cx="132.4" cy="83.0" r="11.5" fill="#1b1b1b"/>
+  </g>
+</svg>

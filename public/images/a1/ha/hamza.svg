@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Das Zeichen Hamza">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#f6f0ff"/><stop offset="1" stop-color="#dccbfb"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#ece2fd"/><circle cx="340" cy="236" r="50" fill="#ece2fd"/>
+<text x="200" y="230" text-anchor="middle" font-family="'Noto Naskh Arabic','Amiri','Geeza Pro',serif" font-size="280" font-weight="bold" fill="#3d2a7a">ء</text>
+</svg>

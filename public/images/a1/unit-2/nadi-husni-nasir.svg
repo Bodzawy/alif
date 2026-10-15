@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Nadi, Husni und Nasir">
+  <defs><clipPath id="c"><circle cx="100" cy="100" r="100"/></clipPath></defs><g clip-path="url(#c)"><circle cx="100" cy="100" r="100" fill="#e8f5e9"/>
+<path d="M1.8 162.0 C4.0 129.0 26.0 121.3 48 121.3 C70.0 121.3 92.0 129.0 94.2 162.0 Z" fill="#ecf0f1"/>
+  <rect x="41.4" y="113.6" width="13.2" height="9.9" fill="#efc49d"/>
+  <ellipse cx="48" cy="96" rx="22" ry="23.8" fill="#efc49d"/>
+  <circle cx="40.1" cy="96" r="2.4" fill="#2f2a26"/><circle cx="55.9" cy="96" r="2.4" fill="#2f2a26"/>
+  <circle cx="34.8" cy="102.6" r="2.6" fill="#ff9d9d" opacity=".55"/><circle cx="61.2" cy="102.6" r="2.6" fill="#ff9d9d" opacity=".55"/>
+  <path d="M41.4 104.4 Q48 109.6 54.6 104.4" stroke="#8a3b2b" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <path d="M26 93.8 C26 66.3 70 66.3 70 93.8 C61.2 82.8 34.8 82.8 26 93.8 Z" fill="#2a1a10"/>
+  <path d="M53.8 162.0 C56.0 129.0 78.0 121.3 100 121.3 C122.0 121.3 144.0 129.0 146.2 162.0 Z" fill="#c0392b"/>
+  <rect x="93.4" y="113.6" width="13.2" height="9.9" fill="#e3ad84"/>
+  <ellipse cx="100" cy="96" rx="22" ry="23.8" fill="#e3ad84"/>
+  <circle cx="92.1" cy="96" r="2.4" fill="#2f2a26"/><circle cx="107.9" cy="96" r="2.4" fill="#2f2a26"/>
+  <circle cx="86.8" cy="102.6" r="2.6" fill="#ff9d9d" opacity=".55"/><circle cx="113.2" cy="102.6" r="2.6" fill="#ff9d9d" opacity=".55"/>
+  <path d="M93.4 104.4 Q100 109.6 106.6 104.4" stroke="#8a3b2b" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <path d="M78 93.8 C78 66.3 122 66.3 122 93.8 C113.2 82.8 86.8 82.8 78 93.8 Z" fill="#3b2416"/>
+  <path d="M105.8 162.0 C108.0 129.0 130.0 121.3 152 121.3 C174.0 121.3 196.0 129.0 198.2 162.0 Z" fill="#2c3e50"/>
+  <rect x="145.4" y="113.6" width="13.2" height="9.9" fill="#efc49d"/>
+  <ellipse cx="152" cy="96" rx="22" ry="23.8" fill="#efc49d"/>
+  <circle cx="144.1" cy="96" r="2.4" fill="#2f2a26"/><circle cx="159.9" cy="96" r="2.4" fill="#2f2a26"/>
+  <circle cx="138.8" cy="102.6" r="2.6" fill="#ff9d9d" opacity=".55"/><circle cx="165.2" cy="102.6" r="2.6" fill="#ff9d9d" opacity=".55"/>
+  <path d="M145.4 104.4 Q152 109.6 158.6 104.4" stroke="#8a3b2b" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <path d="M130 93.8 C130 66.3 174 66.3 174 93.8 C165.2 82.8 138.8 82.8 130 93.8 Z" fill="#1b1b1b"/>
+  <g fill="none" stroke="#2f2a26" stroke-width="1.5"><circle cx="144.1" cy="96" r="5.3"/><circle cx="159.9" cy="96" r="5.3"/><path d="M149.4 96 L154.6 96"/></g>
+  </g>
+</svg>

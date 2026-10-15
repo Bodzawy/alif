@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Ein Bett">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+  <ellipse cx="200" cy="268" rx="150" ry="10" fill="#000" opacity="0.12"/>
+<rect x="60" y="110" width="20" height="150" rx="6" fill="#a0703c"/><rect x="320" y="150" width="20" height="110" rx="6" fill="#a0703c"/>
+  <path d="M60 110 C60 80 80 70 100 70 L100 200 L60 200 Z" fill="#a0703c"/>
+  <rect x="70" y="180" width="260" height="50" rx="8" fill="#f8f9f9" stroke="#bdc3c7" stroke-width="3"/>
+  <path d="M150 176 L330 176 L330 232 L150 232 Z" fill="#5dade2"/><path d="M150 176 L150 232" stroke="#2e86c1" stroke-width="3"/>
+  <ellipse cx="116" cy="170" rx="34" ry="18" fill="#fff" stroke="#bdc3c7" stroke-width="3"/>
+  <rect x="70" y="228" width="270" height="12" fill="#7d5a3a"/>
+</svg>

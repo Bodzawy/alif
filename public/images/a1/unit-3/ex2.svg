@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Ein Mann und eine Frau mit Büchern unterhalten sich vor der Universität">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+<path d="M80 170 L80 90 C80 40 320 40 320 90 L320 170 Z" fill="#e5e8e8" stroke="#bfc9ca" stroke-width="3"/>
+  <path d="M170 170 L170 110 C170 90 230 90 230 110 L230 170 Z" fill="#cacfd2"/>
+  <rect x="0" y="170" width="400" height="130" fill="#d5dbdb"/><g><rect x="134.6" y="207.5" width="13.2" height="82.5" rx="4.4" fill="#34495e"/><rect x="152.2" y="207.5" width="13.2" height="82.5" rx="4.4" fill="#34495e"/>
+  <path d="M125.8 155.8 C125.8 144.8 174.2 144.8 174.2 155.8 L172.0 213.0 L128.0 213.0 Z" fill="#2c3e50"/>
+  <path d="M172.0 160.2 L207.2 171.2" stroke="#2c3e50" stroke-width="11.0" stroke-linecap="round"/><circle cx="211.6" cy="172.3" r="6.6" fill="#efc49d"/>
+  <path d="M128.0 158.0 L121.4 207.5" stroke="#2c3e50" stroke-width="11.0" stroke-linecap="round"/>
+  <rect x="143.4" y="136.0" width="13.2" height="13.2" fill="#efc49d"/>
+  <ellipse cx="150" cy="122.79999999999997" rx="18.700000000000003" ry="20.2" fill="#efc49d"/>
+  <circle cx="143.3" cy="122.79999999999997" r="2.1" fill="#2f2a26"/><circle cx="156.7" cy="122.79999999999997" r="2.1" fill="#2f2a26"/>
+  <circle cx="138.8" cy="128.4" r="2.2" fill="#ff9d9d" opacity=".55"/><circle cx="161.2" cy="128.4" r="2.2" fill="#ff9d9d" opacity=".55"/>
+  <path d="M144.4 129.9 Q150 134.4 155.6 129.9" stroke="#8a3b2b" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M131.3 120.9 C131.3 97.6 168.7 97.6 168.7 120.9 C161.2 111.6 138.8 111.6 131.3 120.9 Z" fill="#2a1a10"/></g><g><path d="M233.2 153.5 L266.8 153.5 L281.5 277.4 L218.5 277.4 Z" fill="#d35400"/>
+  <rect x="237.4" y="275.3" width="8.4" height="14.7" fill="#efc49d"/><rect x="254.2" y="275.3" width="8.4" height="14.7" fill="#efc49d"/>
+  <path d="M271.0 164.0 L277.3 211.2" stroke="#d35400" stroke-width="10.5" stroke-linecap="round"/><path d="M229.0 164.0 L222.7 211.2" stroke="#d35400" stroke-width="10.5" stroke-linecap="round"/>
+  <rect x="243.7" y="143.0" width="12.6" height="12.6" fill="#efc49d"/>
+  <ellipse cx="250" cy="130.4" rx="17.85" ry="19.3" fill="#efc49d"/>
+  <circle cx="243.6" cy="130.4" r="2.0" fill="#2f2a26"/><circle cx="256.4" cy="130.4" r="2.0" fill="#2f2a26"/>
+  <circle cx="239.3" cy="135.8" r="2.1" fill="#ff9d9d" opacity=".55"/><circle cx="260.7" cy="135.8" r="2.1" fill="#ff9d9d" opacity=".55"/>
+  <path d="M244.6 137.2 Q250 141.5 255.4 137.2" stroke="#8a3b2b" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <circle cx="234.8" cy="124.2" r="5.7" fill="#2a1a10"/><circle cx="239.3" cy="116.1" r="5.7" fill="#2a1a10"/><circle cx="247.3" cy="112.6" r="5.7" fill="#2a1a10"/><circle cx="255.4" cy="113.4" r="5.7" fill="#2a1a10"/><circle cx="263.4" cy="117.9" r="5.7" fill="#2a1a10"/><circle cx="266.1" cy="125.9" r="5.7" fill="#2a1a10"/></g><g transform="rotate(-10 249.0 173.0)"><rect x="232" y="160" width="34" height="26" rx="4" fill="#1abc9c"/><rect x="236" y="176" width="28" height="8" fill="#fffdf6"/><rect x="238.8" y="166.5" width="20.4" height="3.1" rx="2" fill="#fff" opacity=".7"/></g>
+</svg>

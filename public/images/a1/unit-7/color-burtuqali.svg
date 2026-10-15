@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Farbe: Orange">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fffbe8"/><stop offset="1" stop-color="#ffe7a3"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#fff2c2"/><circle cx="340" cy="236" r="50" fill="#fff2c2"/>
+<path d="M110 90 C150 50 260 60 290 100 C330 150 300 230 230 240 C160 250 90 220 90 160 C90 130 95 105 110 90 Z" fill="#e67e22" stroke="#909497" stroke-width="3"/><circle cx="320" cy="80" r="16" fill="#e67e22" stroke="#909497" stroke-width="2"/><circle cx="80" cy="250" r="10" fill="#e67e22" stroke="#909497" stroke-width="2"/>
+</svg>

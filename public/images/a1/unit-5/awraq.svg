@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Ein Stapel Papier">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+  <ellipse cx="200" cy="250" rx="110" ry="10" fill="#000" opacity="0.12"/>
+<g transform="rotate(-8 200 160)"><rect x="110" y="70" width="180" height="150" fill="#fdfefe" stroke="#99a3a4" stroke-width="2"/></g><g transform="rotate(-4 200 160)"><rect x="110" y="76" width="180" height="150" fill="#fdfefe" stroke="#99a3a4" stroke-width="2"/></g><g transform="rotate(0 200 160)"><rect x="110" y="82" width="180" height="150" fill="#fdfefe" stroke="#99a3a4" stroke-width="2"/></g><g transform="rotate(3 200 160)"><rect x="110" y="88" width="180" height="150" fill="#fdfefe" stroke="#99a3a4" stroke-width="2"/></g><g transform="rotate(6 200 160)"><rect x="110" y="94" width="180" height="150" fill="#fdfefe" stroke="#99a3a4" stroke-width="2"/></g><g stroke="#aab7b8" stroke-width="3"><path d="M140 120 L270 124"/><path d="M140 138 L270 142"/><path d="M140 156 L270 160"/><path d="M140 174 L270 178"/><path d="M140 192 L270 196"/></g>
+</svg>

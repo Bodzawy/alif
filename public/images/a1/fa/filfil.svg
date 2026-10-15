@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Paprika">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#f0fbec"/><stop offset="1" stop-color="#c6e8b9"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#e1f4d9"/><circle cx="340" cy="236" r="50" fill="#e1f4d9"/>
+  <ellipse cx="190" cy="262" rx="120" ry="10" fill="#000" opacity="0.12"/>
+<path d="M110 120 C70 120 66 190 92 230 C110 258 150 258 168 230 C190 196 186 120 150 120 C140 130 120 130 110 120 Z" fill="#e74c3c"/>
+  <path d="M130 120 L130 96" stroke="#2e7d32" stroke-width="8" stroke-linecap="round"/><path d="M112 124 C122 112 140 112 150 124" fill="#43a047"/>
+  <path d="M230 118 C196 118 196 176 214 210 C228 236 262 236 274 210 C290 176 284 118 256 118 C248 126 238 126 230 118 Z" fill="#f1c40f"/>
+  <path d="M244 118 L244 98" stroke="#2e7d32" stroke-width="7" stroke-linecap="round"/>
+  <path d="M290 120 C310 170 316 220 300 262 C296 230 288 180 280 130 Z" fill="#c0392b"/><path d="M286 124 L292 104" stroke="#2e7d32" stroke-width="5"/>
+</svg>

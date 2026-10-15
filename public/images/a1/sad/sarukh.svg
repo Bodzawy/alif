@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Rakete">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+<g fill="#fff"><circle cx="70" cy="60" r="3"/><circle cx="330" cy="90" r="2"/><circle cx="300" cy="40" r="3"/><circle cx="90" cy="220" r="2"/></g>
+  <g transform="rotate(45 200 150)">
+    <path d="M200 40 C232 70 240 120 236 200 L164 200 C160 120 168 70 200 40 Z" fill="#ecf0f1" stroke="#636e72" stroke-width="4"/>
+    <path d="M200 40 C214 52 222 66 226 80 L174 80 C178 66 186 52 200 40 Z" fill="#e74c3c"/>
+    <circle cx="200" cy="120" r="18" fill="#74b9ff" stroke="#636e72" stroke-width="4"/>
+    <path d="M164 160 L132 214 L164 200 Z" fill="#e74c3c"/><path d="M236 160 L268 214 L236 200 Z" fill="#e74c3c"/>
+    <path d="M176 200 L200 262 L224 200 Z" fill="#f39c12"/><path d="M188 200 L200 236 L212 200 Z" fill="#f1c40f"/>
+  </g>
+</svg>

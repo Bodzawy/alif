@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Drei Frauen mit der Fahne Koreas">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+<g><path d="M113.2 148.5 L146.8 148.5 L161.5 272.4 L98.5 272.4 Z" fill="#e74c3c"/>
+  <rect x="117.4" y="270.3" width="8.4" height="14.7" fill="#efc49d"/><rect x="134.2" y="270.3" width="8.4" height="14.7" fill="#efc49d"/>
+  <path d="M151.0 159.0 L157.3 206.2" stroke="#e74c3c" stroke-width="10.5" stroke-linecap="round"/><path d="M109.0 159.0 L102.7 206.2" stroke="#e74c3c" stroke-width="10.5" stroke-linecap="round"/>
+  <rect x="123.7" y="138.0" width="12.6" height="12.6" fill="#efc49d"/>
+  <path d="M110.4 150.4 C106.8 100.4 153.2 100.4 149.6 150.4 L144.3 150.4 L144.3 121.8 C137.1 113.8 122.9 113.8 115.7 121.8 L115.7 150.4 Z" fill="#1b1b1b"/>
+  <ellipse cx="130" cy="125.4" rx="17.85" ry="19.3" fill="#efc49d"/>
+  <circle cx="123.6" cy="125.4" r="2.0" fill="#2f2a26"/><circle cx="136.4" cy="125.4" r="2.0" fill="#2f2a26"/>
+  <circle cx="119.3" cy="130.8" r="2.1" fill="#ff9d9d" opacity=".55"/><circle cx="140.7" cy="130.8" r="2.1" fill="#ff9d9d" opacity=".55"/>
+  <path d="M124.6 132.2 Q130 136.5 135.4 132.2" stroke="#8a3b2b" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M111.8 127.2 C111.3 100.4 148.7 100.4 148.2 127.2 C142.5 117.4 126.4 112.0 111.8 127.2 Z" fill="#1b1b1b"/></g><g><path d="M183.2 148.5 L216.8 148.5 L231.5 272.4 L168.5 272.4 Z" fill="#8e44ad"/>
+  <rect x="187.4" y="270.3" width="8.4" height="14.7" fill="#efc49d"/><rect x="204.2" y="270.3" width="8.4" height="14.7" fill="#efc49d"/>
+  <path d="M221.0 159.0 L227.3 206.2" stroke="#8e44ad" stroke-width="10.5" stroke-linecap="round"/><path d="M179.0 159.0 L172.7 206.2" stroke="#8e44ad" stroke-width="10.5" stroke-linecap="round"/>
+  <rect x="193.7" y="138.0" width="12.6" height="12.6" fill="#efc49d"/>
+  <path d="M180.4 150.4 C176.8 100.4 223.2 100.4 219.6 150.4 L214.3 150.4 L214.3 121.8 C207.1 113.8 192.9 113.8 185.7 121.8 L185.7 150.4 Z" fill="#1b1b1b"/>
+  <ellipse cx="200" cy="125.4" rx="17.85" ry="19.3" fill="#efc49d"/>
+  <circle cx="193.6" cy="125.4" r="2.0" fill="#2f2a26"/><circle cx="206.4" cy="125.4" r="2.0" fill="#2f2a26"/>
+  <circle cx="189.3" cy="130.8" r="2.1" fill="#ff9d9d" opacity=".55"/><circle cx="210.7" cy="130.8" r="2.1" fill="#ff9d9d" opacity=".55"/>
+  <path d="M194.6 132.2 Q200 136.5 205.4 132.2" stroke="#8a3b2b" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M181.8 127.2 C181.3 100.4 218.7 100.4 218.2 127.2 C212.5 117.4 196.4 112.0 181.8 127.2 Z" fill="#1b1b1b"/></g><g><path d="M253.2 148.5 L286.8 148.5 L301.5 272.4 L238.5 272.4 Z" fill="#f39c12"/>
+  <rect x="257.4" y="270.3" width="8.4" height="14.7" fill="#efc49d"/><rect x="274.2" y="270.3" width="8.4" height="14.7" fill="#efc49d"/>
+  <path d="M291.0 159.0 L297.3 206.2" stroke="#f39c12" stroke-width="10.5" stroke-linecap="round"/><path d="M249.0 159.0 L242.7 206.2" stroke="#f39c12" stroke-width="10.5" stroke-linecap="round"/>
+  <rect x="263.7" y="138.0" width="12.6" height="12.6" fill="#efc49d"/>
+  <path d="M250.4 150.4 C246.8 100.4 293.2 100.4 289.6 150.4 L284.3 150.4 L284.3 121.8 C277.1 113.8 262.9 113.8 255.7 121.8 L255.7 150.4 Z" fill="#1b1b1b"/>
+  <ellipse cx="270" cy="125.4" rx="17.85" ry="19.3" fill="#efc49d"/>
+  <circle cx="263.6" cy="125.4" r="2.0" fill="#2f2a26"/><circle cx="276.4" cy="125.4" r="2.0" fill="#2f2a26"/>
+  <circle cx="259.3" cy="130.8" r="2.1" fill="#ff9d9d" opacity=".55"/><circle cx="280.7" cy="130.8" r="2.1" fill="#ff9d9d" opacity=".55"/>
+  <path d="M264.6 132.2 Q270 136.5 275.4 132.2" stroke="#8a3b2b" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M251.8 127.2 C251.3 100.4 288.7 100.4 288.2 127.2 C282.5 117.4 266.4 112.0 251.8 127.2 Z" fill="#1b1b1b"/></g><rect x="304" y="40" width="5" height="220" fill="#7f8c8d"/><g transform="translate(309 44)"><rect width="64" height="42" fill="#fff" stroke="#ccc"/><circle cx="32" cy="21" r="10" fill="#003478"/><path d="M22 21 A10 10 0 0 1 42 21 Z" fill="#c60c30"/><g stroke="#000" stroke-width="2"><path d="M8 8 L16 14 M48 28 L56 34 M48 14 L56 8 M8 34 L16 28"/></g></g>
+</svg>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Zwei Frauen mit der Fahne der USA">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+<g><path d="M143.2 148.5 L176.8 148.5 L191.5 272.4 L128.5 272.4 Z" fill="#d35400"/>
+  <rect x="147.4" y="270.3" width="8.4" height="14.7" fill="#efc49d"/><rect x="164.2" y="270.3" width="8.4" height="14.7" fill="#efc49d"/>
+  <path d="M181.0 159.0 L187.3 206.2" stroke="#d35400" stroke-width="10.5" stroke-linecap="round"/><path d="M139.0 159.0 L132.7 206.2" stroke="#d35400" stroke-width="10.5" stroke-linecap="round"/>
+  <rect x="153.7" y="138.0" width="12.6" height="12.6" fill="#efc49d"/>
+  <path d="M140.4 150.4 C136.8 100.4 183.2 100.4 179.6 150.4 L174.3 150.4 L174.3 121.8 C167.1 113.8 152.9 113.8 145.7 121.8 L145.7 150.4 Z" fill="#e5c07b"/>
+  <ellipse cx="160" cy="125.4" rx="17.85" ry="19.3" fill="#efc49d"/>
+  <circle cx="153.6" cy="125.4" r="2.0" fill="#2f2a26"/><circle cx="166.4" cy="125.4" r="2.0" fill="#2f2a26"/>
+  <circle cx="149.3" cy="130.8" r="2.1" fill="#ff9d9d" opacity=".55"/><circle cx="170.7" cy="130.8" r="2.1" fill="#ff9d9d" opacity=".55"/>
+  <path d="M154.6 132.2 Q160 136.5 165.4 132.2" stroke="#8a3b2b" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M141.8 127.2 C141.3 100.4 178.7 100.4 178.2 127.2 C172.5 117.4 156.4 112.0 141.8 127.2 Z" fill="#e5c07b"/></g><g><path d="M223.2 148.5 L256.8 148.5 L271.5 272.4 L208.5 272.4 Z" fill="#2e86c1"/>
+  <rect x="227.4" y="270.3" width="8.4" height="14.7" fill="#efc49d"/><rect x="244.2" y="270.3" width="8.4" height="14.7" fill="#efc49d"/>
+  <path d="M261.0 159.0 L267.3 206.2" stroke="#2e86c1" stroke-width="10.5" stroke-linecap="round"/><path d="M219.0 159.0 L212.7 206.2" stroke="#2e86c1" stroke-width="10.5" stroke-linecap="round"/>
+  <rect x="233.7" y="138.0" width="12.6" height="12.6" fill="#efc49d"/>
+  <path d="M220.4 150.4 C216.8 100.4 263.2 100.4 259.6 150.4 L254.3 150.4 L254.3 121.8 C247.1 113.8 232.9 113.8 225.7 121.8 L225.7 150.4 Z" fill="#5a3825"/>
+  <ellipse cx="240" cy="125.4" rx="17.85" ry="19.3" fill="#efc49d"/>
+  <circle cx="233.6" cy="125.4" r="2.0" fill="#2f2a26"/><circle cx="246.4" cy="125.4" r="2.0" fill="#2f2a26"/>
+  <circle cx="229.3" cy="130.8" r="2.1" fill="#ff9d9d" opacity=".55"/><circle cx="250.7" cy="130.8" r="2.1" fill="#ff9d9d" opacity=".55"/>
+  <path d="M234.6 132.2 Q240 136.5 245.4 132.2" stroke="#8a3b2b" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M221.8 127.2 C221.3 100.4 258.7 100.4 258.2 127.2 C252.5 117.4 236.4 112.0 221.8 127.2 Z" fill="#5a3825"/></g><rect x="274" y="40" width="5" height="220" fill="#7f8c8d"/><g transform="translate(279 44)"><rect width="64" height="42" fill="#fff"/><rect y="0" width="64" height="3" fill="#b22234"/><rect y="6" width="64" height="3" fill="#b22234"/><rect y="12" width="64" height="3" fill="#b22234"/><rect y="18" width="64" height="3" fill="#b22234"/><rect y="24" width="64" height="3" fill="#b22234"/><rect y="30" width="64" height="3" fill="#b22234"/><rect y="36" width="64" height="3" fill="#b22234"/><rect width="26" height="21" fill="#3c3b6e"/></g>
+</svg>

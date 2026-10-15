@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Glas (Kelch)">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#f6f0ff"/><stop offset="1" stop-color="#dccbfb"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#ece2fd"/><circle cx="340" cy="236" r="50" fill="#ece2fd"/>
+<path d="M140 60 L260 60 C266 130 240 170 200 176 C160 170 134 130 140 60 Z" fill="#e3f2fd" stroke="#90a4ae" stroke-width="4"/>
+  <path d="M146 110 L254 110 C250 146 232 166 200 170 C168 166 150 146 146 110 Z" fill="#c0392b" opacity=".7"/>
+  <rect x="194" y="176" width="12" height="60" fill="#e3f2fd" stroke="#90a4ae" stroke-width="3"/><ellipse cx="200" cy="244" rx="50" ry="12" fill="#e3f2fd" stroke="#90a4ae" stroke-width="4"/>
+</svg>

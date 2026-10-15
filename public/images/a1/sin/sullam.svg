@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Leiter">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+  <ellipse cx="200" cy="274" rx="90" ry="10" fill="#000" opacity="0.12"/>
+<path d="M150 40 L120 270" stroke="#a0703c" stroke-width="12" stroke-linecap="round"/><path d="M250 40 L280 270" stroke="#a0703c" stroke-width="12" stroke-linecap="round"/>
+  <path d="M150 70 L250 70" stroke="#c49a6c" stroke-width="10" stroke-linecap="round"/><path d="M144 110 L256 110" stroke="#c49a6c" stroke-width="10" stroke-linecap="round"/><path d="M138 150 L262 150" stroke="#c49a6c" stroke-width="10" stroke-linecap="round"/><path d="M132 190 L268 190" stroke="#c49a6c" stroke-width="10" stroke-linecap="round"/><path d="M126 230 L274 230" stroke="#c49a6c" stroke-width="10" stroke-linecap="round"/>
+</svg>

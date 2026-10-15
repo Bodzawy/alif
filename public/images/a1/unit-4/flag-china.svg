@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Zwei Männer mit der Fahne Chinas">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+<g><rect x="145.3" y="206.2" width="12.6" height="78.8" rx="4.2" fill="#34495e"/><rect x="162.1" y="206.2" width="12.6" height="78.8" rx="4.2" fill="#34495e"/>
+  <path d="M136.9 156.9 C136.9 146.4 183.1 146.4 183.1 156.9 L181.0 211.5 L139.0 211.5 Z" fill="#2471a3"/>
+  <path d="M181.0 159.0 L187.3 206.2" stroke="#2471a3" stroke-width="10.5" stroke-linecap="round"/><path d="M139.0 159.0 L132.7 206.2" stroke="#2471a3" stroke-width="10.5" stroke-linecap="round"/>
+  <rect x="153.7" y="138.0" width="12.6" height="12.6" fill="#efc49d"/>
+  <ellipse cx="160" cy="125.4" rx="17.85" ry="19.3" fill="#efc49d"/>
+  <circle cx="153.6" cy="125.4" r="2.0" fill="#2f2a26"/><circle cx="166.4" cy="125.4" r="2.0" fill="#2f2a26"/>
+  <circle cx="149.3" cy="130.8" r="2.1" fill="#ff9d9d" opacity=".55"/><circle cx="170.7" cy="130.8" r="2.1" fill="#ff9d9d" opacity=".55"/>
+  <path d="M154.6 132.2 Q160 136.5 165.4 132.2" stroke="#8a3b2b" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M142.15 123.6 C142.15 101.3 177.85 101.3 177.85 123.6 C170.7 114.7 149.3 114.7 142.15 123.6 Z" fill="#1b1b1b"/></g><g><rect x="225.3" y="206.2" width="12.6" height="78.8" rx="4.2" fill="#34495e"/><rect x="242.1" y="206.2" width="12.6" height="78.8" rx="4.2" fill="#34495e"/>
+  <path d="M216.9 156.9 C216.9 146.4 263.1 146.4 263.1 156.9 L261.0 211.5 L219.0 211.5 Z" fill="#7f8c8d"/>
+  <path d="M261.0 159.0 L267.3 206.2" stroke="#7f8c8d" stroke-width="10.5" stroke-linecap="round"/><path d="M219.0 159.0 L212.7 206.2" stroke="#7f8c8d" stroke-width="10.5" stroke-linecap="round"/>
+  <rect x="233.7" y="138.0" width="12.6" height="12.6" fill="#efc49d"/>
+  <ellipse cx="240" cy="125.4" rx="17.85" ry="19.3" fill="#efc49d"/>
+  <circle cx="233.6" cy="125.4" r="2.0" fill="#2f2a26"/><circle cx="246.4" cy="125.4" r="2.0" fill="#2f2a26"/>
+  <circle cx="229.3" cy="130.8" r="2.1" fill="#ff9d9d" opacity=".55"/><circle cx="250.7" cy="130.8" r="2.1" fill="#ff9d9d" opacity=".55"/>
+  <path d="M234.6 132.2 Q240 136.5 245.4 132.2" stroke="#8a3b2b" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M222.15 123.6 C222.15 101.3 257.85 101.3 257.85 123.6 C250.7 114.7 229.3 114.7 222.15 123.6 Z" fill="#1b1b1b"/></g><rect x="274" y="40" width="5" height="220" fill="#7f8c8d"/><g transform="translate(279 44)"><rect width="64" height="42" fill="#de2910"/><g fill="#ffde00"><circle cx="12" cy="12" r="6"/><circle cx="24" cy="5" r="2"/><circle cx="28" cy="10" r="2"/><circle cx="28" cy="17" r="2"/><circle cx="24" cy="21" r="2"/></g></g>
+</svg>

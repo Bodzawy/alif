@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Ein Auge">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#f6f0ff"/><stop offset="1" stop-color="#dccbfb"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#ece2fd"/><circle cx="340" cy="236" r="50" fill="#ece2fd"/>
+<path d="M60 150 C120 80 280 80 340 150 C280 220 120 220 60 150 Z" fill="#fff" stroke="#2f2a26" stroke-width="6"/>
+  <circle cx="200" cy="150" r="48" fill="#5d8aa8"/><circle cx="200" cy="150" r="22" fill="#1b1b1b"/><circle cx="214" cy="136" r="9" fill="#fff"/>
+  <path d="M70 120 C130 50 270 50 330 120" stroke="#2f2a26" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <path d="M110 70 C150 52 250 52 290 70" stroke="#4a3426" stroke-width="10" fill="none" stroke-linecap="round" transform="translate(0 -14)"/>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Eine junge Frau">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff0f3"/><stop offset="1" stop-color="#ffd0dc"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#ffe2e9"/><circle cx="340" cy="236" r="50" fill="#ffe2e9"/>
+<path d="M107.6 252.0 C112.0 186.0 156.0 170.6 200 170.6 C244.0 170.6 288.0 186.0 292.4 252.0 Z" fill="#8e44ad"/>
+  <rect x="186.8" y="155.2" width="26.4" height="19.8" fill="#efc49d"/>
+  <path d="M151.6 181.6 C142.8 58.4 257.2 58.4 248.4 181.6 L235.2 181.6 L235.2 111.2 C217.6 91.4 182.4 91.4 164.8 111.2 L164.8 181.6 Z" fill="#5a3825"/>
+  <ellipse cx="200" cy="120" rx="44" ry="47.5" fill="#efc49d"/>
+  <circle cx="184.2" cy="120" r="4.8" fill="#2f2a26"/><circle cx="215.8" cy="120" r="4.8" fill="#2f2a26"/>
+  <circle cx="173.6" cy="133.2" r="5.3" fill="#ff9d9d" opacity=".55"/><circle cx="226.4" cy="133.2" r="5.3" fill="#ff9d9d" opacity=".55"/>
+  <path d="M186.8 136.7 Q200 147.3 213.2 136.7" stroke="#8a3b2b" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <path d="M155.1 124.4 C153.8 58.4 246.2 58.4 244.9 124.4 C230.8 100.2 191.2 87.0 155.1 124.4 Z" fill="#5a3825"/>
+</svg>

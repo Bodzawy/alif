@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Ein Junge von hinten, ein Pfeil zeigt auf den Rücken">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+<rect x="150" y="180" width="100" height="70" rx="20" fill="#34495e"/>
+  <path d="M140 110 C140 90 260 90 260 110 L262 200 L138 200 Z" fill="#e67e22"/>
+  <path d="M140 120 L118 190 M260 120 L282 190" stroke="#e67e22" stroke-width="22" stroke-linecap="round"/>
+  <rect x="190" y="70" width="20" height="24" fill="#c68642"/>
+  <circle cx="200" cy="56" r="30" fill="#2a1a10"/><ellipse cx="200" cy="74" rx="26" ry="10" fill="#c68642"/>
+  <path d="M320 120 L272 146" stroke="#e53950" stroke-width="6" stroke-linecap="round"/><path d="M272 146 L290 128 L294 150 Z" fill="#e53950"/>
+</svg>

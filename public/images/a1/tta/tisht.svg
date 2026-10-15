@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Eine flache Waschschüssel">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+  <ellipse cx="200" cy="250" rx="130" ry="10" fill="#000" opacity="0.12"/>
+<ellipse cx="200" cy="140" rx="150" ry="44" fill="#d0d3d4" stroke="#909497" stroke-width="5"/>
+  <ellipse cx="200" cy="140" rx="128" ry="32" fill="#aed6f1"/>
+  <path d="M50 140 C60 220 120 244 200 244 C280 244 340 220 350 140" fill="#bfc9ca" stroke="#909497" stroke-width="5"/>
+  <path d="M90 170 C120 200 280 200 310 170" stroke="#e5e8e8" stroke-width="6" fill="none" opacity=".8"/>
+</svg>

@@ -13,7 +13,11 @@ import { GuidedSoundWords } from "@/components/a1/guided/guided-sound-words";
 import { DialogueStep } from "@/components/a1/dialogue/dialogue-step";
 import { LetterFindStep } from "@/components/a1/letter-find/letter-find-step";
 import { PhrasesStep } from "@/components/a1/phrases/phrases-step";
+import { ClozeStep } from "@/components/a1/cloze/cloze-step";
 import { CompareStep } from "@/components/a1/compare/compare-step";
+import { OrderStep } from "@/components/a1/order/order-step";
+import { QuizStep } from "@/components/a1/quiz/quiz-step";
+import { SpellStep } from "@/components/a1/spell/spell-step";
 import { MatchStep } from "@/components/a1/match/match-step";
 import { PositionsStep } from "@/components/a1/positions/positions-step";
 import { TableStep } from "@/components/a1/table/table-step";
@@ -85,9 +89,9 @@ export default async function A1StepPage({ params }: { params: Promise<Params> }
     <div
       className={cn(
         "container py-6 sm:py-10",
-        step.kind === "dialogue" || step.kind === "letter-find" || step.kind === "word-pick"
+        step.kind === "dialogue" || step.kind === "letter-find" || step.kind === "word-pick" || step.kind === "spell"
           ? "max-w-3xl"
-          : step.kind === "phrases" || step.kind === "positions" || step.kind === "compare" || step.kind === "table"
+          : step.kind === "phrases" || step.kind === "positions" || step.kind === "compare" || step.kind === "table" || step.kind === "quiz" || step.kind === "cloze" || step.kind === "order"
             ? "max-w-4xl"
             : step.kind === "forms" || step.kind === "gaps"
               ? "max-w-3xl"
@@ -152,7 +156,7 @@ export default async function A1StepPage({ params }: { params: Promise<Params> }
         </div>
       )}
 
-      {step.kind === "sound-words" ? (
+      {step.kind === "sound-words" || step.kind === "words" ? (
         <GuidedSoundWords groups={step.groups} progressKey={progressKey} />
       ) : step.kind === "forms" ? (
         <FormsStep forms={step.forms} availableAudio={availableAudio(step.forms.audioBase)} progressKey={progressKey} />
@@ -174,6 +178,14 @@ export default async function A1StepPage({ params }: { params: Promise<Params> }
         <WordPickStep pick={step.pick} progressKey={progressKey} />
       ) : step.kind === "table" ? (
         <TableStep tables={step.tables} quiz={step.quiz} progressKey={progressKey} />
+      ) : step.kind === "spell" ? (
+        <SpellStep words={step.words} progressKey={progressKey} />
+      ) : step.kind === "quiz" ? (
+        <QuizStep items={step.items} progressKey={progressKey} />
+      ) : step.kind === "cloze" ? (
+        <ClozeStep items={step.items} progressKey={progressKey} />
+      ) : step.kind === "order" ? (
+        <OrderStep order={step.order} progressKey={progressKey} />
       ) : (
         <GapsStep gaps={step.gaps} availableAudio={availableAudio(step.gaps.audioBase)} progressKey={progressKey} />
       )}

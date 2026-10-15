@@ -39,7 +39,7 @@ export default function A1Page() {
                 <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary-soft text-lg font-bold text-primary">{unit.number}</span>
                 <ArrowRight className="h-6 w-6 text-muted-foreground transition group-hover:translate-x-1 group-hover:text-primary" aria-hidden />
               </div>
-              <p lang="ar" dir="rtl" className="mt-5 text-right font-arabic text-xl text-muted-foreground">{arabicLessonLabel(unit.number)}</p>
+              <p lang="ar" dir="rtl" className="mt-5 text-right font-arabic text-xl text-muted-foreground">{unit.bookLabel ?? arabicLessonLabel(unit.number)}</p>
               <h2 lang="ar" dir="rtl" className="text-right font-arabic text-4xl font-bold leading-[1.6] text-primary">{unit.title}</h2>
               <p className="mt-2 font-semibold">
                 Lektion {unit.number} · {unit.titleGerman}

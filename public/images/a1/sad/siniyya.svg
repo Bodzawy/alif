@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Tablett">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fffbe8"/><stop offset="1" stop-color="#ffe7a3"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#fff2c2"/><circle cx="340" cy="236" r="50" fill="#fff2c2"/>
+<ellipse cx="200" cy="200" rx="150" ry="50" fill="#bdc3c7" stroke="#7f8c8d" stroke-width="4"/>
+  <ellipse cx="200" cy="196" rx="132" ry="40" fill="#d5dbdf"/>
+  <path d="M50 196 C40 190 40 210 52 210" stroke="#7f8c8d" stroke-width="6" fill="none"/><path d="M350 196 C360 190 360 210 348 210" stroke="#7f8c8d" stroke-width="6" fill="none"/>
+  <g><path d="M160 110 L196 110 L192 196 L164 196 Z" fill="#e3f2fd" stroke="#90a4ae" stroke-width="3"/><path d="M164 150 L192 150 L192 196 L164 196 Z" fill="#c0392b" opacity=".75"/></g>
+  <g><path d="M208 110 L244 110 L240 196 L212 196 Z" fill="#e3f2fd" stroke="#90a4ae" stroke-width="3"/><path d="M212 150 L240 150 L240 196 L212 196 Z" fill="#c0392b" opacity=".75"/></g>
+</svg>

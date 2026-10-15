@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Eine Bluse">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fffbe8"/><stop offset="1" stop-color="#ffe7a3"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#fff2c2"/><circle cx="340" cy="236" r="50" fill="#fff2c2"/>
+<path d="M140 60 L260 60 L310 110 L280 140 L265 125 L270 250 L130 250 L135 125 L120 140 L90 110 Z" fill="#f1948a"/><circle cx="170" cy="85.0" r="5" fill="#fdfefe"/><circle cx="182" cy="79.0" r="5" fill="#fdfefe"/><circle cx="194" cy="73.0" r="5" fill="#fdfefe"/><circle cx="206" cy="73.0" r="5" fill="#fdfefe"/><circle cx="218" cy="79.0" r="5" fill="#fdfefe"/><circle cx="230" cy="85.0" r="5" fill="#fdfefe"/>
+</svg>

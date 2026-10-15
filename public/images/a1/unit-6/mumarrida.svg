@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Die Krankenschwester">
+  <defs><clipPath id="c"><circle cx="100" cy="100" r="100"/></clipPath></defs><g clip-path="url(#c)"><circle cx="100" cy="100" r="100" fill="#eaf2f8"/>
+<path d="M37.0 186.0 C40.0 141.0 70.0 130.5 100 130.5 C130.0 130.5 160.0 141.0 163.0 186.0 Z" fill="#fdfefe"/>
+  <rect x="91.0" y="120.0" width="18.0" height="13.5" fill="#efc49d"/>
+  <path d="M67.0 138.0 C61.0 54.0 139.0 54.0 133.0 138.0 L124.0 138.0 L124.0 90.0 C112.0 76.5 88.0 76.5 76.0 90.0 L76.0 138.0 Z" fill="#3b2416"/>
+  <ellipse cx="100" cy="96" rx="30" ry="32.4" fill="#efc49d"/>
+  <circle cx="89.2" cy="96" r="3.3" fill="#2f2a26"/><circle cx="110.8" cy="96" r="3.3" fill="#2f2a26"/>
+  <circle cx="82.0" cy="105.0" r="3.6" fill="#ff9d9d" opacity=".55"/><circle cx="118.0" cy="105.0" r="3.6" fill="#ff9d9d" opacity=".55"/>
+  <path d="M91.0 107.4 Q100 114.6 109.0 107.4" stroke="#8a3b2b" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  <path d="M69.4 99.0 C68.5 54.0 131.5 54.0 130.6 99.0 C121.0 82.5 94.0 73.5 69.4 99.0 Z" fill="#3b2416"/><rect x="78" y="52" width="44" height="14" rx="4" fill="#fdfefe" stroke="#c0392b" stroke-width="2"/><path d="M100 54 L100 64 M95 59 L105 59" stroke="#c0392b" stroke-width="3"/>
+  </g>
+</svg>

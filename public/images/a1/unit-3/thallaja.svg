@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Ein Kühlschrank">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+  <ellipse cx="200" cy="284" rx="90" ry="10" fill="#000" opacity="0.12"/>
+<rect x="130" y="30" width="140" height="250" rx="14" fill="#fdfefe" stroke="#909497" stroke-width="4"/>
+  <path d="M130 120 L270 120" stroke="#909497" stroke-width="4"/>
+  <rect x="246" y="60" width="10" height="44" rx="4" fill="#909497"/><rect x="246" y="140" width="10" height="60" rx="4" fill="#909497"/>
+  <path d="M150 50 L150 100" stroke="#d6eaf8" stroke-width="8" stroke-linecap="round"/>
+</svg>

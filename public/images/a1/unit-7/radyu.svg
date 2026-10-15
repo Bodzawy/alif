@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Ein Kassettenradio">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#f0fbec"/><stop offset="1" stop-color="#c6e8b9"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#e1f4d9"/><circle cx="340" cy="236" r="50" fill="#e1f4d9"/>
+<rect x="70" y="110" width="260" height="130" rx="20" fill="#5d6d7e"/><circle cx="125" cy="180" r="38" fill="#2c3e50"/><circle cx="275" cy="180" r="38" fill="#2c3e50"/><rect x="170" y="150" width="60" height="40" rx="4" fill="#d5dbdb"/><path d="M120 110 L130 60 L270 60 L280 110" stroke="#2c3e50" stroke-width="6" fill="none"/>
+</svg>

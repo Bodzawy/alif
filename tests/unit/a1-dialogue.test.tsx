@@ -40,6 +40,7 @@ import { getA1Lesson } from "@/data/a1";
 import { menDialogue, womenDialogue } from "@/data/a1/sabah-al-khayr";
 import { majidFatimaDialogue } from "@/data/a1/tahiyya";
 import { adnanKhalidDialogue, nazikDinaDialogue } from "@/data/a1/lesson-2/masa-al-khayr";
+import { manAntaA, manAntaB, suziDialogue, wajdiDialogue } from "@/data/a1/unit-2/conversations";
 import type { Dialogue } from "@/data/types";
 import { getLessonProgress, moveSabahAlKhayrProgress } from "@/lib/progress";
 import { CONDITION_RULES } from "@/lib/pronunciation/rules";
@@ -447,5 +448,73 @@ describe("progress of the entry", () => {
     const old = { [`${base}/step-1`]: { passed: ["sabah-al-khayr"], completedAt: "a" }, [`${base}/step-2`]: { passed: [], completedAt: "b" }, other: { passed: [] } };
     expect(moveSabahAlKhayrProgress(old)).toEqual({ [`${base}/step-7`]: old[`${base}/step-2`], other: { passed: [] } });
     expect(moveSabahAlKhayrProgress({ other: { passed: [] } })).toEqual({ other: { passed: [] } });
+  });
+});
+
+// Unit 2 of the book: conversations with three or more speakers, and role groups
+// (the learner speaks "Der Fragende" or "Die Antwortenden"; the app speaks the rest).
+describe.each([
+  ["Wagdi (3 speakers)", wajdiDialogue],
+  ["Susi (3 speakers)", suziDialogue],
+  ["Wer bist du? (أ)", manAntaA],
+  ["Wer bist du? (ب)", manAntaB],
+])("Unit 2 – %s", (_, d) => {
+  it("Anhören: every line in order, each speaker in their own voice", async () => {
+    render(<DialogueListen dialogue={d} progressKey={KEY} />);
+    await at(0);
+    fireEvent.click(screen.getByTestId("dialogue-play-all"));
+    await until(() => played.length === d.lines.length && screen.getByTestId("dialogue-listen").dataset.status === "idle", 120_000);
+    expect(played).toEqual(d.lines.map((_l, i) => said(d, i)));
+  });
+
+  it("Nachsprechen: all lines, \"Super!\" after each, nothing skipped", async () => {
+    await startRepeat(d);
+    await until(() => screen.queryByTestId("dialogue-done") !== null, 120_000);
+    expect(targets()).toEqual(d.lines.map((l) => l.exercise.target));
+    expect(played).toEqual(d.lines.flatMap((_l, i) => [said(d, i), SUPER]));
+    expect(getLessonProgress(KEY).completedAt).toBeTruthy();
+  });
+
+  it("every line has an allowed target with a rule, and its model text may be spoken", () => {
+    for (const line of d.lines) {
+      expect(CONDITION_RULES[line.exercise.target]?.excellent, line.exercise.target).toBeDefined();
+      expect(isAllowedTarget(line.exercise.target)).toBe(true);
+      expect(isAllowedTtsText(line.exercise.modelText)).toBe(true);
+    }
+  });
+});
+
+describe("Rollenspiel – role groups (Unit 2 · مَنْ أَنْتَ؟)", () => {
+  const d = manAntaA;
+  const asks = d.lines.filter((l) => l.speaker === "asker");
+  const answers = d.lines.filter((l) => l.speaker !== "asker");
+  it("the roles are \"Der Fragende\" and \"Die Antwortenden\"", async () => {
+    render(<DialogueSpeaking dialogue={d} mode="roleplay" progressKey={KEY} />);
+    await at(0);
+    expect(screen.getByTestId("role-asker")).toHaveTextContent("Der Fragende");
+    expect(screen.getByTestId("role-answers")).toHaveTextContent("Die Antwortenden");
+    expect(screen.queryByTestId("role-naji")).toBeNull();
+  });
+
+  it("as the answering people: the app asks all six questions, the learner gives all six answers – a wrong answer stays", async () => {
+    verdicts = [true, false, true];
+    await startRoleplay(d, "answers");
+    await until(() => screen.queryByTestId("dialogue-done") !== null, 120_000);
+    const t = targets();
+    expect(t.filter((x, i) => t.indexOf(x) === i || x !== t[i - 1])).toEqual(answers.map((l) => l.exercise.target));
+    expect(t).toHaveLength(answers.length + 1); // the wrong one was asked again
+    // The app's lines: every question in order (the one before the wrong answer twice), never an answer.
+    const appLines = played.filter((p) => p !== SUPER);
+    expect(appLines).toHaveLength(asks.length + 1);
+    let at = 0;
+    for (const p of appLines) if (p === said(d, d.lines.indexOf(asks[at]!))) at++;
+    expect(at).toBe(asks.length);
+  });
+
+  it("as the one who asks: the learner asks, the app answers with every group's own voice", async () => {
+    await startRoleplay(d, "asker");
+    await until(() => screen.queryByTestId("dialogue-done") !== null, 120_000);
+    expect(targets()).toEqual(asks.map((l) => l.exercise.target));
+    expect(played.filter((p) => p !== SUPER)).toEqual(answers.map((l) => said(d, d.lines.indexOf(l))));
   });
 });

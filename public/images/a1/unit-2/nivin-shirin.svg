@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Nivin und Schirin">
+  <defs><clipPath id="c"><circle cx="100" cy="100" r="100"/></clipPath></defs><g clip-path="url(#c)"><circle cx="100" cy="100" r="100" fill="#fce4ec"/>
+<path d="M11.4 174.0 C14.0 135.0 40.0 125.9 66 125.9 C92.0 125.9 118.0 135.0 120.6 174.0 Z" fill="#bcaaa4"/>
+  <rect x="58.2" y="116.8" width="15.6" height="11.7" fill="#efc49d"/>
+  <path d="M37.4 132.4 C32.2 59.6 99.8 59.6 94.6 132.4 L86.8 132.4 L86.8 90.8 C76.4 79.1 55.6 79.1 45.2 90.8 L45.2 132.4 Z" fill="#6b4226"/>
+  <ellipse cx="66" cy="96" rx="26" ry="28.1" fill="#efc49d"/>
+  <circle cx="56.6" cy="96" r="2.9" fill="#2f2a26"/><circle cx="75.4" cy="96" r="2.9" fill="#2f2a26"/>
+  <circle cx="50.4" cy="103.8" r="3.1" fill="#ff9d9d" opacity=".55"/><circle cx="81.6" cy="103.8" r="3.1" fill="#ff9d9d" opacity=".55"/>
+  <path d="M58.2 105.9 Q66 112.1 73.8 105.9" stroke="#8a3b2b" stroke-width="2.1" fill="none" stroke-linecap="round"/>
+  <path d="M39.5 98.6 C38.7 59.6 93.3 59.6 92.5 98.6 C84.2 84.3 60.8 76.5 39.5 98.6 Z" fill="#6b4226"/>
+  <path d="M79.4 174.0 C82.0 135.0 108.0 125.9 134 125.9 C160.0 125.9 186.0 135.0 188.6 174.0 Z" fill="#5d4037"/>
+  <rect x="126.2" y="116.8" width="15.6" height="11.7" fill="#efc49d"/>
+  <path d="M101.5 137.6 C97.6 57.0 170.4 57.0 166.5 137.6 L158.7 106.4 C158.7 75.2 109.3 75.2 109.3 106.4 Z" fill="#4e342e"/>
+  <ellipse cx="134" cy="96" rx="26" ry="28.1" fill="#efc49d"/>
+  <circle cx="124.6" cy="96" r="2.9" fill="#2f2a26"/><circle cx="143.4" cy="96" r="2.9" fill="#2f2a26"/>
+  <circle cx="118.4" cy="103.8" r="3.1" fill="#ff9d9d" opacity=".55"/><circle cx="149.6" cy="103.8" r="3.1" fill="#ff9d9d" opacity=".55"/>
+  <path d="M126.2 105.9 Q134 112.1 141.8 105.9" stroke="#8a3b2b" stroke-width="2.1" fill="none" stroke-linecap="round"/>
+  <path d="M106.7 99.9 C105.4 58.3 162.6 58.3 161.3 99.9 C156.1 81.7 111.9 81.7 106.7 99.9 Z" fill="#4e342e"/>
+  </g>
+</svg>

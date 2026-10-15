@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Eine Polizeiwache">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+<rect x="70" y="60" width="260" height="200" fill="#f5e6d3" stroke="#a0703c" stroke-width="4"/>
+  <rect x="80" y="70" width="240" height="44" fill="#1b2631"/><text x="200" y="102" text-anchor="middle" font-family="'Noto Naskh Arabic','Geeza Pro',serif" font-size="28" font-weight="bold" fill="#fdfefe">قِسْمُ الشُّرْطَةِ</text>
+  <rect x="170" y="150" width="60" height="108" fill="#7d5a3a"/><g><rect x="279.5" y="201.8" width="9.0" height="56.2" rx="3.0" fill="#1b2631"/><rect x="291.5" y="201.8" width="9.0" height="56.2" rx="3.0" fill="#1b2631"/>
+  <path d="M273.5 166.5 C273.5 159.0 306.5 159.0 306.5 166.5 L305.0 205.5 L275.0 205.5 Z" fill="#1b2631"/>
+  <path d="M305.0 168.0 L309.5 201.8" stroke="#1b2631" stroke-width="7.5" stroke-linecap="round"/><path d="M275.0 168.0 L270.5 201.8" stroke="#1b2631" stroke-width="7.5" stroke-linecap="round"/>
+  <rect x="285.5" y="153.0" width="9.0" height="9.0" fill="#efc49d"/>
+  <ellipse cx="290" cy="144.0" rx="12.75" ry="13.8" fill="#efc49d"/>
+  <circle cx="285.4" cy="144.0" r="1.4" fill="#2f2a26"/><circle cx="294.6" cy="144.0" r="1.4" fill="#2f2a26"/>
+  <circle cx="282.4" cy="147.8" r="1.5" fill="#ff9d9d" opacity=".55"/><circle cx="297.6" cy="147.8" r="1.5" fill="#ff9d9d" opacity=".55"/>
+  <path d="M286.2 148.8 Q290 151.9 293.8 148.8" stroke="#8a3b2b" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M277.25 142.7 C277.25 126.8 302.75 126.8 302.75 142.7 C297.6 136.3 282.4 136.3 277.25 142.7 Z" fill="#2a1a10"/>
+  <path d="M276.6 138.3 C277.25 124.9 302.75 124.9 303.4 138.3 Z" fill="#1b2631"/><rect x="275.3" y="137.0" width="29.3" height="2.8" rx="1.3" fill="#2f2a26"/><circle cx="290" cy="133.2" r="1.8" fill="#f1c40f"/></g><rect x="40" y="258" width="320" height="10" fill="#7f8c8d"/>
+</svg>

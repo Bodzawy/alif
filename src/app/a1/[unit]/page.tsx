@@ -43,7 +43,7 @@ export default async function A1UnitPage({ params }: { params: Promise<Params> }
         <p className="text-sm font-semibold text-muted-foreground">
           {A1_LEVEL.code} · Lektion {unit.number} · {unit.titleGerman}
         </p>
-        <p lang="ar" dir="rtl" className="mt-3 font-arabic text-2xl text-muted-foreground">{arabicLessonLabel(unit.number)}</p>
+        <p lang="ar" dir="rtl" className="mt-3 font-arabic text-2xl text-muted-foreground">{unit.bookLabel ?? arabicLessonLabel(unit.number)}</p>
         <h1 lang="ar" dir="rtl" className="font-arabic text-5xl font-bold leading-[1.8] text-primary" data-testid="unit-title">
           {unit.title}
         </h1>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Segel">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+<rect x="0" y="230" width="400" height="70" fill="#64b5f6"/>
+  <path d="M120 230 L290 230 L268 262 L142 262 Z" fill="#8a5a2b"/>
+  <path d="M206 230 L206 40" stroke="#5d4037" stroke-width="6"/>
+  <path d="M212 48 L300 220 L212 220 Z" fill="#fafafa" stroke="#b0bec5" stroke-width="3"/>
+  <path d="M200 70 L130 214 L200 214 Z" fill="#ecf0f1" stroke="#b0bec5" stroke-width="3"/>
+  <path d="M206 40 L240 50 L206 60 Z" fill="#e74c3c"/>
+</svg>

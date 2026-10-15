@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Dorf">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fffbe8"/><stop offset="1" stop-color="#ffe7a3"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#fff2c2"/><circle cx="340" cy="236" r="50" fill="#fff2c2"/>
+<rect x="0" y="230" width="400" height="70" fill="#e8d6a8"/>
+  <path d="M300 230 C302 170 300 130 306 90" stroke="#8a5a2b" stroke-width="10" fill="none"/>
+  <g fill="#43a047"><ellipse cx="280" cy="94" rx="36" ry="10" transform="rotate(20 280 94)"/><ellipse cx="332" cy="94" rx="36" ry="10" transform="rotate(-20 332 94)"/><ellipse cx="286" cy="80" rx="36" ry="10" transform="rotate(-25 286 80)"/><ellipse cx="326" cy="80" rx="36" ry="10" transform="rotate(25 326 80)"/><ellipse cx="306" cy="76" rx="36" ry="10" transform="rotate(90 306 76)"/></g>
+  <rect x="50" y="150" width="90" height="80" fill="#f5f0e6" stroke="#c9b48c" stroke-width="3"/><rect x="150" y="130" width="110" height="100" fill="#fbf7ef" stroke="#c9b48c" stroke-width="3"/>
+  <rect x="80" y="190" width="24" height="40" fill="#8a5a2b"/><rect x="190" y="180" width="30" height="50" fill="#5d4037"/>
+  <rect x="62" y="166" width="16" height="16" fill="#6fa8dc"/><rect x="164" y="146" width="18" height="18" fill="#6fa8dc"/><rect x="230" y="146" width="18" height="18" fill="#6fa8dc"/>
+  <rect x="180" y="96" width="10" height="34" fill="#c9b48c"/><path d="M175 96 L195 96 L185 80 Z" fill="#c9b48c"/>
+</svg>

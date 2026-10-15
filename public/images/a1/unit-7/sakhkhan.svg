@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Ein Warmwasserboiler">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fffbe8"/><stop offset="1" stop-color="#ffe7a3"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#fff2c2"/><circle cx="340" cy="236" r="50" fill="#fff2c2"/>
+<rect x="140" y="50" width="120" height="180" rx="30" fill="#d5dbdb" stroke="#909497" stroke-width="4"/><circle cx="200" cy="120" r="22" fill="#fdfefe" stroke="#909497" stroke-width="3"/><path d="M200 120 L212 108" stroke="#c0392b" stroke-width="4"/><path d="M175 230 L175 270 M225 230 L225 270" stroke="#909497" stroke-width="8"/>
+</svg>

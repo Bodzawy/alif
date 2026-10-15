@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Ein Wachsoldat mit der Fahne Großbritanniens">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+<g><rect x="185.3" y="206.2" width="12.6" height="78.8" rx="4.2" fill="#34495e"/><rect x="202.1" y="206.2" width="12.6" height="78.8" rx="4.2" fill="#34495e"/>
+  <path d="M176.9 156.9 C176.9 146.4 223.1 146.4 223.1 156.9 L221.0 211.5 L179.0 211.5 Z" fill="#c0392b"/>
+  <path d="M221.0 159.0 L227.3 206.2" stroke="#c0392b" stroke-width="10.5" stroke-linecap="round"/><path d="M179.0 159.0 L172.7 206.2" stroke="#c0392b" stroke-width="10.5" stroke-linecap="round"/>
+  <rect x="193.7" y="138.0" width="12.6" height="12.6" fill="#efc49d"/>
+  <ellipse cx="200" cy="125.4" rx="17.85" ry="19.3" fill="#efc49d"/>
+  <circle cx="193.6" cy="125.4" r="2.0" fill="#2f2a26"/><circle cx="206.4" cy="125.4" r="2.0" fill="#2f2a26"/>
+  <circle cx="189.3" cy="130.8" r="2.1" fill="#ff9d9d" opacity=".55"/><circle cx="210.7" cy="130.8" r="2.1" fill="#ff9d9d" opacity=".55"/>
+  <path d="M194.6 132.2 Q200 136.5 205.4 132.2" stroke="#8a3b2b" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M182.15 123.6 C182.15 101.3 217.85 101.3 217.85 123.6 C210.7 114.7 189.3 114.7 182.15 123.6 Z" fill="#1b1b1b"/>
+  <path d="M181.3 117.4 C182.15 98.6 217.85 98.6 218.7 117.4 Z" fill="#1b1b1b"/><rect x="179.5" y="115.6" width="41.1" height="3.9" rx="1.8" fill="#2f2a26"/><circle cx="200" cy="110.2" r="2.5" fill="#f1c40f"/></g><rect x="234" y="40" width="5" height="220" fill="#7f8c8d"/><g transform="translate(239 44)"><rect width="64" height="42" fill="#012169"/><path d="M0 0 L64 42 M64 0 L0 42" stroke="#fff" stroke-width="7"/><path d="M0 0 L64 42 M64 0 L0 42" stroke="#c8102e" stroke-width="3"/><path d="M32 0 L32 42 M0 21 L64 21" stroke="#fff" stroke-width="11"/><path d="M32 0 L32 42 M0 21 L64 21" stroke="#c8102e" stroke-width="6"/></g>
+</svg>

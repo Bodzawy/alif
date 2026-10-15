@@ -3,9 +3,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import { CheckCircle2, Loader2, Mic, Play, Volume2, VolumeX } from "lucide-react";
 
-import { SoundWordsStep } from "@/components/a1/sound-words-step";
+import { SoundWordsStep, type WordRow } from "@/components/a1/sound-words-step";
 import { Button } from "@/components/ui/button";
-import type { A1Word, SoundItem } from "@/data/types";
 import { openGuidedMic, type GuidedMic } from "@/lib/audio/guided-mic";
 import { sleep } from "@/lib/audio/narrate";
 import { createNarrator, readMuted, type Narrator } from "@/lib/audio/narration";
@@ -23,12 +22,12 @@ import { useGuidedFlow, type BlockMark, type GuidedBlock, type GuidedDeps } from
 // checked by the same evaluation as "Aufnehmen". Without a microphone, or when
 // the evaluation keeps failing, the page falls back to the buttons.
 
-type Groups = { sound: SoundItem; words: A1Word[] }[];
+type Groups = WordRow[];
 
 /** The 12 blocks in the order the child sees them: per row the sound, then its words (RTL). */
 export function guidedBlocks(groups: Groups): GuidedBlock[] {
   return groups.flatMap(({ sound, words }) => [
-    { id: sound.id, text: sound.exercise.modelText, target: sound.exercise.target },
+    ...(sound ? [{ id: sound.id, text: sound.exercise.modelText, target: sound.exercise.target }] : []),
     ...words.map((word) => ({ id: word.id, text: word.exercise.modelText, target: word.exercise.target })),
   ]);
 }

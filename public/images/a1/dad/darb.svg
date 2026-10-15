@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Schlagen">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff0f3"/><stop offset="1" stop-color="#ffd0dc"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#ffe2e9"/><circle cx="340" cy="236" r="50" fill="#ffe2e9"/>
+<path d="M60 220 C120 200 170 170 210 130" stroke="#efc49d" stroke-width="40" fill="none" stroke-linecap="round"/>
+  <path d="M40 240 C80 226 120 210 150 190" stroke="#2e86de" stroke-width="46" fill="none"/>
+  <path d="M210 130 C220 100 250 84 280 92 C304 100 300 130 280 140 C258 150 232 150 210 130 Z" fill="#efc49d"/>
+  <g stroke="#e74c3c" stroke-width="5" stroke-linecap="round"><path d="M300 70 L330 40"/><path d="M312 100 L352 92"/><path d="M296 128 L332 150"/></g>
+  <text x="330" y="210" font-family="Arial, sans-serif" font-size="40" font-weight="bold" fill="#e74c3c">!</text>
+</svg>

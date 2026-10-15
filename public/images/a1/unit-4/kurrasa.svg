@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Ein aufgeschlagenes Heft">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fffbe8"/><stop offset="1" stop-color="#ffe7a3"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#fff2c2"/><circle cx="340" cy="236" r="50" fill="#fff2c2"/>
+  <ellipse cx="200" cy="248" rx="150" ry="10" fill="#000" opacity="0.12"/>
+<path d="M200 90 C160 74 100 74 60 86 L60 236 C100 224 160 224 200 240 Z" fill="#fdfefe" stroke="#909497" stroke-width="3"/>
+  <path d="M200 90 C240 74 300 74 340 86 L340 236 C300 224 240 224 200 240 Z" fill="#fdfefe" stroke="#909497" stroke-width="3"/>
+  <g stroke="#85c1e9" stroke-width="2"><path d="M74 108 C110 100 160 100 190 110"/><path d="M210 110 C240 100 290 100 326 108"/><path d="M74 124 C110 116 160 116 190 126"/><path d="M210 126 C240 116 290 116 326 124"/><path d="M74 140 C110 132 160 132 190 142"/><path d="M210 142 C240 132 290 132 326 140"/><path d="M74 156 C110 148 160 148 190 158"/><path d="M210 158 C240 148 290 148 326 156"/><path d="M74 172 C110 164 160 164 190 174"/><path d="M210 174 C240 164 290 164 326 172"/><path d="M74 188 C110 180 160 180 190 190"/><path d="M210 190 C240 180 290 180 326 188"/><path d="M74 204 C110 196 160 196 190 206"/><path d="M210 206 C240 196 290 196 326 204"/></g>
+  <path d="M200 90 L200 240" stroke="#909497" stroke-width="3"/>
+</svg>

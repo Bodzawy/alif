@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Ein Fenster mit Vorhang">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+<rect x="110" y="50" width="180" height="200" fill="#d6eaf8" stroke="#a0703c" stroke-width="10"/>
+  <path d="M200 50 L200 250 M110 150 L290 150" stroke="#a0703c" stroke-width="8"/>
+  <path d="M290 40 C270 90 300 150 280 260 L330 260 L330 40 Z" fill="#f5cba7"/><path d="M300 40 L300 260 M316 40 L316 260" stroke="#e59866" stroke-width="2"/>
+  <rect x="96" y="250" width="208" height="14" fill="#7d5a3a"/>
+</svg>

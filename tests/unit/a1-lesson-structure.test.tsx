@@ -1,3 +1,4 @@
+import { A1_UNIT_SLUGS } from "../support/a1-units";
 import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { existsSync } from "node:fs";
 import path from "node:path";
@@ -65,7 +66,10 @@ describe("Lektion 1: ten entries in book order", () => {
     expect(await redirected(A1UnitPage({ params: Promise.resolve({ unit: "kha" }) }))).toBe("/a1/lesson-1/kha");
     // lesson-2 is A1 · Lektion 2 now ("مَسَاءُ الْخَيْر"); the next old word-lesson URL still leads to A0.
     expect(await redirected(A1UnitPage({ params: Promise.resolve({ unit: "lesson-2" }) }))).toBeUndefined();
-    expect(await redirected(A1UnitPage({ params: Promise.resolve({ unit: "lesson-3" }) }))).toBe("/a0/words/lesson-3");
+    // Every implemented A1 lesson is shown; the next old word-lesson URLs still lead to A0.
+    for (const unit of A1_UNIT_SLUGS) expect(await redirected(A1UnitPage({ params: Promise.resolve({ unit }) })), unit).toBeUndefined();
+    const next = `lesson-${A1_UNIT_SLUGS.length + 1}`;
+    expect(await redirected(A1UnitPage({ params: Promise.resolve({ unit: next }) }))).toBe(`/a0/words/${next}`);
   });
 
   it("saved progress of Alif's old steps moves along (step-N → alif/step-(N − 1)); nothing is deleted; Laute has no new place", () => {
@@ -186,7 +190,7 @@ describe("pictures of every vocabulary item", () => {
           s.kind === "sound-words"
             ? s.groups.flatMap((g) => g.words.map((w): Picture => [`${lesson.slug} ${w.id}`, w.image]))
             : s.kind === "gaps" && s.gaps.mode === "picture"
-                ? // Lektion 2 · حروف المد · تدريب ٦ ("Ordne die Buchstaben"): the book has no pictures there.
+                ? // "Ordne die Buchstaben" (Lektion 2 · حروف المد · تدريب ٦, Unit 2 · تدريب ٤): the book has no pictures there.
                   s.gaps.items.filter((w) => !w.id.startsWith("arrange-")).map((w): Picture => [`${lesson.slug} gap ${w.id}`, w.image])
                 : s.kind === "forms"
                   ? [...s.forms.sort].filter((w) => !ABSTRACT.has(w.id)).map((w): Picture => [`${lesson.slug} forms ${w.id}`, w.image])

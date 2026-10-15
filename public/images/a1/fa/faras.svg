@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Pferd">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#f0fbec"/><stop offset="1" stop-color="#c6e8b9"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#e1f4d9"/><circle cx="340" cy="236" r="50" fill="#e1f4d9"/>
+<path d="M0 250 C120 240 280 240 400 250 L400 300 L0 300 Z" fill="#9fd27f"/>
+  <g fill="#c8a27a"><rect x="130" y="170" width="16" height="84" rx="6"/><rect x="156" y="174" width="16" height="80" rx="6"/><rect x="246" y="174" width="16" height="80" rx="6"/><rect x="270" y="170" width="16" height="84" rx="6"/></g>
+  <g fill="#5d4037"><rect x="128" y="246" width="20" height="10" rx="3"/><rect x="154" y="246" width="20" height="10" rx="3"/><rect x="244" y="246" width="20" height="10" rx="3"/><rect x="268" y="246" width="20" height="10" rx="3"/></g>
+  <ellipse cx="208" cy="160" rx="88" ry="42" fill="#e0bf96"/>
+  <path d="M268 140 C280 108 292 82 310 70 L338 84 C328 102 314 120 298 160 Z" fill="#e0bf96"/>
+  <path d="M304 64 C318 56 346 62 356 82 C360 92 352 100 342 98 L324 92 Z" fill="#e0bf96"/>
+  <path d="M310 60 L314 44 L322 58 Z" fill="#c8a27a"/><circle cx="330" cy="74" r="3.5" fill="#2f2a26"/>
+  <path d="M302 62 C292 84 282 104 276 128" stroke="#6d4c41" stroke-width="12" fill="none" stroke-linecap="round"/>
+  <path d="M122 144 C96 150 86 186 92 222 C96 236 104 244 110 248 C108 220 112 190 122 172 Z" fill="#6d4c41"/>
+</svg>

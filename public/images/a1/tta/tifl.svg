@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Ein Baby auf einem Kissen">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fffbe8"/><stop offset="1" stop-color="#ffe7a3"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#fff2c2"/><circle cx="340" cy="236" r="50" fill="#fff2c2"/>
+  <ellipse cx="200" cy="262" rx="140" ry="10" fill="#000" opacity="0.12"/>
+<ellipse cx="200" cy="190" rx="150" ry="74" fill="#d6b48a"/><ellipse cx="200" cy="180" rx="134" ry="60" fill="#f3e2c7"/>
+  <ellipse cx="216" cy="182" rx="66" ry="40" fill="#fff" />
+  <circle cx="140" cy="160" r="38" fill="#f5d0b0"/>
+  <path d="M110 140 C120 118 160 118 170 136" stroke="#c49a6c" stroke-width="5" fill="none"/>
+  <circle cx="128" cy="160" r="4" fill="#2f2a26"/><circle cx="152" cy="160" r="4" fill="#2f2a26"/><ellipse cx="140" cy="178" rx="8" ry="6" fill="#c0392b"/>
+  <ellipse cx="282" cy="168" rx="14" ry="10" fill="#f5d0b0"/><ellipse cx="282" cy="198" rx="14" ry="10" fill="#f5d0b0"/>
+  <path d="M184 150 C200 140 220 142 236 152" stroke="#f5d0b0" stroke-width="14" stroke-linecap="round" fill="none"/>
+</svg>

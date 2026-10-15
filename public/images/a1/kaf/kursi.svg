@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Stuhl">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#f0fbec"/><stop offset="1" stop-color="#c6e8b9"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#e1f4d9"/><circle cx="340" cy="236" r="50" fill="#e1f4d9"/>
+  <ellipse cx="200" cy="278" rx="100" ry="10" fill="#000" opacity="0.12"/>
+<rect x="140" y="40" width="14" height="230" rx="5" fill="#8a5a2b"/><rect x="246" y="40" width="14" height="230" rx="5" fill="#8a5a2b"/>
+  <rect x="146" y="60" width="108" height="12" rx="4" fill="#a0703c"/><rect x="146" y="100" width="108" height="10" rx="4" fill="#a0703c"/>
+  <path d="M120 160 L280 160 L294 186 L106 186 Z" fill="#c49a6c"/>
+  <rect x="112" y="186" width="12" height="90" rx="4" fill="#8a5a2b"/><rect x="276" y="186" width="12" height="90" rx="4" fill="#8a5a2b"/>
+</svg>

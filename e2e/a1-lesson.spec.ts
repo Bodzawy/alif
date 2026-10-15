@@ -18,7 +18,7 @@ test.describe("phone", () => {
   test("the contents list the ten entries in book order; each opens its first step and leads back", async ({ page }) => {
     const errors = collectPageErrors(page);
     await page.goto("/a1");
-    await expect(page.locator('a[data-testid^="a1-lesson-"]')).toHaveCount(2); // Lektion 1 and 2
+    await expect(page.locator('a[data-testid^="a1-lesson-"]')).toHaveCount(20); // Lektion 1–20 (the whole book)
     expect(await noHorizontalScroll(page)).toBe(true);
     await page.getByTestId("a1-lesson-lesson-1").tap();
     await expect(page).toHaveURL(/\/a1\/lesson-1$/);

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Ein Salon mit Kamin, Bild und Vorhang">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fffbe8"/><stop offset="1" stop-color="#ffe7a3"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#fff2c2"/><circle cx="340" cy="236" r="50" fill="#fff2c2"/>
+<rect x="0" y="0" width="400" height="200" fill="#fdebd0"/><rect x="0" y="200" width="400" height="100" fill="#d7a86e"/><rect x="20" y="20" width="40" height="190" fill="#c0392b" opacity=".7"/><rect x="160" y="40" width="70" height="50" fill="#fdfefe" stroke="#a0703c" stroke-width="5"/><rect x="270" y="110" width="100" height="100" fill="#d5dbdb"/><rect x="290" y="150" width="60" height="60" fill="#2c3e50"/><path d="M305 205 C310 180 330 180 335 205" fill="#e67e22"/><rect x="90" y="160" width="130" height="60" rx="14" fill="#a569bd"/>
+</svg>

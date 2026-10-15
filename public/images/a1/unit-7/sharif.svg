@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Scharif">
+  <defs><clipPath id="c"><circle cx="100" cy="100" r="100"/></clipPath></defs><g clip-path="url(#c)"><circle cx="100" cy="100" r="100" fill="#fef9e7"/>
+<path d="M37.0 182.0 C40.0 137.0 70.0 126.5 100 126.5 C130.0 126.5 160.0 137.0 163.0 182.0 Z" fill="#c0392b"/>
+  <rect x="91.0" y="116.0" width="18.0" height="13.5" fill="#efc49d"/>
+  <ellipse cx="100" cy="92" rx="30" ry="32.4" fill="#efc49d"/>
+  <circle cx="89.2" cy="92" r="3.3" fill="#2f2a26"/><circle cx="110.8" cy="92" r="3.3" fill="#2f2a26"/>
+  <circle cx="82.0" cy="101.0" r="3.6" fill="#ff9d9d" opacity=".55"/><circle cx="118.0" cy="101.0" r="3.6" fill="#ff9d9d" opacity=".55"/>
+  <path d="M91.0 103.4 Q100 110.6 109.0 103.4" stroke="#8a3b2b" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  <circle cx="74.5" cy="81.5" r="9.6" fill="#1b1b1b"/><circle cx="82.0" cy="68.0" r="9.6" fill="#1b1b1b"/><circle cx="95.5" cy="62.0" r="9.6" fill="#1b1b1b"/><circle cx="109.0" cy="63.5" r="9.6" fill="#1b1b1b"/><circle cx="122.5" cy="71.0" r="9.6" fill="#1b1b1b"/><circle cx="127.0" cy="84.5" r="9.6" fill="#1b1b1b"/>
+  <g fill="none" stroke="#2f2a26" stroke-width="2.1"><circle cx="89.2" cy="92" r="7.2"/><circle cx="110.8" cy="92" r="7.2"/><path d="M96.4 92 L103.6 92"/></g>
+  </g>
+</svg>

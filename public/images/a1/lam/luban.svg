@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Kaugummi">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+<rect x="70" y="130" width="260" height="56" rx="10" fill="#fff59d" stroke="#f9a825" stroke-width="3" transform="rotate(-12 200 158)"/>
+  <rect x="120" y="140" width="160" height="36" rx="6" fill="#4fc3f7" transform="rotate(-12 200 158)"/>
+  <text x="200" y="166" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#fff" transform="rotate(-12 200 158)">GUM</text>
+  <circle cx="300" cy="230" r="30" fill="#f8bbd0" stroke="#ec407a" stroke-width="3"/>
+</svg>

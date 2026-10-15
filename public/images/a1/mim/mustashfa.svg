@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Krankenhaus">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+<rect x="0" y="250" width="400" height="50" fill="#9fd27f"/>
+  <rect x="70" y="80" width="260" height="170" fill="#fafafa" stroke="#b0bec5" stroke-width="4"/>
+  <rect x="160" y="40" width="80" height="50" fill="#fafafa" stroke="#b0bec5" stroke-width="4"/>
+  <rect x="190" y="48" width="20" height="36" fill="#e53935"/><rect x="182" y="56" width="36" height="20" fill="#e53935"/>
+  <g fill="#90caf9"><rect x="90" y="100" width="34" height="28" rx="3"/><rect x="146" y="100" width="34" height="28" rx="3"/><rect x="202" y="100" width="34" height="28" rx="3"/><rect x="258" y="100" width="34" height="28" rx="3"/><rect x="314" y="100" width="34" height="28" rx="3"/><rect x="90" y="146" width="34" height="28" rx="3"/><rect x="146" y="146" width="34" height="28" rx="3"/><rect x="258" y="146" width="34" height="28" rx="3"/><rect x="314" y="146" width="34" height="28" rx="3"/></g>
+  <rect x="176" y="190" width="48" height="60" fill="#64b5f6"/><path d="M200 190 L200 250" stroke="#1e88e5" stroke-width="3"/>
+</svg>

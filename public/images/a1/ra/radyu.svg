@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Radio">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fffbe8"/><stop offset="1" stop-color="#ffe7a3"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#fff2c2"/><circle cx="340" cy="236" r="50" fill="#fff2c2"/>
+  <ellipse cx="200" cy="244" rx="110" ry="10" fill="#000" opacity="0.12"/>
+<line x1="250" y1="96" x2="300" y2="40" stroke="#5d6d7e" stroke-width="5" stroke-linecap="round"/><circle cx="300" cy="40" r="6" fill="#5d6d7e"/>
+  <rect x="90" y="96" width="220" height="140" rx="22" fill="#b5651d"/><rect x="104" y="110" width="192" height="112" rx="14" fill="#d4874a"/>
+  <circle cx="160" cy="166" r="40" fill="#5d4037"/><g fill="#8d6e63"><circle cx="136" cy="166" r="4"/><circle cx="148" cy="154" r="4"/><circle cx="148" cy="166" r="4"/><circle cx="148" cy="178" r="4"/><circle cx="160" cy="142" r="4"/><circle cx="160" cy="154" r="4"/><circle cx="160" cy="166" r="4"/><circle cx="160" cy="178" r="4"/><circle cx="160" cy="190" r="4"/><circle cx="172" cy="154" r="4"/><circle cx="172" cy="166" r="4"/><circle cx="172" cy="178" r="4"/><circle cx="184" cy="166" r="4"/></g>
+  <rect x="216" y="128" width="64" height="30" rx="6" fill="#fff4d6"/><path d="M226 150 L226 136 M238 150 L238 140 M250 150 L250 134 M262 150 L262 140 M272 150 L272 136" stroke="#8a5a2b" stroke-width="2"/><path d="M244 128 L244 158" stroke="#e53950" stroke-width="3"/>
+  <circle cx="232" cy="190" r="13" fill="#5d4037"/><circle cx="268" cy="190" r="13" fill="#5d4037"/>
+</svg>

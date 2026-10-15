@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Polizist">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+<g><rect x="179.7" y="181.2" width="17.4" height="108.8" rx="5.8" fill="#152a45"/><rect x="202.9" y="181.2" width="17.4" height="108.8" rx="5.8" fill="#152a45"/>
+  <path d="M168.1 113.1 C168.1 98.6 231.9 98.6 231.9 113.1 L229.0 188.5 L171.0 188.5 Z" fill="#1f3a5f"/>
+  <path d="M229.0 116.0 L258.0 72.5" stroke="#1f3a5f" stroke-width="14.5" stroke-linecap="round"/><circle cx="260.9" cy="66.7" r="8.7" fill="#efc49d"/>
+  <path d="M171.0 116.0 L162.3 181.2" stroke="#1f3a5f" stroke-width="14.5" stroke-linecap="round"/>
+  <rect x="191.3" y="87.0" width="17.4" height="17.4" fill="#efc49d"/>
+  <ellipse cx="200" cy="69.6" rx="24.65" ry="26.6" fill="#efc49d"/>
+  <circle cx="191.1" cy="69.6" r="2.7" fill="#2f2a26"/><circle cx="208.9" cy="69.6" r="2.7" fill="#2f2a26"/>
+  <circle cx="185.2" cy="77.0" r="3.0" fill="#ff9d9d" opacity=".55"/><circle cx="214.8" cy="77.0" r="3.0" fill="#ff9d9d" opacity=".55"/>
+  <path d="M192.6 79.0 Q200 84.9 207.4 79.0" stroke="#8a3b2b" stroke-width="2.0" fill="none" stroke-linecap="round"/>
+  <path d="M175.35 67.1 C175.35 36.3 224.65 36.3 224.65 67.1 C214.8 54.8 185.2 54.8 175.35 67.1 Z" fill="#2a1a10"/>
+  <path d="M174.1 58.5 C175.35 32.6 224.65 32.6 225.9 58.5 Z" fill="#1f3a5f"/><rect x="171.7" y="56.0" width="56.7" height="5.4" rx="2.5" fill="#2f2a26"/><circle cx="200" cy="48.6" r="3.5" fill="#f1c40f"/></g>
+  <rect x="186" y="118" width="16" height="14" fill="#f1c40f"/><path d="M180 116 L220 190" stroke="#d4ac0d" stroke-width="4"/>
+</svg>

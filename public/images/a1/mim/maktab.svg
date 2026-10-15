@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Schreibtisch">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fffbe8"/><stop offset="1" stop-color="#ffe7a3"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#fff2c2"/><circle cx="340" cy="236" r="50" fill="#fff2c2"/>
+  <ellipse cx="200" cy="264" rx="150" ry="10" fill="#000" opacity="0.12"/>
+<rect x="50" y="110" width="300" height="20" rx="4" fill="#8a5a2b"/>
+  <rect x="60" y="130" width="100" height="130" fill="#a0703c"/><rect x="240" y="130" width="100" height="130" fill="#a0703c"/>
+  <g fill="#b9864f" stroke="#7a4a2a" stroke-width="2"><rect x="70" y="140" width="80" height="34"/><rect x="70" y="182" width="80" height="34"/><rect x="70" y="224" width="80" height="30"/><rect x="250" y="140" width="80" height="34"/><rect x="250" y="182" width="80" height="34"/><rect x="250" y="224" width="80" height="30"/></g>
+  <g fill="#3b2416"><rect x="100" y="154" width="20" height="6" rx="3"/><rect x="100" y="196" width="20" height="6" rx="3"/><rect x="100" y="236" width="20" height="6" rx="3"/><rect x="280" y="154" width="20" height="6" rx="3"/><rect x="280" y="196" width="20" height="6" rx="3"/><rect x="280" y="236" width="20" height="6" rx="3"/></g>
+  <rect x="170" y="134" width="60" height="22" fill="#b9864f" stroke="#7a4a2a" stroke-width="2"/>
+</svg>

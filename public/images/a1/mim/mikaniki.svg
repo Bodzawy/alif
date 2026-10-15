@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Mechaniker">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+<path d="M30 230 L30 190 C30 170 60 150 100 146 L140 110 L240 110 L280 150 C320 156 340 176 340 200 L340 230 Z" fill="#e74c3c"/>
+  <path d="M150 120 L230 120 L262 150 L136 150 Z" fill="#bbdefb"/>
+  <circle cx="90" cy="236" r="26" fill="#263238"/><circle cx="90" cy="236" r="10" fill="#90a4ae"/><circle cx="280" cy="236" r="26" fill="#263238"/><circle cx="280" cy="236" r="10" fill="#90a4ae"/>
+  <path d="M30 190 L-10 130 L60 140 Z" fill="#c0392b"/>
+  <g><rect x="58.1" y="196.2" width="10.2" height="63.8" rx="3.4" fill="#0d47a1"/><rect x="71.7" y="196.2" width="10.2" height="63.8" rx="3.4" fill="#0d47a1"/>
+  <path d="M51.3 156.3 C51.3 147.8 88.7 147.8 88.7 156.3 L87.0 200.5 L53.0 200.5 Z" fill="#1565c0"/>
+  <path d="M87.0 159.7 L114.2 168.2" stroke="#1565c0" stroke-width="8.5" stroke-linecap="round"/><circle cx="117.6" cy="169.1" r="5.1" fill="#efc49d"/>
+  <path d="M53.0 158.0 L47.9 196.2" stroke="#1565c0" stroke-width="8.5" stroke-linecap="round"/>
+  <rect x="64.9" y="141.0" width="10.2" height="10.2" fill="#efc49d"/>
+  <ellipse cx="70" cy="130.8" rx="14.45" ry="15.6" fill="#efc49d"/>
+  <circle cx="64.8" cy="130.8" r="1.6" fill="#2f2a26"/><circle cx="75.2" cy="130.8" r="1.6" fill="#2f2a26"/>
+  <circle cx="61.3" cy="135.1" r="1.7" fill="#ff9d9d" opacity=".55"/><circle cx="78.7" cy="135.1" r="1.7" fill="#ff9d9d" opacity=".55"/>
+  <path d="M65.7 136.3 Q70 139.8 74.3 136.3" stroke="#8a3b2b" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M55.55 129.4 C55.55 111.3 84.45 111.3 84.45 129.4 C78.7 122.1 61.3 122.1 55.55 129.4 Z" fill="#2a1a10"/>
+  <path d="M54.8 124.3 C55.55 109.1 84.45 109.1 85.2 124.3 Z" fill="#1565c0"/><rect x="53.4" y="122.9" width="33.2" height="3.2" rx="1.4" fill="#2f2a26"/><circle cx="70" cy="118.5" r="2.0" fill="#f1c40f"/></g>
+  <path d="M116 168 L136 146" stroke="#95a5a6" stroke-width="6" stroke-linecap="round"/>
+</svg>

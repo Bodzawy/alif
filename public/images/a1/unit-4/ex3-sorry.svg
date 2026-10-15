@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Ein Kellner hat einem Gast Essen auf die Kleidung geschüttet">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff0f3"/><stop offset="1" stop-color="#ffd0dc"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#ffe2e9"/><circle cx="340" cy="236" r="50" fill="#ffe2e9"/>
+<g><rect x="113.9" y="193.8" width="13.8" height="86.2" rx="4.6" fill="#1b4f72"/><rect x="132.3" y="193.8" width="13.8" height="86.2" rx="4.6" fill="#1b4f72"/>
+  <path d="M104.7 139.7 C104.7 128.2 155.3 128.2 155.3 139.7 L153.0 199.5 L107.0 199.5 Z" fill="#2471a3"/>
+  <path d="M153.0 142.0 L159.9 193.8" stroke="#2471a3" stroke-width="11.5" stroke-linecap="round"/><path d="M107.0 142.0 L100.1 193.8" stroke="#2471a3" stroke-width="11.5" stroke-linecap="round"/>
+  <rect x="123.1" y="119.0" width="13.8" height="13.8" fill="#efc49d"/>
+  <ellipse cx="130" cy="105.20000000000003" rx="19.549999999999997" ry="21.1" fill="#efc49d"/>
+  <circle cx="123.0" cy="105.20000000000003" r="2.2" fill="#2f2a26"/><circle cx="137.0" cy="105.20000000000003" r="2.2" fill="#2f2a26"/>
+  <circle cx="118.3" cy="111.1" r="2.3" fill="#ff9d9d" opacity=".55"/><circle cx="141.7" cy="111.1" r="2.3" fill="#ff9d9d" opacity=".55"/>
+  <path d="M124.1 112.6 Q130 117.3 135.9 112.6" stroke="#8a3b2b" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+  <path d="M110.45 103.2 C110.45 78.8 149.55 78.8 149.55 103.2 C141.7 93.5 118.3 93.5 110.45 103.2 Z" fill="#2a1a10"/></g><path d="M110 160 C120 175 140 175 150 160" fill="#d35400"/><circle cx="118" cy="168" r="6" fill="#d35400"/><g><rect x="253.2" y="190.0" width="14.4" height="90.0" rx="4.8" fill="#1b1b1b"/><rect x="272.4" y="190.0" width="14.4" height="90.0" rx="4.8" fill="#1b1b1b"/>
+  <path d="M243.6 133.6 C243.6 121.6 296.4 121.6 296.4 133.6 L294.0 196.0 L246.0 196.0 Z" fill="#fdfefe"/>
+  <path d="M294.0 138.4 L332.4 150.4" stroke="#fdfefe" stroke-width="12.0" stroke-linecap="round"/><circle cx="337.2" cy="151.6" r="7.2" fill="#efc49d"/>
+  <path d="M246.0 136.0 L238.8 190.0" stroke="#fdfefe" stroke-width="12.0" stroke-linecap="round"/>
+  <rect x="262.8" y="112.0" width="14.4" height="14.4" fill="#efc49d"/>
+  <ellipse cx="270" cy="97.6" rx="20.4" ry="22.0" fill="#efc49d"/>
+  <circle cx="262.7" cy="97.6" r="2.2" fill="#2f2a26"/><circle cx="277.3" cy="97.6" r="2.2" fill="#2f2a26"/>
+  <circle cx="257.8" cy="103.7" r="2.4" fill="#ff9d9d" opacity=".55"/><circle cx="282.2" cy="103.7" r="2.4" fill="#ff9d9d" opacity=".55"/>
+  <path d="M263.9 105.4 Q270 110.2 276.1 105.4" stroke="#8a3b2b" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+  <path d="M249.6 95.6 C249.6 70.1 290.4 70.1 290.4 95.6 C282.2 85.4 257.8 85.4 249.6 95.6 Z" fill="#1b1b1b"/></g><ellipse cx="320" cy="150" rx="40" ry="8" fill="#bdc3c7"/><circle cx="310" cy="142" r="10" fill="#e67e22"/>
+</svg>

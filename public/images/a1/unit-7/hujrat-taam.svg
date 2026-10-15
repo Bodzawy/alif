@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Ein Esszimmer mit Tisch und Stühlen">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fffbe8"/><stop offset="1" stop-color="#ffe7a3"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#fff2c2"/><circle cx="340" cy="236" r="50" fill="#fff2c2"/>
+<rect x="0" y="0" width="400" height="200" fill="#fdebd0"/><rect x="0" y="200" width="400" height="100" fill="#d7a86e"/><rect x="30" y="120" width="110" height="90" fill="#a0703c"/><rect x="170" y="150" width="190" height="16" fill="#7d5a3a"/><rect x="180" y="166" width="10" height="60" fill="#7d5a3a"/><rect x="340" y="166" width="10" height="60" fill="#7d5a3a"/><rect x="200" y="120" width="10" height="100" fill="#5d4037"/><rect x="250" y="120" width="10" height="100" fill="#5d4037"/><rect x="300" y="120" width="10" height="100" fill="#5d4037"/>
+</svg>

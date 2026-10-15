@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Eine Schachtel">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#f6f0ff"/><stop offset="1" stop-color="#dccbfb"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#ece2fd"/><circle cx="340" cy="236" r="50" fill="#ece2fd"/>
+  <ellipse cx="200" cy="258" rx="120" ry="10" fill="#000" opacity="0.12"/>
+<path d="M90 130 L200 96 L310 130 L200 164 Z" fill="#d7bde2"/>
+  <path d="M90 130 L90 220 L200 256 L200 164 Z" fill="#a569bd"/><path d="M310 130 L310 220 L200 256 L200 164 Z" fill="#8e44ad"/>
+  <path d="M84 126 L200 88 L316 126 L316 142 L200 180 L84 142 Z" fill="#bb8fce" opacity=".8"/>
+</svg>

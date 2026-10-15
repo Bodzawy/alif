@@ -1,3 +1,4 @@
+import { A1_UNIT_SLUGS } from "../support/a1-units";
 import { act, cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { existsSync } from "node:fs";
 import path from "node:path";
@@ -22,7 +23,7 @@ const [wordsStep] = lesson.steps;
 
 describe("A1 · Lesson 1 content", () => {
   it("Alif is the first entry of الدرس الأول – صباح الخير, with five steps: words (with the vowels), forms of أ, writing, filling gaps, listening", () => {
-    expect(A1_LEVEL.units.map((u) => u.slug)).toEqual(["lesson-1", "lesson-2"]);
+    expect(A1_LEVEL.units.map((u) => u.slug)).toEqual(A1_UNIT_SLUGS);
     expect(a1Unit1.lessons.map((l) => l.slug)).toEqual(["alif", "ba", "ta", "tha", "jim", "hha", "kha", "review", "sabah-al-khayr", "tahiyya-wa-taqdim"]);
     expect(arabicLessonLabel(a1Unit1.number)).toBe("الدرس الأول");
     expect(a1Unit1.title).toBe("صَبَاحُ الْخَيْر");
@@ -97,7 +98,7 @@ describe("A1 · Lesson 1 content", () => {
   });
 
   it("vowel rules: decided by the vowel IQRA hears, not by Azure accuracy", () => {
-    expect(Object.keys(SOUND_RULES)).toEqual(["أَ", "إِ", "أُ", ...["ب", "ت", "ث", "ج", "ح", "خ", "د", "ذ", "و", "ي"].flatMap((l) => [l + "َ", l + "ِ", l + "ُ"])]);
+    expect(Object.keys(SOUND_RULES)).toEqual(["أَ", "إِ", "أُ", ...["ب", "ت", "ث", "ج", "ح", "خ", "د", "ذ", "و", "ي", "ر", "ز", "س", "ش", "ص", "ض", "ف", "ق", "ك", "ل", "م", "ن", "ه", "ط", "ظ", "ع", "غ"].flatMap((l) => [l + "َ", l + "ِ", l + "ُ"])]);
     const heard = { "أَ": ["<", "aa"], "إِ": ["<", "i"], "أُ": ["h", "uu"] } as const;
     const assess = (target: string, phonemes: string[] | null, accuracy = 90) =>
       buildAssessment({

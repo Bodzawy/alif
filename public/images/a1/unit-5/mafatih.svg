@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Schlüssel">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fffbe8"/><stop offset="1" stop-color="#ffe7a3"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#fff2c2"/><circle cx="340" cy="236" r="50" fill="#fff2c2"/>
+<circle cx="290" cy="110" r="40" fill="none" stroke="#909497" stroke-width="10"/>
+  <g transform="rotate(-20 200 160)"><circle cx="250" cy="150" r="26" fill="#d4ac0d"/><circle cx="250" cy="150" r="9" fill="#fef9e7"/><rect x="90" y="142" width="140" height="16" fill="#d4ac0d"/><path d="M100 158 L100 176 L114 176 L114 158 M126 158 L126 170 L138 170 L138 158" fill="#d4ac0d"/></g>
+  <g transform="rotate(10 200 200)"><rect x="210" y="180" width="60" height="44" rx="10" fill="#1b1b1b"/><rect x="80" y="196" width="140" height="14" fill="#909497"/><path d="M90 210 L90 226 L104 226 L104 210" fill="#909497"/></g>
+</svg>

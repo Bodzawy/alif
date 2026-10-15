@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Ein Postamt">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+<rect x="70" y="60" width="260" height="200" fill="#f5e6d3" stroke="#a0703c" stroke-width="4"/>
+  <rect x="80" y="70" width="240" height="44" fill="#1a5276"/><text x="200" y="102" text-anchor="middle" font-family="'Noto Naskh Arabic','Geeza Pro',serif" font-size="28" font-weight="bold" fill="#fdfefe">بَرِيد</text>
+  <rect x="110" y="140" width="80" height="60" fill="#fdfefe" stroke="#909497" stroke-width="2"/><path d="M110 140 L150 170 L190 140" fill="none" stroke="#909497" stroke-width="2"/><rect x="220" y="130" width="70" height="128" fill="#7d5a3a"/><rect x="40" y="258" width="320" height="10" fill="#7f8c8d"/>
+</svg>

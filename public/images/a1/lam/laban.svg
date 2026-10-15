@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Milch">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+  <ellipse cx="200" cy="270" rx="70" ry="10" fill="#000" opacity="0.12"/>
+<rect x="172" y="40" width="56" height="26" rx="5" fill="#2980b9"/>
+  <path d="M176 66 L224 66 L224 90 C252 104 256 130 256 150 L256 250 C256 260 248 266 238 266 L162 266 C152 266 144 260 144 250 L144 150 C144 130 148 104 176 90 Z" fill="#fff" stroke="#b0bec5" stroke-width="4"/>
+  <rect x="156" y="160" width="88" height="56" rx="8" fill="#d6eaf8"/><text x="200" y="196" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#2980b9">MILK</text>
+</svg>

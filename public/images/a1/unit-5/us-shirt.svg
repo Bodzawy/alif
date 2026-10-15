@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Ein Mann mit „U.S.“ auf dem Pullover">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fffbe8"/><stop offset="1" stop-color="#ffe7a3"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#fff2c2"/><circle cx="340" cy="236" r="50" fill="#fff2c2"/>
+<path d="M107.6 232.0 C112.0 166.0 156.0 150.6 200 150.6 C244.0 150.6 288.0 166.0 292.4 232.0 Z" fill="#fdfefe"/>
+  <rect x="186.8" y="135.2" width="26.4" height="19.8" fill="#e3ad84"/>
+  <ellipse cx="200" cy="100" rx="44" ry="47.5" fill="#e3ad84"/>
+  <circle cx="184.2" cy="100" r="4.8" fill="#2f2a26"/><circle cx="215.8" cy="100" r="4.8" fill="#2f2a26"/>
+  <circle cx="173.6" cy="113.2" r="5.3" fill="#ff9d9d" opacity=".55"/><circle cx="226.4" cy="113.2" r="5.3" fill="#ff9d9d" opacity=".55"/>
+  <path d="M186.8 116.7 Q200 127.3 213.2 116.7" stroke="#8a3b2b" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <path d="M156 95.6 C156 40.6 244 40.6 244 95.6 C226.4 73.6 173.6 73.6 156 95.6 Z" fill="#1b1b1b"/><rect x="110" y="200" width="180" height="14" fill="#2471a3"/><text x="200" y="262" text-anchor="middle" font-family="Arial, sans-serif" font-size="40" font-weight="bold" fill="#1b4f72">U.S</text>
+</svg>

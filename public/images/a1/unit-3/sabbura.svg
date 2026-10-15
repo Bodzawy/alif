@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Eine Tafel auf einem Gestell">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#f0fbec"/><stop offset="1" stop-color="#c6e8b9"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#e1f4d9"/><circle cx="340" cy="236" r="50" fill="#e1f4d9"/>
+<path d="M120 40 L90 280 M280 40 L310 280 M200 30 L200 60" stroke="#8a5a2b" stroke-width="10" stroke-linecap="round"/>
+  <rect x="100" y="60" width="200" height="140" rx="6" fill="#1e3a2b" stroke="#a0703c" stroke-width="10"/>
+  <path d="M140 110 L180 110 M140 140 L230 140" stroke="#fff" stroke-width="4" opacity=".6" stroke-linecap="round"/>
+  <rect x="104" y="204" width="192" height="10" fill="#a0703c"/>
+</svg>

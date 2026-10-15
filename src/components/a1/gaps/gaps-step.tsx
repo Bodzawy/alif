@@ -273,6 +273,11 @@ export function GapsStep({ gaps, availableAudio, progressKey }: { gaps: GapsCont
           {current.item.image && (
             <Image src={current.item.image.src} alt={current.item.image.alt} width={200} height={150} className="mx-auto mt-4 rounded-2xl" unoptimized data-testid="gap-image" />
           )}
+          {current.item.hint && (
+            <p lang="ar" dir="rtl" className="mt-3 font-arabic text-3xl font-bold leading-[1.8] text-muted-foreground" data-testid="gap-hint">
+              {current.item.hint}
+            </p>
+          )}
 
           {/* The word: the rest in pieces around the gap (cut only after letters without a Hand), or – once solved – shaped as one string. */}
           <div className="mt-4 grid min-h-28 place-items-center">

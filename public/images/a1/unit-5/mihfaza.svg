@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Eine Brieftasche">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fffbe8"/><stop offset="1" stop-color="#ffe7a3"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#fff2c2"/><circle cx="340" cy="236" r="50" fill="#fff2c2"/>
+  <ellipse cx="200" cy="236" rx="120" ry="10" fill="#000" opacity="0.12"/>
+<rect x="90" y="90" width="220" height="140" rx="16" fill="#6e2c00"/><rect x="100" y="100" width="200" height="60" rx="10" fill="#873600"/>
+  <rect x="120" y="80" width="150" height="40" rx="4" fill="#82e0aa" stroke="#1e8449" stroke-width="2"/>
+  <path d="M90 160 L310 160" stroke="#4a1f00" stroke-width="3"/><circle cx="290" cy="190" r="10" fill="#d4ac0d"/>
+</svg>

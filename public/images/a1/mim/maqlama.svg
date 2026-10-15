@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Federmäppchen">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+<rect x="70" y="120" width="260" height="90" rx="14" fill="#7e57c2"/><rect x="70" y="120" width="260" height="24" rx="12" fill="#5e35b1"/>
+  <path d="M90 132 L310 132" stroke="#ffd54f" stroke-width="4" stroke-dasharray="8 6"/>
+  <path d="M110 110 L300 70" stroke="#f1c40f" stroke-width="12" stroke-linecap="round"/><path d="M300 70 L320 66 L304 78 Z" fill="#2f2a26"/>
+  <path d="M120 100 L270 50" stroke="#e74c3c" stroke-width="10" stroke-linecap="round"/>
+  <rect x="150" y="230" width="60" height="24" rx="5" fill="#ff8a80"/><rect x="230" y="232" width="70" height="14" rx="7" fill="#29b6f6"/>
+</svg>

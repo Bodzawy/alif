@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Kilo">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+  <ellipse cx="200" cy="254" rx="90" ry="10" fill="#000" opacity="0.12"/>
+<path d="M120 130 L160 100 L240 100 L280 130 L280 220 L240 250 L160 250 L120 220 Z" fill="#7f8c8d" stroke="#566573" stroke-width="4"/>
+  <path d="M120 130 L160 100 L240 100 L280 130 L240 150 L160 150 Z" fill="#95a5a6"/>
+  <ellipse cx="200" cy="124" rx="34" ry="14" fill="#bdc3c7"/>
+  <text x="200" y="214" font-family="Arial, sans-serif" font-size="46" font-weight="bold" text-anchor="middle" fill="#ecf0f1">1 kg</text>
+</svg>

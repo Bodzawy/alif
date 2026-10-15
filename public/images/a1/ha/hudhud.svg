@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Wiedehopf">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#f0fbec"/><stop offset="1" stop-color="#c6e8b9"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#e1f4d9"/><circle cx="340" cy="236" r="50" fill="#e1f4d9"/>
+<path d="M60 230 C140 220 260 226 360 240" stroke="#7a4a2a" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <path d="M180 220 L170 246 M210 220 L214 246" stroke="#7a4a2a" stroke-width="5"/>
+  <ellipse cx="200" cy="180" rx="70" ry="40" fill="#e0a96d"/>
+  <path d="M220 160 C260 150 300 170 330 200 C300 196 270 196 240 200 Z" fill="#2b2b2b"/>
+  <g stroke="#fff" stroke-width="6"><path d="M260 168 L270 190"/><path d="M284 176 L294 196"/></g>
+  <circle cx="140" cy="140" r="32" fill="#e0a96d"/>
+  <path d="M112 116 L96 70 L124 108 L124 60 L140 104 L150 56 L156 104 L174 66 L166 112 Z" fill="#e0a96d"/>
+  <g fill="#2b2b2b"><circle cx="96" cy="70" r="5"/><circle cx="124" cy="60" r="5"/><circle cx="150" cy="56" r="5"/><circle cx="174" cy="66" r="5"/></g>
+  <circle cx="130" cy="136" r="5" fill="#2b2b2b"/>
+  <path d="M110 146 C90 150 70 156 46 164 C70 150 90 142 112 138 Z" fill="#3d3d3d"/>
+</svg>

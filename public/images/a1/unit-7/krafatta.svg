@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Eine Krawatte">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+<path d="M185 40 L215 40 L208 70 L230 230 L200 270 L170 230 L192 70 Z" fill="#922b21"/><path d="M192 70 L208 70" stroke="#641e16" stroke-width="4"/><path d="M180 100 L222 120" stroke="#f5b041" stroke-width="5"/><path d="M180 130 L222 150" stroke="#f5b041" stroke-width="5"/><path d="M180 160 L222 180" stroke="#f5b041" stroke-width="5"/><path d="M180 190 L222 210" stroke="#f5b041" stroke-width="5"/>
+</svg>

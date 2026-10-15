@@ -12,7 +12,7 @@ const isSound = (target: string) => /[\u064B-\u0652]/.test(target);
 export function a1Words(): A1Word[] {
   const all = a1Entries().flatMap(({ lesson }) =>
     lesson.steps.flatMap((step): A1Word[] =>
-      step.kind === "sound-words"
+      step.kind === "sound-words" || step.kind === "words"
         ? step.groups.flatMap((group) => group.words)
         : step.kind === "dialogue"
           ? step.dialogue.lines.map(({ id, arabic, german, transliteration, exercise }) => ({ id, arabic, german, transliteration, exercise }))

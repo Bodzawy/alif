@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Socken">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff0f3"/><stop offset="1" stop-color="#ffd0dc"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#ffe2e9"/><circle cx="340" cy="236" r="50" fill="#ffe2e9"/>
+<path d="M150 40 L200 40 L200 200 C200 240 170 260 130 260 C100 260 90 230 120 220 L150 200 Z" fill="#a93226"/><path d="M220 60 L270 60 L270 220 C270 260 240 270 210 270 C180 268 175 245 200 238 L220 220 Z" fill="#cd6155"/><path d="M150 60 L200 60" stroke="#f5b7b1" stroke-width="5"/><path d="M150 84 L200 84" stroke="#f5b7b1" stroke-width="5"/><path d="M150 108 L200 108" stroke="#f5b7b1" stroke-width="5"/><path d="M150 132 L200 132" stroke="#f5b7b1" stroke-width="5"/><path d="M150 156 L200 156" stroke="#f5b7b1" stroke-width="5"/>
+</svg>

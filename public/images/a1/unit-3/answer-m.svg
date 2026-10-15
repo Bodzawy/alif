@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Der Antwortende">
+  <defs><clipPath id="c"><circle cx="100" cy="100" r="100"/></clipPath></defs><g clip-path="url(#c)"><circle cx="100" cy="100" r="100" fill="#e3f1fb"/>
+<path d="M37.0 182.0 C40.0 137.0 70.0 126.5 100 126.5 C130.0 126.5 160.0 137.0 163.0 182.0 Z" fill="#2471a3"/>
+  <rect x="91.0" y="116.0" width="18.0" height="13.5" fill="#efc49d"/>
+  <ellipse cx="100" cy="92" rx="30" ry="32.4" fill="#efc49d"/>
+  <circle cx="89.2" cy="92" r="3.3" fill="#2f2a26"/><circle cx="110.8" cy="92" r="3.3" fill="#2f2a26"/>
+  <circle cx="82.0" cy="101.0" r="3.6" fill="#ff9d9d" opacity=".55"/><circle cx="118.0" cy="101.0" r="3.6" fill="#ff9d9d" opacity=".55"/>
+  <path d="M91.0 103.4 Q100 110.6 109.0 103.4" stroke="#8a3b2b" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  <path d="M70 89.0 C70 51.5 130 51.5 130 89.0 C118.0 74.0 82.0 74.0 70 89.0 Z" fill="#3b2416"/><path d="M88 104 C94 100 106 100 112 104" stroke="#3b2416" stroke-width="5" fill="none" stroke-linecap="round"/>
+  </g>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Notizblock">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+  <ellipse cx="205" cy="274" rx="90" ry="10" fill="#000" opacity="0.12"/>
+<rect x="120" y="60" width="170" height="210" rx="8" fill="#fffde7" stroke="#b0bec5" stroke-width="3"/>
+  <rect x="120" y="60" width="170" height="36" rx="8" fill="#1976d2"/>
+  <circle cx="140" cy="60" r="7" fill="none" stroke="#546e7a" stroke-width="4"/><circle cx="162" cy="60" r="7" fill="none" stroke="#546e7a" stroke-width="4"/><circle cx="184" cy="60" r="7" fill="none" stroke="#546e7a" stroke-width="4"/><circle cx="206" cy="60" r="7" fill="none" stroke="#546e7a" stroke-width="4"/><circle cx="228" cy="60" r="7" fill="none" stroke="#546e7a" stroke-width="4"/><circle cx="250" cy="60" r="7" fill="none" stroke="#546e7a" stroke-width="4"/><circle cx="272" cy="60" r="7" fill="none" stroke="#546e7a" stroke-width="4"/>
+  <g stroke="#90caf9" stroke-width="3"><path d="M134 118 L276 118"/><path d="M134 142 L276 142"/><path d="M134 166 L276 166"/><path d="M134 190 L276 190"/><path d="M134 214 L276 214"/><path d="M134 238 L276 238"/></g>
+  <path d="M140 128 L240 128 M140 152 L220 152" stroke="#455a64" stroke-width="4" stroke-linecap="round"/>
+</svg>

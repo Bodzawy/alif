@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Vorhang">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fffbe8"/><stop offset="1" stop-color="#ffe7a3"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#fff2c2"/><circle cx="340" cy="236" r="50" fill="#fff2c2"/>
+<rect x="100" y="60" width="200" height="180" fill="#bde3f7" stroke="#8a5a2b" stroke-width="8"/>
+  <path d="M200 60 L200 240 M100 150 L300 150" stroke="#8a5a2b" stroke-width="6"/>
+  <rect x="70" y="40" width="260" height="12" rx="6" fill="#6d4c41"/>
+  <path d="M80 50 L150 50 C140 120 120 170 150 260 L80 260 Z" fill="#c0392b"/><path d="M320 50 L250 50 C260 120 280 170 250 260 L320 260 Z" fill="#c0392b"/>
+  <g stroke="#922b21" stroke-width="3"><path d="M100 54 L96 256"/><path d="M122 54 L114 256"/><path d="M300 54 L304 256"/><path d="M278 54 L286 256"/></g>
+</svg>

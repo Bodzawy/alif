@@ -81,9 +81,11 @@ afterEach(() => {
 // ---------------------------------------------------------------------------
 describe("Lektion 2 – placement and order", () => {
   it("is the second A1 lesson; its six entries in book order: د ذ و ي, the long vowels, the evening conversations", () => {
-    expect(A1_LEVEL.units.map((u) => [u.slug, u.number, u.title, u.titleGerman])).toEqual([
+    expect(A1_LEVEL.units.slice(0, 4).map((u) => [u.slug, u.number, u.title, u.titleGerman])).toEqual([
       ["lesson-1", 1, "صَبَاحُ الْخَيْر", "Guten Morgen"],
       ["lesson-2", 2, "مَسَاءُ الْخَيْر", "Guten Abend"],
+      ["lesson-3", 3, "هَلْ أَنْتَ وَجْدِي؟", "Bist du Wagdi?"],
+      ["lesson-4", 4, "مَنْ أَنْتَ؟", "Wer bist du?"],
     ]);
     expect(a1Unit2.lessons.map((l) => [l.slug, l.kind, l.label, l.labelGerman])).toEqual([
       ["dal", "letter", "د", "Dal"],
@@ -98,7 +100,8 @@ describe("Lektion 2 – placement and order", () => {
   it("the last entry of Lektion 1 leads on to the first of Lektion 2; inside Lektion 2 entry by entry; the last one ends", () => {
     expect(nextA1Entry("lesson-1", "tahiyya-wa-taqdim")).toMatchObject({ unit: { slug: "lesson-2" }, lesson: { slug: "dal" } });
     expect(nextA1Entry("lesson-1", "sabah-al-khayr")?.lesson.slug).toBe("tahiyya-wa-taqdim"); // Lektion 1 unchanged
-    expect(a1Unit2.lessons.map((l) => nextA1Entry("lesson-2", l.slug)?.lesson.slug)).toEqual(["dhal", "waw", "ya", "huruf-al-madd", "masa-al-khayr", undefined]);
+    // The last entry of Lektion 2 leads on to Lektion 3 (the book's Unit 2).
+    expect(a1Unit2.lessons.map((l) => nextA1Entry("lesson-2", l.slug)?.lesson.slug)).toEqual(["dhal", "waw", "ya", "huruf-al-madd", "masa-al-khayr", "ra"]);
   });
 
   it("the step page of the last step of Lektion 1 shows \"Weiter: Lektion 2 · د Dal\"", async () => {

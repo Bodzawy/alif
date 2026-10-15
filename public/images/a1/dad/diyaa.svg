@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Diaa (Name)">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+<path d="M103.4 258.0 C108.0 189.0 154.0 172.9 200 172.9 C246.0 172.9 292.0 189.0 296.6 258.0 Z" fill="#34495e"/>
+  <rect x="186.2" y="156.8" width="27.6" height="20.7" fill="#e3ad84"/>
+  <ellipse cx="200" cy="120" rx="46" ry="49.7" fill="#e3ad84"/>
+  <circle cx="183.4" cy="120" r="5.1" fill="#2f2a26"/><circle cx="216.6" cy="120" r="5.1" fill="#2f2a26"/>
+  <circle cx="172.4" cy="133.8" r="5.5" fill="#ff9d9d" opacity=".55"/><circle cx="227.6" cy="133.8" r="5.5" fill="#ff9d9d" opacity=".55"/>
+  <path d="M186.2 137.5 Q200 148.5 213.8 137.5" stroke="#8a3b2b" stroke-width="3.7" fill="none" stroke-linecap="round"/>
+  <path d="M154 115.4 C154 57.9 246 57.9 246 115.4 C227.6 92.4 172.4 92.4 154 115.4 Z" fill="#2a1a10"/>
+  <path d="M160 186 L200 230 L240 186" fill="#fff"/><path d="M196 196 L204 196 L208 260 L192 260 Z" fill="#c0392b"/>
+</svg>

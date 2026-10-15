@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="barid-jiddan">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+<rect x="0" y="0" width="400" height="300" fill="#eaf2f8"/><path d="M40 200 C80 140 160 140 200 200 Z" fill="#fdfefe" stroke="#aab7b8" stroke-width="3"/><rect x="0" y="250" width="400" height="50" fill="#fdfefe"/><g><rect x="256.0" y="215.0" width="12.0" height="75.0" rx="4.0" fill="#34495e"/><rect x="272.0" y="215.0" width="12.0" height="75.0" rx="4.0" fill="#34495e"/>
+  <path d="M248.0 168.0 C248.0 158.0 292.0 158.0 292.0 168.0 L290.0 220.0 L250.0 220.0 Z" fill="#c0392b"/>
+  <path d="M290.0 170.0 L296.0 215.0" stroke="#c0392b" stroke-width="10.0" stroke-linecap="round"/><path d="M250.0 170.0 L244.0 215.0" stroke="#c0392b" stroke-width="10.0" stroke-linecap="round"/>
+  <rect x="264.0" y="150.0" width="12.0" height="12.0" fill="#efc49d"/>
+  <ellipse cx="270" cy="138.0" rx="17.0" ry="18.4" fill="#efc49d"/>
+  <circle cx="263.9" cy="138.0" r="1.9" fill="#2f2a26"/><circle cx="276.1" cy="138.0" r="1.9" fill="#2f2a26"/>
+  <circle cx="259.8" cy="143.1" r="2.0" fill="#ff9d9d" opacity=".55"/><circle cx="280.2" cy="143.1" r="2.0" fill="#ff9d9d" opacity=".55"/>
+  <path d="M264.9 144.5 Q270 148.5 275.1 144.5" stroke="#8a3b2b" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M253.0 136.3 C253.0 115.0 287.0 115.0 287.0 136.3 C280.2 127.8 259.8 127.8 253.0 136.3 Z" fill="#2a1a10"/>
+  <path d="M252.2 130.3 C253.0 112.5 287.0 112.5 287.9 130.3 Z" fill="#fdfefe"/><rect x="250.4" y="128.7" width="39.1" height="3.7" rx="1.7" fill="#2f2a26"/><circle cx="270" cy="123.5" r="2.4" fill="#f1c40f"/></g>
+</svg>

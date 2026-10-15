@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Nasim und Nushi">
+  <defs><clipPath id="c"><circle cx="100" cy="100" r="100"/></clipPath></defs><g clip-path="url(#c)"><circle cx="100" cy="100" r="100" fill="#dcefff"/>
+<path d="M11.4 174.0 C14.0 135.0 40.0 125.9 66 125.9 C92.0 125.9 118.0 135.0 120.6 174.0 Z" fill="#2c3e50"/>
+  <rect x="58.2" y="116.8" width="15.6" height="11.7" fill="#efc49d"/>
+  <ellipse cx="66" cy="96" rx="26" ry="28.1" fill="#efc49d"/>
+  <circle cx="56.6" cy="96" r="2.9" fill="#2f2a26"/><circle cx="75.4" cy="96" r="2.9" fill="#2f2a26"/>
+  <circle cx="50.4" cy="103.8" r="3.1" fill="#ff9d9d" opacity=".55"/><circle cx="81.6" cy="103.8" r="3.1" fill="#ff9d9d" opacity=".55"/>
+  <path d="M58.2 105.9 Q66 112.1 73.8 105.9" stroke="#8a3b2b" stroke-width="2.1" fill="none" stroke-linecap="round"/>
+  <circle cx="43.9" cy="86.9" r="8.3" fill="#1b1b1b"/><circle cx="50.4" cy="75.2" r="8.3" fill="#1b1b1b"/><circle cx="62.1" cy="70.0" r="8.3" fill="#1b1b1b"/><circle cx="73.8" cy="71.3" r="8.3" fill="#1b1b1b"/><circle cx="85.5" cy="77.8" r="8.3" fill="#1b1b1b"/><circle cx="89.4" cy="89.5" r="8.3" fill="#1b1b1b"/>
+  <path d="M79.4 174.0 C82.0 135.0 108.0 125.9 134 125.9 C160.0 125.9 186.0 135.0 188.6 174.0 Z" fill="#ecf0f1"/>
+  <rect x="126.2" y="116.8" width="15.6" height="11.7" fill="#e3ad84"/>
+  <ellipse cx="134" cy="96" rx="26" ry="28.1" fill="#e3ad84"/>
+  <circle cx="124.6" cy="96" r="2.9" fill="#2f2a26"/><circle cx="143.4" cy="96" r="2.9" fill="#2f2a26"/>
+  <circle cx="118.4" cy="103.8" r="3.1" fill="#ff9d9d" opacity=".55"/><circle cx="149.6" cy="103.8" r="3.1" fill="#ff9d9d" opacity=".55"/>
+  <path d="M126.2 105.9 Q134 112.1 141.8 105.9" stroke="#8a3b2b" stroke-width="2.1" fill="none" stroke-linecap="round"/>
+  <path d="M108 93.4 C108 60.9 160 60.9 160 93.4 C149.6 80.4 118.4 80.4 108 93.4 Z" fill="#3b2416"/>
+  </g>
+</svg>

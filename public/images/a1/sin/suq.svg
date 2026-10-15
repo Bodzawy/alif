@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Markt">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#f0fbec"/><stop offset="1" stop-color="#c6e8b9"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#e1f4d9"/><circle cx="340" cy="236" r="50" fill="#e1f4d9"/>
+  <ellipse cx="200" cy="258" rx="140" ry="10" fill="#000" opacity="0.12"/>
+<path d="M60 60 L340 60 L320 100 L80 100 Z" fill="#e74c3c"/><path d="M80 100 L100 60" stroke="#fff" stroke-width="10"/><path d="M120 100 L140 60" stroke="#fff" stroke-width="10"/><path d="M160 100 L180 60" stroke="#fff" stroke-width="10"/><path d="M200 100 L220 60" stroke="#fff" stroke-width="10"/><path d="M240 100 L260 60" stroke="#fff" stroke-width="10"/><path d="M280 100 L300 60" stroke="#fff" stroke-width="10"/><path d="M320 100 L340 60" stroke="#fff" stroke-width="10"/>
+  <rect x="80" y="100" width="10" height="150" fill="#8a5a2b"/><rect x="310" y="100" width="10" height="150" fill="#8a5a2b"/>
+  <rect x="70" y="180" width="260" height="70" rx="6" fill="#c49a6c"/>
+  <circle cx="110" cy="172" r="11" fill="#f39c12"/><circle cx="134" cy="172" r="11" fill="#f39c12"/><circle cx="158" cy="172" r="11" fill="#f39c12"/><circle cx="182" cy="172" r="11" fill="#f39c12"/><circle cx="220" cy="172" r="11" fill="#e74c3c"/><circle cx="244" cy="172" r="11" fill="#e74c3c"/><circle cx="268" cy="172" r="11" fill="#e74c3c"/><circle cx="292" cy="172" r="11" fill="#e74c3c"/>
+  <g fill="#7cb342"><ellipse cx="160" cy="158" rx="10" ry="6"/><ellipse cx="270" cy="158" rx="10" ry="6"/></g>
+</svg>

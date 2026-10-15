@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Mehrere Raben">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+<g transform="translate(120 100) scale(0.8)">
+    <ellipse cx="0" cy="0" rx="50" ry="24" fill="#1c1c1c"/><path d="M-10 -10 C-60 -70 -100 -50 -120 -40 C-80 -30 -50 -10 -20 6 Z" fill="#1c1c1c"/>
+    <path d="M-46 4 L-90 20 L-84 -6 Z" fill="#1c1c1c"/>
+    <circle cx="44" cy="-14" r="18" fill="#1c1c1c"/><path d="M58 -18 L84 -10 L58 -4 Z" fill="#555"/><circle cx="48" cy="-18" r="3" fill="#fff"/>
+    </g><g transform="translate(280 80) scale(0.7)">
+    <ellipse cx="0" cy="0" rx="50" ry="24" fill="#1c1c1c"/><path d="M-10 -10 C-60 -70 -100 -50 -120 -40 C-80 -30 -50 -10 -20 6 Z" fill="#1c1c1c"/>
+    <path d="M-46 4 L-90 20 L-84 -6 Z" fill="#1c1c1c"/>
+    <circle cx="44" cy="-14" r="18" fill="#1c1c1c"/><path d="M58 -18 L84 -10 L58 -4 Z" fill="#555"/><circle cx="48" cy="-18" r="3" fill="#fff"/>
+    </g><g transform="translate(220 210) scale(1.0)">
+    <ellipse cx="0" cy="0" rx="50" ry="24" fill="#1c1c1c"/><path d="M-30 -14 C-10 -30 30 -24 40 -4 C10 6 -20 6 -30 -14 Z" fill="#2e2e2e"/>
+    <path d="M-46 4 L-90 20 L-84 -6 Z" fill="#1c1c1c"/>
+    <circle cx="44" cy="-14" r="18" fill="#1c1c1c"/><path d="M58 -18 L84 -10 L58 -4 Z" fill="#555"/><circle cx="48" cy="-18" r="3" fill="#fff"/>
+    <path d="M-6 22 L-10 40 M10 22 L12 40" stroke="#555" stroke-width="4"/></g><path d="M120 252 L330 252" stroke="#7a4a2a" stroke-width="8" stroke-linecap="round"/>
+</svg>

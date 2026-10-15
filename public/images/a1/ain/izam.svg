@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Ein Skelett aus Knochen">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#f6f0ff"/><stop offset="1" stop-color="#dccbfb"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#ece2fd"/><circle cx="340" cy="236" r="50" fill="#ece2fd"/>
+<circle cx="200" cy="60" r="34" fill="#f4ecd8" stroke="#c9b99a" stroke-width="3"/><circle cx="188" cy="58" r="7" fill="#2f2a26"/><circle cx="212" cy="58" r="7" fill="#2f2a26"/><path d="M190 78 L210 78" stroke="#2f2a26" stroke-width="3"/>
+  <path d="M200 94 L200 196" stroke="#f4ecd8" stroke-width="10"/><path d="M200 112 C170 104 158 120 164 130 M200 112 C230 104 242 120 236 130" stroke="#f4ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M200 128 C170 120 158 136 164 146 M200 128 C230 120 242 136 236 146" stroke="#f4ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M200 144 C170 136 158 152 164 162 M200 144 C230 136 242 152 236 162" stroke="#f4ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M200 160 C170 152 158 168 164 178 M200 160 C230 152 242 168 236 178" stroke="#f4ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M200 176 C170 168 158 184 164 194 M200 176 C230 168 242 184 236 194" stroke="#f4ecd8" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <path d="M164 106 L130 180 L120 236 M236 106 L270 180 L280 236" stroke="#f4ecd8" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <path d="M176 200 C190 190 210 190 224 200 L218 214 L182 214 Z" fill="#f4ecd8"/>
+  <path d="M186 212 L176 290 M214 212 L224 290" stroke="#f4ecd8" stroke-width="10" stroke-linecap="round"/>
+  <g stroke="#c9b99a" stroke-width="1" fill="none" opacity=".8"><path d="M200 94 L200 196"/></g>
+</svg>

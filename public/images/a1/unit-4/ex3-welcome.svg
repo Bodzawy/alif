@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Zwei Männer geben sich in einer Hotelhalle die Hand">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fffbe8"/><stop offset="1" stop-color="#ffe7a3"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#fff2c2"/><circle cx="340" cy="236" r="50" fill="#fff2c2"/>
+<rect x="0" y="0" width="400" height="190" fill="#fdebd0"/><rect x="40" y="40" width="90" height="60" fill="#85c1e9" stroke="#a0703c" stroke-width="6"/><g><rect x="133.2" y="190.0" width="14.4" height="90.0" rx="4.8" fill="#2c3e50"/><rect x="152.4" y="190.0" width="14.4" height="90.0" rx="4.8" fill="#2c3e50"/>
+  <path d="M123.6 133.6 C123.6 121.6 176.4 121.6 176.4 133.6 L174.0 196.0 L126.0 196.0 Z" fill="#2c3e50"/>
+  <path d="M174.0 138.4 L212.4 150.4" stroke="#2c3e50" stroke-width="12.0" stroke-linecap="round"/><circle cx="217.2" cy="151.6" r="7.2" fill="#efc49d"/>
+  <path d="M126.0 136.0 L118.8 190.0" stroke="#2c3e50" stroke-width="12.0" stroke-linecap="round"/>
+  <rect x="142.8" y="112.0" width="14.4" height="14.4" fill="#efc49d"/>
+  <ellipse cx="150" cy="97.6" rx="20.4" ry="22.0" fill="#efc49d"/>
+  <circle cx="142.7" cy="97.6" r="2.2" fill="#2f2a26"/><circle cx="157.3" cy="97.6" r="2.2" fill="#2f2a26"/>
+  <circle cx="137.8" cy="103.7" r="2.4" fill="#ff9d9d" opacity=".55"/><circle cx="162.2" cy="103.7" r="2.4" fill="#ff9d9d" opacity=".55"/>
+  <path d="M143.9 105.4 Q150 110.2 156.1 105.4" stroke="#8a3b2b" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+  <path d="M129.6 95.6 C129.6 70.1 170.4 70.1 170.4 95.6 C162.2 85.4 137.8 85.4 129.6 95.6 Z" fill="#2a1a10"/></g><g><rect x="233.2" y="190.0" width="14.4" height="90.0" rx="4.8" fill="#566573"/><rect x="252.4" y="190.0" width="14.4" height="90.0" rx="4.8" fill="#566573"/>
+  <path d="M223.6 133.6 C223.6 121.6 276.4 121.6 276.4 133.6 L274.0 196.0 L226.0 196.0 Z" fill="#7f8c8d"/>
+  <path d="M274.0 136.0 L281.2 190.0" stroke="#7f8c8d" stroke-width="12.0" stroke-linecap="round"/><path d="M226.0 136.0 L218.8 190.0" stroke="#7f8c8d" stroke-width="12.0" stroke-linecap="round"/>
+  <rect x="242.8" y="112.0" width="14.4" height="14.4" fill="#efc49d"/>
+  <ellipse cx="250" cy="97.6" rx="20.4" ry="22.0" fill="#efc49d"/>
+  <circle cx="242.7" cy="97.6" r="2.2" fill="#2f2a26"/><circle cx="257.3" cy="97.6" r="2.2" fill="#2f2a26"/>
+  <circle cx="237.8" cy="103.7" r="2.4" fill="#ff9d9d" opacity=".55"/><circle cx="262.2" cy="103.7" r="2.4" fill="#ff9d9d" opacity=".55"/>
+  <path d="M243.9 105.4 Q250 110.2 256.1 105.4" stroke="#8a3b2b" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+  <g fill="none" stroke="#2f2a26" stroke-width="1.4"><circle cx="242.7" cy="97.6" r="4.9"/><circle cx="257.3" cy="97.6" r="4.9"/><path d="M247.6 97.6 L252.4 97.6"/></g></g>
+</svg>

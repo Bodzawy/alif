@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Beutel">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fffbe8"/><stop offset="1" stop-color="#ffe7a3"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#fff2c2"/><circle cx="340" cy="236" r="50" fill="#fff2c2"/>
+  <ellipse cx="200" cy="264" rx="90" ry="10" fill="#000" opacity="0.12"/>
+<path d="M170 90 C120 130 100 200 130 240 C150 266 250 266 270 240 C300 200 280 130 230 90 Z" fill="#f5f0e6" stroke="#b5a68a" stroke-width="4"/>
+  <path d="M170 90 L162 60 L182 72 L200 54 L218 72 L238 60 L230 90 Z" fill="#efe6d4" stroke="#b5a68a" stroke-width="3"/>
+  <path d="M168 92 C188 100 212 100 232 92" stroke="#c0392b" stroke-width="7" fill="none"/>
+  <rect x="236" y="104" width="34" height="20" rx="3" fill="#fff" stroke="#b5a68a" stroke-width="2" transform="rotate(20 253 114)"/>
+</svg>

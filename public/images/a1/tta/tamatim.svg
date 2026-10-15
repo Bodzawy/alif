@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Drei Tomaten">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#f0fbec"/><stop offset="1" stop-color="#c6e8b9"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#e1f4d9"/><circle cx="340" cy="236" r="50" fill="#e1f4d9"/>
+  <ellipse cx="200" cy="258" rx="120" ry="10" fill="#000" opacity="0.12"/>
+<circle cx="150" cy="190" r="62" fill="#e53935"/><ellipse cx="128.3" cy="168.3" rx="13.6" ry="8.7" fill="#fff" opacity=".45"/>
+  <path d="M150 128 l-14 -6 l10 10 l-12 8 l16 -4 l0 14 l6 -14 l14 6 l-8 -12 l12 -10 l-16 6 Z" fill="#2e7d32"/>
+  <circle cx="250" cy="196" r="58" fill="#e53935"/><ellipse cx="229.7" cy="175.7" rx="12.8" ry="8.1" fill="#fff" opacity=".45"/>
+  <path d="M250 138 l-14 -6 l10 10 l-12 8 l16 -4 l0 14 l6 -14 l14 6 l-8 -12 l12 -10 l-16 6 Z" fill="#2e7d32"/>
+  <circle cx="200" cy="130" r="54" fill="#e53935"/><ellipse cx="181.1" cy="111.1" rx="11.9" ry="7.6" fill="#fff" opacity=".45"/>
+  <path d="M200 76 l-14 -6 l10 10 l-12 8 l16 -4 l0 14 l6 -14 l14 6 l-8 -12 l12 -10 l-16 6 Z" fill="#2e7d32"/>
+</svg>

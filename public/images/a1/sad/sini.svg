@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Chinese">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff0f3"/><stop offset="1" stop-color="#ffd0dc"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#ffe2e9"/><circle cx="340" cy="236" r="50" fill="#ffe2e9"/>
+<path d="M107.6 252.0 C112.0 186.0 156.0 170.6 200 170.6 C244.0 170.6 288.0 186.0 292.4 252.0 Z" fill="#7f8c8d"/>
+  <rect x="186.8" y="155.2" width="26.4" height="19.8" fill="#f2d0a4"/>
+  <ellipse cx="200" cy="120" rx="44" ry="47.5" fill="#f2d0a4"/>
+  <circle cx="184.2" cy="120" r="4.8" fill="#2f2a26"/><circle cx="215.8" cy="120" r="4.8" fill="#2f2a26"/>
+  <circle cx="173.6" cy="133.2" r="5.3" fill="#ff9d9d" opacity=".55"/><circle cx="226.4" cy="133.2" r="5.3" fill="#ff9d9d" opacity=".55"/>
+  <path d="M186.8 136.7 Q200 147.3 213.2 136.7" stroke="#8a3b2b" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <path d="M156 115.6 C156 60.6 244 60.6 244 115.6 C226.4 93.6 173.6 93.6 156 115.6 Z" fill="#1b1b1b"/>
+  <path d="M152 92 C152 56 248 56 248 92 L244 84 C226 70 174 70 156 84 Z" fill="#1b1b1b"/><circle cx="200" cy="56" r="8" fill="#1b1b1b"/>
+  <path d="M200 176 L200 300" stroke="#5d6d7e" stroke-width="4"/><g fill="#5d6d7e"><circle cx="200" cy="200" r="4"/><circle cx="200" cy="230" r="4"/><circle cx="200" cy="260" r="4"/></g>
+</svg>

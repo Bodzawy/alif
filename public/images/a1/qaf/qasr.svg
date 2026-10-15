@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Palast">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+<rect x="0" y="250" width="400" height="50" fill="#9fd27f"/>
+  <rect x="80" y="120" width="240" height="130" fill="#f5e6c8" stroke="#c9a66b" stroke-width="3"/>
+  <rect x="60" y="90" width="50" height="160" fill="#efdcb3" stroke="#c9a66b" stroke-width="3"/><rect x="290" y="90" width="50" height="160" fill="#efdcb3" stroke="#c9a66b" stroke-width="3"/>
+  <path d="M56 90 L85 50 L114 90 Z" fill="#c0392b"/><path d="M286 90 L315 50 L344 90 Z" fill="#c0392b"/>
+  <path d="M150 120 C150 70 250 70 250 120 Z" fill="#f1c40f" stroke="#c9a227" stroke-width="3"/><path d="M200 70 L200 46" stroke="#c9a227" stroke-width="3"/><circle cx="200" cy="44" r="5" fill="#c9a227"/>
+  <path d="M180 250 L180 200 C180 180 220 180 220 200 L220 250 Z" fill="#8a5a2b"/>
+  <g fill="#6fa8dc"><rect x="110" y="150" width="20" height="30" rx="10"/><rect x="146" y="150" width="20" height="30" rx="10"/><rect x="234" y="150" width="20" height="30" rx="10"/><rect x="270" y="150" width="20" height="30" rx="10"/><rect x="75" y="120" width="20" height="30" rx="10"/><rect x="305" y="120" width="20" height="30" rx="10"/></g>
+</svg>

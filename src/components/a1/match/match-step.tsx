@@ -42,7 +42,8 @@ export function MatchStep({ match, progressKey }: { match: MatchContent; progres
   }
 
   function check() {
-    const result = Object.fromEntries(match.prompts.map((p) => [p.id, assigned[p.id] === p.answer]));
+    const ok = (p: MatchPrompt) => assigned[p.id] === p.answer || Boolean(p.accept?.includes(assigned[p.id] ?? ""));
+    const result = Object.fromEntries(match.prompts.map((p) => [p.id, ok(p)]));
     setChecked(result);
     if (match.prompts.every((p) => result[p.id])) {
       setActive(null);

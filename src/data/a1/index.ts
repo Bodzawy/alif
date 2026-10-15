@@ -1,4 +1,5 @@
 import type { A1Lesson, A1Unit, PronunciationExercise } from "@/data/types";
+import { clozeLineText } from "@/lib/arabic/cloze";
 
 import { a1Alif } from "./lesson-1";
 import { a1Ba } from "./letters/ba";
@@ -10,6 +11,15 @@ import { a1Tha } from "./letters/tha";
 import { a1Review } from "./review";
 import { a1SabahAlKhayr } from "./sabah-al-khayr";
 import { a1Unit2 } from "./lesson-2";
+import { a1Unit3, a1Unit4 } from "./unit-2";
+import { a1Unit5, a1Unit6 } from "./unit-3";
+import { a1Unit7, a1Unit8 } from "./unit-4";
+import { a1Unit10, a1Unit9 } from "./unit-5";
+import { a1Unit11, a1Unit12 } from "./unit-6";
+import { a1Unit13, a1Unit14 } from "./unit-7";
+import { a1Unit15, a1Unit16 } from "./unit-8";
+import { a1Unit17, a1Unit18 } from "./unit-9";
+import { a1Unit19, a1Unit20 } from "./unit-10";
 import { a1Tahiyya } from "./tahiyya";
 
 // A1 – the new curriculum, built lesson by lesson (one book unit each). /a1
@@ -19,7 +29,9 @@ import { a1Tahiyya } from "./tahiyya";
 // the others in letters/, see letter-lesson.ts), the review, the phrase and
 // the next textbook page: greeting, introducing oneself, exercises (tahiyya.ts).
 // Lektion 2 "مَسَاءُ الْخَيْر": the letters د ذ و ي, the long vowels and the
-// evening conversations (lesson-2/).
+// evening conversations (lesson-2/). Lektion 3 and 4: the book's Unit 2
+// ("وجدي.pdf", unit-2/). From Lektion 5 on: the book "لغتنا الفصحى 1", one
+// presentation (تقديم) per lesson (unit-3/ …, see docs/book-progress.md).
 // (The former A1 word lessons are A0 → Wörter, see src/data/curriculum.ts.)
 
 export const a1Unit1: A1Unit = {
@@ -35,7 +47,7 @@ export const A1_LEVEL = {
   code: "A1",
   title: "Lektionen",
   description: "Lerne Lektion für Lektion – hören, nachsprechen und sofort Feedback bekommen.",
-  units: [a1Unit1, a1Unit2] as A1Unit[],
+  units: [a1Unit1, a1Unit2, a1Unit3, a1Unit4, a1Unit5, a1Unit6, a1Unit7, a1Unit8, a1Unit9, a1Unit10, a1Unit11, a1Unit12, a1Unit13, a1Unit14, a1Unit15, a1Unit16, a1Unit17, a1Unit18, a1Unit19, a1Unit20] as A1Unit[],
 } as const;
 
 export function getA1Unit(slug: string): A1Unit | undefined {
@@ -80,6 +92,8 @@ export function a1LessonExercises(lesson: A1Lesson): PronunciationExercise[] {
   const all = lesson.steps.flatMap((step) =>
     step.kind === "sound-words"
       ? step.groups.flatMap((group) => [group.sound.exercise, ...group.words.map((word) => word.exercise)])
+      : step.kind === "words"
+        ? step.groups.flatMap((group) => group.words.map((word) => word.exercise))
       : step.kind === "dialogue"
         ? step.dialogue.lines.map((line) => line.exercise)
         : step.kind === "phrases"
@@ -119,6 +133,14 @@ function stepSpokenTexts(step: A1Lesson["steps"][number]): string[] {
       return (step.pick.words ?? []).map((word) => word.arabic.replace(PUNCT, ""));
     case "table":
       return step.tables.flatMap((table) => table.rows.flat().filter((cell) => cell.listen !== false).map((cell) => cell.arabic));
+    case "spell":
+      return step.words.map((word) => word.arabic);
+    case "quiz":
+      return step.items.map((item) => item.spoken ?? item.arabic);
+    case "cloze":
+      return step.items.flatMap((item) => item.lines.map((line) => clozeLineText(line.parts)));
+    case "order":
+      return step.order.items.map((item) => item.arabic);
     default:
       return [];
   }

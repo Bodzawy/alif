@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Eine Jacke mit Pelzkragen">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fffbe8"/><stop offset="1" stop-color="#ffe7a3"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#fff2c2"/><circle cx="340" cy="236" r="50" fill="#fff2c2"/>
+<path d="M130 70 L270 70 L320 120 L310 260 L90 260 L80 120 Z" fill="#7f8c8d"/><path d="M200 80 L200 260" stroke="#5d6d7e" stroke-width="4"/>
+  <path d="M130 60 C150 100 250 100 270 60 C250 90 150 90 130 60 Z" fill="#d5dbdb"/><circle cx="140" cy="70" r="14" fill="#e5e8e8"/><circle cx="165" cy="82" r="14" fill="#e5e8e8"/><circle cx="200" cy="88" r="14" fill="#e5e8e8"/><circle cx="235" cy="82" r="14" fill="#e5e8e8"/><circle cx="260" cy="70" r="14" fill="#e5e8e8"/><circle cx="212" cy="140" r="5" fill="#2c3e50"/><circle cx="212" cy="180" r="5" fill="#2c3e50"/><circle cx="212" cy="220" r="5" fill="#2c3e50"/>
+</svg>

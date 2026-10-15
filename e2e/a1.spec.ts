@@ -66,8 +66,8 @@ test("/a1 shows الدرس الأول – صباح الخير; its contents list
   await expect(card).toContainText("الدرس الأول");
   await expect(card).toContainText("صَبَاحُ الْخَيْر");
   await expect(card).toContainText("Lektion 1 · Guten Morgen");
-  // One card per book lesson (Lektion 1 and 2); the letters are their contents, not lessons of their own.
-  await expect(page.locator('a[data-testid^="a1-lesson-"]')).toHaveCount(2);
+  // One card per A1 lesson (1–20); the letters are their contents, not lessons of their own.
+  await expect(page.locator('a[data-testid^="a1-lesson-"]')).toHaveCount(20);
   await card.click();
   await expect(page).toHaveURL(/\/a1\/lesson-1$/);
   const entries = page.getByTestId("unit-contents").getByRole("link");

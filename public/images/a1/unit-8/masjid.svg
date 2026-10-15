@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Eine Moschee">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+<rect x="110" y="150" width="200" height="110" fill="#fdfefe" stroke="#909497" stroke-width="3"/><path d="M150 150 C150 90 270 90 270 150 Z" fill="#d4ac0d"/><rect x="60" y="80" width="26" height="180" fill="#fdfefe" stroke="#909497" stroke-width="3"/><path d="M60 80 L73 50 L86 80 Z" fill="#d4ac0d"/><path d="M210 92 L210 70" stroke="#909497" stroke-width="3"/><path d="M205 72 C215 64 215 58 207 54" stroke="#d4ac0d" stroke-width="3" fill="none"/><rect x="190" y="200" width="40" height="60" rx="20" fill="#7d5a3a"/>
+</svg>

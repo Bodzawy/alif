@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Geschenk">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff0f3"/><stop offset="1" stop-color="#ffd0dc"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#ffe2e9"/><circle cx="340" cy="236" r="50" fill="#ffe2e9"/>
+  <ellipse cx="200" cy="264" rx="110" ry="10" fill="#000" opacity="0.12"/>
+<rect x="110" y="130" width="180" height="130" rx="8" fill="#5dade2"/><rect x="100" y="104" width="200" height="40" rx="8" fill="#85c1e9"/>
+  <rect x="186" y="104" width="28" height="156" fill="#e74c3c"/><rect x="100" y="116" width="200" height="16" fill="#e74c3c" opacity=".0"/>
+  <path d="M200 104 C160 60 120 70 140 98 C150 110 180 108 200 104 Z" fill="#e74c3c"/><path d="M200 104 C240 60 280 70 260 98 C250 110 220 108 200 104 Z" fill="#e74c3c"/>
+  <circle cx="200" cy="104" r="12" fill="#c0392b"/>
+  <g fill="#fff" opacity=".7"><circle cx="140" cy="170" r="6"/><circle cx="250" cy="200" r="6"/><circle cx="150" cy="230" r="6"/><circle cx="260" cy="160" r="6"/></g>
+</svg>

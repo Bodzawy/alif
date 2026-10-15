@@ -1,3 +1,4 @@
+import { A1_UNIT_SLUGS } from "../support/a1-units";
 import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
@@ -171,7 +172,7 @@ describe("/a1 and the step pages of a letter", () => {
   it("/a1 shows the lesson cards: الدرس الأول – صَبَاحُ الْخَيْر first, leading to its contents", () => {
     render(<A1Page />);
     const cards = screen.getAllByTestId(/^a1-lesson-[^-]+-\d+$/);
-    expect(cards.map((c) => c.getAttribute("data-testid"))).toEqual(["a1-lesson-lesson-1", "a1-lesson-lesson-2"]);
+    expect(cards.map((c) => c.getAttribute("data-testid"))).toEqual(A1_UNIT_SLUGS.map((slug) => `a1-lesson-${slug}`));
     const card = cards[0]!;
     expect(card).toHaveAttribute("href", "/a1/lesson-1");
     expect(card).toHaveTextContent("الدرس الأول");

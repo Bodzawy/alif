@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Zwei Füller">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#f6f0ff"/><stop offset="1" stop-color="#dccbfb"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#ece2fd"/><circle cx="340" cy="236" r="50" fill="#ece2fd"/>
+<g transform="rotate(-25 200 150)"><rect x="70" y="110" width="250" height="22" rx="10" fill="#2c3e50"/><path d="M320 110 L360 121 L320 132 Z" fill="#bdc3c7"/><rect x="110" y="106" width="60" height="6" rx="3" fill="#d4ac0d"/></g>
+  <g transform="rotate(-10 200 190)"><rect x="60" y="180" width="250" height="22" rx="10" fill="#922b21"/><path d="M310 180 L350 191 L310 202 Z" fill="#bdc3c7"/><rect x="100" y="176" width="60" height="6" rx="3" fill="#d4ac0d"/></g>
+</svg>

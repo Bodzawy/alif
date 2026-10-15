@@ -22,6 +22,8 @@ Alif
         │   └── Wörter · Formen · Schreiben · Ergänzen · Hören · Nachsprechen & schreiben · Aussprechen · Diktat
         ├── حُرُوفُ الْمَدّ                      /a1/lesson-2/huruf-al-madd/step-1 … step-11 (lang ā ū ī, Übungen 1–9)
         └── مَسَاءُ الْخَيْر                    /a1/lesson-2/masa-al-khayr/step-1 … step-11 (two conversations, grammar, Übungen 1–3, تذكر)
+    ├── الوحدة الثانية – تقديم (١) هَلْ أَنْتَ وَجْدِي؟   /a1/lesson-3 (ر ز س ش ص ض, 10 steps each; the conversations)
+    └── الوحدة الثانية – تقديم (٢) مَنْ أَنْتَ؟        /a1/lesson-4 (ف ق ك ل م ن; مراجعة عامة; presentations, grammar, Übungen, تذكر)
 ```
 
 A0 is a progression layer over the unchanged pronunciation pipeline: a letter
@@ -215,6 +217,25 @@ allow-list (`a1SpokenTexts`). Pictures: `public/images/a1/{dal,dhal,waw,ya,huruf
 (hand-drawn SVGs; existing pictures reused where the word is the same).
 No recordings exist yet: words are spoken by `/api/tts`, narration clips show as captions.
 
+## A1 · Lektion 3 und 4: Unit 2 of the book ("وجدي.pdf")
+
+`src/data/a1/unit-2/`: the book's Unit 2 as two A1 lessons (its two
+presentations; `A1Unit.bookLabel` shows "الوحدة الثانية – تقديم (١/٢)").
+Every letter (ر ز س ش ص ض · ف ق ك ل م ن – the unit has no ط ظ ع غ lessons) is
+built by `unit2Letter()` (`letter-entry.ts`) in book order: Wörter · Formen (the
+book's table) · Schreiben · Ergänzen (تدريب ٢) · Hören (٣) · Nachsprechen &
+schreiben (٤) · Mit Dehnung schreiben + Aussprechen (٨) · Diktat (٩, solution
+words of "حل تدريب ٩") · Getrennt schreiben (١٠, step type `spell`). Exercises
+5–7 point to the publisher's website. Writing sets: `src/data/letters/unit-2.ts`.
+`conversations.ts`: the conversations (three speakers each in تقديم ١; one
+questioner and six groups in تقديم ٢, role-play by **role groups**,
+`Dialogue.roles`), the grammar tables, the review (مراجعة عامة) and the
+exercises (step types `quiz` and `cloze`; free name choices accept every
+fitting name). Page-by-page mapping: `docs/a1-unit-2-checklist.md`.
+Pronunciation: one rule per new word and line (same pattern; no ث / ذ, no long
+ī / ū, no final k / t, no pronoun endings – أنتم and أنتن, ‑ta / ‑ti are not
+told apart) and the sounds رَ … نُ – not yet checked against real IQRA output.
+
 ## A1 · Formen (أ / ـأ): words and audio
 
 The step is data in `src/data/a1/lesson-1.ts` (`kind: "forms"`), rendered by
@@ -332,3 +353,24 @@ Lessons unlock in order (lesson N after lesson N-1 is completed). Switch to "all
 Routes, the TTS allow-list and the API's accepted targets are all derived from the curriculum. `npm test` fails if any lesson is incomplete (3 voweled words, rules, pictures, intro files) or if a word target collides with a letter name or another word.
 
 `npm run lessons:status` prints one line per lesson (words, audio, pictures, intro video) and exits with 1 on any problem. It only reads local files; nothing calls Azure. Content still waiting for native-speaker review is listed in `REVIEW.md`; decisions taken while building lessons 2–28 are in `DECISIONS.md`.
+
+## A1 · Lektion 5–20: the rest of the book „لغتنا الفصحى 1“
+
+From Lektion 5 on, every presentation (تقديم) of the book is one A1 lesson, in
+book order (units 3–10, book pages 91–303). Data: `src/data/a1/unit-3/` …
+`unit-10/`; page-by-page coverage: `docs/a1-unit-N-checklist.md`; overview and
+resume notes: `docs/book-progress.md`.
+
+- New step kinds: `order` (اقرأ ورتب الحوار), `words` (picture words without a
+  sound row); quiz items may have `spoken`, `image` and picture options; gap
+  items may show the printed letters (`hint`).
+- Helpers: `src/lib/arabic/transliterate.ts` (Alif's transliteration),
+  `src/lib/arabic/numbers.ts` (number words, phone numbers, prices).
+- Pronunciation rules for new words and lines: `npx tsx scripts/a1-rules.ts --write`
+  (same scheme as the Unit 2 gates; existing rules are never changed).
+- Tests: `tests/unit/a1-book.test.tsx` (every step of every book lesson renders
+  and is solvable), `tests/unit/a1-unit-3.test.tsx`, `a1-unit-4.test.tsx`
+  (content checks against the book), `e2e/a1-book.spec.ts` (every entry worked
+  through on a phone, every step rendered on a desktop). When adding a lesson:
+  update `tests/support/a1-units.ts` and `WORD_COUNT` in
+  `tests/unit/vocabulary-iqra-gates.test.ts`.

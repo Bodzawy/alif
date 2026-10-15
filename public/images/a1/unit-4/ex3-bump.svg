@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Im Park: ein Mann stößt einen anderen an, der hinfällt">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#f0fbec"/><stop offset="1" stop-color="#c6e8b9"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#e1f4d9"/><circle cx="340" cy="236" r="50" fill="#e1f4d9"/>
+<rect x="0" y="220" width="400" height="80" fill="#a9cf7f"/>
+  <circle cx="320" cy="120" r="50" fill="#2e8b57"/><rect x="314" y="150" width="12" height="80" fill="#7a4a2a"/><g><rect x="233.9" y="183.8" width="13.8" height="86.2" rx="4.6" fill="#5d6d7e"/><rect x="252.3" y="183.8" width="13.8" height="86.2" rx="4.6" fill="#5d6d7e"/>
+  <path d="M224.7 129.7 C224.7 118.2 275.3 118.2 275.3 129.7 L273.0 189.5 L227.0 189.5 Z" fill="#ecf0f1"/>
+  <path d="M273.0 134.3 L309.8 145.8" stroke="#ecf0f1" stroke-width="11.5" stroke-linecap="round"/><circle cx="314.4" cy="147.0" r="6.9" fill="#efc49d"/>
+  <path d="M227.0 132.0 L220.1 183.8" stroke="#ecf0f1" stroke-width="11.5" stroke-linecap="round"/>
+  <rect x="243.1" y="109.0" width="13.8" height="13.8" fill="#efc49d"/>
+  <ellipse cx="250" cy="95.20000000000003" rx="19.549999999999997" ry="21.1" fill="#efc49d"/>
+  <circle cx="243.0" cy="95.20000000000003" r="2.2" fill="#2f2a26"/><circle cx="257.0" cy="95.20000000000003" r="2.2" fill="#2f2a26"/>
+  <circle cx="238.3" cy="101.1" r="2.3" fill="#ff9d9d" opacity=".55"/><circle cx="261.7" cy="101.1" r="2.3" fill="#ff9d9d" opacity=".55"/>
+  <path d="M244.1 102.6 Q250 107.3 255.9 102.6" stroke="#8a3b2b" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+  <path d="M232.4 98.1 C234.4 124.5 265.6 124.5 267.6 98.1 C259.8 112.8 240.2 112.8 232.4 98.1 Z" fill="#7f8c8d"/></g><g transform="rotate(-50 130 240)"><g><rect x="114.6" y="187.5" width="13.2" height="82.5" rx="4.4" fill="#34495e"/><rect x="132.2" y="187.5" width="13.2" height="82.5" rx="4.4" fill="#34495e"/>
+  <path d="M105.8 135.8 C105.8 124.8 154.2 124.8 154.2 135.8 L152.0 193.0 L108.0 193.0 Z" fill="#c0392b"/>
+  <path d="M152.0 138.0 L158.6 187.5" stroke="#c0392b" stroke-width="11.0" stroke-linecap="round"/><path d="M108.0 138.0 L101.4 187.5" stroke="#c0392b" stroke-width="11.0" stroke-linecap="round"/>
+  <rect x="123.4" y="116.0" width="13.2" height="13.2" fill="#efc49d"/>
+  <ellipse cx="130" cy="102.79999999999997" rx="18.700000000000003" ry="20.2" fill="#efc49d"/>
+  <circle cx="123.3" cy="102.79999999999997" r="2.1" fill="#2f2a26"/><circle cx="136.7" cy="102.79999999999997" r="2.1" fill="#2f2a26"/>
+  <circle cx="118.8" cy="108.4" r="2.2" fill="#ff9d9d" opacity=".55"/><circle cx="141.2" cy="108.4" r="2.2" fill="#ff9d9d" opacity=".55"/>
+  <path d="M124.4 109.9 Q130 114.4 135.6 109.9" stroke="#8a3b2b" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M111.3 100.9 C111.3 77.6 148.7 77.6 148.7 100.9 C141.2 91.6 118.8 91.6 111.3 100.9 Z" fill="#2a1a10"/></g></g><g stroke="#2f2a26" stroke-width="3"><path d="M180 150 L196 140 M184 168 L202 166"/></g>
+</svg>

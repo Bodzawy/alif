@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Eine Dusche">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+<path d="M120 270 L120 60 L230 60" stroke="#909497" stroke-width="10" fill="none"/><path d="M200 60 L260 60 L270 90 L190 90 Z" fill="#bdc3c7"/><path d="M200 100 L195 150" stroke="#5dade2" stroke-width="3" stroke-linecap="round"/><path d="M214 100 L209 150" stroke="#5dade2" stroke-width="3" stroke-linecap="round"/><path d="M228 100 L223 150" stroke="#5dade2" stroke-width="3" stroke-linecap="round"/><path d="M242 100 L237 150" stroke="#5dade2" stroke-width="3" stroke-linecap="round"/><path d="M256 100 L251 150" stroke="#5dade2" stroke-width="3" stroke-linecap="round"/>
+</svg>

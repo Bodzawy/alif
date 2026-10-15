@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Eine Kirche">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#f6f0ff"/><stop offset="1" stop-color="#dccbfb"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#ece2fd"/><circle cx="340" cy="236" r="50" fill="#ece2fd"/>
+<rect x="110" y="140" width="180" height="120" fill="#fdfefe" stroke="#909497" stroke-width="3"/><path d="M100 140 L200 90 L300 140 Z" fill="#7d5a3a"/><rect x="230" y="60" width="40" height="80" fill="#fdfefe" stroke="#909497" stroke-width="3"/><path d="M226 60 L250 30 L274 60 Z" fill="#7d5a3a"/><path d="M250 10 L250 30 M242 18 L258 18" stroke="#2c3e50" stroke-width="4"/><rect x="185" y="200" width="30" height="60" fill="#7d5a3a"/>
+</svg>

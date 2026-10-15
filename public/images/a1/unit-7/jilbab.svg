@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Eine Galabija (langes Gewand)">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#f0fbec"/><stop offset="1" stop-color="#c6e8b9"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#e1f4d9"/><circle cx="340" cy="236" r="50" fill="#e1f4d9"/>
+<path d="M160 40 L240 40 L300 90 L280 110 L270 100 L290 280 L110 280 L130 100 L120 110 L100 90 Z" fill="#fdfefe" stroke="#909497" stroke-width="3"/><path d="M180 40 L200 110 L220 40" fill="none" stroke="#909497" stroke-width="3"/>
+</svg>

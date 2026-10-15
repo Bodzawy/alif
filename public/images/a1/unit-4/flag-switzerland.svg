@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Eine Frau mit der Fahne der Schweiz">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+<g><path d="M183.2 148.5 L216.8 148.5 L231.5 272.4 L168.5 272.4 Z" fill="#e67e22"/>
+  <rect x="187.4" y="270.3" width="8.4" height="14.7" fill="#efc49d"/><rect x="204.2" y="270.3" width="8.4" height="14.7" fill="#efc49d"/>
+  <path d="M221.0 159.0 L227.3 206.2" stroke="#e67e22" stroke-width="10.5" stroke-linecap="round"/><path d="M179.0 159.0 L172.7 206.2" stroke="#e67e22" stroke-width="10.5" stroke-linecap="round"/>
+  <rect x="193.7" y="138.0" width="12.6" height="12.6" fill="#efc49d"/>
+  <path d="M180.4 150.4 C176.8 100.4 223.2 100.4 219.6 150.4 L214.3 150.4 L214.3 121.8 C207.1 113.8 192.9 113.8 185.7 121.8 L185.7 150.4 Z" fill="#e5c07b"/>
+  <ellipse cx="200" cy="125.4" rx="17.85" ry="19.3" fill="#efc49d"/>
+  <circle cx="193.6" cy="125.4" r="2.0" fill="#2f2a26"/><circle cx="206.4" cy="125.4" r="2.0" fill="#2f2a26"/>
+  <circle cx="189.3" cy="130.8" r="2.1" fill="#ff9d9d" opacity=".55"/><circle cx="210.7" cy="130.8" r="2.1" fill="#ff9d9d" opacity=".55"/>
+  <path d="M194.6 132.2 Q200 136.5 205.4 132.2" stroke="#8a3b2b" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M181.8 127.2 C181.3 100.4 218.7 100.4 218.2 127.2 C212.5 117.4 196.4 112.0 181.8 127.2 Z" fill="#e5c07b"/></g><rect x="234" y="40" width="5" height="220" fill="#7f8c8d"/><g transform="translate(239 44)"><rect width="64" height="42" fill="#d52b1e"/><path d="M32 10 L32 32 M21 21 L43 21" stroke="#fff" stroke-width="7"/></g>
+</svg>

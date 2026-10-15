@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Eine Wäscherei">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+<rect x="70" y="60" width="260" height="200" fill="#f5e6d3" stroke="#a0703c" stroke-width="4"/>
+  <rect x="80" y="70" width="240" height="44" fill="#2e86c1"/><text x="200" y="102" text-anchor="middle" font-family="'Noto Naskh Arabic','Geeza Pro',serif" font-size="28" font-weight="bold" fill="#fdfefe">مَغْسَلَة</text>
+  <rect x="110" y="140" width="70" height="90" rx="8" fill="#fdfefe" stroke="#909497" stroke-width="3"/><circle cx="145" cy="190" r="22" fill="#aed6f1"/><rect x="200" y="140" width="70" height="90" rx="8" fill="#fdfefe" stroke="#909497" stroke-width="3"/><circle cx="235" cy="190" r="22" fill="#aed6f1"/><rect x="40" y="258" width="320" height="10" fill="#7f8c8d"/>
+</svg>

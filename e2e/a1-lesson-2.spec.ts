@@ -442,7 +442,7 @@ test.describe("phone", () => {
     await page.getByTestId("quiz-woman-option-1").tap();
     await expect(page.getByTestId("step-completed")).toBeVisible();
     await expect(page.getByTestId("back-to-unit-end")).toHaveAttribute("href", "/a1/lesson-2");
-    await expect(page.getByTestId("next-entry")).toHaveCount(0); // the last entry of A1 so far
+    await expect(page.getByTestId("next-entry")).toHaveAttribute("href", "/a1/lesson-3/ra"); // on to the book's Unit 2
 
     const p = await progress(page);
     for (let n = 1; n <= 11; n++) expect(p[`a1/lesson-2/masa-al-khayr/step-${n}`]?.completedAt, `step-${n}`).toBeTruthy();

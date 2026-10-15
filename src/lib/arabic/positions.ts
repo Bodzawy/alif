@@ -33,5 +33,6 @@ export function positionCards(positions: LetterPositions): PositionCard[] {
   return [
     ...positions.items.map((item) => card(item.id, item.label, item.labelGerman, item.shape, item.word, item.german, letter, item.occurrence)),
     card("sukun", "النُّطْقُ مَعَ السُّكُونِ", "mit Sukun (ohne Vokal)", sukun.glyph, sukun.word, sukun.german, letter, sukun.occurrence),
+    ...(sukun.more ?? []).map((more, i) => card(`sukun-${i + 2}`, "النُّطْقُ مَعَ السُّكُونِ", "mit Sukun (ohne Vokal)", sukun.glyph, more.word, more.german, letter, more.occurrence)),
   ];
 }

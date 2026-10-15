@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="China">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff0f3"/><stop offset="1" stop-color="#ffd0dc"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#ffe2e9"/><circle cx="340" cy="236" r="50" fill="#ffe2e9"/>
+<path d="M90 140 C100 100 150 80 200 90 C240 70 300 80 320 110 C340 140 320 160 300 170 C310 200 280 230 240 220 C210 240 160 230 140 210 C110 210 80 180 90 140 Z" fill="#f8c291" stroke="#b9770e" stroke-width="3"/>
+  <circle cx="250" cy="140" r="5" fill="#c0392b"/><text x="256" y="134" font-family="Arial, sans-serif" font-size="14" fill="#6e2c00">Peking</text>
+  <path d="M160 40 L160 70" stroke="#6e2c00" stroke-width="3"/><ellipse cx="160" cy="104" rx="34" ry="38" fill="#e74c3c"/><rect x="138" y="64" width="44" height="10" rx="3" fill="#f1c40f"/><rect x="138" y="134" width="44" height="10" rx="3" fill="#f1c40f"/>
+  <path d="M146 80 L146 130 M160 70 L160 140 M174 80 L174 130" stroke="#c0392b" stroke-width="2"/><path d="M160 144 L160 170" stroke="#f1c40f" stroke-width="4"/>
+</svg>

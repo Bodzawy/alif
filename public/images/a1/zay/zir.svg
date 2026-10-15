@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Wasserkrug aus Ton">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fffbe8"/><stop offset="1" stop-color="#ffe7a3"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#fff2c2"/><circle cx="340" cy="236" r="50" fill="#fff2c2"/>
+  <ellipse cx="200" cy="280" rx="90" ry="10" fill="#000" opacity="0.12"/>
+<path d="M168 50 L232 50 L226 74 C290 100 300 190 260 240 C248 256 226 262 200 262 C174 262 152 256 140 240 C100 190 110 100 174 74 Z" fill="#c0703c"/>
+  <rect x="164" y="44" width="72" height="14" rx="6" fill="#a35a2a"/>
+  <path d="M136 140 C170 152 230 152 264 140" stroke="#e8a06a" stroke-width="6" fill="none"/><path d="M134 170 C170 182 230 182 266 170" stroke="#a35a2a" stroke-width="4" fill="none"/>
+  <path d="M170 120 C162 160 166 200 178 230" stroke="#e8a06a" stroke-width="6" fill="none" opacity=".6" stroke-linecap="round"/>
+  <path d="M140 262 L260 262 L250 276 L150 276 Z" fill="#8a5a2b"/>
+</svg>

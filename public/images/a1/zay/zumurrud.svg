@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Smaragd">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+<path d="M140 90 L260 90 L300 140 L200 250 L100 140 Z" fill="#1e9e5a"/>
+  <path d="M140 90 L170 140 L230 140 L260 90 Z" fill="#3ccf86"/><path d="M100 140 L170 140 L200 250 Z" fill="#17844a"/><path d="M300 140 L230 140 L200 250 Z" fill="#14703f"/>
+  <path d="M170 140 L230 140 L200 250 Z" fill="#26b56d"/>
+  <path d="M150 100 L165 125" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".8"/>
+  <g fill="#fff"><path d="M300 60 L305 74 L319 79 L305 84 L300 98 L295 84 L281 79 L295 74 Z"/><path d="M96 200 L99 208 L107 211 L99 214 L96 222 L93 214 L85 211 L93 208 Z"/></g>
+</svg>

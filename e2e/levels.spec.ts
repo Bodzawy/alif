@@ -36,11 +36,11 @@ test("a lesson's breadcrumb leads back to A0 → Wörter", async ({ page }) => {
 
 test("old URLs of the former A1 word lessons lead to A0 → Wörter unless A1 has a lesson there", async ({ page, request }) => {
   for (const [from, to] of [
-    // /a1/lesson-2 is A1 · Lektion 2 now (مَسَاءُ الْخَيْر); the next old word-lesson URL still redirects.
-    ["/a1/lesson-3", "/a0/words/lesson-3"],
+    // /a1/lesson-2 … lesson-20 are A1 lessons now (the whole book); the next old word-lesson URL still redirects.
+    ["/a1/lesson-21", "/a0/words/lesson-21"],
     ["/a1/lesson-28", "/a0/words/lesson-28"],
     ["/a1/lesson-1/intro", "/a0/words/lesson-1/intro"],
-    ["/a1/lesson-5/intro", "/a0/words/lesson-5/intro"],
+    ["/a1/lesson-21/intro", "/a0/words/lesson-21/intro"],
     // lesson-1 is the new A1 lesson (its contents page); its old step URLs lead to Alif's steps,
     // the letters' own URLs to their entry, and an entry to its first step.
     ["/a1/lesson-1/step-3", "/a1/lesson-1/alif/step-2"],
@@ -54,8 +54,8 @@ test("old URLs of the former A1 word lessons lead to A0 → Wörter unless A1 ha
     expect(new URL(location, "http://x").pathname, from).toBe(to);
   }
   expect((await request.get("/a1/lesson-99")).status()).toBe(404);
-  await page.goto("/a1/lesson-3");
-  await expect(page).toHaveURL(/\/a0\/words\/lesson-3$/);
+  await page.goto("/a1/lesson-21");
+  await expect(page).toHaveURL(/\/a0\/words\/lesson-21$/);
   await page.goto("/a1/lesson-2");
   await expect(page.getByTestId("unit-title")).toHaveText("مَسَاءُ الْخَيْر");
 });

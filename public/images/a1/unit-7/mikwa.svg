@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Ein Bügeleisen">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#f6f0ff"/><stop offset="1" stop-color="#dccbfb"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#ece2fd"/><circle cx="340" cy="236" r="50" fill="#ece2fd"/>
+<path d="M80 220 C100 140 240 120 320 150 L320 220 Z" fill="#2e86c1"/><path d="M150 150 C150 100 260 96 280 140" stroke="#1b4f72" stroke-width="16" fill="none" stroke-linecap="round"/><rect x="74" y="216" width="252" height="16" rx="6" fill="#bdc3c7"/>
+</svg>

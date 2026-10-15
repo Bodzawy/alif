@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Backenzähne">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff0f3"/><stop offset="1" stop-color="#ffd0dc"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#ffe2e9"/><circle cx="340" cy="236" r="50" fill="#ffe2e9"/>
+<path d="M40 150 C120 120 280 120 360 150 L360 190 C280 170 120 170 40 190 Z" fill="#e57373"/>
+  <path d="M70 158 C70 132 116 132 116 158 L114 220 C108 236 100 226 93 200 C86 226 78 236 72 220 Z" fill="#fafafa" stroke="#bdbdbd" stroke-width="2"/><path d="M124 158 C124 132 170 132 170 158 L168 220 C162 236 154 226 147 200 C140 226 132 236 126 220 Z" fill="#fafafa" stroke="#bdbdbd" stroke-width="2"/><path d="M178 158 C178 132 224 132 224 158 L222 220 C216 236 208 226 201 200 C194 226 186 236 180 220 Z" fill="#fafafa" stroke="#bdbdbd" stroke-width="2"/><path d="M232 158 C232 132 278 132 278 158 L276 220 C270 236 262 226 255 200 C248 226 240 236 234 220 Z" fill="#fafafa" stroke="#bdbdbd" stroke-width="2"/><path d="M286 158 C286 132 332 132 332 158 L330 220 C324 236 316 226 309 200 C302 226 294 236 288 220 Z" fill="#fafafa" stroke="#bdbdbd" stroke-width="2"/>
+</svg>

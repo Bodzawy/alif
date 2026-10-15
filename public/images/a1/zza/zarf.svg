@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Ein geschlossener Briefumschlag mit Briefmarke">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fffbe8"/><stop offset="1" stop-color="#ffe7a3"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#fff2c2"/><circle cx="340" cy="236" r="50" fill="#fff2c2"/>
+  <ellipse cx="200" cy="236" rx="130" ry="10" fill="#000" opacity="0.12"/>
+<rect x="80" y="80" width="240" height="150" rx="10" fill="#f8f9f9" stroke="#7f8c8d" stroke-width="4"/>
+  <path d="M80 90 L200 170 L320 90" fill="#eaeded" stroke="#7f8c8d" stroke-width="4"/>
+  <path d="M80 230 L170 160 M320 230 L230 160" stroke="#bdc3c7" stroke-width="3"/>
+  <rect x="266" y="98" width="38" height="44" rx="3" fill="#2e86c1" stroke="#fff" stroke-width="3" stroke-dasharray="4 3"/><circle cx="285" cy="120" r="10" fill="#f7c948"/>
+  <g stroke="#7f8c8d" stroke-width="4" stroke-linecap="round"><path d="M120 196 L190 196"/><path d="M120 212 L170 212"/></g>
+</svg>

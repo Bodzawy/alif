@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Ein Mann und sein Schatten">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fffbe8"/><stop offset="1" stop-color="#ffe7a3"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#fff2c2"/><circle cx="340" cy="236" r="50" fill="#fff2c2"/>
+<path d="M60 268 L330 268" stroke="#b7950b" stroke-width="4"/>
+  <path d="M240 268 L110 290 L40 278 L50 262 L120 230 L150 210 L230 262 Z" fill="#2c2c2c" opacity=".55"/>
+  <g><rect x="242.5" y="174.2" width="15.0" height="93.8" rx="5.0" fill="#34495e"/><rect x="262.5" y="174.2" width="15.0" height="93.8" rx="5.0" fill="#34495e"/>
+  <path d="M232.5 115.5 C232.5 103.0 287.5 103.0 287.5 115.5 L285.0 180.5 L235.0 180.5 Z" fill="#7f8c8d"/>
+  <path d="M285.0 118.0 L292.5 174.2" stroke="#7f8c8d" stroke-width="12.5" stroke-linecap="round"/><path d="M235.0 118.0 L227.5 174.2" stroke="#7f8c8d" stroke-width="12.5" stroke-linecap="round"/>
+  <rect x="252.5" y="93.0" width="15.0" height="15.0" fill="#efc49d"/>
+  <ellipse cx="260" cy="78.0" rx="21.25" ry="23.0" fill="#efc49d"/>
+  <circle cx="252.3" cy="78.0" r="2.3" fill="#2f2a26"/><circle cx="267.6" cy="78.0" r="2.3" fill="#2f2a26"/>
+  <circle cx="247.2" cy="84.4" r="2.5" fill="#ff9d9d" opacity=".55"/><circle cx="272.8" cy="84.4" r="2.5" fill="#ff9d9d" opacity=".55"/>
+  <path d="M253.6 86.1 Q260 91.2 266.4 86.1" stroke="#8a3b2b" stroke-width="1.7" fill="none" stroke-linecap="round"/>
+  <g fill="none" stroke="#2f2a26" stroke-width="1.5"><circle cx="252.3" cy="78.0" r="5.1"/><circle cx="267.6" cy="78.0" r="5.1"/><path d="M257.4 78.0 L262.6 78.0"/></g></g>
+  <circle cx="360" cy="50" r="26" fill="#f7c948"/>
+</svg>

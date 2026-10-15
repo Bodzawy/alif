@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="season-rabi">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+<rect x="0" y="0" width="400" height="300" fill="#eafaf1"/><circle cx="90" cy="120" r="70" fill="#82e0aa"/><circle cx="40" cy="270" r="10" fill="#e74c3c"/><circle cx="80" cy="260" r="10" fill="#f4d03f"/><circle cx="120" cy="270" r="10" fill="#af7ac5"/><circle cx="160" cy="260" r="10" fill="#e74c3c"/><circle cx="200" cy="270" r="10" fill="#f4d03f"/><circle cx="240" cy="260" r="10" fill="#af7ac5"/><circle cx="280" cy="270" r="10" fill="#e74c3c"/><circle cx="320" cy="260" r="10" fill="#f4d03f"/><circle cx="360" cy="270" r="10" fill="#af7ac5"/><g><rect x="237.4" y="222.5" width="10.8" height="67.5" rx="3.6" fill="#34495e"/><rect x="251.8" y="222.5" width="10.8" height="67.5" rx="3.6" fill="#34495e"/>
+  <path d="M230.2 180.2 C230.2 171.2 269.8 171.2 269.8 180.2 L268.0 227.0 L232.0 227.0 Z" fill="#c0392b"/>
+  <path d="M268.0 182.0 L273.4 222.5" stroke="#c0392b" stroke-width="9.0" stroke-linecap="round"/><path d="M232.0 182.0 L226.6 222.5" stroke="#c0392b" stroke-width="9.0" stroke-linecap="round"/>
+  <rect x="244.6" y="164.0" width="10.8" height="10.8" fill="#efc49d"/>
+  <ellipse cx="250" cy="153.2" rx="15.3" ry="16.5" fill="#efc49d"/>
+  <circle cx="244.5" cy="153.2" r="1.7" fill="#2f2a26"/><circle cx="255.5" cy="153.2" r="1.7" fill="#2f2a26"/>
+  <circle cx="240.8" cy="157.8" r="1.8" fill="#ff9d9d" opacity=".55"/><circle cx="259.2" cy="157.8" r="1.8" fill="#ff9d9d" opacity=".55"/>
+  <path d="M245.4 159.0 Q250 162.7 254.6 159.0" stroke="#8a3b2b" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M234.7 151.7 C234.7 132.5 265.3 132.5 265.3 151.7 C259.2 144.0 240.8 144.0 234.7 151.7 Z" fill="#2a1a10"/></g>
+</svg>

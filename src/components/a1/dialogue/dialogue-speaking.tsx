@@ -77,7 +77,9 @@ export function DialogueSpeaking({ dialogue, mode, progressKey }: { dialogue: Di
   if (!narrator.current && hydrated) narrator.current = createNarrator({ baseUrl: "", available: [] });
 
   const speakerOf = useCallback((id: string) => dialogue.speakers.find((s) => s.id === id)!, [dialogue.speakers]);
-  const learnerLines = useMemo(() => (mode === "repeat" ? dialogue.lines : dialogue.lines.filter((l) => l.speaker === role)), [mode, dialogue.lines, role]);
+  /** The speakers of the learner's role (a speaker, or a role group of several speakers). */
+  const mine = useMemo(() => new Set(role ? (dialogue.roles?.find((r) => r.id === role)?.speakers ?? [role]) : []), [role, dialogue.roles]);
+  const learnerLines = useMemo(() => (mode === "repeat" ? dialogue.lines : dialogue.lines.filter((l) => mine.has(l.speaker))), [mode, dialogue.lines, mine]);
   const blocks: GuidedBlock[] = useMemo(() => learnerLines.map((l) => ({ id: l.id, text: l.exercise.modelText, target: l.exercise.target })), [learnerLines]);
   const lineById = useCallback((id: string) => dialogue.lines.find((l) => l.id === id)!, [dialogue.lines]);
   /** Role-play: the partner's lines before a learner line (since the learner's previous line). */
@@ -85,16 +87,16 @@ export function DialogueSpeaking({ dialogue, mode, progressKey }: { dialogue: Di
     (id: string) => {
       const at = dialogue.lines.findIndex((l) => l.id === id);
       const before: DialogueLine[] = [];
-      for (let i = at - 1; i >= 0 && dialogue.lines[i]!.speaker !== role; i--) before.unshift(dialogue.lines[i]!);
+      for (let i = at - 1; i >= 0 && !mine.has(dialogue.lines[i]!.speaker); i--) before.unshift(dialogue.lines[i]!);
       return before;
     },
-    [dialogue.lines, role]
+    [dialogue.lines, mine]
   );
   const closingLines = useMemo(() => {
     if (mode !== "roleplay" || !role) return [];
-    const lastLearner = dialogue.lines.map((l) => l.speaker).lastIndexOf(role);
+    const lastLearner = dialogue.lines.map((l) => mine.has(l.speaker)).lastIndexOf(true);
     return dialogue.lines.slice(lastLearner + 1);
-  }, [mode, role, dialogue.lines]);
+  }, [mode, role, mine, dialogue.lines]);
 
   const releaseMic = useCallback(() => {
     mic.current?.release();
@@ -247,10 +249,12 @@ export function DialogueSpeaking({ dialogue, mode, progressKey }: { dialogue: Di
             ? CAPTION.right
             : "";
   const done = (id: string) => flow.state.marks[id] === "done";
-  const learnerSpeaker = role ? speakerOf(role) : null;
-  const partnerSpeaker = role ? dialogue.speakers.find((s) => s.id !== role)! : null;
+  const roleChoices = dialogue.roles ?? dialogue.speakers.map((s) => ({ id: s.id, name: s.name, speakers: [s.id], avatar: s.avatar }));
+  const learnerSpeaker = role ? (roleChoices.find((r) => r.id === role) ?? null) : null;
+  const partners = role ? dialogue.speakers.filter((s) => !mine.has(s.id)) : [];
+  const partnerSpeaker = partners.length > 0 ? { name: partners.length === 1 ? partners[0]!.name : "Die anderen" } : null;
 
-  if (stageMode === "fallback") return <DialogueFallback dialogue={dialogue} mode={mode} role={role} note={note} progressKey={progressKey} />;
+  if (stageMode === "fallback") return <DialogueFallback dialogue={dialogue} mode={mode} mine={role ? mine : null} note={note} progressKey={progressKey} />;
 
   return (
     <div data-testid="dialogue-speaking" data-mode={mode} data-stage={stageMode === "guided" ? stage : stageMode} data-active={active ?? ""} data-speaking={speaking ?? ""} data-role={role ?? ""}>
@@ -283,8 +287,8 @@ export function DialogueSpeaking({ dialogue, mode, progressKey }: { dialogue: Di
         <div className="mb-6 rounded-3xl border bg-card p-6 text-center shadow-card sm:p-8" data-testid="start-overlay">
           <p className="font-semibold">Wen sprichst du? Die App spricht die andere Rolle.</p>
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
-            {dialogue.speakers.map((speaker) => {
-              const firstLine = dialogue.lines.find((l) => l.speaker === speaker.id)!;
+            {roleChoices.map((speaker) => {
+              const firstLine = dialogue.lines.find((l) => speaker.speakers.includes(l.speaker))!;
               return (
                 <button
                   key={speaker.id}
@@ -335,7 +339,7 @@ export function DialogueSpeaking({ dialogue, mode, progressKey }: { dialogue: Di
         {dialogue.lines.map((line, i) => {
           if (!visible(i) && stageMode === "guided") return null;
           const speaker = speakerOf(line.speaker);
-          const isLearner = mode === "repeat" || line.speaker === role;
+          const isLearner = mode === "repeat" || mine.has(line.speaker);
           const isActive = line.id === active;
           const state = isActive ? "active" : speaking === line.id ? "playing" : done(line.id) ? "done" : stageMode === "guided" && isLearner && mode === "repeat" ? "waiting" : "idle";
           return (
@@ -351,7 +355,7 @@ export function DialogueSpeaking({ dialogue, mode, progressKey }: { dialogue: Di
                   showGerman={showGerman}
                   showTransliteration={showTransliteration}
                   state={state}
-                  label={mode === "roleplay" && line.speaker === role ? `Du (${speaker.name})` : undefined}
+                  label={mode === "roleplay" && mine.has(line.speaker) ? `Du (${speaker.name})` : undefined}
                   actions={
                     isActive ? (
                       <>
@@ -417,9 +421,9 @@ export function DialogueSpeaking({ dialogue, mode, progressKey }: { dialogue: Di
  * with listen and record buttons and the usual feedback. The step is done when
  * every line to speak was right.
  */
-function DialogueFallback({ dialogue, mode, role, note, progressKey }: { dialogue: Dialogue; mode: Mode; role: string | null; note: string | null; progressKey: string }) {
+function DialogueFallback({ dialogue, mode, mine, note, progressKey }: { dialogue: Dialogue; mode: Mode; mine: ReadonlySet<string> | null; note: string | null; progressKey: string }) {
   const session = usePracticeSession();
-  const toSpeak = dialogue.lines.filter((l) => mode === "repeat" || !role || l.speaker === role);
+  const toSpeak = dialogue.lines.filter((l) => mode === "repeat" || !mine || mine.has(l.speaker));
   const allPassed = toSpeak.every((l) => session.passed.has(l.exercise.id) || getLessonProgress(progressKey).passed.includes(l.id));
 
   useEffect(() => {

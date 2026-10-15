@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Ein Teller">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+  <ellipse cx="200" cy="256" rx="140" ry="10" fill="#000" opacity="0.12"/>
+<ellipse cx="200" cy="160" rx="150" ry="90" fill="#fdfefe" stroke="#bdc3c7" stroke-width="4"/>
+  <ellipse cx="200" cy="160" rx="96" ry="56" fill="#f4f6f7" stroke="#d5dbdb" stroke-width="4"/>
+  <g fill="#1abc9c"><path d="M200 74 l10 10 l-10 10 l-10 -10 Z"/><path d="M200 226 l10 10 l-10 10 l-10 -10 Z"/><path d="M58 160 l10 10 l-10 10 l-10 -10 Z" transform="translate(4 -10)"/><path d="M342 150 l10 10 l-10 10 l-10 -10 Z"/></g>
+</svg>

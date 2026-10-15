@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Eine Krankenschwester am Schreibtisch telefoniert mit einer Frau">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff0f3"/><stop offset="1" stop-color="#ffd0dc"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#ffe2e9"/><circle cx="340" cy="236" r="50" fill="#ffe2e9"/>
+<rect x="40" y="200" width="200" height="16" fill="#a0703c"/><rect x="50" y="216" width="12" height="70" fill="#7d5a3a"/><path d="M75.4 228.0 C78.0 189.0 104.0 179.9 130 179.9 C156.0 179.9 182.0 189.0 184.6 228.0 Z" fill="#fdfefe"/>
+  <rect x="122.2" y="170.8" width="15.6" height="11.7" fill="#efc49d"/>
+  <path d="M101.4 186.4 C96.2 113.6 163.8 113.6 158.6 186.4 L150.8 186.4 L150.8 144.8 C140.4 133.1 119.6 133.1 109.2 144.8 L109.2 186.4 Z" fill="#3b2416"/>
+  <ellipse cx="130" cy="150" rx="26" ry="28.1" fill="#efc49d"/>
+  <circle cx="120.6" cy="150" r="2.9" fill="#2f2a26"/><circle cx="139.4" cy="150" r="2.9" fill="#2f2a26"/>
+  <circle cx="114.4" cy="157.8" r="3.1" fill="#ff9d9d" opacity=".55"/><circle cx="145.6" cy="157.8" r="3.1" fill="#ff9d9d" opacity=".55"/>
+  <path d="M122.2 159.9 Q130 166.1 137.8 159.9" stroke="#8a3b2b" stroke-width="2.1" fill="none" stroke-linecap="round"/>
+  <path d="M103.5 152.6 C102.7 113.6 157.3 113.6 156.5 152.6 C148.2 138.3 124.8 130.5 103.5 152.6 Z" fill="#3b2416"/><g transform="translate(156 160)"><rect x="-10" y="-30" width="20" height="40" rx="6" fill="#1b1b1b"/></g><circle cx="300" cy="110" r="70" fill="#fdedec" stroke="#c0392b" stroke-width="4"/><path d="M245.4 174.0 C248.0 135.0 274.0 125.9 300 125.9 C326.0 125.9 352.0 135.0 354.6 174.0 Z" fill="#8e44ad"/>
+  <rect x="292.2" y="116.8" width="15.6" height="11.7" fill="#efc49d"/>
+  <path d="M271.4 132.4 C266.2 59.6 333.8 59.6 328.6 132.4 L320.8 132.4 L320.8 90.8 C310.4 79.1 289.6 79.1 279.2 90.8 L279.2 132.4 Z" fill="#5a3825"/>
+  <ellipse cx="300" cy="96" rx="26" ry="28.1" fill="#efc49d"/>
+  <circle cx="290.6" cy="96" r="2.9" fill="#2f2a26"/><circle cx="309.4" cy="96" r="2.9" fill="#2f2a26"/>
+  <circle cx="284.4" cy="103.8" r="3.1" fill="#ff9d9d" opacity=".55"/><circle cx="315.6" cy="103.8" r="3.1" fill="#ff9d9d" opacity=".55"/>
+  <path d="M292.2 105.9 Q300 112.1 307.8 105.9" stroke="#8a3b2b" stroke-width="2.1" fill="none" stroke-linecap="round"/>
+  <path d="M273.5 98.6 C272.7 59.6 327.3 59.6 326.5 98.6 C318.2 84.3 294.8 76.5 273.5 98.6 Z" fill="#5a3825"/><g transform="translate(326 104)"><rect x="-10" y="-30" width="20" height="40" rx="6" fill="#1b1b1b"/></g>
+</svg>

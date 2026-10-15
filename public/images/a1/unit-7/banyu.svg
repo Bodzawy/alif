@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Eine Badewanne">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+<path d="M60 140 L340 140 L320 230 L80 230 Z" fill="#fdfefe" stroke="#909497" stroke-width="4"/><path d="M300 140 L300 70 L330 70" stroke="#909497" stroke-width="7" fill="none"/><path d="M90 230 L80 260 M310 230 L320 260" stroke="#909497" stroke-width="7"/>
+</svg>

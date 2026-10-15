@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Ein Hemd">
+  <defs><radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#a9d6f5"/></radialGradient></defs>
+  <rect width="400" height="300" fill="url(#bg)"/><circle cx="64" cy="64" r="38" fill="#d4ecfc"/><circle cx="340" cy="236" r="50" fill="#d4ecfc"/>
+<path d="M140 60 L260 60 L310 110 L280 130 L270 120 L270 260 L130 260 L130 120 L120 130 L90 110 Z" fill="#fdfefe" stroke="#909497" stroke-width="3"/>
+  <path d="M170 60 L200 100 L230 60" fill="none" stroke="#909497" stroke-width="3"/><path d="M200 100 L200 260" stroke="#909497" stroke-width="2"/><circle cx="208" cy="130" r="4" fill="#909497"/><circle cx="208" cy="170" r="4" fill="#909497"/><circle cx="208" cy="210" r="4" fill="#909497"/>
+</svg>

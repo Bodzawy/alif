@@ -3,6 +3,7 @@
 import type { ReactNode } from "react";
 
 import { VocabularyCard } from "@/components/lessons/vocabulary-card";
+import { cn } from "@/lib/utils";
 import type { A1Word, SoundItem } from "@/data/types";
 
 import { SoundCard } from "./sound-card";
@@ -22,21 +23,42 @@ export type GuidedView = {
   passed: (id: string) => boolean;
 };
 
-export function SoundWordsStep({ groups, guided }: { groups: { sound: SoundItem; words: A1Word[] }[]; guided?: GuidedView }) {
+/** A row of "Wörter": the sound and its words – or (step "words") a titled group of picture words. */
+export type WordRow = { sound?: SoundItem; id?: string; title?: string; titleArabic?: string; words: A1Word[] };
+
+export function SoundWordsStep({ groups, guided }: { groups: WordRow[]; guided?: GuidedView }) {
   const session = usePracticeSession();
   const passed = (id: string) => (guided ? guided.passed(id) : session.passed.has(id));
 
   return (
     <div className="space-y-6 lg:space-y-8" data-testid="sound-words-step">
-      {groups.map(({ sound, words }) => (
+      {groups.map(({ sound, words, id, title, titleArabic }) => (
         <section
-          key={sound.id}
+          key={sound?.id ?? id}
           dir="rtl"
-          aria-label={`Wörter mit ${sound.glyph}`}
-          data-testid={`word-group-${sound.id}`}
-          className="grid gap-4 rounded-[2rem] border border-primary/10 bg-card/60 p-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-[13rem_repeat(3,minmax(0,1fr))] xl:p-4 [&_svg]:shrink-0"
+          aria-label={sound ? `Wörter mit ${sound.glyph}` : (title ?? "Wörter")}
+          data-testid={`word-group-${sound?.id ?? id}`}
+          className={cn(
+            "grid gap-4 rounded-[2rem] border border-primary/10 bg-card/60 p-3 sm:grid-cols-2 lg:grid-cols-3 xl:p-4 [&_svg]:shrink-0",
+            sound ? "xl:grid-cols-[13rem_repeat(3,minmax(0,1fr))]" : "xl:grid-cols-4"
+          )}
         >
-          {guided ? (
+          {!sound ? (
+            (title || titleArabic) && (
+              <header className="text-center sm:col-span-2 lg:col-span-3 xl:col-span-4" data-testid={`word-group-title-${id}`}>
+                {titleArabic && (
+                  <p lang="ar" className="font-arabic text-2xl font-bold leading-[1.8] text-primary">
+                    {titleArabic}
+                  </p>
+                )}
+                {title && (
+                  <p dir="ltr" className="text-sm font-semibold text-muted-foreground">
+                    {title}
+                  </p>
+                )}
+              </header>
+            )
+          ) : guided ? (
             <div className="grid sm:col-span-2 lg:col-span-3 xl:col-span-1">
               {guided.frame(
                 sound.id,
@@ -63,7 +85,7 @@ export function SoundWordsStep({ groups, guided }: { groups: { sound: SoundItem;
               className="sm:col-span-2 lg:col-span-3 xl:col-span-1"
             />
           )}
-          <ol className="contents" aria-label={`Wörter mit ${sound.glyph}`}>
+          <ol className="contents" aria-label={sound ? `Wörter mit ${sound.glyph}` : (title ?? "Wörter")}>
             {words.map((word) => (
               <li key={word.id} dir="ltr" className="grid" data-testid={`word-slot-${word.id}`}>
                 {guided ? (
