@@ -1,3 +1,4 @@
+import { longVowelSound } from "@/lib/tts/long-vowel";
 import { endsInTanwin, withCutTail } from "@/lib/tts/tanwin-cut";
 import { GERMAN_CUES } from "@/lib/pronunciation/cues";
 
@@ -65,6 +66,9 @@ const TANWEEN_IPA: Readonly<Record<string, string>> = {
 
 /** Force audible tanwin on the A1 standalone letter-lesson words. */
 function speechText(text: string) {
+  // A lone letter with a short vowel is read with the long vowel (بَ → بَا).
+  const longVowel = longVowelSound(text);
+  if (longVowel) return escapeXml(longVowel);
   if (endsInTanwin(text)) return withCutTail(escapeXml(text));
   const ipa = TANWEEN_IPA[text];
   if (ipa) return `<phoneme alphabet="ipa" ph="${ipa}">${escapeXml(text)}</phoneme>`;
