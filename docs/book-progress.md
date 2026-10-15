@@ -82,4 +82,6 @@ Final verification: typecheck, lint, all unit tests, production build, full e2e.
   a1-unit-2, levels, a1-book.
 - Known e2e failures outside this work: home.spec (Jetzt starten now opens /lernweg) and
   lesson-flow responsive. Both come from the landing page commit, not from the book.
+- /a1 overview: grouped by unit (`A1Unit.group`, `src/data/a1/groups.ts`), two cards per row,
+  identical card skeleton.
 - Nothing committed, pushed or deployed.

@@ -63,7 +63,7 @@ async function stubServices(page: Page, wrongOnce: string[] = []) {
 test("/a1 shows الدرس الأول – صباح الخير; its contents list أ ب ت ث ج ح خ, مراجعة, صباح الخير, التحية وتقديم النفس; أ opens Wörter", async ({ page }) => {
   await page.goto("/a1");
   const card = page.getByTestId("a1-lesson-lesson-1");
-  await expect(card).toContainText("الدرس الأول");
+  await expect(page.getByTestId("a1-group-start")).toContainText("Einstieg");
   await expect(card).toContainText("صَبَاحُ الْخَيْر");
   await expect(card).toContainText("Lektion 1 · Guten Morgen");
   // One card per A1 lesson (1–20); the letters are their contents, not lessons of their own.

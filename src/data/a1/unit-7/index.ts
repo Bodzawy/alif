@@ -1,5 +1,6 @@
 import type { A1Unit } from "@/data/types";
 
+import { A1_GROUPS } from "../groups";
 import { a1MaAsSir } from "./ma-as-sir";
 import { a1MaLawn } from "./ma-lawn";
 
@@ -9,6 +10,7 @@ import { a1MaLawn } from "./ma-lawn";
 
 export const a1Unit13: A1Unit = {
   slug: "lesson-13",
+  group: A1_GROUPS.unit7,
   number: 13,
   bookLabel: "الْوَحْدَةُ السَّابِعَةُ – تَقْدِيمٌ (١)",
   title: "مَا السِّعْرُ؟",
@@ -18,6 +20,7 @@ export const a1Unit13: A1Unit = {
 
 export const a1Unit14: A1Unit = {
   slug: "lesson-14",
+  group: A1_GROUPS.unit7,
   number: 14,
   bookLabel: "الْوَحْدَةُ السَّابِعَةُ – تَقْدِيمٌ (٢)",
   title: "مَا لَوْنُ هَذَا الْقَلَمِ؟",

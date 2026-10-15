@@ -215,7 +215,8 @@ test.describe("phone", () => {
   test("A1 lists the book's lessons with their labels; each lesson page lists its entries in book order", async ({ page }) => {
     const errors = collectPageErrors(page);
     await page.goto("/a1");
-    for (const unit of bookUnits) await expect(page.getByTestId(`a1-lesson-${unit.slug}`)).toContainText(unit.bookLabel!);
+    for (const unit of bookUnits) await expect(page.getByTestId(`a1-group-${unit.group.id}`).getByTestId(`a1-lesson-${unit.slug}`)).toBeVisible();
+    for (const unit of bookUnits) await expect(page.getByTestId(`a1-group-${unit.group.id}`)).toContainText(unit.group.arabic);
     for (const unit of bookUnits) {
       await page.goto(`/a1/${unit.slug}`);
       await expect(page.locator('[data-testid^="unit-entry-"][data-testid$="-label"]')).toHaveText(unit.lessons.map((l) => l.label));

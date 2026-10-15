@@ -1,6 +1,7 @@
 import type { A1Lesson, A1Unit, PronunciationExercise } from "@/data/types";
 import { clozeLineText } from "@/lib/arabic/cloze";
 
+import { A1_GROUPS } from "./groups";
 import { a1Alif } from "./lesson-1";
 import { a1Ba } from "./letters/ba";
 import { a1Hha } from "./letters/hha";
@@ -36,6 +37,7 @@ import { a1Tahiyya } from "./tahiyya";
 
 export const a1Unit1: A1Unit = {
   slug: "lesson-1",
+  group: A1_GROUPS.start,
   number: 1,
   title: "صَبَاحُ الْخَيْر",
   titleGerman: "Guten Morgen",

@@ -1,5 +1,6 @@
 import type { A1Unit } from "@/data/types";
 
+import { A1_GROUPS } from "../groups";
 import { a1MaAlYawm } from "./ma-al-yawm";
 import { a1MaRaqm } from "./ma-raqm";
 
@@ -9,6 +10,7 @@ import { a1MaRaqm } from "./ma-raqm";
 
 export const a1Unit11: A1Unit = {
   slug: "lesson-11",
+  group: A1_GROUPS.unit6,
   number: 11,
   bookLabel: "الْوَحْدَةُ السَّادِسَةُ – تَقْدِيمٌ (١)",
   title: "مَا الرَّقْمُ؟",
@@ -18,6 +20,7 @@ export const a1Unit11: A1Unit = {
 
 export const a1Unit12: A1Unit = {
   slug: "lesson-12",
+  group: A1_GROUPS.unit6,
   number: 12,
   bookLabel: "الْوَحْدَةُ السَّادِسَةُ – تَقْدِيمٌ (٢)",
   title: "مَا الْيَوْمُ؟",

@@ -1,5 +1,6 @@
 import type { A1Unit } from "@/data/types";
 
+import { A1_GROUPS } from "../groups";
 import { a1Ayna, a1AynaSaydaliyya } from "./ayna";
 
 // Unit 8 of the book "لغتنا الفصحى 1" (book pages 225–245, PDF pages 257–277):
@@ -8,6 +9,7 @@ import { a1Ayna, a1AynaSaydaliyya } from "./ayna";
 
 export const a1Unit15: A1Unit = {
   slug: "lesson-15",
+  group: A1_GROUPS.unit8,
   number: 15,
   bookLabel: "الْوَحْدَةُ الثَّامِنَةُ – تَقْدِيمٌ (١)",
   title: "أَيْنَ الْحَقِيبَةُ؟",
@@ -17,6 +19,7 @@ export const a1Unit15: A1Unit = {
 
 export const a1Unit16: A1Unit = {
   slug: "lesson-16",
+  group: A1_GROUPS.unit8,
   number: 16,
   bookLabel: "الْوَحْدَةُ الثَّامِنَةُ – تَقْدِيمٌ (٢)",
   title: "أَيْنَ الصَّيْدَلِيَّةُ؟",

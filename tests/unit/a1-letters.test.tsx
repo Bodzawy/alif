@@ -175,11 +175,26 @@ describe("/a1 and the step pages of a letter", () => {
     expect(cards.map((c) => c.getAttribute("data-testid"))).toEqual(A1_UNIT_SLUGS.map((slug) => `a1-lesson-${slug}`));
     const card = cards[0]!;
     expect(card).toHaveAttribute("href", "/a1/lesson-1");
-    expect(card).toHaveTextContent("الدرس الأول");
     expect(card).toHaveTextContent("صَبَاحُ الْخَيْر");
     expect(card).toHaveTextContent("Lektion 1 · Guten Morgen");
     expect(card).toHaveTextContent("10 Teile");
-    expect(within(card).getByTestId("a1-lesson-lesson-1-letters")).toHaveTextContent("أ · ب · ت · ث · ج · ح · خ");
+    const letters = within(card).getByTestId("a1-lesson-lesson-1-letters");
+    expect(within(letters).getAllByRole("listitem").map((li) => li.textContent)).toEqual(["أ", "ب", "ت", "ث", "ج", "ح", "خ"]);
+    // The unit label is the section header, not part of the card.
+    expect(within(screen.getByTestId("a1-group-start")).getByRole("heading", { level: 2 })).toHaveTextContent("الْبِدَايَةُ");
+    expect(within(screen.getByTestId("a1-group-start")).getByRole("heading", { level: 2 })).toHaveTextContent("Einstieg");
+  });
+
+  it("/a1 groups the lessons by unit, two per section; singular „1 Teil“; no letters → no letters list", () => {
+    render(<A1Page />);
+    const sections = screen.getAllByTestId(/^a1-group-[a-z0-9-]+$/);
+    expect(sections.map((s) => s.getAttribute("data-testid"))).toEqual(["a1-group-start", ...Array.from({ length: 9 }, (_, i) => `a1-group-unit-${i + 2}`)]);
+    for (const section of sections) expect(within(section).getAllByTestId(/^a1-lesson-[^-]+-\d+$/)).toHaveLength(2);
+    expect(within(screen.getByTestId("a1-group-unit-2")).getByRole("heading", { level: 2 })).toHaveTextContent("الْوَحْدَةُ الثَّانِيَةُ");
+    const one = screen.getByTestId("a1-lesson-lesson-8");
+    expect(one).toHaveTextContent("1 Teil");
+    expect(one).not.toHaveTextContent("1 Teile");
+    expect(screen.queryByTestId("a1-lesson-lesson-8-letters")).toBeNull();
   });
 
   it("the lesson's contents: أ ب ت ث ج ح خ, مراجعة, صَبَاحُ الْخَيْر – in this order, each leading to its first step", async () => {

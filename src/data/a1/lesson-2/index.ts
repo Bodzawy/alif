@@ -1,5 +1,6 @@
 import type { A1Unit } from "@/data/types";
 
+import { A1_GROUPS } from "../groups";
 import { a1Dal } from "./dal";
 import { a1Dhal } from "./dhal";
 import { a1HurufAlMadd } from "./huruf-al-madd";
@@ -13,6 +14,7 @@ import { a1Ya } from "./ya";
 
 export const a1Unit2: A1Unit = {
   slug: "lesson-2",
+  group: A1_GROUPS.start,
   number: 2,
   title: "مَسَاءُ الْخَيْر",
   titleGerman: "Guten Abend",

@@ -3,15 +3,31 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 import { A1_LEVEL, a1UnitHref } from "@/data/a1";
-import { arabicLessonLabel } from "@/data/a1/ordinals";
+import type { A1Unit, A1UnitGroup } from "@/data/types";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: `${A1_LEVEL.code} – ${A1_LEVEL.title}`,
   description: A1_LEVEL.description,
 };
 
-// /a1: one card per lesson of the book. A lesson's letters, review and phrase
-// are its contents (/a1/<lesson>), not lessons of their own.
+/** The lessons in book order, one section per group (the beginning, then each unit of the book). */
+function sections(units: A1Unit[]): Array<{ group: A1UnitGroup; units: A1Unit[] }> {
+  const out: Array<{ group: A1UnitGroup; units: A1Unit[] }> = [];
+  for (const unit of units) {
+    const last = out.at(-1);
+    if (last && last.group.id === unit.group.id) last.units.push(unit);
+    else out.push({ group: unit.group, units: [unit] });
+  }
+  return out;
+}
+
+const parts = (n: number) => `${n} ${n === 1 ? "Teil" : "Teile"}`;
+
+// /a1: the lessons of the book, grouped by unit (two per row). A lesson's
+// letters, review and phrase are its contents (/a1/<lesson>), not lessons of
+// their own. Every card has the same skeleton so a row lines up: badge and
+// parts · Arabic title (two lines high) · German line · footer with the letters.
 export default function A1Page() {
   return (
     <div className="container max-w-4xl py-8 sm:py-12">
@@ -27,31 +43,69 @@ export default function A1Page() {
         </div>
       </header>
 
-      <ol className="mt-8 flex flex-col gap-4" aria-label="Lektionen">
-        {A1_LEVEL.units.map((unit) => (
-          <li key={unit.slug}>
-            <Link
-              href={a1UnitHref(unit)}
-              data-testid={`a1-lesson-${unit.slug}`}
-              className="group flex w-full flex-col items-stretch gap-2 rounded-2xl border bg-card p-4 shadow-card transition hover:shadow-lift focus-ring sm:flex-row sm:items-center sm:gap-5 sm:p-5"
-            >
-              <div className="flex items-start justify-between">
-                <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary-soft text-lg font-bold text-primary">{unit.number}</span>
-                <ArrowRight className="h-6 w-6 text-muted-foreground transition group-hover:translate-x-1 group-hover:text-primary" aria-hidden />
-              </div>
-              <p lang="ar" dir="rtl" className="mt-5 text-right font-arabic text-xl text-muted-foreground">{unit.bookLabel ?? arabicLessonLabel(unit.number)}</p>
-              <h2 lang="ar" dir="rtl" className="text-right font-arabic text-4xl font-bold leading-[1.6] text-primary">{unit.title}</h2>
-              <p className="mt-2 font-semibold">
-                Lektion {unit.number} · {unit.titleGerman}
-              </p>
-              <p lang="ar" dir="rtl" className="mt-3 text-right font-arabic text-2xl leading-[1.6] text-muted-foreground" data-testid={`a1-lesson-${unit.slug}-letters`}>
-                {unit.lessons.filter((lesson) => lesson.letter).map((lesson) => lesson.label).join(" · ")}
-              </p>
-              <p className="mt-auto pt-4 text-sm font-medium text-primary">{unit.lessons.length} Teile</p>
-            </Link>
-          </li>
+      <div className="mt-10 space-y-10">
+        {sections(A1_LEVEL.units).map(({ group, units }) => (
+          <section key={group.id} aria-labelledby={`a1-group-${group.id}`} data-testid={`a1-group-${group.id}`}>
+            <div className="mb-4 flex items-center gap-3 border-b pb-2 sm:border-0 sm:pb-0">
+              <h2 id={`a1-group-${group.id}`} className="flex min-w-0 flex-wrap items-baseline gap-x-2">
+                <span lang="ar" dir="rtl" className="font-arabic text-xl font-bold leading-[1.6] text-foreground">
+                  {group.arabic}
+                </span>
+                <span className="text-sm font-medium text-muted-foreground">{group.german}</span>
+              </h2>
+              <span className="hidden h-px min-w-8 flex-1 bg-border sm:block" aria-hidden />
+            </div>
+
+            <ol className="grid gap-4 sm:grid-cols-2" aria-label="Lektionen">
+              {units.map((unit, i) => {
+                const letters = unit.lessons.filter((lesson) => lesson.letter).map((lesson) => lesson.label);
+                // An odd last card sits centred at the width of one column instead of stretching.
+                const lone = units.length % 2 === 1 && i === units.length - 1 && units.length > 1;
+                const alone = units.length === 1;
+                return (
+                  <li key={unit.slug} className={cn((lone || alone) && "sm:col-span-2 sm:mx-auto sm:w-[calc(50%-0.5rem)]")}>
+                    <Link
+                      href={a1UnitHref(unit)}
+                      data-testid={`a1-lesson-${unit.slug}`}
+                      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-card p-5 shadow-card transition hover:shadow-lift focus-ring"
+                    >
+                      <span className="absolute inset-x-0 top-0 h-1 bg-primary/30 transition group-hover:bg-primary" aria-hidden />
+
+                      <div className="flex items-center justify-between gap-3">
+                        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-lg font-bold text-primary">{unit.number}</span>
+                        <span className="whitespace-nowrap rounded-full bg-primary-soft px-3 py-1 text-sm font-medium text-primary">{parts(unit.lessons.length)}</span>
+                      </div>
+
+                      <h3 lang="ar" dir="rtl" className="mt-3 line-clamp-2 min-h-[3.2em] text-right font-arabic text-[1.75rem] font-bold leading-[1.6] text-primary">
+                        {unit.title}
+                      </h3>
+
+                      <p className="mb-4 mt-1 line-clamp-2 font-semibold leading-6">
+                        Lektion {unit.number} · {unit.titleGerman}
+                      </p>
+
+                      <div className="mt-auto flex min-h-[3.5rem] items-center justify-between gap-3 border-t pt-3">
+                        {letters.length > 0 ? (
+                          <ul dir="rtl" lang="ar" className="flex flex-wrap gap-1.5" aria-label="Neue Buchstaben" data-testid={`a1-lesson-${unit.slug}-letters`}>
+                            {letters.map((letter) => (
+                              <li key={letter} className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-soft font-arabic text-lg font-bold leading-none text-primary">
+                                {letter}
+                              </li>
+                            ))}
+                          </ul>
+                        ) : (
+                          <span aria-hidden />
+                        )}
+                        <ArrowRight className="h-5 w-5 shrink-0 text-muted-foreground transition group-hover:translate-x-1 group-hover:text-primary" aria-hidden />
+                      </div>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ol>
+          </section>
         ))}
-      </ol>
+      </div>
     </div>
   );
 }

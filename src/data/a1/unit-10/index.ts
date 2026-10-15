@@ -1,5 +1,6 @@
 import type { A1Unit } from "@/data/types";
 
+import { A1_GROUPS } from "../groups";
 import { a1Review10 } from "./review";
 import { a1Terms } from "./terms";
 import { a1Taqs, a1Usra } from "./usra";
@@ -11,6 +12,7 @@ import { a1Taqs, a1Usra } from "./usra";
 
 export const a1Unit19: A1Unit = {
   slug: "lesson-19",
+  group: A1_GROUPS.unit10,
   number: 19,
   bookLabel: "الْوَحْدَةُ الْعَاشِرَةُ – تَقْدِيمٌ (١)",
   title: "أَنَا وَأُسْرَتِي",
@@ -20,6 +22,7 @@ export const a1Unit19: A1Unit = {
 
 export const a1Unit20: A1Unit = {
   slug: "lesson-20",
+  group: A1_GROUPS.unit10,
   number: 20,
   bookLabel: "الْوَحْدَةُ الْعَاشِرَةُ – تَقْدِيمٌ (٢)",
   title: "كَيْفَ حَالَةُ الطَّقْسِ؟",

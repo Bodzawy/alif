@@ -1,5 +1,6 @@
 import type { A1Unit } from "@/data/types";
 
+import { A1_GROUPS } from "../groups";
 import { a1Ain, a1Ghain, a1Ha, a1Tta, a1Zza } from "./letters";
 import { a1ManHuwa } from "./man-huwa";
 import { a1Alphabet, a1MinAyna, a1Review3, a1Shadda } from "./min-ayna";
@@ -12,6 +13,7 @@ import { a1Alphabet, a1MinAyna, a1Review3, a1Shadda } from "./min-ayna";
 
 export const a1Unit5: A1Unit = {
   slug: "lesson-5",
+  group: A1_GROUPS.unit3,
   number: 5,
   bookLabel: "الْوَحْدَةُ الثَّالِثَةُ – تَقْدِيمٌ (١)",
   title: "مَنْ هُوَ؟",
@@ -21,6 +23,7 @@ export const a1Unit5: A1Unit = {
 
 export const a1Unit6: A1Unit = {
   slug: "lesson-6",
+  group: A1_GROUPS.unit3,
   number: 6,
   bookLabel: "الْوَحْدَةُ الثَّالِثَةُ – تَقْدِيمٌ (٢)",
   title: "مِنْ أَيْنَ أَنْتَ؟",

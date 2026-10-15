@@ -1,5 +1,6 @@
 import type { A1Unit } from "@/data/types";
 
+import { A1_GROUPS } from "../groups";
 import { a1ManAnta, a1Review2, a1Wajdi } from "./conversations";
 import { a1Dad, a1Ra, a1Sad, a1Shin, a1Sin, a1Zay } from "./letters-1";
 import { a1Fa, a1Kaf, a1Lam, a1Mim, a1Nun, a1Qaf } from "./letters-2";
@@ -12,6 +13,7 @@ import { a1Fa, a1Kaf, a1Lam, a1Mim, a1Nun, a1Qaf } from "./letters-2";
 
 export const a1Unit3: A1Unit = {
   slug: "lesson-3",
+  group: A1_GROUPS.unit2,
   number: 3,
   bookLabel: "الْوَحْدَةُ الثَّانِيَةُ – تَقْدِيمٌ (١)",
   title: "هَلْ أَنْتَ وَجْدِي؟",
@@ -21,6 +23,7 @@ export const a1Unit3: A1Unit = {
 
 export const a1Unit4: A1Unit = {
   slug: "lesson-4",
+  group: A1_GROUPS.unit2,
   number: 4,
   bookLabel: "الْوَحْدَةُ الثَّانِيَةُ – تَقْدِيمٌ (٢)",
   title: "مَنْ أَنْتَ؟",

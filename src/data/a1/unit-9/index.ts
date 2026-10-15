@@ -1,5 +1,6 @@
 import type { A1Unit } from "@/data/types";
 
+import { A1_GROUPS } from "../groups";
 import { a1Ijaza, a1Yawm } from "./yawm";
 
 // Unit 9 of the book "لغتنا الفصحى 1" (book pages 247–265, PDF pages 279–297):
@@ -8,6 +9,7 @@ import { a1Ijaza, a1Yawm } from "./yawm";
 
 export const a1Unit17: A1Unit = {
   slug: "lesson-17",
+  group: A1_GROUPS.unit9,
   number: 17,
   bookLabel: "الْوَحْدَةُ التَّاسِعَةُ – تَقْدِيمٌ (١)",
   title: "يَوْمٌ فِي حَيَاةِ بَاسِم",
@@ -17,6 +19,7 @@ export const a1Unit17: A1Unit = {
 
 export const a1Unit18: A1Unit = {
   slug: "lesson-18",
+  group: A1_GROUPS.unit9,
   number: 18,
   bookLabel: "الْوَحْدَةُ التَّاسِعَةُ – تَقْدِيمٌ (٢)",
   title: "الْإِجَازَةُ الْأُسْبُوعِيَّةُ",

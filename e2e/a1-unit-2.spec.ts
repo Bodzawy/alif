@@ -110,9 +110,9 @@ test.describe("phone", () => {
   test("A1 shows Lektion 3 and 4 with the book's labels; their contents in book order", async ({ page }) => {
     const errors = collectPageErrors(page);
     await page.goto("/a1");
-    await expect(page.getByTestId("a1-lesson-lesson-3")).toContainText("الْوَحْدَةُ الثَّانِيَةُ");
-    await expect(page.getByTestId("a1-lesson-lesson-3-letters")).toHaveText("ر · ز · س · ش · ص · ض");
-    await expect(page.getByTestId("a1-lesson-lesson-4-letters")).toHaveText("ف · ق · ك · ل · م · ن");
+    await expect(page.getByTestId("a1-group-unit-2")).toContainText("الْوَحْدَةُ الثَّانِيَةُ");
+    await expect(page.getByTestId("a1-lesson-lesson-3-letters").getByRole("listitem")).toHaveText(["ر", "ز", "س", "ش", "ص", "ض"]);
+    await expect(page.getByTestId("a1-lesson-lesson-4-letters").getByRole("listitem")).toHaveText(["ف", "ق", "ك", "ل", "م", "ن"]);
     await page.getByTestId("a1-lesson-lesson-4").tap();
     await expect(page.locator('[data-testid^="unit-entry-"][data-testid$="-label"]')).toHaveText(["ف", "ق", "ك", "ل", "م", "ن", "مُرَاجَعَةٌ عَامَّة", "مَنْ أَنْتَ؟"]);
     expect(await noHorizontalScroll(page)).toBe(true);

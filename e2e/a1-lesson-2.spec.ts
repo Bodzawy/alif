@@ -166,7 +166,7 @@ test.describe("phone", () => {
     await expect(page).toHaveURL(/\/a1\/lesson-2\/dal\/step-1$/);
     await page.goto("/a1");
     await expect(page.getByTestId("a1-lesson-lesson-2")).toContainText("مَسَاءُ الْخَيْر");
-    await expect(page.getByTestId("a1-lesson-lesson-2-letters")).toHaveText("د · ذ · و · ي");
+    await expect(page.getByTestId("a1-lesson-lesson-2-letters").getByRole("listitem")).toHaveText(["د", "ذ", "و", "ي"]);
     await page.getByTestId("a1-lesson-lesson-2").tap();
     await expect(page).toHaveURL(/\/a1\/lesson-2$/);
     await expect(page.getByTestId("unit-title")).toHaveText("مَسَاءُ الْخَيْر");

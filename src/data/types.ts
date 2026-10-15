@@ -598,11 +598,22 @@ export type A1Unit = {
   number: number;
   /** The book's own label when it is not "الدرس …", e.g. "الوحدة الثانية – تقديم (١)". */
   bookLabel?: string;
+  /** The section of /a1 the lesson belongs to: the book unit (two lessons each), or the beginning. */
+  group: A1UnitGroup;
   /** Arabic lesson title, e.g. "صَبَاحُ الْخَيْر". */
   title: string;
   /** German translation of the title. */
   titleGerman: string;
   lessons: A1Lesson[];
+};
+
+/** A section of the A1 overview: a unit of the book (e.g. "الْوَحْدَةُ الثَّانِيَةُ" – "Unit 2 · Nach Personen fragen"). */
+export type A1UnitGroup = {
+  id: string;
+  /** Arabic name, e.g. "الْوَحْدَةُ الثَّانِيَةُ". */
+  arabic: string;
+  /** German name, e.g. "Unit 2 · Nach Personen fragen". */
+  german: string;
 };
 
 export type A1LessonLetter = {

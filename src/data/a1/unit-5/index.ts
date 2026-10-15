@@ -1,5 +1,6 @@
 import type { A1Unit } from "@/data/types";
 
+import { A1_GROUPS } from "../groups";
 import { a1HalHadhihi, a1Review5 } from "./hal-hadhihi";
 import { a1KitabMan } from "./kitab-man";
 
@@ -10,6 +11,7 @@ import { a1KitabMan } from "./kitab-man";
 
 export const a1Unit9: A1Unit = {
   slug: "lesson-9",
+  group: A1_GROUPS.unit5,
   number: 9,
   bookLabel: "الْوَحْدَةُ الْخَامِسَةُ – تَقْدِيمٌ (١)",
   title: "كِتَابُ مَنْ هَذَا؟",
@@ -19,6 +21,7 @@ export const a1Unit9: A1Unit = {
 
 export const a1Unit10: A1Unit = {
   slug: "lesson-10",
+  group: A1_GROUPS.unit5,
   number: 10,
   bookLabel: "الْوَحْدَةُ الْخَامِسَةُ – تَقْدِيمٌ (٢)",
   title: "هَلْ هَذِهِ حَقِيبَةٌ؟",
