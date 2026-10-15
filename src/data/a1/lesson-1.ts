@@ -1,4 +1,5 @@
 import { alifWriting } from "@/data/letters/alif";
+import { withTanwin } from "@/lib/arabic/tanwin";
 import type { A1Lesson, FormsWord, GapItem, SoundItem, VocabularyItem } from "@/data/types";
 
 // A1 · Lesson 1 – صَبَاحُ الْخَيْر. Alif with the three short vowels, then the
@@ -60,7 +61,7 @@ const damma: SoundItem = {
 };
 
 function word(id: string, arabic: string, target: string, german: string, transliteration: string, alt: string): VocabularyItem {
-  return { id, arabic, german, transliteration, image: { src: `${IMG}/${id}.svg`, alt }, exercise: { id, target, modelText: arabic } };
+  return { id, arabic, german, transliteration, image: { src: `${IMG}/${id}.svg`, alt }, exercise: { id, target, modelText: withTanwin(arabic) } };
 }
 
 /**

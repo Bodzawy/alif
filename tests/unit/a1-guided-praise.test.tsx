@@ -108,13 +108,13 @@ describe("guided mode: \"Super!\" after a right answer", () => {
     expect(active()).toBe("alif-fatha");
     expect(texts()).toEqual(["أَ", GERMAN_CUES.super]);
 
-    // "Super!" has ended → the next word (أَب) is played.
-    await until(() => texts().includes("أَب"));
-    expect(played.find((p) => p.text === "أَب")!.at - superAt).toBeGreaterThanOrEqual(SUPER_MS);
+    // "Super!" has ended → the next word (أَب, spoken with Tanwin: أَبٌ) is played.
+    await until(() => texts().includes("أَبٌ"));
+    expect(played.find((p) => p.text === "أَبٌ")!.at - superAt).toBeGreaterThanOrEqual(SUPER_MS);
     expect(active()).toBe("ab");
     // Then the next right answer gets its own "Super!".
     await until(() => texts().filter((t) => t === GERMAN_CUES.super).length === 2);
-    expect(texts().slice(0, 4)).toEqual(["أَ", GERMAN_CUES.super, "أَب", GERMAN_CUES.super]);
+    expect(texts().slice(0, 4)).toEqual(["أَ", GERMAN_CUES.super, "أَبٌ", GERMAN_CUES.super]);
   });
 
   it("wrong: no \"Super!\" – the audio again and a new attempt, as before", async () => {

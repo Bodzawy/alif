@@ -2,6 +2,7 @@ import type { A1Lesson, A1LessonLetter, A1Step, GapItem, LetterPositions, SoundI
 
 import { alignPattern } from "@/lib/arabic/gap";
 import { splitTiles } from "@/lib/arabic/letter-form";
+import { withTanwin } from "@/lib/arabic/tanwin";
 
 import { picture, unvocalised, type LetterWordSpec } from "../letter-lesson";
 import { dictationItem, gaps2, letterPattern, needsBare, vowelTiles, WRITE_INTRO } from "../lesson-2/letter-entry";
@@ -115,7 +116,7 @@ export function unit2Letter(spec: Unit2LetterSpec): A1Lesson {
         german,
         transliteration,
         ...(pic ? { image: picture(letter.id, id, pic) } : {}),
-        exercise: { id, target: unvocalised(arabic).replace(/[؟?]/g, ""), modelText: arabic },
+        exercise: { id, target: unvocalised(arabic).replace(/[؟?]/g, ""), modelText: withTanwin(arabic) },
       })),
     })),
   });

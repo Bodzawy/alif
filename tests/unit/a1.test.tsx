@@ -21,6 +21,13 @@ import { isAllowedTarget, isAllowedTtsText } from "@/lib/pronunciation/targets";
 const lesson = getA1Lesson("lesson-1", "alif")!;
 const [wordsStep] = lesson.steps;
 
+/** What "Anhören" says for each word of Alif's Wörter step. */
+const ALIF_SPOKEN: Record<string, string> = {
+  ab: "أَبٌ", ana: "أَنَا", amir: "أَمِيرٌ",
+  ibra: "إِبْرَةٌ", isba: "إِصْبَعٌ", ibriq: "إِبْرِيقٌ",
+  udhun: "أُذُنٌ", umm: "أُمٌّ", usra: "أُسْرَةٌ",
+};
+
 describe("A1 · Lesson 1 content", () => {
   it("Alif is the first entry of الدرس الأول – صباح الخير, with five steps: words (with the vowels), forms of أ, writing, filling gaps, listening", () => {
     expect(A1_LEVEL.units.map((u) => u.slug)).toEqual(A1_UNIT_SLUGS);
@@ -46,7 +53,8 @@ describe("A1 · Lesson 1 content", () => {
         // The word begins with the group's vowel (hamza + vowel sign).
         expect(word.arabic.slice(0, 2), word.id).toBe(group.sound.glyph);
         expect(word.german && word.transliteration, word.id).toBeTruthy();
-        expect(word.exercise.modelText).toBe(word.arabic);
+        // The model audio is spoken with Tanwin – except أَنَا (a pronoun takes no Tanwin).
+        expect(word.exercise.modelText, word.id).toBe(ALIF_SPOKEN[word.id]);
       }
     }
   });

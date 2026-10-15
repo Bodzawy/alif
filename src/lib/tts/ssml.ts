@@ -1,4 +1,5 @@
 import { GERMAN_CUES } from "@/lib/pronunciation/cues";
+import { endsInTanwin, withCutTail } from "@/lib/tts/tanwin-cut";
 
 // Same voice, prosody and output format as the original /api/tts.
 export const TTS_VOICE = "ar-SA-ZariyahNeural";
@@ -43,7 +44,7 @@ export function buildSsml(text: string, voice?: TtsVoiceKey): string {
              xml:lang="${german ? "de-DE" : "ar-SA"}">
         <voice name="${german ? TTS_VOICE_GERMAN : voice ? TTS_DIALOGUE_VOICES[voice] : TTS_VOICE}">
           <prosody rate="-8%">
-            ${escapeXml(text)}
+            ${endsInTanwin(text) ? withCutTail(escapeXml(text)) : escapeXml(text)}
           </prosody>
         </voice>
       </speak>

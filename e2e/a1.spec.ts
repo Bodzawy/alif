@@ -16,9 +16,9 @@ const SOUNDS = [
 ] as const;
 
 const GROUPS = [
-  ["alif-fatha", [["ab", "أَب", "أب", "Vater", "Ab"], ["ana", "أَنَا", "أنا", "ich", "Anā"], ["amir", "أَمِير", "أمير", "Prinz", "Amīr"]]],
-  ["alif-kasra", [["ibra", "إِبْرَة", "إبرة", "Nadel", "Ibra"], ["isba", "إِصْبَع", "إصبع", "Finger", "Iṣbaʿ"], ["ibriq", "إِبْرِيق", "إبريق", "Kanne", "Ibrīq"]]],
-  ["alif-damma", [["udhun", "أُذُن", "أذن", "Ohr", "Udhun"], ["umm", "أُمّ", "أم", "Mutter", "Umm"], ["usra", "أُسْرَة", "أسرة", "Familie", "Usra"]]],
+  ["alif-fatha", [["ab", "أَب", "أب", "Vater", "Ab", "أَبٌ"], ["ana", "أَنَا", "أنا", "ich", "Anā", "أَنَا"], ["amir", "أَمِير", "أمير", "Prinz", "Amīr", "أَمِيرٌ"]]],
+  ["alif-kasra", [["ibra", "إِبْرَة", "إبرة", "Nadel", "Ibra", "إِبْرَةٌ"], ["isba", "إِصْبَع", "إصبع", "Finger", "Iṣbaʿ", "إِصْبَعٌ"], ["ibriq", "إِبْرِيق", "إبريق", "Kanne", "Ibrīq", "إِبْرِيقٌ"]]],
+  ["alif-damma", [["udhun", "أُذُن", "أذن", "Ohr", "Udhun", "أُذُنٌ"], ["umm", "أُمّ", "أم", "Mutter", "Umm", "أُمٌّ"], ["usra", "أُسْرَة", "أسرة", "Familie", "Usra", "أُسْرَةٌ"]]],
 ] as const;
 
 /** IQRA phonemes that satisfy a target's "excellent" rule (first alternative of every "contains"). */
@@ -110,7 +110,7 @@ test("Wörter: three vowel sections (the former Laute), nine word cards (image, 
     const cards = section.locator('[data-testid^="vocab-card-"]');
     expect(await cards.evaluateAll((els) => els.map((el) => el.getAttribute("data-testid")))).toEqual(words.map(([id]) => `vocab-card-${id}`));
 
-    for (const [id, arabic, target, german, franco] of words) {
+    for (const [id, arabic, target, german, franco, spoken] of words) {
       const card = section.getByTestId(`vocab-card-${id}`);
       await expect(card.getByTestId(`vocab-arabic-${id}`)).toHaveText(arabic);
       await expect(card).toContainText(german);
@@ -120,7 +120,8 @@ test("Wörter: three vowel sections (the former Laute), nine word cards (image, 
       await expect.poll(() => image.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0)).toBe(true);
 
       await card.getByTestId(`exercise-${id}-listen`).click();
-      await expect.poll(() => stub.tts).toContain(arabic);
+      // "Anhören" speaks the word with Tanwin (أَنَا takes none); the card keeps the pausal word.
+      await expect.poll(() => stub.tts).toContain(spoken);
       await recordExercise(page, id, 500);
       await expect(card.getByTestId(`exercise-${id}-feedback-headline`)).toHaveText("مُمْتَاز! 👏");
       await expect(card).toContainText("Geschafft");
@@ -140,7 +141,7 @@ test("the real API accepts every A1 target and TTS text (no invalid_target)", as
   // :3211 is configured (invalid Azure key), so requests pass validation and then fail at Azure.
   const base = "http://127.0.0.1:3211";
   const targets = [...SOUNDS.map(([, glyph]) => glyph), ...GROUPS.flatMap(([, words]) => words.map((w) => w[2]))];
-  const texts = [...SOUNDS.map(([, glyph]) => glyph), ...GROUPS.flatMap(([, words]) => words.map((w) => w[1]))];
+  const texts = [...SOUNDS.map(([, glyph]) => glyph), ...GROUPS.flatMap(([, words]) => words.map((w) => w[5]))];
   for (const target of targets) {
     const response = await request.post(`${base}/api/pronunciation`, {
       multipart: { target, audio: { name: "voice.wav", mimeType: "audio/wav", buffer: toneWav(800) } },

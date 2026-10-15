@@ -127,8 +127,8 @@ test("blurred blocks, the active block grows, wrong → again, right → light g
   await expect(step(page)).toHaveAttribute("data-active", "ana", { timeout: 20_000 });
 
   expect(calls.evaluate).toBe(3);
-  // After each right answer "Super!" (German voice) is spoken before the next block.
-  expect(calls.tts.slice(0, 3)).toEqual(["أَ", "Super!", "أَب"]);
+  // After each right answer "Super!" (German voice) is spoken before the next block; the word أَب is spoken with Tanwin.
+  expect(calls.tts.slice(0, 3)).toEqual(["أَ", "Super!", "أَبٌ"]);
   const progress = await page.evaluate(() => JSON.parse(localStorage.getItem("alif:progress:v1") ?? "{}"));
   expect(progress["a1/lesson-1/alif/step-1"].passed).toEqual(["alif-fatha", "ab"]);
 

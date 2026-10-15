@@ -1,4 +1,5 @@
 import type { A1Lesson, A1Word, ClozeItem, Dialogue, DialogueSpeaker, PhraseItem, QuizItem, TableCell } from "@/data/types";
+import { withTanwin } from "@/lib/arabic/tanwin";
 import { transliterate } from "@/lib/arabic/transliterate";
 
 import { unvocalised } from "../letter-lesson";
@@ -23,7 +24,7 @@ const word = (id: string, arabic: string, german: string, src: string, alt: stri
   german,
   transliteration: transliterate(arabic),
   image: { src, alt },
-  exercise: { id, target: unvocalised(arabic), modelText: arabic },
+  exercise: { id, target: unvocalised(arabic), modelText: withTanwin(arabic) },
 });
 
 // ---------------------------------------------------------------------------

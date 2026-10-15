@@ -1,5 +1,6 @@
 import type { A1Lesson, A1LessonLetter, A1Word, FormsWord, GapItem, GapsContent, SoundItem, WritingLetterSet } from "@/data/types";
 import { formGlyph, LETTER_FORMS, pickNeighbors } from "@/lib/arabic/letter-form";
+import { withTanwin } from "@/lib/arabic/tanwin";
 
 // A1 · Lektion 1 is one book unit (صَبَاحُ الْخَيْر) with one entry per letter:
 // Alif is src/data/a1/lesson-1.ts, every further letter (ب ت ث ج ح خ) is a
@@ -170,7 +171,7 @@ export function letterLesson(spec: LetterLessonSpec): A1Lesson {
     german,
     transliteration,
     ...(pic ? { image: picture(letter.id, id, pic) } : {}),
-    exercise: { id, target: unvocalised(arabic), modelText: arabic },
+    exercise: { id, target: unvocalised(arabic), modelText: withTanwin(arabic) },
   });
   const allWords = [...spec.words.fatha, ...spec.words.kasra, ...spec.words.damma];
   const wordPicture = (id: string) => {
