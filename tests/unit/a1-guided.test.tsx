@@ -226,7 +226,7 @@ describe("Schritt 2 guided mode", () => {
     await at(0);
     expect(active()).toBe("amir");
     await until(() => stage() === "listen");
-    expect(played).toEqual(["أَمِير"]);
+    expect(played).toEqual(["أَمِيرٌ"]); // the model audio is spoken with Tanwin
   });
 
   it("microphone denied → today's page with buttons and a note", async () => {

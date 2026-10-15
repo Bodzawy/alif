@@ -2,6 +2,8 @@
 // kept per text for the lifetime of the page, so repeated "Anhören" clicks do
 // not hit Azure again. Only one sound plays at a time.
 
+const TTS_CACHE_REVISION = "waw-diagnostic-v4";
+
 const cache = new Map<string, Promise<string>>();
 
 /** A dialogue speaker's voice (see TTS_DIALOGUE_VOICES); without it the default lesson voice. */
@@ -28,7 +30,7 @@ async function fetchAudioUrl(text: string, voice?: SpeechVoice): Promise<string>
 }
 
 function audioUrl(text: string, voice?: SpeechVoice): Promise<string> {
-  const key = voice ? `${voice}\u0000${text}` : text;
+  const key = `${TTS_CACHE_REVISION}\u0000${voice ? `${voice}\u0000` : ""}${text}`;
   let pending = cache.get(key);
   if (!pending) {
     pending = fetchAudioUrl(text, voice);

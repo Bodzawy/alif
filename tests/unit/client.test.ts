@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 
+import { setRecordingInfo } from "@/lib/audio/recording-info";
 import { API_ERROR_MESSAGES } from "@/lib/pronunciation/errors";
 import { messageForFailedResponse, PronunciationRequestError, submitRecording, toStudentFeedback } from "@/lib/pronunciation/client";
 import type { PronunciationResponse } from "@/lib/pronunciation/types";
@@ -65,6 +66,20 @@ describe("submitRecording", () => {
     const body = init.body as FormData;
     expect(body.get("target")).toBe("ألف");
     expect((body.get("audio") as File).name).toBe("voice.wav");
+  });
+
+  it("sends the length before the silence was cut (recordedMs) when the WAV was trimmed; nothing else changes", async () => {
+    const fetchImpl = vi.fn(async () => new Response(JSON.stringify(response()), { status: 200 }));
+    const trimmed = new Blob(["RIFF"], { type: "audio/wav" });
+    setRecordingInfo(trimmed, { recordedMs: 2480.4, sentMs: 812 });
+    await submitRecording(trimmed, "ألف", { fetchImpl: fetchImpl as unknown as typeof fetch });
+    let body = (fetchImpl.mock.calls[0] as unknown as [string, RequestInit])[1].body as FormData;
+    expect(body.get("recordedMs")).toBe("2480");
+    expect(body.get("target")).toBe("ألف");
+
+    await submitRecording(new Blob(["RIFF"], { type: "audio/wav" }), "ألف", { fetchImpl: fetchImpl as unknown as typeof fetch });
+    body = (fetchImpl.mock.calls[1] as unknown as [string, RequestInit])[1].body as FormData;
+    expect(body.has("recordedMs")).toBe(false);
   });
 
   it("turns HTTP errors and network failures into German messages", async () => {

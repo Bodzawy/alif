@@ -3,6 +3,8 @@ import { apiError } from "@/lib/pronunciation/errors";
 import { isAllowedTtsText } from "@/lib/pronunciation/targets";
 import { clientKey, createRateLimiter } from "@/lib/rate-limit";
 import { TTS_OUTPUT_FORMAT, buildSsml, isTtsVoiceKey } from "@/lib/tts/ssml";
+import { synthesizeTanwinWord } from "@/lib/tts/azure-tanwin";
+import { TANWIN_CUT_MARK, withoutCutTail } from "@/lib/tts/tanwin-cut";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -46,6 +48,17 @@ export async function POST(request: Request) {
     }
     const voice = isTtsVoiceKey(rawVoice) ? rawVoice : undefined;
 
+    const ssml = buildSsml(text, voice);
+    // A single word with Tanwin: cut at the bookmark so its -un is heard (src/lib/tts/tanwin-cut.ts).
+    if (ssml.includes(`mark="${TANWIN_CUT_MARK}"`)) {
+      try {
+        const wav = await synthesizeTanwinWord(ssml, azure);
+        return new Response(new Uint8Array(wav), { status: 200, headers: { "Content-Type": "audio/wav", "Cache-Control": "private, max-age=86400" } });
+      } catch (error) {
+        console.error("TTS TANWIN ERROR:", error);
+      }
+    }
+
     const response = await fetch(`https://${azure.region}.tts.speech.microsoft.com/cognitiveservices/v1`, {
       method: "POST",
       headers: {
@@ -54,7 +67,7 @@ export async function POST(request: Request) {
         "X-Microsoft-OutputFormat": TTS_OUTPUT_FORMAT,
         "User-Agent": "Alif",
       },
-      body: buildSsml(text, voice),
+      body: withoutCutTail(ssml),
       signal: AbortSignal.timeout(TTS_TIMEOUT_MS),
       cache: "no-store",
     });

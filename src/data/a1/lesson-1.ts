@@ -1,5 +1,6 @@
 import { alifWriting } from "@/data/letters/alif";
 import type { A1Lesson, FormsWord, GapItem, SoundItem, VocabularyItem } from "@/data/types";
+import { withTanwin } from "./letter-lesson";
 
 // A1 · Lesson 1 – صَبَاحُ الْخَيْر. Alif with the three short vowels, then the
 // words from the lesson sheet that begin with each of them (order as on the sheet).
@@ -18,6 +19,7 @@ export const UEBUNGEN_AUDIO_BASE = "/audio/a1/lesson-1/uebungen";
 const gapItem = (id: string, arabic: string, german: string, picture: boolean): GapItem => ({
   id,
   arabic,
+  spoken: withTanwin(arabic),
   german,
   audio: id,
   ...(picture ? { image: { src: `${IMG}/${id}.svg`, alt: german } } : {}),
@@ -40,7 +42,7 @@ const fatha: SoundItem = {
   glyph: "أَ",
   transliteration: "a",
   vowelName: { arabic: "فَتْحَة", german: "Fatha" },
-  exercise: { id: "alif-fatha", target: "أَ", modelText: "أَ" },
+  exercise: { id: "alif-fatha", target: "أَ", modelText: "أَا" },
 };
 
 const kasra: SoundItem = {
@@ -48,7 +50,7 @@ const kasra: SoundItem = {
   glyph: "إِ",
   transliteration: "i",
   vowelName: { arabic: "كَسْرَة", german: "Kasra" },
-  exercise: { id: "alif-kasra", target: "إِ", modelText: "إِ" },
+  exercise: { id: "alif-kasra", target: "إِ", modelText: "إِي" },
 };
 
 const damma: SoundItem = {
@@ -56,11 +58,14 @@ const damma: SoundItem = {
   glyph: "أُ",
   transliteration: "u",
   vowelName: { arabic: "ضَمَّة", german: "Damma" },
-  exercise: { id: "alif-damma", target: "أُ", modelText: "أُ" },
+  exercise: { id: "alif-damma", target: "أُ", modelText: "ؤُ" },
 };
 
 function word(id: string, arabic: string, target: string, german: string, transliteration: string, alt: string): VocabularyItem {
-  return { id, arabic, german, transliteration, image: { src: `${IMG}/${id}.svg`, alt }, exercise: { id, target, modelText: arabic } };
+  // Temporary audible diagnostic requested by the user: keep the visible word
+  // and assessment target intact, but feed an unmistakable waw to lesson TTS.
+  const modelText = withTanwin(arabic);
+  return { id, arabic, german, transliteration, image: { src: `${IMG}/${id}.svg`, alt }, exercise: { id, target, modelText } };
 }
 
 /**

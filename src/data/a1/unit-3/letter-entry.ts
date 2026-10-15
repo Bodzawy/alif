@@ -1,6 +1,7 @@
 import type { A1Lesson, A1LessonLetter, A1Step, GapItem, LetterPositions, SoundItem, WritingLetterSet } from "@/data/types";
 
 import { alignPattern } from "@/lib/arabic/gap";
+import { withTanwin } from "@/lib/arabic/tanwin";
 import { transliterate } from "@/lib/arabic/transliterate";
 
 import { picture, unvocalised, type LetterWordSpec } from "../letter-lesson";
@@ -122,7 +123,7 @@ export function unit3Letter(spec: Unit3LetterSpec): A1Lesson {
         german,
         transliteration,
         ...(pic ? { image: picture(letter.id, id, pic) } : {}),
-        exercise: { id, target: unvocalised(arabic).replace(/[؟?]/g, ""), modelText: arabic },
+        exercise: { id, target: unvocalised(arabic).replace(/[؟?]/g, ""), modelText: withTanwin(arabic) },
       })),
     })),
   });

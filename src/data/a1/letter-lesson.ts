@@ -63,6 +63,34 @@ const SUKUN = "\u0652";
 /** The pronunciation target: the word without harakat (as for every word in vocabulary_conditions.json). */
 export const unvocalised = (arabic: string) => arabic.replace(HARAKAT, "");
 
+/** Add tanwin to a displayed short-vowel ending for the A1 letter-word model audio. */
+export function withTanwin(arabic: string): string {
+  // أَنَا is a pronoun; Arabic pronouns do not take tanwin.
+  if (arabic === "أَنَا") return arabic;
+  const chars = Array.from(arabic);
+  for (let i = chars.length - 1; i >= 0; i--) {
+    const ch = chars[i]!;
+    if (ch === "ة") {
+      chars.splice(i + 1, 0, "ٌ");
+      return chars.join("");
+    }
+    if (/[\u064B-\u0652]/.test(ch)) {
+      // A word's isolated dictionary form is spoken with nominative tanwin.
+      // Replace its final short vowel or sukun; keep shadda before tanwin.
+      if (ch === "ّ") continue;
+      if (ch === "ْ") chars[i] = "ٌ";
+      else if (ch === "ً" || ch === "ٍ" || ch === "ٌ") return arabic;
+      else chars[i] = "ٌ";
+      return chars.join("");
+    }
+    if (/[\u0621-\u064A]/.test(ch)) {
+      chars.splice(i + 1, 0, "ٌ");
+      return chars.join("");
+    }
+  }
+  return arabic;
+}
+
 export const letterImageBase = (id: string) => `/images/a1/${id}`;
 export const letterFormsAudioBase = (id: string) => `/audio/a1/${id}/formen`;
 
@@ -170,7 +198,7 @@ export function letterLesson(spec: LetterLessonSpec): A1Lesson {
     german,
     transliteration,
     ...(pic ? { image: picture(letter.id, id, pic) } : {}),
-    exercise: { id, target: unvocalised(arabic), modelText: arabic },
+    exercise: { id, target: unvocalised(arabic), modelText: withTanwin(arabic) },
   });
   const allWords = [...spec.words.fatha, ...spec.words.kasra, ...spec.words.damma];
   const wordPicture = (id: string) => {
@@ -203,7 +231,7 @@ export function letterLesson(spec: LetterLessonSpec): A1Lesson {
       const meaning = german ?? allWords.find((w) => w[0] === id)?.[2] ?? formsWords.find((w) => w[0] === id)?.[2];
       if (!meaning) throw new Error(`${letter.id}: gap item "${arabic}" needs a German meaning`);
       const image = withPicture ? (pic ? picture(letter.id, id, pic) : (wordPicture(id) ?? (spec.formsPictures?.[id] ? picture(letter.id, id, spec.formsPictures[id]) : undefined))) : undefined;
-      return { id, arabic, german: meaning, audio: `${letter.id}/uebungen/${id}`, pattern, ...(image ? { image } : {}) };
+      return { id, arabic, spoken: withTanwin(arabic), german: meaning, audio: `${letter.id}/uebungen/${id}`, pattern, ...(image ? { image } : {}) };
     };
   const gapChoices = [...sounds.map((s) => s.glyph), letter.glyph + SUKUN];
 

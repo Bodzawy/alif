@@ -1,3 +1,5 @@
+import { recordingInfo } from "@/lib/audio/recording-info";
+
 import { API_ERROR_MESSAGES, isApiErrorCode, type ApiErrorCode } from "./errors";
 import { NO_MATCHING_RULE, type PronunciationResponse } from "./types";
 
@@ -36,6 +38,9 @@ export async function submitRecording(
   const form = new FormData();
   form.append("audio", wav, "voice.wav");
   form.append("target", target);
+  // Length before the silence was cut – only logged by the server.
+  const info = recordingInfo(wav);
+  if (info) form.append("recordedMs", String(Math.round(info.recordedMs)));
 
   let response: Response;
   try {

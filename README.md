@@ -154,6 +154,16 @@ still work (307): `/a1/lesson-1/step-N` → `/a1/lesson-1/alif/step-(N−1)` (st
 Wörter), `/a1/<letter>` → `/a1/lesson-1/<letter>`. Saved progress of Alif's old
 steps is copied once per browser to the new keys (`copyMovedA1Progress`).
 
+The words of "Wörter" in every letter entry are **spoken with Tanwin**
+(بَيْتٌ, بِطَاقَةٌ, أُمٌّ, مُسْتَشْفًى): `exercise.modelText = withTanwin(arabic)`
+(`src/lib/arabic/tanwin.ts`). The card and the pronunciation target stay pausal
+(بَيْت / `بيت`), so the rules are unchanged. No Tanwin for words that cannot
+take it: pronouns, the article ال, names and question words ending in ا,
+indeclinable loanwords (رَادْيُو) and the diptotes in `NO_TANWIN`. Gap steps
+(Ergänzen, Hören, Diktat) keep the pausal word: their answer is the final
+letter's sign. `npx tsx --env-file=.env.local scripts/verify-tanwin-audio.ts`
+checks the real audio (Azure TTS → IQRA phonemes: the word must end in ‑un).
+
 ## A1 · Lektion 1: the conversations "صَبَاحُ الْخَيْر"
 
 The two textbook conversations (Ahmad / Ali, Nabila / Fatima – seven lines

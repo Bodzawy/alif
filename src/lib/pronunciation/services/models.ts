@@ -10,6 +10,11 @@ import type { IqraResult, MasaarResult } from "../types";
 // 8-second timeout. Both are best effort: a failure returns null and the
 // assessment continues without that service's data.
 
+// Kept at 8 s: in the production log (Oct 2026) 57 of 440 answered requests
+// took over 4 s in total, so a 4 s limit could cut off IQRA answers that
+// arrive in time today and turn them into "Nicht eindeutig". /api/pronunciation
+// now logs IQRA's own time (timings.iqraMs); lower this only when those show
+// IQRA answers well within the new limit.
 export const MODEL_TIMEOUT_MS = 8_000;
 
 type ModelService = "MASAAR" | "IQRA";

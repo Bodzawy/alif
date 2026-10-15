@@ -87,7 +87,7 @@
               "exercise": {
                 "id": "ab",
                 "target": "أب",
-                "modelText": "أَب"
+                "modelText": "أَبٌ"
               }
             },
             {
@@ -117,7 +117,7 @@
               "exercise": {
                 "id": "amir",
                 "target": "أمير",
-                "modelText": "أَمِير"
+                "modelText": "أَمِيرٌ"
               }
             }
           ]
@@ -150,7 +150,7 @@
               "exercise": {
                 "id": "ibra",
                 "target": "إبرة",
-                "modelText": "إِبْرَة"
+                "modelText": "إِبْرَةٌ"
               }
             },
             {
@@ -165,7 +165,7 @@
               "exercise": {
                 "id": "isba",
                 "target": "إصبع",
-                "modelText": "إِصْبَع"
+                "modelText": "إِصْبَعٌ"
               }
             },
             {
@@ -180,7 +180,7 @@
               "exercise": {
                 "id": "ibriq",
                 "target": "إبريق",
-                "modelText": "إِبْرِيق"
+                "modelText": "إِبْرِيقٌ"
               }
             }
           ]
@@ -213,7 +213,7 @@
               "exercise": {
                 "id": "udhun",
                 "target": "أذن",
-                "modelText": "أُذُن"
+                "modelText": "أُذُنٌ"
               }
             },
             {
@@ -228,7 +228,7 @@
               "exercise": {
                 "id": "umm",
                 "target": "أم",
-                "modelText": "أُمّ"
+                "modelText": "أُمٌّ"
               }
             },
             {
@@ -243,7 +243,7 @@
               "exercise": {
                 "id": "usra",
                 "target": "أسرة",
-                "modelText": "أُسْرَة"
+                "modelText": "أُسْرَةٌ"
               }
             }
           ]

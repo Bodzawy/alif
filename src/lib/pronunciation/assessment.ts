@@ -60,8 +60,8 @@ export function buildAssessment({ target, primary, masaar, iqra }: AssessmentInp
 
   if (feedback) {
     // The conditions file, not the legacy score alone, decides whether this
-    // attempt passes. Only an explicit "excellent" rule is a pass.
-    passed = feedback.rule === "excellent";
+    // attempt passes, but Azure's minimum score checks remain mandatory.
+    passed = feedback.rule === "excellent" && accuracyPassed && firstSoundPassed;
     if (!passed && failureReason === null) {
       failureReason = "rule_not_matched";
     }

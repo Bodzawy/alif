@@ -40,7 +40,7 @@ function modelServer(reply: () => { status: number; body: unknown; delayMs?: num
 }
 
 const masaarReply = { status: 200, body: { letter: "أ", confidence: 0.93, top3: [{ letter: "أ", confidence: 0.93 }] } as unknown };
-let iqraReply: { status: number; body: unknown } = { status: 200, body: { sequence: "b aa", phonemes: ["b", "aa"], duration: 0.8 } };
+let iqraReply: { status: number; body: unknown; delayMs?: number } = { status: 200, body: { sequence: "b aa", phonemes: ["b", "aa"], duration: 0.8 } };
 
 const masaar = modelServer(() => masaarReply);
 const iqra = modelServer(() => iqraReply);
@@ -217,5 +217,82 @@ describe("POST /api/pronunciation", () => {
     for (let i = 0; i < 31; i++) last = await post({ audio, target: "ألف" }, "192.0.2.77");
     expect(last!.status).toBe(429);
     expect(last!.headers.get("retry-after")).toBeTruthy();
+  });
+});
+
+describe("POST /api/pronunciation – timing log", () => {
+  const assessmentLog = () => {
+    const call = vi.mocked(console.log).mock.calls.find(([label]) => label === "ARABIC PRONUNCIATION ASSESSMENT:");
+    expect(call, "assessment log line").toBeDefined();
+    return call![1] as { audio: { durationMs: number; recordedMs: number | null }; timings: { azureMs: number; iqraMs: number; masaarMs: number }; tookMs: number };
+  };
+
+  it("logs how long Azure, IQRA and MASAAR each took", async () => {
+    iqraReply = { ...iqraReply, delayMs: 150 };
+    azureMock.assess.mockImplementation(() => new Promise((resolve) => setTimeout(() => resolve(azureResult()), 60)));
+    const response = await post({ audio: await wavFile(), target: "باء" });
+    expect(response.status).toBe(200);
+
+    const { timings, tookMs } = assessmentLog();
+    expect(timings.iqraMs).toBeGreaterThanOrEqual(140);
+    expect(timings.azureMs).toBeGreaterThanOrEqual(50);
+    expect(timings.azureMs).toBeLessThan(timings.iqraMs);
+    expect(timings.masaarMs).toBeGreaterThanOrEqual(0);
+    // Parallel: the request takes about as long as the slowest service, not the sum.
+    expect(tookMs).toBeGreaterThanOrEqual(timings.iqraMs);
+    expect(tookMs).toBeLessThan(timings.iqraMs + timings.azureMs);
+  });
+
+  it("logs IQRA's time also when it fails; the evaluation goes on as before", async () => {
+    iqraReply = { status: 500, body: { error: "boom" }, delayMs: 30 };
+    const body = await (await post({ audio: await wavFile(), target: "باء" })).json();
+    expect(body.feedback.rule).toBe("no_matching_rule");
+    expect(assessmentLog().timings.iqraMs).toBeGreaterThanOrEqual(25);
+  });
+
+  it("logs null for a service that is not configured", async () => {
+    const url = process.env.MASAAR_URL;
+    delete process.env.MASAAR_URL;
+    try {
+      await post({ audio: await wavFile(), target: "باء" });
+      expect(assessmentLog().timings.masaarMs).toBeNull();
+      expect(masaar.requests).toHaveLength(0);
+    } finally {
+      process.env.MASAAR_URL = url;
+    }
+  });
+
+  it("logs the length before the browser cut the silence (recordedMs) next to the sent length", async () => {
+    await post({ audio: await wavFile(600), target: "باء", recordedMs: "2480" });
+    expect(assessmentLog().audio).toMatchObject({ durationMs: 600, recordedMs: 2480 });
+
+    vi.mocked(console.log).mockClear();
+    await post({ audio: await wavFile(600), target: "باء" });
+    expect(assessmentLog().audio.recordedMs).toBeNull();
+
+    vi.mocked(console.log).mockClear();
+    await post({ audio: await wavFile(600), target: "باء", recordedMs: "nonsense" });
+    expect(assessmentLog().audio.recordedMs).toBeNull();
+  });
+
+  it("logs the timings when Azure fails or hears nothing", async () => {
+    azureMock.assess.mockRejectedValueOnce(new AzureSpeechError("Azure timed out", "timeout"));
+    expect((await post({ audio: await wavFile(), target: "باء" })).status).toBe(504);
+    const errorLog = vi.mocked(console.error).mock.calls.find(([label]) => label === "AZURE SPEECH ERROR:")![1] as { timings: { azureMs: number; iqraMs: number | null } };
+    expect(errorLog.timings.azureMs).toBeGreaterThanOrEqual(0);
+    // The request ends with Azure's error; IQRA may still be running (then null).
+    expect(errorLog.timings).toHaveProperty("iqraMs");
+
+    azureMock.assess.mockResolvedValueOnce(azureResult({ accuracy: null, pronunciation: null }));
+    expect((await post({ audio: await wavFile(), target: "باء" })).status).toBe(422);
+    const infoLog = vi.mocked(console.info).mock.calls.find(([label]) => label === "PRONUNCIATION: Azure recognised no speech.")![1] as { timings: { azureMs: number } };
+    expect(infoLog.timings.azureMs).toBeGreaterThanOrEqual(0);
+  });
+
+  it("never writes a key into the log", async () => {
+    await post({ audio: await wavFile(), target: "باء", recordedMs: "1000" });
+    const logged = JSON.stringify([...vi.mocked(console.log).mock.calls, ...vi.mocked(console.info).mock.calls, ...vi.mocked(console.warn).mock.calls, ...vi.mocked(console.error).mock.calls]);
+    expect(logged).not.toContain("internal-secret");
+    expect(logged).not.toContain("test-key");
   });
 });

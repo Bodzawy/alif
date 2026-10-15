@@ -43,10 +43,9 @@ describe("buildAssessment", () => {
     expect(weak.passed).toBe(false);
   });
 
-  it("lets an 'excellent' rule pass even when the legacy first-sound check failed", () => {
-    // Original behaviour: the conditions file decides `passed`; legacy checks only set the reason.
+  it("does not pass an 'excellent' rule when Azure's first-sound score is below threshold", () => {
     const result = buildAssessment({ target: "باء", primary: azure({ accuracy: 75, firstSoundScore: 40 }), masaar: null, iqra: { phonemes: ["b"] } });
-    expect(result.passed).toBe(true);
+    expect(result.passed).toBe(false);
     expect(result.failureReason).toBe("weak_first_sound");
   });
 

@@ -69,7 +69,7 @@ describe("Ba – lesson data", () => {
       for (const word of group.words) {
         expect(word.arabic.slice(0, 2), word.id).toBe(group.sound.glyph);
         expect(existsSync(path.join(process.cwd(), "public", word.image!.src)), word.id).toBe(true);
-        expect(word.exercise).toEqual({ id: word.id, target: word.arabic.replace(/[ً-ْ]/g, ""), modelText: word.arabic });
+        expect(word.exercise).toEqual({ id: word.id, target: word.arabic.replace(/[ً-ْ]/g, ""), modelText: `${word.arabic}ٌ` }); // spoken with Tanwin
         expect(word.transliteration).toBeTruthy();
       }
     }

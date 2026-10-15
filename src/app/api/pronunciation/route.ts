@@ -13,6 +13,25 @@ export const maxDuration = 30;
 
 const rateLimit = createRateLimiter({ limit: 30, windowMs: 60_000 });
 
+/** How long each service took, in ms, for the server log (null: not called / not configured). */
+type Timings = { azureMs: number | null; iqraMs: number | null; masaarMs: number | null };
+
+/** Resolves like `promise` and writes its duration (also on failure) through `done`. */
+async function timed<T>(promise: Promise<T>, done: (ms: number) => void): Promise<T> {
+  const start = Date.now();
+  try {
+    return await promise;
+  } finally {
+    done(Date.now() - start);
+  }
+}
+
+/** Length of the recording before the browser cut the silence (sent by submitRecording); log only. */
+function recordedMs(value: FormDataEntryValue | null): number | null {
+  const ms = typeof value === "string" ? Number(value) : NaN;
+  return Number.isFinite(ms) && ms >= 0 && ms <= 600_000 ? Math.round(ms) : null;
+}
+
 // Browser → Alif → (Azure ‖ MASAAR ‖ IQRA) → condition engine → feedback.
 export async function POST(request: Request) {
   const startedAt = Date.now();
@@ -67,25 +86,28 @@ export async function POST(request: Request) {
       return apiError("audio_too_short", 400);
     }
 
+    const audioLog = { durationMs: wav.durationMs, recordedMs: recordedMs(formData.get("recordedMs")) };
+
     // All three evaluations run in parallel. MASAAR and IQRA are best effort
-    // (null on failure); Azure is required.
+    // (null on failure); Azure is required. Each one is timed for the log.
+    const timings: Timings = { azureMs: null, iqraMs: null, masaarMs: null };
     let masaar, iqra, primary;
     try {
       [masaar, iqra, primary] = await Promise.all([
-        assessMasaar(audioBuffer),
-        assessIqra(audioBuffer),
-        assessWithAzure(audioBuffer, target, azure),
+        masaarUrl() ? timed(assessMasaar(audioBuffer), (ms) => (timings.masaarMs = ms)) : assessMasaar(audioBuffer),
+        iqraUrl() ? timed(assessIqra(audioBuffer), (ms) => (timings.iqraMs = ms)) : assessIqra(audioBuffer),
+        timed(assessWithAzure(audioBuffer, target, azure), (ms) => (timings.azureMs = ms)),
       ]);
     } catch (error) {
       if (error instanceof AzureSpeechError) {
-        console.error("AZURE SPEECH ERROR:", { kind: error.kind, message: error.message, details: error.details });
+        console.error("AZURE SPEECH ERROR:", { kind: error.kind, message: error.message, details: error.details, audio: audioLog, timings });
         return apiError("service_unavailable", error.kind === "timeout" ? 504 : 502);
       }
       throw error;
     }
 
     if (!hasUsableAzureScores(primary)) {
-      console.info("PRONUNCIATION: Azure recognised no speech.", { target, durationMs: wav.durationMs });
+      console.info("PRONUNCIATION: Azure recognised no speech.", { target, ...audioLog, timings, tookMs: Date.now() - startedAt });
       return apiError("unclear_audio", 422);
     }
 
@@ -93,7 +115,7 @@ export async function POST(request: Request) {
 
     console.log("ARABIC PRONUNCIATION ASSESSMENT:", {
       target,
-      audio: { durationMs: wav.durationMs, sampleRate: wav.sampleRate, channels: wav.channels },
+      audio: { ...audioLog, sampleRate: wav.sampleRate, channels: wav.channels },
       services: {
         azure: true,
         masaar: masaarUrl() ? masaar !== null : "not configured",
@@ -108,6 +130,7 @@ export async function POST(request: Request) {
       matchedRule: assessment.conditionEvaluation.matchedRule,
       passed: assessment.passed,
       failureReason: assessment.failureReason,
+      timings,
       tookMs: Date.now() - startedAt,
     });
 

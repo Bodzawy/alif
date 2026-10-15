@@ -1,6 +1,7 @@
 import type { A1Lesson, A1LessonLetter, A1Step, FormsWord, GapItem, GapsContent, LetterPositions, SoundItem, WritingLetterSet } from "@/data/types";
 import { alignPattern } from "@/lib/arabic/gap";
 import { baseLetter, formGlyph, LETTER_FORMS, pickNeighbors } from "@/lib/arabic/letter-form";
+import { withTanwin } from "@/lib/arabic/tanwin";
 
 import { letterFormsTexts, picture, SHARED_GAPS_FOLDER, sharedGapsContent, unvocalised, type LetterFormsWordSpec, type LetterWordSpec } from "../letter-lesson";
 
@@ -204,7 +205,7 @@ export function lesson2Letter(spec: Lesson2LetterSpec): A1Lesson {
         german,
         transliteration,
         ...(pic ? { image: picture(letter.id, id, pic) } : {}),
-        exercise: { id, target: unvocalised(arabic), modelText: arabic },
+        exercise: { id, target: unvocalised(arabic), modelText: withTanwin(arabic) },
       })),
     })),
   });
