@@ -58,10 +58,10 @@ function speechSpan(samples: Float32Array, level = 0.002) {
 }
 
 describe("trimSilence", () => {
-  it("cuts the silence before and after the speech and keeps padMs (500 ms) on each side", () => {
+  it("cuts the silence before and after the speech and keeps padMs (350 ms) on each side", () => {
     const recording = concat(silence(1200), tone(400), silence(1500));
     const result = trimSilence(recording, RATE);
-    expect(TRIM_SILENCE.padMs).toBe(500);
+    expect(TRIM_SILENCE.padMs).toBe(350);
     expect(result.trimmed).toBe(true);
     expect(result.originalMs).toBeCloseTo(3100, 0);
     expect(result.startMs).toBeCloseTo(1200 - TRIM_SILENCE.padMs, -1);

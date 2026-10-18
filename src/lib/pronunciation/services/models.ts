@@ -22,7 +22,9 @@ type ModelService = "IQRA";
 async function postAudioToModel(
   service: ModelService,
   baseUrl: string | undefined,
-  audioBuffer: Buffer
+  audioBuffer: Buffer,
+  /** Cancels the request when its answer is no longer needed (not logged as an error). */
+  signal?: AbortSignal
 ): Promise<unknown | null> {
   if (!baseUrl) {
     console.warn(`${service} URL is not configured.`);
@@ -31,6 +33,8 @@ async function postAudioToModel(
 
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), MODEL_TIMEOUT_MS);
+  const cancel = () => controller.abort();
+  signal?.addEventListener("abort", cancel);
 
   try {
     const formData = new FormData();
@@ -54,6 +58,7 @@ async function postAudioToModel(
 
     return await response.json();
   } catch (error) {
+    if (signal?.aborted) return null;
     const reason =
       error instanceof Error && error.name === "AbortError"
         ? `timed out after ${MODEL_TIMEOUT_MS / 1000} seconds`
@@ -62,11 +67,12 @@ async function postAudioToModel(
     return null;
   } finally {
     clearTimeout(timeout);
+    signal?.removeEventListener("abort", cancel);
   }
 }
 
-export async function assessIqra(audioBuffer: Buffer): Promise<IqraResult | null> {
-  const result = await postAudioToModel("IQRA", iqraUrl(), audioBuffer);
+export async function assessIqra(audioBuffer: Buffer, signal?: AbortSignal): Promise<IqraResult | null> {
+  const result = await postAudioToModel("IQRA", iqraUrl(), audioBuffer, signal);
   if (!result || typeof result !== "object") return null;
   const data = result as IqraResult & { ok?: boolean };
   if (data.ok === false) return null;

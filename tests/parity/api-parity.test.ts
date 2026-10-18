@@ -115,6 +115,18 @@ const withoutMasaar = (body: { details?: Record<string, unknown> }) => {
   return { ...body, details };
 };
 
+// Deliberate difference: when Azure alone already decides the rule, Alif answers
+// without waiting for IQRA – details.iqra is null and iqraPhonemes empty, every
+// other field (rule, passed, failureReason, message) must equal legacy's.
+type Body = { details?: Record<string, unknown>; conditionEvaluation?: { matchedRule: string; iqraPhonemes: string[] } };
+const decidedWithoutIqra = (legacyBody: Body, alifBody: Body) => {
+  const rule = legacyBody.conditionEvaluation?.matchedRule;
+  const target = (legacyBody as { target?: string }).target;
+  const conditions = target && rule ? RULES[target]?.[rule]?.conditions : undefined;
+  return alifBody.details?.iqra === null && legacyBody.details?.iqra !== null && Boolean(conditions) && !conditions!.some((c) => c.startsWith("iqra_"));
+};
+const withoutIqra = (body: Body) => ({ ...body, details: { ...body.details, iqra: null }, conditionEvaluation: { ...body.conditionEvaluation!, iqraPhonemes: [] } });
+
 function expectSame(label: string, { legacy, alif }: Awaited<ReturnType<typeof both>>) {
   expect(alif.status, label).toBe(legacy.status);
   expect(alif.azure, label).toEqual(legacy.azure);
@@ -122,7 +134,8 @@ function expectSame(label: string, { legacy, alif }: Awaited<ReturnType<typeof b
   expect(alif.fetches, label).toEqual(legacy.fetches.filter((f) => !String(f.url).includes("/masaar/")));
   if (legacy.status === 200) {
     const { feedback, ...rest } = alif.body;
-    expect(rest, label).toEqual(withoutMasaar(legacy.body));
+    const expected = withoutMasaar(legacy.body);
+    expect(rest, label).toEqual(decidedWithoutIqra(expected, rest) ? withoutIqra(expected) : expected);
     expect(feedback, label).toEqual({ rule: legacy.body.conditionEvaluation.matchedRule, message: legacy.body.conditionEvaluation.message });
   }
 }

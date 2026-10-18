@@ -167,7 +167,7 @@ describe("POST /api/pronunciation", () => {
 
   it("does not send the internal key header when none is configured", async () => {
     delete process.env.INTERNAL_API_KEY;
-    await post({ audio: await wavFile(), target: "ألف" });
+    await post({ audio: await wavFile(), target: "باء" });
     expect(iqra.requests[0]!.apiKey).toBeUndefined();
   });
 
@@ -226,7 +226,7 @@ describe("POST /api/pronunciation – timing log", () => {
   const assessmentLog = () => {
     const call = vi.mocked(console.log).mock.calls.find(([label]) => label === "ARABIC PRONUNCIATION ASSESSMENT:");
     expect(call, "assessment log line").toBeDefined();
-    return call![1] as { audio: { durationMs: number; recordedMs: number | null }; timings: { azureMs: number; iqraMs: number }; tookMs: number };
+    return call![1] as { audio: { durationMs: number; recordedMs: number | null }; timings: { azureMs: number; iqraMs: number }; services: Record<string, unknown>; tookMs: number };
   };
 
   it("logs how long Azure and IQRA each took", async () => {
@@ -243,6 +243,25 @@ describe("POST /api/pronunciation – timing log", () => {
     // Parallel: the request takes about as long as the slowest service, not the sum.
     expect(tookMs).toBeGreaterThanOrEqual(timings.iqraMs);
     expect(tookMs).toBeLessThan(timings.iqraMs + timings.azureMs);
+  });
+
+  it("answers a weak Azure score at once, without waiting for IQRA (no rule could pass)", async () => {
+    iqraReply = { ...iqraReply, delayMs: 2000 };
+    azureMock.assess.mockResolvedValue(azureResult({ accuracy: 52 }));
+    const started = Date.now();
+    const response = await post({ audio: await wavFile(), target: "باء" });
+    expect(Date.now() - started).toBeLessThan(1000);
+    const body = await response.json();
+    expect(body).toMatchObject({ passed: false, failureReason: "low_accuracy", feedback: { rule: "wrong" }, details: { iqra: null }, conditionEvaluation: { matchedRule: "wrong", iqraPhonemes: [] } });
+    expect(assessmentLog().services).toMatchObject({ iqra: "not needed" });
+  });
+
+  it("waits for IQRA when its phonemes decide (a good Azure score)", async () => {
+    iqraReply = { ...iqraReply, delayMs: 300 };
+    const started = Date.now();
+    const body = await (await post({ audio: await wavFile(), target: "باء" })).json();
+    expect(Date.now() - started).toBeGreaterThanOrEqual(290);
+    expect(body).toMatchObject({ passed: true, details: { iqra: { phonemes: ["b", "aa"] } } });
   });
 
   it("logs IQRA's time also when it fails; the evaluation goes on as before", async () => {

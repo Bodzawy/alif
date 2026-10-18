@@ -1,5 +1,6 @@
 import { MAX_UPLOAD_BYTES, MIN_AUDIO_MS, readWavHeader } from "@/lib/audio/wav-header";
 import { buildAssessment, hasUsableAzureScores } from "@/lib/pronunciation/assessment";
+import { ruleDecidedWithoutIqra } from "@/lib/pronunciation/condition-engine";
 import { azureConfig, iqraUrl } from "@/lib/pronunciation/config";
 import { apiError } from "@/lib/pronunciation/errors";
 import { AzureSpeechError, assessWithAzure } from "@/lib/pronunciation/services/azure";
@@ -33,8 +34,11 @@ function recordedMs(value: FormDataEntryValue | null): number | null {
 }
 
 // Browser → Alif → (Azure ‖ IQRA) → condition engine → feedback.
+// IQRA is not waited for when Azure alone already decides the rule.
 export async function POST(request: Request) {
   const startedAt = Date.now();
+  /** Cancels the IQRA request once its answer is no longer needed. */
+  const iqraCancel = new AbortController();
 
   try {
     const limited = rateLimit(clientKey(request));
@@ -88,15 +92,15 @@ export async function POST(request: Request) {
 
     const audioLog = { durationMs: wav.durationMs, recordedMs: recordedMs(formData.get("recordedMs")) };
 
-    // Both evaluations run in parallel. IQRA is best effort (null on
+    // Both evaluations start in parallel. IQRA is best effort (null on
     // failure); Azure is required. Each one is timed for the log.
     const timings: Timings = { azureMs: null, iqraMs: null };
-    let iqra, primary;
+    const iqraPending = iqraUrl()
+      ? timed(assessIqra(audioBuffer, iqraCancel.signal), (ms) => (timings.iqraMs = ms))
+      : assessIqra(audioBuffer, iqraCancel.signal);
+    let primary;
     try {
-      [iqra, primary] = await Promise.all([
-        iqraUrl() ? timed(assessIqra(audioBuffer), (ms) => (timings.iqraMs = ms)) : assessIqra(audioBuffer),
-        timed(assessWithAzure(audioBuffer, target, azure), (ms) => (timings.azureMs = ms)),
-      ]);
+      primary = await timed(assessWithAzure(audioBuffer, target, azure), (ms) => (timings.azureMs = ms));
     } catch (error) {
       if (error instanceof AzureSpeechError) {
         console.error("AZURE SPEECH ERROR:", { kind: error.kind, message: error.message, details: error.details, audio: audioLog, timings });
@@ -110,6 +114,12 @@ export async function POST(request: Request) {
       return apiError("unclear_audio", 422);
     }
 
+    // When Azure alone already decides the rule (e.g. accuracy below the 70 that
+    // every passing rule needs), IQRA cannot change the answer: answer now
+    // instead of waiting for it. The result is the same; only details.iqra is
+    // null and conditionEvaluation.iqraPhonemes empty.
+    const decidedWithoutIqra = ruleDecidedWithoutIqra({ target, azureAccuracy: primary.accuracy, azureRecognized: primary.recognized }) !== null;
+    const iqra = decidedWithoutIqra ? null : await iqraPending;
     const assessment = buildAssessment({ target, primary, iqra });
 
     console.log("ARABIC PRONUNCIATION ASSESSMENT:", {
@@ -117,7 +127,7 @@ export async function POST(request: Request) {
       audio: { ...audioLog, sampleRate: wav.sampleRate, channels: wav.channels },
       services: {
         azure: true,
-        iqra: iqraUrl() ? iqra !== null : "not configured",
+        iqra: !iqraUrl() ? "not configured" : decidedWithoutIqra ? "not needed" : iqra !== null,
       },
       azureAccuracy: primary.accuracy,
       azureRecognized: primary.recognized,
@@ -135,5 +145,7 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error("PRONUNCIATION API ERROR:", error);
     return apiError("internal_error", 500);
+  } finally {
+    iqraCancel.abort();
   }
 }

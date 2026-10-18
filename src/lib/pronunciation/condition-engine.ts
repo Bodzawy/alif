@@ -128,3 +128,27 @@ export function evaluateLetterConditions(
 
   return null;
 }
+
+const IQRA_CONDITION = /^iqra_/;
+
+/**
+ * Alif addition (speed): the rule evaluateLetterConditions will match whatever
+ * IQRA returns, decided from Azure alone – or null when IQRA's answer could
+ * still change it. Rules are tried in the engine's order: a rule whose Azure
+ * conditions fail can never match; the first rule whose Azure conditions hold
+ * decides only when it has no IQRA condition. When no rule can match, the
+ * fallback message depends on IQRA, so that is not decided here either.
+ * E.g. azure_accuracy 52 for باء → "wrong" (azure_accuracy < 70), before IQRA has answered.
+ */
+export function ruleDecidedWithoutIqra(context: Omit<ConditionContext, "iqraPhonemes"> & { target: string }): string | null {
+  const letterRules = (CONDITION_RULES as Record<string, Record<string, Rule>>)[context.target];
+  if (!letterRules) return null;
+
+  for (const [rule, definition] of Object.entries(letterRules)) {
+    const azureOnly = definition.conditions.filter((condition) => !IQRA_CONDITION.test(condition));
+    if (!azureOnly.every((condition) => matchesCondition(condition, { ...context, iqraPhonemes: [] }))) continue;
+    return definition.conditions.some((condition) => IQRA_CONDITION.test(condition)) ? null : rule;
+  }
+
+  return null;
+}

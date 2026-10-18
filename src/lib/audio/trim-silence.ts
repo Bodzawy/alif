@@ -16,9 +16,11 @@ export const TRIM_SILENCE = {
    * Audio kept before the first and after the last speech frame. Measured with
    * the real services (Oct 2026, 6 letters × 5): with 200 ms IQRA cut the edges
    * (عين heard as "E", 0/5 instead of 5/5); with 350 and 500 ms every letter
-   * passed as often as untrimmed. 500 ms is the safe margin.
+   * passed as often as untrimmed. 500 ms was the safe margin; 350 ms (the
+   * shortest value that passed every letter) sends 0.3 s less audio, which
+   * Azure and IQRA each answer about 0.3 s sooner.
    */
-  padMs: 500,
+  padMs: 350,
   /** Analysis frame. */
   frameMs: 10,
   /** Speech must stay above the threshold this long; shorter bursts (a click, the tap on "Stopp") are ignored. */

@@ -52,7 +52,8 @@ Browser (MediaRecorder, unprocessed mic audio, max 3.5 s)
   → 16 kHz · mono · 16-bit PCM WAV (Web Audio, in the browser)
   → POST /api/pronunciation  (multipart: audio=voice.wav, target=<reference text>)
        ├─ Azure Speech: pronunciation assessment, ar-EG, phoneme granularity   (required)
-       └─ IQRA: phoneme recogniser   POST $IQRA_URL/predict                    (best effort, 8 s)
+       └─ IQRA: phoneme recogniser   POST $IQRA_URL/predict                    (best effort, 8 s;
+                                     not waited for when Azure alone decides the rule, e.g. accuracy < 70)
   → condition engine (letter_conditions.json + vocabulary_conditions.json)
   → { passed, feedback{rule,message}, scores, details, conditionEvaluation, … }
   → Alif UI: German headline + tip, original Arabic rule message, accuracy bar, retry
