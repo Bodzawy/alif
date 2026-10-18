@@ -26,7 +26,7 @@ import { speakLine } from "./speak";
 //   play (repeat: the line's model · role-play: the partner's line(s))
 //   → listen (the microphone hears the learner; silence = try again)
 //   → check (the SAME evaluation as every A1 exercise: /api/pronunciation with
-//     Azure + MASAAR + IQRA and the condition rules) → right: "Super!", next
+//     Azure + IQRA and the condition rules) → right: "Super!", next
 //   → wrong: feedback, play again, listen again – as often as needed, never skipped.
 // Without a microphone, or when the evaluation keeps failing, the step falls
 // back to buttons (PronunciationExercise) – the same evaluation, by hand.

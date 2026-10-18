@@ -1,14 +1,14 @@
 import "server-only";
 
-import { internalApiKey, iqraUrl, masaarUrl } from "../config";
-import type { IqraResult, MasaarResult } from "../types";
+import { internalApiKey, iqraUrl } from "../config";
+import type { IqraResult } from "../types";
 
-// Clients for the self-hosted MASAAR (letter classification) and IQRA
-// (phoneme recognition) model services. Ported from the original
-// /api/pronunciation route: same /predict endpoint, same multipart field
-// ("audio", filename voice.wav), same X-Internal-Api-Key header and the same
-// 8-second timeout. Both are best effort: a failure returns null and the
-// assessment continues without that service's data.
+// Client for the self-hosted IQRA (phoneme recognition) model service. Ported
+// from the original /api/pronunciation route: same /predict endpoint, same
+// multipart field ("audio", filename voice.wav), same X-Internal-Api-Key header
+// and the same 8-second timeout. Best effort: a failure returns null and the
+// assessment continues without IQRA's data. (The original also called the
+// MASAAR letter classifier; its result never decided `passed`, so Alif dropped it.)
 
 // Kept at 8 s: in the production log (Oct 2026) 57 of 440 answered requests
 // took over 4 s in total, so a 4 s limit could cut off IQRA answers that
@@ -17,7 +17,7 @@ import type { IqraResult, MasaarResult } from "../types";
 // IQRA answers well within the new limit.
 export const MODEL_TIMEOUT_MS = 8_000;
 
-type ModelService = "MASAAR" | "IQRA";
+type ModelService = "IQRA";
 
 async function postAudioToModel(
   service: ModelService,
@@ -63,13 +63,6 @@ async function postAudioToModel(
   } finally {
     clearTimeout(timeout);
   }
-}
-
-export async function assessMasaar(audioBuffer: Buffer): Promise<MasaarResult | null> {
-  const result = await postAudioToModel("MASAAR", masaarUrl(), audioBuffer);
-  if (!result || typeof result !== "object") return null;
-  const data = result as MasaarResult & { ok?: boolean };
-  return data.ok === false ? null : data;
 }
 
 export async function assessIqra(audioBuffer: Buffer): Promise<IqraResult | null> {

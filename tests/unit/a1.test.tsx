@@ -76,7 +76,6 @@ describe("A1 · Lesson 1 content", () => {
           const result = buildAssessment({
             target: word.exercise.target,
             primary: { referenceText: word.exercise.target, recognized: word.exercise.target, accuracy: 95, pronunciation: 95, fluency: 90, completeness: 100, firstSoundScore: 80, words: [] },
-            masaar: null,
             iqra: { phonemes },
           });
           expect(result.passed, `${word.id} heard with ${heardVowel}`).toBe(heardVowel === vowel);
@@ -112,7 +111,6 @@ describe("A1 · Lesson 1 content", () => {
       buildAssessment({
         target,
         primary: { referenceText: target, recognized: target, accuracy, pronunciation: accuracy, fluency: 90, completeness: 100, firstSoundScore: 80, words: [] },
-        masaar: null,
         iqra: phonemes && { phonemes },
       });
     // Alif's vowels (the letter lessons' sounds are tested in a1-letters.test.tsx).

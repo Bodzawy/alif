@@ -52,7 +52,6 @@ Browser (MediaRecorder, unprocessed mic audio, max 3.5 s)
   → 16 kHz · mono · 16-bit PCM WAV (Web Audio, in the browser)
   → POST /api/pronunciation  (multipart: audio=voice.wav, target=<reference text>)
        ├─ Azure Speech: pronunciation assessment, ar-EG, phoneme granularity   (required)
-       ├─ MASAAR: letter classifier  POST $MASAAR_URL/predict                  (best effort, 8 s)
        └─ IQRA: phoneme recogniser   POST $IQRA_URL/predict                    (best effort, 8 s)
   → condition engine (letter_conditions.json + vocabulary_conditions.json)
   → { passed, feedback{rule,message}, scores, details, conditionEvaluation, … }
@@ -82,9 +81,8 @@ All variables are read on the server only. None of them reaches the browser bund
 | --- | --- | --- |
 | `AZURE_SPEECH_KEY` | **yes** | Azure Speech resource key, used for assessment and TTS |
 | `AZURE_SPEECH_REGION` | **yes** | Azure region of that resource, e.g. `germanywestcentral` |
-| `MASAAR_URL` | recommended | Base URL of the MASAAR model service, **without** `/predict` |
 | `IQRA_URL` | recommended | Base URL of the IQRA phoneme service, **without** `/predict`. Most letter rules need its phonemes. Without IQRA, those attempts are reported as "not evaluable" and never pass. |
-| `INTERNAL_API_KEY` | if the model server uses one | Sent as `X-Internal-Api-Key` to MASAAR and IQRA. It must equal the key configured on that server. |
+| `INTERNAL_API_KEY` | if the model server uses one | Sent as `X-Internal-Api-Key` to IQRA. It must equal the key configured on that server. |
 
 ## Scripts
 
@@ -103,7 +101,7 @@ npm run test:e2e    # Playwright E2E (run `npm run build` first)
 `npm run test:e2e` starts three local processes on its own:
 
 - `:3210` runs Alif without any service configuration. It covers the full student journey (the API answer is stubbed) and the real error paths.
-- `:3211` runs Alif with the real Azure SDK, plus MASAAR and IQRA stand-ins (`e2e/support/mock-model-server.mjs`) that speak the production contract.
+- `:3211` runs Alif with the real Azure SDK, plus an IQRA stand-in (`e2e/support/mock-model-server.mjs`) that speak the production contract.
 - `:3299` is that stand-in model server.
 
 To include real Azure in the `:3211` run, set `ALIF_E2E_AZURE_KEY` and `ALIF_E2E_AZURE_REGION`. To test a deployed instance with all real services:
@@ -121,9 +119,9 @@ Alif is a standard Next.js 15 app. It needs no database and no other part of Mas
 **Vercel** (a `vercel.json` with region `fra1` is included):
 
 1. Import the `Bodzawy/alif` repository in Vercel. It detects Next.js automatically.
-2. Set `AZURE_SPEECH_KEY`, `AZURE_SPEECH_REGION`, `MASAAR_URL`, `IQRA_URL` and `INTERNAL_API_KEY` under *Settings → Environment Variables*.
-3. Deploy. Then open `https://<domain>/api/health`: `azureSpeech`, `masaar` and `iqra` should all be `true`.
-4. Make sure the MASAAR/IQRA server accepts requests from Vercel (public HTTPS URL and matching `INTERNAL_API_KEY`).
+2. Set `AZURE_SPEECH_KEY`, `AZURE_SPEECH_REGION`, `IQRA_URL` and `INTERNAL_API_KEY` under *Settings → Environment Variables*.
+3. Deploy. Then open `https://<domain>/api/health`: `azureSpeech` and `iqra` should both be `true`.
+4. Make sure the IQRA server accepts requests from Vercel (public HTTPS URL and matching `INTERNAL_API_KEY`).
 
 **Any Node host / VPS / Docker:**
 
@@ -175,7 +173,7 @@ Each serves three steps of type `dialogue` (`src/components/a1/dialogue/`):
 - **listen** – the whole dialogue or single lines, pause / continue / again,
   translation and transliteration switches, then a comprehension question.
 - **repeat** – every line on the guided flow of "Wörter": the model, the
-  microphone listens, the SAME evaluation (`/api/pronunciation`: Azure, MASAAR,
+  microphone listens, the SAME evaluation (`/api/pronunciation`: Azure,
   IQRA, condition rules), "Super!", the next line; wrong or silent = again,
   without limit. No microphone / repeated service errors → buttons
   (`PronunciationExercise`).

@@ -1,6 +1,6 @@
 import { evaluateLetterConditions } from "./condition-engine";
 import { NO_MATCHING_RULE } from "./types";
-import type { AzureAssessment, FailureReason, IqraResult, MasaarResult, PronunciationResponse } from "./types";
+import type { AzureAssessment, FailureReason, IqraResult, PronunciationResponse } from "./types";
 
 // The scoring/decision step of the original /api/pronunciation route, moved
 // into a pure function so it can be unit-tested. Thresholds, order of checks,
@@ -23,7 +23,6 @@ export function discriminationScore(result: AzureAssessment): number | null {
 export type AssessmentInput = {
   target: string;
   primary: AzureAssessment & { accuracy: number; pronunciation: number };
-  masaar: MasaarResult | null;
   iqra: IqraResult | null;
 };
 
@@ -34,7 +33,7 @@ export function hasUsableAzureScores(
   return primary.accuracy !== null && primary.pronunciation !== null;
 }
 
-export function buildAssessment({ target, primary, masaar, iqra }: AssessmentInput): PronunciationResponse {
+export function buildAssessment({ target, primary, iqra }: AssessmentInput): PronunciationResponse {
   const targetScore = discriminationScore(primary);
 
   const accuracyPassed = primary.accuracy >= MIN_ACCURACY;
@@ -94,7 +93,6 @@ export function buildAssessment({ target, primary, masaar, iqra }: AssessmentInp
     // matched rule's message, identical to conditionEvaluation.message.
     feedback: { rule: resolvedFeedback.rule, message: resolvedFeedback.message },
     details: {
-      masaar,
       azure: { recognized: primary.recognized, accuracy: primary.accuracy },
       iqra,
     },

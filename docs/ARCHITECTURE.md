@@ -21,9 +21,9 @@ The following Masaar parts were **not** taken over, because the pronunciation fe
 ## 2. Preserved behaviour (parity)
 
 - **Azure:** `ar-EG`, `HundredMark`, `Phoneme` granularity, miscue on, `fromWavFileInput`, same mapping of words and phonemes, `firstSoundScore` = first phoneme of the first word.
-- **MASAAR / IQRA:** `POST <URL>/predict`, multipart field `audio` named `voice.wav`, `X-Internal-Api-Key` only when it is configured, 8 s timeout, `null` on failure or `{ ok: false }`, and IQRA phonemes filtered to strings. MASAAR is evaluated and returned but, as in Masaar, it does not influence the result.
+- **IQRA:** `POST <URL>/predict`, multipart field `audio` named `voice.wav`, `X-Internal-Api-Key` only when it is configured, 8 s timeout, `null` on failure or `{ ok: false }`, and phonemes filtered to strings.
 - **Decision:** legacy thresholds `MIN_ACCURACY = 65` and `MIN_FIRST_SOUND_SCORE = 55` set only `failureReason`. The condition rules decide `passed`, and only the `excellent` rule passes. If no rule matches, the attempt never passes; the response carries `no_matching_rule` and the original Arabic fallback message.
-- **Response shape:** identical (`target, recognized, passed, failureReason, scores, details{masaar,azure,iqra}, conditionEvaluation, discrimination, words`).
+- **Response shape:** identical (`target, recognized, passed, failureReason, scores, details{azure,iqra}, conditionEvaluation, discrimination, words`) except `details.masaar` (see §3).
 - **Condition engine:** verified against the Masaar engine on 43,500 randomised inputs across all 28 letters, with identical results.
 
 ## 3. Deliberate differences (each with a concrete reason)
@@ -33,6 +33,7 @@ The following Masaar parts were **not** taken over, because the pronunciation fe
 | Response also contains `feedback: {rule, message}` | Masaar's learn page read `feedback.message`, but the API never sent it, so students only saw a generic "✅ ممتاز!". The value equals `conditionEvaluation.message`. |
 | Vocabulary rules in a separate `vocabulary_conditions.json` | Masaar only had rules for letter names. The letter file is untouched, and merging fails loudly on any duplicate key. |
 | Two-stage word check: Azure ≥ 70 **and** the word's own IQRA gate | Azure's overall accuracy alone passed words with a clearly wrong consonant (e.g. جبل heard as `j a m a l`). Each of the 84 words now passes only when IQRA's phonemes contain the word's important consonants (`excellent`), e.g. جمل → `contains ['j','m','l']`. Vowels, hamza, ث and ذ are not required (IQRA does not output them reliably). `'T\|TT'` accepts either token: IQRA writes shadda as a doubled consonant and sometimes writes r as rr. A missing consonant gives `said_wrong_sound`; an empty IQRA result matches no rule, so the existing "IQRA not reachable" answer is shown instead of a pronunciation error. The two engine additions (alternatives, `iqra_phonemes is not empty`) are not used by the letter rules, so letters still behave exactly as in Masaar. |
+| The MASAAR letter classifier is not called; `details.masaar` is gone | Its result never influenced `passed` (in Masaar either), but the answer waited for it – up to its 8 s timeout when it was slow or down. Only Azure and IQRA decide, as before. |
 | Upload validation (RIFF/WAVE header, ≤ 2 MB, ≥ 100 ms) | Invalid audio is rejected with a clear message before paid services are called. |
 | Azure timeout of 20 s (the HTTP layer answers 504) | Masaar's `recognizeOnceAsync` had no upper bound and could hang until the platform killed the request. |
 | Error answers carry `{ error (German), code }` with status 400/413/422/429/502/503/504 | Students never see a bare "Error". Technical details are logged on the server only. |
@@ -69,7 +70,7 @@ src/
   lib/
     audio/                       WAV encoding (browser), WAV header check (server), recording constants
     pronunciation/               condition engine, rules, letters, targets, assessment, client mapping, errors, config
-    pronunciation/services/      azure.ts, models.ts (MASAAR + IQRA), server-only
+    pronunciation/services/      azure.ts, models.ts (IQRA), server-only
     tts/                         SSML builder, browser player with cache
     progress.ts                  per-browser lesson progress (swap for a server store when accounts exist)
     alphabet-progress.ts         A0 status per letter: mastered / skipped / available / locked
@@ -95,7 +96,7 @@ pronunciation route, condition engine, letter rules and letter list
 
 - `legacy-fixture.test.ts`: the fixture is unchanged, Alif's `letter_conditions.json` is byte-identical, and A0 uses Masaar's letters, targets and TTS texts.
 - `engine-parity.test.ts`: 88,200 condition-engine cases.
-- `api-parity.test.ts`: both `/api/pronunciation` handlers with the same audio, Azure result (simulated SDK) and MASAAR/IQRA answers. It covers all 28 letters, accuracies around every threshold, every rule phoneme combination, IQRA and MASAAR failure modes, Azure edge results and missing configuration, all 74 rules reached, and compares status, full JSON, Azure SDK parameters and `/predict` requests.
+- `api-parity.test.ts`: both `/api/pronunciation` handlers with the same audio, Azure result (simulated SDK) and IQRA answers (legacy also gets MASAAR answers, which Alif no longer calls; they are left out of the comparison). It covers all 28 letters, accuracies around every threshold, every rule phoneme combination, IQRA and MASAAR failure modes, Azure edge results and missing configuration, all 74 rules reached, and compares status, full JSON, Azure SDK parameters and `/predict` requests.
 
 The suite runs in CI with `npm test`. Deliberately changing a threshold, an
 operator or a rule makes it fail.

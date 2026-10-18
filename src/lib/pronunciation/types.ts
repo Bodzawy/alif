@@ -22,13 +22,6 @@ export type AzureAssessment = {
   words: WordAssessment[];
 };
 
-/** Response of the MASAAR letter-classification service (/predict). */
-export type MasaarResult = {
-  letter?: string;
-  confidence?: number;
-  top3?: Array<{ label?: string; letter?: string; confidence?: number; score?: number }>;
-};
-
 /** Response of the IQRA phoneme-recognition service (/predict). */
 export type IqraResult = {
   sequence?: string;
@@ -62,7 +55,6 @@ export type PronunciationResponse = {
   };
   feedback: { rule: string; message: string };
   details: {
-    masaar: MasaarResult | null;
     azure: { recognized: string; accuracy: number };
     iqra: IqraResult | null;
   };

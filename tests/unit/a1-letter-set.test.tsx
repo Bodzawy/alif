@@ -168,7 +168,6 @@ describe.each(Object.entries(LETTERS))("%s – lesson data", (slug, x) => {
       buildAssessment({
         target,
         primary: { referenceText: target, recognized: target, accuracy: 90, pronunciation: 90, fluency: 90, completeness: 100, firstSoundScore: 80, words: [] },
-        masaar: null,
         iqra: { phonemes },
       }).passed;
     const consonant = { ta: ["t"], tha: [], jim: ["j"], hha: ["H"], kha: ["x"] }[slug]!;

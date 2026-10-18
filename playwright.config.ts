@@ -5,7 +5,7 @@ import { defineConfig } from "@playwright/test";
 // Two local servers are started:
 //   :3210  Alif with NO service configuration (frontend flow + error handling)
 //   :3211  Alif configured with Azure credentials from the environment (or a
-//          deliberately invalid key) and MASAAR/IQRA pointed at a local
+//          deliberately invalid key) and IQRA pointed at a local
 //          stand-in (e2e/support/mock-model-server.mjs)
 //
 // To run the real full chain against a deployment with real services:
@@ -46,7 +46,7 @@ export default defineConfig({
           command: "npx next start -p 3210 -H 127.0.0.1",
           url: "http://127.0.0.1:3210/",
           reuseExistingServer: false,
-          env: { AZURE_SPEECH_KEY: "", AZURE_SPEECH_REGION: "", MASAAR_URL: "", IQRA_URL: "", INTERNAL_API_KEY: "" },
+          env: { AZURE_SPEECH_KEY: "", AZURE_SPEECH_REGION: "", IQRA_URL: "", INTERNAL_API_KEY: "" },
         },
         {
           command: "npx next start -p 3211 -H 127.0.0.1",
@@ -55,7 +55,6 @@ export default defineConfig({
           env: {
             AZURE_SPEECH_KEY: process.env.ALIF_E2E_AZURE_KEY ?? "e2e-invalid-key",
             AZURE_SPEECH_REGION: process.env.ALIF_E2E_AZURE_REGION ?? "germanywestcentral",
-            MASAAR_URL: "http://127.0.0.1:3299/masaar",
             IQRA_URL: "http://127.0.0.1:3299/iqra",
             INTERNAL_API_KEY: "e2e-internal-key",
           },

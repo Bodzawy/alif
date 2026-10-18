@@ -20,63 +20,63 @@ function azure(overrides: Partial<AzureAssessment> = {}): AzureAssessment & { ac
 
 describe("buildAssessment", () => {
   it("passes only when the matched rule is 'excellent'", () => {
-    const result = buildAssessment({ target: "باء", primary: azure(), masaar: { letter: "ب", confidence: 0.9 }, iqra: { phonemes: ["b", "aa"] } });
+    const result = buildAssessment({ target: "باء", primary: azure(), iqra: { phonemes: ["b", "aa"] } });
     expect(result.passed).toBe(true);
     expect(result.failureReason).toBeNull();
     expect(result.feedback).toEqual({ rule: "excellent", message: LETTER_RULES["باء"]!.excellent!.message });
     expect(result.conditionEvaluation).toMatchObject({ matchedRule: "excellent", iqraPhonemes: ["b", "aa"], azureAccuracy: 88 });
-    expect(result.details.masaar).toEqual({ letter: "ب", confidence: 0.9 });
+    expect(result.details).not.toHaveProperty("masaar");
   });
 
   it("fails with rule_not_matched when a non-excellent rule matches despite good legacy scores", () => {
-    const result = buildAssessment({ target: "ثاء", primary: azure({ referenceText: "ثاء" }), masaar: null, iqra: { phonemes: ["s", "aa"] } });
+    const result = buildAssessment({ target: "ثاء", primary: azure({ referenceText: "ثاء" }), iqra: { phonemes: ["s", "aa"] } });
     expect(result.passed).toBe(false);
     expect(result.failureReason).toBe("rule_not_matched");
     expect(result.conditionEvaluation.matchedRule).toBe("said_sin");
   });
 
   it("keeps the legacy failure reasons (accuracy < 65, first sound < 55)", () => {
-    expect(buildAssessment({ target: "باء", primary: azure({ accuracy: 60 }), masaar: null, iqra: { phonemes: ["b"] } }).failureReason).toBe("low_accuracy");
-    const weak = buildAssessment({ target: "باء", primary: azure({ accuracy: 68, firstSoundScore: 40 }), masaar: null, iqra: { phonemes: ["b"] } });
+    expect(buildAssessment({ target: "باء", primary: azure({ accuracy: 60 }), iqra: { phonemes: ["b"] } }).failureReason).toBe("low_accuracy");
+    const weak = buildAssessment({ target: "باء", primary: azure({ accuracy: 68, firstSoundScore: 40 }), iqra: { phonemes: ["b"] } });
     expect(weak.failureReason).toBe("weak_first_sound");
     expect(weak.conditionEvaluation.matchedRule).toBe("wrong");
     expect(weak.passed).toBe(false);
   });
 
   it("does not pass an 'excellent' rule when Azure's first-sound score is below threshold", () => {
-    const result = buildAssessment({ target: "باء", primary: azure({ accuracy: 75, firstSoundScore: 40 }), masaar: null, iqra: { phonemes: ["b"] } });
+    const result = buildAssessment({ target: "باء", primary: azure({ accuracy: 75, firstSoundScore: 40 }), iqra: { phonemes: ["b"] } });
     expect(result.passed).toBe(false);
     expect(result.failureReason).toBe("weak_first_sound");
   });
 
   it("never passes when no rule matches; message depends on IQRA availability", () => {
-    const withoutIqra = buildAssessment({ target: "باء", primary: azure(), masaar: null, iqra: null });
+    const withoutIqra = buildAssessment({ target: "باء", primary: azure(), iqra: null });
     expect(withoutIqra.passed).toBe(false);
     expect(withoutIqra.failureReason).toBe("rule_not_matched");
     expect(withoutIqra.conditionEvaluation.matchedRule).toBe(NO_MATCHING_RULE);
     expect(withoutIqra.conditionEvaluation.message).toContain("IQRA");
 
-    const withIqra = buildAssessment({ target: "باء", primary: azure(), masaar: null, iqra: { phonemes: ["x"] } });
+    const withIqra = buildAssessment({ target: "باء", primary: azure(), iqra: { phonemes: ["x"] } });
     expect(withIqra.conditionEvaluation.message).toBe("لم تنطبق شروط تقييم هذا الحرف. حاول مرة أخرى.");
   });
 
   it("falls back for missing fluency/completeness exactly like the original", () => {
-    const result = buildAssessment({ target: "ألف", primary: azure({ fluency: null, completeness: null }), masaar: null, iqra: null });
+    const result = buildAssessment({ target: "ألف", primary: azure({ fluency: null, completeness: null }), iqra: null });
     expect(result.scores).toEqual({ accuracy: 88, pronunciation: 85, fluency: 88, completeness: 100 });
   });
 
   it("evaluates Lesson 1 vocabulary with Azure >= 70 and the word's IQRA gate", () => {
     const asad = { sequence: "< a s a d", phonemes: ["<", "a", "s", "a", "d"] };
-    const good = buildAssessment({ target: "أسد", primary: azure({ referenceText: "أسد", accuracy: 72 }), masaar: null, iqra: asad });
+    const good = buildAssessment({ target: "أسد", primary: azure({ referenceText: "أسد", accuracy: 72 }), iqra: asad });
     expect(good.passed).toBe(true);
     expect(good.feedback.message).toBe(VOCABULARY_RULES["أسد"]!.excellent!.message);
-    const wrongSound = buildAssessment({ target: "أسد", primary: azure({ referenceText: "أسد", accuracy: 92 }), masaar: null, iqra: { phonemes: ["<", "a", "s", "a", "t"] } });
+    const wrongSound = buildAssessment({ target: "أسد", primary: azure({ referenceText: "أسد", accuracy: 92 }), iqra: { phonemes: ["<", "a", "s", "a", "t"] } });
     expect(wrongSound.passed).toBe(false);
     expect(wrongSound.conditionEvaluation.matchedRule).toBe("said_wrong_sound");
-    const weak = buildAssessment({ target: "أسد", primary: azure({ referenceText: "أسد", accuracy: 64 }), masaar: null, iqra: asad });
+    const weak = buildAssessment({ target: "أسد", primary: azure({ referenceText: "أسد", accuracy: 64 }), iqra: asad });
     expect(weak.passed).toBe(false);
     expect(weak.conditionEvaluation.matchedRule).toBe("needs_improvement");
-    const noIqra = buildAssessment({ target: "أسد", primary: azure({ referenceText: "أسد", accuracy: 92 }), masaar: null, iqra: null });
+    const noIqra = buildAssessment({ target: "أسد", primary: azure({ referenceText: "أسد", accuracy: 92 }), iqra: null });
     expect(noIqra.passed).toBe(false);
     expect(noIqra.conditionEvaluation.matchedRule).toBe(NO_MATCHING_RULE);
   });

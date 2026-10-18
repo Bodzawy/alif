@@ -12,7 +12,8 @@ import type { AzureScenario } from "./support/fake-speech-sdk";
 
 // Same request, same Azure result, same MASAAR/IQRA answers → the legacy
 // Masaar route and Alif's route must answer identically (status and full JSON;
-// Alif only adds `feedback`, which must equal conditionEvaluation's rule/message).
+// Alif only adds `feedback`, which must equal conditionEvaluation's rule/message,
+// and no longer calls MASAAR – see expectSame).
 
 type Rules = Record<string, Record<string, { conditions: string[]; message: string }>>;
 const RULES = legacyRules as Rules;
@@ -105,13 +106,23 @@ async function both(target: string | null, withAudio = true) {
   return { legacy: await call(legacyPOST, target, withAudio), alif: await call(alifPOST, target, withAudio) };
 }
 
+// Deliberate difference: Alif no longer calls MASAAR (its answer never decided
+// `passed`). Legacy's MASAAR request and `details.masaar` are left out; every
+// other request and field must still be identical – whatever MASAAR answered.
+const withoutMasaar = (body: { details?: Record<string, unknown> }) => {
+  if (!body.details) return body;
+  const { masaar: _masaar, ...details } = body.details;
+  return { ...body, details };
+};
+
 function expectSame(label: string, { legacy, alif }: Awaited<ReturnType<typeof both>>) {
   expect(alif.status, label).toBe(legacy.status);
   expect(alif.azure, label).toEqual(legacy.azure);
-  expect(alif.fetches, label).toEqual(legacy.fetches);
+  expect(alif.fetches.filter((f) => String(f.url).includes("/masaar/")), label).toEqual([]);
+  expect(alif.fetches, label).toEqual(legacy.fetches.filter((f) => !String(f.url).includes("/masaar/")));
   if (legacy.status === 200) {
     const { feedback, ...rest } = alif.body;
-    expect(rest, label).toEqual(legacy.body);
+    expect(rest, label).toEqual(withoutMasaar(legacy.body));
     expect(feedback, label).toEqual({ rule: legacy.body.conditionEvaluation.matchedRule, message: legacy.body.conditionEvaluation.message });
   }
 }

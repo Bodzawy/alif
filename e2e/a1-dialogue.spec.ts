@@ -32,7 +32,6 @@ async function mock(page: Page, answers: boolean[] = []) {
     const body = buildAssessment({
       target,
       primary: { referenceText: target, recognized: target, accuracy: right ? 92 : 40, pronunciation: 90, fluency: 90, completeness: 100, firstSoundScore: 80, words: [] },
-      masaar: null,
       iqra: { sequence: "S a", phonemes: right ? ["S", "b", "H", "x", "n", "r", "k", "y", "f", "l", "m", "d", "s", "E", "w", "T"] : ["a"], duration: 0.6 },
     });
     await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(body) });

@@ -1,4 +1,4 @@
-import { azureConfig, internalApiKey, iqraUrl, masaarUrl } from "@/lib/pronunciation/config";
+import { azureConfig, internalApiKey, iqraUrl } from "@/lib/pronunciation/config";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -7,7 +7,6 @@ export const dynamic = "force-dynamic";
 export async function GET() {
   const services = {
     azureSpeech: azureConfig() !== null,
-    masaar: Boolean(masaarUrl()),
     iqra: Boolean(iqraUrl()),
     internalApiKey: Boolean(internalApiKey()),
   };

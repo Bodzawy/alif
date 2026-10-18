@@ -22,10 +22,6 @@ function serviceUrl(value: string | undefined): string | undefined {
   return clean(value)?.replace(/\/+$/, "");
 }
 
-export function masaarUrl(): string | undefined {
-  return serviceUrl(process.env.MASAAR_URL);
-}
-
 export function iqraUrl(): string | undefined {
   return serviceUrl(process.env.IQRA_URL);
 }

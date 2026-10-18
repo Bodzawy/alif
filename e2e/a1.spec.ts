@@ -40,7 +40,6 @@ function answer(target: string, correct: boolean) {
   return buildAssessment({
     target,
     primary: { referenceText: target, recognized: target, accuracy: correct ? 90 : 50, pronunciation: 80, fluency: 90, completeness: 100, firstSoundScore: 80, words: [] },
-    masaar: null,
     iqra: { sequence: phonemes.join(" "), phonemes, duration: 0.6 },
   });
 }

@@ -70,6 +70,6 @@ test("health endpoint reports configuration without exposing values", async ({ r
   const health = await request.get("/api/health");
   expect(await health.json()).toEqual({
     status: "degraded",
-    services: { azureSpeech: false, masaar: false, iqra: false, internalApiKey: false },
+    services: { azureSpeech: false, iqra: false, internalApiKey: false },
   });
 });

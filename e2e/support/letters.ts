@@ -32,7 +32,6 @@ export async function mockServices(page: Page) {
     const body = buildAssessment({
       target,
       primary: { referenceText: target, recognized: target, accuracy: 90, pronunciation: 80, fluency: 90, completeness: 100, firstSoundScore: 80, words: [] },
-      masaar: null,
       iqra: { sequence: phonemes.join(" "), phonemes, duration: 0.6 },
     });
     await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(body) });

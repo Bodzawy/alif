@@ -26,7 +26,7 @@ function apiAnswer(target: string, passed: boolean) {
     target, recognized: target, passed, failureReason: passed ? null : "low_accuracy",
     scores: { accuracy, pronunciation: accuracy, fluency: accuracy, completeness: 100 },
     feedback: { rule, message },
-    details: { masaar: null, azure: { recognized: target, accuracy }, iqra: null },
+    details: { azure: { recognized: target, accuracy }, iqra: null },
     conditionEvaluation: { target, azureAccuracy: accuracy, azureRecognized: target, iqraPhonemes: [], matchedRule: rule, message, conditions: [] },
     discrimination: { targetScore: accuracy, firstSoundScore: null, closestAlternative: null, alternativeScore: null, margin: null },
     words: [],

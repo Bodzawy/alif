@@ -7,7 +7,8 @@ import { encodeWav } from "@/lib/audio/wav";
 import type { AzureAssessment } from "@/lib/pronunciation/types";
 
 // Azure Speech is the only part replaced: it needs real credentials and
-// Microsoft's network. MASAAR and IQRA are real HTTP servers below.
+// Microsoft's network. IQRA is a real HTTP server below; so is an old MASAAR
+// service, which Alif must no longer call.
 const azureMock = vi.hoisted(() => ({ assess: vi.fn() }));
 vi.mock("@/lib/pronunciation/services/azure", async (importOriginal) => {
   const original = await importOriginal<typeof import("@/lib/pronunciation/services/azure")>();
@@ -39,11 +40,9 @@ function modelServer(reply: () => { status: number; body: unknown; delayMs?: num
   return { server, requests };
 }
 
-const MASAAR_OK = { status: 200, body: { letter: "أ", confidence: 0.93, top3: [{ letter: "أ", confidence: 0.93 }] } as unknown };
-let masaarReply: { status: number; body: unknown; delayMs?: number } = MASAAR_OK;
 let iqraReply: { status: number; body: unknown; delayMs?: number } = { status: 200, body: { sequence: "b aa", phonemes: ["b", "aa"], duration: 0.8 } };
 
-const masaar = modelServer(() => masaarReply);
+const masaar = modelServer(() => ({ status: 200, body: { letter: "أ", confidence: 0.93 } }));
 const iqra = modelServer(() => iqraReply);
 
 function listen(server: Server) {
@@ -81,7 +80,6 @@ beforeEach(() => {
   process.env.INTERNAL_API_KEY = "internal-secret";
   masaar.requests.length = 0;
   iqra.requests.length = 0;
-  masaarReply = MASAAR_OK;
   iqraReply = { status: 200, body: { sequence: "b aa", phonemes: ["b", "aa"], duration: 0.8 } };
   azureMock.assess.mockReset().mockResolvedValue(azureResult());
   vi.spyOn(console, "log").mockImplementation(() => undefined);
@@ -93,7 +91,7 @@ beforeEach(() => {
 afterEach(() => vi.restoreAllMocks());
 
 describe("POST /api/pronunciation", () => {
-  it("runs Azure, MASAAR and IQRA, applies the condition engine and returns feedback", async () => {
+  it("runs Azure and IQRA, applies the condition engine and returns feedback", async () => {
     const audio = await wavFile();
     const response = await post({ audio, target: "باء" });
     expect(response.status).toBe(200);
@@ -104,7 +102,7 @@ describe("POST /api/pronunciation", () => {
       passed: true,
       failureReason: null,
       feedback: { rule: "excellent", message: "ممتاز 👏 نطقت حرف الباء بشكل صحيح" },
-      details: { masaar: { letter: "أ", confidence: 0.93 }, iqra: { phonemes: ["b", "aa"] }, azure: { accuracy: 86 } },
+      details: { iqra: { phonemes: ["b", "aa"] }, azure: { accuracy: 86 } },
       conditionEvaluation: { matchedRule: "excellent", iqraPhonemes: ["b", "aa"], conditions: ["azure_accuracy >= 70", "iqra_phonemes contains b"] },
     });
 
@@ -114,16 +112,18 @@ describe("POST /api/pronunciation", () => {
     expect(config).toEqual({ key: "test-key", region: "germanywestcentral" });
     expect(Buffer.compare(azureAudio as Buffer, Buffer.from(await audio.arrayBuffer()))).toBe(0);
 
-    // MASAAR and IQRA: POST <base>/predict, multipart "audio" = voice.wav, internal key header.
-    for (const service of [masaar, iqra]) {
-      expect(service.requests).toHaveLength(1);
-      const request = service.requests[0]!;
-      expect(request.path).toBe("/predict");
-      expect(request.apiKey).toBe("internal-secret");
-      expect(request.contentType).toMatch(/^multipart\/form-data/);
-      expect(request.body.toString("latin1")).toContain('name="audio"; filename="voice.wav"');
-      expect(request.body.includes(Buffer.from(await audio.arrayBuffer()))).toBe(true);
-    }
+    // IQRA: POST <base>/predict, multipart "audio" = voice.wav, internal key header.
+    expect(iqra.requests).toHaveLength(1);
+    const request = iqra.requests[0]!;
+    expect(request.path).toBe("/predict");
+    expect(request.apiKey).toBe("internal-secret");
+    expect(request.contentType).toMatch(/^multipart\/form-data/);
+    expect(request.body.toString("latin1")).toContain('name="audio"; filename="voice.wav"');
+    expect(request.body.includes(Buffer.from(await audio.arrayBuffer()))).toBe(true);
+
+    // MASAAR is not called, even while an old MASAAR_URL is still set, and not in the answer.
+    expect(masaar.requests).toHaveLength(0);
+    expect(body.details).not.toHaveProperty("masaar");
   });
 
   it("returns retry feedback from the matched rule (ثاء said as س)", async () => {
@@ -168,7 +168,7 @@ describe("POST /api/pronunciation", () => {
   it("does not send the internal key header when none is configured", async () => {
     delete process.env.INTERNAL_API_KEY;
     await post({ audio: await wavFile(), target: "ألف" });
-    expect(masaar.requests[0]!.apiKey).toBeUndefined();
+    expect(iqra.requests[0]!.apiKey).toBeUndefined();
   });
 
   it("answers 422 unclear_audio when Azure recognises no speech", async () => {
@@ -192,7 +192,7 @@ describe("POST /api/pronunciation", () => {
     const response = await post({ audio: await wavFile(), target: "ألف" });
     expect(response.status).toBe(503);
     expect(await response.json()).toMatchObject({ code: "service_not_configured" });
-    expect(masaar.requests).toHaveLength(0);
+    expect(iqra.requests).toHaveLength(0);
     expect(azureMock.assess).not.toHaveBeenCalled();
   });
 
@@ -226,10 +226,10 @@ describe("POST /api/pronunciation – timing log", () => {
   const assessmentLog = () => {
     const call = vi.mocked(console.log).mock.calls.find(([label]) => label === "ARABIC PRONUNCIATION ASSESSMENT:");
     expect(call, "assessment log line").toBeDefined();
-    return call![1] as { audio: { durationMs: number; recordedMs: number | null }; timings: { azureMs: number; iqraMs: number; masaarMs: number }; tookMs: number };
+    return call![1] as { audio: { durationMs: number; recordedMs: number | null }; timings: { azureMs: number; iqraMs: number }; tookMs: number };
   };
 
-  it("logs how long Azure, IQRA and MASAAR each took", async () => {
+  it("logs how long Azure and IQRA each took", async () => {
     iqraReply = { ...iqraReply, delayMs: 150 };
     azureMock.assess.mockImplementation(() => new Promise((resolve) => setTimeout(() => resolve(azureResult()), 60)));
     const response = await post({ audio: await wavFile(), target: "باء" });
@@ -239,21 +239,10 @@ describe("POST /api/pronunciation – timing log", () => {
     expect(timings.iqraMs).toBeGreaterThanOrEqual(140);
     expect(timings.azureMs).toBeGreaterThanOrEqual(50);
     expect(timings.azureMs).toBeLessThan(timings.iqraMs);
-    expect(timings.masaarMs).toBeGreaterThanOrEqual(0);
+    expect(timings).not.toHaveProperty("masaarMs");
     // Parallel: the request takes about as long as the slowest service, not the sum.
     expect(tookMs).toBeGreaterThanOrEqual(timings.iqraMs);
     expect(tookMs).toBeLessThan(timings.iqraMs + timings.azureMs);
-  });
-
-  it("does not hold the answer for a slow MASAAR (it never decides `passed`)", async () => {
-    masaarReply = { ...MASAAR_OK, delayMs: 2000 };
-    const started = Date.now();
-    const response = await post({ audio: await wavFile(), target: "باء" });
-    expect(Date.now() - started).toBeLessThan(1000);
-    expect(response.status).toBe(200);
-    const body = await response.json();
-    expect(body).toMatchObject({ passed: true, details: { masaar: null } });
-    expect(masaar.requests).toHaveLength(1);
   });
 
   it("logs IQRA's time also when it fails; the evaluation goes on as before", async () => {
@@ -264,14 +253,14 @@ describe("POST /api/pronunciation – timing log", () => {
   });
 
   it("logs null for a service that is not configured", async () => {
-    const url = process.env.MASAAR_URL;
-    delete process.env.MASAAR_URL;
+    const url = process.env.IQRA_URL;
+    delete process.env.IQRA_URL;
     try {
       await post({ audio: await wavFile(), target: "باء" });
-      expect(assessmentLog().timings.masaarMs).toBeNull();
-      expect(masaar.requests).toHaveLength(0);
+      expect(assessmentLog().timings.iqraMs).toBeNull();
+      expect(iqra.requests).toHaveLength(0);
     } finally {
-      process.env.MASAAR_URL = url;
+      process.env.IQRA_URL = url;
     }
   });
 

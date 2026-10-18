@@ -1002,7 +1002,7 @@ function azure(target: string, accuracy: number): AzureAssessment & { accuracy: 
 
 function assess(target: string, accuracy: number, phonemes: string[] | null) {
   const iqra: IqraResult | null = phonemes ? { sequence: phonemes.join(" "), phonemes, duration: 0.8 } : null;
-  return buildAssessment({ target, primary: azure(target, accuracy), masaar: null, iqra });
+  return buildAssessment({ target, primary: azure(target, accuracy), iqra });
 }
 
 /** A plausible, never-empty IQRA output: hamza, the first vowel, then the required consonants (chosen alternative) with vowels around them. */

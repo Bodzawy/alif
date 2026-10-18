@@ -14,7 +14,7 @@ function response(overrides: Partial<PronunciationResponse> & { rule?: string; m
     failureReason: null,
     scores: { accuracy: 82, pronunciation: 80, fluency: 82, completeness: 100 },
     feedback: { rule, message },
-    details: { masaar: null, azure: { recognized: "ألف", accuracy: 82 }, iqra: null },
+    details: { azure: { recognized: "ألف", accuracy: 82 }, iqra: null },
     conditionEvaluation: { target: "ألف", azureAccuracy: 82, azureRecognized: "ألف", iqraPhonemes: [], matchedRule: rule, message, conditions: [] },
     discrimination: { targetScore: 82, firstSoundScore: null, closestAlternative: null, alternativeScore: null, margin: null },
     words: [],

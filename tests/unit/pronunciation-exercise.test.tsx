@@ -42,7 +42,7 @@ const okBody = (passed: boolean, rule = passed ? "excellent" : "correct_letter_n
   failureReason: passed ? null : "rule_not_matched",
   scores: { accuracy: passed ? 84 : 61, pronunciation: 80, fluency: 80, completeness: 100 },
   feedback: { rule, message: passed ? "ممتاز 👏 نطقت حرف الألف بشكل صحيح" : " حاول تحسين طريقة النطق" },
-  details: { masaar: null, iqra: null, azure: { recognized: "ألف", accuracy: 84 } },
+  details: { iqra: null, azure: { recognized: "ألف", accuracy: 84 } },
   conditionEvaluation: {
     target: "ألف",
     azureAccuracy: passed ? 84 : 61,

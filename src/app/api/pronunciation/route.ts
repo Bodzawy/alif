@@ -1,9 +1,9 @@
 import { MAX_UPLOAD_BYTES, MIN_AUDIO_MS, readWavHeader } from "@/lib/audio/wav-header";
 import { buildAssessment, hasUsableAzureScores } from "@/lib/pronunciation/assessment";
-import { azureConfig, iqraUrl, masaarUrl } from "@/lib/pronunciation/config";
+import { azureConfig, iqraUrl } from "@/lib/pronunciation/config";
 import { apiError } from "@/lib/pronunciation/errors";
 import { AzureSpeechError, assessWithAzure } from "@/lib/pronunciation/services/azure";
-import { assessIqra, assessMasaar } from "@/lib/pronunciation/services/models";
+import { assessIqra } from "@/lib/pronunciation/services/models";
 import { isAllowedTarget } from "@/lib/pronunciation/targets";
 import { clientKey, createRateLimiter } from "@/lib/rate-limit";
 
@@ -14,7 +14,7 @@ export const maxDuration = 30;
 const rateLimit = createRateLimiter({ limit: 30, windowMs: 60_000 });
 
 /** How long each service took, in ms, for the server log (null: not called / not configured). */
-type Timings = { azureMs: number | null; iqraMs: number | null; masaarMs: number | null };
+type Timings = { azureMs: number | null; iqraMs: number | null };
 
 /** Resolves like `promise` and writes its duration (also on failure) through `done`. */
 async function timed<T>(promise: Promise<T>, done: (ms: number) => void): Promise<T> {
@@ -26,26 +26,13 @@ async function timed<T>(promise: Promise<T>, done: (ms: number) => void): Promis
   }
 }
 
-/** How long the answer may still wait for MASAAR once Azure and IQRA have answered. */
-const MASAAR_GRACE_MS = 250;
-
-/** `promise`'s value if it settles within `ms`, else null (the promise itself keeps running). */
-async function withinGrace<T>(promise: Promise<T | null>, ms: number): Promise<T | null> {
-  let timer: ReturnType<typeof setTimeout> | undefined;
-  try {
-    return await Promise.race([promise, new Promise<null>((resolve) => (timer = setTimeout(() => resolve(null), ms)))]);
-  } finally {
-    clearTimeout(timer);
-  }
-}
-
 /** Length of the recording before the browser cut the silence (sent by submitRecording); log only. */
 function recordedMs(value: FormDataEntryValue | null): number | null {
   const ms = typeof value === "string" ? Number(value) : NaN;
   return Number.isFinite(ms) && ms >= 0 && ms <= 600_000 ? Math.round(ms) : null;
 }
 
-// Browser → Alif → (Azure ‖ MASAAR ‖ IQRA) → condition engine → feedback.
+// Browser → Alif → (Azure ‖ IQRA) → condition engine → feedback.
 export async function POST(request: Request) {
   const startedAt = Date.now();
 
@@ -101,21 +88,15 @@ export async function POST(request: Request) {
 
     const audioLog = { durationMs: wav.durationMs, recordedMs: recordedMs(formData.get("recordedMs")) };
 
-    // All three evaluations run in parallel. MASAAR and IQRA are best effort
-    // (null on failure); Azure is required. Each one is timed for the log.
-    const timings: Timings = { azureMs: null, iqraMs: null, masaarMs: null };
-    // MASAAR never decides `passed` (only Azure and IQRA feed the condition
-    // engine); it is passed through in `details`. So the answer does not wait
-    // for it: a slow or unreachable MASAAR held every evaluation up to its 8 s
-    // timeout. It may finish within MASAAR_GRACE_MS after the others, else null.
-    const masaarPending = masaarUrl() ? timed(assessMasaar(audioBuffer), (ms) => (timings.masaarMs = ms)) : assessMasaar(audioBuffer);
-    let masaar, iqra, primary;
+    // Both evaluations run in parallel. IQRA is best effort (null on
+    // failure); Azure is required. Each one is timed for the log.
+    const timings: Timings = { azureMs: null, iqraMs: null };
+    let iqra, primary;
     try {
       [iqra, primary] = await Promise.all([
         iqraUrl() ? timed(assessIqra(audioBuffer), (ms) => (timings.iqraMs = ms)) : assessIqra(audioBuffer),
         timed(assessWithAzure(audioBuffer, target, azure), (ms) => (timings.azureMs = ms)),
       ]);
-      masaar = await withinGrace(masaarPending, MASAAR_GRACE_MS);
     } catch (error) {
       if (error instanceof AzureSpeechError) {
         console.error("AZURE SPEECH ERROR:", { kind: error.kind, message: error.message, details: error.details, audio: audioLog, timings });
@@ -129,21 +110,19 @@ export async function POST(request: Request) {
       return apiError("unclear_audio", 422);
     }
 
-    const assessment = buildAssessment({ target, primary, masaar, iqra });
+    const assessment = buildAssessment({ target, primary, iqra });
 
     console.log("ARABIC PRONUNCIATION ASSESSMENT:", {
       target,
       audio: { ...audioLog, sampleRate: wav.sampleRate, channels: wav.channels },
       services: {
         azure: true,
-        masaar: masaarUrl() ? masaar !== null : "not configured",
         iqra: iqraUrl() ? iqra !== null : "not configured",
       },
       azureAccuracy: primary.accuracy,
       azureRecognized: primary.recognized,
       firstSound: primary.firstSoundScore,
       targetScore: assessment.discrimination.targetScore,
-      masaar,
       iqraPhonemes: assessment.conditionEvaluation.iqraPhonemes,
       matchedRule: assessment.conditionEvaluation.matchedRule,
       passed: assessment.passed,

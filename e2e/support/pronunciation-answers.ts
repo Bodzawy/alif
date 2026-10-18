@@ -21,7 +21,6 @@ export function pronunciationAnswer(target: string, mode: AnswerMode) {
   return buildAssessment({
     target,
     primary: { referenceText: target, recognized: target, accuracy, pronunciation: accuracy, fluency: 90, completeness: 100, firstSoundScore: 80, words: [] },
-    masaar: null,
     iqra: mode === "iqra-unavailable" ? null : { sequence: phonemes.join(" "), phonemes, duration: 0.8 },
   });
 }

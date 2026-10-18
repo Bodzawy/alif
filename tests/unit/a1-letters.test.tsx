@@ -90,7 +90,6 @@ describe("Ba – lesson data", () => {
       buildAssessment({
         target,
         primary: { referenceText: target, recognized: target, accuracy: 90, pronunciation: 90, fluency: 90, completeness: 100, firstSoundScore: 80, words: [] },
-        masaar: null,
         iqra: { phonemes },
       });
     const heard = { "بَ": ["b", "aa"], "بِ": ["b", "i"], "بُ": ["b", "u"] } as const;

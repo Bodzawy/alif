@@ -1,6 +1,5 @@
-// Stand-in for the self-hosted MASAAR and IQRA model services, used only by
-// the E2E suite. It speaks the same contract Alif relies on:
-//   POST /masaar/predict  multipart field "audio" (voice.wav) → { letter, confidence, top3 }
+// Stand-in for the self-hosted IQRA model service, used only by the E2E suite.
+// It speaks the same contract Alif relies on:
 //   POST /iqra/predict    multipart field "audio" (voice.wav) → { sequence, phonemes, duration }
 // and records every call so tests can assert the services were reached.
 import { createServer } from "node:http";
@@ -26,7 +25,7 @@ createServer(async (req, res) => {
   const chunks = [];
   for await (const chunk of req) chunks.push(chunk);
   const body = Buffer.concat(chunks);
-  const service = req.url === "/masaar/predict" ? "MASAAR" : req.url === "/iqra/predict" ? "IQRA" : null;
+  const service = req.url === "/iqra/predict" ? "IQRA" : null;
 
   if (req.method !== "POST" || !service) {
     res.writeHead(404);
@@ -44,10 +43,6 @@ createServer(async (req, res) => {
 
   res.writeHead(200, { "content-type": "application/json" });
   res.end(
-    JSON.stringify(
-      service === "MASAAR"
-        ? { letter: "أ", confidence: 0.91, top3: [{ letter: "أ", confidence: 0.91 }, { letter: "ع", confidence: 0.05 }] }
-        : { sequence: "< a l i f", phonemes: ["<", "a", "l", "i", "f"], duration: 0.9 }
-    )
+    JSON.stringify({ sequence: "< a l i f", phonemes: ["<", "a", "l", "i", "f"], duration: 0.9 })
   );
 }).listen(port, "127.0.0.1", () => console.log(`mock model server on ${port}`));
