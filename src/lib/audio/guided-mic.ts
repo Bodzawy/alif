@@ -11,8 +11,12 @@ export const GUIDED_MIC_CONSTRAINTS: MediaTrackConstraints = { echoCancellation:
 
 /** Voice detection – to be tuned on real children's voices. */
 export const GUIDED_VAD = {
-  /** Stop this long after the child stopped speaking. */
-  endSilenceMs: 1000,
+  /**
+   * Stop this long after the child stopped speaking. Every ms here is waited
+   * before the evaluation can even start; 700 ms is the value A0 uses
+   * (VOICE_ACTIVITY), well above the quiet closure inside a word (≤ 120 ms).
+   */
+  endSilenceMs: 700,
   /** Stop at the latest this long after speech started. */
   maxSpeechMs: 4000,
   /** No speech within this time: "no answer" (the evaluation is not called). */

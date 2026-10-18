@@ -26,6 +26,19 @@ async function timed<T>(promise: Promise<T>, done: (ms: number) => void): Promis
   }
 }
 
+/** How long the answer may still wait for MASAAR once Azure and IQRA have answered. */
+const MASAAR_GRACE_MS = 250;
+
+/** `promise`'s value if it settles within `ms`, else null (the promise itself keeps running). */
+async function withinGrace<T>(promise: Promise<T | null>, ms: number): Promise<T | null> {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  try {
+    return await Promise.race([promise, new Promise<null>((resolve) => (timer = setTimeout(() => resolve(null), ms)))]);
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 /** Length of the recording before the browser cut the silence (sent by submitRecording); log only. */
 function recordedMs(value: FormDataEntryValue | null): number | null {
   const ms = typeof value === "string" ? Number(value) : NaN;
@@ -91,13 +104,18 @@ export async function POST(request: Request) {
     // All three evaluations run in parallel. MASAAR and IQRA are best effort
     // (null on failure); Azure is required. Each one is timed for the log.
     const timings: Timings = { azureMs: null, iqraMs: null, masaarMs: null };
+    // MASAAR never decides `passed` (only Azure and IQRA feed the condition
+    // engine); it is passed through in `details`. So the answer does not wait
+    // for it: a slow or unreachable MASAAR held every evaluation up to its 8 s
+    // timeout. It may finish within MASAAR_GRACE_MS after the others, else null.
+    const masaarPending = masaarUrl() ? timed(assessMasaar(audioBuffer), (ms) => (timings.masaarMs = ms)) : assessMasaar(audioBuffer);
     let masaar, iqra, primary;
     try {
-      [masaar, iqra, primary] = await Promise.all([
-        masaarUrl() ? timed(assessMasaar(audioBuffer), (ms) => (timings.masaarMs = ms)) : assessMasaar(audioBuffer),
+      [iqra, primary] = await Promise.all([
         iqraUrl() ? timed(assessIqra(audioBuffer), (ms) => (timings.iqraMs = ms)) : assessIqra(audioBuffer),
         timed(assessWithAzure(audioBuffer, target, azure), (ms) => (timings.azureMs = ms)),
       ]);
+      masaar = await withinGrace(masaarPending, MASAAR_GRACE_MS);
     } catch (error) {
       if (error instanceof AzureSpeechError) {
         console.error("AZURE SPEECH ERROR:", { kind: error.kind, message: error.message, details: error.details, audio: audioLog, timings });

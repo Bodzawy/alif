@@ -39,7 +39,8 @@ function modelServer(reply: () => { status: number; body: unknown; delayMs?: num
   return { server, requests };
 }
 
-const masaarReply = { status: 200, body: { letter: "أ", confidence: 0.93, top3: [{ letter: "أ", confidence: 0.93 }] } as unknown };
+const MASAAR_OK = { status: 200, body: { letter: "أ", confidence: 0.93, top3: [{ letter: "أ", confidence: 0.93 }] } as unknown };
+let masaarReply: { status: number; body: unknown; delayMs?: number } = MASAAR_OK;
 let iqraReply: { status: number; body: unknown; delayMs?: number } = { status: 200, body: { sequence: "b aa", phonemes: ["b", "aa"], duration: 0.8 } };
 
 const masaar = modelServer(() => masaarReply);
@@ -80,6 +81,7 @@ beforeEach(() => {
   process.env.INTERNAL_API_KEY = "internal-secret";
   masaar.requests.length = 0;
   iqra.requests.length = 0;
+  masaarReply = MASAAR_OK;
   iqraReply = { status: 200, body: { sequence: "b aa", phonemes: ["b", "aa"], duration: 0.8 } };
   azureMock.assess.mockReset().mockResolvedValue(azureResult());
   vi.spyOn(console, "log").mockImplementation(() => undefined);
@@ -241,6 +243,17 @@ describe("POST /api/pronunciation – timing log", () => {
     // Parallel: the request takes about as long as the slowest service, not the sum.
     expect(tookMs).toBeGreaterThanOrEqual(timings.iqraMs);
     expect(tookMs).toBeLessThan(timings.iqraMs + timings.azureMs);
+  });
+
+  it("does not hold the answer for a slow MASAAR (it never decides `passed`)", async () => {
+    masaarReply = { ...MASAAR_OK, delayMs: 2000 };
+    const started = Date.now();
+    const response = await post({ audio: await wavFile(), target: "باء" });
+    expect(Date.now() - started).toBeLessThan(1000);
+    expect(response.status).toBe(200);
+    const body = await response.json();
+    expect(body).toMatchObject({ passed: true, details: { masaar: null } });
+    expect(masaar.requests).toHaveLength(1);
   });
 
   it("logs IQRA's time also when it fails; the evaluation goes on as before", async () => {

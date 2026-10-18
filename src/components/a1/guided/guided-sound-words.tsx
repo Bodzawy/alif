@@ -108,9 +108,14 @@ export function GuidedSoundWords({ groups, progressKey }: { groups: Groups; prog
         await speak(GERMAN_CUES.super, signal);
       },
       record: (signal) => mic.current?.record(signal) ?? Promise.resolve(null),
-      evaluate: (utterance, block, signal) => evaluateUtterance(utterance, block.target, signal),
+      evaluate: (utterance, block, signal) => {
+        // While the server evaluates: load what plays after the verdict ("Super!", the next block), so it starts at once.
+        const next = blocks[blocks.findIndex((b) => b.id === block.id) + 1];
+        for (const text of [GERMAN_CUES.super, next?.text]) if (text) void speechUrl(text).catch(() => undefined);
+        return evaluateUtterance(utterance, block.target, signal);
+      },
     };
-  }, []);
+  }, [blocks]);
 
   const flow = useGuidedFlow(blocks, deps, {
     onMark: (id, mark) => (mark === "done" ? markExercisePassed(progressKey, id) : markExerciseSkipped(progressKey, id)),
