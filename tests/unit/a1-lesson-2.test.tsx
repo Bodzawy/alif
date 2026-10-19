@@ -41,6 +41,7 @@ import { hasMadd, maddLetters } from "@/lib/arabic/madd";
 import { getLessonProgress } from "@/lib/progress";
 import { CONDITION_RULES, SOUND_RULES } from "@/lib/pronunciation/rules";
 import { isAllowedTarget, isAllowedTtsText } from "@/lib/pronunciation/targets";
+import { withTanwin } from "@/lib/arabic/tanwin";
 
 const PUBLIC = path.join(process.cwd(), "public");
 const entry = (slug: string) => getA1Lesson("lesson-2", slug)!;
@@ -160,7 +161,9 @@ describe.each(["dal", "dhal", "waw", "ya"])("the letter %s", (slug) => {
 
   it("(١) النطق: the sound with Fatha, Kasra, Damma, then exactly the book's words – Arabic, German, transliteration, the right picture", () => {
     const words = stepOf(lesson, "step-1", "sound-words");
-    expect(words.groups.map((g) => [g.sound.glyph, g.words.map((w) => [w.arabic, w.german, w.image?.src])])).toEqual(WORDS[slug]);
+    expect(words.groups.map((g) => [g.sound.glyph, g.words.map((w) => [w.arabic, w.german, w.image?.src])])).toEqual(
+      WORDS[slug]!.map(([glyph, words]) => [glyph, words.map(([arabic, ...rest]) => [withTanwin(arabic), ...rest])])
+    );
     for (const group of words.groups) {
       expect(CONDITION_RULES[group.sound.exercise.target], group.sound.glyph).toBeDefined();
       expect(isAllowedTarget(group.sound.exercise.target)).toBe(true);

@@ -1,7 +1,7 @@
 import type { A1Lesson, A1LessonLetter, A1Step, FormsWord, GapItem, GapsContent, LetterPositions, SoundItem, WritingLetterSet } from "@/data/types";
 import { alignPattern } from "@/lib/arabic/gap";
 import { baseLetter, formGlyph, LETTER_FORMS, pickNeighbors } from "@/lib/arabic/letter-form";
-import { withTanwin } from "@/lib/arabic/tanwin";
+import { tanwinWord } from "@/lib/arabic/tanwin";
 
 import { letterFormsTexts, picture, SHARED_GAPS_FOLDER, sharedGapsContent, unvocalised, type LetterFormsWordSpec, type LetterWordSpec } from "../letter-lesson";
 
@@ -199,14 +199,18 @@ export function lesson2Letter(spec: Lesson2LetterSpec): A1Lesson {
     instruction: { arabic: "(١) النُّطْقُ: كَرِّرْ بَعْدَ الْمُدَرِّسِ", german: "Aussprache: Hör zu und sprich nach – erst den Laut, dann die Wörter." },
     groups: vowels.map((vowel, i) => ({
       sound: sounds[i]!,
-      words: spec.words[vowel].map(([id, arabic, german, transliteration, pic]) => ({
-        id,
-        arabic,
-        german,
-        transliteration,
-        ...(pic ? { image: picture(letter.id, id, pic) } : {}),
-        exercise: { id, target: unvocalised(arabic), modelText: withTanwin(arabic) },
-      })),
+      // Shown and spoken with Tanwin; the target is the pausal word without harakat.
+      words: spec.words[vowel].map(([id, pausal, german, written, pic]) => {
+        const { arabic, spoken, transliteration } = tanwinWord(pausal, written);
+        return {
+          id,
+          arabic,
+          german,
+          transliteration,
+          ...(pic ? { image: picture(letter.id, id, pic) } : {}),
+          exercise: { id, target: unvocalised(pausal), modelText: spoken },
+        };
+      }),
     })),
   });
 

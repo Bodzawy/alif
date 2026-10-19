@@ -1,6 +1,6 @@
 import { alifWriting } from "@/data/letters/alif";
 import type { A1Lesson, FormsWord, GapItem, SoundItem, VocabularyItem } from "@/data/types";
-import { withTanwin } from "./letter-lesson";
+import { tanwinWord, withTanwin } from "@/lib/arabic/tanwin";
 
 // A1 · Lesson 1 – صَبَاحُ الْخَيْر. Alif with the three short vowels, then the
 // words from the lesson sheet that begin with each of them (order as on the sheet).
@@ -18,7 +18,8 @@ export const UEBUNGEN_AUDIO_BASE = "/audio/a1/lesson-1/uebungen";
  */
 const gapItem = (id: string, arabic: string, german: string, picture: boolean): GapItem => ({
   id,
-  arabic,
+  // shown as spoken, with Tanwin (the gap is the Hamza-Alif at the start)
+  arabic: withTanwin(arabic),
   spoken: withTanwin(arabic),
   german,
   audio: id,
@@ -61,11 +62,10 @@ const damma: SoundItem = {
   exercise: { id: "alif-damma", target: "أُ", modelText: "ؤُ" },
 };
 
-function word(id: string, arabic: string, target: string, german: string, transliteration: string, alt: string): VocabularyItem {
-  // Temporary audible diagnostic requested by the user: keep the visible word
-  // and assessment target intact, but feed an unmistakable waw to lesson TTS.
-  const modelText = withTanwin(arabic);
-  return { id, arabic, german, transliteration, image: { src: `${IMG}/${id}.svg`, alt }, exercise: { id, target, modelText } };
+/** Shown and spoken with Tanwin; `target` is the pausal word without harakat. */
+function word(id: string, pausal: string, target: string, german: string, written: string, alt: string): VocabularyItem {
+  const { arabic, spoken, transliteration } = tanwinWord(pausal, written);
+  return { id, arabic, german, transliteration, image: { src: `${IMG}/${id}.svg`, alt }, exercise: { id, target, modelText: spoken } };
 }
 
 /**

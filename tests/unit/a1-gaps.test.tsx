@@ -10,6 +10,7 @@ import { getA1Lesson } from "@/data/a1";
 import type { GapsContent } from "@/data/types";
 import { gapPieces, gapWord, piecesAreSafe } from "@/lib/arabic/gap";
 import { getLessonProgress } from "@/lib/progress";
+import { withTanwin } from "@/lib/arabic/tanwin";
 
 const lesson = getA1Lesson("lesson-1", "alif")!;
 const stepOf = (slug: string) => {
@@ -55,15 +56,16 @@ describe("Schritt 5 Ergänzen / 6 Hören – content from the book", () => {
     ]);
     expect(step5.gaps.choices).toEqual(["أَ", "إِ", "أُ"]);
     expect(step6.gaps.choices).toEqual(["أْ", "أَ", "إِ", "أُ"]);
-    expect(step5.gaps.items.map((i) => [i.arabic, i.german])).toEqual(BOOK5.map(([w, g]) => [w, g]));
-    expect(step6.gaps.items.map((i) => [i.arabic, i.german])).toEqual(BOOK6.map(([w, g]) => [w, g]));
+    // shown as spoken, with Tanwin
+    expect(step5.gaps.items.map((i) => [i.arabic, i.german])).toEqual(BOOK5.map(([w, g]) => [withTanwin(w), g]));
+    expect(step6.gaps.items.map((i) => [i.arabic, i.german])).toEqual(BOOK6.map(([w, g]) => [withTanwin(w), g]));
     expect([step5.gaps.mode, step6.gaps.mode]).toEqual(["picture", "listen"]);
   });
 
   it("computes gap, answer and rest for all 19 items; every answer is one of the choices", () => {
     for (const [i, [word, , answer, rest]] of BOOK5.entries()) {
       const gap = gapWord(step5.gaps.items[i]!.arabic);
-      expect([gap.index, gap.answer, gap.before, gap.after], word).toEqual([0, answer, "", rest]);
+      expect([gap.index, gap.answer, gap.before, gap.after], word).toEqual([0, answer, "", withTanwin(rest)]);
       expect(step5.gaps.choices).toContain(gap.answer);
     }
     for (const [i, [word, , answer]] of BOOK6.entries()) {
@@ -75,8 +77,8 @@ describe("Schritt 5 Ergänzen / 6 Hören – content from the book", () => {
 
   it("item 10 (رَأْس) has its gap in the middle and the answer أْ", () => {
     const gap = gapWord(step6.gaps.items[9]!.arabic);
-    expect([gap.index, gap.answer, gap.vowel, gap.before, gap.after]).toEqual([1, "أْ", "sukun", "رَ", "س"]);
-    expect(gapPieces(gap)).toEqual([{ kind: "text", text: "رَ" }, { kind: "gap" }, { kind: "text", text: "س" }]);
+    expect([gap.index, gap.answer, gap.vowel, gap.before, gap.after]).toEqual([1, "أْ", "sukun", "رَ", "سٌ"]);
+    expect(gapPieces(gap)).toEqual([{ kind: "text", text: "رَ" }, { kind: "gap" }, { kind: "text", text: "سٌ" }]);
   });
 
   it("cuts the word only after letters that never connect forward, and the pieces make up the word", () => {
@@ -193,7 +195,7 @@ describe("the gap flow", () => {
 
     // Items 2–9 right on the first try (with "Weiter" to save time).
     for (const [word, , answer] of BOOK5.slice(1)) {
-      await waitFor(() => expect(screen.getByTestId("gap-item")).toHaveAttribute("data-item", step5.gaps.items.find((i) => i.arabic === word)!.id));
+      await waitFor(() => expect(screen.getByTestId("gap-item")).toHaveAttribute("data-item", step5.gaps.items.find((i) => i.arabic === withTanwin(word))!.id));
       answerWith(answer);
       fireEvent.click(screen.getByTestId("gap-next"));
     }
@@ -237,7 +239,7 @@ describe("the gap flow", () => {
     fireEvent.click(await screen.findByTestId("start-button"));
     await waitFor(() => expect(played).toEqual(["g6_intro", "ras"]));
     expect(screen.queryByTestId("gap-image")).toBeNull();
-    expect(Array.from(document.querySelectorAll('[data-testid="gap-piece"]')).map((e) => e.textContent)).toEqual(["رَ", "س"]);
+    expect(Array.from(document.querySelectorAll('[data-testid="gap-piece"]')).map((e) => e.textContent)).toEqual(["رَ", "سٌ"]);
     played.length = 0;
     fireEvent.click(screen.getByTestId("gap-listen"));
     await waitFor(() => expect(played).toEqual(["ras"]));

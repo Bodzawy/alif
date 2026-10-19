@@ -1,5 +1,5 @@
 import type { A1Lesson, A1Word, ClozeItem, Dialogue, DialogueSpeaker, PhraseItem, QuizItem, TableCell } from "@/data/types";
-import { withTanwin } from "@/lib/arabic/tanwin";
+import { tanwinWord } from "@/lib/arabic/tanwin";
 import { transliterate } from "@/lib/arabic/transliterate";
 
 import { unvocalised } from "../letter-lesson";
@@ -18,14 +18,11 @@ import { differenceItem } from "./letter-entry";
 const V = "/images/vocabulary";
 const IMG = "/images/a1/unit-3";
 
-const word = (id: string, arabic: string, german: string, src: string, alt: string): A1Word => ({
-  id,
-  arabic,
-  german,
-  transliteration: transliterate(arabic),
-  image: { src, alt },
-  exercise: { id, target: unvocalised(arabic), modelText: withTanwin(arabic) },
-});
+/** Shown and spoken with Tanwin; the target is the pausal word without harakat. */
+const word = (id: string, pausal: string, german: string, src: string, alt: string): A1Word => {
+  const { arabic, spoken, transliteration } = tanwinWord(pausal, transliterate(pausal));
+  return { id, arabic, german, transliteration, image: { src, alt }, exercise: { id, target: unvocalised(pausal), modelText: spoken } };
+};
 
 // ---------------------------------------------------------------------------
 // الشَّدَّة وَالتَّاء الْمَرْبُوطَة
@@ -119,7 +116,9 @@ export const a1Shadda: A1Lesson = {
       instruction: { arabic: "تَدْرِيبٌ (١): اُكْتُبِ الْكَلِمَةَ الصَّحِيحَةَ تَحْتَ الصُّورَةِ ثُمَّ اقْرَأْهَا أَمَامَ الْفَصْلِ.", german: "Übung 1: Welches Wort gehört unter das Bild? Wähle es und lies es laut vor." },
       items: PICTURE_WORDS.map((id) => {
         const w = byId.get(id)!;
-        return { id, image: w.image, lines: [{ label: "", parts: [{ accept: [w.arabic], options: PICTURE_OPTIONS }] }] } satisfies ClozeItem;
+        // the book's options are the pausal words (the card shows سَيِّدَةٌ, the option سَيِّدَة)
+        const answer = PICTURE_OPTIONS.find((o) => unvocalised(o) === w.exercise.target)!;
+        return { id, image: w.image, lines: [{ label: "", parts: [{ accept: [answer], options: PICTURE_OPTIONS }] }] } satisfies ClozeItem;
       }),
     },
     {

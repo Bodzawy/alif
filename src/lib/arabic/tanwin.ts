@@ -1,7 +1,9 @@
-// The words of "Wörter" in the A1 letter entries are spoken with Tanwin
-// (بَيْتٌ, بِطَاقَةٌ, أُمٌّ, مُسْتَشْفًى) – only the model audio. The word on the
-// card (arabic) and the pronunciation target (unvocalised) stay pausal, so the
-// rules in vocabulary_conditions.json are untouched.
+// The words of "Wörter" in the A1 letter entries (and the Lektion 1 words of
+// "Ergänzen" / "Hören") are spoken with Tanwin (بَيْتٌ, بِطَاقَةٌ, أُمٌّ, مُسْتَشْفًى),
+// and what is spoken is also what is shown: the card shows the word with its
+// Tanwin and the transliteration ends in -un / -an / -in (tanwinWord). Only the
+// pronunciation target (unvocalised) is built from the pausal word – it is the
+// same either way, so the rules in vocabulary_conditions.json are untouched.
 // No Tanwin for a word that cannot take it:
 //   – with the article ال (الْيُونَان, الصِّين),
 //   – ending in ا: pronouns, names, question words (أَنَا, دِينَا, لِمَاذَا؟),
@@ -26,6 +28,9 @@ export const NO_TANWIN: ReadonlySet<string> = new Set([
   "هُدَى", // female name
   "طَمَاطِم", // pattern of صِيغَةُ مُنْتَهَى الْجُمُوعِ (فَعَالِل)
   "زُمَلَاء", // فُعَلَاء: ending in the Alif of the feminine (أَلِفُ التَّأْنِيثِ الْمَمْدُودَةُ)
+  "أَحْمَر", // أَفْعَل of a colour
+  "أَجْمَل", // أَفْعَل of the comparative
+  "أَثْنَاء", // "during": used as an adverb, not with Tanwin
 ]);
 
 /** Words whose pausal spelling hides a sound that comes back with Tanwin: the doubled letter of a Nisba or of خَسّ. */
@@ -63,4 +68,41 @@ export function withTanwin(arabic: string): string {
   }
   // The pausal ending (Sukun or a vowel) gives way to -un; a Shadda stays (after the vowel sign, as everywhere in the data).
   return `${stem.join("")}${letter}${DAMMATAN}${marks.includes(SHADDA) ? SHADDA : ""}${punct}`;
+}
+
+const TANWIN_ENDING: Record<string, string> = { "ً": "an", "ٌ": "un", "ٍ": "in" };
+const DIGRAPH = /(sh|kh|th|dh|gh|ch)$/i;
+
+/**
+ * The transliteration of a word that gets its Tanwin (`spoken` = withTanwin(`pausal`)), kept in the
+ * hand-written convention of the lesson (e.g. "Dsch", "Ch" in Lektion 1): بَيْت "Bayt" → "Baytun",
+ * بِطَاقَة "Biṭāqa" → "Biṭāqatun", فُرْشَاة "Furshāh" → "Furshātun", مُسْتَشْفَى "Mustashfā" → "Mustashfan",
+ * هِنْدِي "Hindī" → "Hindiyyun", خَس "Chas" → "Chassun".
+ */
+export function tanwinTransliteration(transliteration: string, pausal: string, spoken: string): string {
+  const mark = Array.from(spoken).reverse().find((c) => TANWIN_ENDING[c]);
+  if (spoken === pausal || !mark) return transliteration;
+  const ending = TANWIN_ENDING[mark]!;
+  const word = spoken.replace(TRAILING_PUNCT, "");
+  const t = transliteration;
+  if (/ة[ً-ٍ]$/.test(word)) return t.replace(/āh$/, "āt").replace(/a$/, "at") + ending;
+  if (/[ً-ٍ]ى$/.test(word)) return t.replace(/ā$/, "") + ending;
+  // a Nisba ـِيّ: "…iyy" (or "…ī" when the Shadda was not written) + -un
+  if (/ِيّ?[ً-ٍ]ّ?$/.test(word)) return t.replace(/ī$/, "iyy") + ending;
+  // a Shadda that only the spoken word has (خَس → خَسٌّ): the last consonant is doubled
+  if (spoken.includes(SHADDA) && !pausal.includes(SHADDA)) {
+    const last = DIGRAPH.exec(t)?.[0] ?? t.slice(-1);
+    return t + last.toLowerCase() + ending;
+  }
+  return t + ending;
+}
+
+/**
+ * A word that can take Tanwin, as shown and spoken: `arabic` and `spoken` with the Tanwin, the
+ * transliteration with -un / -an / -in. The pronunciation target must still be made from the pausal
+ * word (it is the same without harakat).
+ */
+export function tanwinWord(pausal: string, transliteration: string): { arabic: string; spoken: string; transliteration: string } {
+  const spoken = withTanwin(pausal);
+  return { arabic: spoken, spoken, transliteration: tanwinTransliteration(transliteration, pausal, spoken) };
 }

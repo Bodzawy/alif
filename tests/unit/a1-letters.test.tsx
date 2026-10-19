@@ -18,6 +18,7 @@ import { getLessonProgress } from "@/lib/progress";
 import { buildAssessment } from "@/lib/pronunciation/assessment";
 import { CONDITION_RULES } from "@/lib/pronunciation/rules";
 import { isAllowedTarget, isAllowedTtsText } from "@/lib/pronunciation/targets";
+import { withTanwin } from "@/lib/arabic/tanwin";
 
 // A1 · Lektion 1, the letter entries (ب here; ت ث ج ح خ in a1-letter-set.test.tsx).
 // Five steps each, like Alif: Wörter (each row starts with its sound), Formen,
@@ -61,15 +62,15 @@ describe("Ba – lesson data", () => {
   it("Wörter: exactly the book words, in book order, spelled as in the brief; each with its picture", () => {
     const { groups } = step(ba, "step-1", "sound-words");
     expect(groups.map((g) => [g.sound.glyph, g.words.map((w) => [w.id, w.arabic, w.german])])).toEqual([
-      ["بَ", [["banat", "بَنَات", "Mädchen (Plural)"], ["bayt", "بَيْت", "Haus"], ["bab", "بَاب", "Tür"]]],
-      ["بِ", [["bint", "بِنْت", "Mädchen"], ["bir", "بِئْر", "Brunnen"], ["bitaqa", "بِطَاقَة", "Karte"]]],
-      ["بُ", [["bunduqiyya", "بُنْدُقِيَّة", "Gewehr"], ["burtuqal", "بُرْتُقَال", "Orangen"], ["burj", "بُرْج", "Turm"]]],
+      ["بَ", [["banat", "بَنَاتٌ", "Mädchen (Plural)"], ["bayt", "بَيْتٌ", "Haus"], ["bab", "بَابٌ", "Tür"]]],
+      ["بِ", [["bint", "بِنْتٌ", "Mädchen"], ["bir", "بِئْرٌ", "Brunnen"], ["bitaqa", "بِطَاقَةٌ", "Karte"]]],
+      ["بُ", [["bunduqiyya", "بُنْدُقِيَّةٌ", "Gewehr"], ["burtuqal", "بُرْتُقَالٌ", "Orangen"], ["burj", "بُرْجٌ", "Turm"]]],
     ]);
     for (const group of groups) {
       for (const word of group.words) {
         expect(word.arabic.slice(0, 2), word.id).toBe(group.sound.glyph);
         expect(existsSync(path.join(process.cwd(), "public", word.image!.src)), word.id).toBe(true);
-        expect(word.exercise).toEqual({ id: word.id, target: word.arabic.replace(/[ً-ْ]/g, ""), modelText: `${word.arabic}ٌ` }); // spoken with Tanwin
+        expect(word.exercise).toEqual({ id: word.id, target: word.arabic.replace(/[ً-ْ]/g, ""), modelText: word.arabic }); // shown and spoken with Tanwin
         expect(word.transliteration).toBeTruthy();
       }
     }

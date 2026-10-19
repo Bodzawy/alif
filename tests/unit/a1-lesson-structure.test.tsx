@@ -19,6 +19,7 @@ import { baseLetter, joins, splitTiles } from "@/lib/arabic/letter-form";
 import { copyMovedA1Progress } from "@/lib/progress";
 import { CONDITION_RULES } from "@/lib/pronunciation/rules";
 import { isAllowedTarget, isAllowedTtsText } from "@/lib/pronunciation/targets";
+import { withTanwin } from "@/lib/arabic/tanwin";
 
 // A1 · Lektion 1 as one lesson with ten entries; the review; the phrase;
 // pattern gaps; and the pictures of every vocabulary item.
@@ -134,7 +135,8 @@ describe("مراجعة – the review", () => {
     for (const { gaps } of [fill!, listen!]) {
       const letters = gaps.items.map((item) => {
         const word = known.get(item.id)!;
-        expect(word.arabic, item.id).toBe(item.arabic);
+        // the review shows the word pausal (as its pattern), the card with Tanwin
+        expect(word.arabic, item.id).toBe(withTanwin(item.arabic));
         expect(word.german).toBe(item.german);
         const [gap] = gapTask(item).gaps;
         expect(gap!.index).toBe(0);

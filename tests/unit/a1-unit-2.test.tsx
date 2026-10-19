@@ -32,6 +32,7 @@ import { spellLetters } from "@/lib/arabic/spell";
 import { getLessonProgress } from "@/lib/progress";
 import { CONDITION_RULES, SOUND_RULES } from "@/lib/pronunciation/rules";
 import { isAllowedTarget, isAllowedTtsText } from "@/lib/pronunciation/targets";
+import { withTanwin } from "@/lib/arabic/tanwin";
 
 const PUBLIC = path.join(process.cwd(), "public");
 const KEY = "a1/lesson-3/test/step-x";
@@ -119,7 +120,7 @@ describe.each(letters.map((l) => [l.slug, l] as const))("the letter %s", (slug, 
   it("(١) النطق: the sound with Fatha, Kasra, Damma and exactly the book's nine words – each with its own existing picture, German, transliteration, a rule", () => {
     const words = stepOf(lesson, "step-1", "sound-words");
     expect(words.groups.map((g) => g.sound.glyph)).toEqual([letter + "َ", letter + "ِ", letter + "ُ"]);
-    expect(words.groups.map((g) => g.words.map((w) => w.arabic))).toEqual(WORDS[slug]);
+    expect(words.groups.map((g) => g.words.map((w) => w.arabic))).toEqual(WORDS[slug]!.map((g) => g.map(withTanwin)));
     for (const w of words.groups.flatMap((g) => g.words)) {
       expect(existsSync(path.join(PUBLIC, w.image!.src)), w.image!.src).toBe(true);
       expect(w.german).not.toMatch(/\b(the|and|with)\b/);

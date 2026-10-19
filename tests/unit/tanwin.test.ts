@@ -39,6 +39,9 @@ describe("withTanwin", () => {
     ["وِئَام", "female name"],
     ["طَمَاطِم", "diptote pattern"],
     ["زُمَلَاء", "diptote (ـَاء of the feminine)"],
+    ["أَحْمَر", "diptote (أَفْعَل of a colour)"],
+    ["أَجْمَل", "diptote (أَفْعَل of the comparative)"],
+    ["أَثْنَاء", "adverb \"during\""],
     ["كِتَابٌ", "already with Tanwin"],
   ])("%s stays as it is (%s)", (word) => {
     expect(withTanwin(word)).toBe(word);
@@ -55,7 +58,7 @@ const letterWords = (): Array<{ entry: string; word: A1Word }> =>
       )
     );
 
-describe("A1 letter entries: Wörter are spoken with Tanwin", () => {
+describe("A1 letter entries: Wörter are spoken and shown with Tanwin", () => {
   const words = letterWords();
 
   it("covers every letter entry with words", () => {
@@ -63,11 +66,10 @@ describe("A1 letter entries: Wörter are spoken with Tanwin", () => {
     expect(words).toHaveLength(259);
   });
 
-  it("only the model audio changes: the shown word and the pronunciation target stay pausal", () => {
+  it("the card shows what is spoken; the pronunciation target is the word without harakat", () => {
     for (const { entry, word } of words) {
       const label = `${entry} ${word.id}`;
-      expect(TANWIN.test(word.exercise.modelText), label).toBe(TANWIN.test(withTanwin(word.arabic)));
-      expect(TANWIN.test(word.arabic), label).toBe(false);
+      expect(word.arabic, label).toBe(word.exercise.modelText);
       expect(word.exercise.target, label).toBe(unvocalised(word.arabic).replace(/[؟?]/g, ""));
       expect(hasRulesFor(word.exercise.target), label).toBe(true);
     }

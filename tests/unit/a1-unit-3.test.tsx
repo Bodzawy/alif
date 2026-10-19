@@ -20,6 +20,7 @@ import { isSunLetterWord } from "@/data/a1/unit-3/min-ayna";
 import type { A1Lesson, A1Step } from "@/data/types";
 import { transliterate } from "@/lib/arabic/transliterate";
 import { getLessonProgress } from "@/lib/progress";
+import { withTanwin } from "@/lib/arabic/tanwin";
 
 const KEY = "a1/lesson-5/test/step-x";
 const stepOf = <K extends A1Step["kind"]>(lesson: A1Lesson, slug: string, kind: K) => {
@@ -80,7 +81,7 @@ describe.each(Object.keys(WORDS))("the letter %s", (slug) => {
   it("(١) النطق: the sound with Fatha, Kasra, Damma and the book's nine words", () => {
     const step = stepOf(lesson, "step-1", "sound-words");
     expect(step.groups.map((g) => g.sound.glyph)).toEqual([letter + "َ", letter + "ِ", letter + "ُ"]);
-    expect(step.groups.map((g) => g.words.map((w) => w.arabic))).toEqual(WORDS[slug]);
+    expect(step.groups.map((g) => g.words.map((w) => w.arabic))).toEqual(WORDS[slug]!.map((g) => g.map(withTanwin)));
   });
 
   it("steps in book order: Wörter, Formen, Schreiben (١), Ergänzen (٢), Hören (٣), (٤), Diktat (٨), then (٩)", () => {
@@ -184,7 +185,7 @@ describe("مَنْ هُوَ؟ – conversation and exercises", () => {
 describe("Lektion 6 – Shadda, review, مِنْ أَيْنَ أَنْتَ؟, alphabet", () => {
   it("الشدة والتاء المربوطة: the nine words in book order; تدريب ٢ writes the printed letters as one word", () => {
     const lesson = entry("lesson-6", "shadda");
-    expect(stepOf(lesson, "step-1", "words").groups[0]!.words.map((w) => w.arabic)).toEqual(["سَبُّورَة", "نَظَّارَة", "سَيَّارَة", "سَيِّدَة", "غَسَّالَة", "ثَلَّاجَة", "هَدِيَّة", "شُبَّاك", "سُكَّر"]);
+    expect(stepOf(lesson, "step-1", "words").groups[0]!.words.map((w) => w.arabic)).toEqual(["سَبُّورَة", "نَظَّارَة", "سَيَّارَة", "سَيِّدَة", "غَسَّالَة", "ثَلَّاجَة", "هَدِيَّة", "شُبَّاك", "سُكَّر"].map(withTanwin));
     expect(stepOf(lesson, "step-4", "gaps").gaps.items.map((i) => [i.hint, i.arabic])).toEqual([
       ["س ب ب و ر ة", "سَبُّورَة"], ["غ س س ا ل ة", "غَسَّالَة"], ["س ك ك ر", "سُكَّرْ"], ["ت ف ف ا ح ة", "تُفَّاحَة"], ["ث ل ل ا ج ة", "ثَلَّاجَة"],
     ]);

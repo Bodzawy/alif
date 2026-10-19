@@ -78,6 +78,8 @@ function word(w: string, lower: boolean): string {
       continue;
     }
     if (base === "ى") {
+      // after Tanwin -an (مُسْتَشْفًى) the ى is only the seat of the Tanwin
+      if (prev?.marks.includes("\u064B")) continue;
       out = out.endsWith("a") ? out.slice(0, -1) + "ā" : out + "ā";
       continue;
     }

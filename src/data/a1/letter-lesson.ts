@@ -1,5 +1,7 @@
 import type { A1Lesson, A1LessonLetter, A1Word, FormsWord, GapItem, GapsContent, SoundItem, WritingLetterSet } from "@/data/types";
+import { splitTiles } from "@/lib/arabic/hamza-alif";
 import { formGlyph, LETTER_FORMS, pickNeighbors } from "@/lib/arabic/letter-form";
+import { tanwinWord, withTanwin } from "@/lib/arabic/tanwin";
 
 // A1 · Lektion 1 is one book unit (صَبَاحُ الْخَيْر) with one entry per letter:
 // Alif is src/data/a1/lesson-1.ts, every further letter (ب ت ث ج ح خ) is a
@@ -63,32 +65,19 @@ const SUKUN = "\u0652";
 /** The pronunciation target: the word without harakat (as for every word in vocabulary_conditions.json). */
 export const unvocalised = (arabic: string) => arabic.replace(HARAKAT, "");
 
-/** Add tanwin to a displayed short-vowel ending for the A1 letter-word model audio. */
-export function withTanwin(arabic: string): string {
-  // أَنَا is a pronoun; Arabic pronouns do not take tanwin.
-  if (arabic === "أَنَا") return arabic;
-  const chars = Array.from(arabic);
-  for (let i = chars.length - 1; i >= 0; i--) {
-    const ch = chars[i]!;
-    if (ch === "ة") {
-      chars.splice(i + 1, 0, "ٌ");
-      return chars.join("");
-    }
-    if (/[\u064B-\u0652]/.test(ch)) {
-      // A word's isolated dictionary form is spoken with nominative tanwin.
-      // Replace its final short vowel or sukun; keep shadda before tanwin.
-      if (ch === "ّ") continue;
-      if (ch === "ْ") chars[i] = "ٌ";
-      else if (ch === "ً" || ch === "ٍ" || ch === "ٌ") return arabic;
-      else chars[i] = "ٌ";
-      return chars.join("");
-    }
-    if (/[\u0621-\u064A]/.test(ch)) {
-      chars.splice(i + 1, 0, "ٌ");
-      return chars.join("");
-    }
-  }
-  return arabic;
+/**
+ * A gap item of "Ergänzen" / "Hören", shown as it is spoken (with Tanwin): the
+ * book pattern's last tile follows the word. When the book's gap IS the last
+ * tile (بَابْ "_ا_", أَبْ "أَ_", ثُلُثْ "_لُ_"), the word stays pausal – the
+ * answer is the letter with Sukun – and only the voice says the Tanwin.
+ */
+export function shownGap(pausal: string, pattern: string): { arabic: string; pattern: string; spoken: string } {
+  const spoken = withTanwin(pausal);
+  const parts = splitTiles(pattern);
+  const tiles = splitTiles(pausal);
+  const shown = splitTiles(spoken);
+  if (spoken === pausal || parts.at(-1) === "_" || shown.length !== tiles.length) return { arabic: pausal, pattern, spoken };
+  return { arabic: spoken, pattern: parts.at(-1) === tiles.at(-1) ? [...parts.slice(0, -1), shown.at(-1)!].join("") : pattern, spoken };
 }
 
 export const letterImageBase = (id: string) => `/images/a1/${id}`;
@@ -192,14 +181,18 @@ export function letterLesson(spec: LetterLessonSpec): A1Lesson {
     const id = `${letter.id}-${vowel}`;
     return { id, glyph, transliteration: letter.latin + VOWELS[vowel].latin, vowelName: VOWELS[vowel].name, exercise: { id, target: glyph, modelText: glyph } };
   };
-  const word = ([id, arabic, german, transliteration, pic]: LetterWordSpec): A1Word => ({
-    id,
-    arabic,
-    german,
-    transliteration,
-    ...(pic ? { image: picture(letter.id, id, pic) } : {}),
-    exercise: { id, target: unvocalised(arabic), modelText: withTanwin(arabic) },
-  });
+  // Shown and spoken with Tanwin; the target is the pausal word without harakat.
+  const word = ([id, pausal, german, written, pic]: LetterWordSpec): A1Word => {
+    const { arabic, spoken, transliteration } = tanwinWord(pausal, written);
+    return {
+      id,
+      arabic,
+      german,
+      transliteration,
+      ...(pic ? { image: picture(letter.id, id, pic) } : {}),
+      exercise: { id, target: unvocalised(pausal), modelText: spoken },
+    };
+  };
   const allWords = [...spec.words.fatha, ...spec.words.kasra, ...spec.words.damma];
   const wordPicture = (id: string) => {
     const found = allWords.find((w) => w[0] === id);
@@ -231,7 +224,7 @@ export function letterLesson(spec: LetterLessonSpec): A1Lesson {
       const meaning = german ?? allWords.find((w) => w[0] === id)?.[2] ?? formsWords.find((w) => w[0] === id)?.[2];
       if (!meaning) throw new Error(`${letter.id}: gap item "${arabic}" needs a German meaning`);
       const image = withPicture ? (pic ? picture(letter.id, id, pic) : (wordPicture(id) ?? (spec.formsPictures?.[id] ? picture(letter.id, id, spec.formsPictures[id]) : undefined))) : undefined;
-      return { id, arabic, spoken: withTanwin(arabic), german: meaning, audio: `${letter.id}/uebungen/${id}`, pattern, ...(image ? { image } : {}) };
+      return { id, ...shownGap(arabic, pattern), german: meaning, audio: `${letter.id}/uebungen/${id}`, ...(image ? { image } : {}) };
     };
   const gapChoices = [...sounds.map((s) => s.glyph), letter.glyph + SUKUN];
 

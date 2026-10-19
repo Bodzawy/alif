@@ -36,6 +36,7 @@ import { GuidedSoundWords, guidedBlocks } from "@/components/a1/guided/guided-so
 import { guidedReducer, initialGuidedState } from "@/components/a1/guided/guided-flow";
 import { getA1Lesson } from "@/data/a1";
 import { getLessonProgress } from "@/lib/progress";
+import { withTanwin } from "@/lib/arabic/tanwin";
 
 const step2 = getA1Lesson("lesson-1", "alif")!.steps[0]!;
 if (step2.kind !== "sound-words") throw new Error("step-1 must be sound-words");
@@ -112,7 +113,7 @@ describe("Schritt 2 guided mode", () => {
     expect(guidedBlocks(groups).map((b) => b.id)).toEqual(ORDER);
     expect(groups.flatMap((g) => [g.sound.glyph, ...g.words.map((w) => w.arabic)])).toEqual([
       "أَ", "أَب", "أَنَا", "أَمِير", "إِ", "إِبْرَة", "إِصْبَع", "إِبْرِيق", "أُ", "أُذُن", "أُمّ", "أُسْرَة",
-    ]);
+    ].map((t) => (t.length > 2 ? withTanwin(t) : t)));
   });
 
   it("before the start only the first block is sharp; buttons are hidden", async () => {

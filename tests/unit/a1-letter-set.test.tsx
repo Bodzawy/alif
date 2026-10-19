@@ -15,6 +15,7 @@ import { buildAssessment } from "@/lib/pronunciation/assessment";
 import { CONDITION_RULES } from "@/lib/pronunciation/rules";
 import { isAllowedTarget, isAllowedTtsText } from "@/lib/pronunciation/targets";
 import { WRITING_BOX } from "@/lib/writing/trace";
+import { withTanwin } from "@/lib/arabic/tanwin";
 
 // A1 · Lektion 1 · ت ث ج ح خ (phase 2: data only). Every letter is checked
 // against the brief: words and spellings, book order, Formen positions,
@@ -141,7 +142,7 @@ describe.each(Object.entries(LETTERS))("%s – lesson data", (slug, x) => {
 
   it("Wörter: exactly the book words, in book order, spelled as in the brief; every word with a picture file", () => {
     const { groups } = step(lesson, "sound-words");
-    expect(groups.map((g) => g.words.map((w) => [w.id, w.arabic, w.german]))).toEqual(x.words);
+    expect(groups.map((g) => g.words.map((w) => [w.id, w.arabic, w.german]))).toEqual(x.words.map((g) => g.map(([id, arabic, german]) => [id, withTanwin(arabic), german])));
     for (const [i, group] of groups.entries()) {
       expect(group.sound.glyph).toBe(x.glyph + VOWELS[i]);
       for (const word of group.words) {

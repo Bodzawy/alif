@@ -56,6 +56,8 @@ const SUN = "تثدذرزسشصضطظلن";
 /** The word with the article: الْقَمِيص, but الطَّابِعَة (a sun letter takes the Shadda). */
 export const withArticle = (word: string) => (SUN.includes(word[0]!) ? `ال${word[0]}ّ${word.slice(1)}` : `الْ${word}`);
 const unitFor = (n: number) => (n === 1 ? "جُنَيْه" : n === 2 ? "جُنَيْهَان" : n <= 10 ? "جُنَيْهَات" : n <= 99 ? "جُنَيْهًا" : "جُنَيْه");
+/** The currency word shown after the digits: as spoken when it has Tanwin (٨٠ جُنَيْهًا), otherwise جُنَيْه. */
+const shownUnit = (n: number) => (/[\u064B-\u064D]/.test(priceSay(n).split(" ").at(-1)!) ? priceSay(n).split(" ").at(-1)! : "جُنَيْه");
 const priceSay = (n: number) => (n === 2 ? "جُنَيْهَان" : `${bigNumberWord(n)} ${unitFor(n % 100 === 0 ? 100 : n % 100 || 100)}`);
 const PRICE_WORDS: A1Word[] = PRICES.map(([id, arabic, german, price, src]) => ({
   id: `price-${id}`,
@@ -160,7 +162,7 @@ export const a1MaAsSir: A1Lesson = {
       title: "Was kostet …?",
       navLabel: "Preise sagen",
       instruction: { arabic: "ج) اِقْرَأْ بَاقِيَ الْأَسْعَارِ مَعَ الْمُدَرِّسِ وَكَرِّرِ الْحِوَارَ.", german: "Sag die Preise der Liste: سِعْرُ … = …" },
-      groups: [{ id: "say", title: "سِعْرُ …", items: PRICES.map(([id, arabic, german, price]) => phrase(`say-${id}`, `سِعْرُ ${withArticle(arabic)} = ${toArabicDigits(price)} جُنَيْه`, `${german}: ${price} Pfund`, `سِعْرُ ${withArticle(arabic)} ${priceSay(price)}`)) }],
+      groups: [{ id: "say", title: "سِعْرُ …", items: PRICES.map(([id, arabic, german, price]) => phrase(`say-${id}`, `سِعْرُ ${withArticle(arabic)} = ${toArabicDigits(price)} ${shownUnit(price)}`, `${german}: ${price} Pfund`, `سِعْرُ ${withArticle(arabic)} ${priceSay(price)}`)) }],
     },
     {
       kind: "table",
@@ -263,7 +265,7 @@ export const a1MaAsSir: A1Lesson = {
       navLabel: "Übung 5",
       instruction: { arabic: "تَدْرِيبٌ (٥): طَالِب (أ): اُطْلُبْ هَذِهِ الْمُشْتَرَيَاتِ – طَالِب (ب): اُحْسُبِ الثَّمَنَ.", german: "Übung 5: Bestellen und ausrechnen – mit den Preisen aus Übung 3 (Anzug 680, Hemd 120, Socken 15,60, Tasche 120).", note: "Der Besteller sagt: أُرِيدُ خَمْسَ بِدَلٍ وَأَرْبَعَةَ قُمْصَانٍ وَسِتَّةَ جَوَارِبَ." },
       items: [
-        { id: "a", arabic: "أُرِيدُ ٥ بِدَل، ٤ قُمْصَان، ٦ جَوَارِب.", spoken: "أُرِيدُ خَمْسَ بِدَلٍ وَأَرْبَعَةَ قُمْصَانٍ وَسِتَّةَ جَوَارِبَ.", german: "5 Anzüge, 4 Hemden, 6 Paar Socken", questions: [{ prompt: "Der Preis:", options: ["٣٩٧٣,٦٠", "٣٨٨٠,٠٠", "١٣٧١,٦٠"], answer: 0 }] },
+        { id: "a", arabic: "أُرِيدُ ٥ بِدَلٍ، ٤ قُمْصَانٍ، ٦ جَوَارِب.", spoken: "أُرِيدُ خَمْسَ بِدَلٍ وَأَرْبَعَةَ قُمْصَانٍ وَسِتَّةَ جَوَارِبَ.", german: "5 Anzüge, 4 Hemden, 6 Paar Socken", questions: [{ prompt: "Der Preis:", options: ["٣٩٧٣,٦٠", "٣٨٨٠,٠٠", "١٣٧١,٦٠"], answer: 0 }] },
         { id: "b", arabic: "أُرِيدُ ٦ حَقَائِب، ١١ جَوْرَبًا، ٤ قُمْصَان.", spoken: "أُرِيدُ سِتَّ حَقَائِبَ وَأَحَدَ عَشَرَ جَوْرَبًا وَأَرْبَعَةَ قُمْصَانٍ.", german: "6 Taschen, 11 Paar Socken, 4 Hemden", questions: [{ prompt: "Der Preis:", options: ["٣٩٧٣,٦٠", "١٣٧١,٦٠", "١٢٠٠,٠٠"], answer: 1 }] },
       ],
     },

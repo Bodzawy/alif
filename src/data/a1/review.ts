@@ -1,5 +1,6 @@
 import type { A1Lesson, GapItem } from "@/data/types";
 import { alignPattern } from "@/lib/arabic/gap";
+import { splitTiles } from "@/lib/arabic/hamza-alif";
 import { baseLetter } from "@/lib/arabic/letter-form";
 
 import { SHARED_GAPS_FOLDER, sharedGapsContent } from "./letter-lesson";
@@ -34,19 +35,31 @@ const FAMILY: Record<string, string[]> = {
 
 const LESSONS = [a1Alif, a1Ba, a1Ta, a1Tha, a1Jim, a1Hha, a1Kha];
 
+/**
+ * The word as the review has always shown and spoken it: pausal. The card shows it with Tanwin
+ * (بَيْتٌ); the book pattern's last tile is the pausal one (e.g. "م" of "_وْم"), so it replaces the
+ * card's last tile.
+ */
+function pausalOf(shown: string, pattern: string): string {
+  const tiles = splitTiles(shown);
+  const last = splitTiles(pattern).at(-1)!;
+  return last !== "_" && tiles.length === splitTiles(pattern).length ? [...tiles.slice(0, -1), last].join("") : shown;
+}
+
 function reviewItem(id: string, pattern: string, withPicture: boolean): GapItem {
   for (const lesson of LESSONS) {
     for (const step of lesson.steps) {
       if (step.kind !== "sound-words") continue;
       const word = step.groups.flatMap((group) => group.words).find((w) => w.id === id);
       if (!word) continue;
-      const [gap] = alignPattern(word.arabic, pattern);
+      const arabic = pausalOf(word.arabic, pattern);
+      const [gap] = alignPattern(arabic, pattern);
       if (!gap || gap.index !== 0 || gap.vowel === "sukun" || gap.vowel === "none") throw new Error(`review: "${pattern}" must leave out the first letter with its vowel`);
       const letter = baseLetter(gap.answer) === "إ" ? "أ" : baseLetter(gap.answer);
       const vowel = gap.vowel;
       return {
         id,
-        arabic: word.arabic,
+        arabic,
         german: word.german,
         pattern,
         choices: FAMILY[letter]!.map((l) => tile(l, vowel)),
