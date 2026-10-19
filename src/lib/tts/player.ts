@@ -1,8 +1,34 @@
-// Plays Arabic model pronunciations from Alif's /api/tts. Generated audio is
-// kept per text for the lifetime of the page, so repeated "Anhören" clicks do
-// not hit Azure again. Only one sound plays at a time.
+// Plays Arabic model pronunciations. Texts with a professional recording
+// (recorded-manifest.json, files under /audio/ar/, see DEPLOY-AUDIO.md) play that
+// recording; every other text – and any recording that cannot be loaded – is
+// spoken by Alif's /api/tts (Azure). Audio is kept per text for the lifetime of
+// the page, so repeated "Anhören" clicks load nothing again. Only one sound
+// plays at a time.
 
-const TTS_CACHE_REVISION = "waw-diagnostic-v4";
+const TTS_CACHE_REVISION = "recorded-v1";
+
+type RecordedManifest = { clips: Record<string, string> };
+let manifestPromise: Promise<RecordedManifest> | null = null;
+
+function recordedManifest(): Promise<RecordedManifest> {
+  manifestPromise ??= import("./recorded-manifest.json")
+    .then((m) => m.default as RecordedManifest)
+    .catch(() => ({ clips: {} }));
+  return manifestPromise;
+}
+
+/** Object URL of the recording of `text`, or null when there is none (or it cannot be loaded). */
+async function fetchRecordedUrl(text: string): Promise<string | null> {
+  const file = (await recordedManifest()).clips[text];
+  if (!file) return null;
+  try {
+    const response = await fetch(`/audio/ar/${file}.mp3`);
+    if (!response.ok) return null;
+    return URL.createObjectURL(await response.blob());
+  } catch {
+    return null;
+  }
+}
 
 const cache = new Map<string, Promise<string>>();
 
@@ -18,6 +44,11 @@ export class TtsError extends Error {
 }
 
 async function fetchAudioUrl(text: string, voice?: SpeechVoice): Promise<string> {
+  // Dialogue voices have no recordings yet; lesson texts do (when installed).
+  if (!voice) {
+    const recorded = await fetchRecordedUrl(text);
+    if (recorded) return recorded;
+  }
   const response = await fetch("/api/tts", {
     method: "POST",
     headers: { "Content-Type": "application/json" },

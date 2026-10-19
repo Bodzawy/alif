@@ -24,3 +24,9 @@ playwright-report/
 
 # videos: mp4 files are served from outside the repo in production (see DEPLOY-VIDEOS.md); posters stay in git
 public/videos/**/*.mp4
+
+# recorded Arabic clips: served from outside the repo in production (see DEPLOY-AUDIO.md)
+public/audio/ar/
+# working audio of docs/audio-replacement (ElevenLabs input, cut clips, tests): local only, the approved clips go to public/audio/ar/
+docs/audio-replacement/**/*.mp3
+docs/audio-replacement/**/*.wav

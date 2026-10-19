@@ -1,0 +1,75 @@
+{
+ "batch": "pause-test",
+ "items": [
+  {
+   "id": "w0026",
+   "kind": "letter-name",
+   "text": "هَاء"
+  },
+  {
+   "id": "w0027",
+   "kind": "letter-name",
+   "text": "وَاو"
+  },
+  {
+   "id": "w0028",
+   "kind": "letter-name",
+   "text": "يَاء"
+  },
+  {
+   "id": "w0029",
+   "kind": "word",
+   "text": "أَسَد"
+  },
+  {
+   "id": "w0030",
+   "kind": "word",
+   "text": "أَرْنَب"
+  },
+  {
+   "id": "w0031",
+   "kind": "word",
+   "text": "أَنَانَاس"
+  },
+  {
+   "id": "w0032",
+   "kind": "word",
+   "text": "بَيْت"
+  },
+  {
+   "id": "w0033",
+   "kind": "word",
+   "text": "بَاب"
+  },
+  {
+   "id": "w0034",
+   "kind": "word",
+   "text": "بَطَّة"
+  },
+  {
+   "id": "w0035",
+   "kind": "word",
+   "text": "تُفَّاحَة"
+  },
+  {
+   "id": "w0036",
+   "kind": "word",
+   "text": "تِمْسَاح"
+  },
+  {
+   "id": "w0037",
+   "kind": "word",
+   "text": "تَاج"
+  },
+  {
+   "id": "w0038",
+   "kind": "word",
+   "text": "ثَعْلَب"
+  },
+  {
+   "id": "w0039",
+   "kind": "word",
+   "text": "ثُوم"
+  }
+ ]
+}

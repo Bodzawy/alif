@@ -1,0 +1,1016 @@
+{
+ "batch": "batch-01",
+ "texts": 100,
+ "audio_seconds": 79.31,
+ "detect": [
+  -65,
+  0.06
+ ],
+ "min_border_gap": 0.07,
+ "speed_scale": 1.01,
+ "warnings": [
+  "25 clips to check by ear: w0046(TIGHT-GAP), w0049(TIGHT-GAP), w0062(TIGHT-GAP), w0064(TIGHT-GAP), w0065(TIGHT-GAP), w0067(TIGHT-GAP), w0068(TIGHT-GAP), w0069(TIGHT-GAP), w0070(TIGHT-GAP), w0072(TIGHT-GAP), w0073(TIGHT-GAP), w0074(TIGHT-GAP), w0075(TIGHT-GAP), w0079(TIGHT-GAP), w0080(TIGHT-GAP), w0082(TIGHT-GAP), w0084(TIGHT-GAP), w0085(TIGHT-GAP), w0086(TIGHT-GAP), w0087(TIGHT-GAP)"
+ ],
+ "clips": [
+  {
+   "id": "w0001",
+   "text": "أَلِف",
+   "start": 0.0,
+   "end": 0.74,
+   "speech": 0.62,
+   "expected": 0.6,
+   "gain_db": 3.8,
+   "flag": ""
+  },
+  {
+   "id": "w0002",
+   "text": "بَاء",
+   "start": 0.89,
+   "end": 1.72,
+   "speech": 0.65,
+   "expected": 0.6,
+   "gain_db": 2.5,
+   "flag": ""
+  },
+  {
+   "id": "w0003",
+   "text": "تَاء",
+   "start": 1.84,
+   "end": 2.55,
+   "speech": 0.53,
+   "expected": 0.6,
+   "gain_db": 6.6,
+   "flag": ""
+  },
+  {
+   "id": "w0004",
+   "text": "ثَاء",
+   "start": 2.64,
+   "end": 3.46,
+   "speech": 0.63,
+   "expected": 0.6,
+   "gain_db": 6.5,
+   "flag": ""
+  },
+  {
+   "id": "w0005",
+   "text": "جِيم",
+   "start": 3.62,
+   "end": 4.45,
+   "speech": 0.65,
+   "expected": 0.6,
+   "gain_db": 4.5,
+   "flag": ""
+  },
+  {
+   "id": "w0006",
+   "text": "حَاء",
+   "start": 4.56,
+   "end": 5.38,
+   "speech": 0.64,
+   "expected": 0.6,
+   "gain_db": 5.0,
+   "flag": ""
+  },
+  {
+   "id": "w0007",
+   "text": "خَاء",
+   "start": 5.44,
+   "end": 6.27,
+   "speech": 0.65,
+   "expected": 0.6,
+   "gain_db": 6.1,
+   "flag": ""
+  },
+  {
+   "id": "w0008",
+   "text": "دَال",
+   "start": 6.34,
+   "end": 7.2,
+   "speech": 0.7,
+   "expected": 0.6,
+   "gain_db": 3.1,
+   "flag": ""
+  },
+  {
+   "id": "w0009",
+   "text": "ذَال",
+   "start": 7.25,
+   "end": 8.11,
+   "speech": 0.69,
+   "expected": 0.6,
+   "gain_db": 4.9,
+   "flag": ""
+  },
+  {
+   "id": "w0010",
+   "text": "رَاء",
+   "start": 8.15,
+   "end": 8.9,
+   "speech": 0.59,
+   "expected": 0.6,
+   "gain_db": 2.9,
+   "flag": ""
+  },
+  {
+   "id": "w0011",
+   "text": "زَاي",
+   "start": 8.95,
+   "end": 9.74,
+   "speech": 0.65,
+   "expected": 0.6,
+   "gain_db": 4.5,
+   "flag": ""
+  },
+  {
+   "id": "w0012",
+   "text": "سِين",
+   "start": 9.78,
+   "end": 10.64,
+   "speech": 0.7,
+   "expected": 0.6,
+   "gain_db": 6.8,
+   "flag": ""
+  },
+  {
+   "id": "w0013",
+   "text": "شِين",
+   "start": 10.69,
+   "end": 11.56,
+   "speech": 0.73,
+   "expected": 0.6,
+   "gain_db": 6.3,
+   "flag": ""
+  },
+  {
+   "id": "w0014",
+   "text": "صَاد",
+   "start": 11.58,
+   "end": 12.45,
+   "speech": 0.71,
+   "expected": 0.6,
+   "gain_db": 7.6,
+   "flag": ""
+  },
+  {
+   "id": "w0015",
+   "text": "ضَاد",
+   "start": 12.49,
+   "end": 13.35,
+   "speech": 0.68,
+   "expected": 0.6,
+   "gain_db": 4.3,
+   "flag": ""
+  },
+  {
+   "id": "w0016",
+   "text": "طَاء",
+   "start": 13.41,
+   "end": 14.07,
+   "speech": 0.51,
+   "expected": 0.6,
+   "gain_db": 4.9,
+   "flag": ""
+  },
+  {
+   "id": "w0017",
+   "text": "ظَاء",
+   "start": 14.11,
+   "end": 14.9,
+   "speech": 0.63,
+   "expected": 0.6,
+   "gain_db": 3.7,
+   "flag": ""
+  },
+  {
+   "id": "w0018",
+   "text": "عَيْن",
+   "start": 14.94,
+   "end": 15.73,
+   "speech": 0.64,
+   "expected": 0.6,
+   "gain_db": 4.1,
+   "flag": ""
+  },
+  {
+   "id": "w0019",
+   "text": "غَيْن",
+   "start": 15.75,
+   "end": 16.59,
+   "speech": 0.7,
+   "expected": 0.6,
+   "gain_db": 3.6,
+   "flag": ""
+  },
+  {
+   "id": "w0020",
+   "text": "فَاء",
+   "start": 16.61,
+   "end": 17.4,
+   "speech": 0.63,
+   "expected": 0.6,
+   "gain_db": 7.0,
+   "flag": ""
+  },
+  {
+   "id": "w0021",
+   "text": "قَاف",
+   "start": 17.44,
+   "end": 18.21,
+   "speech": 0.62,
+   "expected": 0.6,
+   "gain_db": 5.6,
+   "flag": ""
+  },
+  {
+   "id": "w0022",
+   "text": "كَاف",
+   "start": 18.24,
+   "end": 19.01,
+   "speech": 0.63,
+   "expected": 0.6,
+   "gain_db": 5.7,
+   "flag": ""
+  },
+  {
+   "id": "w0023",
+   "text": "لَام",
+   "start": 19.03,
+   "end": 19.81,
+   "speech": 0.64,
+   "expected": 0.6,
+   "gain_db": 2.6,
+   "flag": ""
+  },
+  {
+   "id": "w0024",
+   "text": "مِيم",
+   "start": 19.84,
+   "end": 20.62,
+   "speech": 0.63,
+   "expected": 0.6,
+   "gain_db": 2.4,
+   "flag": ""
+  },
+  {
+   "id": "w0025",
+   "text": "نُون",
+   "start": 20.64,
+   "end": 21.4,
+   "speech": 0.63,
+   "expected": 0.6,
+   "gain_db": 3.5,
+   "flag": ""
+  },
+  {
+   "id": "w0026",
+   "text": "هَاء",
+   "start": 21.41,
+   "end": 22.14,
+   "speech": 0.59,
+   "expected": 0.6,
+   "gain_db": 4.9,
+   "flag": ""
+  },
+  {
+   "id": "w0027",
+   "text": "وَاو",
+   "start": 22.16,
+   "end": 22.92,
+   "speech": 0.61,
+   "expected": 0.6,
+   "gain_db": 3.0,
+   "flag": ""
+  },
+  {
+   "id": "w0028",
+   "text": "يَاء",
+   "start": 22.95,
+   "end": 23.74,
+   "speech": 0.61,
+   "expected": 0.6,
+   "gain_db": 3.6,
+   "flag": ""
+  },
+  {
+   "id": "w0029",
+   "text": "أَسَد",
+   "start": 23.79,
+   "end": 24.53,
+   "speech": 0.57,
+   "expected": 0.6,
+   "gain_db": 3.6,
+   "flag": ""
+  },
+  {
+   "id": "w0030",
+   "text": "أَرْنَب",
+   "start": 24.58,
+   "end": 25.33,
+   "speech": 0.6,
+   "expected": 0.7,
+   "gain_db": 3.1,
+   "flag": ""
+  },
+  {
+   "id": "w0031",
+   "text": "أَنَانَاس",
+   "start": 25.36,
+   "end": 26.4,
+   "speech": 0.92,
+   "expected": 0.92,
+   "gain_db": 1.8,
+   "flag": ""
+  },
+  {
+   "id": "w0032",
+   "text": "بَيْت",
+   "start": 26.4,
+   "end": 27.22,
+   "speech": 0.68,
+   "expected": 0.6,
+   "gain_db": 4.7,
+   "flag": ""
+  },
+  {
+   "id": "w0033",
+   "text": "بَاب",
+   "start": 27.24,
+   "end": 27.96,
+   "speech": 0.58,
+   "expected": 0.6,
+   "gain_db": 4.0,
+   "flag": ""
+  },
+  {
+   "id": "w0034",
+   "text": "بَطَّة",
+   "start": 27.99,
+   "end": 28.73,
+   "speech": 0.6,
+   "expected": 0.6,
+   "gain_db": 5.0,
+   "flag": ""
+  },
+  {
+   "id": "w0035",
+   "text": "تُفَّاحَة",
+   "start": 28.75,
+   "end": 29.61,
+   "speech": 0.75,
+   "expected": 0.81,
+   "gain_db": 4.9,
+   "flag": ""
+  },
+  {
+   "id": "w0036",
+   "text": "تِمْسَاح",
+   "start": 29.61,
+   "end": 30.62,
+   "speech": 0.87,
+   "expected": 0.81,
+   "gain_db": 5.4,
+   "flag": ""
+  },
+  {
+   "id": "w0037",
+   "text": "تَاج",
+   "start": 30.64,
+   "end": 31.36,
+   "speech": 0.6,
+   "expected": 0.6,
+   "gain_db": 6.3,
+   "flag": ""
+  },
+  {
+   "id": "w0038",
+   "text": "ثَعْلَب",
+   "start": 31.36,
+   "end": 32.16,
+   "speech": 0.68,
+   "expected": 0.7,
+   "gain_db": 5.2,
+   "flag": ""
+  },
+  {
+   "id": "w0039",
+   "text": "ثُوم",
+   "start": 32.16,
+   "end": 32.9,
+   "speech": 0.62,
+   "expected": 0.6,
+   "gain_db": 6.5,
+   "flag": ""
+  },
+  {
+   "id": "w0040",
+   "text": "ثَلْج",
+   "start": 32.9,
+   "end": 33.65,
+   "speech": 0.63,
+   "expected": 0.6,
+   "gain_db": 6.9,
+   "flag": ""
+  },
+  {
+   "id": "w0041",
+   "text": "جَمَل",
+   "start": 33.65,
+   "end": 34.4,
+   "speech": 0.63,
+   "expected": 0.6,
+   "gain_db": 4.1,
+   "flag": ""
+  },
+  {
+   "id": "w0042",
+   "text": "جَزَرَة",
+   "start": 34.41,
+   "end": 35.18,
+   "speech": 0.65,
+   "expected": 0.7,
+   "gain_db": 5.3,
+   "flag": ""
+  },
+  {
+   "id": "w0043",
+   "text": "جَبَل",
+   "start": 35.19,
+   "end": 35.93,
+   "speech": 0.62,
+   "expected": 0.6,
+   "gain_db": 4.4,
+   "flag": ""
+  },
+  {
+   "id": "w0044",
+   "text": "حِصَان",
+   "start": 35.93,
+   "end": 36.79,
+   "speech": 0.75,
+   "expected": 0.7,
+   "gain_db": 5.5,
+   "flag": ""
+  },
+  {
+   "id": "w0045",
+   "text": "حُوت",
+   "start": 36.79,
+   "end": 37.55,
+   "speech": 0.68,
+   "expected": 0.6,
+   "gain_db": 7.9,
+   "flag": ""
+  },
+  {
+   "id": "w0046",
+   "text": "حَلِيب",
+   "start": 37.55,
+   "end": 38.37,
+   "speech": 0.72,
+   "expected": 0.7,
+   "gain_db": 4.8,
+   "flag": "TIGHT-GAP"
+  },
+  {
+   "id": "w0047",
+   "text": "خُبْز",
+   "start": 38.37,
+   "end": 39.11,
+   "speech": 0.62,
+   "expected": 0.6,
+   "gain_db": 7.6,
+   "flag": ""
+  },
+  {
+   "id": "w0048",
+   "text": "خَرُوف",
+   "start": 39.11,
+   "end": 39.98,
+   "speech": 0.78,
+   "expected": 0.7,
+   "gain_db": 4.2,
+   "flag": ""
+  },
+  {
+   "id": "w0049",
+   "text": "خِيَار",
+   "start": 39.98,
+   "end": 40.8,
+   "speech": 0.72,
+   "expected": 0.7,
+   "gain_db": 4.1,
+   "flag": "TIGHT-GAP"
+  },
+  {
+   "id": "w0050",
+   "text": "دُبّ",
+   "start": 40.8,
+   "end": 41.45,
+   "speech": 0.53,
+   "expected": 0.49,
+   "gain_db": 5.9,
+   "flag": ""
+  },
+  {
+   "id": "w0051",
+   "text": "دَجَاجَة",
+   "start": 41.46,
+   "end": 42.3,
+   "speech": 0.74,
+   "expected": 0.81,
+   "gain_db": 3.7,
+   "flag": ""
+  },
+  {
+   "id": "w0052",
+   "text": "دَرَّاجَة",
+   "start": 42.3,
+   "end": 43.2,
+   "speech": 0.79,
+   "expected": 0.81,
+   "gain_db": 3.2,
+   "flag": ""
+  },
+  {
+   "id": "w0053",
+   "text": "ذِئْب",
+   "start": 43.2,
+   "end": 43.89,
+   "speech": 0.57,
+   "expected": 0.6,
+   "gain_db": 6.7,
+   "flag": ""
+  },
+  {
+   "id": "w0054",
+   "text": "ذُرَة",
+   "start": 43.89,
+   "end": 44.61,
+   "speech": 0.59,
+   "expected": 0.6,
+   "gain_db": 6.6,
+   "flag": ""
+  },
+  {
+   "id": "w0055",
+   "text": "ذُبَابَة",
+   "start": 44.61,
+   "end": 45.46,
+   "speech": 0.73,
+   "expected": 0.81,
+   "gain_db": 3.2,
+   "flag": ""
+  },
+  {
+   "id": "w0056",
+   "text": "رُمَّانَة",
+   "start": 45.46,
+   "end": 46.32,
+   "speech": 0.73,
+   "expected": 0.81,
+   "gain_db": 1.9,
+   "flag": ""
+  },
+  {
+   "id": "w0057",
+   "text": "رِيشَة",
+   "start": 46.32,
+   "end": 47.02,
+   "speech": 0.59,
+   "expected": 0.7,
+   "gain_db": 4.6,
+   "flag": ""
+  },
+  {
+   "id": "w0058",
+   "text": "رَجُل",
+   "start": 47.02,
+   "end": 47.74,
+   "speech": 0.6,
+   "expected": 0.6,
+   "gain_db": 4.4,
+   "flag": ""
+  },
+  {
+   "id": "w0059",
+   "text": "زَرَافَة",
+   "start": 47.75,
+   "end": 48.59,
+   "speech": 0.73,
+   "expected": 0.81,
+   "gain_db": 4.2,
+   "flag": ""
+  },
+  {
+   "id": "w0060",
+   "text": "زَيْتُونَة",
+   "start": 48.59,
+   "end": 49.45,
+   "speech": 0.77,
+   "expected": 0.92,
+   "gain_db": 5.5,
+   "flag": ""
+  },
+  {
+   "id": "w0061",
+   "text": "زَهْرَة",
+   "start": 49.45,
+   "end": 50.15,
+   "speech": 0.6,
+   "expected": 0.7,
+   "gain_db": 7.6,
+   "flag": ""
+  },
+  {
+   "id": "w0062",
+   "text": "سَمَكَة",
+   "start": 50.15,
+   "end": 50.89,
+   "speech": 0.66,
+   "expected": 0.7,
+   "gain_db": 7.3,
+   "flag": "TIGHT-GAP"
+  },
+  {
+   "id": "w0063",
+   "text": "سَيَّارَة",
+   "start": 50.89,
+   "end": 51.78,
+   "speech": 0.79,
+   "expected": 0.81,
+   "gain_db": 4.1,
+   "flag": ""
+  },
+  {
+   "id": "w0064",
+   "text": "سَاعَة",
+   "start": 51.78,
+   "end": 52.49,
+   "speech": 0.63,
+   "expected": 0.7,
+   "gain_db": 7.1,
+   "flag": "TIGHT-GAP"
+  },
+  {
+   "id": "w0065",
+   "text": "شَمْس",
+   "start": 52.49,
+   "end": 53.29,
+   "speech": 0.7,
+   "expected": 0.6,
+   "gain_db": 7.8,
+   "flag": "TIGHT-GAP"
+  },
+  {
+   "id": "w0066",
+   "text": "شَجَرَة",
+   "start": 53.29,
+   "end": 54.01,
+   "speech": 0.64,
+   "expected": 0.7,
+   "gain_db": 6.4,
+   "flag": ""
+  },
+  {
+   "id": "w0067",
+   "text": "شَاي",
+   "start": 54.01,
+   "end": 54.73,
+   "speech": 0.63,
+   "expected": 0.6,
+   "gain_db": 6.8,
+   "flag": "TIGHT-GAP"
+  },
+  {
+   "id": "w0068",
+   "text": "صَقْر",
+   "start": 54.73,
+   "end": 55.44,
+   "speech": 0.63,
+   "expected": 0.6,
+   "gain_db": 6.4,
+   "flag": "TIGHT-GAP"
+  },
+  {
+   "id": "w0069",
+   "text": "صُنْدُوق",
+   "start": 55.44,
+   "end": 56.31,
+   "speech": 0.79,
+   "expected": 0.81,
+   "gain_db": 4.3,
+   "flag": "TIGHT-GAP"
+  },
+  {
+   "id": "w0070",
+   "text": "صَابُون",
+   "start": 56.31,
+   "end": 57.22,
+   "speech": 0.81,
+   "expected": 0.81,
+   "gain_db": 5.1,
+   "flag": "TIGHT-GAP"
+  },
+  {
+   "id": "w0071",
+   "text": "ضِفْدَع",
+   "start": 57.22,
+   "end": 58.0,
+   "speech": 0.68,
+   "expected": 0.7,
+   "gain_db": 7.8,
+   "flag": ""
+  },
+  {
+   "id": "w0072",
+   "text": "ضِرْس",
+   "start": 58.0,
+   "end": 58.72,
+   "speech": 0.64,
+   "expected": 0.6,
+   "gain_db": 5.2,
+   "flag": "TIGHT-GAP"
+  },
+  {
+   "id": "w0073",
+   "text": "ضَبُع",
+   "start": 58.72,
+   "end": 59.39,
+   "speech": 0.59,
+   "expected": 0.6,
+   "gain_db": 5.4,
+   "flag": "TIGHT-GAP"
+  },
+  {
+   "id": "w0074",
+   "text": "طَائِرَة",
+   "start": 59.39,
+   "end": 60.07,
+   "speech": 0.6,
+   "expected": 0.81,
+   "gain_db": 7.2,
+   "flag": "TIGHT-GAP"
+  },
+  {
+   "id": "w0075",
+   "text": "طَبْل",
+   "start": 60.07,
+   "end": 60.65,
+   "speech": 0.48,
+   "expected": 0.6,
+   "gain_db": 6.8,
+   "flag": "TIGHT-GAP"
+  },
+  {
+   "id": "w0076",
+   "text": "طَاوُوس",
+   "start": 60.65,
+   "end": 61.52,
+   "speech": 0.78,
+   "expected": 0.81,
+   "gain_db": 3.4,
+   "flag": ""
+  },
+  {
+   "id": "w0077",
+   "text": "ظَرْف",
+   "start": 61.52,
+   "end": 62.25,
+   "speech": 0.64,
+   "expected": 0.6,
+   "gain_db": 6.6,
+   "flag": ""
+  },
+  {
+   "id": "w0078",
+   "text": "ظُفْر",
+   "start": 62.25,
+   "end": 62.96,
+   "speech": 0.62,
+   "expected": 0.6,
+   "gain_db": 8.3,
+   "flag": ""
+  },
+  {
+   "id": "w0079",
+   "text": "ظَبْي",
+   "start": 62.96,
+   "end": 63.64,
+   "speech": 0.6,
+   "expected": 0.6,
+   "gain_db": 5.8,
+   "flag": "TIGHT-GAP"
+  },
+  {
+   "id": "w0080",
+   "text": "عِنَب",
+   "start": 63.64,
+   "end": 64.32,
+   "speech": 0.59,
+   "expected": 0.6,
+   "gain_db": 5.5,
+   "flag": "TIGHT-GAP"
+  },
+  {
+   "id": "w0081",
+   "text": "عُصْفُور",
+   "start": 64.32,
+   "end": 65.2,
+   "speech": 0.79,
+   "expected": 0.81,
+   "gain_db": 8.7,
+   "flag": ""
+  },
+  {
+   "id": "w0082",
+   "text": "عَسَل",
+   "start": 65.2,
+   "end": 65.9,
+   "speech": 0.61,
+   "expected": 0.6,
+   "gain_db": 8.2,
+   "flag": "TIGHT-GAP"
+  },
+  {
+   "id": "w0083",
+   "text": "غُرَاب",
+   "start": 65.9,
+   "end": 66.67,
+   "speech": 0.68,
+   "expected": 0.7,
+   "gain_db": 3.2,
+   "flag": ""
+  },
+  {
+   "id": "w0084",
+   "text": "غَيْمَة",
+   "start": 66.67,
+   "end": 67.38,
+   "speech": 0.62,
+   "expected": 0.7,
+   "gain_db": 4.5,
+   "flag": "TIGHT-GAP"
+  },
+  {
+   "id": "w0085",
+   "text": "غَسَّالَة",
+   "start": 67.38,
+   "end": 68.23,
+   "speech": 0.77,
+   "expected": 0.81,
+   "gain_db": 6.6,
+   "flag": "TIGHT-GAP"
+  },
+  {
+   "id": "w0086",
+   "text": "فِيل",
+   "start": 68.23,
+   "end": 68.94,
+   "speech": 0.63,
+   "expected": 0.6,
+   "gain_db": 8.5,
+   "flag": "TIGHT-GAP"
+  },
+  {
+   "id": "w0087",
+   "text": "فَرَاشَة",
+   "start": 68.94,
+   "end": 69.72,
+   "speech": 0.71,
+   "expected": 0.81,
+   "gain_db": 3.9,
+   "flag": "TIGHT-GAP"
+  },
+  {
+   "id": "w0088",
+   "text": "فَرَاوِلَة",
+   "start": 69.72,
+   "end": 70.55,
+   "speech": 0.74,
+   "expected": 0.92,
+   "gain_db": 3.8,
+   "flag": "TIGHT-GAP"
+  },
+  {
+   "id": "w0089",
+   "text": "قِطَّة",
+   "start": 70.55,
+   "end": 71.18,
+   "speech": 0.53,
+   "expected": 0.6,
+   "gain_db": 4.5,
+   "flag": ""
+  },
+  {
+   "id": "w0090",
+   "text": "قَمَر",
+   "start": 71.18,
+   "end": 71.81,
+   "speech": 0.54,
+   "expected": 0.6,
+   "gain_db": 5.1,
+   "flag": ""
+  },
+  {
+   "id": "w0091",
+   "text": "قَلَم",
+   "start": 71.81,
+   "end": 72.45,
+   "speech": 0.54,
+   "expected": 0.6,
+   "gain_db": 4.8,
+   "flag": "TIGHT-GAP"
+  },
+  {
+   "id": "w0092",
+   "text": "كَلْب",
+   "start": 72.45,
+   "end": 73.1,
+   "speech": 0.53,
+   "expected": 0.6,
+   "gain_db": 5.9,
+   "flag": ""
+  },
+  {
+   "id": "w0093",
+   "text": "كِتَاب",
+   "start": 73.1,
+   "end": 73.9,
+   "speech": 0.68,
+   "expected": 0.7,
+   "gain_db": 6.1,
+   "flag": ""
+  },
+  {
+   "id": "w0094",
+   "text": "كُرَة",
+   "start": 73.9,
+   "end": 74.43,
+   "speech": 0.43,
+   "expected": 0.6,
+   "gain_db": 5.9,
+   "flag": ""
+  },
+  {
+   "id": "w0095",
+   "text": "لَيْمُونَة",
+   "start": 74.43,
+   "end": 75.26,
+   "speech": 0.74,
+   "expected": 0.92,
+   "gain_db": 1.3,
+   "flag": ""
+  },
+  {
+   "id": "w0096",
+   "text": "لِسَان",
+   "start": 75.26,
+   "end": 76.06,
+   "speech": 0.71,
+   "expected": 0.7,
+   "gain_db": 5.5,
+   "flag": ""
+  },
+  {
+   "id": "w0097",
+   "text": "لَقْلَق",
+   "start": 76.06,
+   "end": 76.83,
+   "speech": 0.67,
+   "expected": 0.7,
+   "gain_db": 6.0,
+   "flag": "TIGHT-GAP"
+  },
+  {
+   "id": "w0098",
+   "text": "مَوْزَة",
+   "start": 76.83,
+   "end": 77.52,
+   "speech": 0.61,
+   "expected": 0.7,
+   "gain_db": 3.0,
+   "flag": ""
+  },
+  {
+   "id": "w0099",
+   "text": "مِفْتَاح",
+   "start": 77.52,
+   "end": 78.42,
+   "speech": 0.81,
+   "expected": 0.81,
+   "gain_db": 5.7,
+   "flag": "TIGHT-GAP"
+  },
+  {
+   "id": "w0100",
+   "text": "مِظَلَّة",
+   "start": 78.42,
+   "end": 79.22,
+   "speech": 0.64,
+   "expected": 0.7,
+   "gain_db": 2.8,
+   "flag": "TIGHT-GAP"
+  }
+ ]
+}

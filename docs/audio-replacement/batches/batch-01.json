@@ -1,0 +1,505 @@
+{
+ "batch": "batch-01",
+ "items": [
+  {
+   "id": "w0001",
+   "kind": "letter-name",
+   "text": "أَلِف"
+  },
+  {
+   "id": "w0002",
+   "kind": "letter-name",
+   "text": "بَاء"
+  },
+  {
+   "id": "w0003",
+   "kind": "letter-name",
+   "text": "تَاء"
+  },
+  {
+   "id": "w0004",
+   "kind": "letter-name",
+   "text": "ثَاء"
+  },
+  {
+   "id": "w0005",
+   "kind": "letter-name",
+   "text": "جِيم"
+  },
+  {
+   "id": "w0006",
+   "kind": "letter-name",
+   "text": "حَاء"
+  },
+  {
+   "id": "w0007",
+   "kind": "letter-name",
+   "text": "خَاء"
+  },
+  {
+   "id": "w0008",
+   "kind": "letter-name",
+   "text": "دَال"
+  },
+  {
+   "id": "w0009",
+   "kind": "letter-name",
+   "text": "ذَال"
+  },
+  {
+   "id": "w0010",
+   "kind": "letter-name",
+   "text": "رَاء"
+  },
+  {
+   "id": "w0011",
+   "kind": "letter-name",
+   "text": "زَاي"
+  },
+  {
+   "id": "w0012",
+   "kind": "letter-name",
+   "text": "سِين"
+  },
+  {
+   "id": "w0013",
+   "kind": "letter-name",
+   "text": "شِين"
+  },
+  {
+   "id": "w0014",
+   "kind": "letter-name",
+   "text": "صَاد"
+  },
+  {
+   "id": "w0015",
+   "kind": "letter-name",
+   "text": "ضَاد"
+  },
+  {
+   "id": "w0016",
+   "kind": "letter-name",
+   "text": "طَاء"
+  },
+  {
+   "id": "w0017",
+   "kind": "letter-name",
+   "text": "ظَاء"
+  },
+  {
+   "id": "w0018",
+   "kind": "letter-name",
+   "text": "عَيْن"
+  },
+  {
+   "id": "w0019",
+   "kind": "letter-name",
+   "text": "غَيْن"
+  },
+  {
+   "id": "w0020",
+   "kind": "letter-name",
+   "text": "فَاء"
+  },
+  {
+   "id": "w0021",
+   "kind": "letter-name",
+   "text": "قَاف"
+  },
+  {
+   "id": "w0022",
+   "kind": "letter-name",
+   "text": "كَاف"
+  },
+  {
+   "id": "w0023",
+   "kind": "letter-name",
+   "text": "لَام"
+  },
+  {
+   "id": "w0024",
+   "kind": "letter-name",
+   "text": "مِيم"
+  },
+  {
+   "id": "w0025",
+   "kind": "letter-name",
+   "text": "نُون"
+  },
+  {
+   "id": "w0026",
+   "kind": "letter-name",
+   "text": "هَاء"
+  },
+  {
+   "id": "w0027",
+   "kind": "letter-name",
+   "text": "وَاو"
+  },
+  {
+   "id": "w0028",
+   "kind": "letter-name",
+   "text": "يَاء"
+  },
+  {
+   "id": "w0029",
+   "kind": "word",
+   "text": "أَسَد"
+  },
+  {
+   "id": "w0030",
+   "kind": "word",
+   "text": "أَرْنَب"
+  },
+  {
+   "id": "w0031",
+   "kind": "word",
+   "text": "أَنَانَاس"
+  },
+  {
+   "id": "w0032",
+   "kind": "word",
+   "text": "بَيْت"
+  },
+  {
+   "id": "w0033",
+   "kind": "word",
+   "text": "بَاب"
+  },
+  {
+   "id": "w0034",
+   "kind": "word",
+   "text": "بَطَّة"
+  },
+  {
+   "id": "w0035",
+   "kind": "word",
+   "text": "تُفَّاحَة"
+  },
+  {
+   "id": "w0036",
+   "kind": "word",
+   "text": "تِمْسَاح"
+  },
+  {
+   "id": "w0037",
+   "kind": "word",
+   "text": "تَاج"
+  },
+  {
+   "id": "w0038",
+   "kind": "word",
+   "text": "ثَعْلَب"
+  },
+  {
+   "id": "w0039",
+   "kind": "word",
+   "text": "ثُوم"
+  },
+  {
+   "id": "w0040",
+   "kind": "word",
+   "text": "ثَلْج"
+  },
+  {
+   "id": "w0041",
+   "kind": "word",
+   "text": "جَمَل"
+  },
+  {
+   "id": "w0042",
+   "kind": "word",
+   "text": "جَزَرَة"
+  },
+  {
+   "id": "w0043",
+   "kind": "word",
+   "text": "جَبَل"
+  },
+  {
+   "id": "w0044",
+   "kind": "word",
+   "text": "حِصَان"
+  },
+  {
+   "id": "w0045",
+   "kind": "word",
+   "text": "حُوت"
+  },
+  {
+   "id": "w0046",
+   "kind": "word",
+   "text": "حَلِيب"
+  },
+  {
+   "id": "w0047",
+   "kind": "word",
+   "text": "خُبْز"
+  },
+  {
+   "id": "w0048",
+   "kind": "word",
+   "text": "خَرُوف"
+  },
+  {
+   "id": "w0049",
+   "kind": "word",
+   "text": "خِيَار"
+  },
+  {
+   "id": "w0050",
+   "kind": "word",
+   "text": "دُبّ"
+  },
+  {
+   "id": "w0051",
+   "kind": "word",
+   "text": "دَجَاجَة"
+  },
+  {
+   "id": "w0052",
+   "kind": "word",
+   "text": "دَرَّاجَة"
+  },
+  {
+   "id": "w0053",
+   "kind": "word",
+   "text": "ذِئْب"
+  },
+  {
+   "id": "w0054",
+   "kind": "word",
+   "text": "ذُرَة"
+  },
+  {
+   "id": "w0055",
+   "kind": "word",
+   "text": "ذُبَابَة"
+  },
+  {
+   "id": "w0056",
+   "kind": "word",
+   "text": "رُمَّانَة"
+  },
+  {
+   "id": "w0057",
+   "kind": "word",
+   "text": "رِيشَة"
+  },
+  {
+   "id": "w0058",
+   "kind": "word",
+   "text": "رَجُل"
+  },
+  {
+   "id": "w0059",
+   "kind": "word",
+   "text": "زَرَافَة"
+  },
+  {
+   "id": "w0060",
+   "kind": "word",
+   "text": "زَيْتُونَة"
+  },
+  {
+   "id": "w0061",
+   "kind": "word",
+   "text": "زَهْرَة"
+  },
+  {
+   "id": "w0062",
+   "kind": "word",
+   "text": "سَمَكَة"
+  },
+  {
+   "id": "w0063",
+   "kind": "word",
+   "text": "سَيَّارَة"
+  },
+  {
+   "id": "w0064",
+   "kind": "word",
+   "text": "سَاعَة"
+  },
+  {
+   "id": "w0065",
+   "kind": "word",
+   "text": "شَمْس"
+  },
+  {
+   "id": "w0066",
+   "kind": "word",
+   "text": "شَجَرَة"
+  },
+  {
+   "id": "w0067",
+   "kind": "word",
+   "text": "شَاي"
+  },
+  {
+   "id": "w0068",
+   "kind": "word",
+   "text": "صَقْر"
+  },
+  {
+   "id": "w0069",
+   "kind": "word",
+   "text": "صُنْدُوق"
+  },
+  {
+   "id": "w0070",
+   "kind": "word",
+   "text": "صَابُون"
+  },
+  {
+   "id": "w0071",
+   "kind": "word",
+   "text": "ضِفْدَع"
+  },
+  {
+   "id": "w0072",
+   "kind": "word",
+   "text": "ضِرْس"
+  },
+  {
+   "id": "w0073",
+   "kind": "word",
+   "text": "ضَبُع"
+  },
+  {
+   "id": "w0074",
+   "kind": "word",
+   "text": "طَائِرَة"
+  },
+  {
+   "id": "w0075",
+   "kind": "word",
+   "text": "طَبْل"
+  },
+  {
+   "id": "w0076",
+   "kind": "word",
+   "text": "طَاوُوس"
+  },
+  {
+   "id": "w0077",
+   "kind": "word",
+   "text": "ظَرْف"
+  },
+  {
+   "id": "w0078",
+   "kind": "word",
+   "text": "ظُفْر"
+  },
+  {
+   "id": "w0079",
+   "kind": "word",
+   "text": "ظَبْي"
+  },
+  {
+   "id": "w0080",
+   "kind": "word",
+   "text": "عِنَب"
+  },
+  {
+   "id": "w0081",
+   "kind": "word",
+   "text": "عُصْفُور"
+  },
+  {
+   "id": "w0082",
+   "kind": "word",
+   "text": "عَسَل"
+  },
+  {
+   "id": "w0083",
+   "kind": "word",
+   "text": "غُرَاب"
+  },
+  {
+   "id": "w0084",
+   "kind": "word",
+   "text": "غَيْمَة"
+  },
+  {
+   "id": "w0085",
+   "kind": "word",
+   "text": "غَسَّالَة"
+  },
+  {
+   "id": "w0086",
+   "kind": "word",
+   "text": "فِيل"
+  },
+  {
+   "id": "w0087",
+   "kind": "word",
+   "text": "فَرَاشَة"
+  },
+  {
+   "id": "w0088",
+   "kind": "word",
+   "text": "فَرَاوِلَة"
+  },
+  {
+   "id": "w0089",
+   "kind": "word",
+   "text": "قِطَّة"
+  },
+  {
+   "id": "w0090",
+   "kind": "word",
+   "text": "قَمَر"
+  },
+  {
+   "id": "w0091",
+   "kind": "word",
+   "text": "قَلَم"
+  },
+  {
+   "id": "w0092",
+   "kind": "word",
+   "text": "كَلْب"
+  },
+  {
+   "id": "w0093",
+   "kind": "word",
+   "text": "كِتَاب"
+  },
+  {
+   "id": "w0094",
+   "kind": "word",
+   "text": "كُرَة"
+  },
+  {
+   "id": "w0095",
+   "kind": "word",
+   "text": "لَيْمُونَة"
+  },
+  {
+   "id": "w0096",
+   "kind": "word",
+   "text": "لِسَان"
+  },
+  {
+   "id": "w0097",
+   "kind": "word",
+   "text": "لَقْلَق"
+  },
+  {
+   "id": "w0098",
+   "kind": "word",
+   "text": "مَوْزَة"
+  },
+  {
+   "id": "w0099",
+   "kind": "word",
+   "text": "مِفْتَاح"
+  },
+  {
+   "id": "w0100",
+   "kind": "word",
+   "text": "مِظَلَّة"
+  }
+ ]
+}
