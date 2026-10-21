@@ -191,3 +191,96 @@ test("fallback: microphone not available → today's page with buttons and a not
   await expect(page.getByTestId("exercise-ab-feedback-headline")).toHaveText("مُمْتَاز! 👏");
   expect(calls.evaluate).toBe(1);
 });
+
+// The child's own controls: skip after two wrong answers, previous word, start over.
+const SHOTS = process.env.ALIF_E2E_SHOTS;
+const shot = async (page: Page, name: string) => {
+  if (SHOTS) await page.screenshot({ path: `${SHOTS}/${name}.png` });
+};
+const evaluated = (calls: { evaluate: number }, n: number) => expect.poll(() => calls.evaluate, { timeout: 30_000, intervals: [100] }).toBe(n);
+
+test("controls: fail once → no Skip; fail twice → Skip fades in; skip → next word, saved as skipped, counter starts again", async ({ page }) => {
+  test.setTimeout(150_000);
+  const errors = collectPageErrors(page);
+  await syntheticVoice(page);
+  const calls = await mockServices(page, Array(40).fill(false)); // every answer wrong
+  await page.goto("/a1/lesson-1/alif/step-1");
+  await expect(page.getByTestId("guided-controls")).toHaveCount(0); // not before the start
+  await page.getByTestId("start-button").tap();
+  await expect(step(page)).toHaveAttribute("data-active", "alif-fatha");
+  await expect(page.getByTestId("guided-previous")).toBeDisabled(); // first word
+  await expect(page.getByTestId("guided-restart")).toBeEnabled();
+  await shot(page, "1-start");
+
+  await evaluated(calls, 1);
+  await expect(page.getByTestId("guided-caption")).toHaveText(/Noch einmal/);
+  await expect(page.getByTestId("guided-skip")).toHaveCount(0);
+  await shot(page, "2-one-failure");
+
+  await evaluated(calls, 2);
+  const skip = page.getByTestId("guided-skip");
+  await expect(skip).toBeVisible();
+  expect(await skip.evaluate((e) => getComputedStyle(e).animationName)).toBe("fade-in");
+  await expect(step(page)).toHaveAttribute("data-active", "alif-fatha"); // the child can keep trying
+  // Within the screen on a phone, no horizontal scrolling, the Skip button stays secondary (card background, not the primary colour).
+  const box = (await page.getByTestId("guided-controls").boundingBox())!;
+  expect(box.x).toBeGreaterThanOrEqual(0);
+  expect(box.x + box.width).toBeLessThanOrEqual(390);
+  expect(box.y + box.height).toBeLessThanOrEqual(844);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  const [skipBg, cardBg] = await skip.evaluate((e) => [getComputedStyle(e).backgroundColor, getComputedStyle(document.querySelector("[data-testid=start-button], .bg-card")!).backgroundColor]);
+  expect(skipBg).toBe(cardBg);
+  await page.waitForTimeout(400);
+  await shot(page, "3-two-failures-skip");
+
+  await skip.tap();
+  await expect(step(page)).toHaveAttribute("data-active", "ab");
+  await expect(page.getByTestId("guided-skip")).toHaveCount(0);
+  await expect(block(page, "alif-fatha")).toHaveAttribute("data-state", "practice");
+  const progress = await page.evaluate(() => JSON.parse(localStorage.getItem("alif:progress:v1") ?? "{}")["a1/lesson-1/alif/step-1"]);
+  expect(progress).toMatchObject({ passed: [], skipped: ["alif-fatha"] });
+  await evaluated(calls, 3); // a wrong answer on the new word: the counter started again
+  await expect(page.getByTestId("guided-caption")).toHaveText(/Noch einmal/);
+  await expect(page.getByTestId("guided-skip")).toHaveCount(0);
+  await expect(page.getByTestId("guided-previous")).toBeEnabled();
+  await shot(page, "4-after-skip");
+  expect(errors).toEqual([]);
+});
+
+test("controls: Previous goes back a word; Start over asks first, then back to word 1 with the progress reset", async ({ page }) => {
+  test.setTimeout(150_000);
+  const errors = collectPageErrors(page);
+  await syntheticVoice(page);
+  await mockServices(page, [true, true]);
+  await page.goto("/a1/lesson-1/alif/step-1");
+  await page.getByTestId("start-button").tap();
+  await expect(step(page)).toHaveAttribute("data-active", "ana", { timeout: 40_000 });
+
+  await page.getByTestId("guided-previous").tap();
+  await expect(step(page)).toHaveAttribute("data-active", "ab");
+  await page.getByTestId("guided-previous").tap();
+  await expect(step(page)).toHaveAttribute("data-active", "alif-fatha");
+  await expect(page.getByTestId("guided-previous")).toBeDisabled();
+
+  await page.getByTestId("guided-restart").tap();
+  await expect(page.getByTestId("guided-restart-confirm")).toBeVisible();
+  await expect(page.getByTestId("guided-restart-confirm")).toContainText("Von vorn anfangen?");
+  await expect(step(page)).toHaveAttribute("data-stage", "paused");
+  await page.waitForTimeout(400);
+  await shot(page, "5-restart-confirm");
+  await page.getByTestId("guided-restart-cancel").tap();
+  await expect(page.getByTestId("guided-restart-confirm")).toHaveCount(0);
+  await expect(page.getByTestId("guided-restart")).toBeVisible();
+
+  // Move on a word, then start over for real.
+  await expect(step(page)).toHaveAttribute("data-active", "ab", { timeout: 40_000 });
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("alif:progress:v1") ?? "{}")["a1/lesson-1/alif/step-1"].passed)).toEqual(["alif-fatha", "ab"]);
+  await page.getByTestId("guided-restart").tap();
+  await page.getByTestId("guided-restart-yes").tap();
+  await expect(step(page)).toHaveAttribute("data-active", "alif-fatha");
+  await expect(block(page, "alif-fatha")).not.toHaveAttribute("data-state", "done");
+  await expect(block(page, "ab")).not.toHaveAttribute("data-state", "done");
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("alif:progress:v1") ?? "{}")["a1/lesson-1/alif/step-1"] ?? null)).toBeNull();
+  await shot(page, "6-after-restart");
+  expect(errors).toEqual([]);
+});

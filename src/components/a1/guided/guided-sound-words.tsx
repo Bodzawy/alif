@@ -1,14 +1,14 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
-import { CheckCircle2, Loader2, Mic, Play, Volume2, VolumeX } from "lucide-react";
+import { CheckCircle2, ChevronLeft, ChevronRight, Loader2, Mic, Play, RotateCcw, Volume2, VolumeX } from "lucide-react";
 
 import { SoundWordsStep, type WordRow } from "@/components/a1/sound-words-step";
 import { Button } from "@/components/ui/button";
 import { openGuidedMic, type GuidedMic } from "@/lib/audio/guided-mic";
 import { sleep } from "@/lib/audio/narrate";
 import { createNarrator, readMuted, type Narrator } from "@/lib/audio/narration";
-import { getLessonProgress, markExercisePassed, markExerciseSkipped, markLessonCompleted, subscribeProgress } from "@/lib/progress";
+import { getLessonProgress, markExercisePassed, markExerciseSkipped, markLessonCompleted, resetLessonProgress, subscribeProgress } from "@/lib/progress";
 import { GERMAN_CUES } from "@/lib/pronunciation/cues";
 import { speechUrl } from "@/lib/tts/player";
 import { cn } from "@/lib/utils";
@@ -21,6 +21,11 @@ import { useGuidedFlow, type BlockMark, type GuidedBlock, type GuidedDeps } from
 // is played (the same audio as "Anhören"), the child repeats, the recording is
 // checked by the same evaluation as "Aufnehmen". Without a microphone, or when
 // the evaluation keeps failing, the page falls back to the buttons.
+//
+// Quiet controls below the words (sticky, so they stay reachable on a phone):
+// "Vorheriges Wort", "Von vorn" (after a small inline question) and, once a
+// word was answered wrong twice, "Überspringen" – the child may also keep trying.
+// A skipped word is saved as skipped, never as passed.
 
 type Groups = WordRow[];
 
@@ -59,6 +64,7 @@ export function GuidedSoundWords({ groups, progressKey }: { groups: Groups; prog
   const [mode, setMode] = useState<"start" | "guided" | "fallback">("start");
   const [note, setNote] = useState<string | null>(null);
   const [muted, setMuted] = useState(false);
+  const [confirmRestart, setConfirmRestart] = useState(false);
   const narrator = useRef<Narrator | null>(null);
   const mic = useRef<GuidedMic | null>(null);
   const frames = useRef(new Map<string, HTMLDivElement>());
@@ -146,6 +152,33 @@ export function GuidedSoundWords({ groups, progressKey }: { groups: Groups; prog
     for (const id of saved.passed) marks[id] = "done";
     setMode("guided");
     flow.start(marks);
+  }
+
+  function askRestart() {
+    setConfirmRestart(true);
+    flow.pause(); // no sound or listening while the question is open
+  }
+
+  function cancelRestart() {
+    setConfirmRestart(false);
+    flow.resume();
+  }
+
+  async function restart() {
+    setConfirmRestart(false);
+    narrator.current?.unlock();
+    // At the end the microphone was released; this tap may open it again.
+    if (!mic.current) {
+      try {
+        mic.current = await openGuidedMic();
+      } catch {
+        setNote(NOTE.mic);
+        setMode("fallback");
+        return;
+      }
+    }
+    resetLessonProgress(progressKey);
+    flow.restart();
   }
 
   function toggleMute() {
@@ -296,6 +329,49 @@ export function GuidedSoundWords({ groups, progressKey }: { groups: Groups; prog
       </p>
 
       <SoundWordsStep groups={groups} guided={{ frame, passed: (id) => marks[id] === "done" }} />
+
+      {mode === "guided" && (
+        // Stays at the bottom of the screen while the words scroll. "Überspringen" (only after two
+        // wrong answers) above the quiet controls; RTL like the words, so "previous" is on the right.
+        <div dir="rtl" data-testid="guided-controls" className="pointer-events-none sticky bottom-3 z-20 mt-6 flex flex-col items-center gap-2">
+          {flow.canSkip && !confirmRestart && (
+            <Button variant="secondary" onClick={flow.skip} data-testid="guided-skip" className="pointer-events-auto animate-fade-in">
+              <span>Überspringen</span>
+              <ChevronLeft className="h-4 w-4" aria-hidden />
+            </Button>
+          )}
+          <div className="pointer-events-auto flex max-w-full items-center gap-1 rounded-2xl border bg-card/90 p-1 shadow-sm backdrop-blur">
+            {confirmRestart ? (
+              <div dir="ltr" role="group" aria-labelledby="guided-restart-question" data-testid="guided-restart-confirm" className="flex animate-fade-in flex-col items-center gap-1 px-2 py-1 sm:flex-row sm:gap-2">
+                <p id="guided-restart-question" className="text-sm font-semibold">
+                  Von vorn anfangen?
+                </p>
+                <div className="flex gap-1">
+                  <Button variant="ghost" size="sm" onClick={cancelRestart} data-testid="guided-restart-cancel">
+                    Abbrechen
+                  </Button>
+                  <Button variant="secondary" size="sm" onClick={() => void restart()} data-testid="guided-restart-yes">
+                    Ja, von vorn
+                  </Button>
+                </div>
+              </div>
+            ) : (
+              <>
+                <Button variant="ghost" size="sm" onClick={flow.previous} disabled={!flow.previousBlock} data-testid="guided-previous">
+                  <ChevronRight className="h-4 w-4" aria-hidden />
+                  <span className="sm:hidden">Zurück</span>
+                  <span className="hidden sm:inline">Vorheriges Wort</span>
+                </Button>
+                <span aria-hidden className="h-5 w-px bg-border" />
+                <Button variant="ghost" size="sm" onClick={askRestart} data-testid="guided-restart">
+                  <RotateCcw className="h-4 w-4" aria-hidden />
+                  <span>Von vorn</span>
+                </Button>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
