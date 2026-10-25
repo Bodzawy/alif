@@ -2,6 +2,7 @@ import { LETTER_NAME_WORDS } from "../support/a1-units";
 import { describe, expect, it } from "vitest";
 
 import { a1Words } from "../support/a1-words";
+import { shortVowelCondition } from "../support/vowel-condition";
 import { LEVELS } from "@/data/curriculum";
 import { buildAssessment, NO_MATCHING_RULE } from "@/lib/pronunciation/assessment";
 import { LETTER_RULES, VOCABULARY_RULES } from "@/lib/pronunciation/rules";
@@ -103,7 +104,7 @@ const EXPECTED_TOKENS: Record<string, string[]> = {
   "إبرة": ["b","r|rr"],
   "إصبع": ["S","b","E"],
   "إبريق": ["b","r|rr","q"],
-  "أذن": ["n"],
+  "أذن": ["*","n"], // ذ required here, unlike other words
   "أم": ["m|mm"],
   "أسرة": ["s","r|rr"],
   // A1 · Lesson 1 · Ba (بَيْت and بَاب share the A0 rules of بيت and باب)
@@ -1067,7 +1068,7 @@ describe("vocabulary IQRA gates", () => {
     const vowel = FIRST_VOWEL[target];
 
     it("has the agreed rule: Azure >= 70, IQRA contains the word's consonants (and, for A1, the right first vowel)", () => {
-      expect(VOCABULARY_RULES[target]!.excellent!.conditions).toEqual([
+      expect(VOCABULARY_RULES[target]!.excellent!.conditions.map(shortVowelCondition)).toEqual([
         "azure_accuracy >= 70",
         `iqra_phonemes contains ${list}`,
         ...(vowel ? [`iqra_initial_vowel == ${vowel}`] : []),

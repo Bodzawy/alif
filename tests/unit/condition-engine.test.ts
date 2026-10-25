@@ -136,6 +136,17 @@ describe("condition engine – iqra_initial_vowel (A1 words that begin with أَ
     expect(matchesCondition("iqra_initial_vowel == e", heard("e"))).toBe(false); // only a / i / u are valid
   });
 
+  it("== / != ['…'] compare the initial token with a list of alternatives", () => {
+    const heard = (...phonemes: string[]) => ctx(90, phonemes);
+    expect(matchesCondition("iqra_initial_vowel == ['i|ii|I|II']", heard("<", "ii", "S", "b"))).toBe(true);
+    expect(matchesCondition("iqra_initial_vowel == ['i|ii|I|II']", heard("<<", "I", "b"))).toBe(true);
+    expect(matchesCondition("iqra_initial_vowel == ['i|ii|I|II']", heard("<", "a", "S", "b"))).toBe(false);
+    expect(matchesCondition("iqra_initial_vowel == ['i|ii|I|II']", heard("b", "r", "i"))).toBe(false); // a later i does not count
+    expect(matchesCondition("iqra_initial_vowel == ['i|ii|I|II']", heard())).toBe(false);
+    expect(matchesCondition("iqra_initial_vowel != ['u|uu|U|UU']", heard("<", "a", "*", "u", "n"))).toBe(true);
+    expect(matchesCondition("iqra_initial_vowel != ['u|uu|U|UU']", heard("<", "UU", "*", "n"))).toBe(false);
+  });
+
   it("is not used by any letter rule (letters behave exactly as in Masaar)", () => {
     for (const rules of Object.values(LETTER_RULES)) {
       for (const condition of Object.values(rules).flatMap((rule) => rule.conditions)) expect(condition).not.toContain("iqra_initial_vowel");

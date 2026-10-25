@@ -1,4 +1,5 @@
 import { A1_UNIT_SLUGS } from "../support/a1-units";
+import { shortVowelCondition } from "../support/vowel-condition";
 import { act, cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { existsSync } from "node:fs";
 import path from "node:path";
@@ -67,8 +68,8 @@ describe("A1 · Lesson 1 content", () => {
       expect(group.sound.transliteration).toBe(vowel);
       for (const word of group.words) {
         const rules = CONDITION_RULES[word.exercise.target]!;
-        expect(rules.excellent!.conditions, word.id).toContain(`iqra_initial_vowel == ${vowel}`);
-        expect(rules.said_wrong_vowel!.conditions, word.id).toContain(`iqra_initial_vowel != ${vowel}`);
+        expect(rules.excellent!.conditions.map(shortVowelCondition), word.id).toContain(`iqra_initial_vowel == ${vowel}`);
+        expect(rules.said_wrong_vowel!.conditions.map(shortVowelCondition), word.id).toContain(`iqra_initial_vowel != ${vowel}`);
         // Real IQRA format: hamza, then the vowel. Right vowel passes, the other two do not.
         const consonants = (rules.excellent!.conditions[1]!.match(/\[(.*)\]/)![1]!).replace(/'/g, "").split(",").map((t) => t.split("|")[0]!);
         for (const heardVowel of ["a", "i", "u"] as const) {

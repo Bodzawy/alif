@@ -13,7 +13,8 @@
 //     returned phonemes, so an IQRA outage is not reported as a wrong sound;
 //   - `iqra_initial_vowel == a|i|u` (or `!=`): the quality of the vowel the
 //     word begins with in IQRA's output, e.g. "a" for ["<", "aa", "b", "a"]
-//     (A1 words that begin with أَ / إِ / أُ). See initialVowel().
+//     (A1 words that begin with أَ / إِ / أُ). See initialVowel(). The list
+//     form `iqra_initial_vowel == ['i|ii|I|II']` compares the token itself.
 import { CONDITION_RULES, type Rule } from "./rules";
 
 export type ConditionContext = {
@@ -54,9 +55,14 @@ const INITIAL_HAMZA = new Set(["<", "<<", "h"]);
  * later syllable never counts as the initial one.
  */
 export function initialVowel(phonemes: string[]): "a" | "i" | "u" | null {
+  return VOWEL_QUALITY[initialToken(phonemes) ?? ""] ?? null;
+}
+
+/** The first token after an initial hamza, e.g. "u" for ["<", "u", "*", "u", "n"]. */
+function initialToken(phonemes: string[]): string | null {
   let index = 0;
   while (index < phonemes.length && INITIAL_HAMZA.has(phonemes[index]!)) index++;
-  return VOWEL_QUALITY[phonemes[index] ?? ""] ?? null;
+  return phonemes[index] ?? null;
 }
 
 function hasPhonemes(phonemes: string[], expected: string[]) {
@@ -93,6 +99,16 @@ export function matchesCondition(condition: string, context: ConditionContext) {
   if (vowel) {
     const [, operator, expected] = vowel;
     const isMatch = initialVowel(context.iqraPhonemes) === expected;
+    return operator === "==" ? isMatch : !isMatch;
+  }
+
+  // List form: iqra_initial_vowel == ['i|ii|I|II'] holds when the first token
+  // after the initial hamza is one of the listed tokens.
+  const vowelTokens = condition.match(/^iqra_initial_vowel\s*(==|!=)\s*(\[.*\])$/);
+  if (vowelTokens) {
+    const [, operator, rawExpected] = vowelTokens;
+    const expected = (rawExpected ?? "").replace(/[\[\]'\s]/g, "").split(/[|,]/).filter(Boolean);
+    const isMatch = expected.includes(initialToken(context.iqraPhonemes) ?? "");
     return operator === "==" ? isMatch : !isMatch;
   }
 

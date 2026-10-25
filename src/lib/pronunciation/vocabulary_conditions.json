@@ -2152,7 +2152,7 @@
       "conditions": [
         "azure_accuracy >= 70",
         "iqra_phonemes contains ['S','b','E']",
-        "iqra_initial_vowel == i"
+        "iqra_initial_vowel == ['i|ii|I|II|iey|Iey']"
       ],
       "message": "ممتاز 👏 نطقت كلمة إصبع بشكل صحيح"
     },
@@ -2185,7 +2185,7 @@
       "conditions": [
         "azure_accuracy >= 70",
         "iqra_phonemes contains ['b','r|rr','q']",
-        "iqra_initial_vowel == i"
+        "iqra_initial_vowel == ['i|ii|I|II|iey|Iey']"
       ],
       "message": "ممتاز 👏 نطقت كلمة إبريق بشكل صحيح"
     },
@@ -2217,8 +2217,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['n']",
-        "iqra_initial_vowel == u"
+        "iqra_phonemes contains ['*','n']",
+        "iqra_initial_vowel == ['u|uu|U|UU']"
       ],
       "message": "ممتاز 👏 نطقت كلمة أذن بشكل صحيح"
     },
@@ -2226,7 +2226,7 @@
       "conditions": [
         "azure_accuracy >= 70",
         "iqra_phonemes is not empty",
-        "iqra_phonemes does not contain ['n']"
+        "iqra_phonemes does not contain ['*','n']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة أذن"
     },
@@ -2234,7 +2234,7 @@
       "conditions": [
         "azure_accuracy >= 70",
         "iqra_phonemes is not empty",
-        "iqra_initial_vowel != u"
+        "iqra_initial_vowel != ['u|uu|U|UU']"
       ],
       "message": "حاول مرة أخرى، كلمة أذن تبدأ بـ أُ"
     },
@@ -2251,7 +2251,7 @@
       "conditions": [
         "azure_accuracy >= 70",
         "iqra_phonemes contains ['m|mm']",
-        "iqra_initial_vowel == u"
+        "iqra_initial_vowel == ['u|uu|U|UU']"
       ],
       "message": "ممتاز 👏 نطقت كلمة أم بشكل صحيح"
     },
@@ -2284,7 +2284,7 @@
       "conditions": [
         "azure_accuracy >= 70",
         "iqra_phonemes contains ['s','r|rr']",
-        "iqra_initial_vowel == u"
+        "iqra_initial_vowel == ['u|uu|U|UU']"
       ],
       "message": "ممتاز 👏 نطقت كلمة أسرة بشكل صحيح"
     },

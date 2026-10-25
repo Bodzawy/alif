@@ -30,7 +30,7 @@
   "أُ": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['u|uu|U|UU|uoh|ouh']"
+        "iqra_phonemes contains ['u|uu|U|UU']"
       ],
       "message": "ممتاز 👏 نطقت أُ بشكل صحيح"
     },
@@ -79,9 +79,7 @@
     "excellent": {
       "conditions": [
         "iqra_phonemes contains ['b']",
-        "iqra_phonemes contains ['u|uu|U|UU']",
-        "iqra_phonemes does not contain ['a|aa|A|AA']",
-        "iqra_phonemes does not contain ['i|ii|I|II']"
+        "iqra_phonemes contains ['u|uu|U|UU']"
       ],
       "message": "ممتاز 👏 نطقت بُ بشكل صحيح"
     },
