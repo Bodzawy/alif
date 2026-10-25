@@ -2,9 +2,7 @@
   "أَ": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['a|aa|A|AA']",
-        "iqra_phonemes does not contain ['i|ii|I|II']",
-        "iqra_phonemes does not contain ['u|uu|U|UU']"
+        "iqra_phonemes contains ['a|aa|A|AA|aah|Aah']"
       ],
       "message": "ممتاز 👏 نطقت أَ بشكل صحيح"
     },
@@ -18,9 +16,7 @@
   "إِ": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['i|ii|I|II']",
-        "iqra_phonemes does not contain ['a|aa|A|AA']",
-        "iqra_phonemes does not contain ['u|uu|U|UU']"
+        "iqra_phonemes contains ['i|ii|I|II|iey|Iey']"
       ],
       "message": "ممتاز 👏 نطقت إِ بشكل صحيح"
     },
@@ -34,9 +30,7 @@
   "أُ": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['u|uu|U|UU']",
-        "iqra_phonemes does not contain ['a|aa|A|AA']",
-        "iqra_phonemes does not contain ['i|ii|I|II']"
+        "iqra_phonemes contains ['u|uu|U|UU|uoh|ouh']"
       ],
       "message": "ممتاز 👏 نطقت أُ بشكل صحيح"
     },
