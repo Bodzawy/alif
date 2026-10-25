@@ -233,11 +233,11 @@ describe("POST /api/pronunciation – ALIF Speaking (track=speaking)", () => {
     expect(console.log).toHaveBeenCalledWith("ARABIC PRONUNCIATION ASSESSMENT:", expect.objectContaining({ track: "speaking", services: { azure: true, iqra: "not used" } }));
   });
 
-  it("fails below Azure's minimum scores (accuracy 65, first sound 55)", async () => {
+  it("fails below Azure's minimum scores (accuracy 65, first sound 30)", async () => {
     azureMock.assess.mockResolvedValue(azureResult({ accuracy: 64 }));
     let body = await (await post({ audio: await wavFile(), target: "باء", track: "speaking" })).json();
     expect(body).toMatchObject({ passed: false, failureReason: "low_accuracy", feedback: { rule: "needs_improvement", message: "حاول مرة أخرى" } });
-    azureMock.assess.mockResolvedValue(azureResult({ accuracy: 90, firstSoundScore: 54 }));
+    azureMock.assess.mockResolvedValue(azureResult({ accuracy: 90, firstSoundScore: 29 }));
     body = await (await post({ audio: await wavFile(), target: "باء", track: "speaking" })).json();
     expect(body).toMatchObject({ passed: false, failureReason: "weak_first_sound" });
     expect(iqra.requests).toHaveLength(0);

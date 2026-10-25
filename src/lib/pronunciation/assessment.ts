@@ -11,7 +11,7 @@ import type { AzureAssessment, FailureReason, IqraResult, PronunciationResponse 
 
 /** Legacy thresholds – they only decide `failureReason`, not `passed`. */
 export const MIN_ACCURACY = 65;
-export const MIN_FIRST_SOUND_SCORE = 55;
+export const MIN_FIRST_SOUND_SCORE = 30;
 
 export { NO_MATCHING_RULE };
 

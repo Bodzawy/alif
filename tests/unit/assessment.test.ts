@@ -21,7 +21,7 @@ function azure(overrides: Partial<AzureAssessment> = {}): AzureAssessment & { ac
 describe("buildAssessment", () => {
   it("ALIF Speaking: Azure's minimum scores alone decide, for any target and any IQRA answer", () => {
     for (const target of ["باء", "أَ", "أُ"]) {
-      const right = buildAssessment({ target, primary: azure({ accuracy: 65, firstSoundScore: 55 }), iqra: null, track: "speaking" });
+      const right = buildAssessment({ target, primary: azure({ accuracy: 65, firstSoundScore: 30 }), iqra: null, track: "speaking" });
       expect(right).toMatchObject({ passed: true, failureReason: null, feedback: { rule: "excellent", message: "ممتاز 👏" } });
       expect(right.conditionEvaluation).toMatchObject({ matchedRule: "excellent", conditions: [] });
       // Phonemes ALIF Pronunciation would reject change nothing here.
@@ -32,7 +32,7 @@ describe("buildAssessment", () => {
       failureReason: "low_accuracy",
       feedback: { rule: "needs_improvement", message: "حاول مرة أخرى" },
     });
-    expect(buildAssessment({ target: "باء", primary: azure({ firstSoundScore: 54 }), iqra: null, track: "speaking" })).toMatchObject({
+    expect(buildAssessment({ target: "باء", primary: azure({ firstSoundScore: 29 }), iqra: null, track: "speaking" })).toMatchObject({
       passed: false,
       failureReason: "weak_first_sound",
     });
@@ -54,16 +54,22 @@ describe("buildAssessment", () => {
     expect(result.conditionEvaluation.matchedRule).toBe("said_sin");
   });
 
-  it("keeps the legacy failure reasons (accuracy < 65, first sound < 55)", () => {
+  it("keeps the accuracy failure reason and rejects a non-excellent rule", () => {
     expect(buildAssessment({ target: "باء", primary: azure({ accuracy: 60 }), iqra: { phonemes: ["b"] } }).failureReason).toBe("low_accuracy");
-    const weak = buildAssessment({ target: "باء", primary: azure({ accuracy: 68, firstSoundScore: 40 }), iqra: { phonemes: ["b"] } });
-    expect(weak.failureReason).toBe("weak_first_sound");
-    expect(weak.conditionEvaluation.matchedRule).toBe("wrong");
-    expect(weak.passed).toBe(false);
+    const wrong = buildAssessment({ target: "باء", primary: azure({ accuracy: 68, firstSoundScore: 40 }), iqra: { phonemes: ["b"] } });
+    expect(wrong.failureReason).toBe("rule_not_matched");
+    expect(wrong.conditionEvaluation.matchedRule).toBe("wrong");
+    expect(wrong.passed).toBe(false);
   });
 
-  it("does not pass an 'excellent' rule when Azure's first-sound score is below threshold", () => {
-    const result = buildAssessment({ target: "باء", primary: azure({ accuracy: 75, firstSoundScore: 40 }), iqra: { phonemes: ["b"] } });
+  it("passes an excellent rule when first sound is at least 30", () => {
+    const result = buildAssessment({ target: "باء", primary: azure({ accuracy: 75, firstSoundScore: 40 }), iqra: { phonemes: ["b", "aa"] } });
+    expect(result.passed).toBe(true);
+    expect(result.failureReason).toBeNull();
+  });
+
+  it("rejects an excellent rule when first sound is below 30", () => {
+    const result = buildAssessment({ target: "باء", primary: azure({ accuracy: 75, firstSoundScore: 27 }), iqra: { phonemes: ["b", "aa"] } });
     expect(result.passed).toBe(false);
     expect(result.failureReason).toBe("weak_first_sound");
   });
