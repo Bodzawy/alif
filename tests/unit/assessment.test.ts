@@ -21,21 +21,23 @@ function azure(overrides: Partial<AzureAssessment> = {}): AzureAssessment & { ac
 describe("buildAssessment", () => {
   it("ALIF Speaking: Azure's minimum scores alone decide, for any target and any IQRA answer", () => {
     for (const target of ["باء", "أَ", "أُ"]) {
-      const right = buildAssessment({ target, primary: azure({ accuracy: 65, firstSoundScore: 30 }), iqra: null, track: "speaking" });
+      const right = buildAssessment({ target, primary: azure({ accuracy: 90, firstSoundScore: 30 }), iqra: null, track: "speaking" });
       expect(right).toMatchObject({ passed: true, failureReason: null, feedback: { rule: "excellent", message: "ممتاز 👏" } });
       expect(right.conditionEvaluation).toMatchObject({ matchedRule: "excellent", conditions: [] });
       // Phonemes ALIF Pronunciation would reject change nothing here.
-      expect(buildAssessment({ target, primary: azure(), iqra: { phonemes: ["s", "ii"] }, track: "speaking" }).passed).toBe(true);
+      expect(buildAssessment({ target, primary: azure({ accuracy: 95 }), iqra: { phonemes: ["s", "ii"] }, track: "speaking" }).passed).toBe(true);
     }
-    expect(buildAssessment({ target: "باء", primary: azure({ accuracy: 64 }), iqra: null, track: "speaking" })).toMatchObject({
+    expect(buildAssessment({ target: "باء", primary: azure({ accuracy: 89 }), iqra: null, track: "speaking" })).toMatchObject({
       passed: false,
       failureReason: "low_accuracy",
       feedback: { rule: "needs_improvement", message: "حاول مرة أخرى" },
     });
-    expect(buildAssessment({ target: "باء", primary: azure({ firstSoundScore: 29 }), iqra: null, track: "speaking" })).toMatchObject({
+    expect(buildAssessment({ target: "باء", primary: azure({ accuracy: 95, firstSoundScore: 29 }), iqra: null, track: "speaking" })).toMatchObject({
       passed: false,
       failureReason: "weak_first_sound",
     });
+    // ALIF Pronunciation keeps 65: an 89 is not a low accuracy there.
+    expect(buildAssessment({ target: "باء", primary: azure({ accuracy: 89 }), iqra: { phonemes: ["b", "aa"] } }).passed).toBe(true);
   });
 
   it("passes only when the matched rule is 'excellent'", () => {

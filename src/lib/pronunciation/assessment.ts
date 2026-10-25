@@ -11,6 +11,8 @@ import type { AzureAssessment, FailureReason, IqraResult, PronunciationResponse 
 
 /** Legacy thresholds – they only decide `failureReason`, not `passed`. */
 export const MIN_ACCURACY = 65;
+/** ALIF Speaking has no IQRA check, so Azure alone must be sure the word was said well. */
+export const SPEAKING_MIN_ACCURACY = 90;
 export const MIN_FIRST_SOUND_SCORE = 30;
 
 export { NO_MATCHING_RULE };
@@ -46,7 +48,7 @@ export function hasUsableAzureScores(
 export function buildAssessment({ target, primary, iqra, track = "pronunciation" }: AssessmentInput): PronunciationResponse {
   const targetScore = discriminationScore(primary);
 
-  const accuracyPassed = primary.accuracy >= MIN_ACCURACY;
+  const accuracyPassed = primary.accuracy >= (track === "speaking" ? SPEAKING_MIN_ACCURACY : MIN_ACCURACY);
   const firstSoundPassed = primary.firstSoundScore === null || primary.firstSoundScore >= MIN_FIRST_SOUND_SCORE;
 
   let passed = accuracyPassed && firstSoundPassed;
