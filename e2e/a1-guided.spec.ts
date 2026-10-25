@@ -284,3 +284,29 @@ test("controls: Previous goes back a word; Start over asks first, then back to w
   await shot(page, "6-after-restart");
   expect(errors).toEqual([]);
 });
+
+test("arrows on the active word: left → the next word at once (saved as skipped), right → the word before", async ({ page }) => {
+  test.setTimeout(150_000);
+  const errors = collectPageErrors(page);
+  await silentVoice(page);
+  await mockServices(page);
+  await page.goto("/a1/lesson-1/alif/step-1");
+  await page.getByTestId("start-button").tap();
+  await expect(step(page)).toHaveAttribute("data-active", "alif-fatha");
+  await expect(block(page, "alif-fatha").getByTestId("guided-arrow-previous")).toBeDisabled();
+
+  await page.getByTestId("guided-arrow-next").tap();
+  await expect(step(page)).toHaveAttribute("data-active", "ab");
+  await expect(block(page, "alif-fatha")).toHaveAttribute("data-state", "practice");
+  await page.getByTestId("guided-arrow-next").tap();
+  await expect(step(page)).toHaveAttribute("data-active", "ana");
+  await expect(block(page, "ana").getByTestId("guided-arrows")).toBeVisible();
+  await page.waitForTimeout(500);
+  await shot(page, "7-arrows");
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+
+  await page.getByTestId("guided-arrow-previous").tap();
+  await expect(step(page)).toHaveAttribute("data-active", "ab");
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("alif:progress:v1") ?? "{}")["a1/lesson-1/alif/step-1"].skipped)).toEqual(["alif-fatha", "ab"]);
+  expect(errors).toEqual([]);
+});

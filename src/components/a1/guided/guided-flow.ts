@@ -19,6 +19,8 @@ import type { Verdict } from "./evaluate";
 // The child's own controls (A1 "Wörter", see guided-sound-words.tsx):
 //   skip     – after two wrong answers on the block: marked "needs practice", next block
 //   previous – the block before the active one (in the page's order), asked again
+//   forward  – the block after the active one (in the page's order), at any time; the active
+//              block is marked "needs practice" unless it was passed
 //   restart  – every block from the first one, without any marks
 
 export type GuidedBlock = { id: string; text: string; target: string };
@@ -72,6 +74,7 @@ type Action =
   | { type: "fallback" }
   | { type: "skip" }
   | { type: "previous" }
+  | { type: "forward" }
   | { type: "restart" };
 
 export const initialGuidedState: GuidedState = { stage: "idle", order: [], queue: [], round: 1, attempts: 0, failures: 0, retry: false, marks: {}, practice: [], errors: 0, run: 0 };
@@ -88,6 +91,12 @@ export function canSkip(s: GuidedState): boolean {
 export function previousBlock(s: GuidedState): string | null {
   const index = s.order.indexOf(s.queue[0] ?? "");
   return WORKING.includes(s.stage) && index > 0 ? s.order[index - 1]! : null;
+}
+
+/** The block after the active one, or null on the last block. */
+export function nextBlock(s: GuidedState): string | null {
+  const index = s.order.indexOf(s.queue[0] ?? "");
+  return WORKING.includes(s.stage) && index >= 0 && index < s.order.length - 1 ? s.order[index + 1]! : null;
 }
 
 function fail(s: GuidedState): GuidedState {
@@ -146,6 +155,14 @@ export function guidedReducer(s: GuidedState, a: Action): GuidedState {
       if (!id) return s;
       // The previous block first, then on from the active one as before.
       return { ...s, queue: [id, ...s.queue.filter((q) => q !== id)], stage: "focus", attempts: 0, failures: 0, retry: false, errors: 0, run: s.run + 1 };
+    }
+    case "forward": {
+      const id = nextBlock(s);
+      if (!id) return s;
+      // Like skip, but always allowed: the active block is never "right" by jumping on.
+      const current = s.queue[0]!;
+      const marks = s.marks[current] === "done" ? s.marks : { ...s.marks, [current]: "practice" as const };
+      return { ...s, marks, queue: [id, ...s.queue.slice(1).filter((q) => q !== id)], stage: "focus", attempts: 0, failures: 0, retry: false, errors: 0, run: s.run + 1 };
     }
     case "restart":
       return { ...initialGuidedState, order: s.order, queue: s.order, stage: s.order.length ? "focus" : "finished", run: s.run + 1 };
@@ -240,8 +257,10 @@ export function useGuidedFlow(blocks: GuidedBlock[], deps: GuidedDeps, callbacks
     replay: () => dispatch({ type: "replay" }),
     canSkip: canSkip(state),
     previousBlock: previousBlock(state),
+    nextBlock: nextBlock(state),
     skip: () => dispatch({ type: "skip" }),
     previous: () => dispatch({ type: "previous" }),
+    forward: () => dispatch({ type: "forward" }),
     /** From the first block, without marks; the caller resets the saved progress. */
     restart: () => {
       saved.current.clear();

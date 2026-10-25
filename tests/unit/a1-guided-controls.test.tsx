@@ -33,7 +33,7 @@ vi.mock("@/lib/tts/player", () => ({ speechUrl: vi.fn(async (text: string) => `b
 vi.mock("@/lib/audio/wav", () => ({ blobTo16KhzMonoWav: vi.fn(async () => new Blob(["RIFF"], { type: "audio/wav" })) }));
 
 import { GuidedSoundWords, guidedBlocks } from "@/components/a1/guided/guided-sound-words";
-import { canSkip, guidedReducer, initialGuidedState, previousBlock, type GuidedState } from "@/components/a1/guided/guided-flow";
+import { canSkip, guidedReducer, initialGuidedState, nextBlock, previousBlock, type GuidedState } from "@/components/a1/guided/guided-flow";
 import { getA1Lesson } from "@/data/a1";
 import { getLessonProgress } from "@/lib/progress";
 
@@ -158,6 +158,23 @@ describe("guided flow – skip, previous, restart (reducer)", () => {
     expect([s.queue[0], s.failures]).toEqual(["y", 0]); // back on y with a fresh counter
   });
 
+  it("forward: at any time to the word after; the word left is 'needs practice' unless done; none on the last word", () => {
+    let s = wrong(started()); // one wrong answer on x
+    expect(nextBlock(s)).toBe("y");
+    s = guidedReducer(s, { type: "forward" });
+    expect([s.stage, s.queue, s.failures, s.attempts, s.retry]).toEqual(["focus", ["y", "z"], 0, 0, false]);
+    expect(s.marks).toEqual({ x: "practice" });
+    s = guidedReducer(s, { type: "previous" }); // back on x, then right → on to y
+    s = right(s);
+    expect([s.marks, s.queue[0]]).toEqual([{ x: "done" }, "y"]);
+    s = guidedReducer(s, { type: "previous" });
+    s = guidedReducer(s, { type: "forward" }); // a passed word keeps "done"
+    expect([s.marks, s.queue]).toEqual([{ x: "done" }, ["y", "z"]]);
+    s = guidedReducer(s, { type: "forward" });
+    expect([s.queue, nextBlock(s)]).toEqual([["z"], null]);
+    expect(guidedReducer(s, { type: "forward" })).toBe(s); // ignored on the last word
+  });
+
   it("restart: from the first word, no marks, no counters", () => {
     let s = wrong(wrong(right(right(started()))));
     s = guidedReducer(s, { type: "restart" });
@@ -208,6 +225,34 @@ describe("guided mode – the controls on the page", () => {
     expect(skip()).toBeNull();
     expect(screen.getByTestId("guided-previous")).toBeDisabled();
     await until(() => active() === "ab"); // passed again → on to where the child was
+  }, 30_000);
+
+  it("arrows on the active word: left → next word at once (saved as skipped), right → the word before", async () => {
+    await startGuided();
+    const arrows = () => screen.getByTestId("block-alif-fatha").querySelector("[data-testid=guided-arrows]");
+    expect(arrows()).not.toBeNull();
+    expect(screen.getByTestId("guided-arrow-previous")).toBeDisabled(); // first word
+    expect(screen.getAllByTestId("guided-arrow-next")).toHaveLength(1); // only on the active word
+    fireEvent.click(screen.getByTestId("guided-arrow-next"));
+    await at(0);
+    expect(active()).toBe("ab");
+    expect(arrows()).toBeNull();
+    expect(screen.getByTestId("block-ab").querySelector("[data-testid=guided-arrows]")).not.toBeNull();
+    expect(getLessonProgress(KEY)).toMatchObject({ passed: [], skipped: ["alif-fatha"] });
+    fireEvent.click(screen.getByTestId("guided-arrow-previous"));
+    await at(0);
+    expect(active()).toBe("alif-fatha");
+  }, 30_000);
+
+  it("the next arrow is disabled on the last word; no arrows while Start over asks", async () => {
+    window.localStorage.setItem("alif:progress:v1", JSON.stringify({ [KEY]: { passed: ORDER.slice(0, 11) } }));
+    await startGuided();
+    expect(active()).toBe("usra");
+    expect(screen.getByTestId("guided-arrow-next")).toBeDisabled();
+    expect(screen.getByTestId("guided-arrow-previous")).toBeEnabled();
+    fireEvent.click(screen.getByTestId("guided-restart"));
+    await at(0);
+    expect(screen.queryByTestId("guided-arrows")).toBeNull();
   }, 30_000);
 
   it("Start over asks first; Cancel continues; Yes → word 1, progress of this step deleted", async () => {

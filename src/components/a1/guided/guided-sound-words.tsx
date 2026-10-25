@@ -26,6 +26,8 @@ import { useGuidedFlow, type BlockMark, type GuidedBlock, type GuidedDeps } from
 // "Vorheriges Wort", "Von vorn" (after a small inline question) and, once a
 // word was answered wrong twice, "Überspringen" – the child may also keep trying.
 // A skipped word is saved as skipped, never as passed.
+// On the active block itself: arrows to the block before (right, RTL) and after
+// (left) at any time; jumping on saves the word as skipped, like "Überspringen".
 
 type Groups = WordRow[];
 
@@ -258,6 +260,31 @@ export function GuidedSoundWords({ groups, progressKey }: { groups: Groups; prog
           <span data-testid="checking-sign" role="img" aria-label="Wird geprüft" className="pointer-events-none absolute left-3 top-3 flex h-11 w-11 items-center justify-center rounded-full bg-card text-muted-foreground shadow">
             <Loader2 className="h-5 w-5 motion-safe:animate-spin" aria-hidden />
           </span>
+        )}
+        {isActive && mode === "guided" && !confirmRestart && (
+          // Over the picture (an overlay with the picture's 4:3 shape), vertically centred on it.
+          <div dir="ltr" data-testid="guided-arrows" className="pointer-events-none absolute inset-x-0 top-0 flex aspect-[4/3] max-h-full items-center justify-between px-2">
+            <Button
+              variant="secondary"
+              onClick={flow.forward}
+              disabled={!flow.nextBlock}
+              aria-label="Nächstes Wort"
+              data-testid="guided-arrow-next"
+              className="pointer-events-auto w-11 rounded-full bg-card/90 px-0 shadow backdrop-blur disabled:opacity-0"
+            >
+              <ChevronLeft className="h-6 w-6" aria-hidden />
+            </Button>
+            <Button
+              variant="secondary"
+              onClick={flow.previous}
+              disabled={!flow.previousBlock}
+              aria-label="Vorheriges Wort"
+              data-testid="guided-arrow-previous"
+              className="pointer-events-auto w-11 rounded-full bg-card/90 px-0 shadow backdrop-blur disabled:opacity-0"
+            >
+              <ChevronRight className="h-6 w-6" aria-hidden />
+            </Button>
+          </div>
         )}
         {isActive && caption && (
           <span data-testid="guided-caption" dir="ltr" className="pointer-events-none absolute -bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full bg-card px-3 py-1 text-sm font-semibold shadow">
