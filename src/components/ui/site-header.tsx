@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { TrackSwitch } from "@/components/track/track-switch";
+
 import { LogoMark } from "./logo";
 
 export function SiteHeader() {
@@ -17,6 +19,7 @@ export function SiteHeader() {
           <Link href="/a1" className="rounded-lg px-3 py-2 text-muted-foreground transition hover:bg-muted hover:text-foreground focus-ring">
             A1
           </Link>
+          <TrackSwitch className="ml-1" />
         </nav>
       </div>
     </header>

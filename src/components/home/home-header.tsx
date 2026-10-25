@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { ArrowRight, Check, ChevronDown, Globe, Menu, X } from "lucide-react";
 
+import { TrackSwitch } from "@/components/track/track-switch";
 import { cn } from "@/lib/utils";
 
 // The homepage header, over the hero: logo and tagline, the page's sections,
-// the language menu and "Anmelden". No JavaScript: the menus are <details>.
+// the programme, the language menu and "Anmelden". The menus are <details>
+// (no JavaScript); only the programme switch is a client component.
 // Alif has no accounts yet (progress lives in the browser) and only a German
 // interface – both menus say so instead of pretending more.
 
@@ -90,6 +92,7 @@ export function HomeHeader() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
+          <TrackSwitch className="h-11" />
           <LanguageMenu />
           <LoginInfo />
         </div>
@@ -109,6 +112,9 @@ export function HomeHeader() {
               ))}
             </nav>
             <div className="mt-2 border-t border-brand-gold/20 px-4 pt-3 text-sm text-brand-navy/70">
+              <p className="mb-3 flex items-center justify-between gap-2 font-medium text-brand-navy">
+                Programm <TrackSwitch />
+              </p>
               <p className="flex items-center gap-2 font-medium text-brand-navy">
                 <Globe className="h-4 w-4" aria-hidden /> Deutsch
               </p>

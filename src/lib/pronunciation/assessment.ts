@@ -1,3 +1,5 @@
+import type { Track } from "@/lib/track";
+
 import { evaluateLetterConditions } from "./condition-engine";
 import { NO_MATCHING_RULE } from "./types";
 import type { AzureAssessment, FailureReason, IqraResult, PronunciationResponse } from "./types";
@@ -24,7 +26,15 @@ export type AssessmentInput = {
   target: string;
   primary: AzureAssessment & { accuracy: number; pronunciation: number };
   iqra: IqraResult | null;
+  /** "speaking" (ALIF Speaking – Beginner): Azure's minimum scores alone decide; no condition rules. */
+  track?: Track;
 };
+
+/** ALIF Speaking: the rule names the condition files use, with general messages. */
+export const SPEAKING_FEEDBACK = {
+  excellent: "ممتاز 👏",
+  needs_improvement: "حاول مرة أخرى",
+} as const;
 
 /** Azure returned no usable score (no speech recognised) – the original answered 422. */
 export function hasUsableAzureScores(
@@ -33,7 +43,7 @@ export function hasUsableAzureScores(
   return primary.accuracy !== null && primary.pronunciation !== null;
 }
 
-export function buildAssessment({ target, primary, iqra }: AssessmentInput): PronunciationResponse {
+export function buildAssessment({ target, primary, iqra, track = "pronunciation" }: AssessmentInput): PronunciationResponse {
   const targetScore = discriminationScore(primary);
 
   const accuracyPassed = primary.accuracy >= MIN_ACCURACY;
@@ -50,12 +60,17 @@ export function buildAssessment({ target, primary, iqra }: AssessmentInput): Pro
 
   const iqraPhonemes = iqra?.phonemes ?? [];
 
-  const feedback = evaluateLetterConditions({
-    target,
-    azureAccuracy: primary.accuracy,
-    azureRecognized: primary.recognized,
-    iqraPhonemes,
-  });
+  // Up to here `passed` is Azure's minimum scores alone – all ALIF Speaking asks for.
+  const speakingRule = passed ? "excellent" : "needs_improvement";
+  const feedback =
+    track === "speaking"
+      ? { rule: speakingRule, message: SPEAKING_FEEDBACK[speakingRule], conditions: [] }
+      : evaluateLetterConditions({
+          target,
+          azureAccuracy: primary.accuracy,
+          azureRecognized: primary.recognized,
+          iqraPhonemes,
+        });
 
   if (feedback) {
     // The conditions file, not the legacy score alone, decides whether this

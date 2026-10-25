@@ -7,6 +7,7 @@ import "./globals.css";
 import { SiteFooter } from "@/components/ui/site-footer";
 import { HideOnHome } from "@/components/ui/hide-on-home";
 import { SiteHeader } from "@/components/ui/site-header";
+import { TrackDialog } from "@/components/track/track-switch";
 
 export const metadata: Metadata = {
   title: { default: "Alif – Arabisch lernen", template: "%s · Alif" },
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </HideOnHome>
         <main className="flex-1">{children}</main>
         <SiteFooter />
+        <TrackDialog />
       </body>
     </html>
   );

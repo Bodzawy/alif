@@ -68,6 +68,17 @@ describe("submitRecording", () => {
     expect((body.get("audio") as File).name).toBe("voice.wav");
   });
 
+  it("sends the chosen programme (track); ALIF Pronunciation before any choice", async () => {
+    window.localStorage.clear();
+    const fetchImpl = vi.fn(async () => new Response(JSON.stringify(response()), { status: 200 }));
+    const sent = (i: number) => ((fetchImpl.mock.calls[i] as unknown as [string, RequestInit])[1].body as FormData).get("track");
+    await submitRecording(new Blob(["RIFF"]), "ألف", { fetchImpl: fetchImpl as unknown as typeof fetch });
+    window.localStorage.setItem("alif:track", "speaking");
+    await submitRecording(new Blob(["RIFF"]), "ألف", { fetchImpl: fetchImpl as unknown as typeof fetch });
+    expect([sent(0), sent(1)]).toEqual(["pronunciation", "speaking"]);
+    window.localStorage.clear();
+  });
+
   it("sends the length before the silence was cut (recordedMs) when the WAV was trimmed; nothing else changes", async () => {
     const fetchImpl = vi.fn(async () => new Response(JSON.stringify(response()), { status: 200 }));
     const trimmed = new Blob(["RIFF"], { type: "audio/wav" });

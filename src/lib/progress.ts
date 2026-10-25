@@ -1,8 +1,17 @@
+import { currentTrack, subscribeTrack } from "./track";
+
 // Per-browser lesson progress. Kept deliberately small and behind this module
 // so it can be replaced by a server-side store once Alif gets accounts.
+// Each programme (src/lib/track.ts) has its own progress: "pronunciation" keeps
+// the key from before the programmes, "speaking" starts empty.
 
 const STORAGE_KEY = "alif:progress:v1";
+const SPEAKING_STORAGE_KEY = "alif:progress:speaking:v1";
 const listeners = new Set<() => void>();
+
+function storageKey() {
+  return currentTrack() === "speaking" ? SPEAKING_STORAGE_KEY : STORAGE_KEY;
+}
 
 export type LessonProgress = {
   passed: string[];
@@ -18,6 +27,7 @@ export function lessonKey(levelSlug: string, lessonSlug: string) {
   return `${levelSlug}/${lessonSlug}`;
 }
 
+let cachedKey: string | undefined;
 let cachedRaw: string | null | undefined;
 let cachedState: ProgressState = {};
 
@@ -105,13 +115,17 @@ function migrateOnce(raw: string | null): string | null {
 }
 
 function read(): ProgressState {
+  const key = storageKey();
   let raw: string | null = null;
   try {
-    raw = migrateOnce(window.localStorage.getItem(STORAGE_KEY));
+    // The migrations concern progress from before the programmes.
+    const stored = window.localStorage.getItem(key);
+    raw = key === STORAGE_KEY ? migrateOnce(stored) : stored;
   } catch {
     raw = null;
   }
-  if (raw === cachedRaw) return cachedState;
+  if (key === cachedKey && raw === cachedRaw) return cachedState;
+  cachedKey = key;
   cachedRaw = raw;
   try {
     const parsed = raw ? (JSON.parse(raw) as unknown) : {};
@@ -123,10 +137,12 @@ function read(): ProgressState {
 }
 
 function write(state: ProgressState) {
+  const key = storageKey();
   try {
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    window.localStorage.setItem(key, JSON.stringify(state));
   } catch {
     // Storage unavailable (private mode, blocked): progress lives only in memory.
+    cachedKey = key;
     cachedRaw = undefined;
     cachedState = state;
   }
@@ -136,12 +152,15 @@ function write(state: ProgressState) {
 export function subscribeProgress(listener: () => void) {
   listeners.add(listener);
   const onStorage = (event: StorageEvent) => {
-    if (event.key === STORAGE_KEY) listener();
+    if (event.key === STORAGE_KEY || event.key === SPEAKING_STORAGE_KEY) listener();
   };
   window.addEventListener("storage", onStorage);
+  // Another programme chosen: its progress applies from now on.
+  const unsubscribeTrack = subscribeTrack(listener);
   return () => {
     listeners.delete(listener);
     window.removeEventListener("storage", onStorage);
+    unsubscribeTrack();
   };
 }
 

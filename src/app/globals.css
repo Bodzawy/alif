@@ -88,6 +88,8 @@
 .home-levels-grid {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
+  /* The cards' sr-only labels are absolute: without this they escape the scrolling row and widen the page on phones. */
+  position: relative;
 }
 
 .home-learning-path li > a,

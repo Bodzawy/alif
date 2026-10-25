@@ -1,5 +1,7 @@
 import { defineConfig } from "@playwright/test";
 
+import { chosenTrack } from "./e2e/support/track";
+
 // E2E against production builds (`npm run build` first).
 //
 // Two local servers are started:
@@ -11,6 +13,7 @@ import { defineConfig } from "@playwright/test";
 // To run the real full chain against a deployment with real services:
 //   ALIF_E2E_LIVE_URL=https://alif.example.com ALIF_E2E_FAKE_AUDIO=/path/alif.wav npx playwright test live
 const fakeAudio = process.env.ALIF_E2E_FAKE_AUDIO;
+
 const chromiumPath = process.env.ALIF_E2E_CHROMIUM ?? (process.env.PLAYWRIGHT_BROWSERS_PATH === "/opt/pw-browsers" ? "/opt/pw-browsers/chromium" : undefined);
 
 export default defineConfig({
@@ -21,6 +24,7 @@ export default defineConfig({
   reporter: [["list"]],
   use: {
     baseURL: "http://127.0.0.1:3210",
+    storageState: chosenTrack("http://127.0.0.1:3210", "http://127.0.0.1:3211"),
     permissions: ["microphone"],
     trace: "retain-on-failure",
     launchOptions: {

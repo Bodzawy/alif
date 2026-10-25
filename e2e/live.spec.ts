@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 
+import { chosenTrack } from "./support/track";
 import { recordExercise } from "./support/helpers";
 
 // Full production chain against a real deployment:
@@ -10,7 +11,7 @@ import { recordExercise } from "./support/helpers";
 const liveUrl = process.env.ALIF_E2E_LIVE_URL;
 
 test.skip(!liveUrl, "set ALIF_E2E_LIVE_URL to run against a deployment with real services");
-test.use({ baseURL: liveUrl });
+test.use({ baseURL: liveUrl, storageState: chosenTrack(liveUrl ? new URL(liveUrl).origin : "") });
 
 test("live: microphone → Alif API → Azure + IQRA → conditions → feedback", async ({ page }) => {
   await page.goto("/a0/words/lesson-1");
