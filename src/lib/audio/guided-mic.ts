@@ -3,11 +3,17 @@
 // recorded and cut by simple voice detection (RMS level from an AnalyserNode,
 // the existing speech gate of voice-activity.ts).
 
-import { recordingSupported } from "./recording";
+import { MIC_CONSTRAINTS, recordingSupported } from "./recording";
 import { createSpeechGate } from "./voice-activity";
 
-/** As requested for guided mode. (The button mode keeps MIC_CONSTRAINTS from recording.ts: unprocessed audio.) */
-export const GUIDED_MIC_CONSTRAINTS: MediaTrackConstraints = { echoCancellation: true, noiseSuppression: true, autoGainControl: true };
+/**
+ * Unprocessed audio, exactly as the button mode (MIC_CONSTRAINTS from recording.ts).
+ * The browser filters distorted the short sounds: the same أُ that IQRA heard as
+ * "< uu" from a raw recording came back as "h aa" from guided mode, because noise
+ * suppression and gain control smear the glottal stop, and echo cancellation – still
+ * adapting to the model sound that just played – swallowed the start of the child's answer.
+ */
+export const GUIDED_MIC_CONSTRAINTS: MediaTrackConstraints = MIC_CONSTRAINTS;
 
 /** Voice detection – to be tuned on real children's voices. */
 export const GUIDED_VAD = {

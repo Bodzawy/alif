@@ -4,7 +4,7 @@ Nichts wurde committet; der Git-Zustand wurde nicht angefasst.
 
 ## Neu
 
-- `src/lib/audio/guided-mic.ts` – Mikrofon für den geführten Modus: einmal beim Start-Tipp geöffnet (`echoCancellation`, `noiseSuppression`, `autoGainControl` = true), Sprach-Erkennung per RMS aus einem `AnalyserNode` (Werte in `GUIDED_VAD`), `release()` stoppt die Spuren.
+- `src/lib/audio/guided-mic.ts` – Mikrofon für den geführten Modus: einmal beim Start-Tipp geöffnet (`GUIDED_MIC_CONSTRAINTS` = `MIC_CONSTRAINTS` aus `recording.ts`: `channelCount` 1, `echoCancellation`, `noiseSuppression`, `autoGainControl` = false – die Browser-Filter haben kurze Laute verzerrt, z. B. die Hamza in أُ, und die Echo-Unterdrückung hat den Anfang der Antwort nach dem Vorsprech-Ton verschluckt), Sprach-Erkennung per RMS aus einem `AnalyserNode` (Werte in `GUIDED_VAD`), `release()` stoppt die Spuren.
 - `src/components/a1/guided/evaluate.ts` – schickt eine Aufnahme an dieselbe Auswertung wie „Aufnehmen“ (`blobTo16KhzMonoWav` → `submitRecording` → `toStudentFeedback(...).passed`); unterscheidet richtig / falsch / Dienstfehler.
 - `src/components/a1/guided/guided-flow.ts` – Zustandsmaschine (Reducer + `useGuidedFlow`): focus → play → listen → check → right („Super!“) / noch einmal – unbegrenzt viele Versuche (kein „needs practice“ mehr), Pause bei `visibilitychange`, Rückfall nach 2 Dienstfehlern.
 - `src/components/a1/guided/guided-sound-words.tsx` – Start-Karte „Los geht's!“, Blöcke (Unschärfe, Vergrößerung, Tönungen, Hör-Zeichen, Beschriftungen, aria-live), Speichern / Fortsetzen, Rückfall auf die Knopf-Seite.

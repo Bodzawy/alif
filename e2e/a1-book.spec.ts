@@ -39,7 +39,7 @@ async function mock(page: Page) {
 }
 
 /**
- * "Wörter" opens in guided mode: its microphone request (echo cancellation) is refused so the
+ * "Wörter" opens in guided mode: its microphone request (made before the button page exists) is refused so the
  * page falls back to the buttons. Dialogues need the same request – so the refusal holds only
  * while localStorage "e2e:refuse-guided" is set (before a "Wörter" step).
  */
@@ -47,7 +47,7 @@ async function refuseGuidedMicrophoneWhenFlagged(page: Page) {
   await page.addInitScript(() => {
     const original = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
     navigator.mediaDevices.getUserMedia = (constraints) =>
-      localStorage.getItem("e2e:refuse-guided") === "1" && (constraints?.audio as MediaTrackConstraints | undefined)?.echoCancellation === true
+      localStorage.getItem("e2e:refuse-guided") === "1" && !document.querySelector('[data-testid="guided-fallback"]')
         ? Promise.reject(new DOMException("denied", "NotAllowedError"))
         : original(constraints);
   });

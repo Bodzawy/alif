@@ -179,7 +179,7 @@ test("reduced motion: the active block does not grow, the listening sign does no
 });
 
 test("fallback: microphone not available → today's page with buttons and a note; the buttons work", async ({ page }) => {
-  // Only guided mode's request (with echo cancellation) is refused; the buttons' recording still works.
+  // Only guided mode's request (before the button page is shown) is refused; the buttons' recording still works.
   await syntheticVoice(page);
   await refuseGuidedMicrophone(page);
   const calls = await mockServices(page);
