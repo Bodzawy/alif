@@ -74,8 +74,12 @@ async function postAudioToModel(
 export async function assessIqra(audioBuffer: Buffer, signal?: AbortSignal): Promise<IqraResult | null> {
   const result = await postAudioToModel("IQRA", iqraUrl(), audioBuffer, signal);
   if (!result || typeof result !== "object") return null;
-  const data = result as IqraResult & { ok?: boolean };
-  if (data.ok === false) return null;
+  const data = result as IqraResult & { ok?: boolean; error?: unknown };
+  if (data.ok === false) {
+    // E.g. "The recording is silent or too quiet": the log must say why IQRA has no phonemes.
+    console.warn("IQRA could not analyse the recording:", data.error ?? "no reason given");
+    return null;
+  }
 
   return {
     sequence: data.sequence,

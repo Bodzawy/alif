@@ -158,6 +158,13 @@ describe("POST /api/pronunciation", () => {
     expect(body.feedback.rule).toBe("no_matching_rule");
   });
 
+  it("logs IQRA's reason when it refuses the recording", async () => {
+    iqraReply = { status: 200, body: { ok: false, error: "The recording is silent or too quiet" } };
+    const body = await (await post({ audio: await wavFile(), target: "باء" })).json();
+    expect(body.details.iqra).toBeNull();
+    expect(console.warn).toHaveBeenCalledWith("IQRA could not analyse the recording:", "The recording is silent or too quiet");
+  });
+
   it("treats { ok: false } from a model service as unavailable", async () => {
     iqraReply = { status: 200, body: { ok: false } };
     const body = await (await post({ audio: await wavFile(), target: "ألف" })).json();
