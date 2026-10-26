@@ -68,8 +68,10 @@ describe("A1 · Lesson 1 content", () => {
       expect(group.sound.transliteration).toBe(vowel);
       for (const word of group.words) {
         const rules = CONDITION_RULES[word.exercise.target]!;
-        expect(rules.excellent!.conditions.map(shortVowelCondition), word.id).toContain(`iqra_initial_vowel == ${vowel}`);
-        expect(rules.said_wrong_vowel!.conditions.map(shortVowelCondition), word.id).toContain(`iqra_initial_vowel != ${vowel}`);
+        // إصبع also passes with u: before the emphatic ص IQRA hears its kasra as u (and أُصْبُع is correct Fusha too).
+        const accepted: string[] = word.id === "isba" ? [vowel, "u"] : [vowel];
+        expect(rules.excellent!.conditions.map(shortVowelCondition), word.id).toContain(`iqra_initial_vowel == ${accepted.join("|")}`);
+        expect(rules.said_wrong_vowel!.conditions.map(shortVowelCondition), word.id).toContain(`iqra_initial_vowel != ${accepted.join("|")}`);
         // Real IQRA format: hamza, then the vowel. Right vowel passes, the other two do not.
         const consonants = (rules.excellent!.conditions[1]!.match(/\[(.*)\]/)![1]!).replace(/'/g, "").split(",").map((t) => t.split("|")[0]!);
         for (const heardVowel of ["a", "i", "u"] as const) {
@@ -79,8 +81,8 @@ describe("A1 · Lesson 1 content", () => {
             primary: { referenceText: word.exercise.target, recognized: word.exercise.target, accuracy: 95, pronunciation: 95, fluency: 90, completeness: 100, firstSoundScore: 80, words: [] },
             iqra: { phonemes },
           });
-          expect(result.passed, `${word.id} heard with ${heardVowel}`).toBe(heardVowel === vowel);
-          if (heardVowel !== vowel) expect(result.conditionEvaluation.matchedRule).toBe("said_wrong_vowel");
+          expect(result.passed, `${word.id} heard with ${heardVowel}`).toBe(accepted.includes(heardVowel));
+          if (!accepted.includes(heardVowel)) expect(result.conditionEvaluation.matchedRule).toBe("said_wrong_vowel");
         }
       }
     }

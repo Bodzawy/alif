@@ -994,6 +994,8 @@ const FIRST_VOWEL: Record<string, "a" | "i" | "u"> = {
   "إبرة": "i", "إصبع": "i", "إبريق": "i",
   "أذن": "u", "أم": "u", "أسرة": "u",
 };
+// إصبع also passes with u: before the emphatic ص IQRA hears its kasra as u (and أُصْبُع is correct Fusha too).
+const ALSO_ACCEPTED: Record<string, Array<"a" | "i" | "u">> = { "إصبع": ["u"] };
 
 const IQRA_UNAVAILABLE_MESSAGE = "تعذر تحليل أصوات النطق. حاول مرة أخرى بعد التأكد من اتصال IQRA.";
 
@@ -1071,7 +1073,7 @@ describe("vocabulary IQRA gates", () => {
       expect(VOCABULARY_RULES[target]!.excellent!.conditions.map(shortVowelCondition)).toEqual([
         "azure_accuracy >= 70",
         `iqra_phonemes contains ${list}`,
-        ...(vowel ? [`iqra_initial_vowel == ${vowel}`] : []),
+        ...(vowel ? [`iqra_initial_vowel == ${[vowel, ...(ALSO_ACCEPTED[target] ?? [])].join("|")}`] : []),
       ]);
     });
 
@@ -1100,7 +1102,7 @@ describe("vocabulary IQRA gates", () => {
 
     if (vowel) {
       it("5. A1: fails when the word begins with a different vowel – all consonants right, Azure 100", () => {
-        for (const wrong of (["a", "i", "u"] as const).filter((v) => v !== vowel)) {
+        for (const wrong of (["a", "i", "u"] as const).filter((v) => v !== vowel && !ALSO_ACCEPTED[target]?.includes(v))) {
           for (const token of [wrong, wrong + wrong, wrong.toUpperCase()]) {
             const result = assess(target, 100, spoken(tokens, undefined, token));
             expect(result.passed, `${target} begun with ${token}`).toBe(false);

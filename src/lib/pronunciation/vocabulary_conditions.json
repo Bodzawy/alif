@@ -2152,7 +2152,7 @@
       "conditions": [
         "azure_accuracy >= 70",
         "iqra_phonemes contains ['S','b','E']",
-        "iqra_initial_vowel == ['i|ii|I|II|iey|Iey']"
+        "iqra_initial_vowel == ['i|ii|I|II|iey|Iey|u|uu|U|UU']"
       ],
       "message": "ممتاز 👏 نطقت كلمة إصبع بشكل صحيح"
     },
@@ -2168,7 +2168,7 @@
       "conditions": [
         "azure_accuracy >= 70",
         "iqra_phonemes is not empty",
-        "iqra_initial_vowel != i"
+        "iqra_initial_vowel != ['i|ii|I|II|iey|Iey|u|uu|U|UU']"
       ],
       "message": "حاول مرة أخرى، كلمة إصبع تبدأ بـ إِ"
     },
