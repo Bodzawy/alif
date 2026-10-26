@@ -48,11 +48,11 @@ export const CONDITION_RULES: Record<string, RuleSet> = mergeRules(LETTER_RULES,
 
 /**
  * ALIF Speaking (Beginner): gentler IQRA rules for the same targets, only used
- * once Azure has passed the answer. Each word's main sounds, each accepting the
- * sounds a beginner says instead (س or ص, ت or ط, ح or ه …); ر is not checked
- * and nothing is excluded ("does not contain"). Written from the rules above,
- * then edited by hand. A target without an entry, a rule without IQRA
- * conditions, or no answer from IQRA: Azure alone decides.
+ * once Azure has passed the answer: the word's two easiest letters, each also
+ * accepting the sound a beginner says instead (س or ص, ت or ط, ح or ه …); ر is
+ * never checked; the vowels أَ إِ أُ have no IQRA condition. Written from the
+ * rules above, then edited by hand. A target without an entry, a rule without
+ * IQRA conditions, or no answer from IQRA: Azure alone decides.
  */
 export const BEGINNER_RULES = beginnerConditions as Record<string, RuleSet>;
 

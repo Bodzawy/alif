@@ -48,16 +48,16 @@ describe("buildAssessment", () => {
   it("ALIF Speaking: after Azure, the gentle beginner rule checks the sounds IQRA heard", () => {
     const speaking = (target: string, phonemes: string[] | null, overrides: Partial<AzureAssessment> = {}) =>
       buildAssessment({ target, primary: azure({ accuracy: 80, recognized: "x", ...overrides }), iqra: phonemes && { phonemes }, track: "speaking" });
-    // بيت: b, y, t – a ط for the ت is fine for a beginner; another first sound is not.
+    // بيت: its two easiest letters, ب and ت – a ط for the ت is fine for a beginner; no ب is not.
     expect(speaking("بيت", ["b", "a", "y", "t"]).passed).toBe(true);
     expect(speaking("بيت", ["b", "a", "y", "T"]).passed).toBe(true);
     expect(speaking("بيت", ["t", "a", "y", "t"])).toMatchObject({ passed: false, failureReason: "rule_not_matched", feedback: { rule: "needs_improvement" } });
-    // صباح الخير: س for ص and ه for ح are accepted, the ر is not checked.
+    // صباح الخير: ب and خ (ه or ح accepted for it); ص and ر are not checked.
     expect(speaking("صباح الخير", ["s", "a", "b", "aa", "h", "a", "l", "x", "ay"]).passed).toBe(true);
     expect(speaking("صباح الخير", ["s", "a", "m", "aa", "h", "a", "l", "x", "ay"]).passed).toBe(false); // no ب
-    // أُ: the vowel is the lesson – still checked, the cross-vowel exclusions are gone.
+    // أَ إِ أُ: Azure alone.
     expect(speaking("أُ", ["<", "uu"]).passed).toBe(true);
-    expect(speaking("أُ", ["h", "aa"]).passed).toBe(false);
+    expect(speaking("أُ", ["h", "aa"]).passed).toBe(true);
     // No phonemes from IQRA, or a rule without sounds (ألف): Azure's verdict stands.
     expect(speaking("بيت", null).passed).toBe(true);
     expect(speaking("ألف", ["q"]).passed).toBe(true);
