@@ -1,6 +1,7 @@
 import type { A1Lesson, A1Unit, PronunciationExercise } from "@/data/types";
 import { clozeLineText } from "@/lib/arabic/cloze";
 
+import { formsFallbackTexts } from "./forms-fallback";
 import { A1_GROUPS } from "./groups";
 import { a1Alif } from "./lesson-1";
 import { a1Ba } from "./letters/ba";
@@ -117,6 +118,13 @@ export function a1Exercises(): PronunciationExercise[] {
  */
 export function a1SpokenTexts(): string[] {
   return [...new Set(a1Entries().flatMap(({ lesson }) => lesson.steps.flatMap(stepSpokenTexts)))];
+}
+
+/** Every text of formsFallbackTexts (allowed by /api/tts). */
+export function a1FormsFallbackTexts(): string[] {
+  return [
+    ...new Set(a1Entries().flatMap(({ lesson }) => lesson.steps.flatMap((step) => (step.kind === "forms" ? Object.values(formsFallbackTexts(step.forms)) : [])))),
+  ];
 }
 
 const PUNCT = /[.،؟!:]+$/;

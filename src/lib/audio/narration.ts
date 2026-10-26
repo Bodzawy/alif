@@ -1,7 +1,8 @@
 // Plays pre-recorded narration files (WAV under public/). One sequence at a
 // time: starting a new one interrupts whatever is playing. Files that are not
 // in the `available` list are skipped without a request, so a missing file
-// never shows an error or a 404 in the console.
+// never shows an error or a 404 in the console – or, with `fallback`, replaced
+// by another source (e.g. text-to-speech of the clip's text until it is recorded).
 //
 // All clips go through ONE reused audio element. iOS Safari only lets a page
 // play sound after a tap, and that permission belongs to the element that was
@@ -55,11 +56,14 @@ export function createNarrator({
   available,
   extension = "wav",
   createAudio = () => new Audio(),
+  fallback,
 }: {
   baseUrl: string;
   available: readonly string[];
   extension?: string;
   createAudio?: () => HTMLAudioElement;
+  /** For a clip without a file: the URL to play instead, or null to skip it. */
+  fallback?: (name: string) => Promise<string | null>;
 }): Narrator {
   const files = new Set(available);
   let muted = typeof window === "undefined" ? false : readMuted();
@@ -77,8 +81,14 @@ export function createNarrator({
     finish("interrupted");
   }
 
-  function playOne(name: string): Promise<ClipResult> {
-    return playSource(`${baseUrl}/${name}.${extension}`);
+  /** The clip's file, else its fallback; "interrupted" when a newer sound started while the fallback loaded. */
+  async function playOne(name: string): Promise<ClipResult> {
+    if (files.has(name)) return playSource(`${baseUrl}/${name}.${extension}`);
+    if (!fallback) return "skipped";
+    const token = generation;
+    const url = await fallback(name).catch(() => null);
+    if (token !== generation) return "interrupted";
+    return url ? playSource(url) : "skipped";
   }
 
   function playSource(url: string): Promise<ClipResult> {
@@ -109,7 +119,7 @@ export function createNarrator({
       stopCurrent();
       if (muted) return true;
       for (const name of names) {
-        if (!files.has(name)) continue;
+        if (!files.has(name) && !fallback) continue;
         const result = await playOne(name);
         if (token !== generation || result === "interrupted") return false;
       }
@@ -118,7 +128,7 @@ export function createNarrator({
     async playClip(name) {
       generation += 1;
       stopCurrent();
-      if (muted || !files.has(name)) return "skipped";
+      if (muted || (!files.has(name) && !fallback)) return "skipped";
       return playOne(name);
     },
     async playUrl(url) {

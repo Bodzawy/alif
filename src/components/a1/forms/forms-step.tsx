@@ -4,9 +4,11 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { CheckCircle2, Lock, Play, RotateCcw, Volume2, VolumeX } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { formsFallbackTexts } from "@/data/a1/forms-fallback";
 import type { FormsContent } from "@/data/types";
 import { createNarrator, readMuted, type Narrator } from "@/lib/audio/narration";
 import { getLessonProgress, markLessonCompleted, subscribeProgress } from "@/lib/progress";
+import { speechUrl } from "@/lib/tts/player";
 import { cn } from "@/lib/utils";
 
 import { BuildActivity } from "./build-activity";
@@ -62,7 +64,13 @@ export function FormsStep({ forms, availableAudio, progressKey }: { forms: Forms
 
   // Created after hydration (it needs the browser), so server and client render alike.
   if (!narrator.current && hydrated) {
-    narrator.current = createNarrator({ baseUrl: forms.audioBase, available: availableAudio });
+    // Until a letter lesson is recorded, text-to-speech reads each missing clip (its caption, or the word).
+    const fallback = formsFallbackTexts(forms);
+    narrator.current = createNarrator({
+      baseUrl: forms.audioBase,
+      available: availableAudio,
+      fallback: async (name) => (fallback[name] ? speechUrl(fallback[name]) : null),
+    });
   }
 
   useEffect(() => {

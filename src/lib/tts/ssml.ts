@@ -4,9 +4,15 @@ import { GERMAN_CUES } from "@/lib/pronunciation/cues";
 
 // Same voice, prosody and output format as the original /api/tts.
 export const TTS_VOICE = "ar-SA-ZariyahNeural";
-/** Only for the German cues (e.g. "Super!"): an Arabic voice would mispronounce them. */
+/** Only for German texts (the cues, e.g. "Super!", and unrecorded Formen narration): an Arabic voice would mispronounce them. */
 export const TTS_VOICE_GERMAN = "de-DE-KatjaNeural";
 const GERMAN_TEXTS: ReadonlySet<string> = new Set(Object.values(GERMAN_CUES));
+const ARABIC_SCRIPT = /[\u0600-\u06FF]/;
+
+/** German: a cue, or any (allowed) text without Arabic script. */
+export function isGermanText(text: string) {
+  return GERMAN_TEXTS.has(text) || !ARABIC_SCRIPT.test(text);
+}
 
 /**
  * The voices a request may ask for (dialogue speakers; DialogueVoice in
@@ -79,7 +85,7 @@ function speechText(text: string) {
 }
 
 export function buildSsml(text: string, voice?: TtsVoiceKey): string {
-  const german = GERMAN_TEXTS.has(text);
+  const german = isGermanText(text);
   return `
       <speak version="1.0"
              xmlns="http://www.w3.org/2001/10/synthesis"

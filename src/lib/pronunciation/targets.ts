@@ -1,4 +1,4 @@
-import { a1SpokenTexts } from "@/data/a1";
+import { a1FormsFallbackTexts, a1SpokenTexts } from "@/data/a1";
 import { allExercises } from "@/data/curriculum";
 import { ARABIC_LETTERS } from "./letters";
 import { FEEDBACK_CUES, GERMAN_CUES } from "./cues";
@@ -25,6 +25,8 @@ export const ALLOWED_TTS_TEXTS: ReadonlySet<string> = new Set([
   ...allExercises().map((exercise) => exercise.modelText),
   // The words of A1 "Ergänzen" / "Hören" without a recording (e.g. بَابْ).
   ...a1SpokenTexts(),
+  // A letter lesson's Formen narration (German) and words until they are recorded.
+  ...a1FormsFallbackTexts(),
   ...Object.values(FEEDBACK_CUES),
   ...Object.values(GERMAN_CUES),
 ]);

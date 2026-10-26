@@ -1,6 +1,6 @@
 # Aufnahme-Skript: Dschim (ج) – A1 · Lektion 1 · „Formen", „Ergänzen", „Hören"
 
-Folder for all files: `public/audio/a1/jim/formen/` (WAV). The page plays only files that exist at build time; a missing file is skipped silently.
+Folder for all files: `public/audio/a1/jim/formen/` (WAV). The page plays only files that exist at build time; until a clip is recorded, text-to-speech reads its text (German narration: Azure de-DE-KatjaNeural; words: the lesson voice).
 Generated from the lesson data (`src/data/a1/letters/jim.ts`, texts from `letterFormsTexts` in `src/data/a1/letter-lesson.ts`). If a text changes there, change it here too (a unit test checks that both match).
 
 "Wörter" needs no recordings: like Alif, it plays the model pronunciation through /api/tts. The words of "Ergänzen" and "Hören" (section 3) are spoken by /api/tts until their recordings exist. Their German narration is shared by all letters (`docs/audio-scripts/shared.md`).

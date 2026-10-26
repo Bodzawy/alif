@@ -145,6 +145,27 @@ describe("narration player", () => {
     expect(await narrator.playClip("b")).toBe("skipped");
   });
 
+  it("fallback: a clip without a file plays the fallback's URL; none (null) or a newer sound skips it", async () => {
+    const asked: string[] = [];
+    const narrator = createNarrator({
+      baseUrl: "/x",
+      available: ["a"],
+      fallback: async (name) => {
+        asked.push(name);
+        return name === "spoken" ? "blob:tts/spoken" : null;
+      },
+    });
+    expect(await narrator.play(["a", "spoken", "silent"])).toBe(true);
+    expect(played).toEqual(["a", "spoken"]); // the file first, then the text-to-speech URL
+    expect(asked).toEqual(["spoken", "silent"]); // never asked for a recorded clip
+    expect(await narrator.playClip("silent")).toBe("skipped");
+    played.length = 0;
+    const cut = narrator.playClip("spoken");
+    narrator.stop(); // while the fallback is still loading
+    expect(await cut).toBe("interrupted");
+    expect(played).toEqual([]);
+  });
+
   it("remembers mute; muted sequences resolve at once without sound", async () => {
     const narrator = createNarrator({ baseUrl: "/x", available: ["a"] });
     narrator.setMuted(true);

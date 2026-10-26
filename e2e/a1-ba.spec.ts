@@ -2,6 +2,7 @@ import { expect, test } from "@playwright/test";
 
 import { getA1Lesson } from "../src/data/a1";
 import { baWriting } from "../src/data/letters/ba";
+import { toneWav } from "./support/audio";
 import { collectPageErrors } from "./support/helpers";
 import { answerGaps, boardPoints, mockServices, noHorizontalScroll, scrollY, syntheticVoice, touchDrag, touchStroke } from "./support/letters";
 
@@ -168,4 +169,17 @@ test("Ba Schreiben: tapping the dot first asks for the order; a long stroke on t
   const r = (await page.getByTestId("writing-board").boundingBox())!;
   await touchStroke(page, Array.from({ length: 12 }, (_, i) => ({ x: center.x - i * (r.width / 24), y: center.y })));
   await expect(page.getByTestId("writing-instruction")).toHaveText("Tippe nur kurz auf den Punkt.");
+});
+
+test("Ba · Formen without recordings: Azure reads the narration (German) and the words until they are recorded", async ({ page }) => {
+  const spoken: string[] = [];
+  await page.route("**/api/tts", async (route) => {
+    spoken.push(route.request().postDataJSON().text);
+    await route.fulfill({ status: 200, contentType: "audio/wav", body: toneWav(150) });
+  });
+  await page.goto("/a1/lesson-1/ba/step-2");
+  await page.getByTestId("start-button").click();
+  await expect.poll(() => spoken[0], { timeout: 20_000 }).toBe("Heute lernst du die Formen vom Ba. Das Ba sieht nicht immer gleich aus. Hör gut zu und mach mit!");
+  await expect.poll(() => spoken.length, { timeout: 30_000 }).toBeGreaterThan(2);
+  expect(spoken[1]).toBe("Zuerst schauen wir vier Wörter an. Dann übst du selbst. Schau genau zu.");
 });
