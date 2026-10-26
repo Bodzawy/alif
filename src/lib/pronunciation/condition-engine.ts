@@ -29,7 +29,8 @@ export type ConditionEvaluation = {
   conditions: string[];
 };
 
-function normalizedText(value: string) {
+/** Letters only: without harakat, spaces and punctuation. */
+export function normalizedText(value: string) {
   return value
     .replace(/[ً-ٰٟ]/g, "")
     .replace(/[^ء-يa-zA-Z]/g, "");

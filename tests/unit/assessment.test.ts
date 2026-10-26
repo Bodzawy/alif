@@ -19,25 +19,32 @@ function azure(overrides: Partial<AzureAssessment> = {}): AzureAssessment & { ac
 }
 
 describe("buildAssessment", () => {
-  it("ALIF Speaking: Azure's minimum scores alone decide, for any target and any IQRA answer", () => {
+  it("ALIF Speaking: Azure alone – accuracy 65 (and first sound 30), or Azure recognised exactly the target", () => {
+    const speaking = (target: string, overrides: Partial<AzureAssessment>, phonemes: string[] | null = null) =>
+      buildAssessment({ target, primary: azure(overrides), iqra: phonemes && { phonemes }, track: "speaking" });
     for (const target of ["باء", "أَ", "أُ"]) {
-      const right = buildAssessment({ target, primary: azure({ accuracy: 90, firstSoundScore: 30 }), iqra: null, track: "speaking" });
+      const right = speaking(target, { accuracy: 65, firstSoundScore: 30, recognized: "شيء" });
       expect(right).toMatchObject({ passed: true, failureReason: null, feedback: { rule: "excellent", message: "ممتاز 👏" } });
       expect(right.conditionEvaluation).toMatchObject({ matchedRule: "excellent", conditions: [] });
       // Phonemes ALIF Pronunciation would reject change nothing here.
-      expect(buildAssessment({ target, primary: azure({ accuracy: 95 }), iqra: { phonemes: ["s", "ii"] }, track: "speaking" }).passed).toBe(true);
+      expect(speaking(target, { accuracy: 80 }, ["s", "ii"]).passed).toBe(true);
     }
-    expect(buildAssessment({ target: "باء", primary: azure({ accuracy: 89 }), iqra: null, track: "speaking" })).toMatchObject({
+    expect(speaking("باء", { accuracy: 64, recognized: "تاء" })).toMatchObject({
       passed: false,
       failureReason: "low_accuracy",
       feedback: { rule: "needs_improvement", message: "حاول مرة أخرى" },
     });
-    expect(buildAssessment({ target: "باء", primary: azure({ accuracy: 95, firstSoundScore: 29 }), iqra: null, track: "speaking" })).toMatchObject({
-      passed: false,
-      failureReason: "weak_first_sound",
-    });
-    // ALIF Pronunciation keeps 65: an 89 is not a low accuracy there.
-    expect(buildAssessment({ target: "باء", primary: azure({ accuracy: 89 }), iqra: { phonemes: ["b", "aa"] } }).passed).toBe(true);
+    expect(speaking("باء", { accuracy: 90, firstSoundScore: 29, recognized: "تاء" })).toMatchObject({ passed: false, failureReason: "weak_first_sound" });
+
+    // Recognised as the target: right with any scores – harakat, punctuation and a repetition do not matter.
+    for (const [target, recognized] of [["باء", "باء."], ["أُ", "أُ أُ"], ["أُ", "أ"], ["بَيْتٌ", "بيت"]] as const) {
+      expect(speaking(target, { accuracy: 20, firstSoundScore: 10, recognized }), `${target} / ${recognized}`).toMatchObject({ passed: true, failureReason: null });
+    }
+    for (const [target, recognized] of [["أُ", "إ"], ["باء", "باء تاء"], ["باء", ""], ["أُ", "أُم"]] as const) {
+      expect(speaking(target, { accuracy: 20, recognized }).passed, `${target} / ${recognized}`).toBe(false);
+    }
+    // Only ALIF Speaking: in ALIF Pronunciation a recognised target with a low score still fails.
+    expect(buildAssessment({ target: "باء", primary: azure({ accuracy: 20, recognized: "باء" }), iqra: { phonemes: ["b", "aa"] } }).passed).toBe(false);
   });
 
   it("passes only when the matched rule is 'excellent'", () => {

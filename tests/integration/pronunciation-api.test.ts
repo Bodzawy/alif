@@ -232,7 +232,7 @@ describe("POST /api/pronunciation", () => {
 describe("POST /api/pronunciation – ALIF Speaking (track=speaking)", () => {
   it("decides by Azure alone: IQRA is not called, its phonemes do not matter", async () => {
     iqraReply = { status: 200, body: { phonemes: ["s", "aa"] } }; // would be "said_sin" in ALIF Pronunciation
-    azureMock.assess.mockResolvedValue(azureResult({ referenceText: "ثاء", recognized: "ساء", accuracy: 90, firstSoundScore: 60 }));
+    azureMock.assess.mockResolvedValue(azureResult({ referenceText: "ثاء", recognized: "ساء", accuracy: 70, firstSoundScore: 60 }));
     const body = await (await post({ audio: await wavFile(), target: "ثاء", track: "speaking" })).json();
     expect(body).toMatchObject({ passed: true, failureReason: null, feedback: { rule: "excellent", message: "ممتاز 👏" }, details: { iqra: null } });
     expect(body.conditionEvaluation).toMatchObject({ matchedRule: "excellent", iqraPhonemes: [], conditions: [] });
@@ -240,13 +240,16 @@ describe("POST /api/pronunciation – ALIF Speaking (track=speaking)", () => {
     expect(console.log).toHaveBeenCalledWith("ARABIC PRONUNCIATION ASSESSMENT:", expect.objectContaining({ track: "speaking", services: { azure: true, iqra: "not used" } }));
   });
 
-  it("fails below its minimum scores (accuracy 90, first sound 30)", async () => {
-    azureMock.assess.mockResolvedValue(azureResult({ accuracy: 89 }));
+  it("fails below the minimum scores (accuracy 65, first sound 30) unless Azure recognised the target", async () => {
+    azureMock.assess.mockResolvedValue(azureResult({ accuracy: 64, recognized: "تاء" }));
     let body = await (await post({ audio: await wavFile(), target: "باء", track: "speaking" })).json();
     expect(body).toMatchObject({ passed: false, failureReason: "low_accuracy", feedback: { rule: "needs_improvement", message: "حاول مرة أخرى" } });
-    azureMock.assess.mockResolvedValue(azureResult({ accuracy: 90, firstSoundScore: 29 }));
+    azureMock.assess.mockResolvedValue(azureResult({ accuracy: 90, firstSoundScore: 29, recognized: "تاء" }));
     body = await (await post({ audio: await wavFile(), target: "باء", track: "speaking" })).json();
     expect(body).toMatchObject({ passed: false, failureReason: "weak_first_sound" });
+    azureMock.assess.mockResolvedValue(azureResult({ accuracy: 40, firstSoundScore: 20, recognized: "باء." }));
+    body = await (await post({ audio: await wavFile(), target: "باء", track: "speaking" })).json();
+    expect(body).toMatchObject({ passed: true, failureReason: null, feedback: { rule: "excellent" } });
     expect(iqra.requests).toHaveLength(0);
   });
 

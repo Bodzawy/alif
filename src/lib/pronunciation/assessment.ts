@@ -1,6 +1,6 @@
 import type { Track } from "@/lib/track";
 
-import { evaluateLetterConditions } from "./condition-engine";
+import { evaluateLetterConditions, normalizedText } from "./condition-engine";
 import { NO_MATCHING_RULE } from "./types";
 import type { AzureAssessment, FailureReason, IqraResult, PronunciationResponse } from "./types";
 
@@ -11,9 +11,17 @@ import type { AzureAssessment, FailureReason, IqraResult, PronunciationResponse 
 
 /** Legacy thresholds – they only decide `failureReason`, not `passed`. */
 export const MIN_ACCURACY = 65;
-/** ALIF Speaking has no IQRA check, so Azure alone must be sure the word was said well. */
-export const SPEAKING_MIN_ACCURACY = 90;
 export const MIN_FIRST_SOUND_SCORE = 30;
+
+/**
+ * Azure recognised exactly the target: every recognised word, without harakat
+ * and punctuation, is the target (a repeated sound, "أُ أُ", counts too).
+ */
+export function recognizedTarget(recognized: string, target: string): boolean {
+  const expected = normalizedText(target);
+  const words = recognized.split(/\s+/).map(normalizedText).filter(Boolean);
+  return expected !== "" && words.length > 0 && words.every((word) => word === expected);
+}
 
 export { NO_MATCHING_RULE };
 
@@ -48,21 +56,23 @@ export function hasUsableAzureScores(
 export function buildAssessment({ target, primary, iqra, track = "pronunciation" }: AssessmentInput): PronunciationResponse {
   const targetScore = discriminationScore(primary);
 
-  const accuracyPassed = primary.accuracy >= (track === "speaking" ? SPEAKING_MIN_ACCURACY : MIN_ACCURACY);
+  const accuracyPassed = primary.accuracy >= MIN_ACCURACY;
   const firstSoundPassed = primary.firstSoundScore === null || primary.firstSoundScore >= MIN_FIRST_SOUND_SCORE;
+  // ALIF Speaking also accepts the word whenever Azure recognised exactly the target, whatever its scores.
+  const azurePassed = (track === "speaking" && recognizedTarget(primary.recognized, target)) || (accuracyPassed && firstSoundPassed);
 
-  let passed = accuracyPassed && firstSoundPassed;
+  let passed = azurePassed;
   let failureReason: FailureReason | null = null;
 
-  if (!accuracyPassed) {
+  if (!azurePassed && !accuracyPassed) {
     failureReason = "low_accuracy";
-  } else if (!firstSoundPassed) {
+  } else if (!azurePassed && !firstSoundPassed) {
     failureReason = "weak_first_sound";
   }
 
   const iqraPhonemes = iqra?.phonemes ?? [];
 
-  // Up to here `passed` is Azure's minimum scores alone – all ALIF Speaking asks for.
+  // Up to here `passed` is Azure alone – all ALIF Speaking asks for.
   const speakingRule = passed ? "excellent" : "needs_improvement";
   const feedback =
     track === "speaking"
@@ -77,7 +87,7 @@ export function buildAssessment({ target, primary, iqra, track = "pronunciation"
   if (feedback) {
     // The conditions file, not the legacy score alone, decides whether this
     // attempt passes, but Azure's minimum score checks remain mandatory.
-    passed = feedback.rule === "excellent" && accuracyPassed && firstSoundPassed;
+    passed = feedback.rule === "excellent" && azurePassed;
     if (!passed && failureReason === null) {
       failureReason = "rule_not_matched";
     }
