@@ -500,7 +500,7 @@
   "تاج": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['t|tt|T|TT','j|jj']"
+        "iqra_phonemes contains ['t|tt|T|TT','j|jj|g|gg|t|d']"
       ],
       "message": "ممتاز 👏 نطقت كلمة تاج بشكل صحيح"
     },
