@@ -1,3 +1,4 @@
+import beginnerConditions from "./beginner_conditions.json";
 import letterConditions from "./letter_conditions.json";
 import soundConditions from "./sound_conditions.json";
 import vocabularyConditions from "./vocabulary_conditions.json";
@@ -44,6 +45,16 @@ function mergeRules(...sources: Array<Record<string, RuleSet>>): Record<string, 
 export const SOUND_RULES = soundConditions as Record<string, RuleSet>;
 
 export const CONDITION_RULES: Record<string, RuleSet> = mergeRules(LETTER_RULES, VOCABULARY_RULES, SOUND_RULES);
+
+/**
+ * ALIF Speaking (Beginner): gentler IQRA rules for the same targets, only used
+ * once Azure has passed the answer. Each word's main sounds, each accepting the
+ * sounds a beginner says instead (س or ص, ت or ط, ح or ه …); ر is not checked
+ * and nothing is excluded ("does not contain"). Written from the rules above,
+ * then edited by hand. A target without an entry, a rule without IQRA
+ * conditions, or no answer from IQRA: Azure alone decides.
+ */
+export const BEGINNER_RULES = beginnerConditions as Record<string, RuleSet>;
 
 export function hasRulesFor(target: string): boolean {
   return Object.prototype.hasOwnProperty.call(CONDITION_RULES, target);

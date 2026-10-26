@@ -1,5 +1,5 @@
 import { MAX_UPLOAD_BYTES, MIN_AUDIO_MS, readWavHeader } from "@/lib/audio/wav-header";
-import { buildAssessment, hasUsableAzureScores } from "@/lib/pronunciation/assessment";
+import { buildAssessment, hasUsableAzureScores, speakingAzurePassed, speakingNeedsIqra } from "@/lib/pronunciation/assessment";
 import { ruleDecidedWithoutIqra } from "@/lib/pronunciation/condition-engine";
 import { azureConfig, iqraUrl } from "@/lib/pronunciation/config";
 import { apiError } from "@/lib/pronunciation/errors";
@@ -36,7 +36,8 @@ function recordedMs(value: FormDataEntryValue | null): number | null {
 
 // Browser → Alif → (Azure ‖ IQRA) → condition engine → feedback.
 // IQRA is not waited for when Azure alone already decides the rule.
-// ALIF Speaking (form field track=speaking): Azure only, IQRA is not called.
+// ALIF Speaking (form field track=speaking): Azure decides; IQRA only for the
+// gentle beginner rule of a target that has one, and only when Azure passed.
 export async function POST(request: Request) {
   const startedAt = Date.now();
   /** Cancels the IQRA request once its answer is no longer needed. */
@@ -99,10 +100,10 @@ export async function POST(request: Request) {
     // Both evaluations start in parallel. IQRA is best effort (null on
     // failure); Azure is required. Each one is timed for the log.
     const timings: Timings = { azureMs: null, iqraMs: null };
-    const iqraPending =
-      track === "speaking"
-        ? Promise.resolve(null)
-        : iqraUrl()
+    const askIqra = track !== "speaking" || speakingNeedsIqra(target);
+    const iqraPending = !askIqra
+      ? Promise.resolve(null)
+      : iqraUrl()
           ? timed(assessIqra(audioBuffer, iqraCancel.signal), (ms) => (timings.iqraMs = ms))
           : assessIqra(audioBuffer, iqraCancel.signal);
     let primary;
@@ -125,7 +126,10 @@ export async function POST(request: Request) {
     // every passing rule needs), IQRA cannot change the answer: answer now
     // instead of waiting for it. The result is the same; only details.iqra is
     // null and conditionEvaluation.iqraPhonemes empty.
-    const decidedWithoutIqra = track === "speaking" || ruleDecidedWithoutIqra({ target, azureAccuracy: primary.accuracy, azureRecognized: primary.recognized }) !== null;
+    const decidedWithoutIqra =
+      track === "speaking"
+        ? !askIqra || !speakingAzurePassed(primary, target)
+        : ruleDecidedWithoutIqra({ target, azureAccuracy: primary.accuracy, azureRecognized: primary.recognized }) !== null;
     const iqra = decidedWithoutIqra ? null : await iqraPending;
     const assessment = buildAssessment({ target, primary, iqra, track });
 
@@ -135,7 +139,7 @@ export async function POST(request: Request) {
       audio: { ...audioLog, sampleRate: wav.sampleRate, channels: wav.channels },
       services: {
         azure: true,
-        iqra: track === "speaking" ? "not used" : !iqraUrl() ? "not configured" : decidedWithoutIqra ? "not needed" : iqra !== null,
+        iqra: !askIqra ? "not used" : !iqraUrl() ? "not configured" : decidedWithoutIqra ? "not needed" : iqra !== null,
       },
       azureAccuracy: primary.accuracy,
       azureRecognized: primary.recognized,

@@ -1,6 +1,7 @@
 import type { Track } from "@/lib/track";
 
 import { evaluateLetterConditions, normalizedText } from "./condition-engine";
+import { BEGINNER_RULES } from "./rules";
 import { NO_MATCHING_RULE } from "./types";
 import type { AzureAssessment, FailureReason, IqraResult, PronunciationResponse } from "./types";
 
@@ -23,6 +24,18 @@ export function recognizedTarget(recognized: string, target: string): boolean {
   return expected !== "" && words.length > 0 && words.every((word) => word === expected);
 }
 
+/** ALIF Speaking: Azure's part – its minimum scores, or it recognised exactly the target. */
+export function speakingAzurePassed(primary: Pick<AzureAssessment, "accuracy" | "firstSoundScore" | "recognized">, target: string): boolean {
+  const accuracyPassed = primary.accuracy !== null && primary.accuracy >= MIN_ACCURACY;
+  const firstSoundPassed = primary.firstSoundScore === null || primary.firstSoundScore >= MIN_FIRST_SOUND_SCORE;
+  return recognizedTarget(primary.recognized, target) || (accuracyPassed && firstSoundPassed);
+}
+
+/** ALIF Speaking asks IQRA only when the target's beginner rule checks sounds. */
+export function speakingNeedsIqra(target: string): boolean {
+  return (BEGINNER_RULES[target]?.excellent?.conditions ?? []).some((condition) => condition.startsWith("iqra_"));
+}
+
 export { NO_MATCHING_RULE };
 
 export function discriminationScore(result: AzureAssessment): number | null {
@@ -36,7 +49,7 @@ export type AssessmentInput = {
   target: string;
   primary: AzureAssessment & { accuracy: number; pronunciation: number };
   iqra: IqraResult | null;
-  /** "speaking" (ALIF Speaking – Beginner): Azure's minimum scores alone decide; no condition rules. */
+  /** "speaking" (ALIF Speaking – Beginner): Azure first, then the gentle BEGINNER_RULES (when IQRA answered). */
   track?: Track;
 };
 
@@ -59,7 +72,7 @@ export function buildAssessment({ target, primary, iqra, track = "pronunciation"
   const accuracyPassed = primary.accuracy >= MIN_ACCURACY;
   const firstSoundPassed = primary.firstSoundScore === null || primary.firstSoundScore >= MIN_FIRST_SOUND_SCORE;
   // ALIF Speaking also accepts the word whenever Azure recognised exactly the target, whatever its scores.
-  const azurePassed = (track === "speaking" && recognizedTarget(primary.recognized, target)) || (accuracyPassed && firstSoundPassed);
+  const azurePassed = track === "speaking" ? speakingAzurePassed(primary, target) : accuracyPassed && firstSoundPassed;
 
   let passed = azurePassed;
   let failureReason: FailureReason | null = null;
@@ -72,11 +85,16 @@ export function buildAssessment({ target, primary, iqra, track = "pronunciation"
 
   const iqraPhonemes = iqra?.phonemes ?? [];
 
-  // Up to here `passed` is Azure alone – all ALIF Speaking asks for.
+  // ALIF Speaking: once Azure passed it, the gentle beginner rule checks the sounds IQRA heard.
+  // Without such a rule or without IQRA's phonemes, Azure's verdict stands.
+  const beginner =
+    track === "speaking" && azurePassed && iqraPhonemes.length > 0
+      ? evaluateLetterConditions({ target, azureAccuracy: primary.accuracy, azureRecognized: primary.recognized, iqraPhonemes }, BEGINNER_RULES)
+      : null;
   const speakingRule = passed ? "excellent" : "needs_improvement";
   const feedback =
     track === "speaking"
-      ? { rule: speakingRule, message: SPEAKING_FEEDBACK[speakingRule], conditions: [] }
+      ? (beginner ?? { rule: speakingRule, message: SPEAKING_FEEDBACK[speakingRule], conditions: [] })
       : evaluateLetterConditions({
           target,
           azureAccuracy: primary.accuracy,

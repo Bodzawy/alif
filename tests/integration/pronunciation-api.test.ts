@@ -230,14 +230,24 @@ describe("POST /api/pronunciation", () => {
 });
 
 describe("POST /api/pronunciation – ALIF Speaking (track=speaking)", () => {
-  it("decides by Azure alone: IQRA is not called, its phonemes do not matter", async () => {
-    iqraReply = { status: 200, body: { phonemes: ["s", "aa"] } }; // would be "said_sin" in ALIF Pronunciation
-    azureMock.assess.mockResolvedValue(azureResult({ referenceText: "ثاء", recognized: "ساء", accuracy: 70, firstSoundScore: 60 }));
-    const body = await (await post({ audio: await wavFile(), target: "ثاء", track: "speaking" })).json();
+  it("a target whose beginner rule checks no sounds (ألف): Azure alone, IQRA is not called", async () => {
+    azureMock.assess.mockResolvedValue(azureResult({ referenceText: "ألف", recognized: "ألف", accuracy: 70, firstSoundScore: 60 }));
+    const body = await (await post({ audio: await wavFile(), target: "ألف", track: "speaking" })).json();
     expect(body).toMatchObject({ passed: true, failureReason: null, feedback: { rule: "excellent", message: "ممتاز 👏" }, details: { iqra: null } });
     expect(body.conditionEvaluation).toMatchObject({ matchedRule: "excellent", iqraPhonemes: [], conditions: [] });
     expect(iqra.requests).toHaveLength(0);
     expect(console.log).toHaveBeenCalledWith("ARABIC PRONUNCIATION ASSESSMENT:", expect.objectContaining({ track: "speaking", services: { azure: true, iqra: "not used" } }));
+  });
+
+  it("after Azure passed: the gentle beginner rule with IQRA's phonemes (ثاء: ث, or f / s / t)", async () => {
+    azureMock.assess.mockResolvedValue(azureResult({ referenceText: "ثاء", recognized: "ساء", accuracy: 70, firstSoundScore: 60 }));
+    iqraReply = { status: 200, body: { phonemes: ["s", "aa"] } }; // "said_sin" in ALIF Pronunciation
+    let body = await (await post({ audio: await wavFile(), target: "ثاء", track: "speaking" })).json();
+    expect(body).toMatchObject({ passed: true, details: { iqra: { phonemes: ["s", "aa"] } } });
+    iqraReply = { status: 200, body: { phonemes: ["k", "aa"] } };
+    body = await (await post({ audio: await wavFile(), target: "ثاء", track: "speaking" })).json();
+    expect(body).toMatchObject({ passed: false, failureReason: "rule_not_matched", feedback: { rule: "needs_improvement" } });
+    expect(iqra.requests).toHaveLength(2);
   });
 
   it("fails below the minimum scores (accuracy 65, first sound 30) unless Azure recognised the target", async () => {
@@ -249,8 +259,7 @@ describe("POST /api/pronunciation – ALIF Speaking (track=speaking)", () => {
     expect(body).toMatchObject({ passed: false, failureReason: "weak_first_sound" });
     azureMock.assess.mockResolvedValue(azureResult({ accuracy: 40, firstSoundScore: 20, recognized: "باء." }));
     body = await (await post({ audio: await wavFile(), target: "باء", track: "speaking" })).json();
-    expect(body).toMatchObject({ passed: true, failureReason: null, feedback: { rule: "excellent" } });
-    expect(iqra.requests).toHaveLength(0);
+    expect(body).toMatchObject({ passed: true, failureReason: null, feedback: { rule: "excellent" } }); // IQRA heard b
   });
 
   it("an unknown or missing track is ALIF Pronunciation (IQRA and the condition files)", async () => {

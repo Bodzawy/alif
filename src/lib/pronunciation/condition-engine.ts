@@ -128,9 +128,11 @@ export function matchesCondition(condition: string, context: ConditionContext) {
 }
 
 export function evaluateLetterConditions(
-  context: ConditionContext & { target: string }
+  context: ConditionContext & { target: string },
+  /** Another rule set for the same targets (ALIF Speaking: BEGINNER_RULES). */
+  rules: Record<string, Record<string, Rule>> = CONDITION_RULES
 ): ConditionEvaluation | null {
-  const letterRules = (CONDITION_RULES as Record<string, Record<string, Rule>>)[context.target];
+  const letterRules = rules[context.target];
   if (!letterRules) return null;
 
   for (const [rule, definition] of Object.entries(letterRules)) {
