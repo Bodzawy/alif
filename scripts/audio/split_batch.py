@@ -34,6 +34,20 @@ def speech_regions(path, total):
         if total - pos >= 0.06: regions.append([pos, total])
         yield (noise, d), regions
 
+def clear_pauses(path, total, n):
+    """Recordings with clear pauses between the texts (Google AI Studio with [long pause]): their pauses are quiet but
+    not digital silence. When some threshold finds exactly n speech regions apart by at least 0.3 s, that is the cut."""
+    for noise in (-50, -45, -40, -35):
+        regions, pos = [], 0.0
+        for s, e in silences(path, noise, 0.3):
+            s = max(s, 0.0)
+            if s - pos >= 0.06: regions.append([pos, s])
+            pos = max(pos, e)
+        if total - pos >= 0.06: regions.append([pos, total])
+        if len(regions) == n:
+            return (noise, 0.3), regions
+    return None
+
 HARAKAT = re.compile("[\u064B-\u0652\u0670]")
 
 def pred_dur(text, scale):
@@ -87,8 +101,8 @@ def main():
     items, name = spec["items"], spec["batch"]
     n = len(items)
     total = duration(audio_path)
-    chosen = None
-    for setting, regions in speech_regions(audio_path, total):
+    chosen = clear_pauses(audio_path, total, n)
+    for setting, regions in ([] if chosen else speech_regions(audio_path, total)):
         if len(regions) >= n:
             chosen = (setting, regions); break
         last = (setting, regions)
