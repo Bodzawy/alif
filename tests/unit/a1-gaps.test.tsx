@@ -232,6 +232,19 @@ describe("the gap flow", () => {
     expect(played).toEqual([]);
   });
 
+  it("Ergänzen: the word plays by itself after the intro, and again as soon as the next item appears", async () => {
+    const words = step5.gaps.items.map((i) => i.audio!);
+    const gaps: GapsContent = { ...step5.gaps, items: step5.gaps.items.slice(0, 2) };
+    render(<GapsStep gaps={gaps} availableAudio={[...ALL_FILES, ...words]} progressKey="k" />);
+    fireEvent.click(await screen.findByTestId("start-button"));
+    await waitFor(() => expect(played).toEqual(["g5_intro", gaps.items[0]!.audio]));
+    played.length = 0;
+    answerWith(BOOK5[0]![2]);
+    fireEvent.click(screen.getByTestId("gap-next")); // on to item 2 without waiting
+    await waitFor(() => expect(played.at(-1)).toBe(gaps.items[1]!.audio));
+    expect(played).not.toContain("g5_intro"); // the intro only once
+  });
+
   it("Hören: the item's word plays after the intro; the sukun item reveals with g_reveal_sukun", async () => {
     const words = step6.gaps.items.map((i) => i.audio!);
     const gaps: GapsContent = { ...step6.gaps, items: step6.gaps.items.slice(9) }; // only رَأْس

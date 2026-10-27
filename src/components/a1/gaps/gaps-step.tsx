@@ -25,7 +25,8 @@ import { GAPS_FALLBACK_MS, GAPS_NARRATION, GAPS_TEXT, gapStars } from "./content
 // wrong answer: a hint; second: the right tile is shown with the reason, and
 // the child still places it. The result screen ("Korrigieren") lists every word.
 // Differences between the steps come only from the data (`mode`, choices,
-// clips). A word without a recording is spoken by /api/tts.
+// clips). A word without a recording is spoken by /api/tts. Every item starts
+// with its word (after the intro on the first one), in "Ergänzen" too.
 
 type Phase = "ask" | "correct" | "result";
 type Result = { id: string; firstTry: boolean };
@@ -113,7 +114,7 @@ export function GapsStep({ gaps, availableAudio, progressKey }: { gaps: GapsCont
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sayWord]);
 
-  // Intro on the first item; in "Hören" every item starts with its word.
+  // Intro on the first item; then every item starts with its word – no tap needed.
   const introDone = useRef(false);
   useEffect(() => {
     if (!started || phase !== "ask" || !narrator.current) return;
@@ -125,7 +126,7 @@ export function GapsStep({ gaps, availableAudio, progressKey }: { gaps: GapsCont
         setCaption(gaps.narration.intro);
         await narrateWithFallback(nr, gaps.narration.intro, GAPS_FALLBACK_MS.intro, signal);
       }
-      if (!signal.aborted && listen) void sayWord(signal, 0);
+      if (!signal.aborted) void sayWord(signal, 0);
     })();
     // Runs when an item appears (or after "Nochmal"), not on every answer.
     // eslint-disable-next-line react-hooks/exhaustive-deps
