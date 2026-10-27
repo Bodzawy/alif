@@ -21,6 +21,8 @@ const JOIN_MS = 450;
 // shuffled tile bank. Tiles go in from the right; a wrong tile shakes back to
 // the bank. A full word slides together and fades into the real, browser-
 // shaped word with the Hamza-Alif (and the Hand that holds it) highlighted.
+// Each word is heard as soon as it appears (the first right after the
+// activity's intro) and again with "Anhören" next to its picture.
 export function BuildActivity({ words, narrator, onComplete, letter }: { words: FormsWord[]; narrator: Narrator; onComplete: () => void; letter?: FormsLetter }) {
   const [wordIndex, setWordIndex] = useState(0);
   const word = words[wordIndex]!;
@@ -41,6 +43,7 @@ export function BuildActivity({ words, narrator, onComplete, letter }: { words: 
         word={word}
         letter={letter}
         narrator={narrator}
+        first={wordIndex === 0}
         last={wordIndex === words.length - 1}
         onNext={async () => {
           if (wordIndex < words.length - 1) {
@@ -56,8 +59,29 @@ export function BuildActivity({ words, narrator, onComplete, letter }: { words: 
   );
 }
 
-function BuildWord({ word, letter, narrator, last, onNext }: { word: FormsWord; letter?: FormsLetter; narrator: Narrator; last: boolean; onNext: () => void }) {
+function BuildWord({
+  word,
+  letter,
+  narrator,
+  first,
+  last,
+  onNext,
+}: {
+  word: FormsWord;
+  letter?: FormsLetter;
+  narrator: Narrator;
+  first: boolean;
+  last: boolean;
+  onNext: () => void;
+}) {
   const { tiles, target, position } = useMemo(() => wordShape(word, letter), [word, letter]);
+
+  // The word as soon as it appears; the first one after the activity's intro (restarting it is not heard).
+  useEffect(() => {
+    void narrator.play(first ? [NARRATION.build.intro, word.audio] : [word.audio]);
+    // Once per word: the component is keyed by it.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const [placed, setPlaced] = useState<(string | null)[]>(() => tiles.map(() => null));
   const [bank, setBank] = useState<BankTile[]>(() => shuffled(tiles.map((tile, i) => ({ key: `${i}`, tile }))));
   const [shake, setShake] = useState<string | null>(null);
@@ -101,7 +125,12 @@ function BuildWord({ word, letter, narrator, last, onNext }: { word: FormsWord; 
     <section aria-label={`Baue das Wort: ${word.german}`} data-testid={`build-word-${word.id}`} data-phase={phase} className="rounded-3xl border bg-card p-5 text-center shadow-card sm:p-8">
       {/* The word's picture stays in view while the child builds it (and after). */}
       {word.image && (
-        <Image src={word.image.src} alt={word.image.alt} width={160} height={120} className="mx-auto mb-4 rounded-2xl" unoptimized data-testid="build-image" />
+        <Image src={word.image.src} alt={word.image.alt} width={160} height={120} className="mx-auto mb-3 rounded-2xl" unoptimized data-testid="build-image" />
+      )}
+      {!done && (
+        <Button variant="secondary" onClick={() => void narrator.play([word.audio])} data-testid="build-hear" aria-label={`Anhören: ${word.german}`} className="mb-4">
+          <Volume2 className="h-5 w-5" aria-hidden /> Anhören
+        </Button>
       )}
       {/* Slots and the finished word share one place: the tiles slide together, then the word fades in. */}
       <div className={cn("grid min-h-28 place-items-center", isLongWord(tiles) && "grid-cols-1")}>

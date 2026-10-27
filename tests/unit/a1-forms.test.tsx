@@ -302,6 +302,25 @@ async function skipExplain() {
 }
 
 describe("A1 · Schritt 3 Formen – the four parts", () => {
+  it("Baue das Wort: each word is heard as it appears (the first after b_intro) and again with Anhören", async () => {
+    const words = forms.build.map((w) => w.audio);
+    render(<FormsStep forms={forms} availableAudio={[...EXERCISE_AUDIO, ...EXPLAIN_FILES, ...words]} progressKey="k" />);
+    fireEvent.click(await screen.findByTestId("start-button"));
+    await waitFor(() => expect(played.slice(0, 2)).toEqual(["f_intro", "e_intro"]));
+    played.length = 0;
+    await skipExplain();
+    await waitFor(() => expect(played.slice(-2)).toEqual(["b_intro", words[0]]));
+    played.length = 0;
+    fireEvent.click(screen.getByTestId("build-hear"));
+    await waitFor(() => expect(played).toEqual([words[0]]));
+    for (const [i, tile] of splitTiles(forms.build[0]!.arabic).entries()) await tapTile(tile, i);
+    await waitFor(() => expect(screen.getByTestId(`build-word-${forms.build[0]!.id}`)).toHaveAttribute("data-phase", "done"));
+    expect(screen.queryByTestId("build-hear")).toBeNull(); // the result has its own Anhören
+    played.length = 0;
+    fireEvent.click(screen.getByTestId("build-next"));
+    await waitFor(() => expect(played).toEqual([words[1]]));
+  });
+
   it("start → Zuschauen (exercises locked) → build four words → who holds → sort five words → Geschafft", async () => {
     render(<FormsStep forms={forms} availableAudio={[...EXERCISE_AUDIO, ...EXPLAIN_FILES]} progressKey="a1/lesson-1/alif/step-2" />);
 
