@@ -556,7 +556,7 @@
   "جمل": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['m|mm','l|ll']"
+        "iqra_phonemes contains ['j|jj|d|$|t','m|mm','l|ll']"
       ],
       "message": "ممتاز 👏 نطقت كلمة جمل بشكل صحيح"
     },
@@ -584,7 +584,7 @@
   "جبل": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['b|bb','l|ll']"
+        "iqra_phonemes contains ['j|jj|d|$|t','b|bb','l|ll']"
       ],
       "message": "ممتاز 👏 نطقت كلمة جبل بشكل صحيح"
     },

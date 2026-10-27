@@ -1,0 +1,10 @@
+{
+ "batch": "batch-a8",
+ "items": [
+  {"id": "w0174", "kind": "word", "text": "حَقِيبَةٌ"},
+  {"id": "w0175", "kind": "word", "text": "حَدِيقَةٌ"},
+  {"id": "w0176", "kind": "word", "text": "حَفْلَةٌ"},
+  {"id": "w0177", "kind": "word", "text": "حِ"},
+  {"id": "w9001", "kind": "word", "text": "خَسٌّ"}
+ ]
+}

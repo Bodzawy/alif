@@ -1,0 +1,66 @@
+{
+ "batch": "batch-a8",
+ "texts": 5,
+ "audio_seconds": 12.56,
+ "detect": [
+  -50,
+  0.3
+ ],
+ "min_border_gap": 1.39,
+ "speed_scale": 2.13,
+ "warnings": [
+  "1 clips to check by ear: w0177(CHECK-LENGTH)"
+ ],
+ "clips": [
+  {
+   "id": "w0174",
+   "text": "حَقِيبَةٌ",
+   "start": 0.0,
+   "end": 2.63,
+   "speech": 1.72,
+   "expected": 1.72,
+   "gain_db": 1.9,
+   "flag": ""
+  },
+  {
+   "id": "w0175",
+   "text": "حَدِيقَةٌ",
+   "start": 2.76,
+   "end": 6.04,
+   "speech": 2.08,
+   "expected": 1.72,
+   "gain_db": 2.0,
+   "flag": ""
+  },
+  {
+   "id": "w0176",
+   "text": "حَفْلَةٌ",
+   "start": 6.22,
+   "end": 8.52,
+   "speech": 1.17,
+   "expected": 1.49,
+   "gain_db": 0.5,
+   "flag": ""
+  },
+  {
+   "id": "w0177",
+   "text": "حِ",
+   "start": 8.7,
+   "end": 10.59,
+   "speech": 0.47,
+   "expected": 0.8,
+   "gain_db": 3.5,
+   "flag": "CHECK-LENGTH"
+  },
+  {
+   "id": "w9001",
+   "text": "خَسٌّ",
+   "start": 10.78,
+   "end": 12.56,
+   "speech": 1.05,
+   "expected": 1.03,
+   "gain_db": -2.7,
+   "flag": ""
+  }
+ ]
+}
