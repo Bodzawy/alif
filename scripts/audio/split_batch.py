@@ -52,6 +52,40 @@ def clear_pauses(path, total, n):
             return (noise, 0.3), regions
     return None
 
+def envelope(path):
+    """Level in dB per 10 ms frame (mono, 16 kHz)."""
+    raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", path, "-f", "s16le", "-ac", "1", "-ar", "16000", "-"], capture_output=True).stdout
+    import array
+    pcm = array.array("h"); pcm.frombytes(raw[: len(raw) // 2 * 2])
+    out = []
+    for i in range(0, len(pcm), 160):
+        seg = pcm[i:i + 160]
+        rms = math.sqrt(sum(x * x for x in seg) / len(seg)) if seg else 0.0
+        out.append(20 * math.log10(rms / 32768) if rms > 0 else -120.0)
+    return out
+
+def true_borders(path, regions, total, quiet_db=-60.0):
+    """Clear-pause recordings: a word starts softly and fades out slowly, well below the level its region was found at.
+    Between two words, take the longest stretch below quiet_db (the real silence); the word before ends where it begins,
+    the next word starts where it ends. Returns, per word, the span from the end of the silence before it to the start
+    of the silence after it."""
+    db = envelope(path)
+    spans = [[0.0, total] for _ in regions]
+    for k in range(len(regions) - 1):
+        lo, hi = int(regions[k][1] * 100), int(regions[k + 1][0] * 100)
+        best, run = (0, lo, lo), None
+        for t in range(lo, min(hi + 1, len(db))):
+            if db[t] < quiet_db:
+                run = t if run is None else run
+                if t + 1 - run > best[0]: best = (t + 1 - run, run, t + 1)
+            else:
+                run = None
+        if best[0] == 0:  # no real silence: cut at the quietest frame
+            q = min(range(lo, max(lo + 1, min(hi + 1, len(db)))), key=lambda t: db[t])
+            best = (1, q, q + 1)
+        spans[k][1], spans[k + 1][0] = best[1] / 100, best[2] / 100
+    return spans
+
 HARAKAT = re.compile("[\u064B-\u0652\u0670]")
 
 def pred_dur(text, scale):
@@ -126,6 +160,8 @@ def main():
         scale = ratios[len(ratios) // 2]
     regions = cut
     kept = [regions[i + 1][0] - regions[i][1] for i in range(len(regions) - 1)]
+    # Clear pauses: each word from the end of the real silence before it to the start of the silence after it.
+    spans = true_borders(audio_path, regions, total) if clear else None
     warnings = []
     out_dir = os.path.join(os.path.dirname(os.path.abspath(spec_path)), "..", "audio-out", name)
     os.makedirs(out_dir, exist_ok=True)
@@ -134,13 +170,23 @@ def main():
         lo = (regions[i - 1][1] + a) / 2 if i else 0.0
         hi = (b + regions[i + 1][0]) / 2 if i < n - 1 else total
         s, e = max(lo, a - pad_before), min(hi, b + pad_after)
+        if spans:
+            # The whole word plus a little of the silence on each side, never past the middle of that silence.
+            s = max(0.0, spans[i][0] - 0.08) if i == 0 else max((spans[i - 1][1] + spans[i][0]) / 2, spans[i][0] - 0.08)
+            e = min(total, spans[i][1] + 0.08) if i == n - 1 else min((spans[i][1] + spans[i + 1][0]) / 2, spans[i][1] + 0.08)
         tmp = os.path.join(TMPDIR, "_tmp.wav")
-        run(["ffmpeg", "-loglevel", "error", "-y", "-ss", f"{s:.3f}", "-to", f"{e:.3f}", "-i", audio_path, "-ac", "1", tmp])
+        # -ss after -i: read up to the clip instead of seeking (seeking in some WAVs from Google AI Studio returned
+        # nothing past ~24 s, and every later clip came out empty).
+        run(["ffmpeg", "-loglevel", "error", "-y", "-i", audio_path, "-ss", f"{s:.3f}", "-to", f"{e:.3f}", "-ac", "1", tmp])
         mean, peak = volume(tmp)
         gain = max(-6.0, min(10.0, TARGET_MEAN_DB - mean)); gain = min(gain, -1.0 - peak)
         dst = os.path.join(out_dir, it["id"] + ".mp3")
         fades = f",afade=t=in:d={FADE},afade=t=out:st={max(0.0, e - s - FADE):.3f}:d={FADE}" if clear else ""
         run(["ffmpeg", "-loglevel", "error", "-y", "-i", tmp, "-af", f"volume={gain:.2f}dB{fades}", "-c:a", "libmp3lame", "-q:a", "2", dst])
+        # Never install an empty or broken clip: its length must match the cut.
+        got = duration(dst) if os.path.exists(dst) and os.path.getsize(dst) > 1000 else 0.0
+        if abs(got - (e - s)) > 0.1:
+            print(f"FAIL: clip {it['id']} ({it['text']}) came out {got:.2f} s instead of {e - s:.2f} s. Nothing is usable – check ffmpeg."); sys.exit(2)
         os.remove(tmp)
         dur = b - a
         z = (math.log(dur) - math.log(pred_dur(it["text"], scale))) / 0.30
