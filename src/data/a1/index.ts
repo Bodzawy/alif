@@ -1,6 +1,8 @@
 import type { A1Lesson, A1Unit, PronunciationExercise } from "@/data/types";
 import { clozeLineText } from "@/lib/arabic/cloze";
 
+import { vocabularyTanwin } from "@/data/vocabulary-tanwin";
+
 import { formsFallbackTexts } from "./forms-fallback";
 import { A1_GROUPS } from "./groups";
 import { a1Alif } from "./lesson-1";
@@ -50,7 +52,8 @@ export const A1_LEVEL = {
   code: "A1",
   title: "Lektionen",
   description: "Lerne Lektion für Lektion – hören, nachsprechen und sofort Feedback bekommen.",
-  units: [a1Unit1, a1Unit2, a1Unit3, a1Unit4, a1Unit5, a1Unit6, a1Unit7, a1Unit8, a1Unit9, a1Unit10, a1Unit11, a1Unit12, a1Unit13, a1Unit14, a1Unit15, a1Unit16, a1Unit17, a1Unit18, a1Unit19, a1Unit20] as A1Unit[],
+  // The vocabulary words in their Tanwin form, in every lesson (src/data/vocabulary-tanwin.ts).
+  units: [a1Unit1, a1Unit2, a1Unit3, a1Unit4, a1Unit5, a1Unit6, a1Unit7, a1Unit8, a1Unit9, a1Unit10, a1Unit11, a1Unit12, a1Unit13, a1Unit14, a1Unit15, a1Unit16, a1Unit17, a1Unit18, a1Unit19, a1Unit20].map(vocabularyTanwin),
 } as const;
 
 export function getA1Unit(slug: string): A1Unit | undefined {

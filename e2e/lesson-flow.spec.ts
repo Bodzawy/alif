@@ -74,7 +74,8 @@ test("A0 → Wörter → Lesson 1 → listen → record → feedback → retry �
 
   // 4–5: letter and vocabulary cards.
   await expect(page.getByTestId("lesson-letter")).toHaveText("أَ");
-  for (const [id, arabic, german] of [["asad", "أَسَد", "der Löwe"], ["arnab", "أَرْنَب", "der Hase"], ["ananas", "أَنَانَاس", "die Ananas"]]) {
+  // The words are shown with Tanwin (src/data/vocabulary-tanwin.ts).
+  for (const [id, arabic, german] of [["asad", "أَسَدٌ", "der Löwe"], ["arnab", "أَرْنَبٌ", "der Hase"], ["ananas", "أَنَانَاسٌ", "die Ananas"]]) {
     const card = page.getByTestId(`vocab-card-${id}`);
     await expect(card).toBeVisible();
     await expect(page.getByTestId(`vocab-arabic-${id}`)).toHaveText(arabic!);

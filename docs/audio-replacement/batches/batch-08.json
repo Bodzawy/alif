@@ -2,86 +2,6 @@
  "batch": "batch-08",
  "items": [
   {
-   "id": "w0701",
-   "kind": "word",
-   "text": "بُرْتُقَال"
-  },
-  {
-   "id": "w0702",
-   "kind": "word",
-   "text": "تَمَاثِيل"
-  },
-  {
-   "id": "w0703",
-   "kind": "word",
-   "text": "ذَقْن"
-  },
-  {
-   "id": "w0704",
-   "kind": "word",
-   "text": "أَخَذَ"
-  },
-  {
-   "id": "w0705",
-   "kind": "word",
-   "text": "إِذْن"
-  },
-  {
-   "id": "w0706",
-   "kind": "word",
-   "text": "ذِرَاع"
-  },
-  {
-   "id": "w0707",
-   "kind": "word",
-   "text": "ذَهَب"
-  },
-  {
-   "id": "w0708",
-   "kind": "word",
-   "text": "ذَيْل"
-  },
-  {
-   "id": "w0709",
-   "kind": "word",
-   "text": "ذُبَاب"
-  },
-  {
-   "id": "w0710",
-   "kind": "word",
-   "text": "ذِئَاب"
-  },
-  {
-   "id": "w0711",
-   "kind": "word",
-   "text": "بُذُور"
-  },
-  {
-   "id": "w0712",
-   "kind": "word",
-   "text": "هَذَا"
-  },
-  {
-   "id": "w0713",
-   "kind": "word",
-   "text": "هَذِهِ"
-  },
-  {
-   "id": "w0714",
-   "kind": "word",
-   "text": "ذَهَبَ"
-  },
-  {
-   "id": "w0715",
-   "kind": "word",
-   "text": "ذَبَحَ"
-  },
-  {
-   "id": "w0716",
-   "kind": "word",
-   "text": "نَذَرَ"
-  },
-  {
    "id": "w0717",
    "kind": "word",
    "text": "خَذَلَ"
@@ -165,11 +85,6 @@
    "id": "w0733",
    "kind": "word",
    "text": "وُصُول"
-  },
-  {
-   "id": "w0734",
-   "kind": "word",
-   "text": "عَفْو"
   },
   {
    "id": "w0735",
@@ -500,6 +415,91 @@
    "id": "w0800",
    "kind": "word",
    "text": "ثَا"
+  },
+  {
+   "id": "w0801",
+   "kind": "word",
+   "text": "جَا"
+  },
+  {
+   "id": "w0802",
+   "kind": "word",
+   "text": "حَا"
+  },
+  {
+   "id": "w0803",
+   "kind": "word",
+   "text": "خَا"
+  },
+  {
+   "id": "w0804",
+   "kind": "word",
+   "text": "دَا"
+  },
+  {
+   "id": "w0805",
+   "kind": "word",
+   "text": "وَا"
+  },
+  {
+   "id": "w0806",
+   "kind": "word",
+   "text": "يَا"
+  },
+  {
+   "id": "w0807",
+   "kind": "word",
+   "text": "صُرَّة"
+  },
+  {
+   "id": "w0808",
+   "kind": "word",
+   "text": "طُيُور"
+  },
+  {
+   "id": "w0809",
+   "kind": "word",
+   "text": "طُيُر"
+  },
+  {
+   "id": "w0810",
+   "kind": "word",
+   "text": "سُوق"
+  },
+  {
+   "id": "w0811",
+   "kind": "word",
+   "text": "سُق"
+  },
+  {
+   "id": "w0812",
+   "kind": "word",
+   "text": "وَجَدَ"
+  },
+  {
+   "id": "w0813",
+   "kind": "word",
+   "text": "وُجُود"
+  },
+  {
+   "id": "w0814",
+   "kind": "word",
+   "text": "وَلَدَ"
+  },
+  {
+   "id": "w0815",
+   "kind": "word",
+   "text": "وُلُود"
+  },
+  {
+   "id": "w0816",
+   "kind": "word",
+   "text": "وَرْد"
+  },
+  {
+   "id": "w0817",
+   "kind": "word",
+   "text": "بُو"
   }
  ]
 }

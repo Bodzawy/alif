@@ -1,5 +1,6 @@
 import { a1Exercises } from "@/data/a1";
 import type { Lesson, Level, PronunciationExercise } from "@/data/types";
+import { lessonVocabularyTanwin } from "@/data/vocabulary-tanwin";
 import { lesson1 } from "@/data/lessons/words/lesson-1";
 import { lesson2 } from "@/data/lessons/words/lesson-2";
 import { lesson3 } from "@/data/lessons/words/lesson-3";
@@ -51,12 +52,13 @@ export const WORDS_LEVEL: Level = {
   title: "Erste Wörter",
   description: "Erste arabische Wörter hören, nachsprechen und verstehen – mit Bildern und deutscher Übersetzung.",
   // One lesson per letter, in alphabet order. (Until October 2026 this was A1, at /a1/lesson-N.)
+  // The word cards are shown and spoken with Tanwin (src/data/vocabulary-tanwin.ts).
   lessons: [
     lesson1, lesson2, lesson3, lesson4, lesson5, lesson6, lesson7,
     lesson8, lesson9, lesson10, lesson11, lesson12, lesson13, lesson14,
     lesson15, lesson16, lesson17, lesson18, lesson19, lesson20, lesson21,
     lesson22, lesson23, lesson24, lesson25, lesson26, lesson27, lesson28,
-  ],
+  ].map(lessonVocabularyTanwin),
 };
 
 export const LEVELS: Level[] = [WORDS_LEVEL];

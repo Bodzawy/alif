@@ -5,11 +5,15 @@ import { describe, expect, it } from "vitest";
 // the solutions of the book, the general drills, the conversations, the
 // Nisba table, the room words, مَا هَذَا / هَذِهِ and the exercises.
 
-import { getA1Lesson, nextA1Entry } from "@/data/a1";
-import { a1Unit7, a1Unit8 } from "@/data/a1/unit-4";
+import { getA1Lesson, getA1Unit, nextA1Entry } from "@/data/a1";
+
 import { mustafaYamahu, planeDialogue } from "@/data/a1/unit-4/ana-misri";
 import type { A1Lesson, A1Step } from "@/data/types";
 import { gapTask } from "@/lib/arabic/gap";
+
+// The units as the app shows them (vocabulary words with Tanwin, src/data/vocabulary-tanwin.ts).
+const a1Unit7 = getA1Unit("lesson-7")!;
+const a1Unit8 = getA1Unit("lesson-8")!;
 
 const stepOf = <K extends A1Step["kind"]>(lesson: A1Lesson, slug: string, kind: K) => {
   const step = lesson.steps.find((s) => s.slug === slug)!;
@@ -90,7 +94,8 @@ describe("Lektion 8 – هَذِهِ حُجْرَتِي", () => {
 
   it("the sixteen words of the room in book order", () => {
     expect(stepOf(lesson, "step-1", "words").groups[0]!.words.map((w) => w.arabic)).toEqual([
-      "سَرِير", "طَالِب", "مَكْتَب", "نَافِذَة", "بَاب", "كُرْسِيّ", "كِتَاب", "قَلَم", "كُرَّاسَة", "طَاوِلَة", "سِتَارَة", "حَقِيبَة", "سَلَّة", "مَكْتَبَة", "سَجَّادَة", "مِصْبَاح",
+      // Shown and spoken with Tanwin (src/data/vocabulary-tanwin.ts).
+      "سَرِيرٌ", "طَالِبٌ", "مَكْتَبٌ", "نَافِذَةٌ", "بَابٌ", "كُرْسِيٌّ", "كِتَابٌ", "قَلَمٌ", "كُرَّاسَةٌ", "طَاوِلَةٌ", "سِتَارَةٌ", "حَقِيبَةٌ", "سَلَّةٌ", "مَكْتَبَةٌ", "سَجَّادَةٌ", "مِصْبَاحٌ",
     ]);
   });
 

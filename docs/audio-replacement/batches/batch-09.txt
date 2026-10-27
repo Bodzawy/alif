@@ -1,397 +1,199 @@
-جَا
-
-[pause]
-
-حَا
-
-[pause]
-
-خَا
-
-[pause]
-
-دَا
-
-[pause]
-
-وَا
-
-[pause]
-
-يَا
-
-[pause]
-
-صُرَّة
-
-[pause]
-
-طُيُور
-
-[pause]
-
-طُيُر
-
-[pause]
-
-سُوق
-
-[pause]
-
-سُق
-
-[pause]
-
-وَجَدَ
-
-[pause]
-
-وُجُود
-
-[pause]
-
-وَلَدَ
-
-[pause]
-
-وُلُود
-
-[pause]
-
-وَرْد
-
-[pause]
-
-بُو
-
-[pause]
-
 تُو
-
-[pause]
 
 ثُو
 
-[pause]
-
 جُو
-
-[pause]
 
 حُو
 
-[pause]
-
 خُو
-
-[pause]
 
 دُو
 
-[pause]
-
 وُو
-
-[pause]
 
 يُو
 
-[pause]
-
 دِك
-
-[pause]
 
 يَاسَمِينُ
 
-[pause]
-
 يَاسَمِنُ
-
-[pause]
 
 يَمِن
 
-[pause]
-
 الْيَمَن
-
-[pause]
 
 الْيَمِين
 
-[pause]
-
 يَسِير
-
-[pause]
 
 يَجِد
 
-[pause]
-
 يُجْدِي
-
-[pause]
 
 مَجْدِي
 
-[pause]
-
 بِي
-
-[pause]
 
 تِي
 
-[pause]
-
 جِي
-
-[pause]
 
 حِي
 
-[pause]
-
 خِي
-
-[pause]
 
 دِي
 
-[pause]
-
 وِي
-
-[pause]
 
 يِي
 
-[pause]
-
 سَمِير
-
-[pause]
 
 بَابْ
 
-[pause]
-
 كِتَابْ
-
-[pause]
 
 سَبُّورَة
 
-[pause]
-
 فِيلْ
-
-[pause]
 
 وُصُولْ
 
-[pause]
-
 جَمِيلْ
-
-[pause]
 
 بُيُوتْ
 
-[pause]
-
 وُرُودْ
-
-[pause]
 
 تِينْ
 
-[pause]
-
 خَوْخْ
-
-[pause]
 
 أَخِي
 
-[pause]
-
 أُخْتِي
-
-[pause]
 
 بَاتَ
 
-[pause]
-
 جَابِي
-
-[pause]
 
 مُنَى
 
-[pause]
-
 جَاب
-
-[pause]
 
 دُود
 
-[pause]
-
 وَجْدِي
-
-[pause]
 
 دُودِي
 
-[pause]
-
 يَدِي
-
-[pause]
 
 بِيَدِي
 
-[pause]
-
 دَوَاب
-
-[pause]
 
 ذَات
 
-[pause]
-
 ذَاتِي
-
-[pause]
 
 خَاب
 
-[pause]
-
 بَخْت
-
-[pause]
 
 تَحْتِي
 
-[pause]
-
 بِذَاتِي
-
-[pause]
 
 وَحْدِي
 
-[pause]
-
 ثَوْبِي
-
-[pause]
 
 بَيْتِي
 
-[pause]
-
 تُوت
-
-[pause]
 
 رِضَا
 
-[pause]
-
-وَحِيد
-
-[pause]
-
 ذَاتْ
-
-[pause]
 
 خَابْ
 
-[pause]
-
 بَخْتْ
-
-[pause]
-
-حَرِير
-
-[pause]
 
 أَشْجَار
 
-[pause]
-
 حَرْب
-
-[pause]
 
 رِجْل
 
-[pause]
-
 رُمَّان
-
-[pause]
 
 رُخْصَة
 
-[pause]
-
 رِئَة
-
-[pause]
 
 رُبْع
 
-[pause]
-
 رِسَالَة
-
-[pause]
 
 حُجْرَة
 
-[pause]
-
 رِفْعَت
-
-[pause]
 
 طُيُورْ
 
-[pause]
-
 خِيَارْ
-
-[pause]
 
 جَرِيدَة
 
-[pause]
-
 خُضَارْ
-
-[pause]
 
 سَرِيرْ
 
-[pause]
-
 رُو
-
-[pause]
 
 رَا
 
-[pause]
-
 رِي
+
+رَصَاص
+
+بُرْجْ
+
+أَحْمَدْ
+
+تَامِرْ
+
+ثَابِتْ
+
+زَيْت
+
+أَزْهَار
+
+زُمُرُّد
+
+زَمِيل
+
+زِرَاعَة
+
+زِير
+
+زِرّ
+
+زُهُور
+
+زَيْنَب
+
+عَزِيزْ
+
+زَيْد
+
+زِيَاد
+
+عَزَفَ
+
+زِيَادَة

@@ -31,6 +31,13 @@ export const NO_TANWIN: ReadonlySet<string> = new Set([
   "أَحْمَر", // أَفْعَل of a colour
   "أَجْمَل", // أَفْعَل of the comparative
   "أَثْنَاء", // "during": used as an adverb, not with Tanwin
+  // The vocabulary words of the later lessons (vocabularyTanwin, src/data/vocabulary-tanwin.ts):
+  "أَبْيَض", "أَخْضَر", "أَزْرَق", "أَسْوَد", "أَصْفَر", // أَفْعَل of a colour
+  "أَخَذَ", "نَطَقَ", "عَاش", "جَاب", // verbs (er lebte, er durchwanderte)
+  "قِفْ", "لَاحِظْ", // imperatives
+  "مِنْ", "مَعَ", "عِنْدَه", // particles
+  "عَفَاف", // female name
+  "شُبَاط", // month name: whether it takes Tanwin is disputed – kept pausal
 ]);
 
 /** Words whose pausal spelling hides a sound that comes back with Tanwin: the doubled letter of a Nisba or of خَسّ. */

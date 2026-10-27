@@ -14,13 +14,17 @@ vi.mock("@/lib/tts/player", () => ({
 }));
 
 import { OrderStep } from "@/components/a1/order/order-step";
-import { getA1Lesson, nextA1Entry } from "@/data/a1";
-import { a1Unit5, a1Unit6 } from "@/data/a1/unit-3";
+import { getA1Lesson, getA1Unit, nextA1Entry } from "@/data/a1";
+
 import { isSunLetterWord } from "@/data/a1/unit-3/min-ayna";
 import type { A1Lesson, A1Step } from "@/data/types";
 import { transliterate } from "@/lib/arabic/transliterate";
 import { getLessonProgress } from "@/lib/progress";
 import { withTanwin } from "@/lib/arabic/tanwin";
+
+// The units as the app shows them (vocabulary words with Tanwin, src/data/vocabulary-tanwin.ts).
+const a1Unit5 = getA1Unit("lesson-5")!;
+const a1Unit6 = getA1Unit("lesson-6")!;
 
 const KEY = "a1/lesson-5/test/step-x";
 const stepOf = <K extends A1Step["kind"]>(lesson: A1Lesson, slug: string, kind: K) => {
@@ -130,8 +134,9 @@ describe("exercise lists exactly as in the book (samples)", () => {
   it("the positions tables: ه has no dots at the end (note); ع ends with وَدَع", () => {
     const ha = stepOf(entry("lesson-5", "ha"), "step-2", "positions").positions;
     expect(ha.rule?.german).toContain("keine zwei Punkte");
-    expect(ha.items.map((i) => i.word)).toEqual(["هَرَم", "سِهَام", "وَجْه", "عِنْدَه"]);
-    expect(stepOf(entry("lesson-5", "ain"), "step-2", "positions").positions.items.map((i) => i.word)).toEqual(["عَلَم", "الْعَلَم", "مَعَ", "وَدَع"]);
+    // With Tanwin where a noun takes it (not the particles عِنْدَه, مَعَ, nor الْعَلَم with its article).
+    expect(ha.items.map((i) => i.word)).toEqual(["هَرَمٌ", "سِهَامٌ", "وَجْهٌ", "عِنْدَه"]);
+    expect(stepOf(entry("lesson-5", "ain"), "step-2", "positions").positions.items.map((i) => i.word)).toEqual(["عَلَمٌ", "الْعَلَم", "مَعَ", "وَدَعٌ"]);
   });
 });
 

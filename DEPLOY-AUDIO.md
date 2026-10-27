@@ -17,8 +17,12 @@ So a missing upload never breaks a lesson, it only falls back to the old voice.
 
 ## Making new clips
 
-1. `python3 scripts/audio/make_batches.py 100` writes `docs/audio-replacement/batches/batch-NN.txt`.
-2. Paste a batch into ElevenLabs (Wajdi Klai, same settings), save the mp3 as `docs/audio-replacement/audio-in/batch-NN.mp3`.
+1. `npx vite-node -c vitest.config.mts scripts/audio/batches-from-code.ts` makes the batches from the code: every
+   text the app speaks that has no recording yet (`batches/batch-04` …, 100 each; 01–03 are recorded), and
+   `batch-rerecord` for recordings whose text the app no longer speaks (they are taken out of the manifest and
+   listed in `rejected.txt`). It keeps every id; a new text gets the next free one.
+2. Record a batch with one voice for all (Google AI Studio: `docs/audio-replacement/STYLE-gemini.md`), save the
+   audio as `docs/audio-replacement/audio-in/batch-NN.mp3`.
 3. `cd docs/audio-replacement && python3 ../../scripts/audio/split_batch.py batches/batch-NN.json audio-in/batch-NN.mp3`
    cuts it and writes `audio-out/batch-NN/` with a `review.html` to listen to every clip. Clips flagged there need a careful listen.
 4. Bad clips: put their ids (e.g. `w0123`) into `docs/audio-replacement/rejected.txt` (one per line) and re-record only those.

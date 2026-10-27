@@ -31,7 +31,7 @@ afterEach(() => {
 
 describe("POST /api/tts", () => {
   it("synthesises lesson text with the original voice and format", async () => {
-    const response = await post({ text: "أَسَد" });
+    const response = await post({ text: "بَاء" });
     expect(response.status).toBe(200);
     expect(response.headers.get("content-type")).toBe("audio/mpeg");
     const [url, init] = fetchMock.mock.calls[0]!;
@@ -40,7 +40,7 @@ describe("POST /api/tts", () => {
     expect(init.headers["X-Microsoft-OutputFormat"]).toBe("audio-24khz-96kbitrate-mono-mp3");
     expect(init.body).toContain(`<voice name="${TTS_VOICE}">`);
     expect(init.body).toContain('<prosody rate="-8%">');
-    expect(init.body).toContain("أَسَد");
+    expect(init.body).toContain("بَاء");
   });
 
   it("refuses texts that are not part of a lesson", async () => {
@@ -53,14 +53,14 @@ describe("POST /api/tts", () => {
     expect((await post("not json")).status).toBe(400);
     expect((await post({ text: "" })).status).toBe(400);
     delete process.env.AZURE_SPEECH_REGION;
-    const response = await post({ text: "أَسَد" });
+    const response = await post({ text: "بَاء" });
     expect(response.status).toBe(503);
     expect(await response.json()).toMatchObject({ code: "service_not_configured" });
   });
 
   it("maps Azure errors to 502 tts_failed", async () => {
     fetchMock.mockResolvedValue(new Response("quota", { status: 429 }));
-    const response = await post({ text: "أَسَد" });
+    const response = await post({ text: "بَاء" });
     expect(response.status).toBe(502);
     expect(await response.json()).toMatchObject({ code: "tts_failed" });
   });

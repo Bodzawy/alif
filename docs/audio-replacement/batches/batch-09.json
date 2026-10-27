@@ -2,91 +2,6 @@
  "batch": "batch-09",
  "items": [
   {
-   "id": "w0801",
-   "kind": "word",
-   "text": "جَا"
-  },
-  {
-   "id": "w0802",
-   "kind": "word",
-   "text": "حَا"
-  },
-  {
-   "id": "w0803",
-   "kind": "word",
-   "text": "خَا"
-  },
-  {
-   "id": "w0804",
-   "kind": "word",
-   "text": "دَا"
-  },
-  {
-   "id": "w0805",
-   "kind": "word",
-   "text": "وَا"
-  },
-  {
-   "id": "w0806",
-   "kind": "word",
-   "text": "يَا"
-  },
-  {
-   "id": "w0807",
-   "kind": "word",
-   "text": "صُرَّة"
-  },
-  {
-   "id": "w0808",
-   "kind": "word",
-   "text": "طُيُور"
-  },
-  {
-   "id": "w0809",
-   "kind": "word",
-   "text": "طُيُر"
-  },
-  {
-   "id": "w0810",
-   "kind": "word",
-   "text": "سُوق"
-  },
-  {
-   "id": "w0811",
-   "kind": "word",
-   "text": "سُق"
-  },
-  {
-   "id": "w0812",
-   "kind": "word",
-   "text": "وَجَدَ"
-  },
-  {
-   "id": "w0813",
-   "kind": "word",
-   "text": "وُجُود"
-  },
-  {
-   "id": "w0814",
-   "kind": "word",
-   "text": "وَلَدَ"
-  },
-  {
-   "id": "w0815",
-   "kind": "word",
-   "text": "وُلُود"
-  },
-  {
-   "id": "w0816",
-   "kind": "word",
-   "text": "وَرْد"
-  },
-  {
-   "id": "w0817",
-   "kind": "word",
-   "text": "بُو"
-  },
-  {
    "id": "w0818",
    "kind": "word",
    "text": "تُو"
@@ -387,11 +302,6 @@
    "text": "رِضَا"
   },
   {
-   "id": "w0878",
-   "kind": "word",
-   "text": "وَحِيد"
-  },
-  {
    "id": "w0879",
    "kind": "word",
    "text": "ذَاتْ"
@@ -405,11 +315,6 @@
    "id": "w0881",
    "kind": "word",
    "text": "بَخْتْ"
-  },
-  {
-   "id": "w0882",
-   "kind": "word",
-   "text": "حَرِير"
   },
   {
    "id": "w0883",
@@ -500,6 +405,101 @@
    "id": "w0900",
    "kind": "word",
    "text": "رِي"
+  },
+  {
+   "id": "w0901",
+   "kind": "word",
+   "text": "رَصَاص"
+  },
+  {
+   "id": "w0902",
+   "kind": "word",
+   "text": "بُرْجْ"
+  },
+  {
+   "id": "w0903",
+   "kind": "word",
+   "text": "أَحْمَدْ"
+  },
+  {
+   "id": "w0904",
+   "kind": "word",
+   "text": "تَامِرْ"
+  },
+  {
+   "id": "w0905",
+   "kind": "word",
+   "text": "ثَابِتْ"
+  },
+  {
+   "id": "w0906",
+   "kind": "word",
+   "text": "زَيْت"
+  },
+  {
+   "id": "w0910",
+   "kind": "word",
+   "text": "أَزْهَار"
+  },
+  {
+   "id": "w0911",
+   "kind": "word",
+   "text": "زُمُرُّد"
+  },
+  {
+   "id": "w0912",
+   "kind": "word",
+   "text": "زَمِيل"
+  },
+  {
+   "id": "w0913",
+   "kind": "word",
+   "text": "زِرَاعَة"
+  },
+  {
+   "id": "w0914",
+   "kind": "word",
+   "text": "زِير"
+  },
+  {
+   "id": "w0915",
+   "kind": "word",
+   "text": "زِرّ"
+  },
+  {
+   "id": "w0916",
+   "kind": "word",
+   "text": "زُهُور"
+  },
+  {
+   "id": "w0917",
+   "kind": "word",
+   "text": "زَيْنَب"
+  },
+  {
+   "id": "w0918",
+   "kind": "word",
+   "text": "عَزِيزْ"
+  },
+  {
+   "id": "w0919",
+   "kind": "word",
+   "text": "زَيْد"
+  },
+  {
+   "id": "w0920",
+   "kind": "word",
+   "text": "زِيَاد"
+  },
+  {
+   "id": "w0921",
+   "kind": "word",
+   "text": "عَزَفَ"
+  },
+  {
+   "id": "w0922",
+   "kind": "word",
+   "text": "زِيَادَة"
   }
  ]
 }

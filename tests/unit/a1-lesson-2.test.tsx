@@ -30,8 +30,8 @@ import { PositionsStep } from "@/components/a1/positions/positions-step";
 import { TableStep } from "@/components/a1/table/table-step";
 import { WordPickStep } from "@/components/a1/word-pick/word-pick-step";
 import { pickTokens } from "@/lib/arabic/word-pick";
-import { A1_LEVEL, a1LessonExercises, a1SpokenTexts, getA1Lesson, nextA1Entry } from "@/data/a1";
-import { a1Unit2 } from "@/data/a1/lesson-2";
+import { A1_LEVEL, a1LessonExercises, a1SpokenTexts, getA1Lesson, getA1Unit, nextA1Entry } from "@/data/a1";
+
 import { dictationChoices, letterPattern } from "@/data/a1/lesson-2/letter-entry";
 import { adnanKhalidDialogue, nazikDinaDialogue } from "@/data/a1/lesson-2/masa-al-khayr";
 import type { A1Lesson, A1Step } from "@/data/types";
@@ -42,6 +42,9 @@ import { getLessonProgress } from "@/lib/progress";
 import { CONDITION_RULES, SOUND_RULES } from "@/lib/pronunciation/rules";
 import { isAllowedTarget, isAllowedTtsText } from "@/lib/pronunciation/targets";
 import { withTanwin } from "@/lib/arabic/tanwin";
+
+// The units as the app shows them (vocabulary words with Tanwin, src/data/vocabulary-tanwin.ts).
+const a1Unit2 = getA1Unit("lesson-2")!;
 
 const PUBLIC = path.join(process.cwd(), "public");
 const entry = (slug: string) => getA1Lesson("lesson-2", slug)!;
@@ -272,9 +275,10 @@ describe("(٢) كتابة + (٣) النطق مع السكون", () => {
       const p = stepOf(entry(slug), "step-2", "positions").positions;
       return [...p.items.map((i) => [i.label, i.shape, i.word]), ["sukun", p.sukun.glyph, p.sukun.word]];
     };
-    expect(table("dal")).toEqual([["فِي أَوَّلِ الْكَلِمَةِ", "د", "دُولَاب"], ["فِي آخِرِ الْكَلِمَةِ", "ـد", "فَرِيد"], ["مُنْفَصِلَة", "د", "دُرْج"], ["sukun", "دْ", "مَدْرَسَة"]]);
-    expect(table("dhal")).toEqual([["فِي أَوَّلِ الْكَلِمَةِ", "ذ", "ذَقْن"], ["فِي آخِرِ الْكَلِمَةِ", "ـذ", "أَخَذَ"], ["مُنْفَصِلَة", "ذ", "ذُرَة"], ["sukun", "ذْ", "إِذْن"]]);
-    expect(table("waw")).toEqual([["فِي أَوَّلِ الْكَلِمَةِ", "و", "وَلَد"], ["فِي الْمُنْتَصَفِ", "ـو", "وُصُول"], ["فِي آخِرِ الْكَلِمَةِ", "ـو", "عَفْو"], ["مُنْفَصِلَة", "و", "دَوَاء"], ["sukun", "وْ", "ثَوْر"]]);
+    // The example words are shown and spoken with Tanwin (a verb such as أَخَذَ has none); the Sukun word keeps its pausal form.
+    expect(table("dal")).toEqual([["فِي أَوَّلِ الْكَلِمَةِ", "د", "دُولَابٌ"], ["فِي آخِرِ الْكَلِمَةِ", "ـد", "فَرِيدٌ"], ["مُنْفَصِلَة", "د", "دُرْجٌ"], ["sukun", "دْ", "مَدْرَسَة"]]);
+    expect(table("dhal")).toEqual([["فِي أَوَّلِ الْكَلِمَةِ", "ذ", "ذَقْنٌ"], ["فِي آخِرِ الْكَلِمَةِ", "ـذ", "أَخَذَ"], ["مُنْفَصِلَة", "ذ", "ذُرَةٌ"], ["sukun", "ذْ", "إِذْن"]]);
+    expect(table("waw")).toEqual([["فِي أَوَّلِ الْكَلِمَةِ", "و", "وَلَدٌ"], ["فِي الْمُنْتَصَفِ", "ـو", "وُصُولٌ"], ["فِي آخِرِ الْكَلِمَةِ", "ـو", "عَفْوٌ"], ["مُنْفَصِلَة", "و", "دَوَاءٌ"], ["sukun", "وْ", "ثَوْر"]]);
   });
 
   it("ي (with a Hand): the Formen step with the book's words يَد، يَمِين، يُوسُفِي، مَجْدِي and بَيْت", () => {
@@ -305,7 +309,7 @@ describe("(٢) كتابة + (٣) النطق مع السكون", () => {
     expect(screen.getByTestId("positions-count")).toHaveTextContent("5 von 5 gefunden");
     expect(getLessonProgress(KEY).completedAt).toBeTruthy();
     fireEvent.click(screen.getByTestId("position-listen-middle"));
-    await waitFor(() => expect(tts.spoken).toEqual(["وُصُول"]));
+    await waitFor(() => expect(tts.spoken).toEqual(["وُصُولٌ"]));
   });
 });
 
@@ -430,7 +434,7 @@ describe("حروف المد – long and short vowels", () => {
 
   it("تدريب ٨: separated letters → the book's word column (ر – ض – ا = رِضَا is the model)", () => {
     const match = stepOf(madd, "step-10", "match").match;
-    expect(match.options.map((o) => o.arabic)).toEqual(["رِضَا", "تَحْتِي", "جَاب", "يَدِي", "أُخْتِي", "وَجْدِي", "ثَوْبِي", "بَيْتِي", "وَحِيد", "تُوت"]);
+    expect(match.options.map((o) => o.arabic)).toEqual(["رِضَا", "تَحْتِي", "جَاب", "يَدِي", "أُخْتِي", "وَجْدِي", "ثَوْبِي", "بَيْتِي", "وَحِيدٌ", "تُوتٌ"]);
     for (const prompt of match.prompts) {
       const word = match.options.find((o) => o.id === prompt.answer)!.arabic!;
       // The separated letters, joined, are the word (without its signs).

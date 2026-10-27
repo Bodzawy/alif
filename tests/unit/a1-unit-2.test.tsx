@@ -21,8 +21,8 @@ import A1StepPage from "@/app/a1/[unit]/[lesson]/[step]/page";
 import { ClozeStep } from "@/components/a1/cloze/cloze-step";
 import { QuizStep } from "@/components/a1/quiz/quiz-step";
 import { SpellStep } from "@/components/a1/spell/spell-step";
-import { A1_LEVEL, a1LessonExercises, getA1Lesson, nextA1Entry } from "@/data/a1";
-import { a1Unit3, a1Unit4 } from "@/data/a1/unit-2";
+import { A1_LEVEL, a1LessonExercises, getA1Lesson, getA1Unit, nextA1Entry } from "@/data/a1";
+
 import { manAntaA, manAntaB, suziDialogue, wajdiDialogue } from "@/data/a1/unit-2/conversations";
 import { longSyllables } from "@/data/a1/unit-2/letter-entry";
 import type { A1Lesson, A1Step } from "@/data/types";
@@ -33,6 +33,10 @@ import { getLessonProgress } from "@/lib/progress";
 import { CONDITION_RULES, SOUND_RULES } from "@/lib/pronunciation/rules";
 import { isAllowedTarget, isAllowedTtsText } from "@/lib/pronunciation/targets";
 import { withTanwin } from "@/lib/arabic/tanwin";
+
+// The units as the app shows them (vocabulary words with Tanwin, src/data/vocabulary-tanwin.ts).
+const a1Unit3 = getA1Unit("lesson-3")!;
+const a1Unit4 = getA1Unit("lesson-4")!;
 
 const PUBLIC = path.join(process.cwd(), "public");
 const KEY = "a1/lesson-3/test/step-x";
