@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 
 import { a1Words } from "../support/a1-words";
 import { shortVowelCondition } from "../support/vowel-condition";
-import { LEVELS } from "@/data/curriculum";
+import { allExercises, LEVELS } from "@/data/curriculum";
 import { buildAssessment, NO_MATCHING_RULE } from "@/lib/pronunciation/assessment";
 import { LETTER_RULES, VOCABULARY_RULES } from "@/lib/pronunciation/rules";
 import type { AzureAssessment, IqraResult } from "@/lib/pronunciation/types";
@@ -1008,9 +1008,29 @@ function assess(target: string, accuracy: number, phonemes: string[] | null) {
   return buildAssessment({ target, primary: azure(target, accuracy), iqra });
 }
 
-/** A plausible, never-empty IQRA output: hamza, the first vowel, then the required consonants (chosen alternative) with vowels around them. */
-function spoken(tokens: string[], pick: (alternatives: string[]) => string = (alternatives) => alternatives[0]!, first = "a") {
-  return ["<", first, ...tokens.flatMap((token) => [pick(token.split("|")), "a"])];
+/**
+ * Advanced (ALIF Pronunciation): a single word that the app speaks only with Tanwin must end in it – IQRA's
+ * last two tokens u n (or a n for -an, e.g. شُكْرًا). The ending per target; none for a word that is also
+ * spoken without Tanwin somewhere, or that is part of a phrase.
+ */
+const TANWIN_END: Record<string, string[]> = (() => {
+  const spokenAs = new Map<string, Set<string>>();
+  for (const e of allExercises()) (spokenAs.get(e.target) ?? spokenAs.set(e.target, new Set()).get(e.target)!).add(e.modelText);
+  const out: Record<string, string[]> = {};
+  for (const [target, texts] of spokenAs) {
+    const list = [...texts];
+    if (list.some((t) => t.trim().split(/\s+/).length > 1)) continue;
+    const ends = new Set(list.map((t) => (/ٌّ?[.،؟!]?$/.test(t) ? "un" : /ًّ?[اى]?[.،؟!]?$/.test(t) ? "an" : /ٍّ?[.،؟!]?$/.test(t) ? "in" : "none")));
+    if (ends.size === 1 && ends.has("un")) out[target] = ["u|U", "n|nn"];
+    if (ends.size === 1 && ends.has("an")) out[target] = ["a|A", "n|nn"];
+  }
+  return out;
+})();
+const endCondition = (ending: string[]) => `[${ending.map((t) => `'${t}'`).join(",")}]`;
+
+/** A plausible, never-empty IQRA output: hamza, the first vowel, then the required consonants (chosen alternative) with vowels around them – and the Tanwin, when the word has one. */
+function spoken(tokens: string[], pick: (alternatives: string[]) => string = (alternatives) => alternatives[0]!, first = "a", ending: string[] = []) {
+  return ["<", first, ...tokens.flatMap((token) => [pick(token.split("|")), "a"]), ...ending.map((t) => t.split("|")[0]!)];
 }
 
 // 365 up to Lektion 4; Lektion 5 and 6 (the book's Unit 3): 123 evaluated words and lines – the
@@ -1068,34 +1088,53 @@ describe("vocabulary IQRA gates", () => {
     const list = `[${tokens.map((token) => `'${token}'`).join(",")}]`;
 
     const vowel = FIRST_VOWEL[target];
+    const ending = TANWIN_END[target];
+    // A word with n (أَرْنَبٌ): its Tanwin n is a sound of its own – one more n|nn in the list.
+    const hasN = tokens.some((token) => token.split("|").some((t) => t === "n" || t === "nn"));
+    const extraN = Boolean(ending && hasN);
+    const said = (pickTokens: string[], pick?: (alternatives: string[]) => string, first?: string) => spoken(pickTokens, pick, first, ending ?? []);
 
-    it("has the agreed rule: Azure >= 70, IQRA contains the word's consonants (and, for A1, the right first vowel)", () => {
+    it("has the agreed rule: Azure >= 70, IQRA contains the word's consonants (and, for A1, the right first vowel; and the Tanwin at the end)", () => {
       expect(VOCABULARY_RULES[target]!.excellent!.conditions.map(shortVowelCondition)).toEqual([
         "azure_accuracy >= 70",
-        `iqra_phonemes contains ${list}`,
+        `iqra_phonemes contains ${extraN ? list.replace(/\]$/, ",'n|nn']") : list}`,
         ...(vowel ? [`iqra_initial_vowel == ${[vowel, ...(ALSO_ACCEPTED[target] ?? [])].join("|")}`] : []),
+        ...(ending ? [`iqra_phonemes ends with ${endCondition(ending)}`] : []),
       ]);
     });
 
+    if (ending) {
+      it("6. Advanced: fails without the Tanwin at the end (said_without_tanwin) – the right word, Azure 100", () => {
+        const withoutTanwin = spoken(tokens, undefined, vowel);
+        const result = assess(target, 100, withoutTanwin);
+        expect(result.passed, `${target} without Tanwin`).toBe(false);
+        expect(result.conditionEvaluation.matchedRule).toBe("said_without_tanwin");
+        expect(result.feedback.message).toContain("التنوين");
+        expect(assess(target, 100, said(tokens, undefined, vowel)).passed).toBe(true);
+      });
+    }
+
     it("1. passes with Azure >= 70 and every required sound", () => {
-      const result = assess(target, 70, spoken(tokens, undefined, vowel));
+      const result = assess(target, 70, said(tokens, undefined, vowel));
       expect(result.passed).toBe(true);
       expect(result.conditionEvaluation.matchedRule).toBe("excellent");
       if (tokens.some((token) => token.includes("|"))) {
-        expect(assess(target, 70, spoken(tokens, (alternatives) => alternatives.at(-1)!, vowel)).passed).toBe(true);
+        expect(assess(target, 70, said(tokens, (alternatives) => alternatives.at(-1)!, vowel)).passed).toBe(true);
       }
     });
 
     it("2. fails with Azure >= 70 when any single required sound is missing", () => {
       tokens.forEach((_, missing) => {
-        const result = assess(target, 95, spoken(tokens.filter((__, i) => i !== missing), undefined, vowel));
+        const result = assess(target, 95, said(tokens.filter((__, i) => i !== missing), undefined, vowel));
         expect(result.passed, `${target} without ${tokens[missing]}`).toBe(false);
-        expect(result.conditionEvaluation.matchedRule).toBe("said_wrong_sound");
+        // Only the Tanwin n left for the n of the word: the sound is missing all the same.
+        const nLeft = extraN && tokens[missing]!.split("|").some((t) => t === "n" || t === "nn");
+        expect(result.conditionEvaluation.matchedRule).toBe(nLeft ? "said_wrong_sound_n" : "said_wrong_sound");
       });
     });
 
     it("3. fails with Azure < 70 even when IQRA is right", () => {
-      const result = assess(target, 69, spoken(tokens, undefined, vowel));
+      const result = assess(target, 69, said(tokens, undefined, vowel));
       expect(result.passed).toBe(false);
       expect(result.conditionEvaluation.matchedRule).toBe("needs_improvement");
     });
@@ -1104,17 +1143,17 @@ describe("vocabulary IQRA gates", () => {
       it("5. A1: fails when the word begins with a different vowel – all consonants right, Azure 100", () => {
         for (const wrong of (["a", "i", "u"] as const).filter((v) => v !== vowel && !ALSO_ACCEPTED[target]?.includes(v))) {
           for (const token of [wrong, wrong + wrong, wrong.toUpperCase()]) {
-            const result = assess(target, 100, spoken(tokens, undefined, token));
+            const result = assess(target, 100, said(tokens, undefined, token));
             expect(result.passed, `${target} begun with ${token}`).toBe(false);
             expect(result.conditionEvaluation.matchedRule).toBe("said_wrong_vowel");
           }
         }
         // No initial vowel heard: the right vowel later in the word does not count.
-        const late = ["<", ...tokens.flatMap((token) => [token.split("|")[0]!, vowel])];
+        const late = ["<", ...tokens.flatMap((token) => [token.split("|")[0]!, vowel]), ...(ending ?? []).map((t) => t.split("|")[0]!)];
         expect(assess(target, 100, late).passed, `${target} without initial vowel`).toBe(false);
         expect(assess(target, 100, late).conditionEvaluation.matchedRule).toBe("said_wrong_vowel");
         // Long and emphatic forms of the right vowel count as that vowel.
-        for (const token of [vowel + vowel, vowel.toUpperCase()]) expect(assess(target, 90, spoken(tokens, undefined, token)).passed).toBe(true);
+        for (const token of [vowel + vowel, vowel.toUpperCase()]) expect(assess(target, 90, said(tokens, undefined, token)).passed).toBe(true);
       });
     }
 
@@ -1126,5 +1165,26 @@ describe("vocabulary IQRA gates", () => {
         expect(result.feedback.message).toBe(IQRA_UNAVAILABLE_MESSAGE);
       }
     });
+  });
+});
+
+describe("the Tanwin at the end (ALIF Pronunciation only)", () => {
+  it("every single word the app speaks only with Tanwin checks it; a word also spoken without it does not", () => {
+    expect(Object.keys(TANWIN_END).length).toBeGreaterThan(300);
+    for (const [target, rules] of Object.entries(VOCABULARY_RULES)) {
+      const check = rules.excellent?.conditions.find((c) => c.includes("ends with"));
+      const ending = TANWIN_END[target];
+      expect(check, target).toBe(ending ? `iqra_phonemes ends with ${endCondition(ending)}` : undefined);
+      expect(Boolean(rules.said_without_tanwin), target).toBe(Boolean(ending));
+    }
+    for (const mixed of ["يوم", "شارع", "ثلاثة", "يمين"]) expect(TANWIN_END[mixed], mixed).toBeUndefined();
+    expect(TANWIN_END["شكرا"]).toEqual(["a|A", "n|nn"]);
+  });
+
+  it("ALIF Speaking (Beginner) and the letters and sounds are not checked for it", async () => {
+    const { BEGINNER_RULES, SOUND_RULES } = await import("@/lib/pronunciation/rules");
+    for (const rules of [BEGINNER_RULES, LETTER_RULES, SOUND_RULES])
+      for (const rule of Object.values(rules ?? {}).flatMap((r) => Object.values(r)))
+        for (const condition of rule.conditions) expect(condition).not.toContain("end with");
   });
 });

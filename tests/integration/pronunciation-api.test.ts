@@ -137,13 +137,18 @@ describe("POST /api/pronunciation", () => {
 
   it("evaluates Lesson 1 vocabulary words with Azure and the word's IQRA gate", async () => {
     azureMock.assess.mockResolvedValue(azureResult({ referenceText: "أسد", recognized: "أسد", accuracy: 74 }));
-    iqraReply = { status: 200, body: { sequence: "< a s a d", phonemes: ["<", "a", "s", "a", "d"], duration: 0.7 } };
+    // أَسَدٌ – with the Tanwin -un at the end (ALIF Pronunciation).
+    iqraReply = { status: 200, body: { sequence: "< a s a d u n", phonemes: ["<", "a", "s", "a", "d", "u", "n"], duration: 0.7 } };
     let body = await (await post({ audio: await wavFile(), target: "أسد" })).json();
     expect(body).toMatchObject({ passed: true, feedback: { rule: "excellent" } });
 
-    iqraReply = { status: 200, body: { sequence: "< a s a t", phonemes: ["<", "a", "s", "a", "t"], duration: 0.7 } };
+    iqraReply = { status: 200, body: { sequence: "< a s a t u n", phonemes: ["<", "a", "s", "a", "t", "u", "n"], duration: 0.7 } };
     body = await (await post({ audio: await wavFile(), target: "أسد" })).json();
     expect(body).toMatchObject({ passed: false, feedback: { rule: "said_wrong_sound" } });
+
+    iqraReply = { status: 200, body: { sequence: "< a s a d", phonemes: ["<", "a", "s", "a", "d"], duration: 0.7 } };
+    body = await (await post({ audio: await wavFile(), target: "أسد" })).json();
+    expect(body).toMatchObject({ passed: false, feedback: { rule: "said_without_tanwin" } });
 
     iqraReply = { status: 500, body: { error: "boom" } };
     body = await (await post({ audio: await wavFile(), target: "أسد" })).json();

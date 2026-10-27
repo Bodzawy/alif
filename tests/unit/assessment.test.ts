@@ -118,13 +118,17 @@ describe("buildAssessment", () => {
   });
 
   it("evaluates Lesson 1 vocabulary with Azure >= 70 and the word's IQRA gate", () => {
-    const asad = { sequence: "< a s a d", phonemes: ["<", "a", "s", "a", "d"] };
+    // أَسَدٌ – with the Tanwin -un at the end (ALIF Pronunciation).
+    const asad = { sequence: "< a s a d u n", phonemes: ["<", "a", "s", "a", "d", "u", "n"] };
     const good = buildAssessment({ target: "أسد", primary: azure({ referenceText: "أسد", accuracy: 72 }), iqra: asad });
     expect(good.passed).toBe(true);
     expect(good.feedback.message).toBe(VOCABULARY_RULES["أسد"]!.excellent!.message);
-    const wrongSound = buildAssessment({ target: "أسد", primary: azure({ referenceText: "أسد", accuracy: 92 }), iqra: { phonemes: ["<", "a", "s", "a", "t"] } });
+    const wrongSound = buildAssessment({ target: "أسد", primary: azure({ referenceText: "أسد", accuracy: 92 }), iqra: { phonemes: ["<", "a", "s", "a", "t", "u", "n"] } });
     expect(wrongSound.passed).toBe(false);
     expect(wrongSound.conditionEvaluation.matchedRule).toBe("said_wrong_sound");
+    const noTanwin = buildAssessment({ target: "أسد", primary: azure({ referenceText: "أسد", accuracy: 92 }), iqra: { phonemes: ["<", "a", "s", "a", "d"] } });
+    expect(noTanwin.passed).toBe(false);
+    expect(noTanwin.conditionEvaluation.matchedRule).toBe("said_without_tanwin");
     const weak = buildAssessment({ target: "أسد", primary: azure({ referenceText: "أسد", accuracy: 64 }), iqra: asad });
     expect(weak.passed).toBe(false);
     expect(weak.conditionEvaluation.matchedRule).toBe("needs_improvement");

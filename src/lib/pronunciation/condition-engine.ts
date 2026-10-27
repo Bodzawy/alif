@@ -66,8 +66,21 @@ function initialToken(phonemes: string[]): string | null {
   return phonemes[index] ?? null;
 }
 
+/**
+ * Every expected token (alternatives with |) is found, each in a token of its own: ['n','n'] needs two n –
+ * e.g. أَرْنَبٌ "< a r n a b u n", whose Tanwin n must not stand in for the n of the word.
+ */
 function hasPhonemes(phonemes: string[], expected: string[]) {
-  return expected.every((phoneme) => phoneme.split("|").some((alternative) => phonemes.includes(alternative)));
+  const used = new Set<number>();
+  // The narrowest alternatives first, so that n|nn does not take the only n a plain n needs.
+  const ordered = [...expected].sort((a, b) => a.split("|").length - b.split("|").length);
+  return ordered.every((phoneme) => {
+    const alternatives = phoneme.split("|");
+    const index = phonemes.findIndex((token, i) => !used.has(i) && alternatives.includes(token));
+    if (index < 0) return false;
+    used.add(index);
+    return true;
+  });
 }
 
 export function matchesCondition(condition: string, context: ConditionContext) {
@@ -111,6 +124,17 @@ export function matchesCondition(condition: string, context: ConditionContext) {
     const expected = (rawExpected ?? "").replace(/[\[\]'\s]/g, "").split(/[|,]/).filter(Boolean);
     const isMatch = expected.includes(initialToken(context.iqraPhonemes) ?? "");
     return operator === "==" ? isMatch : !isMatch;
+  }
+
+  // The end of the utterance, token by token: iqra_phonemes ends with ['u|U','n|nn'] holds when the last
+  // token is n or nn and the one before it u or U – the Tanwin -un (بَيْتٌ "b a y t u n"; not تِين "t ii n").
+  const ending = condition.match(/^iqra_phonemes\s*(does not end with|ends with)\s*(\[.*\])$/);
+  if (ending) {
+    const [, operator, rawExpected] = ending;
+    const expected = (rawExpected ?? "").replace(/[\[\]'\s]/g, "").split(",").filter(Boolean);
+    const tail = context.iqraPhonemes.slice(-expected.length);
+    const found = tail.length === expected.length && expected.every((token, i) => token.split("|").includes(tail[i]!));
+    return operator === "ends with" ? found : !found;
   }
 
   const phoneme = condition.match(/^iqra_phonemes\s*(does not contain|contains)\s*(.+)$/);

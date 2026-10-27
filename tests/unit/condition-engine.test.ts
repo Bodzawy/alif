@@ -153,3 +153,27 @@ describe("condition engine – iqra_initial_vowel (A1 words that begin with أَ
     }
   });
 });
+
+describe("iqra_phonemes ends with / contains: the Tanwin (ALIF Pronunciation)", () => {
+  const heard = (...phonemes: string[]) => ctx(90, phonemes);
+
+  it("ends with compares the last tokens in order, with alternatives", () => {
+    expect(matchesCondition("iqra_phonemes ends with ['u|U','n|nn']", heard("b", "a", "y", "t", "u", "n"))).toBe(true);
+    expect(matchesCondition("iqra_phonemes ends with ['u|U','n|nn']", heard("b", "a", "y", "t", "U", "nn"))).toBe(true);
+    expect(matchesCondition("iqra_phonemes ends with ['u|U','n|nn']", heard("b", "a", "y", "t"))).toBe(false);
+    expect(matchesCondition("iqra_phonemes ends with ['u|U','n|nn']", heard("t", "ii", "n"))).toBe(false); // تِين: n of the word, no Tanwin
+    expect(matchesCondition("iqra_phonemes ends with ['u|U','n|nn']", heard("n", "u"))).toBe(false); // order counts
+    expect(matchesCondition("iqra_phonemes ends with ['u|U','n|nn']", heard("n"))).toBe(false);
+    expect(matchesCondition("iqra_phonemes ends with ['u|U','n|nn']", heard())).toBe(false);
+    expect(matchesCondition("iqra_phonemes does not end with ['u|U','n|nn']", heard("b", "a", "y", "t"))).toBe(true);
+    expect(matchesCondition("iqra_phonemes does not end with ['a|A','n|nn']", heard("$", "u", "k", "r", "a", "n"))).toBe(false);
+  });
+
+  it("contains counts every listed token once: the Tanwin n does not stand in for the n of أَرْنَبٌ", () => {
+    expect(matchesCondition("iqra_phonemes contains ['r|rr','n','b','n|nn']", heard("<", "a", "r", "n", "a", "b", "u", "n"))).toBe(true);
+    expect(matchesCondition("iqra_phonemes contains ['r|rr','n','b','n|nn']", heard("<", "a", "r", "b", "u", "n"))).toBe(false);
+    expect(matchesCondition("iqra_phonemes contains ['n|nn','n']", heard("nn", "n"))).toBe(true); // the plain n takes the n, n|nn the nn
+    expect(matchesCondition("iqra_phonemes contains ['r|rr','n','b']", heard("<", "a", "r", "b", "u", "n"))).toBe(true); // one n is enough for one n
+    expect(matchesCondition("iqra_phonemes does not contain ['n','n']", heard("n"))).toBe(true);
+  });
+});

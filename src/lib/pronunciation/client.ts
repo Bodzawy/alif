@@ -98,6 +98,9 @@ function germanTip(rule: string, passed: boolean): string {
   if (rule === NO_MATCHING_RULE) {
     return "Deine Aussprache konnte diesmal nicht eindeutig zugeordnet werden. Hör dir das Beispiel an und sprich noch einmal deutlich nach.";
   }
+  if (rule === "said_without_tanwin") {
+    return "Fast! Das Ende fehlt: Sprich das -un (Tanwin) am Schluss mit, wie im Beispiel.";
+  }
   if (rule.startsWith("said_")) {
     return "Das klang nach einem anderen Laut. Hör genau hin, worin sich die Laute unterscheiden, und versuche es erneut.";
   }
