@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore, type PointerEvent as ReactPointerEvent } from "react";
+import { useRouter } from "next/navigation";
 import { CheckCircle2, Eye, SkipForward, StepForward } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -48,7 +49,22 @@ type View = { canvas: HTMLCanvasElement; ctx: CanvasRenderingContext2D; kind: "m
 
 const noop = () => () => undefined;
 
-export function WritingStep({ letterSet, progressKey, onComplete }: { letterSet: WritingLetterSet; progressKey: string; onComplete?: () => void }) {
+/** After the last form: "Geschafft" stays this long, then the next step opens by itself. */
+export const NEXT_STEP_DELAY_MS = 2500;
+
+export function WritingStep({
+  letterSet,
+  progressKey,
+  onComplete,
+  nextHref,
+}: {
+  letterSet: WritingLetterSet;
+  progressKey: string;
+  onComplete?: () => void;
+  /** The next step: opened by itself once every form is written in this visit. */
+  nextHref?: string;
+}) {
+  const router = useRouter();
   const forms = letterSet.forms;
   const narrate = useWritingNarration();
   const hydrated = useSyncExternalStore(noop, () => true, () => false);
@@ -269,8 +285,9 @@ export function WritingStep({ letterSet, progressKey, onComplete }: { letterSet:
       markLessonCompleted(progressKey);
       narrate({ type: "allDone" });
       onCompleteRef.current?.();
+      if (nextHref) later(() => router.push(nextHref), NEXT_STEP_DELAY_MS);
     } else select(next);
-  }, [narrate, progressKey, select]);
+  }, [narrate, progressKey, select, nextHref, later, router]);
 
   function finish() {
     const s = st.current;

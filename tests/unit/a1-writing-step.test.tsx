@@ -58,3 +58,25 @@ describe("A1 · Lektion 1 · Schritt 4 Schreiben – registration and navigation
     expect(screen.getByTestId("step-tab-step-3")).toHaveAttribute("aria-current", "step");
   });
 });
+
+describe("Schreiben – the next step opens by itself", () => {
+  it("once every form is written (here: skipped), Ergänzen opens after the Geschafft moment – not before", async () => {
+    const { useRouter } = await import("next/navigation");
+    const push = useRouter().push as ReturnType<typeof vi.fn>;
+    push.mockClear();
+    vi.useFakeTimers();
+    await renderStep("step-3");
+    const { fireEvent, act } = await import("@testing-library/react");
+    for (let i = 0; i < alifWriting.forms.length; i++) {
+      if (i > 0) await act(() => vi.advanceTimersByTimeAsync(1500));
+      fireEvent.click(screen.getByTestId("writing-skip"));
+    }
+    await act(() => vi.advanceTimersByTimeAsync(0));
+    expect(screen.getByTestId("writing-done")).toBeInTheDocument();
+    await act(() => vi.advanceTimersByTimeAsync(2000));
+    expect(push).not.toHaveBeenCalled(); // "Geschafft" is seen first
+    await act(() => vi.advanceTimersByTimeAsync(600));
+    expect(push).toHaveBeenCalledWith("/a1/lesson-1/alif/step-4");
+    vi.useRealTimers();
+  });
+});

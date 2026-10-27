@@ -161,7 +161,7 @@ export default async function A1StepPage({ params }: { params: Promise<Params> }
       ) : step.kind === "forms" ? (
         <FormsStep forms={step.forms} availableAudio={availableAudio(step.forms.audioBase)} progressKey={progressKey} />
       ) : step.kind === "writing" ? (
-        <WritingStep letterSet={step.letterSet} progressKey={progressKey} />
+        <WritingStep letterSet={step.letterSet} progressKey={progressKey} nextHref={next ? a1StepHref(unit, lesson, next.slug) : undefined} />
       ) : step.kind === "dialogue" ? (
         <DialogueStep dialogue={step.dialogue} mode={step.mode} progressKey={progressKey} />
       ) : step.kind === "phrases" ? (
