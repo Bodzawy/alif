@@ -115,7 +115,8 @@ describe("recordings and batches made from the code", () => {
 
   it("batch-rerecord: the new form of each recording that no longer matches (e.g. أَسَدٌ for أَسَد)", () => {
     const texts = batch("batch-rerecord.json").map((i) => i.text);
-    expect(texts).toEqual(expect.arrayContaining(["أَسَدٌ", "نَمِرٌ", "خَسٌّ"]));
+    // خَسٌّ (w9001) is recorded now (_batch-a8), so it left batch-rerecord.
+    expect(texts).toEqual(expect.arrayContaining(["أَسَدٌ", "نَمِرٌ"]));
     for (const text of texts) expect(TANWIN.test(text), text).toBe(true);
   });
 });

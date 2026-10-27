@@ -8,6 +8,8 @@ import { BEGINNER_RULES, CONDITION_RULES } from "@/lib/pronunciation/rules";
 // instead), never ر, and nothing at all for the vowels أَ إِ أُ (Azure alone).
 
 const KNOWN = [/^iqra_phonemes contains \[('[^']+',?)+\]$/, /^iqra_phonemes is not empty$/];
+// جمل and جبل also check their ج (with the sounds a beginner says instead).
+const THREE_LETTERS = new Set(["جمل", "جبل"]);
 
 describe("beginner_conditions.json", () => {
   it("covers the targets of the ALIF Pronunciation rules and nothing else", () => {
@@ -18,7 +20,7 @@ describe("beginner_conditions.json", () => {
   it("at most two letters per word; أَ إِ أُ have no IQRA condition", () => {
     for (const [target, rules] of Object.entries(BEGINNER_RULES)) {
       const letters = rules.excellent!.conditions.flatMap((c) => c.match(/'[^']+'/g) ?? []);
-      expect(letters.length, target).toBeLessThanOrEqual(2);
+      expect(letters.length, target).toBeLessThanOrEqual(THREE_LETTERS.has(target) ? 3 : 2);
     }
     for (const sound of ["أَ", "إِ", "أُ"]) expect(BEGINNER_RULES[sound]!.excellent!.conditions).toEqual([]);
     expect(BEGINNER_RULES["بيت"]!.excellent!.conditions).toEqual(["iqra_phonemes contains ['b|bb','t|tt|T|TT']"]);
