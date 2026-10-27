@@ -332,6 +332,10 @@ describe("A1 · Schritt 3 Formen – the four parts", () => {
     const positions = ["start", "middle", "end", "separate"];
     for (const [w, word] of forms.build.entries()) {
       played.length = 0;
+      // The word's picture is in view while it is built (أَنَا, سَأَلَ, قَرَأَ have one; سَبَأَ has none).
+      const picture = screen.getByTestId(`build-word-${word.id}`).querySelector('[data-testid="build-image"]');
+      if (word.image) expect(picture).toHaveAttribute("alt", word.image.alt);
+      else expect(picture).toBeNull();
       for (const [i, tile] of splitTiles(word.arabic).entries()) await tapTile(tile, i);
       await waitFor(() => expect(screen.getByTestId(`build-word-${word.id}`)).toHaveAttribute("data-phase", "done"));
       expect(screen.getByTestId("build-position")).toHaveTextContent(Object.values(POSITION_LABEL)[w]!);

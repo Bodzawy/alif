@@ -99,6 +99,10 @@ function BuildWord({ word, letter, narrator, last, onNext }: { word: FormsWord; 
 
   return (
     <section aria-label={`Baue das Wort: ${word.german}`} data-testid={`build-word-${word.id}`} data-phase={phase} className="rounded-3xl border bg-card p-5 text-center shadow-card sm:p-8">
+      {/* The word's picture stays in view while the child builds it (and after). */}
+      {word.image && (
+        <Image src={word.image.src} alt={word.image.alt} width={160} height={120} className="mx-auto mb-4 rounded-2xl" unoptimized data-testid="build-image" />
+      )}
       {/* Slots and the finished word share one place: the tiles slide together, then the word fades in. */}
       <div className={cn("grid min-h-28 place-items-center", isLongWord(tiles) && "grid-cols-1")}>
         <div
@@ -163,9 +167,6 @@ function BuildWord({ word, letter, narrator, last, onNext }: { word: FormsWord; 
         </>
       ) : (
         <div className="mt-4 flex animate-fade-in flex-col items-center gap-3" data-testid="build-result">
-          {word.image && (
-            <Image src={word.image.src} alt={word.image.alt} width={160} height={120} className="rounded-2xl" unoptimized />
-          )}
           <p lang="ar" dir="rtl" className="font-arabic text-2xl font-bold text-primary" data-testid="build-position">
             {POSITION_LABEL[position]}
           </p>
