@@ -2,16 +2,6 @@
  "batch": "batch-13",
  "items": [
   {
-   "id": "w1229",
-   "kind": "word",
-   "text": "فُولْ"
-  },
-  {
-   "id": "w1230",
-   "kind": "word",
-   "text": "وَلَدْ"
-  },
-  {
    "id": "w1231",
    "kind": "word",
    "text": "رَقْمْ"
@@ -500,6 +490,16 @@
    "id": "w1329",
    "kind": "word",
    "text": "بَطِّيخ"
+  },
+  {
+   "id": "w1330",
+   "kind": "word",
+   "text": "بَطَاطِس"
+  },
+  {
+   "id": "w1331",
+   "kind": "word",
+   "text": "شَاطِئ"
   }
  ]
 }

@@ -2,16 +2,6 @@
  "batch": "batch-08",
  "items": [
   {
-   "id": "w0717",
-   "kind": "word",
-   "text": "خَذَلَ"
-  },
-  {
-   "id": "w0718",
-   "kind": "word",
-   "text": "قَذَفَ"
-  },
-  {
    "id": "w0719",
    "kind": "word",
    "text": "حَذِرَ"
@@ -500,6 +490,16 @@
    "id": "w0817",
    "kind": "word",
    "text": "بُو"
+  },
+  {
+   "id": "w0818",
+   "kind": "word",
+   "text": "تُو"
+  },
+  {
+   "id": "w0819",
+   "kind": "word",
+   "text": "ثُو"
   }
  ]
 }

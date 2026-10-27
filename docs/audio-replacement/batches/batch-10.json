@@ -2,16 +2,6 @@
  "batch": "batch-10",
  "items": [
   {
-   "id": "w0923",
-   "kind": "word",
-   "text": "زَارَ"
-  },
-  {
-   "id": "w0924",
-   "kind": "word",
-   "text": "يَزُورُ"
-  },
-  {
    "id": "w0925",
    "kind": "word",
    "text": "عَزَمَ"
@@ -500,6 +490,16 @@
    "id": "w1024",
    "kind": "word",
    "text": "ثِيَابْ"
+  },
+  {
+   "id": "w1025",
+   "kind": "word",
+   "text": "ثُلُثْ"
+  },
+  {
+   "id": "w1026",
+   "kind": "word",
+   "text": "ضَابِط"
   }
  ]
 }

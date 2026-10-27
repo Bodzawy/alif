@@ -99,9 +99,12 @@ describe("recordings and batches made from the code", () => {
     for (const file of readdirSync(BATCHES).filter((f) => f.endsWith(".json") && !f.startsWith("_") && !/^batch-0[123]\./.test(f))) {
       const items = batch(file);
       expect(readFileSync(path.join(BATCHES, file.replace(".json", ".txt")), "utf8").trim().split("\n\n"), file).toEqual(items.map((i) => i.text));
+      // batch-tanwin re-records installed clips (ب ت ج, where the voice dropped the Tanwin).
+      const rerecording = file === "batch-tanwin.json";
       for (const { text } of items) {
         expect(ALLOWED_TTS_TEXTS.has(text), `${file}: ${text}`).toBe(true);
-        expect(recorded.has(text), `${file}: ${text} is recorded`).toBe(false);
+        if (rerecording) expect(TANWIN.test(text), text).toBe(true);
+        else expect(recorded.has(text), `${file}: ${text} is recorded`).toBe(false);
         expect(seen.get(text), `${text} in ${file}`).toBeUndefined();
         seen.set(text, file);
       }

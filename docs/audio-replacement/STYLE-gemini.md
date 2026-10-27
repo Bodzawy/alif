@@ -16,6 +16,10 @@ text is exactly what the app shows and speaks, with its harakat and Tanwin. Reco
 `batch-rerecord` holds the words whose earlier recording no longer matches the app (they are
 spoken with Tanwin now) and the replacement of a rejected clip. Record it like any other batch.
 
+`batch-tanwin` re-records the words of ب ت ج (Lektion 1): their texts have Tanwin, but in the
+installed clips the voice dropped it. The ids are the same, and install_clips.py installs this
+folder after batch-01 … 03, so the new clip replaces the old one.
+
 ## Style
 
 ```

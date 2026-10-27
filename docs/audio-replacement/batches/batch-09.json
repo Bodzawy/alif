@@ -2,16 +2,6 @@
  "batch": "batch-09",
  "items": [
   {
-   "id": "w0818",
-   "kind": "word",
-   "text": "تُو"
-  },
-  {
-   "id": "w0819",
-   "kind": "word",
-   "text": "ثُو"
-  },
-  {
    "id": "w0820",
    "kind": "word",
    "text": "جُو"
@@ -500,6 +490,16 @@
    "id": "w0922",
    "kind": "word",
    "text": "زِيَادَة"
+  },
+  {
+   "id": "w0923",
+   "kind": "word",
+   "text": "زَارَ"
+  },
+  {
+   "id": "w0924",
+   "kind": "word",
+   "text": "يَزُورُ"
   }
  ]
 }

@@ -9,7 +9,8 @@
 //    install_clips.py leaves them out; the word's new text goes into batch-rerecord, with
 //    the replacements of clips rejected before (e.g. خَسٌّ for w0186).
 // 3. Every other text without a recording goes into batch-04, batch-05 … (100 each).
-//    batch-01 … 03 (recorded and installed) are left as they are.
+//    batch-01 … 03 (recorded and installed) are left as they are, and so are the hand-made
+//    re-recordings (batch-tanwin: ب ت ج with an audible Tanwin); their texts are not repeated.
 // Each batch: batch-NN.json (ids in order, for split_batch.py) and batch-NN.txt (paste
 // into Google AI Studio with the style in STYLE-gemini.md: one text per line, a blank
 // line between texts).
@@ -28,6 +29,8 @@ const SCOPE = path.join(AR, "scope-words-letters.csv");
 const REJECTED = path.join(AR, "rejected.txt");
 const MANIFEST = path.join(ROOT, "src", "lib", "tts", "recorded-manifest.json");
 const RECORDED_BATCHES = ["batch-01", "batch-02", "batch-03"];
+/** Re-recordings of clips that are installed but not good enough; installed after the batches above, so they win. */
+const MANUAL_BATCHES = ["batch-tanwin"];
 const SIZE = 100;
 
 type Item = { id: string; kind: string; text: string };
@@ -87,17 +90,20 @@ const rerecordTexts = new Set<string>();
 // The word's new form – unless it is recorded already (e.g. جَمَلٌ from the letter lesson ج).
 for (const [text] of stale) if (byText.has(withTanwin(text)) && !recorded.has(withTanwin(text))) rerecordTexts.add(withTanwin(text));
 // Replacements of clips rejected before (rejected.txt), e.g. w9001 خَسٌّ for w0186 خَسٌ.
-for (const item of batchItems("batch-fix1")) if (byText.has(item.text) && !recorded.has(item.text)) rerecordTexts.add(item.text);
+if (existsSync(path.join(BATCHES, "batch-fix1.json"))) for (const item of batchItems("batch-fix1")) if (byText.has(item.text) && !recorded.has(item.text)) rerecordTexts.add(item.text);
+// Kept from an earlier run (its stale clips are out of the manifest by now).
+if (existsSync(path.join(BATCHES, "batch-rerecord.json"))) for (const item of batchItems("batch-rerecord")) if (byText.has(item.text) && !recorded.has(item.text)) rerecordTexts.add(item.text);
 const rerecord = scope.filter((item) => rerecordTexts.has(item.text));
+const manual = new Set(MANUAL_BATCHES.filter((name) => existsSync(path.join(BATCHES, `${name}.json`))).flatMap((name) => batchItems(name).map((item) => item.text)));
 
 // --- 3. the batches ---------------------------------------------------------------------
 const inRecordedBatches = new Set(RECORDED_BATCHES.flatMap((name) => batchItems(name).map((item) => item.text)));
-const todo = scope.filter((item) => !recorded.has(item.text) && !rerecordTexts.has(item.text) && item.text.trim().split(/\s+/).length === 1);
+const todo = scope.filter((item) => !recorded.has(item.text) && !rerecordTexts.has(item.text) && !manual.has(item.text) && item.text.trim().split(/\s+/).length === 1);
 const unrecordedInRecordedBatches = todo.filter((item) => inRecordedBatches.has(item.text));
 
 for (const file of readdirSync(BATCHES)) {
   const name = file.replace(/\.(json|txt)$/, "");
-  if (!RECORDED_BATCHES.includes(name) && !name.startsWith("_")) unlinkSync(path.join(BATCHES, file));
+  if (!RECORDED_BATCHES.includes(name) && !MANUAL_BATCHES.includes(name) && !name.startsWith("_")) unlinkSync(path.join(BATCHES, file));
 }
 const write = (name: string, items: Item[]) => {
   writeFileSync(path.join(BATCHES, `${name}.json`), JSON.stringify({ batch: name, items }, null, 1) + "\n");
