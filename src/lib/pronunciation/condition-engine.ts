@@ -126,14 +126,17 @@ export function matchesCondition(condition: string, context: ConditionContext) {
     return operator === "==" ? isMatch : !isMatch;
   }
 
-  // The end of the utterance, token by token: iqra_phonemes ends with ['u|U','n|nn'] holds when the last
-  // token is n or nn and the one before it u or U – the Tanwin -un (بَيْتٌ "b a y t u n"; not تِين "t ii n").
+  // The end of the utterance, token by token: iqra_phonemes ends with ['n|nn'] holds when the last token is
+  // n or nn – the Tanwin (IQRA mostly drops its short vowel: أَبٌ "< a b n", "< a b nn"). Several endings
+  // with "or": ['n|nn','u|U','n|nn'] or ['n|nn','n|nn'] or ['nn'] – تِينٌ, whose own n comes before it.
   const ending = condition.match(/^iqra_phonemes\s*(does not end with|ends with)\s*(\[.*\])$/);
   if (ending) {
-    const [, operator, rawExpected] = ending;
-    const expected = (rawExpected ?? "").replace(/[\[\]'\s]/g, "").split(",").filter(Boolean);
-    const tail = context.iqraPhonemes.slice(-expected.length);
-    const found = tail.length === expected.length && expected.every((token, i) => token.split("|").includes(tail[i]!));
+    const [, operator, rawEndings] = ending;
+    const found = (rawEndings ?? "").split(/\]\s*or\s*\[/).some((rawExpected) => {
+      const expected = rawExpected.replace(/[\[\]'\s]/g, "").split(",").filter(Boolean);
+      const tail = context.iqraPhonemes.slice(-expected.length);
+      return tail.length === expected.length && expected.every((token, i) => token.split("|").includes(tail[i]!));
+    });
     return operator === "ends with" ? found : !found;
   }
 

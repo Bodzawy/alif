@@ -1009,28 +1009,29 @@ function assess(target: string, accuracy: number, phonemes: string[] | null) {
 }
 
 /**
- * Advanced (ALIF Pronunciation): a single word that the app speaks only with Tanwin must end in it – IQRA's
- * last two tokens u n (or a n for -an, e.g. شُكْرًا). The ending per target; none for a word that is also
- * spoken without Tanwin somewhere, or that is part of a phrase.
+ * Advanced (ALIF Pronunciation): a single word that the app speaks only with Tanwin must end in its n – IQRA
+ * mostly drops the short vowel (أَبٌ "< a b n", "< a b nn"). A word ending in ن (تِينٌ) needs a second n after
+ * its own: n u n, n n or nn. The ending per target; none for a word that is also spoken without Tanwin
+ * somewhere, or that is part of a phrase.
  */
-const TANWIN_END: Record<string, string[]> = (() => {
+const N_FINAL_END = "['n|nn','u|U','n|nn'] or ['n|nn','n|nn'] or ['nn']";
+const TANWIN_END: Record<string, string> = (() => {
   const spokenAs = new Map<string, Set<string>>();
   for (const e of allExercises()) (spokenAs.get(e.target) ?? spokenAs.set(e.target, new Set()).get(e.target)!).add(e.modelText);
-  const out: Record<string, string[]> = {};
+  const out: Record<string, string> = {};
   for (const [target, texts] of spokenAs) {
     const list = [...texts];
     if (list.some((t) => t.trim().split(/\s+/).length > 1)) continue;
     const ends = new Set(list.map((t) => (/ٌّ?[.،؟!]?$/.test(t) ? "un" : /ًّ?[اى]?[.،؟!]?$/.test(t) ? "an" : /ٍّ?[.،؟!]?$/.test(t) ? "in" : "none")));
-    if (ends.size === 1 && ends.has("un")) out[target] = ["u|U", "n|nn"];
-    if (ends.size === 1 && ends.has("an")) out[target] = ["a|A", "n|nn"];
+    if (ends.size === 1 && (ends.has("un") || ends.has("an"))) out[target] = target.endsWith("ن") ? N_FINAL_END : "['n|nn']";
   }
   return out;
 })();
-const endCondition = (ending: string[]) => `[${ending.map((t) => `'${t}'`).join(",")}]`;
+const isN = (token: string) => token.split("|").some((t) => t === "n" || t === "nn");
 
-/** A plausible, never-empty IQRA output: hamza, the first vowel, then the required consonants (chosen alternative) with vowels around them – and the Tanwin, when the word has one. */
-function spoken(tokens: string[], pick: (alternatives: string[]) => string = (alternatives) => alternatives[0]!, first = "a", ending: string[] = []) {
-  return ["<", first, ...tokens.flatMap((token) => [pick(token.split("|")), "a"]), ...ending.map((t) => t.split("|")[0]!)];
+/** A plausible, never-empty IQRA output: hamza, the first vowel, then the required consonants (chosen alternative) with vowels around them – and what IQRA hears of the Tanwin, when the word has one. */
+function spoken(tokens: string[], pick: (alternatives: string[]) => string = (alternatives) => alternatives[0]!, first = "a", tanwin: string[] = []) {
+  return ["<", first, ...tokens.flatMap((token) => [pick(token.split("|")), "a"]), ...tanwin];
 }
 
 // 365 up to Lektion 4; Lektion 5 and 6 (the book's Unit 3): 123 evaluated words and lines – the
@@ -1085,32 +1086,48 @@ describe("vocabulary IQRA gates", () => {
 
   describe.each(words.map(({ lesson, word }) => [`${lesson} ${word.exercise.target}`, word.exercise.target] as const))("%s", (_, target) => {
     const tokens = EXPECTED_TOKENS[target]!;
-    const list = `[${tokens.map((token) => `'${token}'`).join(",")}]`;
 
     const vowel = FIRST_VOWEL[target];
     const ending = TANWIN_END[target];
-    // A word with n (أَرْنَبٌ): its Tanwin n is a sound of its own – one more n|nn in the list.
-    const hasN = tokens.some((token) => token.split("|").some((t) => t === "n" || t === "nn"));
-    const extraN = Boolean(ending && hasN);
-    const said = (pickTokens: string[], pick?: (alternatives: string[]) => string, first?: string) => spoken(pickTokens, pick, first, ending ?? []);
+    const nFinal = ending === N_FINAL_END;
+    // The n of تِين is its last token (بنطلون lists its first n only: the last one comes with the Tanwin).
+    const nLast = nFinal && isN(tokens.at(-1)!);
+    // A word with n inside (أَرْنَبٌ): its Tanwin n is a sound of its own – one more n|nn in the list.
+    const extraN = Boolean(ending && !nFinal && tokens.some(isN));
+    // A word ending in ن: its n is n or nn (IQRA may join it with the Tanwin's: تِينٌ "t ii nn").
+    const listed = nFinal ? tokens.map((token, i) => (i === tokens.findLastIndex((t) => t === "n") ? "n|nn" : token)) : extraN ? [...tokens, "n|nn"] : tokens;
+    /** The word – with what IQRA hears of the Tanwin, right after the word's own last n. */
+    const said = (pickTokens: string[], pick?: (alternatives: string[]) => string, first?: string, tanwin = ["u", "n"]) => {
+      if (!ending) return spoken(pickTokens, pick, first);
+      if (!nFinal) return spoken(pickTokens, pick, first, tanwin);
+      const word = spoken(pickTokens, pick, first);
+      return nLast ? (isN(pickTokens.at(-1)!) ? [...word.slice(0, -1), ...tanwin] : [...word, ...tanwin]) : [...word, "n", ...tanwin];
+    };
 
     it("has the agreed rule: Azure >= 70, IQRA contains the word's consonants (and, for A1, the right first vowel; and the Tanwin at the end)", () => {
       expect(VOCABULARY_RULES[target]!.excellent!.conditions.map(shortVowelCondition)).toEqual([
         "azure_accuracy >= 70",
-        `iqra_phonemes contains ${extraN ? list.replace(/\]$/, ",'n|nn']") : list}`,
+        `iqra_phonemes contains [${listed.map((token) => `'${token}'`).join(",")}]`,
         ...(vowel ? [`iqra_initial_vowel == ${[vowel, ...(ALSO_ACCEPTED[target] ?? [])].join("|")}`] : []),
-        ...(ending ? [`iqra_phonemes ends with ${endCondition(ending)}`] : []),
+        ...(ending ? [`iqra_phonemes ends with ${ending}`] : []),
       ]);
     });
 
     if (ending) {
       it("6. Advanced: fails without the Tanwin at the end (said_without_tanwin) – the right word, Azure 100", () => {
-        const withoutTanwin = spoken(tokens, undefined, vowel);
-        const result = assess(target, 100, withoutTanwin);
-        expect(result.passed, `${target} without Tanwin`).toBe(false);
-        expect(result.conditionEvaluation.matchedRule).toBe("said_without_tanwin");
-        expect(result.feedback.message).toContain("التنوين");
-        expect(assess(target, 100, said(tokens, undefined, vowel)).passed).toBe(true);
+        // As IQRA hears it without: the word ends in its last sound (تِين "t ii n", أَب "< a b").
+        const withoutTanwin = said(tokens, undefined, vowel, []);
+        // (Cut after the last listed sound only where that is the end of the word: not رُمَّانَة, whose n comes before ة.)
+        const cut = withoutTanwin.at(-1) === "a" && (nFinal || !isN(tokens.at(-1)!)) ? withoutTanwin.slice(0, -1) : withoutTanwin;
+        for (const heard of [withoutTanwin, cut, [...withoutTanwin, "u"]]) {
+          const result = assess(target, 100, heard);
+          expect(result.passed, `${target} without Tanwin: ${heard.join(" ")}`).toBe(false);
+          expect(result.conditionEvaluation.matchedRule).toBe("said_without_tanwin");
+          expect(result.feedback.message).toContain("التنوين");
+        }
+        // With it, however IQRA writes it: u n, n, nn (after the word's own n: u n, n, or joined into nn).
+        for (const tanwin of [["u", "n"], ["n"], ["nn"], ["U", "nn"]]) expect(assess(target, 100, said(tokens, undefined, vowel, tanwin)).passed, `${target} + ${tanwin.join(" ")}`).toBe(true);
+        if (nLast) expect(assess(target, 100, [...said(tokens, undefined, vowel, []).slice(0, -1), "nn"]).passed, `${target} … nn`).toBe(true);
       });
     }
 
@@ -1125,11 +1142,14 @@ describe("vocabulary IQRA gates", () => {
 
     it("2. fails with Azure >= 70 when any single required sound is missing", () => {
       tokens.forEach((_, missing) => {
+        // بنطلون without its first n: its last n still stands in for it (as before the Tanwin check).
+        if (nFinal && !nLast && isN(tokens[missing]!)) return;
         const result = assess(target, 95, said(tokens.filter((__, i) => i !== missing), undefined, vowel));
         expect(result.passed, `${target} without ${tokens[missing]}`).toBe(false);
-        // Only the Tanwin n left for the n of the word: the sound is missing all the same.
-        const nLeft = extraN && tokens[missing]!.split("|").some((t) => t === "n" || t === "nn");
-        expect(result.conditionEvaluation.matchedRule).toBe(nLeft ? "said_wrong_sound_n" : "said_wrong_sound");
+        // Only the Tanwin n left for the n of the word: the sound is missing all the same –
+        // and for تِين, whose n is the last sound, the end of the word is missing.
+        const n = isN(tokens[missing]!);
+        expect(result.conditionEvaluation.matchedRule).toBe(n && extraN ? "said_wrong_sound_n" : n && nLast && missing === tokens.length - 1 ? "said_without_tanwin" : "said_wrong_sound");
       });
     });
 
@@ -1149,7 +1169,7 @@ describe("vocabulary IQRA gates", () => {
           }
         }
         // No initial vowel heard: the right vowel later in the word does not count.
-        const late = ["<", ...tokens.flatMap((token) => [token.split("|")[0]!, vowel]), ...(ending ?? []).map((t) => t.split("|")[0]!)];
+        const late = said(tokens, undefined, vowel).filter((_, i) => i !== 1);
         expect(assess(target, 100, late).passed, `${target} without initial vowel`).toBe(false);
         expect(assess(target, 100, late).conditionEvaluation.matchedRule).toBe("said_wrong_vowel");
         // Long and emphatic forms of the right vowel count as that vowel.
@@ -1174,11 +1194,12 @@ describe("the Tanwin at the end (ALIF Pronunciation only)", () => {
     for (const [target, rules] of Object.entries(VOCABULARY_RULES)) {
       const check = rules.excellent?.conditions.find((c) => c.includes("ends with"));
       const ending = TANWIN_END[target];
-      expect(check, target).toBe(ending ? `iqra_phonemes ends with ${endCondition(ending)}` : undefined);
+      expect(check, target).toBe(ending ? `iqra_phonemes ends with ${ending}` : undefined);
       expect(Boolean(rules.said_without_tanwin), target).toBe(Boolean(ending));
     }
     for (const mixed of ["يوم", "شارع", "ثلاثة", "يمين"]) expect(TANWIN_END[mixed], mixed).toBeUndefined();
-    expect(TANWIN_END["شكرا"]).toEqual(["a|A", "n|nn"]);
+    expect(TANWIN_END["شكرا"]).toBe("['n|nn']");
+    expect(TANWIN_END["تين"]).toBe(N_FINAL_END);
   });
 
   it("ALIF Speaking (Beginner) and the letters and sounds are not checked for it", async () => {

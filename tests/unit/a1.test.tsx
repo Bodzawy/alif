@@ -75,7 +75,7 @@ describe("A1 · Lesson 1 content", () => {
         // Real IQRA format: hamza, then the vowel (and the Tanwin -un at the end). Right vowel passes, the other two do not.
         const consonants = (rules.excellent!.conditions[1]!.match(/\[(.*)\]/)![1]!).replace(/'/g, "").split(",").map((t) => t.split("|")[0]!);
         for (const heardVowel of ["a", "i", "u"] as const) {
-          const phonemes = ["<", heardVowel, ...consonants.flatMap((c) => [c, "a"]), "u", "n"];
+          const phonemes = ["<", heardVowel, ...consonants.flatMap((c) => [c, "a"]).slice(0, -1), "u", "n"]; // أُذُنٌ "< u * u n u n"
           const result = buildAssessment({
             target: word.exercise.target,
             primary: { referenceText: word.exercise.target, recognized: word.exercise.target, accuracy: 95, pronunciation: 95, fluency: 90, completeness: 100, firstSoundScore: 80, words: [] },

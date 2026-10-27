@@ -169,6 +169,17 @@ describe("iqra_phonemes ends with / contains: the Tanwin (ALIF Pronunciation)", 
     expect(matchesCondition("iqra_phonemes does not end with ['a|A','n|nn']", heard("$", "u", "k", "r", "a", "n"))).toBe(false);
   });
 
+  it("ends with … or …: any of the endings – the Tanwin as IQRA writes it (أَبٌ \"< a b nn\", تِينٌ \"t ii n n\")", () => {
+    const ab = "iqra_phonemes ends with ['n|nn']";
+    for (const heardAs of [["<", "a", "b", "n"], ["<", "a", "b", "nn"], ["<", "a", "b", "u", "n"]]) expect(matchesCondition(ab, heard(...heardAs)), heardAs.join(" ")).toBe(true);
+    expect(matchesCondition(ab, heard("<", "a", "b"))).toBe(false);
+    const tiin = "iqra_phonemes ends with ['n|nn','u|U','n|nn'] or ['n|nn','n|nn'] or ['nn']";
+    for (const heardAs of [["t", "ii", "n", "u", "n"], ["t", "ii", "n", "n"], ["t", "ii", "nn"], ["t", "ii", "n", "U", "nn"]]) expect(matchesCondition(tiin, heard(...heardAs)), heardAs.join(" ")).toBe(true);
+    for (const heardAs of [["t", "ii", "n"], ["t", "ii", "u", "n"], []]) expect(matchesCondition(tiin, heard(...heardAs)), heardAs.join(" ")).toBe(false);
+    expect(matchesCondition(tiin.replace("ends with", "does not end with"), heard("t", "ii", "n"))).toBe(true);
+    expect(matchesCondition(tiin.replace("ends with", "does not end with"), heard("t", "ii", "nn"))).toBe(false);
+  });
+
   it("contains counts every listed token once: the Tanwin n does not stand in for the n of أَرْنَبٌ", () => {
     expect(matchesCondition("iqra_phonemes contains ['r|rr','n','b','n|nn']", heard("<", "a", "r", "n", "a", "b", "u", "n"))).toBe(true);
     expect(matchesCondition("iqra_phonemes contains ['r|rr','n','b','n|nn']", heard("<", "a", "r", "b", "u", "n"))).toBe(false);
