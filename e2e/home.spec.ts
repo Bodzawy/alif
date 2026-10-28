@@ -52,10 +52,11 @@ test.describe("desktop 1536", () => {
     await expect(page.getByRole("banner")).toContainText("A0"); // the site header on every other page
   });
 
-  test("language menu and Anmelden say what exists; Jetzt starten opens the alphabet", async ({ page }) => {
+  test("the language switch offers the five languages; Anmelden says what exists; Jetzt starten opens the alphabet", async ({ page }) => {
     await page.goto("/");
-    await page.getByTestId("language-menu").locator("summary").click();
-    await expect(page.getByTestId("language-menu")).toContainText("Weitere Sprachen der Oberfläche sind noch nicht verfügbar.");
+    await page.getByTestId("language-switch").first().click();
+    for (const name of ["Deutsch", "English", "Türkçe", "Shqip", "Français"]) await expect(page.getByTestId("language-dialog")).toContainText(name);
+    await page.getByTestId("language-close").click();
     await page.getByTestId("login-menu").locator("summary").click();
     await expect(page.getByTestId("login-info")).toContainText("Du brauchst kein Konto.");
     await page.getByTestId("cta-start").click();
