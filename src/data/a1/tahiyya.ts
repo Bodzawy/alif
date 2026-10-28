@@ -1,4 +1,4 @@
-import type { A1Lesson, Dialogue, DialogueSpeaker, PhraseItem } from "@/data/types";
+import type { A1Lesson, Dialogue, DialogueSpeaker, PhraseItem, PronunciationExercise } from "@/data/types";
 
 import { lines, menDialogue, womenDialogue } from "./sabah-al-khayr";
 
@@ -19,15 +19,13 @@ import { lines, menDialogue, womenDialogue } from "./sabah-al-khayr";
 
 const IMG = "/images/a1/sabah-al-khayr";
 
-type Spec = [id: string, arabic: string, target: string, transliteration: string, german: string, extra?: Partial<Pick<PhraseItem, "literal" | "tag" | "gender">>];
-const phrase = ([id, arabic, target, transliteration, german, extra]: Spec): PhraseItem => ({
-  id,
-  arabic,
-  transliteration,
-  german,
-  ...extra,
-  exercise: { id, target, modelText: arabic },
-});
+/** "Anhören" in a speaker's voice: the text, voice and recording (line) it plays. */
+type Say = Pick<PronunciationExercise, "modelText" | "voice" | "line">;
+type Spec = [id: string, arabic: string, target: string, transliteration: string, german: string, extra?: Partial<Pick<PhraseItem, "literal" | "tag" | "gender">> & { say?: Say }];
+const phrase = ([id, arabic, target, transliteration, german, extra]: Spec): PhraseItem => {
+  const { say, ...rest } = extra ?? {};
+  return { id, arabic, transliteration, german, ...rest, exercise: { id, target, modelText: arabic, ...say } };
+};
 
 const speaker = (id: string, name: string, voice: DialogueSpeaker["voice"], alt: string): DialogueSpeaker => ({ id, name, voice, avatar: { src: `${IMG}/${id}.svg`, alt } });
 
@@ -54,6 +52,12 @@ export const majidFatimaDialogue: Dialogue = {
   },
 };
 
+/** The expression as Majid or Fatima says it in the dialogue – with their recording. */
+function saidIn(lineId: string): Say {
+  const line = majidFatimaDialogue.lines.find((l) => l.id === lineId)!;
+  return { modelText: line.exercise.modelText, voice: majidFatimaDialogue.speakers.find((s) => s.id === line.speaker)!.voice, line: line.id };
+}
+
 const ROLEPLAY_GERMAN = "Spiele den Dialog mit deinem Lernpartner nach und frage nach seinem oder ihrem Namen.";
 
 export const a1Tahiyya: A1Lesson = {
@@ -73,8 +77,8 @@ export const a1Tahiyya: A1Lesson = {
           id: "gruss",
           title: "Der Gruß und die Antwort",
           items: [
-            phrase(["p-sabah-al-khayr", "صَبَاحُ الْخَيْرِ", "صباح الخير", "Ṣabāḥu l-khayri", "Guten Morgen!", { tag: "Gruß – zu Mann und Frau gleich", literal: "Morgen des Guten" }]),
-            phrase(["p-sabah-an-nur", "صَبَاحُ النُّورِ", "صباح النور", "Ṣabāḥu n-nūri", "Guten Morgen!", { tag: "Antwort", literal: "Morgen des Lichts" }]),
+            phrase(["p-sabah-al-khayr", "صَبَاحُ الْخَيْرِ", "صباح الخير", "Ṣabāḥu l-khayri", "Guten Morgen!", { tag: "Gruß – zu Mann und Frau gleich", literal: "Morgen des Guten", say: saidIn("t-sabah-al-khayr") }]),
+            phrase(["p-sabah-an-nur", "صَبَاحُ النُّورِ", "صباح النور", "Ṣabāḥu n-nūri", "Guten Morgen!", { tag: "Antwort", literal: "Morgen des Lichts", say: saidIn("t-sabah-an-nur") }]),
           ],
         },
         {
@@ -82,9 +86,9 @@ export const a1Tahiyya: A1Lesson = {
           title: "Wie geht es dir?",
           note: "Die Frage hat zwei Formen. Nur der letzte Vokal ändert sich: حَالُكَ (ḥālu-ka) sagst du zu einem Mann, حَالُكِ (ḥālu-ki) zu einer Frau. Die Antwort ist für beide gleich.",
           items: [
-            phrase(["p-kayfa-haluka", "كَيْفَ حَالُكَ؟", "كيف حالك", "Kayfa ḥāluka?", "Wie geht es dir?", { tag: "zu einem Mann", gender: "m" }]),
-            phrase(["p-kayfa-haluki", "كَيْفَ حَالُكِ؟", "كيف حالك", "Kayfa ḥāluki?", "Wie geht es dir?", { tag: "zu einer Frau", gender: "f" }]),
-            phrase(["p-bi-khayr", "بِخَيْرٍ، الْحَمْدُ لِلَّهِ.", "بخير الحمد لله", "Bi-khayrin, al-ḥamdu li-llāhi.", "Gut, Gott sei Dank.", { tag: "Antwort", literal: "Gut, das Lob gebührt Gott" }]),
+            phrase(["p-kayfa-haluka", "كَيْفَ حَالُكَ؟", "كيف حالك", "Kayfa ḥāluka?", "Wie geht es dir?", { tag: "zu einem Mann", gender: "m", say: saidIn("t-kayfa-haluka") }]),
+            phrase(["p-kayfa-haluki", "كَيْفَ حَالُكِ؟", "كيف حالك", "Kayfa ḥāluki?", "Wie geht es dir?", { tag: "zu einer Frau", gender: "f", say: saidIn("t-kayfa-haluki") }]),
+            phrase(["p-bi-khayr", "بِخَيْرٍ، الْحَمْدُ لِلَّهِ.", "بخير الحمد لله", "Bi-khayrin, al-ḥamdu li-llāhi.", "Gut, Gott sei Dank.", { tag: "Antwort", literal: "Gut, das Lob gebührt Gott", say: saidIn("t-bi-khayr-f") }]),
           ],
         },
       ],
@@ -100,8 +104,8 @@ export const a1Tahiyya: A1Lesson = {
           title: "Ich heiße …",
           note: "Auf Arabisch sagst du einfach „Ich (bin) Majid“ – ein Wort für „bin“ gibt es hier nicht. وَ (wa) heißt „und“.",
           items: [
-            phrase(["p-ana-majid", "أَنَا مَاجِدٌ.", "أنا ماجد", "Ana Mājidun.", "Ich heiße Majid.", { literal: "Ich (bin) Majid" }]),
-            phrase(["p-wa-ana-fatima", "وَأَنَا فَاطِمَةُ.", "وأنا فاطمة", "Wa-ana Fāṭimatu.", "Und ich heiße Fatima.", { literal: "Und ich (bin) Fatima" }]),
+            phrase(["p-ana-majid", "أَنَا مَاجِدٌ.", "أنا ماجد", "Ana Mājidun.", "Ich heiße Majid.", { literal: "Ich (bin) Majid", say: { modelText: "أَنَا مَاجِدٌ.", voice: "male-1", line: "p-ana-majid" } }]),
+            phrase(["p-wa-ana-fatima", "وَأَنَا فَاطِمَةُ.", "وأنا فاطمة", "Wa-ana Fāṭimatu.", "Und ich heiße Fatima.", { literal: "Und ich (bin) Fatima", say: saidIn("t-wa-ana-fatima") }]),
           ],
         },
       ],

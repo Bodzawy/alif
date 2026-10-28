@@ -1,6 +1,8 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
+import { splitAddressee } from "@/components/a1/dialogue/dialogue-bubble";
 import { A1_LEVEL } from "@/data/a1";
+import { a1Tahiyya } from "@/data/a1/tahiyya";
 import type { Dialogue } from "@/data/types";
 import dialogueManifest from "@/lib/tts/dialogue-manifest.json";
 
@@ -24,10 +26,12 @@ function dialogues(): Dialogue[] {
 }
 
 describe("dialogue recordings", () => {
-  it("each recording belongs to a dialogue line of the app: the same voice, the same text", () => {
+  it("each recording belongs to a dialogue line (or an expression in a speaker's voice) of the app: the same voice, the same text", () => {
     const app = new Map<string, { voice: string; text: string }>();
     for (const d of dialogues())
       for (const line of d.lines) app.set(line.id, { voice: d.speakers.find((s) => s.id === line.speaker)!.voice, text: line.exercise.modelText });
+    for (const step of a1Tahiyya.steps)
+      if (step.kind === "phrases") for (const { id, exercise } of step.groups.flatMap((g) => g.items)) if (exercise.line === id) app.set(id, { voice: exercise.voice!, text: exercise.modelText });
     expect(Object.keys(lines).length).toBeGreaterThan(0);
     for (const [id, entry] of Object.entries(lines)) {
       expect(app.get(id), id).toEqual({ voice: entry.voice, text: entry.text });
@@ -77,5 +81,38 @@ describe("dialogue recordings", () => {
       await speechUrl(text, "male-1", "m-sabah-al-khayr");
       expect(fetchMock.mock.calls.slice(4).map((c) => c[0])).toEqual([`/audio/ar/${file}.mp3`, "/api/tts"]);
     });
+  });
+});
+
+describe("expressions in a speaker's voice (Begrüßen und sich vorstellen)", () => {
+  const items = a1Tahiyya.steps.flatMap((step) => (step.kind === "phrases" ? step.groups.flatMap((g) => g.items) : []));
+
+  it("each plays the dialogue line it comes from – the same words, that speaker's voice and recording", () => {
+    const app = new Map<string, { voice: string; text: string }>();
+    for (const d of dialogues()) for (const line of d.lines) app.set(line.id, { voice: d.speakers.find((s) => s.id === line.speaker)!.voice, text: line.exercise.modelText });
+    const bare = (t: string) => t.replace(/[.،؟!]/g, "").trim();
+    expect(items.length).toBe(7);
+    for (const { id, arabic, exercise } of items) {
+      expect(exercise.voice, id).toBeDefined();
+      if (exercise.line === id) continue; // its own recording (أَنَا مَاجِدٌ.: not recorded yet – Azure in Majid's voice)
+      expect(app.get(exercise.line!), id).toEqual({ voice: exercise.voice, text: exercise.modelText });
+      expect(bare(exercise.modelText), id).toBe(bare(arabic));
+      expect(lines[exercise.line!], `${id}: recorded`).toEqual(expect.objectContaining({ voice: exercise.voice, text: exercise.modelText }));
+    }
+    // The masculine form is said by Fatima (to Majid), the feminine one by Majid (to Fatima).
+    expect(items.find((i) => i.id === "p-kayfa-haluka")!.exercise.voice).toBe("female-2");
+    expect(items.find((i) => i.id === "p-kayfa-haluki")!.exercise.voice).toBe("male-1");
+  });
+});
+
+describe("whom a sentence is said to", () => {
+  it("comes out of the German as a badge of its own", () => {
+    expect(splitAddressee("Wie geht es dir? (zu einer Frau)")).toEqual({ german: "Wie geht es dir?", addressee: "zu einer Frau", gender: "f" });
+    expect(splitAddressee("Ich heiße Majid. Und du? (zu einer Frau)")).toEqual({ german: "Ich heiße Majid. Und du?", addressee: "zu einer Frau", gender: "f" });
+    expect(splitAddressee("Wie heißt du? (zu einem Mann)")).toEqual({ german: "Wie heißt du?", addressee: "zu einem Mann", gender: "m" });
+    expect(splitAddressee("Wie geht es euch? (zu mehreren Frauen)").gender).toBe("f");
+    expect(splitAddressee("Wie geht es euch? (zu zwei Männern)").gender).toBe("m");
+    expect(splitAddressee("Gut, Gott sei Dank.")).toEqual({ german: "Gut, Gott sei Dank." });
+    expect(splitAddressee("Wohnung (zu vermieten)")).toEqual({ german: "Wohnung (zu vermieten)" });
   });
 });

@@ -359,10 +359,20 @@ describe("Nachsprechen – retries and errors", () => {
   });
 });
 
+/** After one role: not done yet – the other role is next. */
+function expectOneRoleLeft(next: string) {
+  expect(getLessonProgress(KEY).completedAt).toBeUndefined();
+  expect(screen.queryByTestId("step-completed")).toBeNull();
+  expect(screen.getByTestId("dialogue-next-role")).toHaveTextContent(`Weiter als ${next}`);
+}
+
 async function startRoleplay(d: Dialogue, role: string) {
   render(<DialogueSpeaking dialogue={d} mode="roleplay" progressKey={KEY} />);
   await at(0);
-  expect(screen.getByTestId("start-button")).toBeDisabled(); // a role first
+  // The first role is chosen already (first this one, then the other).
+  const firstRole = (d.roles ?? d.speakers)[0]!.id;
+  expect(screen.getByTestId(`role-${firstRole}`)).toHaveAttribute("aria-pressed", "true");
+  expect(screen.getByTestId("start-button")).toBeEnabled();
   fireEvent.click(screen.getByTestId(`role-${role}`));
   fireEvent.click(screen.getByTestId("start-button"));
   await at(0);
@@ -384,7 +394,7 @@ describe.each([
     // Strict turn order: app line, (learner, "Super!"), app line, …, and the app closes with line 7.
     expect(played.filter((p) => p !== SUPER)).toEqual(linesOf(first.id).map(([, i]) => said(d, i)));
     expect(played).toEqual([said(d, 0), SUPER, said(d, 2), SUPER, said(d, 4), SUPER, said(d, 6)]);
-    expect(getLessonProgress(KEY).completedAt).toBeTruthy();
+    expectOneRoleLeft(first.name);
   });
 
   it(`as the first speaker: the learner starts and ends; the app answers with lines 2, 4, 6`, async () => {
@@ -392,7 +402,24 @@ describe.each([
     await until(() => screen.queryByTestId("dialogue-done") !== null);
     expect(targets()).toEqual(linesOf(first.id).map(([l]) => l.exercise.target));
     expect(played).toEqual([SUPER, said(d, 1), SUPER, said(d, 3), SUPER, said(d, 5), SUPER]);
+    expectOneRoleLeft(second.name);
+  });
+
+  it("first one role, then (marked green) the other – only both make the step done", async () => {
+    await startRoleplay(d, first.id);
+    await until(() => screen.queryByTestId("dialogue-done") !== null);
+    expect(getLessonProgress(KEY).completedAt).toBeUndefined();
+    fireEvent.click(screen.getByTestId("dialogue-next-role"));
+    await at(0);
+    expect(screen.getByTestId(`role-${first.id}`)).toHaveAttribute("data-done", "true");
+    expect(screen.getByTestId(`role-done-${first.id}`)).toHaveTextContent("Geschafft");
+    expect(screen.getByTestId(`role-${second.id}`)).toHaveAttribute("aria-pressed", "true"); // the other role is next
+    expect(screen.getByTestId("start-overlay")).toHaveTextContent(`Jetzt sprichst du die andere Rolle: ${second.name}`);
+    fireEvent.click(screen.getByTestId("start-button"));
+    await until(() => screen.queryByTestId("dialogue-done") !== null);
     expect(getLessonProgress(KEY).completedAt).toBeTruthy();
+    expect(screen.queryByTestId("dialogue-next-role")).toBeNull();
+    expect(screen.getByTestId("step-completed")).toBeInTheDocument();
   });
 });
 
@@ -406,7 +433,7 @@ describe("Rollenspiel – Majid und Fatima (Übung 1: nach dem Namen fragen)", (
     expect(targets()).toEqual(["صباح الخير", "كيف حالك", "بخير الحمد لله", "أنا ماجد وأنت"]);
     expect(played).toEqual([SUPER, said(d, 1), SUPER, said(d, 3), said(d, 4), SUPER, said(d, 6), SUPER, said(d, 8)]);
     expect(played.filter((p) => p.startsWith("male-1|"))).toEqual([]); // never the learner's voice
-    expect(getLessonProgress(KEY).completedAt).toBeTruthy();
+    expectOneRoleLeft("Fatima");
   });
 
   it("as Fatima: the learner asks a man (حَالُكَ، مَا اسْمُكَ؟) and ends with وَأَنَا فَاطِمَةُ", async () => {
@@ -414,7 +441,7 @@ describe("Rollenspiel – Majid und Fatima (Übung 1: nach dem Namen fragen)", (
     await until(() => screen.queryByTestId("dialogue-done") !== null);
     expect(targets()).toEqual(["صباح النور", "بخير الحمد لله", "كيف حالك", "ما اسمك", "وأنا فاطمة"]);
     expect(played).toEqual([said(d, 0), SUPER, said(d, 2), SUPER, SUPER, said(d, 5), SUPER, said(d, 7), SUPER]);
-    expect(getLessonProgress(KEY).completedAt).toBeTruthy();
+    expectOneRoleLeft("Majid");
   });
 });
 

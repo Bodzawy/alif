@@ -103,9 +103,9 @@ export function stopSpeaking() {
   }
 }
 
-/** Resolves when playback has finished (or was interrupted). */
-export async function speakArabic(text: string): Promise<void> {
-  const url = await audioUrl(text);
+/** Resolves when playback has finished (or was interrupted). `voice` / `line`: as for speechUrl. */
+export async function speakArabic(text: string, voice?: SpeechVoice, line?: string): Promise<void> {
+  const url = await audioUrl(text, voice, line);
   stopSpeaking();
   const audio = new Audio(url);
   current = audio;

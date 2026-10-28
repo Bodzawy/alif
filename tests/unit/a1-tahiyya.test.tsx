@@ -268,7 +268,10 @@ describe("PhrasesStep (mocked microphone and evaluation)", () => {
     expect(screen.getByTestId("phrase-arabic-p-ana-majid")).toHaveAttribute("dir", "rtl");
 
     fireEvent.click(screen.getByTestId("exercise-p-ana-majid-listen"));
-    await waitFor(() => expect(tts.speak).toHaveBeenCalledWith("أَنَا مَاجِدٌ."));
+    // In Majid's voice (his own recording once there is one), Fatima's sentence in hers – from her dialogue line.
+    await waitFor(() => expect(tts.speak).toHaveBeenCalledWith("أَنَا مَاجِدٌ.", "male-1", "p-ana-majid"));
+    fireEvent.click(screen.getByTestId("exercise-p-wa-ana-fatima-listen"));
+    await waitFor(() => expect(tts.speak).toHaveBeenCalledWith("وَأَنَا فَاطِمَةُ.", "female-2", "t-wa-ana-fatima"));
 
     verdicts = [false];
     await record("p-ana-majid");

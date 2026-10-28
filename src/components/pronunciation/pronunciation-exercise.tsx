@@ -55,7 +55,7 @@ export function PronunciationExercise({
   return (
     <div className={cn("flex flex-col gap-3", className)} data-testid={testId} data-phase={phase}>
       <div className="grid grid-cols-2 gap-2">
-        <ListenButton text={exercise.modelText} disabled={busy} testId={`${testId}-listen`} />
+        <ListenButton text={exercise.modelText} voice={exercise.voice} line={exercise.line} disabled={busy} testId={`${testId}-listen`} />
         <RecordButton phase={phase} onStart={start} onStop={stop} disabled={locked} testId={`${testId}-record`} />
       </div>
 

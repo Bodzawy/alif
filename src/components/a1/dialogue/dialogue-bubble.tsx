@@ -10,6 +10,37 @@ import { cn } from "@/lib/utils";
 
 export type BubbleState = "idle" | "playing" | "active" | "done" | "waiting";
 
+/** "Wie geht es dir? (zu einem Mann)" → the meaning and whom it is said to – shown as a badge of its own. */
+const ADDRESSEE = /\s*\((zu (?:einem Mann|einer Frau|zwei Männern|zwei Frauen|mehreren Männern|mehreren Frauen))\)\s*$/;
+
+export function splitAddressee(german: string): { german: string; addressee?: string; gender?: "m" | "f" } {
+  const match = ADDRESSEE.exec(german);
+  if (!match) return { german };
+  return { german: german.slice(0, match.index), addressee: match[1], gender: /Frau/.test(match[1]!) ? "f" : "m" };
+}
+
+/** Whom a sentence is said to – large and coloured, so the masculine / feminine form is not missed. */
+export function AddresseeBadge({ addressee, gender, testId }: { addressee: string; gender?: "m" | "f"; testId?: string }) {
+  return (
+    <span
+      dir="ltr"
+      data-testid={testId}
+      data-gender={gender}
+      className={cn(
+        "inline-flex items-center gap-1.5 rounded-full border-2 px-3 py-1 text-sm font-bold sm:text-base",
+        gender === "f" ? "border-accent/60 bg-accent-soft text-accent-foreground" : gender === "m" ? "border-primary/50 bg-primary-soft text-primary" : "border-border bg-muted text-foreground"
+      )}
+    >
+      {gender && (
+        <span aria-hidden className="text-base sm:text-lg">
+          {gender === "f" ? "♀" : "♂"}
+        </span>
+      )}
+      {addressee}
+    </span>
+  );
+}
+
 export function DialogueBubble({
   line,
   speaker,
@@ -36,6 +67,7 @@ export function DialogueBubble({
   /** The list item, e.g. to scroll it into view. */
   itemRef?: (el: HTMLLIElement | null) => void;
 }) {
+  const { german, addressee, gender } = splitAddressee(line.german);
   return (
     <li
       ref={itemRef}
@@ -67,9 +99,14 @@ export function DialogueBubble({
             {line.transliteration}
           </p>
         )}
+        {addressee && (
+          <p dir="ltr" className="mt-1 text-left">
+            <AddresseeBadge addressee={addressee} gender={gender} testId={`line-addressee-${line.id}`} />
+          </p>
+        )}
         {showGerman && (
-          <p dir="ltr" className="text-left text-base font-semibold" data-testid={`line-german-${line.id}`}>
-            {line.german}
+          <p dir="ltr" className="mt-1 text-left text-base font-semibold" data-testid={`line-german-${line.id}`}>
+            {german}
             {line.literal && <span className="font-normal text-muted-foreground"> (wörtlich: {line.literal})</span>}
           </p>
         )}

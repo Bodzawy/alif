@@ -19,8 +19,8 @@ import { cn } from "@/lib/utils";
 const noop = () => () => undefined;
 
 const GENDER = {
-  m: { sign: "♂", className: "border-primary/30 bg-primary-soft text-primary" },
-  f: { sign: "♀", className: "border-accent/40 bg-accent-soft text-accent-foreground" },
+  m: { sign: "♂", className: "border-primary/50 bg-primary-soft text-primary" },
+  f: { sign: "♀", className: "border-accent/60 bg-accent-soft text-accent-foreground" },
 } as const;
 
 export function PhrasesStep({ groups, progressKey }: { groups: PhraseGroup[]; progressKey: string }) {
@@ -61,11 +61,19 @@ export function PhrasesStep({ groups, progressKey }: { groups: PhraseGroup[]; pr
                 <li key={item.id} className={cn("flex flex-col rounded-3xl border bg-card p-4 shadow-card sm:p-5", isPassed(item) && hydrated && "border-success/50")} data-testid={`phrase-${item.id}`} data-gender={item.gender}>
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     {item.tag ? (
+                      // Whom it is said to (zu einem Mann / zu einer Frau): large and coloured, so the form is not missed.
                       <span
-                        className={cn("inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-xs font-semibold", item.gender ? GENDER[item.gender].className : "bg-muted text-muted-foreground")}
+                        className={cn(
+                          "inline-flex items-center gap-1.5 rounded-full px-3 py-1",
+                          item.gender ? cn("border-2 text-sm font-bold sm:text-base", GENDER[item.gender].className) : "border bg-muted text-xs font-semibold text-muted-foreground"
+                        )}
                         data-testid={`phrase-tag-${item.id}`}
                       >
-                        {item.gender && <span aria-hidden>{GENDER[item.gender].sign}</span>}
+                        {item.gender && (
+                          <span aria-hidden className="text-base sm:text-lg">
+                            {GENDER[item.gender].sign}
+                          </span>
+                        )}
                         {item.tag}
                       </span>
                     ) : (

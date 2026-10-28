@@ -3,17 +3,22 @@
 import { useEffect, useRef, useState } from "react";
 import { Loader2, Volume2 } from "lucide-react";
 
-import { speakArabic } from "@/lib/tts/player";
+import { speakArabic, type SpeechVoice } from "@/lib/tts/player";
 import { cn } from "@/lib/utils";
 
 export function ListenButton({
   text,
+  voice,
+  line,
   label = "Anhören",
   disabled,
   className,
   testId,
 }: {
   text: string;
+  /** A dialogue speaker's voice, and the line whose recording to play (see speechUrl). */
+  voice?: SpeechVoice;
+  line?: string;
   label?: string;
   disabled?: boolean;
   className?: string;
@@ -36,7 +41,7 @@ export function ListenButton({
     setState("loading");
     try {
       // "loading" covers the request; playback starts right after.
-      const playback = speakArabic(text);
+      const playback = speakArabic(text, voice, line);
       setTimeout(() => mounted.current && setState((s) => (s === "loading" ? "playing" : s)), 350);
       await playback;
     } catch (caught) {

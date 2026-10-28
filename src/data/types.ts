@@ -14,6 +14,12 @@ export type PronunciationExercise = {
   target: string;
   /** Vocalised text spoken by text-to-speech for the "Anhören" button. */
   modelText: string;
+  /**
+   * "Anhören" in a dialogue speaker's voice: the recording made for `line` (a dialogue line or this
+   * item, see src/lib/tts/dialogue-manifest.json) – or, without one, Azure in that voice.
+   */
+  voice?: DialogueVoice;
+  line?: string;
 };
 
 export type LessonLetter = {

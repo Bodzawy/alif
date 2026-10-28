@@ -1,0 +1,18 @@
+{
+ "batch": "_dialogue-l1-male-1b",
+ "voice": "male-1",
+ "speakers": [
+  "Majid (tahiyya-wa-taqdim, Sich vorstellen)"
+ ],
+ "items": [
+  {
+   "id": "d-m1-08",
+   "kind": "dialogue",
+   "voice": "male-1",
+   "text": "أَنَا مَاجِدٌ.",
+   "lines": [
+    "p-ana-majid"
+   ]
+  }
+ ]
+}
