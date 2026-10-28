@@ -4,6 +4,7 @@ import { getA1Lesson } from "../src/data/a1";
 import { menDialogue, womenDialogue } from "../src/data/a1/sabah-al-khayr";
 import type { Dialogue } from "../src/data/types";
 import { buildAssessment } from "../src/lib/pronunciation/assessment";
+import dialogueManifest from "../src/lib/tts/dialogue-manifest.json";
 import { toneWav } from "./support/audio";
 import { collectPageErrors, parseUpload } from "./support/helpers";
 import { answerGaps, noHorizontalScroll, syntheticVoice } from "./support/letters";
@@ -17,12 +18,24 @@ import { answerGaps, noHorizontalScroll, syntheticVoice } from "./support/letter
 
 type Calls = { tts: Array<{ text: string; voice: string }>; uploads: string[] };
 
-/** /api/tts records text + voice; /api/pronunciation answers from the list (false = wrong), then right. */
+/** A dialogue line with a recording (src/lib/tts/dialogue-manifest.json) plays it instead of /api/tts. */
+const recorded: Record<string, { voice: string; text: string; file: string }> = dialogueManifest.lines;
+const byFile = new Map(Object.values(recorded).map((entry) => [entry.file, entry]));
+
+/**
+ * /api/tts and the dialogue recordings record what is spoken (text + voice); /api/pronunciation answers
+ * from the list (false = wrong), then right.
+ */
 async function mock(page: Page, answers: boolean[] = []) {
   const calls: Calls = { tts: [], uploads: [] };
   await page.route("**/api/tts", async (route) => {
     const body = route.request().postDataJSON();
     calls.tts.push({ text: body.text, voice: body.voice ?? "default" });
+    await route.fulfill({ status: 200, contentType: "audio/wav", body: toneWav(250) });
+  });
+  await page.route("**/audio/ar/d-*.mp3", async (route) => {
+    const entry = byFile.get(new URL(route.request().url()).pathname.replace(/^\/audio\/ar\//, "").replace(/\.mp3$/, ""))!;
+    calls.tts.push({ text: entry.text, voice: entry.voice });
     await route.fulfill({ status: 200, contentType: "audio/wav", body: toneWav(250) });
   });
   await page.route("**/api/pronunciation", async (route) => {
@@ -44,7 +57,7 @@ const voices = (calls: Calls) => calls.tts.filter((t) => t.text !== "Super!").ma
 test.describe("phone", () => {
   test.use({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true });
 
-  /** Listen (all 7 lines, two voices, in order), repeat (all 7), role-play (one role) – steps `first` … `first + 2`. */
+  /** Listen (all 7 lines, two voices, in order), repeat (all 7), role-play (one role, then – green – the other) – steps `first` … `first + 2`. */
   async function conversation(page: Page, calls: Calls, d: Dialogue, first: number, role: string) {
     const voiceOf = (speaker: string) => d.speakers.find((s) => s.id === speaker)!.voice;
     await expect(page).toHaveURL(new RegExp(`step-${first}$`));
@@ -70,14 +83,24 @@ test.describe("phone", () => {
     await page.goto(`/a1/lesson-1/sabah-al-khayr/step-${first + 2}`);
 
     // Role-play: the learner's lines only; the app speaks the other role (and never the learner's voice).
-    calls.tts.length = 0;
-    calls.uploads.length = 0;
-    await page.getByTestId(`role-${role}`).tap();
-    await page.getByTestId("start-button").tap();
-    await expect(page.getByTestId("dialogue-done")).toBeVisible({ timeout: 180_000 });
-    expect(calls.uploads).toEqual(d.lines.filter((l) => l.speaker === role).map((l) => l.exercise.target));
-    expect(calls.tts.filter((t) => t.voice === voiceOf(role))).toEqual([]);
-    expect(calls.tts.filter((t) => t.text !== "Super!").map((t) => t.text)).toEqual(d.lines.filter((l) => l.speaker !== role).map((l) => l.arabic));
+    // One role, then the other one (the first is marked done): only both complete the step.
+    const other = d.speakers.find((s) => s.id !== role)!.id;
+    for (const [k, speaker] of [role, other].entries()) {
+      calls.tts.length = 0;
+      calls.uploads.length = 0;
+      if (k === 0) await page.getByTestId(`role-${speaker}`).tap();
+      else {
+        await page.getByTestId("dialogue-next-role").tap();
+        await expect(page.getByTestId(`role-done-${role}`)).toBeVisible();
+        await expect(page.getByTestId(`role-${speaker}`)).toHaveAttribute("aria-pressed", "true");
+      }
+      await page.getByTestId("start-button").tap();
+      await expect(page.getByTestId("dialogue-done")).toBeVisible({ timeout: 180_000 });
+      expect(calls.uploads).toEqual(d.lines.filter((l) => l.speaker === speaker).map((l) => l.exercise.target));
+      expect(calls.tts.filter((t) => t.voice === voiceOf(speaker))).toEqual([]);
+      expect(calls.tts.filter((t) => t.text !== "Super!").map((t) => t.text)).toEqual(d.lines.filter((l) => l.speaker !== speaker).map((l) => l.arabic));
+      if (k === 0) await expect(page.getByTestId("step-completed")).toBeHidden();
+    }
     await expect(page.getByTestId("step-completed")).toBeVisible();
     await page.getByTestId("step-next").tap();
   }
