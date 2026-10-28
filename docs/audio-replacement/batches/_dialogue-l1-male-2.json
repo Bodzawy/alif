@@ -1,0 +1,36 @@
+{
+ "batch": "_dialogue-l1-male-2",
+ "voice": "male-2",
+ "speakers": [
+  "Ali (sabah-al-khayr)"
+ ],
+ "items": [
+  {
+   "id": "d-m2-01",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "صَبَاحُ النُّورِ.",
+   "lines": [
+    "m-sabah-an-nur"
+   ]
+  },
+  {
+   "id": "d-m2-02",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "بِخَيْرٍ، الْحَمْدُ لِلَّهِ.",
+   "lines": [
+    "m-bi-khayr"
+   ]
+  },
+  {
+   "id": "d-m2-03",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "أَنَا عَلِيٌّ، وَأَنْتَ؟",
+   "lines": [
+    "m-ana-ali"
+   ]
+  }
+ ]
+}

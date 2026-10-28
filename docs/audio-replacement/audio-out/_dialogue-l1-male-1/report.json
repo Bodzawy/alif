@@ -1,0 +1,84 @@
+{
+ "batch": "_dialogue-l1-male-1",
+ "texts": 7,
+ "audio_seconds": 14.28,
+ "detect": [
+  -50,
+  0.3
+ ],
+ "min_border_gap": 1.02,
+ "speed_scale": 0.66,
+ "warnings": [],
+ "clips": [
+  {
+   "id": "d-m1-01",
+   "text": "صَبَاحُ الْخَيْرِ.",
+   "start": 0.0,
+   "end": 1.5,
+   "speech": 1.0,
+   "expected": 0.96,
+   "gain_db": 1.0,
+   "flag": ""
+  },
+  {
+   "id": "d-m1-02",
+   "text": "كَيْفَ حَالُكَ؟",
+   "start": 1.54,
+   "end": 3.49,
+   "speech": 0.74,
+   "expected": 0.81,
+   "gain_db": 2.1,
+   "flag": ""
+  },
+  {
+   "id": "d-m1-03",
+   "text": "مَا اسْمُكَ؟",
+   "start": 3.97,
+   "end": 5.06,
+   "speech": 0.6,
+   "expected": 0.74,
+   "gain_db": -1.9,
+   "flag": ""
+  },
+  {
+   "id": "d-m1-04",
+   "text": "وَأَنَا أَحْمَدُ.",
+   "start": 5.12,
+   "end": 7.25,
+   "speech": 0.84,
+   "expected": 0.88,
+   "gain_db": 0.4,
+   "flag": ""
+  },
+  {
+   "id": "d-m1-05",
+   "text": "كَيْفَ حَالُكِ؟",
+   "start": 7.76,
+   "end": 9.27,
+   "speech": 0.95,
+   "expected": 0.81,
+   "gain_db": 0.1,
+   "flag": ""
+  },
+  {
+   "id": "d-m1-06",
+   "text": "بِخَيْرٍ، الْحَمْدُ لِلَّهِ.",
+   "start": 9.62,
+   "end": 11.3,
+   "speech": 1.31,
+   "expected": 1.31,
+   "gain_db": 0.0,
+   "flag": ""
+  },
+  {
+   "id": "d-m1-07",
+   "text": "أَنَا مَاجِدٌ، وَأَنْتِ؟",
+   "start": 11.87,
+   "end": 14.28,
+   "speech": 1.53,
+   "expected": 1.24,
+   "gain_db": -0.6,
+   "flag": ""
+  }
+ ]
+}
