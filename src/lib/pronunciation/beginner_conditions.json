@@ -1842,7 +1842,7 @@
   "تين": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['t|tt|T|TT','n|nn']"
+        "iqra_phonemes contains ['t|tt|T|TT|d|dd|f|ff|s','n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة تين بشكل صحيح"
     },
