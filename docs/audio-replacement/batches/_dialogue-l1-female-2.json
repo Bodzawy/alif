@@ -1,0 +1,66 @@
+{
+ "batch": "_dialogue-l1-female-2",
+ "voice": "female-2",
+ "speakers": [
+  "Fatima (sabah-al-khayr)",
+  "Fatima (tahiyya-wa-taqdim)"
+ ],
+ "items": [
+  {
+   "id": "d-f2-01",
+   "kind": "dialogue",
+   "voice": "female-2",
+   "text": "صَبَاحُ النُّورِ.",
+   "lines": [
+    "w-sabah-an-nur",
+    "t-sabah-an-nur"
+   ]
+  },
+  {
+   "id": "d-f2-02",
+   "kind": "dialogue",
+   "voice": "female-2",
+   "text": "بِخَيْرٍ، الْحَمْدُ لِلَّهِ.",
+   "lines": [
+    "w-bi-khayr",
+    "t-bi-khayr-f"
+   ]
+  },
+  {
+   "id": "d-f2-03",
+   "kind": "dialogue",
+   "voice": "female-2",
+   "text": "أَنَا فَاطِمَةُ، وَأَنْتِ؟",
+   "lines": [
+    "w-ana-fatima"
+   ]
+  },
+  {
+   "id": "d-f2-04",
+   "kind": "dialogue",
+   "voice": "female-2",
+   "text": "كَيْفَ حَالُكَ؟",
+   "lines": [
+    "t-kayfa-haluka"
+   ]
+  },
+  {
+   "id": "d-f2-05",
+   "kind": "dialogue",
+   "voice": "female-2",
+   "text": "مَا اسْمُكَ؟",
+   "lines": [
+    "t-ma-smuka"
+   ]
+  },
+  {
+   "id": "d-f2-06",
+   "kind": "dialogue",
+   "voice": "female-2",
+   "text": "وَأَنَا فَاطِمَةُ.",
+   "lines": [
+    "t-wa-ana-fatima"
+   ]
+  }
+ ]
+}
