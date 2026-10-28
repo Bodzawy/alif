@@ -1,0 +1,74 @@
+{
+ "batch": "_dialogue-l1-female-2",
+ "texts": 6,
+ "audio_seconds": 11.72,
+ "detect": [
+  -45,
+  0.3
+ ],
+ "min_border_gap": 0.69,
+ "speed_scale": 0.78,
+ "warnings": [],
+ "clips": [
+  {
+   "id": "d-f2-01",
+   "text": "صَبَاحُ النُّورِ.",
+   "start": 0.0,
+   "end": 1.9,
+   "speech": 1.17,
+   "expected": 1.14,
+   "gain_db": 0.7,
+   "flag": ""
+  },
+  {
+   "id": "d-f2-02",
+   "text": "بِخَيْرٍ، الْحَمْدُ لِلَّهِ.",
+   "start": 1.9,
+   "end": 3.65,
+   "speech": 1.56,
+   "expected": 1.56,
+   "gain_db": -2.7,
+   "flag": ""
+  },
+  {
+   "id": "d-f2-03",
+   "text": "أَنَا فَاطِمَةُ، وَأَنْتِ؟",
+   "start": 4.17,
+   "end": 6.38,
+   "speech": 1.83,
+   "expected": 1.56,
+   "gain_db": -1.9,
+   "flag": ""
+  },
+  {
+   "id": "d-f2-04",
+   "text": "كَيْفَ حَالُكَ؟",
+   "start": 6.69,
+   "end": 8.06,
+   "speech": 0.92,
+   "expected": 0.97,
+   "gain_db": 3.6,
+   "flag": ""
+  },
+  {
+   "id": "d-f2-05",
+   "text": "مَا اسْمُكَ؟",
+   "start": 8.5,
+   "end": 9.55,
+   "speech": 0.67,
+   "expected": 0.89,
+   "gain_db": -0.3,
+   "flag": ""
+  },
+  {
+   "id": "d-f2-06",
+   "text": "وَأَنَا فَاطِمَةُ.",
+   "start": 10.06,
+   "end": 11.54,
+   "speech": 1.04,
+   "expected": 1.14,
+   "gain_db": -1.4,
+   "flag": ""
+  }
+ ]
+}

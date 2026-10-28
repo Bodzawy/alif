@@ -6,19 +6,20 @@ import { speechUrl, type SpeechVoice } from "@/lib/tts/player";
 export const MAX_LINE_MS = 10_000;
 
 /**
- * Speaks a text through /api/tts on the page's ONE audio element (so nothing
- * overlaps) – in a dialogue speaker's voice, or the default voice. Resolves
+ * Speaks a text on the page's ONE audio element (so nothing overlaps) – in a
+ * dialogue speaker's voice (the line's recording when it has one, else
+ * /api/tts), or the default voice. Resolves
  * "ended" when it played to the end, "skipped" when it could not play
  * (/api/tts unreachable, muted, autoplay refused), "interrupted" when stopped.
  */
-export async function speakLine(narrator: Narrator, text: string, voice: SpeechVoice | undefined, signal: AbortSignal): Promise<"ended" | "skipped" | "interrupted"> {
+export async function speakLine(narrator: Narrator, text: string, voice: SpeechVoice | undefined, signal: AbortSignal, line?: string): Promise<"ended" | "skipped" | "interrupted"> {
   if (signal.aborted) return "interrupted";
   const onAbort = () => narrator.stop();
   signal.addEventListener("abort", onAbort);
   const cap = new AbortController();
   try {
     const playing = (async () => {
-      const url = await speechUrl(text, voice);
+      const url = await speechUrl(text, voice, line);
       if (signal.aborted || cap.signal.aborted) return "interrupted" as const;
       return narrator.playUrl(url);
     })().catch(() => "skipped" as const);

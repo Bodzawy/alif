@@ -73,7 +73,7 @@ export function DialogueListen({ dialogue, progressKey }: { dialogue: Dialogue; 
       const line = dialogue.lines[i]!;
       resumeAt.current = i;
       setCurrent(i);
-      const result = await speakLine(n, line.exercise.modelText, speakerOf(line.speaker).voice, signal);
+      const result = await speakLine(n, line.exercise.modelText, speakerOf(line.speaker).voice, signal, line.id);
       if (signal.aborted) return;
       if (result === "skipped" && !n.isMuted()) setNote("Der Ton konnte gerade nicht geladen werden. Du kannst den Text trotzdem lesen.");
       setHeard((h) => (h.has(line.id) ? h : new Set(h).add(line.id)));

@@ -53,6 +53,9 @@ def main():
         json.dump({"clips": dict(sorted(clips.items(), key=lambda kv: kv[1]))}, f, ensure_ascii=False, indent=0)
         f.write("\n")
     used = set(clips.values())
+    # The dialogue recordings (install_dialogue_clips.py) live in the same folder.
+    dialogue = os.path.join(ROOT, "src", "lib", "tts", "dialogue-manifest.json")
+    if os.path.exists(dialogue): used |= {v["file"] for v in json.load(open(dialogue, encoding="utf-8"))["lines"].values()}
     for p in glob.glob(os.path.join(DEST, "*.mp3")):
         if os.path.basename(p)[:-4] not in used:
             print("unused file (old version):", os.path.basename(p))

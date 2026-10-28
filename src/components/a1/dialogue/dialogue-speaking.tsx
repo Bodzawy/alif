@@ -120,12 +120,12 @@ export function DialogueSpeaking({ dialogue, mode, progressKey }: { dialogue: Di
         let played = false;
         if (mode === "repeat" || hint.current === block.id) {
           hint.current = null;
-          played = (await speakLine(n, line.exercise.modelText, speakerOf(line.speaker).voice, signal)) === "ended";
+          played = (await speakLine(n, line.exercise.modelText, speakerOf(line.speaker).voice, signal, line.id)) === "ended";
         } else {
           for (const [k, partner] of partnerBefore(block.id).entries()) {
             if (k > 0) await sleep(TURN_GAP_MS, signal);
             setSpeaking(partner.id);
-            played = (await speakLine(n, partner.exercise.modelText, speakerOf(partner.speaker).voice, signal)) === "ended" || played;
+            played = (await speakLine(n, partner.exercise.modelText, speakerOf(partner.speaker).voice, signal, partner.id)) === "ended" || played;
             if (signal.aborted) return;
           }
           setSpeaking(null);
@@ -166,7 +166,7 @@ export function DialogueSpeaking({ dialogue, mode, progressKey }: { dialogue: Di
       for (const [k, line] of closingLines.entries()) {
         if (k > 0) await sleep(TURN_GAP_MS, controller.signal);
         setSpeaking(line.id);
-        if (n) await speakLine(n, line.exercise.modelText, speakerOf(line.speaker).voice, controller.signal);
+        if (n) await speakLine(n, line.exercise.modelText, speakerOf(line.speaker).voice, controller.signal, line.id);
         if (controller.signal.aborted) return;
       }
       setSpeaking(null);

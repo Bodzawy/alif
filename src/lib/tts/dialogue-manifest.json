@@ -1,0 +1,27 @@
+{
+"lines": {
+"m-ana-ali": {"voice": "male-2", "text": "أَنَا عَلِيٌّ، وَأَنْتَ؟", "file": "d-m2-03.50e0ec26"},
+"m-bi-khayr": {"voice": "male-2", "text": "بِخَيْرٍ، الْحَمْدُ لِلَّهِ.", "file": "d-m2-02.a1299875"},
+"m-kayfa-haluka": {"voice": "male-1", "text": "كَيْفَ حَالُكَ؟", "file": "d-m1-02.f681bbd7"},
+"m-ma-smuka": {"voice": "male-1", "text": "مَا اسْمُكَ؟", "file": "d-m1-03.832bb3bd"},
+"m-sabah-al-khayr": {"voice": "male-1", "text": "صَبَاحُ الْخَيْرِ.", "file": "d-m1-01.4fb9351d"},
+"m-sabah-an-nur": {"voice": "male-2", "text": "صَبَاحُ النُّورِ.", "file": "d-m2-01.bb1a89ae"},
+"m-wa-ana-ahmad": {"voice": "male-1", "text": "وَأَنَا أَحْمَدُ.", "file": "d-m1-04.a59abe80"},
+"t-ana-majid": {"voice": "male-1", "text": "أَنَا مَاجِدٌ، وَأَنْتِ؟", "file": "d-m1-07.54b95483"},
+"t-bi-khayr-f": {"voice": "female-2", "text": "بِخَيْرٍ، الْحَمْدُ لِلَّهِ.", "file": "d-f2-02.2c532dcd"},
+"t-bi-khayr-m": {"voice": "male-1", "text": "بِخَيْرٍ، الْحَمْدُ لِلَّهِ.", "file": "d-m1-06.f20e635c"},
+"t-kayfa-haluka": {"voice": "female-2", "text": "كَيْفَ حَالُكَ؟", "file": "d-f2-04.00ced44e"},
+"t-kayfa-haluki": {"voice": "male-1", "text": "كَيْفَ حَالُكِ؟", "file": "d-m1-05.11de956f"},
+"t-ma-smuka": {"voice": "female-2", "text": "مَا اسْمُكَ؟", "file": "d-f2-05.4960e736"},
+"t-sabah-al-khayr": {"voice": "male-1", "text": "صَبَاحُ الْخَيْرِ.", "file": "d-m1-01.4fb9351d"},
+"t-sabah-an-nur": {"voice": "female-2", "text": "صَبَاحُ النُّورِ.", "file": "d-f2-01.65328b28"},
+"t-wa-ana-fatima": {"voice": "female-2", "text": "وَأَنَا فَاطِمَةُ.", "file": "d-f2-06.a46d280b"},
+"w-ana-fatima": {"voice": "female-2", "text": "أَنَا فَاطِمَةُ، وَأَنْتِ؟", "file": "d-f2-03.1486c9f5"},
+"w-bi-khayr": {"voice": "female-2", "text": "بِخَيْرٍ، الْحَمْدُ لِلَّهِ.", "file": "d-f2-02.2c532dcd"},
+"w-kayfa-haluki": {"voice": "female-1", "text": "كَيْفَ حَالُكِ؟", "file": "d-f1-02.5c3507eb"},
+"w-ma-smuki": {"voice": "female-1", "text": "مَا اسْمُكِ؟", "file": "d-f1-03.492d7ea9"},
+"w-sabah-al-khayr": {"voice": "female-1", "text": "صَبَاحُ الْخَيْرِ.", "file": "d-f1-01.3453e57e"},
+"w-sabah-an-nur": {"voice": "female-2", "text": "صَبَاحُ النُّورِ.", "file": "d-f2-01.65328b28"},
+"w-wa-ana-nabila": {"voice": "female-1", "text": "وَأَنَا نَبِيلَةُ.", "file": "d-f1-04.3cae299f"}
+}
+}
