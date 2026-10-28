@@ -1,0 +1,45 @@
+{
+ "batch": "_dialogue-l1-female-1",
+ "voice": "female-1",
+ "speakers": [
+  "Nabila (sabah-al-khayr)"
+ ],
+ "items": [
+  {
+   "id": "d-f1-01",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "صَبَاحُ الْخَيْرِ.",
+   "lines": [
+    "w-sabah-al-khayr"
+   ]
+  },
+  {
+   "id": "d-f1-02",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "كَيْفَ حَالُكِ؟",
+   "lines": [
+    "w-kayfa-haluki"
+   ]
+  },
+  {
+   "id": "d-f1-03",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "مَا اسْمُكِ؟",
+   "lines": [
+    "w-ma-smuki"
+   ]
+  },
+  {
+   "id": "d-f1-04",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "وَأَنَا نَبِيلَةُ.",
+   "lines": [
+    "w-wa-ana-nabila"
+   ]
+  }
+ ]
+}

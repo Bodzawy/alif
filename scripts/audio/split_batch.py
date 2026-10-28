@@ -6,6 +6,7 @@ usage: split_batch.py batches/batch-01.json audio-in/batch-01.mp3
 writes: audio-out/batch-01/<id>.mp3, audio-out/batch-01/report.json, audio-out/batch-01/review.html"""
 import json, math, os, re, subprocess, sys, html, tempfile
 
+DB_CACHE = {}
 TARGET_MEAN_DB = -22.0   # clips are levelled to the same average loudness
 PAD_BEFORE, PAD_AFTER = 0.06, 0.12
 # Clear pauses (clear_pauses): the region is found at -50 … -35 dB, but a word's quiet edges – the nasal -un of the
@@ -50,6 +51,24 @@ def clear_pauses(path, total, n):
         if total - pos >= 0.06: regions.append([pos, total])
         if len(regions) == n:
             return (noise, 0.3), regions
+    # Sentences (dialogue lines) pause inside, at a comma: more regions than texts. When the n-1 longest gaps are
+    # clearly longer than every other one, they are the pauses between the texts; the shorter ones stay inside.
+    for noise in (-50, -45, -40, -35):
+        regions, pos = [], 0.0
+        for s, e in silences(path, noise, 0.3):
+            s = max(s, 0.0)
+            if s - pos >= 0.06: regions.append([pos, s])
+            pos = max(pos, e)
+        if total - pos >= 0.06: regions.append([pos, total])
+        if len(regions) <= n: continue
+        gaps = sorted(range(len(regions) - 1), key=lambda i: regions[i + 1][0] - regions[i][1], reverse=True)
+        width = lambda i: regions[i + 1][0] - regions[i][1]
+        borders, inner = sorted(gaps[:n - 1]), gaps[n - 1:]
+        if n > 1 and width(borders and min(borders, key=width)) >= max(1.5 * width(inner[0]), width(inner[0]) + 0.3):
+            merged, start = [], 0
+            for b in borders + [len(regions) - 1]:
+                merged.append([regions[start][0], regions[b][1]]); start = b + 1
+            return (noise, 0.3), merged
     return None
 
 def envelope(path):
@@ -174,6 +193,13 @@ def main():
             # The whole word plus a little of the silence on each side, never past the middle of that silence.
             s = max(0.0, spans[i][0] - 0.08) if i == 0 else max((spans[i - 1][1] + spans[i][0]) / 2, spans[i][0] - 0.08)
             e = min(total, spans[i][1] + 0.08) if i == n - 1 else min((spans[i][1] + spans[i + 1][0]) / 2, spans[i][1] + 0.08)
+        if spans and it.get("kind") == "dialogue":
+            # A dialogue line is played right after the other speaker's: not more than a short breath of silence
+            # around it (faint noise between the lines made the "real silence" end far from the speech).
+            db = DB_CACHE.setdefault(audio_path, envelope(audio_path))
+            loud = [t for t in range(int(s * 100), min(int(e * 100), len(db))) if db[t] > -50]
+            if loud:
+                s, e = max(s, loud[0] / 100 - 0.2), min(e, (loud[-1] + 1) / 100 + 0.25)
         tmp = os.path.join(TMPDIR, "_tmp.wav")
         # -ss after -i: read up to the clip instead of seeking (seeking in some WAVs from Google AI Studio returned
         # nothing past ~24 s, and every later clip came out empty).

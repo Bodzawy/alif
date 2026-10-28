@@ -1,0 +1,44 @@
+{
+ "batch": "_dialogue-l1-male-2",
+ "texts": 3,
+ "audio_seconds": 8.16,
+ "detect": [
+  -50,
+  0.3
+ ],
+ "min_border_gap": 1.84,
+ "speed_scale": 0.67,
+ "warnings": [],
+ "clips": [
+  {
+   "id": "d-m2-01",
+   "text": "صَبَاحُ النُّورِ.",
+   "start": 0.0,
+   "end": 1.18,
+   "speech": 0.96,
+   "expected": 0.97,
+   "gain_db": -3.1,
+   "flag": ""
+  },
+  {
+   "id": "d-m2-02",
+   "text": "بِخَيْرٍ، الْحَمْدُ لِلَّهِ.",
+   "start": 3.09,
+   "end": 4.88,
+   "speech": 1.33,
+   "expected": 1.33,
+   "gain_db": -2.6,
+   "flag": ""
+  },
+  {
+   "id": "d-m2-03",
+   "text": "أَنَا عَلِيٌّ، وَأَنْتَ؟",
+   "start": 6.28,
+   "end": 8.07,
+   "speech": 1.69,
+   "expected": 1.19,
+   "gain_db": -4.1,
+   "flag": ""
+  }
+ ]
+}
