@@ -1,0 +1,74 @@
+{
+ "batch": "_dialogue-l1-male-1",
+ "voice": "male-1",
+ "speakers": [
+  "Ahmad (sabah-al-khayr)",
+  "Majid (tahiyya-wa-taqdim)"
+ ],
+ "items": [
+  {
+   "id": "d-m1-01",
+   "kind": "dialogue",
+   "voice": "male-1",
+   "text": "صَبَاحُ الْخَيْرِ.",
+   "lines": [
+    "m-sabah-al-khayr",
+    "t-sabah-al-khayr"
+   ]
+  },
+  {
+   "id": "d-m1-02",
+   "kind": "dialogue",
+   "voice": "male-1",
+   "text": "كَيْفَ حَالُكَ؟",
+   "lines": [
+    "m-kayfa-haluka"
+   ]
+  },
+  {
+   "id": "d-m1-03",
+   "kind": "dialogue",
+   "voice": "male-1",
+   "text": "مَا اسْمُكَ؟",
+   "lines": [
+    "m-ma-smuka"
+   ]
+  },
+  {
+   "id": "d-m1-04",
+   "kind": "dialogue",
+   "voice": "male-1",
+   "text": "وَأَنَا أَحْمَدُ.",
+   "lines": [
+    "m-wa-ana-ahmad"
+   ]
+  },
+  {
+   "id": "d-m1-05",
+   "kind": "dialogue",
+   "voice": "male-1",
+   "text": "كَيْفَ حَالُكِ؟",
+   "lines": [
+    "t-kayfa-haluki"
+   ]
+  },
+  {
+   "id": "d-m1-06",
+   "kind": "dialogue",
+   "voice": "male-1",
+   "text": "بِخَيْرٍ، الْحَمْدُ لِلَّهِ.",
+   "lines": [
+    "t-bi-khayr-m"
+   ]
+  },
+  {
+   "id": "d-m1-07",
+   "kind": "dialogue",
+   "voice": "male-1",
+   "text": "أَنَا مَاجِدٌ، وَأَنْتِ؟",
+   "lines": [
+    "t-ana-majid"
+   ]
+  }
+ ]
+}
