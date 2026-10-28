@@ -2,26 +2,6 @@
  "batch": "batch-12",
  "items": [
   {
-   "id": "w1131",
-   "kind": "word",
-   "text": "فَقْرْ"
-  },
-  {
-   "id": "w1132",
-   "kind": "word",
-   "text": "قَرْضْ"
-  },
-  {
-   "id": "w1133",
-   "kind": "word",
-   "text": "سَمَك"
-  },
-  {
-   "id": "w1134",
-   "kind": "word",
-   "text": "أَكْوَاب"
-  },
-  {
    "id": "w1135",
    "kind": "word",
    "text": "كَأْس"
@@ -500,6 +480,26 @@
    "id": "w1230",
    "kind": "word",
    "text": "وَلَدْ"
+  },
+  {
+   "id": "w1231",
+   "kind": "word",
+   "text": "رَقْمْ"
+  },
+  {
+   "id": "w1232",
+   "kind": "word",
+   "text": "مَرِيضْ"
+  },
+  {
+   "id": "w1233",
+   "kind": "word",
+   "text": "آمَالْ"
+  },
+  {
+   "id": "w1234",
+   "kind": "word",
+   "text": "صَوْمْ"
   }
  ]
 }

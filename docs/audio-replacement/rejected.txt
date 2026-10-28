@@ -34,3 +34,4 @@ w0103  # نَجْمَة: no longer spoken (now نَجْمَةٌ), re-recorded in
 w0105  # هَاتِف: no longer spoken (now هَاتِفٌ), re-recorded in batch-rerecord
 w0111  # يَقْطِين: no longer spoken (now يَقْطِينٌ), re-recorded in batch-rerecord
 w0112  # يَمَامَة: no longer spoken (now يَمَامَةٌ), re-recorded in batch-rerecord
+w0047  # خُبْز: no longer spoken (the review shows خُبْزٌ now, recorded as w0196)

@@ -2,26 +2,6 @@
  "batch": "batch-09",
  "items": [
   {
-   "id": "w0820",
-   "kind": "word",
-   "text": "جُو"
-  },
-  {
-   "id": "w0821",
-   "kind": "word",
-   "text": "حُو"
-  },
-  {
-   "id": "w0822",
-   "kind": "word",
-   "text": "خُو"
-  },
-  {
-   "id": "w0823",
-   "kind": "word",
-   "text": "دُو"
-  },
-  {
    "id": "w0824",
    "kind": "word",
    "text": "وُو"
@@ -500,6 +480,26 @@
    "id": "w0924",
    "kind": "word",
    "text": "يَزُورُ"
+  },
+  {
+   "id": "w0925",
+   "kind": "word",
+   "text": "عَزَمَ"
+  },
+  {
+   "id": "w0926",
+   "kind": "word",
+   "text": "جَزِيرَة"
+  },
+  {
+   "id": "w0927",
+   "kind": "word",
+   "text": "جَزَرْ"
+  },
+  {
+   "id": "w0928",
+   "kind": "word",
+   "text": "أَرُزُّ"
   }
  ]
 }

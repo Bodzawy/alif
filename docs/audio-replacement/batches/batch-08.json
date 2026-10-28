@@ -2,26 +2,6 @@
  "batch": "batch-08",
  "items": [
   {
-   "id": "w0719",
-   "kind": "word",
-   "text": "حَذِرَ"
-  },
-  {
-   "id": "w0720",
-   "kind": "word",
-   "text": "ذُو"
-  },
-  {
-   "id": "w0721",
-   "kind": "word",
-   "text": "ذِي"
-  },
-  {
-   "id": "w0722",
-   "kind": "word",
-   "text": "ذَهَاب"
-  },
-  {
    "id": "w0723",
    "kind": "word",
    "text": "لَذِيذْ"
@@ -500,6 +480,26 @@
    "id": "w0819",
    "kind": "word",
    "text": "ثُو"
+  },
+  {
+   "id": "w0820",
+   "kind": "word",
+   "text": "جُو"
+  },
+  {
+   "id": "w0821",
+   "kind": "word",
+   "text": "حُو"
+  },
+  {
+   "id": "w0822",
+   "kind": "word",
+   "text": "خُو"
+  },
+  {
+   "id": "w0823",
+   "kind": "word",
+   "text": "دُو"
   }
  ]
 }

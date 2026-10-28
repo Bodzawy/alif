@@ -36,14 +36,13 @@ const FAMILY: Record<string, string[]> = {
 const LESSONS = [a1Alif, a1Ba, a1Ta, a1Tha, a1Jim, a1Hha, a1Kha];
 
 /**
- * The word as the review has always shown and spoken it: pausal. The card shows it with Tanwin
- * (بَيْتٌ); the book pattern's last tile is the pausal one (e.g. "م" of "_وْم"), so it replaces the
- * card's last tile.
+ * The word as its card shows and speaks it – with Tanwin (بَيْتٌ), so it plays the card's recording.
+ * The book pattern ends in the pausal tile (e.g. "م" of "_وْم"); it takes the card's last tile.
  */
-function pausalOf(shown: string, pattern: string): string {
-  const tiles = splitTiles(shown);
-  const last = splitTiles(pattern).at(-1)!;
-  return last !== "_" && tiles.length === splitTiles(pattern).length ? [...tiles.slice(0, -1), last].join("") : shown;
+function patternOf(shown: string, pattern: string): string {
+  const tiles = splitTiles(pattern);
+  const last = splitTiles(shown).at(-1)!;
+  return tiles.at(-1) !== "_" && tiles.length === splitTiles(shown).length ? [...tiles.slice(0, -1), last].join("") : pattern;
 }
 
 function reviewItem(id: string, pattern: string, withPicture: boolean): GapItem {
@@ -52,7 +51,8 @@ function reviewItem(id: string, pattern: string, withPicture: boolean): GapItem 
       if (step.kind !== "sound-words") continue;
       const word = step.groups.flatMap((group) => group.words).find((w) => w.id === id);
       if (!word) continue;
-      const arabic = pausalOf(word.arabic, pattern);
+      const arabic = word.arabic;
+      pattern = patternOf(arabic, pattern);
       const [gap] = alignPattern(arabic, pattern);
       if (!gap || gap.index !== 0 || gap.vowel === "sukun" || gap.vowel === "none") throw new Error(`review: "${pattern}" must leave out the first letter with its vowel`);
       const letter = baseLetter(gap.answer) === "إ" ? "أ" : baseLetter(gap.answer);
