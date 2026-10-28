@@ -14,6 +14,7 @@ import { debugEnabled, demoTotal, evaluateStroke, starsFor, WRITING_BOX, type Fa
 import { AR_NUM, arrowFor, baseline, drawDemo, poly, readPalette, startDot, strokeStart, strokeWidth, type Palette } from "./draw";
 import { sampleLetterSet } from "./sample-path";
 import { useWritingNarration } from "./writing-narration";
+import { useT } from "@/i18n/use-locale";
 
 // "Schreiben" – trace the forms of a letter (workbook "تدريب (١)", "Fahr die
 // Linie nach"). Ported from the prototype docs/reference/alif-uebung1.html:
@@ -67,6 +68,7 @@ export function WritingStep({
   const router = useRouter();
   const forms = letterSet.forms;
   const narrate = useWritingNarration();
+  const t = useT();
   const hydrated = useSyncExternalStore(noop, () => true, () => false);
   const completedBefore = useSyncExternalStore(subscribeProgress, () => Boolean(getLessonProgress(progressKey).completedAt), () => false);
 
@@ -404,43 +406,43 @@ export function WritingStep({
     <div data-testid="writing-step" data-current={forms[cur]!.id} data-done={doneCount} data-complete={allDone} data-ready={hydrated}>
       {hydrated && (completedBefore || allDone) && (
         <p className="mb-4 inline-flex items-center gap-1 rounded-full bg-success px-2.5 py-1 text-xs font-semibold text-success-foreground shadow" data-testid="step-completed">
-          <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> Geschafft
+          <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> {t("Geschafft")}
         </p>
       )}
 
       <div className="grid items-start gap-5 min-[880px]:grid-cols-[1.15fr_1fr]">
-        <section aria-label="Arbeitsblatt" className="rounded-3xl border bg-card p-5 shadow-card">
+        <section aria-label={t("Arbeitsblatt")} className="rounded-3xl border bg-card p-5 shadow-card">
           <div className="mb-1 flex items-baseline justify-center gap-3">
-            <h2 className="text-2xl font-bold tracking-tight">Übung 1</h2>
+            <h2 className="text-2xl font-bold tracking-tight">{t("Übung 1")}</h2>
             <span lang="ar" dir="rtl" className="font-arabic text-2xl font-bold">
               تدريب (١)
             </span>
           </div>
           <div className="mx-1 mb-2 flex items-baseline justify-between gap-3">
-            <span className="font-semibold">Fahr die Linie nach.</span>
+            <span className="font-semibold">{t("Fahr die Linie nach.")}</span>
             <span lang="ar" dir="rtl" className="font-arabic text-xl">
               تَتَبَّعْ بِالْقَلَمِ.
             </span>
           </div>
-          <p className="mx-1 mb-1 text-sm text-muted-foreground">Tippe auf einen Buchstaben, um zu sehen, wie man ihn schreibt.</p>
+          <p className="mx-1 mb-1 text-sm text-muted-foreground">{t("Tippe auf einen Buchstaben, um zu sehen, wie man ihn schreibt.")}</p>
           <div dir="rtl" className="mb-2 grid grid-cols-4" data-testid="model-row">
             {forms.map((f, i) => (
-              <button key={f.id} type="button" onClick={() => onModel(i)} aria-label={`${f.glyph}: vorzeigen`} data-testid={`model-${f.id}`} className="rounded-2xl focus-ring">
+              <button key={f.id} type="button" onClick={() => onModel(i)} aria-label={`${f.glyph}: ${t("vorzeigen")}`} data-testid={`model-${f.id}`} className="rounded-2xl focus-ring">
                 <canvas ref={registerCanvas(`model-${i}`, "model", i)} className="block aspect-[3/4] w-full" aria-hidden />
               </button>
             ))}
           </div>
-          <p className="mx-1 mb-1 text-sm text-muted-foreground">Tippe auf einen grauen Buchstaben und fahr ihn nach.</p>
+          <p className="mx-1 mb-1 text-sm text-muted-foreground">{t("Tippe auf einen grauen Buchstaben und fahr ihn nach.")}</p>
           <div dir="rtl" className="grid grid-cols-4" data-testid="gray-row">
             {forms.map((f, i) => {
               const d = done[i];
-              const status = d ? (d.stars ? `, geschafft, ${d.stars} ${d.stars === 1 ? "Stern" : "Sterne"}` : ", übersprungen") : "";
+              const status = d ? (d.stars ? `, ${t("geschafft")}, ${d.stars === 1 ? t("1 Stern") : t("{n} Sterne", { n: d.stars })}` : `, ${t("übersprungen")}`) : "";
               return (
                 <button
                   key={f.id}
                   type="button"
                   onClick={() => onGray(i)}
-                  aria-label={`${f.glyph}: nachfahren${status}`}
+                  aria-label={`${f.glyph}: ${t("nachfahren")}${status}`}
                   aria-pressed={i === cur}
                   data-testid={`gray-${f.id}`}
                   data-done={d ? (d.stars ? "traced" : "skipped") : "open"}
@@ -448,22 +450,22 @@ export function WritingStep({
                   className={cn("relative rounded-2xl focus-ring", i === cur && "shadow-[inset_0_0_0_3px_hsl(var(--primary))]")}
                 >
                   <canvas ref={registerCanvas(`gray-${i}`, "gray", i)} className="block aspect-[3/4] w-full" aria-hidden />
-                  {d && !d.stars && <span className="absolute inset-x-0 bottom-1 text-center text-[10px] font-semibold text-muted-foreground">übersprungen</span>}
+                  {d && !d.stars && <span className="absolute inset-x-0 bottom-1 text-center text-[10px] font-semibold text-muted-foreground">{t("übersprungen")}</span>}
                 </button>
               );
             })}
           </div>
         </section>
 
-        <section className="flex flex-col gap-3" aria-label="Nachfahren">
+        <section className="flex flex-col gap-3" aria-label={t("Nachfahren")}>
           <p aria-live="polite" data-testid="writing-instruction" className="min-h-[3em] text-lg font-semibold leading-snug">
-            {instr}
+            {t(instr)}
           </p>
           <div ref={boardWrap} className="relative aspect-[3/4] w-[min(100%,380px,calc(62vh*0.75))] self-center">
             <canvas
               ref={registerCanvas("board", "board", 0)}
               data-testid="writing-board"
-              aria-label={`Schreibfläche: ${forms[cur]!.glyph}`}
+              aria-label={`${t("Schreibfläche")}: ${forms[cur]!.glyph}`}
               onPointerDown={onPointerDown}
               onPointerMove={onPointerMove}
               onPointerUp={finish}
@@ -476,25 +478,25 @@ export function WritingStep({
                   {"★".repeat(toast.stars)}
                   <span className="text-border">{"★".repeat(3 - toast.stars)}</span>
                 </div>
-                <div className="rounded-full bg-card px-4 py-0.5 text-2xl font-bold text-success shadow-[0_0_0_2px_hsl(var(--border))]">{toast.word}</div>
+                <div className="rounded-full bg-card px-4 py-0.5 text-2xl font-bold text-success shadow-[0_0_0_2px_hsl(var(--border))]">{t(toast.word)}</div>
               </div>
             )}
           </div>
           <div className="flex flex-wrap gap-2">
             <Button variant="secondary" size="lg" onClick={onDemo} className="flex-1" data-testid="writing-demo">
-              <Eye className="h-5 w-5" aria-hidden /> Vorzeigen
+              <Eye className="h-5 w-5" aria-hidden /> {t("Vorzeigen")}
             </Button>
             <Button size="lg" onClick={() => select((st.current.cur + 1) % forms.length)} className="flex-1" data-testid="writing-next">
-              <StepForward className="h-5 w-5" aria-hidden /> Nächster Buchstabe
+              <StepForward className="h-5 w-5" aria-hidden /> {t("Nächster Buchstabe")}
             </Button>
           </div>
           <Button variant="ghost" size="lg" onClick={onSkip} disabled={allDone} data-testid="writing-skip" className="self-center">
-            <SkipForward className="h-5 w-5" aria-hidden /> Überspringen
+            <SkipForward className="h-5 w-5" aria-hidden /> {t("Überspringen")}
           </Button>
           {allDone && (
             <div data-testid="writing-done" className="animate-fade-in rounded-3xl border border-success/40 bg-card p-6 text-center shadow-card">
               <span className="inline-flex items-center gap-1 rounded-full bg-success px-2.5 py-1 text-xs font-semibold text-success-foreground shadow">
-                <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> Geschafft
+                <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> {t("Geschafft")}
               </span>
               <p lang="ar" className="mt-3 font-arabic text-4xl font-bold text-success">
                 مُمْتَاز! 👏

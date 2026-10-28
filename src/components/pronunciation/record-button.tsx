@@ -6,6 +6,7 @@ import { MAX_RECORDING_MS } from "@/lib/audio/recording";
 import { cn } from "@/lib/utils";
 
 import type { ExercisePhase } from "./use-pronunciation-exercise";
+import { useT } from "@/i18n/use-locale";
 
 export function RecordButton({
   phase,
@@ -23,6 +24,7 @@ export function RecordButton({
   const recording = phase === "recording";
   const processing = phase === "processing";
   const again = phase === "result" || phase === "error";
+  const t = useT();
 
   return (
     <div className="flex flex-col">
@@ -32,7 +34,7 @@ export function RecordButton({
         data-phase={phase}
         onClick={recording ? onStop : onStart}
         disabled={processing || (disabled && !recording)}
-        aria-label={recording ? "Aufnahme stoppen" : processing ? "Wird bewertet" : "Aufnahme starten"}
+        aria-label={recording ? t("Aufnahme stoppen") : processing ? t("Wird bewertet") : t("Aufnahme starten")}
         className={cn(
           "relative inline-flex h-12 items-center justify-center gap-2 overflow-hidden rounded-2xl px-4 text-sm font-semibold shadow-sm transition focus-ring disabled:cursor-not-allowed",
           recording
@@ -58,7 +60,7 @@ export function RecordButton({
         ) : (
           <Mic className="h-5 w-5" aria-hidden />
         )}
-        {recording ? "Stopp" : processing ? "Wird bewertet…" : again ? "Nochmal" : "Aufnehmen"}
+        {recording ? t("Stopp") : processing ? t("Wird bewertet…") : again ? t("Nochmal") : t("Aufnehmen")}
       </button>
     </div>
   );

@@ -13,6 +13,7 @@ import { isLongWord, LONG_ROW, LONG_TILE, NARRATION, POSITION_LABEL } from "./co
 import { ShapedWord } from "./shaped-word";
 import { shuffled, usePickAndDrop } from "./use-pick-and-drop";
 import { wordShape } from "./word-shape";
+import { useT } from "@/i18n/use-locale";
 
 type BankTile = { key: string; tile: string };
 const JOIN_MS = 450;
@@ -24,11 +25,12 @@ const JOIN_MS = 450;
 // Each word is heard as soon as it appears (the first right after the
 // activity's intro) and again with "Anhören" next to its picture.
 export function BuildActivity({ words, narrator, onComplete, letter }: { words: FormsWord[]; narrator: Narrator; onComplete: () => void; letter?: FormsLetter }) {
+  const t = useT();
   const [wordIndex, setWordIndex] = useState(0);
   const word = words[wordIndex]!;
   return (
     <div data-testid="build-activity">
-      <ol className="mb-5 flex justify-center gap-2" aria-label={`Wort ${wordIndex + 1} von ${words.length}`}>
+      <ol className="mb-5 flex justify-center gap-2" aria-label={t("Wort {n} von {total}", { n: wordIndex + 1, total: words.length })}>
         {words.map((item, i) => (
           <li
             key={item.id}
@@ -85,6 +87,7 @@ function BuildWord({
   const [placed, setPlaced] = useState<(string | null)[]>(() => tiles.map(() => null));
   const [bank, setBank] = useState<BankTile[]>(() => shuffled(tiles.map((tile, i) => ({ key: `${i}`, tile }))));
   const [shake, setShake] = useState<string | null>(null);
+  const t = useT();
   const [phase, setPhase] = useState<"building" | "joining" | "done">("building");
   const [leaving, setLeaving] = useState(false);
   const active = placed.indexOf(null);
@@ -122,14 +125,14 @@ function BuildWord({
   const done = phase === "done";
 
   return (
-    <section aria-label={`Baue das Wort: ${word.german}`} data-testid={`build-word-${word.id}`} data-phase={phase} className="rounded-3xl border bg-card p-5 text-center shadow-card sm:p-8">
+    <section aria-label={`${t("Baue das Wort")}: ${t(word.german)}`} data-testid={`build-word-${word.id}`} data-phase={phase} className="rounded-3xl border bg-card p-5 text-center shadow-card sm:p-8">
       {/* The word's picture stays in view while the child builds it (and after). */}
       {word.image && (
-        <Image src={word.image.src} alt={word.image.alt} width={160} height={120} className="mx-auto mb-3 rounded-2xl" unoptimized data-testid="build-image" />
+        <Image src={word.image.src} alt={t(word.image.alt)} width={160} height={120} className="mx-auto mb-3 rounded-2xl" unoptimized data-testid="build-image" />
       )}
       {!done && (
-        <Button variant="secondary" onClick={() => void narrator.play([word.audio])} data-testid="build-hear" aria-label={`Anhören: ${word.german}`} className="mb-4">
-          <Volume2 className="h-5 w-5" aria-hidden /> Anhören
+        <Button variant="secondary" onClick={() => void narrator.play([word.audio])} data-testid="build-hear" aria-label={`${t("Anhören")}: ${t(word.german)}`} className="mb-4">
+          <Volume2 className="h-5 w-5" aria-hidden /> {t("Anhören")}
         </Button>
       )}
       {/* Slots and the finished word share one place: the tiles slide together, then the word fades in. */}
@@ -153,7 +156,7 @@ function BuildWord({
               data-testid={`slot-${i}`}
               data-filled={placed[i] !== null}
               disabled={joined}
-              aria-label={placed[i] ? `Feld ${i + 1}: ${placed[i]}` : i === active ? `Feld ${i + 1}: hier ablegen` : `Feld ${i + 1}: leer`}
+              aria-label={placed[i] ? `${t("Feld {n}", { n: i + 1 })}: ${placed[i]}` : i === active ? `${t("Feld {n}", { n: i + 1 })}: ${t("hier ablegen")}` : `${t("Feld {n}", { n: i + 1 })}: ${t("leer")}`}
               className={cn(
                 "flex h-20 w-16 items-center justify-center rounded-2xl border-2 font-arabic text-4xl font-bold transition focus-ring sm:h-24 sm:w-20 sm:text-5xl",
                 placed[i] ? "border-primary/30 bg-primary-soft text-foreground" : i === active ? "border-dashed border-primary bg-card" : "border-dashed border-border bg-muted/40",
@@ -172,8 +175,8 @@ function BuildWord({
 
       {!done ? (
         <>
-          <p className="mt-4 text-sm text-muted-foreground">Ziehe die Steine von rechts nach links in die Felder – oder tippe erst einen Stein und dann das Feld.</p>
-          <ul className="mt-5 flex flex-wrap justify-center gap-3" aria-label="Steine">
+          <p className="mt-4 text-sm text-muted-foreground">{t("Ziehe die Steine von rechts nach links in die Felder – oder tippe erst einen Stein und dann das Feld.")}</p>
+          <ul className="mt-5 flex flex-wrap justify-center gap-3" aria-label={t("Steine")}>
             {bank.map((item) => (
               <li key={item.key}>
                 <button
@@ -181,7 +184,7 @@ function BuildWord({
                   {...itemProps(item.key, item, joined)}
                   onAnimationEnd={() => setShake(null)}
                   data-testid={`tile-${item.tile}`}
-                  aria-label={`Stein ${item.tile}`}
+                  aria-label={`${t("Stein")} ${item.tile}`}
                   className={cn(
                     "flex h-16 min-w-14 cursor-grab select-none items-center justify-center rounded-2xl border bg-card px-3 font-arabic text-4xl font-bold shadow-sm transition focus-ring active:cursor-grabbing sm:h-20 sm:min-w-16",
                     selectedKey === item.key && "border-primary ring-2 ring-primary",
@@ -199,13 +202,13 @@ function BuildWord({
           <p lang="ar" dir="rtl" className="font-arabic text-2xl font-bold text-primary" data-testid="build-position">
             {POSITION_LABEL[position]}
           </p>
-          <p className="text-lg font-semibold">{word.german}</p>
+          <p className="text-lg font-semibold">{t(word.german)}</p>
           <span className="inline-flex items-center gap-1 rounded-full bg-success px-2.5 py-1 text-xs font-semibold text-success-foreground shadow">
-            <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> Geschafft
+            <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> {t("Geschafft")}
           </span>
           <div className="mt-2 flex flex-wrap justify-center gap-3">
-            <Button variant="secondary" size="lg" onClick={() => void narrator.play([word.audio])} data-testid="build-listen" aria-label={`Anhören: ${word.german}`}>
-              <Volume2 className="h-5 w-5" aria-hidden /> Anhören
+            <Button variant="secondary" size="lg" onClick={() => void narrator.play([word.audio])} data-testid="build-listen" aria-label={`${t("Anhören")}: ${t(word.german)}`}>
+              <Volume2 className="h-5 w-5" aria-hidden /> {t("Anhören")}
             </Button>
             <Button
               size="lg"
@@ -216,12 +219,12 @@ function BuildWord({
               }}
               data-testid="build-next"
             >
-              {last ? "Weiter" : "Nächstes Wort"} <ArrowRight className="h-5 w-5" aria-hidden />
+              {last ? t("Weiter") : t("Nächstes Wort")} <ArrowRight className="h-5 w-5" aria-hidden />
             </Button>
           </div>
         </div>
       )}
-      <span className="sr-only" aria-live="polite">{done ? `${word.german}: ${POSITION_LABEL[position]}` : ""}</span>
+      <span className="sr-only" aria-live="polite">{done ? `${t(word.german)}: ${POSITION_LABEL[position]}` : ""}</span>
     </section>
   );
 }

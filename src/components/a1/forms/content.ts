@@ -80,6 +80,36 @@ export const EXPLAIN_TEXT: Record<string, string> = {
   e_outro: "Hast du es gesehen? Manchmal steht die Hamza allein. Und manchmal wird sie vom Nachbarn festgehalten. Jetzt bist du dran!",
 };
 
+/**
+ * The other Alif clips (alif-hamza-de.zip): the German text of each recording, written down for the
+ * learners of another language (src/lib/audio/local-narration.ts speaks its translation). In German the
+ * recordings play.
+ */
+export const ALIF_NARRATION_TEXT: Record<string, string> = {
+  ...EXPLAIN_TEXT,
+  f_intro: "Heute lernst du die Formen vom Alif mit Hamza. Das Alif mit Hamza sieht nicht immer gleich aus. Hör gut zu und mach mit!",
+  b_intro: "Baue das Wort! Leg die Buchstaben von rechts nach links in die Felder.",
+  b_wrong: "Hmm, der passt hier nicht. Versuch einen anderen.",
+  b_all: "Super! Du hast alle vier Wörter gebaut.",
+  b_done_start: "Richtig! Die Hamza steht am Anfang. Vor ihr steht nichts. Darum steht sie allein.",
+  b_done_middle: "Richtig! Die Hamza steht in der Mitte. Der Nachbar davor hält sie fest.",
+  b_done_end: "Richtig! Die Hamza steht am Ende. Der Nachbar davor hält sie fest.",
+  b_done_separate: "Richtig! Die Hamza steht allein. Der Nachbar davor hat keine Hand.",
+  n_intro: "Wer hält fest? Leg einen Nachbarn rechts neben das Alif. Dort steht der Buchstabe davor.",
+  n_hold: "Der Nachbar hat eine Hand. Er hält das Alif fest.",
+  n_nohold: "Dieser Nachbar hat keine Hand. Das Alif bleibt allein.",
+  n_left: "Das Alif hat keine Hand. Leg den Nachbarn rechts daneben.",
+  n_rule: RULE_TEXT,
+  s_intro: "Mit Hand oder ohne? Steht das Alif allein, oder wird es festgehalten? Leg jedes Wort in den richtigen Korb.",
+  s_ok_start: "Richtig! Das Alif steht am Anfang. Vor ihm steht nichts. Darum steht es allein.",
+  s_ok_nohand: "Richtig! Der Nachbar davor hat keine Hand. Darum steht das Alif allein.",
+  s_ok_hold: "Richtig! Der Nachbar davor hat eine Hand. Er hält das Alif fest.",
+  s_hint: "Fast! Schau genau: Hat der Nachbar vor dem Alif eine Hand?",
+  s_hint_start: "Fast! Schau genau: Steht vor dem Alif ein Buchstabe?",
+  s_replay: "Schau noch einmal genau hin. Dann versuch es noch einmal.",
+  s_done: "Toll! Du kennst jetzt alle Formen vom Alif mit Hamza.",
+};
+
 /** The 10 "Zuschauen" clips (alif-hamza-erklaerung.zip). */
 export const EXPLAIN_FILES = [
   NARRATION.explain.intro,

@@ -6,13 +6,14 @@ import { CheckCircle2, Lock, Play, RotateCcw, Volume2, VolumeX } from "lucide-re
 import { Button } from "@/components/ui/button";
 import { formsFallbackTexts } from "@/data/a1/forms-fallback";
 import type { FormsContent } from "@/data/types";
+import { useLocale, useT } from "@/i18n/use-locale";
+import { localNarration } from "@/lib/audio/local-narration";
 import { createNarrator, readMuted, type Narrator } from "@/lib/audio/narration";
 import { getLessonProgress, markLessonCompleted, subscribeProgress } from "@/lib/progress";
-import { speechUrl } from "@/lib/tts/player";
 import { cn } from "@/lib/utils";
 
 import { BuildActivity } from "./build-activity";
-import { LETTER_NARRATION, NARRATION } from "./content";
+import { ALIF_NARRATION_TEXT, LETTER_NARRATION, NARRATION } from "./content";
 import { ExplainActivity } from "./explain-activity";
 import { LetterNeighborsActivity } from "./letter-neighbors-activity";
 import { LetterSortActivity } from "./letter-sort-activity";
@@ -33,7 +34,7 @@ const letterParts = (name: string) => [
   PARTS[0],
   PARTS[1],
   { title: "Wer hält fest?", intro: LETTER_NARRATION.neighbors.intro },
-  { title: `Wo steht das ${name}?`, intro: LETTER_NARRATION.sort.intro },
+  { title: "Wo steht das {name}?", name, intro: LETTER_NARRATION.sort.intro },
 ];
 
 const noop = () => () => undefined;
@@ -50,6 +51,9 @@ const noop = () => () => undefined;
 // fest?" and the sorting have their own variants (two sides, four baskets).
 export function FormsStep({ forms, availableAudio, progressKey }: { forms: FormsContent; availableAudio: string[]; progressKey: string }) {
   const narrator = useRef<Narrator | null>(null);
+  const narratorLocale = useRef<string | null>(null);
+  const locale = useLocale();
+  const t = useT();
   const [muted, setMuted] = useState(false);
   const [started, setStarted] = useState(false);
   const [part, setPart] = useState(0);
@@ -62,15 +66,14 @@ export function FormsStep({ forms, availableAudio, progressKey }: { forms: Forms
   const letter = forms.letter;
   const parts = letter ? letterParts(letter.name) : PARTS;
 
-  // Created after hydration (it needs the browser), so server and client render alike.
-  if (!narrator.current && hydrated) {
-    // Until a letter lesson is recorded, text-to-speech reads each missing clip (its caption, or the word).
-    const fallback = formsFallbackTexts(forms);
-    narrator.current = createNarrator({
-      baseUrl: forms.audioBase,
-      available: availableAudio,
-      fallback: async (name) => (fallback[name] ? speechUrl(fallback[name]) : null),
-    });
+  // Created after hydration (it needs the browser), so server and client render alike – and again for another language.
+  if (hydrated && (!narrator.current || narratorLocale.current !== locale)) {
+    narrator.current?.stop();
+    // Until a letter lesson is recorded, text-to-speech reads each missing clip (its caption, or the word);
+    // in another language than German every narration clip is spoken from its translation.
+    const texts = letter ? formsFallbackTexts(forms) : { ...formsFallbackTexts(forms), ...ALIF_NARRATION_TEXT };
+    narrator.current = createNarrator({ baseUrl: forms.audioBase, ...localNarration(availableAudio, texts, locale) });
+    narratorLocale.current = locale;
   }
 
   useEffect(() => {
@@ -106,9 +109,10 @@ export function FormsStep({ forms, availableAudio, progressKey }: { forms: Forms
   return (
     <div data-testid="forms-step" data-part={part} data-started={started}>
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <ol className="flex flex-wrap gap-2" aria-label="Teile">
+        <ol className="flex flex-wrap gap-2" aria-label={t("Teile")}>
           {parts.map((item, i) => {
             const locked = i > 0 && !exercisesOpen;
+            const title = t(item.title, "name" in item && item.name ? { name: item.name } : undefined);
             return (
               <li key={item.title}>
                 <button
@@ -116,14 +120,14 @@ export function FormsStep({ forms, availableAudio, progressKey }: { forms: Forms
                   onClick={() => goTo(i)}
                   disabled={!started || locked}
                   aria-current={i === part ? "step" : undefined}
-                  aria-label={locked ? `${item.title} – erst nach „Zuschauen“` : item.title}
+                  aria-label={locked ? t("{title} – erst nach „Zuschauen“", { title }) : title}
                   data-testid={`activity-tab-${i}`}
                   className={cn(
                     "inline-flex min-h-12 items-center gap-2 rounded-full border px-3 text-sm font-medium transition focus-ring disabled:cursor-not-allowed disabled:opacity-50",
                     i === part ? "border-primary bg-primary-soft text-primary" : "bg-card text-muted-foreground hover:bg-muted"
                   )}
                 >
-                  {locked ? <Lock className="h-3.5 w-3.5" aria-hidden /> : i > 0 && <span className="font-bold">{i}</span>} {item.title}
+                  {locked ? <Lock className="h-3.5 w-3.5" aria-hidden /> : i > 0 && <span className="font-bold">{i}</span>} {title}
                 </button>
               </li>
             );
@@ -131,13 +135,13 @@ export function FormsStep({ forms, availableAudio, progressKey }: { forms: Forms
         </ol>
         <div className="flex gap-2">
           <Button variant="secondary" onClick={replayIntro} disabled={!started} className="min-h-12" data-testid="replay-intro">
-            <RotateCcw className="h-4 w-4" aria-hidden /> Nochmal hören
+            <RotateCcw className="h-4 w-4" aria-hidden /> {t("Nochmal hören")}
           </Button>
           <Button
             variant="secondary"
             onClick={toggleMute}
             aria-pressed={muted}
-            aria-label={muted ? "Ton einschalten" : "Ton ausschalten"}
+            aria-label={muted ? t("Ton einschalten") : t("Ton ausschalten")}
             className="min-h-12 min-w-12"
             data-testid="mute-toggle"
           >
@@ -148,7 +152,7 @@ export function FormsStep({ forms, availableAudio, progressKey }: { forms: Forms
 
       {hydrated && completed && (
         <p className="mb-4 inline-flex items-center gap-1 rounded-full bg-success px-2.5 py-1 text-xs font-semibold text-success-foreground shadow" data-testid="step-completed">
-          <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> Geschafft
+          <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> {t("Geschafft")}
         </p>
       )}
 
@@ -165,18 +169,18 @@ export function FormsStep({ forms, availableAudio, progressKey }: { forms: Forms
                     </span>
                   ))}
                 </p>
-                <p className="max-w-sm text-muted-foreground">Das {letter.name} sieht nicht immer gleich aus. Hör gut zu und mach mit!</p>
+                <p className="max-w-sm text-muted-foreground">{t("Das {name} sieht nicht immer gleich aus. Hör gut zu und mach mit!", { name: letter.name })}</p>
               </>
             ) : (
               <>
                 <p lang="ar" dir="rtl" className="font-arabic text-7xl font-bold leading-[1.6]">
                   <span className="text-primary">أ</span> · <span className="text-primary">ـأ</span>
                 </p>
-                <p className="max-w-sm text-muted-foreground">Das Alif mit Hamza sieht nicht immer gleich aus. Hör gut zu und mach mit!</p>
+                <p className="max-w-sm text-muted-foreground">{t("Das Alif mit Hamza sieht nicht immer gleich aus. Hör gut zu und mach mit!")}</p>
               </>
             )}
             <Button size="lg" onClick={start} disabled={!n} data-testid="start-button" className="min-h-14">
-              <Play className="h-5 w-5" aria-hidden /> Los geht&apos;s!
+              <Play className="h-5 w-5" aria-hidden /> {t("Los geht's!")}
             </Button>
           </div>
         ) : part === 0 ? (

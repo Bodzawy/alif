@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils";
 import { LETTER_TILE, NARRATION } from "./content";
 import { ShapedWord } from "./shaped-word";
 import { shuffled, usePickAndDrop } from "./use-pick-and-drop";
+import { useT } from "@/i18n/use-locale";
 
 type Basket = "alone" | "held";
 type Phase = "ask" | "correct" | "apart" | "rebuild";
@@ -23,6 +24,7 @@ const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 // then the word falls apart into its letters and is built again with the
 // connection highlighted – and the child tries again.
 export function SortActivity({ words, narrator, onComplete }: { words: FormsWord[]; narrator: Narrator; onComplete: () => void }) {
+  const t = useT();
   const order = useMemo(() => shuffled(words), [words]);
   const [index, setIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>("ask");
@@ -64,10 +66,10 @@ export function SortActivity({ words, narrator, onComplete }: { words: FormsWord
     return (
       <div data-testid="sort-done" className="animate-fade-in rounded-3xl border border-success/40 bg-card p-8 text-center shadow-card">
         <span className="inline-flex items-center gap-1 rounded-full bg-success px-2.5 py-1 text-xs font-semibold text-success-foreground shadow">
-          <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> Geschafft
+          <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> {t("Geschafft")}
         </span>
         <p lang="ar" className="mt-4 font-arabic text-4xl font-bold text-success">مُمْتَاز! 👏</p>
-        <p className="mt-2 text-muted-foreground">Du erkennst, wann das Alif allein steht und wann es festgehalten wird.</p>
+        <p className="mt-2 text-muted-foreground">{t("Du erkennst, wann das Alif allein steht und wann es festgehalten wird.")}</p>
       </div>
     );
   }
@@ -79,13 +81,13 @@ export function SortActivity({ words, narrator, onComplete }: { words: FormsWord
       onClick={() => void answer(id)}
       disabled={phase !== "ask"}
       data-testid={`basket-${id}`}
-      aria-label={`${label}: ${id === "alone" ? "Das Alif steht allein" : "Das Alif wird festgehalten"}`}
+      aria-label={`${t(label)}: ${id === "alone" ? t("Das Alif steht allein") : t("Das Alif wird festgehalten")}`}
       className={cn(
         "flex min-h-28 flex-1 flex-col items-center justify-center gap-1 rounded-3xl border-2 border-dashed p-4 transition focus-ring disabled:cursor-default",
         phase === "correct" && expected === id ? "border-success bg-success-soft" : selectedKey ? "border-primary bg-primary-soft/60" : "border-border bg-muted/30 hover:bg-muted"
       )}
     >
-      <span className="text-sm font-semibold">{label}</span>
+      <span className="text-sm font-semibold">{t(label)}</span>
       <span lang="ar" dir="rtl" className="font-arabic text-5xl font-bold leading-[1.6] text-primary">{glyph}</span>
     </button>
   );
@@ -104,7 +106,7 @@ export function SortActivity({ words, narrator, onComplete }: { words: FormsWord
           key={word.id}
           type="button"
           {...itemProps(word.id, word.id, phase !== "ask")}
-          aria-label={`Wort ${word.arabic}, ${word.german} – in einen Korb legen`}
+          aria-label={t("Wort {arabic}, {german} – in einen Korb legen", { arabic: word.arabic, german: t(word.german) })}
           data-testid="sort-card"
           className={cn("cursor-grab rounded-2xl px-2 transition focus-ring active:cursor-grabbing disabled:cursor-default", selectedKey && "ring-2 ring-primary")}
         >
@@ -131,7 +133,7 @@ export function SortActivity({ words, narrator, onComplete }: { words: FormsWord
             )}
           </span>
         </button>
-        <p className="font-semibold">{word.german}</p>
+        <p className="font-semibold">{t(word.german)}</p>
       </div>
 
       <div className="mt-6 flex gap-3 sm:gap-6">
@@ -139,7 +141,7 @@ export function SortActivity({ words, narrator, onComplete }: { words: FormsWord
         {basket("held", "Festgehalten", "ـأ")}
       </div>
       <p className="mt-3 min-h-5 text-sm font-semibold" aria-live="polite" data-testid="sort-feedback">
-        {phase === "correct" ? <span className="text-success">Richtig!</span> : phase === "apart" || phase === "rebuild" ? <span className="text-muted-foreground">Schau genau hin …</span> : ""}
+        {phase === "correct" ? <span className="text-success">{t("Richtig!")}</span> : phase === "apart" || phase === "rebuild" ? <span className="text-muted-foreground">{t("Schau genau hin …")}</span> : ""}
       </p>
     </div>
   );

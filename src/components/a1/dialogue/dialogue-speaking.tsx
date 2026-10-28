@@ -19,6 +19,7 @@ import { cn } from "@/lib/utils";
 
 import { AddresseeBadge, DialogueBubble, DialogueToggles, splitAddressee } from "./dialogue-bubble";
 import { speakLine } from "./speak";
+import { useT } from "@/i18n/use-locale";
 
 // Stage 2 "Nachsprechen" (every line) and stage 3 "Rollenspiel" (the
 // learner's role only; the app speaks the other role). Both run on the guided
@@ -60,6 +61,7 @@ export function DialogueSpeaking({ dialogue, mode, progressKey }: { dialogue: Di
   const hydrated = useSyncExternalStore(noop, () => true, () => false);
   const completed = useSyncExternalStore(subscribeProgress, () => Boolean(getLessonProgress(progressKey).completedAt), () => false);
   const stored = useSyncExternalStore(subscribeProgress, () => getLessonProgress(progressKey), () => null);
+  const t = useT();
   const [stageMode, setStageMode] = useState<"start" | "guided" | "fallback">("start");
   const [role, setRole] = useState<string | null>(null);
   const [note, setNote] = useState<string | null>(null);
@@ -284,14 +286,14 @@ export function DialogueSpeaking({ dialogue, mode, progressKey }: { dialogue: Di
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
         {hydrated && (completed || (finished && rolesLeft.length === 0)) ? (
           <p className="inline-flex items-center gap-1 rounded-full bg-success px-2.5 py-1 text-xs font-semibold text-success-foreground shadow" data-testid="step-completed">
-            <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> Geschafft
+            <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> {t("Geschafft")}
           </p>
         ) : (
           <span />
         )}
         <div className="flex flex-wrap items-center gap-2">
           <DialogueToggles showGerman={showGerman} showTransliteration={showTransliteration} onGerman={() => setShowGerman((v) => !v)} onTransliteration={() => setShowTransliteration((v) => !v)} />
-          <Button variant="secondary" onClick={toggleMute} aria-pressed={muted} aria-label={muted ? "Ton einschalten" : "Ton ausschalten"} className="min-h-12 min-w-12" data-testid="mute-toggle">
+          <Button variant="secondary" onClick={toggleMute} aria-pressed={muted} aria-label={muted ? t("Ton einschalten") : t("Ton ausschalten")} className="min-h-12 min-w-12" data-testid="mute-toggle">
             {muted ? <VolumeX className="h-5 w-5" aria-hidden /> : <Volume2 className="h-5 w-5" aria-hidden />}
           </Button>
         </div>
@@ -299,9 +301,9 @@ export function DialogueSpeaking({ dialogue, mode, progressKey }: { dialogue: Di
 
       {stageMode === "start" && mode === "repeat" && (
         <div className="mb-6 flex flex-col items-center gap-4 rounded-3xl border bg-card p-6 text-center shadow-card sm:p-8" data-testid="start-overlay">
-          <p className="max-w-md text-muted-foreground">Hör jeden Satz und sprich ihn nach. Das Mikrofon hört dir zu. Du kannst jeden Satz so oft üben, wie du willst.</p>
+          <p className="max-w-md text-muted-foreground">{t("Hör jeden Satz und sprich ihn nach. Das Mikrofon hört dir zu. Du kannst jeden Satz so oft üben, wie du willst.")}</p>
           <Button size="lg" onClick={() => void start()} disabled={!narrator.current} data-testid="start-button" className="min-h-14">
-            <Mic className="h-5 w-5" aria-hidden /> Jetzt nachsprechen
+            <Mic className="h-5 w-5" aria-hidden /> {t("Jetzt nachsprechen")}
           </Button>
         </div>
       )}
@@ -310,8 +312,8 @@ export function DialogueSpeaking({ dialogue, mode, progressKey }: { dialogue: Di
         <div className="mb-6 rounded-3xl border bg-card p-6 text-center shadow-card sm:p-8" data-testid="start-overlay">
           <p className="font-semibold">
             {hydrated && roleChoices.length > 1 && rolesLeft.length < roleChoices.length && rolesLeft.length > 0
-              ? `Sehr gut! Jetzt sprichst du die andere Rolle: ${rolesLeft[0]!.name}.`
-              : "Sprich zuerst die eine Rolle, dann die andere. Die App spricht jeweils die andere Rolle."}
+              ? t("Sehr gut! Jetzt sprichst du die andere Rolle: {name}.", { name: t(rolesLeft[0]!.name) })
+              : t("Sprich zuerst die eine Rolle, dann die andere. Die App spricht jeweils die andere Rolle.")}
           </p>
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
             {roleChoices.map((speaker) => {
@@ -332,13 +334,13 @@ export function DialogueSpeaking({ dialogue, mode, progressKey }: { dialogue: Di
                 >
                   {isDone && (
                     <span className="absolute right-2 top-2 inline-flex items-center gap-1 rounded-full bg-success px-2 py-0.5 text-xs font-semibold text-success-foreground shadow" data-testid={`role-done-${speaker.id}`}>
-                      <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> Geschafft
+                      <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> {t("Geschafft")}
                     </span>
                   )}
                   {/* eslint-disable-next-line @next/next/no-img-element -- local SVG avatar */}
                   <img src={speaker.avatar.src} alt="" width={56} height={56} className="h-14 w-14 rounded-full border bg-card" />
                   <span className="min-w-0">
-                    <span className="block font-semibold">{speaker.name}</span>
+                    <span className="block font-semibold">{t(speaker.name)}</span>
                     <span lang="ar" dir="rtl" className="block font-arabic text-xl leading-[1.8]">
                       {firstLine.arabic}
                     </span>
@@ -348,7 +350,7 @@ export function DialogueSpeaking({ dialogue, mode, progressKey }: { dialogue: Di
             })}
           </div>
           <Button size="lg" onClick={() => void start()} disabled={!role || !narrator.current} data-testid="start-button" className="mt-5 min-h-14">
-            <Play className="h-5 w-5" aria-hidden /> Rollenspiel starten
+            <Play className="h-5 w-5" aria-hidden /> {t("Rollenspiel starten")}
           </Button>
         </div>
       )}
@@ -356,32 +358,32 @@ export function DialogueSpeaking({ dialogue, mode, progressKey }: { dialogue: Di
       {finished && (
         <div data-testid="dialogue-done" className="mb-6 animate-fade-in rounded-3xl border border-success/40 bg-card p-6 text-center shadow-card">
           <span className="inline-flex items-center gap-1 rounded-full bg-success px-2.5 py-1 text-xs font-semibold text-success-foreground shadow">
-            <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> Geschafft
+            <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> {t("Geschafft")}
           </span>
           <p lang="ar" className="mt-3 font-arabic text-4xl font-bold text-success">
             مُمْتَاز! 👏
           </p>
           <p className="mt-2 text-muted-foreground">
-            {mode === "repeat" ? "Du hast alle Sätze nachgesprochen." : `Du hast das Gespräch als ${learnerSpeaker?.name} geführt.`}
-            {rolesLeft.length > 0 && ` Jetzt sprichst du ${rolesLeft[0]!.name}.`}
+            {mode === "repeat" ? t("Du hast alle Sätze nachgesprochen.") : t("Du hast das Gespräch als {name} geführt.", { name: t(learnerSpeaker?.name ?? "") })}
+            {rolesLeft.length > 0 && ` ${t("Jetzt sprichst du {name}.", { name: t(rolesLeft[0]!.name) })}`}
           </p>
           {rolesLeft.length > 0 ? (
             <Button size="lg" onClick={again} className="mt-4" data-testid="dialogue-next-role">
-              <Play className="h-5 w-5" aria-hidden /> Weiter als {rolesLeft[0]!.name}
+              <Play className="h-5 w-5" aria-hidden /> {t("Weiter als {name}", { name: t(rolesLeft[0]!.name) })}
             </Button>
           ) : (
             <Button variant="secondary" size="lg" onClick={again} className="mt-4" data-testid="dialogue-again">
-              <RotateCcw className="h-5 w-5" aria-hidden /> {mode === "roleplay" ? "Nochmal – mit einer Rolle deiner Wahl" : "Nochmal üben"}
+              <RotateCcw className="h-5 w-5" aria-hidden /> {mode === "roleplay" ? t("Nochmal – mit einer Rolle deiner Wahl") : t("Nochmal üben")}
             </Button>
           )}
         </div>
       )}
 
       <p aria-live="polite" className="sr-only" data-testid="dialogue-live">
-        {caption}
+        {t(caption)}
       </p>
 
-      <ol className="flex flex-col gap-4 rounded-[2rem] border border-primary/10 bg-card/60 p-3 sm:p-5" aria-label={mode === "repeat" ? "Sätze" : "Gespräch"} data-testid="dialogue-lines">
+      <ol className="flex flex-col gap-4 rounded-[2rem] border border-primary/10 bg-card/60 p-3 sm:p-5" aria-label={mode === "repeat" ? t("Sätze") : t("Gespräch")} data-testid="dialogue-lines">
         {dialogue.lines.map((line, i) => {
           if (!visible(i) && stageMode === "guided") return null;
           const speaker = speakerOf(line.speaker);
@@ -401,12 +403,12 @@ export function DialogueSpeaking({ dialogue, mode, progressKey }: { dialogue: Di
                   showGerman={showGerman}
                   showTransliteration={showTransliteration}
                   state={state}
-                  label={mode === "roleplay" && mine.has(line.speaker) ? `Du (${speaker.name})` : undefined}
+                  label={mode === "roleplay" && mine.has(line.speaker) ? t("Du ({name})", { name: t(speaker.name) }) : undefined}
                   actions={
                     isActive ? (
                       <>
                         <Button variant="secondary" size="sm" onClick={flow.replay} disabled={stage === "check" || stage === "right"} data-testid="replay-line">
-                          <Volume2 className="h-4 w-4" aria-hidden /> Nochmal anhören
+                          <Volume2 className="h-4 w-4" aria-hidden /> {t("Nochmal anhören")}
                         </Button>
                         {mode === "roleplay" && (
                           <Button
@@ -419,7 +421,7 @@ export function DialogueSpeaking({ dialogue, mode, progressKey }: { dialogue: Di
                             disabled={stage === "check" || stage === "right"}
                             data-testid="hint-line"
                           >
-                            <Volume2 className="h-4 w-4" aria-hidden /> Satz vorsprechen
+                            <Volume2 className="h-4 w-4" aria-hidden /> {t("Satz vorsprechen")}
                           </Button>
                         )}
                       </>
@@ -429,7 +431,7 @@ export function DialogueSpeaking({ dialogue, mode, progressKey }: { dialogue: Di
                   {isActive && caption && (
                     <p dir="ltr" data-testid="dialogue-caption" className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-card px-3 py-1 text-sm font-semibold shadow">
                       {stage === "listen" ? (
-                        <span data-testid="listening-sign" role="img" aria-label="Das Mikrofon hört zu" className="relative flex h-5 w-5 items-center justify-center">
+                        <span data-testid="listening-sign" role="img" aria-label={t("Das Mikrofon hört zu")} className="relative flex h-5 w-5 items-center justify-center">
                           <span aria-hidden className="absolute inset-0 rounded-full border-2 border-primary motion-safe:animate-pulse-ring" />
                           <Mic className="relative h-3.5 w-3.5 text-primary" aria-hidden />
                         </span>
@@ -440,13 +442,13 @@ export function DialogueSpeaking({ dialogue, mode, progressKey }: { dialogue: Di
                       ) : (
                         <Volume2 className="h-4 w-4 text-primary" aria-hidden />
                       )}
-                      {caption}
+                      {t(caption)}
                     </p>
                   )}
                   {isActive && feedback?.id === line.id && (
                     <div dir="ltr" role="status" data-testid="dialogue-feedback" className="mt-2 rounded-2xl border border-warning/30 bg-warning-soft px-3 py-2 text-sm">
-                      <p className="font-semibold">{feedback.feedback.analysisUnavailable ? "Nicht eindeutig" : feedback.feedback.headline}</p>
-                      <p>{feedback.feedback.analysisUnavailable ? "Deine Aussprache konnte gerade nicht bewertet werden. Versuch es gleich noch einmal." : feedback.feedback.tip}</p>
+                      <p className="font-semibold">{feedback.feedback.analysisUnavailable ? t("Nicht eindeutig") : t(feedback.feedback.headline)}</p>
+                      <p>{feedback.feedback.analysisUnavailable ? t("Deine Aussprache konnte gerade nicht bewertet werden. Versuch es gleich noch einmal.") : t(feedback.feedback.tip)}</p>
                     </div>
                   )}
                 </DialogueBubble>
@@ -455,7 +457,7 @@ export function DialogueSpeaking({ dialogue, mode, progressKey }: { dialogue: Di
       </ol>
       {mode === "roleplay" && partnerSpeaker && stageMode === "guided" && !finished && (
         <p className="mt-3 text-center text-sm text-muted-foreground">
-          Du sprichst {learnerSpeaker?.name}. {partnerSpeaker.name} antwortet erst, wenn dein Satz richtig war.
+          {t("Du sprichst {name}. {partner} antwortet erst, wenn dein Satz richtig war.", { name: t(learnerSpeaker?.name ?? ""), partner: t(partnerSpeaker.name) })}
         </p>
       )}
     </div>
@@ -469,6 +471,7 @@ export function DialogueSpeaking({ dialogue, mode, progressKey }: { dialogue: Di
  */
 function DialogueFallback({ dialogue, mode, mine, note, progressKey }: { dialogue: Dialogue; mode: Mode; mine: ReadonlySet<string> | null; note: string | null; progressKey: string }) {
   const session = usePracticeSession();
+  const t = useT();
   const toSpeak = dialogue.lines.filter((l) => mode === "repeat" || !mine || mine.has(l.speaker));
   const allPassed = toSpeak.every((l) => session.passed.has(l.exercise.id) || getLessonProgress(progressKey).passed.includes(l.id));
 
@@ -481,17 +484,17 @@ function DialogueFallback({ dialogue, mode, mine, note, progressKey }: { dialogu
     <div data-testid="dialogue-fallback">
       {note && (
         <p role="status" data-testid="dialogue-note" className="mb-4 rounded-2xl border border-warning/30 bg-warning-soft px-4 py-3 text-sm">
-          {note}
+          {t(note)}
         </p>
       )}
-      <ol className="flex flex-col gap-4" aria-label="Sätze">
+      <ol className="flex flex-col gap-4" aria-label={t("Sätze")}>
         {dialogue.lines.map((line) => {
           const speaker = dialogue.speakers.find((s) => s.id === line.speaker)!;
           const speak = toSpeak.includes(line);
           const parts = splitAddressee(line.german);
           return (
             <li key={line.id} className={cn("rounded-3xl border bg-card p-4 shadow-card", !speak && "opacity-80")} data-testid={`fallback-line-${line.id}`}>
-              <p className="text-xs font-semibold text-muted-foreground">{speak && mode === "roleplay" ? `Du (${speaker.name})` : speaker.name}</p>
+              <p className="text-xs font-semibold text-muted-foreground">{speak && mode === "roleplay" ? t("Du ({name})", { name: t(speaker.name) }) : t(speaker.name)}</p>
               <p lang="ar" dir="rtl" className="font-arabic text-3xl font-bold leading-[1.8]">
                 {line.arabic}
               </p>
@@ -501,7 +504,7 @@ function DialogueFallback({ dialogue, mode, mine, note, progressKey }: { dialogu
                   <AddresseeBadge addressee={parts.addressee} gender={parts.gender} testId={`fallback-addressee-${line.id}`} />
                 </p>
               )}
-              <p className="font-semibold">{parts.german}</p>
+              <p className="font-semibold">{t(parts.german)}</p>
               {speak && (
                 <PronunciationExercise
                   exercise={line.exercise}

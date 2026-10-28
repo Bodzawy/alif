@@ -29,7 +29,7 @@ vi.mock("@/lib/audio/guided-mic", () => ({
     };
   }),
 }));
-vi.mock("@/lib/tts/player", () => ({ speechUrl: vi.fn(async (text: string) => `blob:${text}`), speakArabic: vi.fn(async () => undefined), stopSpeaking: vi.fn() }));
+vi.mock("@/lib/tts/player", () => ({ speechUrl: vi.fn(async (text: string) => `blob:${text}`), localSpeechUrl: vi.fn(async (text: string) => `blob:${text}`), speakArabic: vi.fn(async () => undefined), stopSpeaking: vi.fn() }));
 vi.mock("@/lib/audio/wav", () => ({ blobTo16KhzMonoWav: vi.fn(async () => new Blob(["RIFF"], { type: "audio/wav" })) }));
 
 import { GuidedSoundWords, guidedBlocks } from "@/components/a1/guided/guided-sound-words";

@@ -23,7 +23,7 @@ import { PositionsStep } from "@/components/a1/positions/positions-step";
 import { TableStep } from "@/components/a1/table/table-step";
 import { WordPickStep } from "@/components/a1/word-pick/word-pick-step";
 import { buttonClasses } from "@/components/ui/button";
-import { MixedText } from "@/components/ui/mixed-text";
+import { T, TMixed, TPillTitle } from "@/i18n/use-locale";
 import { A1_LEVEL, a1Entries, a1LessonHref, a1StepHref, a1StepKey, a1UnitHref, getA1Unit, nextA1Entry } from "@/data/a1";
 import type { A1Step } from "@/data/types";
 import { cn } from "@/lib/utils";
@@ -60,18 +60,6 @@ function availableAudio(base: string): string[] {
 
 const navLabel = (step: A1Step) => step.navLabel ?? step.title;
 
-/** "Formen: أ · ـأ": on phones only "Formen" is shown (six pills fit on two lines); the full title stays in the text. */
-function PillTitle({ title }: { title: string }) {
-  const cut = title.indexOf(": ");
-  if (cut < 0) return <>{title}</>;
-  return (
-    <span>
-      {title.slice(0, cut)}
-      <span className="hidden sm:inline">{title.slice(cut)}</span>
-    </span>
-  );
-}
-
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const found = find(await params);
   return found ? { title: `${A1_LEVEL.code} · Lektion ${found.unit.number}: ${found.unit.titleGerman} · ${found.lesson.labelGerman} · Schritt ${found.index + 1}` } : {};
@@ -102,22 +90,22 @@ export default async function A1StepPage({ params }: { params: Promise<Params> }
     >
       <nav aria-label="Brotkrumen" className="mb-4 flex items-center justify-between gap-2 text-sm text-muted-foreground">
         <Link href={a1UnitHref(unit)} className="inline-flex items-center gap-1 rounded-md hover:text-foreground focus-ring" data-testid="back-to-unit">
-          <ArrowLeft className="h-4 w-4" aria-hidden /> Lektion {unit.number}
+          <ArrowLeft className="h-4 w-4" aria-hidden /> <T params={{ n: unit.number }}>{"Lektion {n}"}</T>
         </Link>
         <span data-testid="step-position">
-          Schritt {index + 1} von {lesson.steps.length}
+          <T params={{ n: index + 1, total: lesson.steps.length }}>{"Schritt {n} von {total}"}</T>
         </span>
       </nav>
 
       <header className="mb-6 text-center">
         <p className="text-sm font-semibold text-muted-foreground">
-          {A1_LEVEL.code} · Lektion {unit.number} · {unit.titleGerman}
+          {A1_LEVEL.code} · <T params={{ n: unit.number }}>{"Lektion {n}"}</T> · <T>{unit.titleGerman}</T>
         </p>
         <h1 lang="ar" dir="rtl" className="mt-2 font-arabic text-4xl font-bold leading-[1.9] text-primary sm:text-5xl" data-testid="lesson-title">
           {unit.title}
         </h1>
         <p className="mt-1 inline-flex items-center gap-2 rounded-full bg-primary-soft px-4 py-1 font-semibold text-primary" data-testid="entry-title">
-          <span lang="ar" dir="rtl" className="font-arabic text-2xl leading-[1.6]">{lesson.label}</span> {lesson.labelGerman}
+          <span lang="ar" dir="rtl" className="font-arabic text-2xl leading-[1.6]">{lesson.label}</span> <T>{lesson.labelGerman}</T>
         </p>
         <ol className="mt-4 flex flex-wrap justify-center gap-2" aria-label="Schritte">
           {lesson.steps.map((item, i) => (
@@ -131,7 +119,7 @@ export default async function A1StepPage({ params }: { params: Promise<Params> }
                   i === index ? "border-primary bg-primary text-primary-foreground" : "bg-card text-muted-foreground hover:bg-muted hover:text-foreground"
                 )}
               >
-                <span className="font-bold">{i + 1}</span> <PillTitle title={item.title} />
+                <span className="font-bold">{i + 1}</span> <TPillTitle title={item.title} />
               </Link>
             </li>
           ))}
@@ -146,11 +134,11 @@ export default async function A1StepPage({ params }: { params: Promise<Params> }
             </p>
           )}
           <p className="mt-1 font-semibold" data-testid="step-instruction-german">
-            <MixedText text={step.instruction.german} />
+            <TMixed text={step.instruction.german} />
           </p>
           {step.instruction.note && (
             <p className="mt-1 text-sm text-muted-foreground" data-testid="step-instruction-note">
-              <MixedText text={step.instruction.note} />
+              <TMixed text={step.instruction.note} />
             </p>
           )}
         </div>
@@ -194,25 +182,30 @@ export default async function A1StepPage({ params }: { params: Promise<Params> }
         <div className="mt-10 flex flex-col-reverse gap-3 sm:flex-row sm:justify-between">
           {previous ? (
             <Link href={a1StepHref(unit, lesson, previous.slug)} className={buttonClasses({ variant: "secondary", size: "lg" })} data-testid="step-prev">
-              <ArrowLeft className="h-5 w-5" aria-hidden /> Zurück: {navLabel(previous)}
+              <ArrowLeft className="h-5 w-5" aria-hidden /> <T>Zurück:</T> <T>{navLabel(previous)}</T>
             </Link>
           ) : (
             <span />
           )}
           {next ? (
             <Link href={a1StepHref(unit, lesson, next.slug)} className={buttonClasses({ size: "lg" })} data-testid="step-next">
-              Weiter: {navLabel(next)} <ArrowRight className="h-5 w-5" aria-hidden />
+              <T>Weiter:</T> <T>{navLabel(next)}</T> <ArrowRight className="h-5 w-5" aria-hidden />
             </Link>
           ) : (
             // The last step: back to the lesson's contents, or on to its next entry.
             <div className="flex flex-col-reverse gap-3 sm:flex-row">
               <Link href={a1UnitHref(unit)} className={buttonClasses({ variant: "secondary", size: "lg" })} data-testid="back-to-unit-end">
-                Zur Lektion {unit.number}
+                <T params={{ n: unit.number }}>{"Zur Lektion {n}"}</T>
               </Link>
               {nextEntry && (
                 <Link href={a1LessonHref(nextEntry.unit, nextEntry.lesson)} className={buttonClasses({ size: "lg" })} data-testid="next-entry">
-                  Weiter: {nextEntry.unit.slug !== unit.slug && <>Lektion {nextEntry.unit.number} · </>}
-                  <span lang="ar" className="font-arabic text-xl leading-none">{nextEntry.lesson.label}</span> {nextEntry.lesson.labelGerman} <ArrowRight className="h-5 w-5" aria-hidden />
+                  <T>Weiter:</T>{" "}
+                  {nextEntry.unit.slug !== unit.slug && (
+                    <>
+                      <T params={{ n: nextEntry.unit.number }}>{"Lektion {n}"}</T> ·{" "}
+                    </>
+                  )}
+                  <span lang="ar" className="font-arabic text-xl leading-none">{nextEntry.lesson.label}</span> <T>{nextEntry.lesson.labelGerman}</T> <ArrowRight className="h-5 w-5" aria-hidden />
                 </Link>
               )}
             </div>

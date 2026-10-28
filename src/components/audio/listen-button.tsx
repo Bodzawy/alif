@@ -5,6 +5,7 @@ import { Loader2, Volume2 } from "lucide-react";
 
 import { speakArabic, type SpeechVoice } from "@/lib/tts/player";
 import { cn } from "@/lib/utils";
+import { useT } from "@/i18n/use-locale";
 
 export function ListenButton({
   text,
@@ -24,6 +25,7 @@ export function ListenButton({
   className?: string;
   testId?: string;
 }) {
+  const t = useT();
   const [state, setState] = useState<"idle" | "loading" | "playing">("idle");
   const [error, setError] = useState<string | null>(null);
   const mounted = useRef(true);
@@ -58,7 +60,7 @@ export function ListenButton({
         onClick={play}
         disabled={disabled}
         data-testid={testId}
-        aria-label={`${label}: ${text}`}
+        aria-label={`${t(label)}: ${text}`}
         className={cn(
           "inline-flex h-12 items-center justify-center gap-2 rounded-2xl border bg-card px-4 text-sm font-semibold text-foreground shadow-sm transition hover:bg-primary-soft hover:text-primary focus-ring disabled:cursor-not-allowed disabled:opacity-50",
           state !== "idle" && "border-primary/40 bg-primary-soft text-primary"
@@ -69,11 +71,11 @@ export function ListenButton({
         ) : (
           <Volume2 className={cn("h-5 w-5", state === "playing" && "animate-pulse")} aria-hidden />
         )}
-        {label}
+        {t(label)}
       </button>
       {error && (
         <p role="status" className="mt-2 text-xs text-destructive">
-          {error}
+          {t(error)}
         </p>
       )}
     </div>

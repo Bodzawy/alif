@@ -8,6 +8,7 @@ import type { LetterFind } from "@/data/types";
 import { checkFind, findLines, targetKeys, tileByKey, type FindResult, type FindWord } from "@/lib/arabic/letter-find";
 import { getLessonProgress, markLessonCompleted, subscribeProgress } from "@/lib/progress";
 import { cn } from "@/lib/utils";
+import { useRichT, useT } from "@/i18n/use-locale";
 
 // Step type "letter-find" ("Lies den Dialog und unterstreiche …"): the
 // dialogue as real text; the learner taps a letter to underline it (tap again
@@ -36,6 +37,8 @@ const noop = () => () => undefined;
 
 export function LetterFindStep({ find, progressKey }: { find: LetterFind; progressKey: string }) {
   const hydrated = useSyncExternalStore(noop, () => true, () => false);
+  const t = useT();
+  const richT = useRichT();
   const completedBefore = useSyncExternalStore(subscribeProgress, () => Boolean(getLessonProgress(progressKey).completedAt), () => false);
   /** -1: the book's letter; otherwise the index of an extra letter. */
   const [targetIndex, setTargetIndex] = useState(-1);
@@ -94,22 +97,26 @@ export function LetterFindStep({ find, progressKey }: { find: LetterFind; progre
     <div data-testid="letter-find" data-letter={target.letter} data-done={done ? "true" : "false"}>
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
         <p className="font-semibold" data-testid="find-goal">
-          Finde alle <span className="font-bold text-primary">{total}</span> ×{" "}
-          <span lang="ar" className="font-arabic text-2xl font-bold text-primary">
-            {target.letter}
-          </span>{" "}
-          ({target.name}) {dialogues.length > 1 ? "in den Dialogen" : "im Dialog"}.
+          {richT(dialogues.length > 1 ? "Finde alle {n} × {letter} ({name}) in den Dialogen." : "Finde alle {n} × {letter} ({name}) im Dialog.", {
+            n: <span className="font-bold text-primary">{total}</span>,
+            letter: (
+              <span lang="ar" className="font-arabic text-2xl font-bold text-primary">
+                {target.letter}
+              </span>
+            ),
+            name: t(target.name),
+          })}
         </p>
         {hydrated && (done || completedBefore) && (
           <p className="inline-flex items-center gap-1 rounded-full bg-success px-2.5 py-1 text-xs font-semibold text-success-foreground shadow" data-testid="step-completed">
-            <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> Geschafft
+            <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> {t("Geschafft")}
           </p>
         )}
       </div>
 
       {find.extra && find.extra.length > 0 && (
         <div className="mb-4 flex flex-wrap items-center gap-2" data-testid="find-targets">
-          <span className="text-sm text-muted-foreground">Buchstabe:</span>
+          <span className="text-sm text-muted-foreground">{t("Buchstabe:")}</span>
           {[{ letter: find.letter, name: find.name }, ...find.extra].map((option, i) => (
             <button
               key={option.letter}
@@ -122,21 +129,21 @@ export function LetterFindStep({ find, progressKey }: { find: LetterFind; progre
                 targetIndex === i - 1 ? "border-primary bg-primary text-primary-foreground" : "bg-card text-muted-foreground hover:bg-muted"
               )}
             >
-              <span lang="ar" className="font-arabic text-xl leading-none">{option.letter}</span> {option.name}
-              {i > 0 && <span className="sr-only"> (freiwillig)</span>}
+              <span lang="ar" className="font-arabic text-xl leading-none">{option.letter}</span> {t(option.name)}
+              {i > 0 && <span className="sr-only"> ({t("freiwillig")})</span>}
             </button>
           ))}
-          {targetIndex >= 0 && <span className="text-xs text-muted-foreground" data-testid="find-extra-note">Freiwillige Wiederholung – „Geschafft“ zählt für den Buchstaben aus dem Buch.</span>}
+          {targetIndex >= 0 && <span className="text-xs text-muted-foreground" data-testid="find-extra-note">{t("Freiwillige Wiederholung – „Geschafft“ zählt für den Buchstaben aus dem Buch.")}</span>}
         </div>
       )}
 
       <div className="flex flex-col gap-5" data-testid="find-lines">
         {dialogues.map((dialogue) => (
-          <ol key={dialogue.id} className="flex flex-col gap-3 rounded-[2rem] border border-primary/10 bg-card/60 p-3 sm:p-5" aria-label={dialogues.length > 1 ? dialogue.intro : "Dialog"} data-testid={`find-dialogue-${dialogue.id}`}>
-            {dialogues.length > 1 && <p className="px-1 text-sm font-semibold text-muted-foreground">{dialogue.intro}</p>}
+          <ol key={dialogue.id} className="flex flex-col gap-3 rounded-[2rem] border border-primary/10 bg-card/60 p-3 sm:p-5" aria-label={dialogues.length > 1 ? t(dialogue.intro) : t("Dialog")} data-testid={`find-dialogue-${dialogue.id}`}>
+            {dialogues.length > 1 && <p className="px-1 text-sm font-semibold text-muted-foreground">{t(dialogue.intro)}</p>}
             {dialogue.lines.map((line) => (
               <li key={line.id} className="rounded-3xl border bg-card px-4 py-3 shadow-card sm:px-5" data-testid={`find-line-${line.id}`}>
-                <p className="text-xs font-semibold text-muted-foreground">{speakerName(line.speaker)}</p>
+                <p className="text-xs font-semibold text-muted-foreground">{t(speakerName(line.speaker))}</p>
                 <p lang="ar" dir="rtl" className="font-arabic text-4xl font-bold leading-[2.2]">
                   {lines[lineIndex.get(line.id)!]!.words.map((word, w) => (
                     <span key={word.key}>
@@ -145,7 +152,7 @@ export function LetterFindStep({ find, progressKey }: { find: LetterFind; progre
                     </span>
                   ))}
                 </p>
-                <p className="text-sm text-muted-foreground">{line.german}</p>
+                <p className="text-sm text-muted-foreground">{t(line.german)}</p>
               </li>
             ))}
           </ol>
@@ -154,27 +161,31 @@ export function LetterFindStep({ find, progressKey }: { find: LetterFind; progre
 
       <div className="mt-5 flex flex-col items-center gap-3 text-center">
         <p className="text-sm text-muted-foreground" aria-live="polite" data-testid="find-count">
-          Markiert: {selected.size}
+          {t("Markiert: {n}", { n: selected.size })}
         </p>
         {result && !done && (
           <div role="status" data-testid="find-feedback" className="w-full max-w-xl rounded-2xl border border-warning/30 bg-warning-soft px-4 py-3 text-sm">
             <p className="font-semibold">
-              {result.correct.length} von {total} richtig.
-              {result.missing.length > 0 && ` Es fehlen noch ${result.missing.length}.`}
+              {t("{n} von {total} richtig.", { n: result.correct.length, total })}
+              {result.missing.length > 0 && ` ${t("Es fehlen noch {n}.", { n: result.missing.length })}`}
             </p>
             {result.wrong.length > 0 && (
               <p data-testid="find-wrong">
-                {result.wrong.length} falsch markiert (rot) – tippe sie an, um sie zu entfernen.{" "}
+                {t("{n} falsch markiert (rot) – tippe sie an, um sie zu entfernen.", { n: result.wrong.length })}{" "}
                 {wrongLetters.map((letter) => (
                   <span key={letter} className="mr-2 inline-block">
-                    <span lang="ar" className="font-arabic text-lg font-bold">
-                      {letter}
-                    </span>{" "}
-                    ist kein{" "}
-                    <span lang="ar" className="font-arabic text-lg font-bold">
-                      {target.letter}
-                    </span>
-                    .
+                    {richT("{letter} ist kein {target}.", {
+                      letter: (
+                        <span lang="ar" className="font-arabic text-lg font-bold">
+                          {letter}
+                        </span>
+                      ),
+                      target: (
+                        <span lang="ar" className="font-arabic text-lg font-bold">
+                          {target.letter}
+                        </span>
+                      ),
+                    })}
                   </span>
                 ))}
               </p>
@@ -187,24 +198,24 @@ export function LetterFindStep({ find, progressKey }: { find: LetterFind; progre
               مُمْتَاز! 👏
             </p>
             <p className="mt-1 text-muted-foreground">
-              Du hast alle {total} gefunden – und nichts anderes markiert.
+              {t("Du hast alle {n} gefunden – und nichts anderes markiert.", { n: total })}
             </p>
           </div>
         )}
         <div className="flex flex-wrap justify-center gap-3">
           {!done && (
             <Button size="lg" onClick={check} disabled={selected.size === 0} data-testid="find-check" className="min-h-12">
-              <SearchCheck className="h-5 w-5" aria-hidden /> Prüfen
+              <SearchCheck className="h-5 w-5" aria-hidden /> {t("Prüfen")}
             </Button>
           )}
           {result && !done && !reveal && (
             <Button variant="secondary" size="lg" onClick={() => setReveal(true)} data-testid="find-reveal" className="min-h-12">
-              <Eye className="h-5 w-5" aria-hidden /> Hilfe: fehlende zeigen
+              <Eye className="h-5 w-5" aria-hidden /> {t("Hilfe: fehlende zeigen")}
             </Button>
           )}
           {(done || selected.size > 0) && (
             <Button variant="secondary" size="lg" onClick={again} data-testid="find-again" className="min-h-12">
-              <RotateCcw className="h-5 w-5" aria-hidden /> {done ? "Nochmal" : "Alles löschen"}
+              <RotateCcw className="h-5 w-5" aria-hidden /> {done ? t("Nochmal") : t("Alles löschen")}
             </Button>
           )}
         </div>
@@ -221,6 +232,7 @@ type Layout = { width: number; height: number; letters: Record<string, Box> };
 const TAP_MARGIN = 6;
 
 export function FindableWord({ word, toneOf, onToggle, disabled }: { word: FindWord; toneOf: (key: string) => Tone | null; onToggle: (key: string) => void; disabled: boolean }) {
+  const tr = useT();
   const wrapper = useRef<HTMLSpanElement>(null);
   const base = useRef<HTMLSpanElement>(null);
   const [layout, setLayout] = useState<Layout | null>(null);
@@ -308,7 +320,7 @@ export function FindableWord({ word, toneOf, onToggle, disabled }: { word: FindW
                 onClick={() => onToggle(tile.key)}
                 disabled={disabled}
                 aria-pressed={tone === "selected" || tone === "correct" || tone === "wrong"}
-                aria-label={`Buchstabe ${i + 1} von ${text}: ${tile.text}${tone === "wrong" ? " – falsch" : tone === "correct" ? " – richtig" : ""}`}
+                aria-label={`${tr("Buchstabe {n} von {word}", { n: i + 1, word: text })}: ${tile.text}${tone === "wrong" ? ` – ${tr("falsch")}` : tone === "correct" ? ` – ${tr("richtig")}` : ""}`}
                 data-testid={`find-tile-${tile.key}`}
                 data-target={tile.target ? "true" : "false"}
                 data-from={at}

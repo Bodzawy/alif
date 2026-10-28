@@ -1,14 +1,14 @@
 import Link from "next/link";
-import { ArrowRight, Check, ChevronDown, Globe, Menu, X } from "lucide-react";
+import { ArrowRight, Globe, Menu, X } from "lucide-react";
 
+import { LanguageSwitch } from "@/components/locale/language-switch";
 import { TrackSwitch } from "@/components/track/track-switch";
 import { cn } from "@/lib/utils";
 
 // The homepage header, over the hero: logo and tagline, the page's sections,
-// the programme, the language menu and "Anmelden". The menus are <details>
-// (no JavaScript); only the programme switch is a client component.
-// Alif has no accounts yet (progress lives in the browser) and only a German
-// interface – both menus say so instead of pretending more.
+// the programme, the language and "Anmelden". The menus are <details>
+// (no JavaScript); the programme and language switches are client components.
+// Alif has no accounts yet (progress lives in the browser) – the login menu says so.
 
 export const HOME_NAV = [
   { href: "/", label: "Startseite", active: true },
@@ -32,25 +32,6 @@ export function HomeLogo({ className }: { className?: string }) {
 }
 
 const menuPanel = "absolute right-0 top-[calc(100%+0.5rem)] z-40 w-72 rounded-2xl border border-brand-gold/25 bg-brand-ivory p-4 text-left shadow-[0_20px_40px_-16px_rgb(20_33_61/0.35)]";
-
-function LanguageMenu() {
-  return (
-    <details className="group relative" data-testid="language-menu">
-      <summary className="flex h-11 cursor-pointer list-none items-center gap-2 rounded-full border border-brand-navy/10 bg-white px-4 text-[0.95rem] font-medium text-brand-navy shadow-sm transition hover:border-brand-emerald/40 focus-ring [&::-webkit-details-marker]:hidden">
-        <Globe className="h-[1.1rem] w-[1.1rem]" aria-hidden />
-        Deutsch
-        <ChevronDown className="h-4 w-4 transition group-open:rotate-180" aria-hidden />
-        <span className="sr-only">– Sprache der Oberfläche</span>
-      </summary>
-      <div className={menuPanel} role="group" aria-label="Sprache der Oberfläche">
-        <p className="flex items-center justify-between rounded-xl bg-brand-emerald/10 px-3 py-2 font-semibold text-brand-emerald">
-          Deutsch <Check className="h-4 w-4" aria-hidden />
-        </p>
-        <p className="mt-2 px-1 text-sm text-brand-navy/70">Alif ist für Deutschsprachige gemacht. Weitere Sprachen der Oberfläche sind noch nicht verfügbar.</p>
-      </div>
-    </details>
-  );
-}
 
 function LoginInfo() {
   return (
@@ -93,7 +74,7 @@ export function HomeHeader() {
 
         <div className="hidden items-center gap-3 lg:flex">
           <TrackSwitch className="h-11" />
-          <LanguageMenu />
+          <LanguageSwitch className="h-11" />
           <LoginInfo />
         </div>
 
@@ -115,8 +96,8 @@ export function HomeHeader() {
               <p className="mb-3 flex items-center justify-between gap-2 font-medium text-brand-navy">
                 Programm <TrackSwitch />
               </p>
-              <p className="flex items-center gap-2 font-medium text-brand-navy">
-                <Globe className="h-4 w-4" aria-hidden /> Deutsch
+              <p className="flex items-center justify-between gap-2 font-medium text-brand-navy">
+                <Globe className="h-4 w-4" aria-hidden /> <LanguageSwitch />
               </p>
               <p className="mt-2">Kein Konto nötig – dein Fortschritt bleibt in diesem Browser.</p>
             </div>

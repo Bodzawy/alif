@@ -13,6 +13,7 @@ import { cn } from "@/lib/utils";
 
 import { DialogueBubble, DialogueToggles } from "./dialogue-bubble";
 import { speakLine } from "./speak";
+import { useT } from "@/i18n/use-locale";
 
 // Stage 1 "Gespräch anhören": the whole dialogue, each speaker in their own
 // voice, line after line on ONE audio element (no overlap). Every line can be
@@ -39,6 +40,7 @@ export function DialogueListen({ dialogue, progressKey }: { dialogue: Dialogue; 
   const [showTransliteration, setShowTransliteration] = useState(true);
   const [note, setNote] = useState<string | null>(null);
   const [answer, setAnswer] = useState<number | null>(null);
+  const t = useT();
   const [muted, setMuted] = useState(false);
 
   if (!narrator.current && hydrated) narrator.current = createNarrator({ baseUrl: "", available: [] });
@@ -109,12 +111,14 @@ export function DialogueListen({ dialogue, progressKey }: { dialogue: Dialogue; 
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
         {hydrated && completed ? (
           <p className="inline-flex items-center gap-1 rounded-full bg-success px-2.5 py-1 text-xs font-semibold text-success-foreground shadow" data-testid="step-completed">
-            <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> Geschafft
+            <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> {t("Geschafft")}
           </p>
         ) : (
-          <p className="text-sm text-muted-foreground" data-testid="dialogue-intro">Hör dir das Gespräch an. {dialogue.intro}</p>
+          <p className="text-sm text-muted-foreground" data-testid="dialogue-intro">
+            {t("Hör dir das Gespräch an.")} {t(dialogue.intro)}
+          </p>
         )}
-        <Button variant="secondary" onClick={toggleMute} aria-pressed={muted} aria-label={muted ? "Ton einschalten" : "Ton ausschalten"} className="min-h-12 min-w-12" data-testid="mute-toggle">
+        <Button variant="secondary" onClick={toggleMute} aria-pressed={muted} aria-label={muted ? t("Ton einschalten") : t("Ton ausschalten")} className="min-h-12 min-w-12" data-testid="mute-toggle">
           {muted ? <VolumeX className="h-5 w-5" aria-hidden /> : <Volume2 className="h-5 w-5" aria-hidden />}
         </Button>
       </div>
@@ -122,20 +126,20 @@ export function DialogueListen({ dialogue, progressKey }: { dialogue: Dialogue; 
       <div className="mb-5 flex flex-wrap items-center gap-3">
         {status === "playing" ? (
           <Button size="lg" variant="secondary" onClick={pause} data-testid="dialogue-pause" className="min-h-12">
-            <Pause className="h-5 w-5" aria-hidden /> Pause
+            <Pause className="h-5 w-5" aria-hidden /> {t("Pause")}
           </Button>
         ) : status === "paused" ? (
           <Button size="lg" onClick={() => void play(resumeAt.current, last)} data-testid="dialogue-resume" className="min-h-12">
-            <Play className="h-5 w-5" aria-hidden /> Weiter
+            <Play className="h-5 w-5" aria-hidden /> {t("Weiter")}
           </Button>
         ) : (
           <Button size="lg" onClick={() => void play(0, last)} disabled={!narrator.current} data-testid="dialogue-play-all" className="min-h-12">
-            <Play className="h-5 w-5" aria-hidden /> Dialog anhören
+            <Play className="h-5 w-5" aria-hidden /> {t("Dialog anhören")}
           </Button>
         )}
         {(status === "paused" || heard.size > 0) && (
           <Button size="lg" variant="secondary" onClick={() => void play(0, last)} data-testid="dialogue-replay" className="min-h-12">
-            <RotateCcw className="h-5 w-5" aria-hidden /> Nochmal
+            <RotateCcw className="h-5 w-5" aria-hidden /> {t("Nochmal")}
           </Button>
         )}
         <DialogueToggles showGerman={showGerman} showTransliteration={showTransliteration} onGerman={() => setShowGerman((v) => !v)} onTransliteration={() => setShowTransliteration((v) => !v)} />
@@ -143,11 +147,11 @@ export function DialogueListen({ dialogue, progressKey }: { dialogue: Dialogue; 
 
       {note && (
         <p role="status" className="mb-4 rounded-2xl border border-warning/30 bg-warning-soft px-4 py-3 text-sm" data-testid="dialogue-note">
-          {note}
+          {t(note)}
         </p>
       )}
 
-      <ol className="flex flex-col gap-4 rounded-[2rem] border border-primary/10 bg-card/60 p-3 sm:p-5" aria-label="Gespräch" data-testid="dialogue-lines">
+      <ol className="flex flex-col gap-4 rounded-[2rem] border border-primary/10 bg-card/60 p-3 sm:p-5" aria-label={t("Gespräch")} data-testid="dialogue-lines">
         {dialogue.lines.map((line, i) => {
           const speaker = speakerOf(line.speaker);
           return (
@@ -160,8 +164,8 @@ export function DialogueListen({ dialogue, progressKey }: { dialogue: Dialogue; 
               showTransliteration={showTransliteration}
               state={current === i ? "playing" : heard.has(line.id) ? "done" : "idle"}
               actions={
-                <Button variant="secondary" size="sm" onClick={() => void play(i, i)} disabled={!narrator.current} data-testid={`play-line-${line.id}`} aria-label={`Anhören: ${line.german}`}>
-                  <Volume2 className="h-4 w-4" aria-hidden /> Anhören
+                <Button variant="secondary" size="sm" onClick={() => void play(i, i)} disabled={!narrator.current} data-testid={`play-line-${line.id}`} aria-label={`${t("Anhören")}: ${t(line.german)}`}>
+                  <Volume2 className="h-4 w-4" aria-hidden /> {t("Anhören")}
                 </Button>
               }
             />
@@ -170,9 +174,9 @@ export function DialogueListen({ dialogue, progressKey }: { dialogue: Dialogue; 
       </ol>
 
       {dialogue.question && allHeard && (
-        <section className="mt-6 animate-fade-in rounded-3xl border bg-card p-5 shadow-card sm:p-6" aria-label="Frage" data-testid="dialogue-question">
+        <section className="mt-6 animate-fade-in rounded-3xl border bg-card p-5 shadow-card sm:p-6" aria-label={t("Frage")} data-testid="dialogue-question">
           <p className="text-lg font-semibold">
-            <MixedText text={dialogue.question.prompt} />
+            <MixedText text={t(dialogue.question.prompt)} />
           </p>
           <ul className="mt-4 flex flex-col gap-2">
             {dialogue.question.options.map((option, i) => {
@@ -190,14 +194,14 @@ export function DialogueListen({ dialogue, progressKey }: { dialogue: Dialogue; 
                       chosen && right ? "border-success bg-success-soft" : chosen ? "border-destructive/50 bg-destructive/5" : "bg-background hover:bg-muted"
                     )}
                   >
-                    {option}
+                    {t(option)}
                   </button>
                 </li>
               );
             })}
           </ul>
           <p aria-live="polite" className="mt-3 min-h-6 text-sm font-semibold" data-testid="answer-feedback">
-            {answer === null ? "" : answer === dialogue.question.answer ? <span className="text-success">Sehr gut! Genau das sagen sie.</span> : <span className="text-muted-foreground">Nicht ganz. Hör noch einmal zu und versuch es nochmal.</span>}
+            {answer === null ? "" : answer === dialogue.question.answer ? <span className="text-success">{t("Sehr gut! Genau das sagen sie.")}</span> : <span className="text-muted-foreground">{t("Nicht ganz. Hör noch einmal zu und versuch es nochmal.")}</span>}
           </p>
         </section>
       )}

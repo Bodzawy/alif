@@ -2,6 +2,7 @@ import { act, cleanup, fireEvent, render, screen } from "@testing-library/react"
 import { afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
 
 import { TrackDialog, TrackSwitch } from "@/components/track/track-switch";
+import { chooseLocale } from "@/lib/locale";
 import { getLessonProgress, markExercisePassed, subscribeProgress } from "@/lib/progress";
 import { chooseTrack, currentTrack, readTrack } from "@/lib/track";
 
@@ -49,6 +50,21 @@ describe("track", () => {
 
 describe("the programme dialog", () => {
   const dialog = () => screen.getByTestId("track-dialog");
+  // The language is asked first (LanguageDialog); the programme dialog waits for it.
+  beforeEach(() => chooseLocale("de"));
+
+  it("waits for the language: before it is chosen the programme dialog stays closed", async () => {
+    window.localStorage.removeItem("alif:lang");
+    render(<TrackDialog />);
+    await act(async () => undefined);
+    expect(dialog()).not.toHaveAttribute("open");
+    act(() => chooseLocale("en"));
+    await act(async () => undefined);
+    expect(dialog()).toHaveAttribute("open");
+    expect(dialog()).toHaveTextContent("Welcome to Alif! Choose your programme");
+    expect(dialog()).toHaveTextContent("Speak Arabic clearly.");
+  });
+
 
   it("opens by itself before the first choice and cannot be closed without choosing", async () => {
     render(

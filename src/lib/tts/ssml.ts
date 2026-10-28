@@ -6,6 +6,19 @@ import { GERMAN_CUES } from "@/lib/pronunciation/cues";
 export const TTS_VOICE = "ar-SA-ZariyahNeural";
 /** Only for German texts (the cues, e.g. "Super!", and unrecorded Formen narration): an Arabic voice would mispronounce them. */
 export const TTS_VOICE_GERMAN = "de-DE-KatjaNeural";
+/** The learner's language (src/lib/locale.ts): instructions and cues in a voice of that language. */
+export const TTS_LOCALE_VOICES = {
+  de: { lang: "de-DE", voice: TTS_VOICE_GERMAN },
+  en: { lang: "en-US", voice: "en-US-JennyNeural" },
+  tr: { lang: "tr-TR", voice: "tr-TR-EmelNeural" },
+  sq: { lang: "sq-AL", voice: "sq-AL-AnilaNeural" },
+  fr: { lang: "fr-FR", voice: "fr-FR-DeniseNeural" },
+} as const;
+export type TtsLocale = keyof typeof TTS_LOCALE_VOICES;
+
+export function isTtsLocale(value: unknown): value is TtsLocale {
+  return typeof value === "string" && Object.hasOwn(TTS_LOCALE_VOICES, value);
+}
 const GERMAN_TEXTS: ReadonlySet<string> = new Set(Object.values(GERMAN_CUES));
 const ARABIC_SCRIPT = /[\u0600-\u06FF]/;
 
@@ -84,13 +97,14 @@ function speechText(text: string) {
     .join('<phoneme alphabet="ipa" ph="tun">ةٌ</phoneme>');
 }
 
-export function buildSsml(text: string, voice?: TtsVoiceKey): string {
-  const german = isGermanText(text);
+/** `lang`: the learner's language for a text without Arabic script (default German). */
+export function buildSsml(text: string, voice?: TtsVoiceKey, lang: TtsLocale = "de"): string {
+  const local = isGermanText(text) ? TTS_LOCALE_VOICES[lang] : null;
   return `
       <speak version="1.0"
              xmlns="http://www.w3.org/2001/10/synthesis"
-             xml:lang="${german ? "de-DE" : "ar-SA"}">
-        <voice name="${german ? TTS_VOICE_GERMAN : voice ? TTS_DIALOGUE_VOICES[voice] : TTS_VOICE}">
+             xml:lang="${local ? local.lang : "ar-SA"}">
+        <voice name="${local ? local.voice : voice ? TTS_DIALOGUE_VOICES[voice] : TTS_VOICE}">
           <prosody rate="-8%">
             ${speechText(text)}
           </prosody>

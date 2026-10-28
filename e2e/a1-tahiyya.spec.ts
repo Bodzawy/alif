@@ -1,6 +1,7 @@
 import { expect, test, type Locator, type Page } from "@playwright/test";
 
 import { a1Tahiyya, majidFatimaDialogue } from "../src/data/a1/tahiyya";
+import dialogueManifest from "../src/lib/tts/dialogue-manifest.json";
 import { collectPageErrors, recordExercise } from "./support/helpers";
 import { mockServices, noHorizontalScroll, syntheticVoice } from "./support/letters";
 
@@ -12,6 +13,18 @@ import { mockServices, noHorizontalScroll, syntheticVoice } from "./support/lett
 
 const BASE = "/a1/lesson-1/tahiyya-wa-taqdim";
 const progress = (page: Page) => page.evaluate(() => JSON.parse(localStorage.getItem("alif:progress:v1") ?? "{}"));
+const recorded: Record<string, { file: string }> = dialogueManifest.lines;
+
+/** What the page loads to speak a dialogue line: its recording (public/audio/ar/), or – without one – /api/tts. */
+function heardLines(page: Page, tts: string[]) {
+  const files: string[] = [];
+  page.on("request", (request) => {
+    const path = new URL(request.url()).pathname;
+    if (path.startsWith("/audio/ar/d-")) files.push(path);
+  });
+  return (lines: Array<{ id: string; arabic: string }>) =>
+    lines.map((line) => (recorded[line.id] ? files.includes(`/audio/ar/${recorded[line.id]!.file}.mp3`) : tts.includes(line.arabic)));
+}
 
 /** A finger tap on the middle of a letter's glyph (the letter buttons lie exactly on their glyphs). */
 async function tapLetter(page: Page, letter: Locator) {
@@ -44,8 +57,10 @@ test.describe("phone", () => {
     await expect(page.getByTestId("phrase-german-p-bi-khayr")).toContainText("Gut, Gott sei Dank.");
     expect(await noHorizontalScroll(page)).toBe(true);
 
+    // In Majid's voice: his recording of the line (or /api/tts in his voice without it).
+    const heard = page.waitForRequest((r) => r.url().includes(`/audio/ar/${recorded["t-kayfa-haluki"]!.file}.mp3`) || (r.url().endsWith("/api/tts") && (r.postData() ?? "").includes("حَالُكِ")));
     await page.getByTestId("exercise-p-kayfa-haluki-listen").tap();
-    await expect.poll(() => calls.tts).toContain("كَيْفَ حَالُكِ؟");
+    await heard;
 
     const step1 = a1Tahiyya.steps[0]!;
     if (step1.kind !== "phrases") throw new Error("step-1 must be phrases");
@@ -71,19 +86,29 @@ test.describe("phone", () => {
     expect(errors).toEqual([]);
   });
 
-  test("Übung 1: role-play as Majid – the app speaks Fatima; Majid asks her name", async ({ page }) => {
-    test.setTimeout(240_000);
+  test("Übung 1: role-play as Majid – the app speaks Fatima; Majid asks her name; then (green) Fatima", async ({ page }) => {
+    test.setTimeout(420_000);
     const errors = collectPageErrors(page);
     await syntheticVoice(page);
     const calls = await mockServices(page);
+    const heard = heardLines(page, calls.tts);
     await page.goto(`${BASE}/step-4`);
     await expect(page.getByTestId("step-instruction-german")).toHaveText("Spiele den Dialog mit deinem Lernpartner nach und frage nach seinem oder ihrem Namen.");
-    await page.getByTestId("role-majid").tap();
+    await expect(page.getByTestId("role-majid")).toHaveAttribute("aria-pressed", "true"); // the first role is chosen already
     await page.getByTestId("start-button").tap();
     await expect(page.getByTestId("dialogue-done")).toBeVisible({ timeout: 180_000 });
     const majid = majidFatimaDialogue.lines.filter((l) => l.speaker === "majid");
+    const fatima = majidFatimaDialogue.lines.filter((l) => l.speaker === "fatima");
     expect(calls.uploads).toEqual(majid.map((l) => l.exercise.target));
-    expect(calls.tts.filter((t) => t !== "Super!")).toEqual(majidFatimaDialogue.lines.filter((l) => l.speaker === "fatima").map((l) => l.arabic));
+    expect(heard(fatima)).toEqual(fatima.map(() => true));
+    // One role is not the whole exercise: Majid is green, Fatima is next.
+    expect((await progress(page))["a1/lesson-1/tahiyya-wa-taqdim/step-4"]?.completedAt).toBeFalsy();
+    await page.getByTestId("dialogue-next-role").tap();
+    await expect(page.getByTestId("role-done-majid")).toBeVisible();
+    await expect(page.getByTestId("role-fatima")).toHaveAttribute("aria-pressed", "true");
+    await page.getByTestId("start-button").tap();
+    await expect(page.getByTestId("dialogue-done")).toBeVisible({ timeout: 180_000 });
+    expect(calls.uploads.slice(majid.length)).toEqual(fatima.map((l) => l.exercise.target));
     expect((await progress(page))["a1/lesson-1/tahiyya-wa-taqdim/step-4"]?.completedAt).toBeTruthy();
     expect(await noHorizontalScroll(page)).toBe(true);
     expect(errors).toEqual([]);

@@ -31,7 +31,7 @@ vi.mock("@/lib/audio/guided-mic", () => ({
   }),
 }));
 const tts = vi.hoisted(() => ({ speechUrl: vi.fn(async (text: string, voice?: string) => `blob:${voice ?? "default"}|${text}`) }));
-vi.mock("@/lib/tts/player", () => ({ speechUrl: tts.speechUrl, speakArabic: vi.fn(async () => undefined), stopSpeaking: vi.fn() }));
+vi.mock("@/lib/tts/player", () => ({ speechUrl: tts.speechUrl, localSpeechUrl: (text: string) => tts.speechUrl(text), speakArabic: vi.fn(async () => undefined), stopSpeaking: vi.fn() }));
 vi.mock("@/lib/audio/wav", () => ({ blobTo16KhzMonoWav: vi.fn(async () => new Blob(["RIFF"], { type: "audio/wav" })) }));
 
 import { DialogueListen } from "@/components/a1/dialogue/dialogue-listen";

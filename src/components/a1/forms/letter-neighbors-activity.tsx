@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils";
 import { LETTER_NARRATION, letterRuleText } from "./content";
 import { ShapedWord } from "./shaped-word";
 import { shuffled, usePickAndDrop } from "./use-pick-and-drop";
+import { useT } from "@/i18n/use-locale";
 
 type Side = "left" | "right";
 /** What the child has tried: a side, with a neighbour that has a Hand or not. */
@@ -36,6 +37,7 @@ export function LetterNeighborsActivity({
   narrator: Narrator;
   onComplete: () => void;
 }) {
+  const t = useT();
   const order = useMemo(() => shuffled(neighbors), [neighbors]);
   const [right, setRight] = useState<string | null>(null);
   const [left, setLeft] = useState<string | null>(null);
@@ -76,7 +78,7 @@ export function LetterNeighborsActivity({
       type="button"
       {...targetProps(side)}
       data-testid={`zone-${side}`}
-      aria-label={side === "right" ? `Rechts neben das ${name} legen (der Buchstabe davor)` : `Links neben das ${name} legen (der Buchstabe danach)`}
+      aria-label={side === "right" ? t("Rechts neben das {name} legen (der Buchstabe davor)", { name }) : t("Links neben das {name} legen (der Buchstabe danach)", { name })}
       className={cn(
         "flex h-28 w-16 shrink-0 flex-col items-center justify-center gap-1 rounded-2xl border-2 border-dashed text-xs font-semibold text-muted-foreground transition focus-ring sm:h-32 sm:w-28",
         selectedKey !== null ? "border-primary bg-primary-soft/60 text-primary" : "border-border bg-muted/30"
@@ -120,17 +122,17 @@ export function LetterNeighborsActivity({
             </span>
           ) : last.holds ? (
             <span className="inline-flex items-center gap-1 text-accent-foreground">
-              <Hand className="h-4 w-4 shrink-0 text-accent" aria-hidden /> Der Nachbar davor streckt seine Hand aus und hält das {name} fest.
+              <Hand className="h-4 w-4 shrink-0 text-accent" aria-hidden /> {t("Der Nachbar davor streckt seine Hand aus und hält das {name} fest.", { name })}
             </span>
           ) : (
-            <span className="text-muted-foreground">Dieser Nachbar hat keine Hand – er hält das {name} nicht fest.</span>
+            <span className="text-muted-foreground">{t("Dieser Nachbar hat keine Hand – er hält das {name} nicht fest.", { name })}</span>
           ))}
       </p>
 
       <p className="mt-3 text-sm text-muted-foreground">
-        Lege einen Nachbarn rechts neben das {name} (davor) oder links daneben (danach).
+        {t("Lege einen Nachbarn rechts neben das {name} (davor) oder links daneben (danach).", { name })}
       </p>
-      <ul className="mt-4 flex flex-wrap justify-center gap-3" aria-label="Nachbarn">
+      <ul className="mt-4 flex flex-wrap justify-center gap-3" aria-label={t("Nachbarn")}>
         {order.map((neighbor) => {
           const placed = neighbor === right || neighbor === left;
           return (
@@ -140,7 +142,7 @@ export function LetterNeighborsActivity({
                 {...itemProps(neighbor, neighbor)}
                 data-testid={`neighbor-${neighbor}`}
                 data-placed={placed}
-                aria-label={`Nachbar ${neighbor}`}
+                aria-label={`${t("Nachbar")} ${neighbor}`}
                 className={cn(
                   "relative flex h-16 w-16 cursor-grab select-none items-center justify-center rounded-2xl border bg-card font-arabic text-4xl font-bold shadow-sm transition focus-ring active:cursor-grabbing sm:h-20 sm:w-20",
                   selectedKey === neighbor && "border-primary ring-2 ring-primary"
@@ -162,11 +164,11 @@ export function LetterNeighborsActivity({
         <div className="mt-6 animate-fade-in rounded-2xl border border-accent/40 bg-accent-soft p-4 text-left" data-testid="rule-card" role="note">
           <p className="flex items-start gap-2 font-semibold">
             <Hand className="mt-0.5 h-5 w-5 shrink-0 text-accent" aria-hidden />
-            {letterRuleText(name)}
+            {t(letterRuleText(name))}
           </p>
           <div className="mt-4 flex justify-end">
             <Button size="lg" onClick={onComplete} data-testid="neighbors-next">
-              Weiter <ArrowRight className="h-5 w-5" aria-hidden />
+              {t("Weiter")} <ArrowRight className="h-5 w-5" aria-hidden />
             </Button>
           </div>
         </div>

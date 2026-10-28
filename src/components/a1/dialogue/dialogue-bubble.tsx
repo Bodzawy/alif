@@ -1,7 +1,10 @@
+"use client";
+
 import type { ReactNode } from "react";
 
 import type { DialogueLine, DialogueSpeaker } from "@/data/types";
 import { cn } from "@/lib/utils";
+import { useT } from "@/i18n/use-locale";
 
 // One line of a dialogue as a chat bubble: the speaker's picture and name,
 // then the Arabic (RTL), the transliteration and the German meaning (LTR).
@@ -21,6 +24,7 @@ export function splitAddressee(german: string): { german: string; addressee?: st
 
 /** Whom a sentence is said to – large and coloured, so the masculine / feminine form is not missed. */
 export function AddresseeBadge({ addressee, gender, testId }: { addressee: string; gender?: "m" | "f"; testId?: string }) {
+  const t = useT();
   return (
     <span
       dir="ltr"
@@ -36,7 +40,7 @@ export function AddresseeBadge({ addressee, gender, testId }: { addressee: strin
           {gender === "f" ? "♀" : "♂"}
         </span>
       )}
-      {addressee}
+      {t(addressee)}
     </span>
   );
 }
@@ -68,6 +72,7 @@ export function DialogueBubble({
   itemRef?: (el: HTMLLIElement | null) => void;
 }) {
   const { german, addressee, gender } = splitAddressee(line.german);
+  const t = useT();
   return (
     <li
       ref={itemRef}
@@ -78,7 +83,7 @@ export function DialogueBubble({
       className={cn("flex items-end gap-3 transition-opacity duration-300", first ? "flex-row" : "flex-row-reverse", state === "waiting" && "opacity-50")}
     >
       {/* eslint-disable-next-line @next/next/no-img-element -- local SVG avatar */}
-      <img src={speaker.avatar.src} alt={speaker.avatar.alt} width={56} height={56} className="h-12 w-12 shrink-0 rounded-full border bg-card shadow-sm sm:h-14 sm:w-14" data-testid={`avatar-${speaker.id}`} />
+      <img src={speaker.avatar.src} alt={t(speaker.avatar.alt)} width={56} height={56} className="h-12 w-12 shrink-0 rounded-full border bg-card shadow-sm sm:h-14 sm:w-14" data-testid={`avatar-${speaker.id}`} />
       <div
         className={cn(
           "relative min-w-0 max-w-[85%] rounded-3xl border px-4 py-3 shadow-card transition sm:max-w-[75%] sm:px-5",
@@ -89,7 +94,7 @@ export function DialogueBubble({
         )}
       >
         <p dir="ltr" className={cn("mb-2 text-xs font-semibold", first ? "text-right text-primary" : "text-left text-accent-foreground")} data-testid={`speaker-name-${line.id}`}>
-          {label ?? speaker.name}
+          {label ?? t(speaker.name)}
         </p>
         <p lang="ar" dir="rtl" className="pt-1 font-arabic text-3xl font-bold leading-[1.9] text-foreground sm:text-4xl" data-testid={`line-arabic-${line.id}`}>
           {line.arabic}
@@ -106,8 +111,13 @@ export function DialogueBubble({
         )}
         {showGerman && (
           <p dir="ltr" className="mt-1 text-left text-base font-semibold" data-testid={`line-german-${line.id}`}>
-            {german}
-            {line.literal && <span className="font-normal text-muted-foreground"> (wörtlich: {line.literal})</span>}
+            {t(german)}
+            {line.literal && (
+              <span className="font-normal text-muted-foreground">
+                {" "}
+                ({t("wörtlich")}: {t(line.literal)})
+              </span>
+            )}
           </p>
         )}
         {actions && (
@@ -133,15 +143,16 @@ export function DialogueToggles({
   onGerman: () => void;
   onTransliteration: () => void;
 }) {
+  const t = useT();
   const chip = (on: boolean) =>
     cn("min-h-11 rounded-full border px-4 text-sm font-medium transition focus-ring", on ? "border-primary bg-primary text-primary-foreground" : "bg-card text-muted-foreground hover:bg-muted");
   return (
-    <div className="flex flex-wrap gap-2" role="group" aria-label="Anzeige">
+    <div className="flex flex-wrap gap-2" role="group" aria-label={t("Anzeige")}>
       <button type="button" aria-pressed={showGerman} onClick={onGerman} className={chip(showGerman)} data-testid="toggle-german">
-        {showGerman ? "Übersetzung ausblenden" : "Übersetzung anzeigen"}
+        {showGerman ? t("Übersetzung ausblenden") : t("Übersetzung anzeigen")}
       </button>
       <button type="button" aria-pressed={showTransliteration} onClick={onTransliteration} className={chip(showTransliteration)} data-testid="toggle-translit">
-        {showTransliteration ? "Umschrift ausblenden" : "Umschrift anzeigen"}
+        {showTransliteration ? t("Umschrift ausblenden") : t("Umschrift anzeigen")}
       </button>
     </div>
   );

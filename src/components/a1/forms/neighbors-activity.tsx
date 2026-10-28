@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 import { NARRATION, RULE_REVEAL, RULE_TEXT } from "./content";
 import { ShapedWord } from "./shaped-word";
 import { shuffled, usePickAndDrop } from "./use-pick-and-drop";
+import { useT } from "@/i18n/use-locale";
 
 const ALIF = "أ";
 
@@ -21,6 +22,7 @@ const ALIF = "أ";
 // apart with a gap. The LEFT side is wrong: the neighbour bounces back. After
 // RULE_REVEAL neighbours of each kind (or all of them) the rule appears.
 export function NeighborsActivity({ neighbors, narrator, onComplete }: { neighbors: string[]; narrator: Narrator; onComplete: () => void }) {
+  const t = useT();
   const order = useMemo(() => shuffled(neighbors), [neighbors]);
   const [tried, setTried] = useState<ReadonlySet<string>>(() => new Set());
   const [pair, setPair] = useState<{ letter: string; holds: boolean } | null>(null);
@@ -50,7 +52,7 @@ export function NeighborsActivity({ neighbors, narrator, onComplete }: { neighbo
       type="button"
       {...targetProps(side)}
       data-testid={`zone-${side}`}
-      aria-label={side === "right" ? "Rechts neben das Alif legen" : "Links neben das Alif legen"}
+      aria-label={side === "right" ? t("Rechts neben das Alif legen") : t("Links neben das Alif legen")}
       className={cn(
         "flex h-28 w-20 shrink-0 items-center justify-center rounded-2xl border-2 border-dashed text-xs font-semibold text-muted-foreground transition focus-ring sm:h-32 sm:w-28",
         selectedKey !== null ? "border-primary bg-primary-soft/60 text-primary" : "border-border bg-muted/30"
@@ -85,15 +87,15 @@ export function NeighborsActivity({ neighbors, narrator, onComplete }: { neighbo
         {pair &&
           (pair.holds ? (
             <span className="inline-flex items-center gap-1 text-accent-foreground">
-              <Hand className="h-4 w-4 text-accent" aria-hidden /> Der Nachbar streckt seine Hand aus und hält das Alif fest.
+              <Hand className="h-4 w-4 text-accent" aria-hidden /> {t("Der Nachbar streckt seine Hand aus und hält das Alif fest.")}
             </span>
           ) : (
-            <span className="text-muted-foreground">Dieser Nachbar hat keine Hand – das Alif bleibt allein.</span>
+            <span className="text-muted-foreground">{t("Dieser Nachbar hat keine Hand – das Alif bleibt allein.")}</span>
           ))}
       </p>
 
-      <p className="mt-4 text-sm text-muted-foreground">Lege einen Nachbarn rechts neben das Alif – dort steht der Buchstabe davor.</p>
-      <ul className="mt-4 flex flex-wrap justify-center gap-3" aria-label="Nachbarn">
+      <p className="mt-4 text-sm text-muted-foreground">{t("Lege einen Nachbarn rechts neben das Alif – dort steht der Buchstabe davor.")}</p>
+      <ul className="mt-4 flex flex-wrap justify-center gap-3" aria-label={t("Nachbarn")}>
         {order.map((letter) => (
           <li key={letter}>
             <button
@@ -102,7 +104,7 @@ export function NeighborsActivity({ neighbors, narrator, onComplete }: { neighbo
               onAnimationEnd={() => setBounce(null)}
               data-testid={`neighbor-${letter}`}
               data-tried={tried.has(letter)}
-              aria-label={`Nachbar ${letter}`}
+              aria-label={`${t("Nachbar")} ${letter}`}
               className={cn(
                 "relative flex h-16 w-16 cursor-grab select-none items-center justify-center rounded-2xl border bg-card font-arabic text-4xl font-bold shadow-sm transition focus-ring active:cursor-grabbing sm:h-20 sm:w-20",
                 selectedKey === letter && "border-primary ring-2 ring-primary",
@@ -124,11 +126,11 @@ export function NeighborsActivity({ neighbors, narrator, onComplete }: { neighbo
         <div className="mt-6 animate-fade-in rounded-2xl border border-accent/40 bg-accent-soft p-4 text-left" data-testid="rule-card" role="note">
           <p className="flex items-start gap-2 font-semibold">
             <Hand className="mt-0.5 h-5 w-5 shrink-0 text-accent" aria-hidden />
-            {RULE_TEXT}
+            {t(RULE_TEXT)}
           </p>
           <div className="mt-4 flex justify-end">
             <Button size="lg" onClick={onComplete} data-testid="neighbors-next">
-              Weiter <ArrowRight className="h-5 w-5" aria-hidden />
+              {t("Weiter")} <ArrowRight className="h-5 w-5" aria-hidden />
             </Button>
           </div>
         </div>

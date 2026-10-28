@@ -2,7 +2,7 @@ import { azureConfig } from "@/lib/pronunciation/config";
 import { apiError } from "@/lib/pronunciation/errors";
 import { isAllowedTtsText } from "@/lib/pronunciation/targets";
 import { clientKey, createRateLimiter } from "@/lib/rate-limit";
-import { TTS_OUTPUT_FORMAT, buildSsml, isTtsVoiceKey } from "@/lib/tts/ssml";
+import { TTS_OUTPUT_FORMAT, buildSsml, isTtsLocale, isTtsVoiceKey } from "@/lib/tts/ssml";
 import { synthesizeTanwinWord } from "@/lib/tts/azure-tanwin";
 import { TANWIN_CUT_MARK, withoutCutTail } from "@/lib/tts/tanwin-cut";
 
@@ -47,8 +47,13 @@ export async function POST(request: Request) {
       return apiError("invalid_request", 400);
     }
     const voice = isTtsVoiceKey(rawVoice) ? rawVoice : undefined;
+    // Optional: the learner's language ("en", "tr" …) for a text that is not Arabic; anything else is refused.
+    const rawLang = (body as { lang?: unknown }).lang;
+    if (rawLang !== undefined && !isTtsLocale(rawLang)) {
+      return apiError("invalid_request", 400);
+    }
 
-    const ssml = buildSsml(text, voice);
+    const ssml = buildSsml(text, voice, isTtsLocale(rawLang) ? rawLang : undefined);
     // A single word with Tanwin: cut at the bookmark so its -un is heard (src/lib/tts/tanwin-cut.ts).
     if (ssml.includes(`mark="${TANWIN_CUT_MARK}"`)) {
       try {

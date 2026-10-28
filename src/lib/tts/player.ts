@@ -6,6 +6,9 @@
 // the page, so repeated "Anhören" clicks load nothing again. Only one sound
 // plays at a time.
 
+import { translate } from "@/i18n/translate";
+import { currentLocale } from "@/lib/locale";
+
 const TTS_CACHE_REVISION = "recorded-v1";
 
 type RecordedManifest = { clips: Record<string, string> };
@@ -101,6 +104,27 @@ export function stopSpeaking() {
     current.pause();
     current = null;
   }
+}
+
+/**
+ * A German text of Alif's own (an instruction, "Super!") in the learner's language, spoken by Azure in a
+ * voice of that language. Cached like every other text.
+ */
+export function localSpeechUrl(text: string): Promise<string> {
+  const locale = currentLocale();
+  const spoken = translate(text, locale);
+  const key = `${TTS_CACHE_REVISION}\u0000lang:${locale}\u0000${spoken}`;
+  let pending = cache.get(key);
+  if (!pending) {
+    pending = (async () => {
+      const response = await fetch("/api/tts", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ text: spoken, lang: locale }) });
+      if (!response.ok) throw new TtsError(translate("Die Aussprache konnte gerade nicht geladen werden. Bitte versuche es gleich noch einmal.", locale));
+      return URL.createObjectURL(await response.blob());
+    })();
+    cache.set(key, pending);
+    pending.catch(() => cache.delete(key));
+  }
+  return pending;
 }
 
 /** Resolves when playback has finished (or was interrupted). `voice` / `line`: as for speechUrl. */

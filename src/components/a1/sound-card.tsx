@@ -4,6 +4,7 @@ import { PronunciationExercise } from "@/components/pronunciation/pronunciation-
 import type { SoundItem } from "@/data/types";
 import type { StudentFeedback } from "@/lib/pronunciation/client";
 import { cn } from "@/lib/utils";
+import { useT } from "@/i18n/use-locale";
 
 /**
  * A vocalised sound (e.g. أَ): big glyph, vowel name, listen and speak.
@@ -32,6 +33,7 @@ export function SoundCard({
   hideControls?: boolean;
 }) {
   const side = size === "side";
+  const t = useT();
   return (
     <article
       data-testid={`sound-card-${sound.id}`}
@@ -47,7 +49,7 @@ export function SoundCard({
     >
       {passed && (
         <span className="absolute end-3 top-3 inline-flex items-center gap-1 rounded-full bg-success px-2.5 py-1 text-xs font-semibold text-success-foreground shadow">
-          <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> Geschafft
+          <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> {t("Geschafft")}
         </span>
       )}
       <div className={cn("flex flex-col items-center", side && "shrink-0")}>

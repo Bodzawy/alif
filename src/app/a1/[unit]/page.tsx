@@ -6,6 +6,7 @@ import { ArrowLeft, ArrowRight, AudioLines, BookOpenCheck, MessageCircle } from 
 import { A1_LEVEL, a1Entries, a1LessonHref, getA1Unit } from "@/data/a1";
 import { arabicLessonLabel } from "@/data/a1/ordinals";
 import { WORDS_LEVEL, getLesson, lessonHref } from "@/data/curriculum";
+import { T } from "@/i18n/use-locale";
 
 type Params = { unit: string };
 
@@ -41,7 +42,7 @@ export default async function A1UnitPage({ params }: { params: Promise<Params> }
 
       <header className="text-center">
         <p className="text-sm font-semibold text-muted-foreground">
-          {A1_LEVEL.code} · Lektion {unit.number} · {unit.titleGerman}
+          {A1_LEVEL.code} · <T params={{ n: unit.number }}>{"Lektion {n}"}</T> · <T>{unit.titleGerman}</T>
         </p>
         <p lang="ar" dir="rtl" className="mt-3 font-arabic text-2xl text-muted-foreground">{unit.bookLabel ?? arabicLessonLabel(unit.number)}</p>
         <h1 lang="ar" dir="rtl" className="font-arabic text-5xl font-bold leading-[1.8] text-primary" data-testid="unit-title">
@@ -72,10 +73,10 @@ export default async function A1UnitPage({ params }: { params: Promise<Params> }
                 {lesson.label}
               </span>
               <span dir="ltr" className="font-semibold">
-                {lesson.labelGerman}
+                <T>{lesson.labelGerman}</T>
               </span>
               <span dir="ltr" className="inline-flex items-center gap-1 text-sm text-muted-foreground group-hover:text-primary">
-                {lesson.steps.length} Schritte <ArrowRight className="h-4 w-4" aria-hidden />
+                <T params={{ n: lesson.steps.length }}>{"{n} Schritte"}</T> <ArrowRight className="h-4 w-4" aria-hidden />
               </span>
             </Link>
           </li>

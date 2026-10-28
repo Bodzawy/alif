@@ -6,6 +6,7 @@ import { Loader2, Volume2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { speakArabic } from "@/lib/tts/player";
 import { cn } from "@/lib/utils";
+import { useT } from "@/i18n/use-locale";
 
 // "Anhören" for one Arabic text of the new step types (positions, compare,
 // match, word-pick, table): the model pronunciation from /api/tts – the same
@@ -29,6 +30,7 @@ export function ListenButton({
   compact?: boolean;
   testId?: string;
 }) {
+  const t = useT();
   const [state, setState] = useState<"idle" | "loading" | "error">("idle");
 
   async function play() {
@@ -49,17 +51,17 @@ export function ListenButton({
         variant="secondary"
         onClick={play}
         disabled={state === "loading"}
-        aria-label={label ?? `Anhören: ${text}`}
+        aria-label={label ?? `${t("Anhören")}: ${text}`}
         className={cn("min-h-11", compact ? "min-w-11 px-0" : "")}
         data-testid={testId}
         data-state={state}
       >
         {state === "loading" ? <Loader2 className="h-5 w-5 animate-spin" aria-hidden /> : <Volume2 className="h-5 w-5" aria-hidden />}
-        {!compact && "Anhören"}
+        {!compact && t("Anhören")}
       </Button>
       {state === "error" && (
         <span role="status" className="text-xs text-destructive" data-testid={testId ? `${testId}-error` : undefined}>
-          Ton nicht verfügbar – versuch es später noch einmal.
+          {t("Ton nicht verfügbar – versuch es später noch einmal.")}
         </span>
       )}
     </span>

@@ -13,6 +13,7 @@ import { cn } from "@/lib/utils";
 import { FeedbackPanel } from "./feedback-panel";
 import { RecordButton } from "./record-button";
 import { usePronunciationExercise } from "./use-pronunciation-exercise";
+import { useT } from "@/i18n/use-locale";
 
 const STATUS: Record<string, string> = {
   recording: "Ich höre zu … sprich jetzt und tippe dann auf Stopp.",
@@ -45,6 +46,7 @@ export function PronunciationExercise({
     },
   });
 
+  const t = useT();
   const busy = phase === "recording" || phase === "processing";
   useEffect(() => {
     onBusyChange?.(busy);
@@ -60,13 +62,13 @@ export function PronunciationExercise({
       </div>
 
       <p aria-live="polite" className="min-h-5 text-center text-sm text-muted-foreground" data-testid={`${testId}-status`}>
-        {STATUS[phase] ?? (locked ? "Warte, bis die andere Aufnahme fertig ist." : "")}
+        {STATUS[phase] ? t(STATUS[phase]) : locked ? t("Warte, bis die andere Aufnahme fertig ist.") : ""}
       </p>
 
       {phase === "error" && error && (
         <div role="alert" data-testid={`${testId}-error`} className="flex animate-fade-in items-start gap-2 rounded-2xl border border-destructive/25 bg-destructive-soft p-3 text-left text-sm text-destructive">
           <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />
-          <span>{error}</span>
+          <span>{t(error)}</span>
         </div>
       )}
 

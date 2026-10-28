@@ -8,6 +8,7 @@ import type { A1Word, SoundItem } from "@/data/types";
 
 import { SoundCard } from "./sound-card";
 import { usePracticeSession } from "./use-practice-session";
+import { useT } from "@/i18n/use-locale";
 
 // Step type "sound-words", laid out like the lesson sheet: one row per sound,
 // read right to left – the sound (with listen and speak) first, then the
@@ -28,6 +29,7 @@ export type WordRow = { sound?: SoundItem; id?: string; title?: string; titleAra
 
 export function SoundWordsStep({ groups, guided }: { groups: WordRow[]; guided?: GuidedView }) {
   const session = usePracticeSession();
+  const t = useT();
   const passed = (id: string) => (guided ? guided.passed(id) : session.passed.has(id));
 
   return (
@@ -36,7 +38,7 @@ export function SoundWordsStep({ groups, guided }: { groups: WordRow[]; guided?:
         <section
           key={sound?.id ?? id}
           dir="rtl"
-          aria-label={sound ? `Wörter mit ${sound.glyph}` : (title ?? "Wörter")}
+          aria-label={sound ? t("Wörter mit {glyph}", { glyph: sound.glyph }) : t(title ?? "Wörter")}
           data-testid={`word-group-${sound?.id ?? id}`}
           className={cn(
             "grid gap-4 rounded-[2rem] border border-primary/10 bg-card/60 p-3 sm:grid-cols-2 lg:grid-cols-3 xl:p-4 [&_svg]:shrink-0",
@@ -53,7 +55,7 @@ export function SoundWordsStep({ groups, guided }: { groups: WordRow[]; guided?:
                 )}
                 {title && (
                   <p dir="ltr" className="text-sm font-semibold text-muted-foreground">
-                    {title}
+                    {t(title)}
                   </p>
                 )}
               </header>
@@ -85,7 +87,7 @@ export function SoundWordsStep({ groups, guided }: { groups: WordRow[]; guided?:
               className="sm:col-span-2 lg:col-span-3 xl:col-span-1"
             />
           )}
-          <ol className="contents" aria-label={sound ? `Wörter mit ${sound.glyph}` : (title ?? "Wörter")}>
+          <ol className="contents" aria-label={sound ? t("Wörter mit {glyph}", { glyph: sound.glyph }) : t(title ?? "Wörter")}>
             {words.map((word) => (
               <li key={word.id} dir="ltr" className="grid" data-testid={`word-slot-${word.id}`}>
                 {guided ? (

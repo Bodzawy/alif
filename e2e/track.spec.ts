@@ -1,11 +1,12 @@
 import { expect, test, type Page } from "@playwright/test";
 
 import { collectPageErrors, recordExercise } from "./support/helpers";
+import { chosenLanguage } from "./support/track";
 
 // ALIF Speaking (Beginner) / ALIF Pronunciation (Advanced): the choice on the
 // first visit, the switch in the header and what the evaluation is told.
 
-test.use({ storageState: { cookies: [], origins: [] } }); // a first visit
+test.use({ storageState: chosenLanguage("http://127.0.0.1:3210", "http://127.0.0.1:3211") }); // a first visit (the language is asked before, see language.spec.ts)
 
 const SHOTS = process.env.ALIF_E2E_SHOTS;
 const shot = async (page: Page, name: string) => {

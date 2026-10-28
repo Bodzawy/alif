@@ -11,6 +11,8 @@ import type { GapsClips, GapsContent } from "@/data/types";
 import { gapTask, type GapTask } from "@/lib/arabic/gap";
 import { playChime, unlockChime } from "@/lib/audio/chime";
 import { narrateWithFallback, sayWithFallback } from "@/lib/audio/narrate";
+import { useLocale, useT } from "@/i18n/use-locale";
+import { localNarration } from "@/lib/audio/local-narration";
 import { createNarrator, readMuted, type Narrator } from "@/lib/audio/narration";
 import { getLessonProgress, markLessonCompleted, subscribeProgress } from "@/lib/progress";
 import { speechUrl } from "@/lib/tts/player";
@@ -42,6 +44,9 @@ const ALIF_CLIPS: GapsClips = {
 
 export function GapsStep({ gaps, availableAudio, progressKey }: { gaps: GapsContent; availableAudio: string[]; progressKey: string }) {
   const narrator = useRef<Narrator | null>(null);
+  const narratorLocale = useRef<string | null>(null);
+  const locale = useLocale();
+  const t = useT();
   const hydrated = useSyncExternalStore(noop, () => true, () => false);
   const completed = useSyncExternalStore(subscribeProgress, () => Boolean(getLessonProgress(progressKey).completedAt), () => false);
   const [muted, setMuted] = useState(false);
@@ -60,9 +65,12 @@ export function GapsStep({ gaps, availableAudio, progressKey }: { gaps: GapsCont
   const [run, setRun] = useState(0);
   const flow = useRef<AbortController | null>(null);
 
-  // Created after hydration (it needs the browser), so server and client render alike.
-  if (!narrator.current && hydrated) {
-    narrator.current = createNarrator({ baseUrl: gaps.audioBase, available: availableAudio });
+  // Created after hydration (it needs the browser), so server and client render alike – and again for another
+  // language: then every narration clip is spoken from its translation (the word recordings stay).
+  if (hydrated && (!narrator.current || narratorLocale.current !== locale)) {
+    narrator.current?.stop();
+    narrator.current = createNarrator({ baseUrl: gaps.audioBase, ...localNarration(availableAudio, gaps.texts ?? GAPS_TEXT, locale) });
+    narratorLocale.current = locale;
   }
   const n = narrator.current;
 
@@ -231,7 +239,7 @@ export function GapsStep({ gaps, availableAudio, progressKey }: { gaps: GapsCont
       <div className="mb-4 flex items-center justify-between gap-3">
         {hydrated && (completed || phase === "result") ? (
           <p className="inline-flex items-center gap-1 rounded-full bg-success px-2.5 py-1 text-xs font-semibold text-success-foreground shadow" data-testid="step-completed">
-            <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> Geschafft
+            <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> {t("Geschafft")}
           </p>
         ) : (
           <span />
@@ -240,7 +248,7 @@ export function GapsStep({ gaps, availableAudio, progressKey }: { gaps: GapsCont
           variant="secondary"
           onClick={toggleMute}
           aria-pressed={muted}
-          aria-label={muted ? "Ton einschalten" : "Ton ausschalten"}
+          aria-label={muted ? t("Ton einschalten") : t("Ton ausschalten")}
           className="min-h-12 min-w-12"
           data-testid="mute-toggle"
         >
@@ -253,17 +261,17 @@ export function GapsStep({ gaps, availableAudio, progressKey }: { gaps: GapsCont
           <p lang="ar" dir="rtl" className="font-arabic text-6xl font-bold leading-[1.6] text-primary">
             {gaps.choices.join(" · ")}
           </p>
-          <p className="max-w-sm text-muted-foreground">{listen ? "Hör genau zu und finde den fehlenden Buchstaben." : "Welcher Buchstabe fehlt? Finde ihn!"}</p>
+          <p className="max-w-sm text-muted-foreground">{listen ? t("Hör genau zu und finde den fehlenden Buchstaben.") : t("Welcher Buchstabe fehlt? Finde ihn!")}</p>
           <Button size="lg" onClick={start} disabled={!n} data-testid="start-button" className="min-h-14">
-            <Play className="h-5 w-5" aria-hidden /> Los geht&apos;s!
+            <Play className="h-5 w-5" aria-hidden /> {t("Los geht's!")}
           </Button>
         </div>
       ) : phase === "result" ? (
         <ResultScreen items={items} results={results} onRestart={restart} />
       ) : (
-        <section aria-label={`Aufgabe ${index + 1} von ${total}`} data-testid="gap-item" data-item={current.item.id} data-wrong={wrong} className="rounded-3xl border bg-card p-5 text-center shadow-card sm:p-8">
+        <section aria-label={t("Aufgabe {n} von {total}", { n: index + 1, total })} data-testid="gap-item" data-item={current.item.id} data-wrong={wrong} className="rounded-3xl border bg-card p-5 text-center shadow-card sm:p-8">
           <p className="text-sm text-muted-foreground" data-testid="gap-progress">
-            Aufgabe {index + 1} von {total}
+            {t("Aufgabe {n} von {total}", { n: index + 1, total })}
           </p>
           <ol className="mt-2 flex flex-wrap justify-center gap-1.5" aria-hidden>
             {items.map(({ item }, i) => (
@@ -272,7 +280,7 @@ export function GapsStep({ gaps, availableAudio, progressKey }: { gaps: GapsCont
           </ol>
 
           {current.item.image && (
-            <Image src={current.item.image.src} alt={current.item.image.alt} width={200} height={150} className="mx-auto mt-4 rounded-2xl" unoptimized data-testid="gap-image" />
+            <Image src={current.item.image.src} alt={t(current.item.image.alt)} width={200} height={150} className="mx-auto mt-4 rounded-2xl" unoptimized data-testid="gap-image" />
           )}
           {current.item.hint && (
             <p lang="ar" dir="rtl" className="mt-3 font-arabic text-3xl font-bold leading-[1.8] text-muted-foreground" data-testid="gap-hint">
@@ -309,7 +317,7 @@ export function GapsStep({ gaps, availableAudio, progressKey }: { gaps: GapsCont
                     data-gap={piece.gap}
                     data-active={active}
                     data-filled={done}
-                    aria-label={done ? `Lücke: ${answer}` : active ? "Lücke: hier ablegen" : "Lücke: danach"}
+                    aria-label={`${t("Lücke")}: ${done ? answer : active ? t("hier ablegen") : t("danach")}`}
                     className={cn(
                       "flex h-20 w-16 shrink-0 items-center justify-center rounded-2xl border-2 font-arabic text-4xl font-bold transition focus-ring sm:h-24 sm:w-20 sm:text-5xl",
                       long && "h-16 w-14 text-3xl",
@@ -330,22 +338,22 @@ export function GapsStep({ gaps, availableAudio, progressKey }: { gaps: GapsCont
             )}
           </div>
           <p className="font-semibold" data-testid="gap-german">
-            {current.item.german}
+            {t(current.item.german)}
           </p>
 
           {gaps.repeat && (
             <p className="mx-auto mt-3 max-w-md rounded-2xl border border-primary/15 bg-primary-soft px-4 py-2 text-sm" data-testid="gap-repeat">
-              Sprich das Wort laut nach – dann schreib den Buchstaben. <span className="text-muted-foreground">(Das Nachsprechen wird hier nicht bewertet.)</span>
+              {t("Sprich das Wort laut nach – dann schreib den Buchstaben.")} <span className="text-muted-foreground">{t("(Das Nachsprechen wird hier nicht bewertet.)")}</span>
             </p>
           )}
 
           <div className="mt-3 flex justify-center">
-            <Button variant="secondary" onClick={playWord} className="min-h-12" data-testid="gap-listen" aria-label={`${listen ? "Nochmal hören" : "Anhören"}: ${current.item.german}`}>
-              <Volume2 className="h-5 w-5" aria-hidden /> {listen ? "Nochmal hören" : "Anhören"}
+            <Button variant="secondary" onClick={playWord} className="min-h-12" data-testid="gap-listen" aria-label={`${listen ? t("Nochmal hören") : t("Anhören")}: ${t(current.item.german)}`}>
+              <Volume2 className="h-5 w-5" aria-hidden /> {listen ? t("Nochmal hören") : t("Anhören")}
             </Button>
           </div>
 
-          <ul className="mt-5 flex flex-wrap justify-center gap-3" aria-label="Buchstaben">
+          <ul className="mt-5 flex flex-wrap justify-center gap-3" aria-label={t("Buchstaben")}>
             {choices.map((choice, i) => {
               const isAnswer = choice === gap.answer;
               return (
@@ -357,7 +365,7 @@ export function GapsStep({ gaps, availableAudio, progressKey }: { gaps: GapsCont
                     data-testid={`choice-${i}`}
                     data-choice={choice}
                     data-reveal={revealed && isAnswer ? "true" : undefined}
-                    aria-label={`Buchstabe ${choice}${revealed && isAnswer ? " – der richtige" : ""}`}
+                    aria-label={`${t("Buchstabe")} ${choice}${revealed && isAnswer ? ` – ${t("der richtige")}` : ""}`}
                     className={cn(
                       "flex h-16 min-w-14 cursor-grab select-none items-center justify-center rounded-2xl border bg-card px-3 font-arabic text-4xl font-bold shadow-sm transition focus-ring active:cursor-grabbing disabled:cursor-default sm:h-20 sm:min-w-16",
                       selectedKey === choice && "border-primary ring-2 ring-primary",
@@ -373,13 +381,13 @@ export function GapsStep({ gaps, availableAudio, progressKey }: { gaps: GapsCont
           </ul>
 
           <p aria-live="polite" data-testid="gap-caption" data-key={caption ?? ""} className="mx-auto mt-5 min-h-12 max-w-md rounded-2xl bg-muted/60 px-4 py-3 text-sm leading-relaxed">
-            {caption ? (texts[caption] ?? "") : ""}
+            {caption ? t(texts[caption] ?? "") : ""}
           </p>
 
           {phase === "correct" && (
             <div className="mt-4 flex justify-center">
               <Button size="lg" onClick={() => next(results)} data-testid="gap-next">
-                Weiter <ArrowRight className="h-5 w-5" aria-hidden />
+                {t("Weiter")} <ArrowRight className="h-5 w-5" aria-hidden />
               </Button>
             </div>
           )}
@@ -388,7 +396,7 @@ export function GapsStep({ gaps, availableAudio, progressKey }: { gaps: GapsCont
 
       {phase === "result" && caption && (
         <p aria-live="polite" data-testid="gap-caption" data-key={caption} className="mx-auto mt-4 max-w-md rounded-2xl bg-muted/60 px-4 py-3 text-center text-sm leading-relaxed">
-          {texts[caption]}
+          {t(texts[caption] ?? "")}
         </p>
       )}
     </div>
@@ -396,42 +404,43 @@ export function GapsStep({ gaps, availableAudio, progressKey }: { gaps: GapsCont
 }
 
 function ResultScreen({ items, results, onRestart }: { items: Array<{ item: GapsContent["items"][number]; task: GapTask }>; results: Result[]; onRestart: () => void }) {
+  const t = useT();
   const firstTry = results.filter((r) => r.firstTry).length;
   const stars = gapStars(firstTry, items.length);
   return (
-    <section data-testid="gap-result" data-stars={stars} data-first-try={firstTry} aria-label="Korrigieren" className="animate-fade-in rounded-3xl border border-success/40 bg-card p-5 text-center shadow-card sm:p-8">
-      <h2 className="text-2xl font-bold">Korrigieren</h2>
+    <section data-testid="gap-result" data-stars={stars} data-first-try={firstTry} aria-label={t("Korrigieren")} className="animate-fade-in rounded-3xl border border-success/40 bg-card p-5 text-center shadow-card sm:p-8">
+      <h2 className="text-2xl font-bold">{t("Korrigieren")}</h2>
       <p className="mt-1 text-sm text-muted-foreground">
-        <Check className="inline h-4 w-4 text-success" aria-hidden /> beim ersten Versuch richtig · <Circle className="inline h-3 w-3 fill-warning text-warning" aria-hidden /> mit Hilfe
+        <Check className="inline h-4 w-4 text-success" aria-hidden /> {t("beim ersten Versuch richtig")} · <Circle className="inline h-3 w-3 fill-warning text-warning" aria-hidden /> {t("mit Hilfe")}
       </p>
       <ul dir="rtl" className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
         {items.map(({ item, task }, i) => {
           const ok = results[i]?.firstTry ?? false;
           return (
             <li key={`${item.id}-${i}`} data-testid={`result-${item.id}`} data-first-try={ok} className="relative flex flex-col items-center rounded-2xl border bg-background/60 px-2 py-3">
-              <span className="absolute end-2 top-2" aria-label={ok ? "beim ersten Versuch richtig" : "mit Hilfe"}>
+              <span className="absolute end-2 top-2" aria-label={ok ? t("beim ersten Versuch richtig") : t("mit Hilfe")}>
                 {ok ? <Check className="h-5 w-5 text-success" aria-hidden /> : <Circle className="h-3 w-3 fill-warning text-warning" aria-hidden />}
               </span>
               <ShapedWord tiles={task.tiles} target={item.pattern ? task.gaps[0]!.index : undefined} highlight className="text-4xl leading-[1.8] text-foreground" />
               <span dir="ltr" className="text-sm font-medium">
-                {item.german}
+                {t(item.german)}
               </span>
             </li>
           );
         })}
       </ul>
-      <p className="mt-5 text-4xl leading-none tracking-widest text-accent" aria-label={`${stars} von 3 Sternen`} data-testid="gap-stars">
+      <p className="mt-5 text-4xl leading-none tracking-widest text-accent" aria-label={t("{n} von 3 Sternen", { n: stars })} data-testid="gap-stars">
         {"★".repeat(stars)}
         <span className="text-border">{"★".repeat(3 - stars)}</span>
       </p>
       <span className="mt-4 inline-flex items-center gap-1 rounded-full bg-success px-2.5 py-1 text-xs font-semibold text-success-foreground shadow">
-        <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> Geschafft
+        <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> {t("Geschafft")}
       </span>
       <p lang="ar" className="mt-3 font-arabic text-4xl font-bold text-success">
         مُمْتَاز! 👏
       </p>
       <Button variant="secondary" size="lg" onClick={onRestart} className="mt-5" data-testid="gap-restart">
-        <RotateCcw className="h-5 w-5" aria-hidden /> Nochmal
+        <RotateCcw className="h-5 w-5" aria-hidden /> {t("Nochmal")}
       </Button>
     </section>
   );

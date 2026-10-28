@@ -1,3 +1,4 @@
+import { allTranslations } from "@/i18n/translate";
 import { a1FormsFallbackTexts, a1SpokenTexts } from "@/data/a1";
 import { allExercises } from "@/data/curriculum";
 import { ARABIC_LETTERS } from "./letters";
@@ -29,6 +30,8 @@ export const ALLOWED_TTS_TEXTS: ReadonlySet<string> = new Set([
   ...a1FormsFallbackTexts(),
   ...Object.values(FEEDBACK_CUES),
   ...Object.values(GERMAN_CUES),
+  // The same texts in the learner's language (src/i18n/): instructions and cues spoken in en, tr, sq, fr.
+  ...allTranslations(),
 ]);
 
 export function isAllowedTtsText(text: unknown): text is string {

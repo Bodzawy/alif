@@ -1,6 +1,9 @@
 import { sleep } from "@/lib/audio/narrate";
 import type { Narrator } from "@/lib/audio/narration";
-import { speechUrl, type SpeechVoice } from "@/lib/tts/player";
+import { localSpeechUrl, speechUrl, type SpeechVoice } from "@/lib/tts/player";
+
+/** Alif's own words (e.g. "Super!") – no Arabic script: spoken in the learner's language. */
+const ARABIC_SCRIPT = /[\u0600-\u06FF]/;
 
 /** Upper limit for fetching + playing one line: a stalled request or player must not stop a flow. */
 export const MAX_LINE_MS = 10_000;
@@ -19,7 +22,7 @@ export async function speakLine(narrator: Narrator, text: string, voice: SpeechV
   const cap = new AbortController();
   try {
     const playing = (async () => {
-      const url = await speechUrl(text, voice, line);
+      const url = await (voice || ARABIC_SCRIPT.test(text) ? speechUrl(text, voice, line) : localSpeechUrl(text));
       if (signal.aborted || cap.signal.aborted) return "interrupted" as const;
       return narrator.playUrl(url);
     })().catch(() => "skipped" as const);

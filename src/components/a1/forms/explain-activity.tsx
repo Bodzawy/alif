@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils";
 import { EXPLAIN_TEXT, isLongWord, LETTER_TILE, LONG_ROW, LONG_TILE, NARRATION, POSITION_LABEL, POSITION_LABEL_GERMAN } from "./content";
 import { ShapedWord } from "./shaped-word";
 import { wordShape } from "./word-shape";
+import { useT } from "@/i18n/use-locale";
 
 // "Zuschauen": the four book words, explained one per scene – no exercise.
 // Each scene runs through stages; every stage starts its sound and timers in
@@ -167,6 +168,7 @@ export function ExplainActivity({
     return () => controller.abort();
   }, [state.scene, state.stage, state.run, narrator, scene, last]);
 
+  const t = useT();
   const stage = state.stage;
   const tilesVisible = stage === "letters" || stage === "join";
   const wordVisible = stage !== "intro" && stage !== "letters";
@@ -181,8 +183,8 @@ export function ExplainActivity({
           : NARRATION.explain.letters(scene.position);
 
   return (
-    <section data-testid="explain-activity" data-scene={state.scene + 1} data-stage={stage} aria-label="Zuschauen" className="rounded-3xl border bg-card p-5 text-center shadow-card sm:p-8">
-      <ol className="mb-5 flex justify-center gap-2" aria-label={`Wort ${state.scene + 1} von ${scenes.length}`}>
+    <section data-testid="explain-activity" data-scene={state.scene + 1} data-stage={stage} aria-label={t("Zuschauen")} className="rounded-3xl border bg-card p-5 text-center shadow-card sm:p-8">
+      <ol className="mb-5 flex justify-center gap-2" aria-label={t("Wort {n} von {total}", { n: state.scene + 1, total: scenes.length })}>
         {scenes.map((item, i) => (
           <li
             key={item.word.id}
@@ -243,24 +245,24 @@ export function ExplainActivity({
       <div className="mt-2 min-h-16" data-testid="explain-meaning">
         {explained && (
           <div className="flex animate-fade-in flex-col items-center gap-1">
-            <p className="text-lg font-semibold">{scene.word.german}</p>
+            <p className="text-lg font-semibold">{t(scene.word.german)}</p>
             <p className="text-sm text-muted-foreground">
               <span lang="ar" dir="rtl" className="font-arabic text-xl font-bold text-primary" data-testid="explain-label">
                 {POSITION_LABEL[scene.position]}
               </span>{" "}
-              · {POSITION_LABEL_GERMAN[scene.position]}
+              · {t(POSITION_LABEL_GERMAN[scene.position])}
             </p>
           </div>
         )}
       </div>
 
       <p aria-live="polite" data-testid="explain-caption" data-key={captionKey} className="mx-auto mt-4 min-h-12 max-w-md rounded-2xl bg-muted/60 px-4 py-3 text-sm leading-relaxed">
-        {(letter?.texts ?? EXPLAIN_TEXT)[captionKey]}
+        {t((letter?.texts ?? EXPLAIN_TEXT)[captionKey] ?? "")}
       </p>
 
       <div className="mt-5 flex flex-wrap justify-center gap-3">
         <Button variant="secondary" size="lg" onClick={() => dispatch({ type: "restart" })} disabled={stage === "intro"} data-testid="explain-replay">
-          <RotateCcw className="h-5 w-5" aria-hidden /> Nochmal ansehen
+          <RotateCcw className="h-5 w-5" aria-hidden /> {t("Nochmal ansehen")}
         </Button>
         <Button
           size="lg"
@@ -270,7 +272,7 @@ export function ExplainActivity({
           data-ready={stage === "ready"}
           className={cn(stage === "ready" && "motion-safe:animate-pulse")}
         >
-          {last ? "Weiter zur Übung" : "Weiter"} <ArrowRight className="h-5 w-5" aria-hidden />
+          {last ? t("Weiter zur Übung") : t("Weiter")} <ArrowRight className="h-5 w-5" aria-hidden />
         </Button>
       </div>
     </section>

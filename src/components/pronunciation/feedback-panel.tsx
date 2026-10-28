@@ -1,7 +1,10 @@
+"use client";
+
 import { AlertCircle, CheckCircle2, RotateCcw, Sparkles } from "lucide-react";
 
 import type { StudentFeedback } from "@/lib/pronunciation/client";
 import { cn } from "@/lib/utils";
+import { useT } from "@/i18n/use-locale";
 
 const toneStyles = {
   success: { box: "border-success/30 bg-success-soft", text: "text-success", bar: "bg-success" },
@@ -23,15 +26,16 @@ export function FeedbackPanel({
   /** Learner view (A1): only a short headline and tip – no accuracy, no rule or service message. */
   simple?: boolean;
 }) {
+  const t = useT();
   const style = toneStyles[feedback.tone];
-  const headline = simple && feedback.passed ? "مُمْتَاز! 👏" : feedback.headline;
+  const headline = simple && feedback.passed ? "مُمْتَاز! 👏" : t(feedback.headline);
   const tip = simple
     ? feedback.passed
       ? null
       : feedback.analysisUnavailable
-        ? "Deine Aussprache konnte gerade nicht bewertet werden. Versuch es gleich noch einmal."
-        : feedback.tip
-    : feedback.tip;
+        ? t("Deine Aussprache konnte gerade nicht bewertet werden. Versuch es gleich noch einmal.")
+        : t(feedback.tip)
+    : t(feedback.tip);
   const Icon = feedback.tone === "success" ? CheckCircle2 : feedback.tone === "retry" ? Sparkles : AlertCircle;
 
   return (
@@ -64,7 +68,7 @@ export function FeedbackPanel({
       {!simple && feedback.accuracy !== null && (
         <div className="mt-3">
           <div className="flex items-center justify-between text-xs font-medium text-muted-foreground">
-            <span>Genauigkeit</span>
+            <span>{t("Genauigkeit")}</span>
             <span className={cn("text-sm font-bold", style.text)}>{feedback.accuracy} %</span>
           </div>
           <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-card" role="presentation">
@@ -82,7 +86,7 @@ export function FeedbackPanel({
           className="mt-4 inline-flex items-center gap-2 rounded-xl bg-card px-3 py-2 text-sm font-semibold shadow-sm transition hover:bg-muted focus-ring disabled:opacity-50"
         >
           <RotateCcw className="h-4 w-4" aria-hidden />
-          Nochmal versuchen
+          {t("Nochmal versuchen")}
         </button>
       )}
     </div>

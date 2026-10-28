@@ -3,6 +3,8 @@
 import { useEffect, useRef, useSyncExternalStore } from "react";
 import { Check, ChevronDown, X } from "lucide-react";
 
+import { useT } from "@/i18n/use-locale";
+import { readLocale, subscribeLocale } from "@/lib/locale";
 import { chooseTrack, readTrack, subscribeTrack, TRACKS, type Track } from "@/lib/track";
 import { cn } from "@/lib/utils";
 
@@ -10,7 +12,8 @@ import { cn } from "@/lib/utils";
 // chosen one and opens TrackDialog, a native modal <dialog> mounted once in the
 // layout (focus trap and backdrop from the browser). Before the first choice
 // the dialog opens by itself on whatever page the visitor lands and cannot be
-// dismissed – Alif needs to know how to judge the answers.
+// dismissed – Alif needs to know how to judge the answers. It waits for the
+// language (LanguageDialog), which is asked first.
 
 const ORDER: Track[] = ["speaking", "pronunciation"];
 const noop = () => () => undefined;
@@ -24,13 +27,14 @@ function useTrack() {
 
 export function TrackSwitch({ className }: { className?: string }) {
   const { hydrated, track } = useTrack();
+  const t = useT();
   return (
     <button
       type="button"
       onClick={() => openers.forEach((open) => open())}
       data-testid="track-switch"
       data-track={track ?? ""}
-      aria-label={track ? `Programm: ${TRACKS[track].name} – ${TRACKS[track].level}. Ändern` : "Programm wählen"}
+      aria-label={track ? t("Programm: {name} – {level}. Ändern", { name: TRACKS[track].name, level: TRACKS[track].level }) : t("Programm wählen")}
       className={cn(
         "inline-flex h-10 items-center gap-1.5 rounded-full border bg-card px-3 text-sm font-semibold text-foreground shadow-sm transition hover:border-primary/40 focus-ring",
         !hydrated && "invisible",
@@ -38,7 +42,7 @@ export function TrackSwitch({ className }: { className?: string }) {
       )}
     >
       <span className={cn("h-2 w-2 rounded-full", track === "speaking" ? "bg-accent" : "bg-primary")} aria-hidden />
-      {track ? TRACKS[track].level : "Programm"}
+      {track ? TRACKS[track].level : t("Programm")}
       <ChevronDown className="h-4 w-4 text-muted-foreground" aria-hidden />
     </button>
   );
@@ -46,8 +50,10 @@ export function TrackSwitch({ className }: { className?: string }) {
 
 export function TrackDialog() {
   const { hydrated, track } = useTrack();
+  const t = useT();
+  const languageChosen = useSyncExternalStore(subscribeLocale, () => readLocale() !== null, () => false);
   const dialog = useRef<HTMLDialogElement>(null);
-  const firstChoice = hydrated && track === null;
+  const firstChoice = hydrated && track === null && languageChosen;
 
   useEffect(() => {
     const open = () => {
@@ -84,7 +90,7 @@ export function TrackDialog() {
         <div className="flex items-start justify-between gap-3">
           <div>
             <h2 id="track-title" className="text-xl font-bold tracking-tight sm:text-2xl">
-              {track ? "Programm wechseln" : "Willkommen bei Alif! Wähle dein Programm"}
+              {track ? t("Programm wechseln") : t("Willkommen bei Alif! Wähle dein Programm")}
             </h2>
             <p lang="ar" dir="rtl" className="mt-1 font-arabic text-lg text-muted-foreground">
               اختر مستواك
@@ -94,7 +100,7 @@ export function TrackDialog() {
             <button
               type="button"
               onClick={() => dialog.current?.close()}
-              aria-label="Schließen"
+              aria-label={t("Schließen")}
               data-testid="track-close"
               className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full hover:bg-muted focus-ring"
             >
@@ -135,7 +141,7 @@ export function TrackDialog() {
                     <span lang="ar" dir="rtl" className="mt-1 block text-start font-arabic text-lg leading-relaxed text-primary">
                       {info.arabic}
                     </span>
-                    <span className="mt-1 block text-sm text-muted-foreground">{info.german}</span>
+                    <span className="mt-1 block text-sm text-muted-foreground">{t(info.german)}</span>
                   </span>
                 </button>
               </li>
@@ -144,7 +150,7 @@ export function TrackDialog() {
         </ol>
 
         <p className="mt-4 text-sm text-muted-foreground">
-          Du kannst das Programm jederzeit oben auf der Seite wechseln. Jedes Programm hat seinen eigenen Fortschritt.
+          {t("Du kannst das Programm jederzeit oben auf der Seite wechseln. Jedes Programm hat seinen eigenen Fortschritt.")}
         </p>
       </div>
     </dialog>

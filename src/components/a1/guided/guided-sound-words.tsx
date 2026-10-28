@@ -10,7 +10,8 @@ import { sleep } from "@/lib/audio/narrate";
 import { createNarrator, readMuted, type Narrator } from "@/lib/audio/narration";
 import { getLessonProgress, markExercisePassed, markExerciseSkipped, markLessonCompleted, resetLessonProgress, subscribeProgress } from "@/lib/progress";
 import { GERMAN_CUES } from "@/lib/pronunciation/cues";
-import { speechUrl } from "@/lib/tts/player";
+import { useT } from "@/i18n/use-locale";
+import { localSpeechUrl, speechUrl } from "@/lib/tts/player";
 import { cn } from "@/lib/utils";
 
 import { evaluateUtterance } from "./evaluate";
@@ -61,6 +62,7 @@ const noop = () => () => undefined;
 
 export function GuidedSoundWords({ groups, progressKey }: { groups: Groups; progressKey: string }) {
   const blocks = useMemo(() => guidedBlocks(groups), [groups]);
+  const t = useT();
   const hydrated = useSyncExternalStore(noop, () => true, () => false);
   const completed = useSyncExternalStore(subscribeProgress, () => Boolean(getLessonProgress(progressKey).completedAt), () => false);
   const [mode, setMode] = useState<"start" | "guided" | "fallback">("start");
@@ -88,7 +90,7 @@ export function GuidedSoundWords({ groups, progressKey }: { groups: Groups; prog
 
   const deps: GuidedDeps = useMemo(() => {
     /** Speaks a text through /api/tts on the one audio element; resolves when it ended (or could not play). */
-    async function speak(text: string, signal: AbortSignal) {
+    async function speak(text: string, signal: AbortSignal, local = false) {
       const n = narrator.current;
       let result: "ended" | "skipped" | "interrupted" = "skipped";
       if (n) {
@@ -96,7 +98,7 @@ export function GuidedSoundWords({ groups, progressKey }: { groups: Groups; prog
         signal.addEventListener("abort", onAbort);
         const cap = new AbortController();
         const playing = (async () => {
-          const url = await speechUrl(text);
+          const url = await (local ? localSpeechUrl(text) : speechUrl(text));
           if (signal.aborted || cap.signal.aborted) return "interrupted" as const;
           return n.playUrl(url);
         })().catch(() => "skipped" as const); // text-to-speech not reachable: go on without the audio
@@ -113,13 +115,14 @@ export function GuidedSoundWords({ groups, progressKey }: { groups: Groups; prog
       },
       // A right answer: "Super!" – the next block follows when it has finished.
       async praise(signal) {
-        await speak(GERMAN_CUES.super, signal);
+        await speak(GERMAN_CUES.super, signal, true);
       },
       record: (signal) => mic.current?.record(signal) ?? Promise.resolve(null),
       evaluate: (utterance, block, signal) => {
         // While the server evaluates: load what plays after the verdict ("Super!", the next block), so it starts at once.
         const next = blocks[blocks.findIndex((b) => b.id === block.id) + 1];
-        for (const text of [GERMAN_CUES.super, next?.text]) if (text) void speechUrl(text).catch(() => undefined);
+        void localSpeechUrl(GERMAN_CUES.super).catch(() => undefined);
+        if (next) void speechUrl(next.text).catch(() => undefined);
         return evaluateUtterance(utterance, block.target, signal);
       },
     };
@@ -251,13 +254,13 @@ export function GuidedSoundWords({ groups, progressKey }: { groups: Groups; prog
         {isActive && stage === "listen" && (
           // Listening sign on the block (a microphone in a pulsing ring – shape, not colour only; static
           // when motion is reduced). The words "Jetzt du!" are in the caption below the block.
-          <span data-testid="listening-sign" role="img" aria-label="Das Mikrofon hört zu" className="pointer-events-none absolute left-3 top-3 flex h-11 w-11 items-center justify-center rounded-full bg-card shadow">
+          <span data-testid="listening-sign" role="img" aria-label={t("Das Mikrofon hört zu")} className="pointer-events-none absolute left-3 top-3 flex h-11 w-11 items-center justify-center rounded-full bg-card shadow">
             <span aria-hidden className="absolute inset-1 rounded-full border-2 border-primary motion-safe:animate-pulse-ring" />
             <Mic className="relative h-5 w-5 text-primary" aria-hidden />
           </span>
         )}
         {isActive && stage === "check" && (
-          <span data-testid="checking-sign" role="img" aria-label="Wird geprüft" className="pointer-events-none absolute left-3 top-3 flex h-11 w-11 items-center justify-center rounded-full bg-card text-muted-foreground shadow">
+          <span data-testid="checking-sign" role="img" aria-label={t("Wird geprüft")} className="pointer-events-none absolute left-3 top-3 flex h-11 w-11 items-center justify-center rounded-full bg-card text-muted-foreground shadow">
             <Loader2 className="h-5 w-5 motion-safe:animate-spin" aria-hidden />
           </span>
         )}
@@ -268,7 +271,7 @@ export function GuidedSoundWords({ groups, progressKey }: { groups: Groups; prog
               variant="secondary"
               onClick={flow.forward}
               disabled={!flow.nextBlock}
-              aria-label="Nächstes Wort"
+              aria-label={t("Nächstes Wort")}
               data-testid="guided-arrow-next"
               className="pointer-events-auto w-11 rounded-full bg-card/90 px-0 shadow backdrop-blur disabled:opacity-0"
             >
@@ -278,7 +281,7 @@ export function GuidedSoundWords({ groups, progressKey }: { groups: Groups; prog
               variant="secondary"
               onClick={flow.previous}
               disabled={!flow.previousBlock}
-              aria-label="Vorheriges Wort"
+              aria-label={t("Vorheriges Wort")}
               data-testid="guided-arrow-previous"
               className="pointer-events-auto w-11 rounded-full bg-card/90 px-0 shadow backdrop-blur disabled:opacity-0"
             >
@@ -289,7 +292,7 @@ export function GuidedSoundWords({ groups, progressKey }: { groups: Groups; prog
         {isActive && caption && (
           <span data-testid="guided-caption" dir="ltr" className="pointer-events-none absolute -bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full bg-card px-3 py-1 text-sm font-semibold shadow">
             {stage === "play" || stage === "focus" ? <Volume2 className="h-4 w-4 text-primary" aria-hidden /> : null}
-            {caption}
+            {t(caption)}
           </span>
         )}
       </div>
@@ -301,7 +304,7 @@ export function GuidedSoundWords({ groups, progressKey }: { groups: Groups; prog
       <div data-testid="guided-fallback">
         {note && (
           <p role="status" data-testid="guided-note" className="mb-4 rounded-2xl border border-warning/30 bg-warning-soft px-4 py-3 text-sm">
-            {note}
+            {t(note)}
           </p>
         )}
         <SoundWordsStep groups={groups} />
@@ -314,7 +317,7 @@ export function GuidedSoundWords({ groups, progressKey }: { groups: Groups; prog
       <div className="mb-4 flex items-center justify-between gap-3">
         {hydrated && (completed || finished) ? (
           <p className="inline-flex items-center gap-1 rounded-full bg-success px-2.5 py-1 text-xs font-semibold text-success-foreground shadow" data-testid="step-completed">
-            <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> Geschafft
+            <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> {t("Geschafft")}
           </p>
         ) : (
           <span />
@@ -323,7 +326,7 @@ export function GuidedSoundWords({ groups, progressKey }: { groups: Groups; prog
           variant="secondary"
           onClick={toggleMute}
           aria-pressed={muted}
-          aria-label={muted ? "Ton einschalten" : "Ton ausschalten"}
+          aria-label={muted ? t("Ton einschalten") : t("Ton ausschalten")}
           className="min-h-12 min-w-12"
           data-testid="mute-toggle"
         >
@@ -333,9 +336,9 @@ export function GuidedSoundWords({ groups, progressKey }: { groups: Groups; prog
 
       {mode === "start" && (
         <div className="mb-6 flex flex-col items-center justify-center gap-4 rounded-3xl border bg-card p-8 text-center shadow-card" data-testid="start-overlay">
-          <p className="max-w-sm text-muted-foreground">Hör zu und sprich nach – Wort für Wort. Das Mikrofon hört dir zu.</p>
+          <p className="max-w-sm text-muted-foreground">{t("Hör zu und sprich nach – Wort für Wort. Das Mikrofon hört dir zu.")}</p>
           <Button size="lg" onClick={() => void start()} disabled={!narrator.current} data-testid="start-button" className="min-h-14">
-            <Play className="h-5 w-5" aria-hidden /> Los geht&apos;s!
+            <Play className="h-5 w-5" aria-hidden /> {t("Los geht's!")}
           </Button>
         </div>
       )}
@@ -343,7 +346,7 @@ export function GuidedSoundWords({ groups, progressKey }: { groups: Groups; prog
       {finished && (
         <div data-testid="guided-done" className="mb-6 animate-fade-in rounded-3xl border border-success/40 bg-card p-6 text-center shadow-card">
           <span className="inline-flex items-center gap-1 rounded-full bg-success px-2.5 py-1 text-xs font-semibold text-success-foreground shadow">
-            <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> Geschafft
+            <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> {t("Geschafft")}
           </span>
           <p lang="ar" className="mt-3 font-arabic text-4xl font-bold text-success">
             مُمْتَاز! 👏
@@ -352,7 +355,7 @@ export function GuidedSoundWords({ groups, progressKey }: { groups: Groups; prog
       )}
 
       <p aria-live="polite" className="sr-only" data-testid="guided-live">
-        {caption.replace(" …", "").replace("!", "")}
+        {t(caption).replace(" …", "").replace("!", "")}
       </p>
 
       <SoundWordsStep groups={groups} guided={{ frame, passed: (id) => marks[id] === "done" }} />
@@ -363,7 +366,7 @@ export function GuidedSoundWords({ groups, progressKey }: { groups: Groups; prog
         <div dir="rtl" data-testid="guided-controls" className="pointer-events-none sticky bottom-3 z-20 mt-6 flex flex-col items-center gap-2">
           {flow.canSkip && !confirmRestart && (
             <Button variant="secondary" onClick={flow.skip} data-testid="guided-skip" className="pointer-events-auto animate-fade-in">
-              <span>Überspringen</span>
+              <span>{t("Überspringen")}</span>
               <ChevronLeft className="h-4 w-4" aria-hidden />
             </Button>
           )}
@@ -371,14 +374,14 @@ export function GuidedSoundWords({ groups, progressKey }: { groups: Groups; prog
             {confirmRestart ? (
               <div dir="ltr" role="group" aria-labelledby="guided-restart-question" data-testid="guided-restart-confirm" className="flex animate-fade-in flex-col items-center gap-1 px-2 py-1 sm:flex-row sm:gap-2">
                 <p id="guided-restart-question" className="text-sm font-semibold">
-                  Von vorn anfangen?
+                  {t("Von vorn anfangen?")}
                 </p>
                 <div className="flex gap-1">
                   <Button variant="ghost" size="sm" onClick={cancelRestart} data-testid="guided-restart-cancel">
-                    Abbrechen
+                    {t("Abbrechen")}
                   </Button>
                   <Button variant="secondary" size="sm" onClick={() => void restart()} data-testid="guided-restart-yes">
-                    Ja, von vorn
+                    {t("Ja, von vorn")}
                   </Button>
                 </div>
               </div>
@@ -386,13 +389,13 @@ export function GuidedSoundWords({ groups, progressKey }: { groups: Groups; prog
               <>
                 <Button variant="ghost" size="sm" onClick={flow.previous} disabled={!flow.previousBlock} data-testid="guided-previous">
                   <ChevronRight className="h-4 w-4" aria-hidden />
-                  <span className="sm:hidden">Zurück</span>
-                  <span className="hidden sm:inline">Vorheriges Wort</span>
+                  <span className="sm:hidden">{t("Zurück")}</span>
+                  <span className="hidden sm:inline">{t("Vorheriges Wort")}</span>
                 </Button>
                 <span aria-hidden className="h-5 w-px bg-border" />
                 <Button variant="ghost" size="sm" onClick={askRestart} data-testid="guided-restart">
                   <RotateCcw className="h-4 w-4" aria-hidden />
-                  <span>Von vorn</span>
+                  <span>{t("Von vorn")}</span>
                 </Button>
               </>
             )}

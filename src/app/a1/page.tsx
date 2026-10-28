@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 
 import { A1_LEVEL, a1UnitHref } from "@/data/a1";
 import type { A1Unit, A1UnitGroup } from "@/data/types";
+import { T } from "@/i18n/use-locale";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -22,7 +23,7 @@ function sections(units: A1Unit[]): Array<{ group: A1UnitGroup; units: A1Unit[] 
   return out;
 }
 
-const parts = (n: number) => `${n} ${n === 1 ? "Teil" : "Teile"}`;
+const parts = (n: number) => (n === 1 ? <T>1 Teil</T> : <T params={{ n }}>{"{n} Teile"}</T>);
 
 // /a1: the lessons of the book, grouped by unit (two per row). A lesson's
 // letters, review and phrase are its contents (/a1/<lesson>), not lessons of
@@ -32,14 +33,18 @@ export default function A1Page() {
   return (
     <div className="container max-w-4xl py-8 sm:py-12">
       <Link href="/" className="mb-6 inline-flex items-center gap-1 rounded-md text-sm text-muted-foreground hover:text-foreground focus-ring">
-        <ArrowLeft className="h-4 w-4" aria-hidden /> Startseite
+        <ArrowLeft className="h-4 w-4" aria-hidden /> <T>Startseite</T>
       </Link>
 
       <header className="flex items-center gap-4">
         <span className="rounded-2xl bg-primary px-4 py-3 text-3xl font-bold text-primary-foreground">{A1_LEVEL.code}</span>
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">{A1_LEVEL.title}</h1>
-          <p className="mt-1 text-muted-foreground">{A1_LEVEL.description}</p>
+          <h1 className="text-3xl font-bold tracking-tight">
+            <T>{A1_LEVEL.title}</T>
+          </h1>
+          <p className="mt-1 text-muted-foreground">
+            <T>{A1_LEVEL.description}</T>
+          </p>
         </div>
       </header>
 
@@ -51,7 +56,9 @@ export default function A1Page() {
                 <span lang="ar" dir="rtl" className="font-arabic text-xl font-bold leading-[1.6] text-foreground">
                   {group.arabic}
                 </span>
-                <span className="text-sm font-medium text-muted-foreground">{group.german}</span>
+                <span className="text-sm font-medium text-muted-foreground">
+                  <T>{group.german}</T>
+                </span>
               </h2>
               <span className="hidden h-px min-w-8 flex-1 bg-border sm:block" aria-hidden />
             </div>
@@ -81,7 +88,7 @@ export default function A1Page() {
                       </h3>
 
                       <p className="mb-4 mt-1 line-clamp-2 font-semibold leading-6">
-                        Lektion {unit.number} · {unit.titleGerman}
+                        <T params={{ n: unit.number }}>{"Lektion {n}"}</T> · <T>{unit.titleGerman}</T>
                       </p>
 
                       <div className="mt-auto flex min-h-[3.5rem] items-center justify-between gap-3 border-t pt-3">
