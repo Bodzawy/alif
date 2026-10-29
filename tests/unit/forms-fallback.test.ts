@@ -8,7 +8,7 @@ import { buildSsml, TTS_VOICE, TTS_VOICE_GERMAN } from "@/lib/tts/ssml";
 
 // A letter lesson's Formen step before its recordings exist: every clip has a
 // text that /api/tts may read – German narration in the German voice, the words
-// in the lesson voice. The Alif lesson is recorded and has none.
+// in the lesson voice. The Alif lesson's narration is recorded; only its words are spoken by TTS.
 
 const formsOf = (entry: string) => {
   const step = getA1Lesson("lesson-1", entry)!.steps.find((s) => s.kind === "forms");
@@ -35,8 +35,13 @@ describe("Formen without recordings", () => {
     expect(buildSsml(texts[formsOf("ba").build[0]!.audio]!)).toContain(`<voice name="${TTS_VOICE}">`);
   });
 
-  it("the Alif lesson (recorded) has no fallback; the list is only lesson texts", () => {
-    expect(formsFallbackTexts(formsOf("alif"))).toEqual({});
+  it("the Alif lesson: only its words (not recorded), in the lesson voice; the list is only lesson texts", () => {
+    const texts = formsFallbackTexts(formsOf("alif"));
+    expect(texts).toEqual({ ana: "أَنَا", saala: "سَأَلَ", saba: "سَبَأَ", qaraa: "قَرَأَ", ras: "رَأْس" });
+    for (const text of Object.values(texts)) {
+      expect(isAllowedTtsText(text), text).toBe(true);
+      expect(buildSsml(text)).toContain(`<voice name="${TTS_VOICE}">`);
+    }
     expect(a1FormsFallbackTexts().length).toBeGreaterThan(100);
     expect(isAllowedTtsText("Ein beliebiger deutscher Satz.")).toBe(false); // still no free TTS proxy
   });
