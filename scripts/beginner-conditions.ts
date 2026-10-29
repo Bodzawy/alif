@@ -7,12 +7,13 @@
 //
 // Not checked: Alif, Alif Maqsura, Ta Marbuta and the Hamza (the letter ألف has no condition), و / ي as
 // long vowels (no mark of their own), the ل of ال before a sun letter (not spoken). Every letter once.
-// The 28 letter names keep their own condition, and so do أَ إِ أُ (Azure alone). Sounds a target already
-// accepts (edited by hand, e.g. تين: t or d, f, s, k) are kept.
+// A single letter with a short vowel (بَ بِ بُ, أَ إِ أُ) is checked for its vowel too, in any form of it
+// (VOWEL_SOUNDS). The 28 letter names keep their own condition. Sounds a target already accepts
+// (edited by hand, e.g. تين: t or d, f, s, k) are kept.
 import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 
-import { beginnerLetterTokens, BEGINNER_FILE, type RuleFile } from "../src/lib/pronunciation/beginner-letters";
+import { beginnerLetterTokens, BEGINNER_FILE, syllableVowel, type RuleFile } from "../src/lib/pronunciation/beginner-letters";
 import { allExercises } from "../src/data/curriculum";
 import { ARABIC_LETTERS } from "../src/lib/pronunciation/letters";
 
@@ -20,7 +21,6 @@ const FILE = path.resolve(__dirname, "..", BEGINNER_FILE);
 const rules = JSON.parse(readFileSync(FILE, "utf8")) as RuleFile;
 
 const letterNames = new Set(ARABIC_LETTERS.map((letter) => letter.referenceText));
-const VOWELS_ONLY = new Set(["أَ", "إِ", "أُ"]);
 /** The vocalised text of each target (the first one the app speaks). */
 const spoken = new Map<string, string>();
 for (const exercise of allExercises()) if (!spoken.has(exercise.target)) spoken.set(exercise.target, exercise.modelText);
@@ -31,8 +31,9 @@ const tokensOf = (condition: string) => (CONTAINS.exec(condition)?.[1] ?? "").re
 let changed = 0;
 const missing: string[] = [];
 for (const [target, rule] of Object.entries(rules)) {
-  if (letterNames.has(target) || VOWELS_ONLY.has(target)) continue;
-  const text = spoken.get(target) ?? target;
+  if (letterNames.has(target)) continue;
+  // A syllable is checked as written (the app speaks أَ as أَا, so its vowel is heard longer).
+  const text = syllableVowel(target) ? target : (spoken.get(target) ?? target);
   if (!spoken.has(target)) missing.push(target);
   const before = rule.excellent.conditions.flatMap(tokensOf);
   const claimed = new Set<string>();

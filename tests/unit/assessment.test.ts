@@ -57,9 +57,15 @@ describe("buildAssessment", () => {
     // صباح الخير: ص (or س), ب, ح (or ه), ل, خ, ي, ر (or g / x).
     expect(speaking("صباح الخير", ["s", "a", "b", "aa", "h", "a", "l", "x", "a", "y", "g"]).passed).toBe(true);
     expect(speaking("صباح الخير", ["s", "a", "m", "aa", "h", "a", "l", "x", "a", "y", "r"]).passed).toBe(false); // no ب
-    // أَ إِ أُ: Azure alone.
+    // A letter with a short vowel: the letter and its vowel, in any form (short, long, emphatic); the three apart.
     expect(speaking("أُ", ["<", "uu"]).passed).toBe(true);
-    expect(speaking("أُ", ["h", "aa"]).passed).toBe(true);
+    expect(speaking("أُ", ["U"]).passed).toBe(true);
+    expect(speaking("أُ", ["h", "aa"]).passed).toBe(false);
+    expect(speaking("بَ", ["p", "aah"]).passed).toBe(true);
+    expect(speaking("بَ", ["b", "A"]).passed).toBe(true);
+    expect(speaking("بِ", ["b", "iey"]).passed).toBe(true);
+    expect(speaking("بِ", ["b", "u"]).passed).toBe(false); // a Damma, not a Kasra
+    expect(speaking("بُ", ["m", "u"]).passed).toBe(false); // no ب
     // No phonemes from IQRA, or a rule without sounds (ألف): Azure's verdict stands.
     expect(speaking("بيت", null).passed).toBe(true);
     expect(speaking("ألف", ["q"]).passed).toBe(true);

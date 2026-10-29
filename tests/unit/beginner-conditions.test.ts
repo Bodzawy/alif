@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { allExercises } from "@/data/curriculum";
-import { beginnerLetterTokens, spokenLetters, type RuleFile } from "@/lib/pronunciation/beginner-letters";
+import { beginnerLetterTokens, spokenLetters, syllableVowel, type RuleFile } from "@/lib/pronunciation/beginner-letters";
 import { ARABIC_LETTERS } from "@/lib/pronunciation/letters";
 import { BEGINNER_RULES, CONDITION_RULES } from "@/lib/pronunciation/rules";
 
@@ -9,7 +9,7 @@ import { BEGINNER_RULES, CONDITION_RULES } from "@/lib/pronunciation/rules";
 // ALIF Pronunciation rules, gentle conditions only, in the engine's syntax:
 // every spoken letter, each with the sounds agreed for that letter (the
 // condition of the letter's name, e.g. باء: b or p), written by
-// scripts/beginner-conditions.ts; nothing at all for the vowels أَ إِ أُ (Azure alone).
+// scripts/beginner-conditions.ts; a letter with a short vowel (بَ, أَ …) needs its vowel too, in any form.
 
 const KNOWN = [/^iqra_phonemes contains \[('[^']+',?)+\]$/, /^iqra_phonemes is not empty$/];
 
@@ -19,16 +19,16 @@ describe("beginner_conditions.json", () => {
     expect(Object.keys(BEGINNER_RULES).length).toBeGreaterThan(1000);
   });
 
-  it("every spoken letter of the word, each with the sounds agreed for that letter; أَ إِ أُ have no IQRA condition", () => {
+  it("every spoken letter of the word, each with the sounds agreed for that letter; a syllable's vowel too", () => {
     const rules = BEGINNER_RULES as unknown as RuleFile;
     const spoken = new Map<string, string>();
     for (const exercise of allExercises()) if (!spoken.has(exercise.target)) spoken.set(exercise.target, exercise.modelText);
     const letterNames = new Set(ARABIC_LETTERS.map((letter) => letter.referenceText));
     let words = 0;
     for (const [target, rule] of Object.entries(BEGINNER_RULES)) {
-      if (letterNames.has(target) || ["أَ", "إِ", "أُ"].includes(target)) continue;
+      if (letterNames.has(target)) continue;
       const tokens = rule.excellent!.conditions.flatMap((c) => (/\[(.+)\]$/.exec(c)?.[1] ?? "").replace(/['\s]/g, "").split(",").filter(Boolean));
-      const letters = beginnerLetterTokens(spoken.get(target) ?? target, rules);
+      const letters = beginnerLetterTokens(syllableVowel(target) ? target : (spoken.get(target) ?? target), rules);
       expect(tokens.length, target).toBe(letters.length);
       letters.forEach(({ alternatives }, i) => {
         for (const alt of alternatives) expect(tokens[i]!.split("|"), `${target}: ${alternatives[0]}`).toContain(alt);
@@ -36,7 +36,16 @@ describe("beginner_conditions.json", () => {
       words++;
     }
     expect(words).toBeGreaterThan(1000);
-    for (const sound of ["أَ", "إِ", "أُ"]) expect(BEGINNER_RULES[sound]!.excellent!.conditions).toEqual([]);
+    // The syllables: the letter and its vowel – every form of it (short, long, emphatic), the three apart.
+    const syllable = (target: string) => BEGINNER_RULES[target]!.excellent!.conditions;
+    expect(syllable("أَ")).toEqual(["iqra_phonemes contains ['a|aa|A|AA|aah|Aah']"]);
+    expect(syllable("إِ")).toEqual(["iqra_phonemes contains ['i|ii|I|II|iey|Iey']"]);
+    expect(syllable("أُ")).toEqual(["iqra_phonemes contains ['u|uu|U|UU']"]);
+    expect(syllable("بَ")).toEqual(["iqra_phonemes contains ['b|bb|p|pp','a|aa|A|AA|aah|Aah']"]);
+    expect(syllable("خُ")).toEqual(["iqra_phonemes contains ['x|xx|H|HH|h|hh','u|uu|U|UU']"]);
+    const syllables = Object.keys(BEGINNER_RULES).filter((target) => syllableVowel(target));
+    expect(syllables).toHaveLength(84);
+    for (const target of syllables) expect(syllable(target).join(), target).toMatch(/'(a|i|u)\|/);
     expect(BEGINNER_RULES["بيت"]!.excellent!.conditions).toEqual(["iqra_phonemes contains ['b|bb|p|pp','y|yy','t|tt|T|TT|s']"]);
     // Sounds added by hand stay (تين: t or d, f, s, k; its n or m).
     expect(BEGINNER_RULES["تين"]!.excellent!.conditions).toEqual(["iqra_phonemes contains ['t|tt|T|TT|s|d|dd|f|ff|k','n|nn|m|mm']"]);
