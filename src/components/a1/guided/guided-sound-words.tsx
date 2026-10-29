@@ -10,7 +10,7 @@ import { sleep } from "@/lib/audio/narrate";
 import { createNarrator, readMuted, type Narrator } from "@/lib/audio/narration";
 import { getLessonProgress, markExercisePassed, markExerciseSkipped, markLessonCompleted, resetLessonProgress, subscribeProgress } from "@/lib/progress";
 import { GERMAN_CUES } from "@/lib/pronunciation/cues";
-import { useT } from "@/i18n/use-locale";
+import { T, useT } from "@/i18n/use-locale";
 import { localSpeechUrl, speechUrl } from "@/lib/tts/player";
 import { cn } from "@/lib/utils";
 
@@ -373,8 +373,8 @@ export function GuidedSteps({ blocks, progressKey, intro, arrows = "picture", ch
           <span className="inline-flex items-center gap-1 rounded-full bg-success px-2.5 py-1 text-xs font-semibold text-success-foreground shadow">
             <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> {t("Geschafft")}
           </span>
-          <p lang="ar" className="mt-3 font-arabic text-4xl font-bold text-success">
-            مُمْتَاز! 👏
+          <p className="mt-3 text-4xl font-bold text-success">
+            <T>Ausgezeichnet!</T> 👏
           </p>
         </div>
       )}

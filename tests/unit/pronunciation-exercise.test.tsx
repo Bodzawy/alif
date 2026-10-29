@@ -5,7 +5,7 @@ vi.mock("@/lib/audio/wav", () => ({
   blobTo16KhzMonoWav: vi.fn(async () => new Blob(["RIFFtest"], { type: "audio/wav" })),
 }));
 const tts = vi.hoisted(() => ({ speak: vi.fn(async () => undefined), stop: vi.fn() }));
-vi.mock("@/lib/tts/player", () => ({ speakArabic: tts.speak, stopSpeaking: tts.stop }));
+vi.mock("@/lib/tts/player", () => ({ speakArabic: tts.speak, speakLocal: tts.speak, stopSpeaking: tts.stop }));
 
 import { PronunciationExercise } from "@/components/pronunciation/pronunciation-exercise";
 import { API_ERROR_MESSAGES } from "@/lib/pronunciation/errors";
@@ -99,7 +99,7 @@ describe("PronunciationExercise", () => {
     expect(screen.getByTestId("exercise-letter-feedback-message")).toHaveTextContent("ممتاز 👏 نطقت حرف الألف بشكل صحيح");
     expect(screen.getByText("84 %")).toBeInTheDocument();
     expect(onResult).toHaveBeenCalledWith(expect.objectContaining({ passed: true }));
-    expect(tts.speak).toHaveBeenCalledWith("مُمْتَاز");
+    expect(tts.speak).toHaveBeenCalledWith("Super!");
   });
 
   it("offers a retry after a failed attempt and records again", async () => {
@@ -109,7 +109,7 @@ describe("PronunciationExercise", () => {
 
     await screen.findByText("Fast geschafft");
     expect(screen.getByTestId("exercise-letter-feedback-message")).toHaveTextContent("حاول تحسين طريقة النطق");
-    expect(tts.speak).toHaveBeenCalledWith("حاول مرة أخرى");
+    expect(tts.speak).toHaveBeenCalledWith("Nochmal versuchen");
 
     fireEvent.click(screen.getByTestId("exercise-letter-feedback-retry"));
     await waitFor(() => expect(FakeRecorder.instances).toHaveLength(2));

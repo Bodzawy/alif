@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 import { LETTER_TILE, NARRATION } from "./content";
 import { ShapedWord } from "./shaped-word";
 import { shuffled, usePickAndDrop } from "./use-pick-and-drop";
-import { useT } from "@/i18n/use-locale";
+import { T, useT } from "@/i18n/use-locale";
 
 type Basket = "alone" | "held";
 type Phase = "ask" | "correct" | "apart" | "rebuild";
@@ -68,7 +68,7 @@ export function SortActivity({ words, narrator, onComplete }: { words: FormsWord
         <span className="inline-flex items-center gap-1 rounded-full bg-success px-2.5 py-1 text-xs font-semibold text-success-foreground shadow">
           <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> {t("Geschafft")}
         </span>
-        <p lang="ar" className="mt-4 font-arabic text-4xl font-bold text-success">مُمْتَاز! 👏</p>
+        <p className="mt-4 text-4xl font-bold text-success"><T>Ausgezeichnet!</T> 👏</p>
         <p className="mt-2 text-muted-foreground">{t("Du erkennst, wann das Alif allein steht und wann es festgehalten wird.")}</p>
       </div>
     );

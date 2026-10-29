@@ -14,7 +14,7 @@ import { BASKET_LABEL, isLongWord, LETTER_NARRATION, LETTER_TILE, LONG_TILE } fr
 import { ShapedWord } from "./shaped-word";
 import { shuffled, usePickAndDrop } from "./use-pick-and-drop";
 import { wordShape } from "./word-shape";
-import { useT } from "@/i18n/use-locale";
+import { T, useT } from "@/i18n/use-locale";
 
 type Phase = "ask" | "correct" | "apart" | "rebuild";
 const MIN_STEP_MS = 900;
@@ -69,7 +69,7 @@ export function LetterSortActivity({ letter, words, narrator, onComplete }: { le
         <span className="inline-flex items-center gap-1 rounded-full bg-success px-2.5 py-1 text-xs font-semibold text-success-foreground shadow">
           <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> {t("Geschafft")}
         </span>
-        <p lang="ar" className="mt-4 font-arabic text-4xl font-bold text-success">مُمْتَاز! 👏</p>
+        <p className="mt-4 text-4xl font-bold text-success"><T>Ausgezeichnet!</T> 👏</p>
         <p className="mt-2 text-muted-foreground">{t("Du erkennst die vier Formen vom {name}.", { name: letter.name })}</p>
       </div>
     );

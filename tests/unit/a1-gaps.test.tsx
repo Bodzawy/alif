@@ -204,7 +204,7 @@ describe("the gap flow", () => {
     expect(result).toHaveAttribute("data-stars", "2");
     expect(screen.getByTestId("result-ab")).toHaveAttribute("data-first-try", "false");
     expect(screen.getByTestId("result-umm")).toHaveAttribute("data-first-try", "true");
-    expect(result).toHaveTextContent("مُمْتَاز! 👏");
+    expect(result).toHaveTextContent("Ausgezeichnet! 👏");
     await waitFor(() => expect(played.at(-1)).toBe("g5_done"));
     expect(getLessonProgress("a1/lesson-1/alif/step-4").completedAt).toBeTruthy();
 

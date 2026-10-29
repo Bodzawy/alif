@@ -202,13 +202,13 @@ test.describe("phone", () => {
       await openButtonMode(page);
       for (const { sound } of groups) {
         await recordExercise(page, sound.id, 800);
-        await expect(page.getByTestId(`exercise-${sound.id}-feedback-headline`)).toHaveText("مُمْتَاز! 👏");
+        await expect(page.getByTestId(`exercise-${sound.id}-feedback-headline`)).toHaveText("Ausgezeichnet! 👏");
       }
       expect(calls.uploads).toEqual(groups.map((g) => g.sound.glyph));
       // One word too: its own rule.
       const firstWord = groups[0]!.words[0]!;
       await recordExercise(page, firstWord.id, 800);
-      await expect(page.getByTestId(`exercise-${firstWord.id}-feedback-headline`)).toHaveText("مُمْتَاز! 👏");
+      await expect(page.getByTestId(`exercise-${firstWord.id}-feedback-headline`)).toHaveText("Ausgezeichnet! 👏");
       expect(calls.uploads.at(-1)).toBe(firstWord.exercise.target);
 
       // 2 Formen.

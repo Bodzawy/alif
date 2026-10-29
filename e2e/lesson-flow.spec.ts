@@ -124,7 +124,7 @@ test("A0 → Wörter → Lesson 1 → listen → record → feedback → retry �
     expect(uploads.at(-1)).toMatchObject({ target, sampleRate: 16000, channels: 1 });
   }
   await expect(page.getByTestId("lesson-progress")).toContainText("4 / 4");
-  expect(ttsTexts).toContain("مُمْتَاز");
+  expect(ttsTexts).toContain("Super!") // the spoken cue after a right answer, in the learner's language;
 
   // 18: continue.
   await page.getByTestId("continue-button").click();

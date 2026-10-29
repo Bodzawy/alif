@@ -180,7 +180,7 @@ test("Zuschauen, then all three activities on a phone: narration chain, touch dr
     if (id !== "ana") await expect(page.getByTestId("sort-shaped")).toHaveAttribute("data-held", String(expected[id] === "held"));
     await expect.poll(() => played.at(-1)).toBe(`s_ok_${reason[id]}`);
   }
-  await expect(page.getByTestId("sort-done")).toContainText("مُمْتَاز! 👏", { timeout: 20_000 });
+  await expect(page.getByTestId("sort-done")).toContainText("Ausgezeichnet! 👏", { timeout: 20_000 });
   await expect.poll(() => played.at(-1)).toBe("s_done");
   await expect(page.getByTestId("step-completed")).toBeVisible();
   const progress = await page.evaluate(() => JSON.parse(localStorage.getItem("alif:progress:v1") ?? "{}"));

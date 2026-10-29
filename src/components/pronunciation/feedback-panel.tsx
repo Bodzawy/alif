@@ -28,7 +28,7 @@ export function FeedbackPanel({
 }) {
   const t = useT();
   const style = toneStyles[feedback.tone];
-  const headline = simple && feedback.passed ? "مُمْتَاز! 👏" : t(feedback.headline);
+  const headline = simple && feedback.passed ? `${t("Ausgezeichnet!")} 👏` : t(feedback.headline);
   const tip = simple
     ? feedback.passed
       ? null

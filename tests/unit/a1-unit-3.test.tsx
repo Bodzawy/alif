@@ -8,7 +8,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 // type "order". MOCKED: /api/tts (speakArabic).
 
 vi.mock("@/lib/tts/player", () => ({
-  speakArabic: vi.fn(async () => undefined),
+  speakArabic: vi.fn(async () => undefined), speakLocal: vi.fn(async () => undefined),
   speechUrl: vi.fn(async (text: string) => `blob:${text}`),
   stopSpeaking: vi.fn(),
 }));

@@ -5,7 +5,7 @@ vi.mock("@/lib/audio/wav", () => ({
   blobTo16KhzMonoWav: vi.fn(async () => new Blob(["RIFFtest"], { type: "audio/wav" })),
 }));
 const tts = vi.hoisted(() => ({ speak: vi.fn(async (_text: string) => undefined), stop: vi.fn() }));
-vi.mock("@/lib/tts/player", () => ({ speakArabic: tts.speak, stopSpeaking: tts.stop }));
+vi.mock("@/lib/tts/player", () => ({ speakArabic: tts.speak, speakLocal: tts.speak, stopSpeaking: tts.stop }));
 // Voice activity: the test decides when the "student" starts and stops speaking.
 const voice = vi.hoisted(() => ({ emit: null as null | ((e: "speech-start" | "speech-end") => void), stop: vi.fn() }));
 vi.mock("@/lib/audio/voice-activity", async (original) => ({

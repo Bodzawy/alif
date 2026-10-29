@@ -10,6 +10,7 @@ import { MADD_NAME, type MaddKind } from "@/lib/arabic/madd";
 import { pickTokens, type PickToken } from "@/lib/arabic/word-pick";
 import { getLessonProgress, markLessonCompleted, subscribeProgress } from "@/lib/progress";
 import { cn } from "@/lib/utils";
+import { T } from "@/i18n/use-locale";
 
 // Step type "word-pick" – "ضع خطًّا تحت الكلمات …": tap whole words to underline
 // them. Which words count is computed from the vocalised text
@@ -223,8 +224,8 @@ export function WordPickStep({ pick, progressKey }: { pick: WordPick; progressKe
 
         {done && (
           <div role="status" data-testid="pick-done" className="w-full max-w-xl animate-fade-in rounded-3xl border border-success/40 bg-card p-5 shadow-card">
-            <p lang="ar" className="font-arabic text-3xl font-bold text-success">
-              مُمْتَاز! 👏
+            <p className="text-3xl font-bold text-success">
+              <T>Ausgezeichnet!</T> 👏
             </p>
             <p className="mt-1 text-muted-foreground">Alles richtig.</p>
           </div>

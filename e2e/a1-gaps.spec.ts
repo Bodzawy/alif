@@ -77,7 +77,7 @@ async function playStep(page: Page, step: string, answers: string[], wrongAt: nu
   const result = page.getByTestId("gap-result");
   await expect(result).toBeVisible({ timeout: 15_000 });
   await expect(result).toHaveAttribute("data-first-try", String(answers.length - 1));
-  await expect(result).toContainText("مُمْتَاز! 👏");
+  await expect(result).toContainText("Ausgezeichnet! 👏");
   await expect.poll(() => played.at(-1)).toBe(step === "step-4" ? "g5_done" : "g6_done");
   const progress = await page.evaluate(() => JSON.parse(localStorage.getItem("alif:progress:v1") ?? "{}"));
   expect(progress[`a1/lesson-1/alif/${step}`].completedAt).toBeTruthy();

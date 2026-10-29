@@ -139,11 +139,11 @@ test.describe("phone", () => {
       await openButtonMode(page);
       for (const { sound } of groups) {
         await recordExercise(page, sound.id, 700);
-        await expect(page.getByTestId(`exercise-${sound.id}-feedback-headline`)).toHaveText("مُمْتَاز! 👏");
+        await expect(page.getByTestId(`exercise-${sound.id}-feedback-headline`)).toHaveText("Ausgezeichnet! 👏");
       }
       const firstWord = groups[0]!.words[0]!;
       await recordExercise(page, firstWord.id, 700);
-      await expect(page.getByTestId(`exercise-${firstWord.id}-feedback-headline`)).toHaveText("مُمْتَاز! 👏");
+      await expect(page.getByTestId(`exercise-${firstWord.id}-feedback-headline`)).toHaveText("Ausgezeichnet! 👏");
       expect(calls.uploads).toEqual([...groups.map((g) => g.sound.glyph), firstWord.exercise.target]);
 
       // 2 Formen: the letter tapped in every word of the book's table.

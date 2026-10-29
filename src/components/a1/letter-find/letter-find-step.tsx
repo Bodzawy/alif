@@ -8,7 +8,7 @@ import type { LetterFind } from "@/data/types";
 import { checkFind, findLines, targetKeys, tileByKey, type FindResult, type FindWord } from "@/lib/arabic/letter-find";
 import { getLessonProgress, markLessonCompleted, subscribeProgress } from "@/lib/progress";
 import { cn } from "@/lib/utils";
-import { useRichT, useT } from "@/i18n/use-locale";
+import { T, useRichT, useT } from "@/i18n/use-locale";
 
 // Step type "letter-find" ("Lies den Dialog und unterstreiche …"): the
 // dialogue as real text; the learner taps a letter to underline it (tap again
@@ -194,8 +194,8 @@ export function LetterFindStep({ find, progressKey }: { find: LetterFind; progre
         )}
         {done && (
           <div role="status" data-testid="find-done" className="w-full max-w-xl animate-fade-in rounded-3xl border border-success/40 bg-card p-5 shadow-card">
-            <p lang="ar" className="font-arabic text-3xl font-bold text-success">
-              مُمْتَاز! 👏
+            <p className="text-3xl font-bold text-success">
+              <T>Ausgezeichnet!</T> 👏
             </p>
             <p className="mt-1 text-muted-foreground">
               {t("Du hast alle {n} gefunden – und nichts anderes markiert.", { n: total })}

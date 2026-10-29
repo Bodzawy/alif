@@ -9,7 +9,7 @@ vi.mock("@/lib/audio/wav", () => ({
   blobTo16KhzMonoWav: vi.fn(async () => new Blob(["RIFFtest"], { type: "audio/wav" })),
 }));
 const tts = vi.hoisted(() => ({ speak: vi.fn(async (_text: string) => undefined), stop: vi.fn() }));
-vi.mock("@/lib/tts/player", () => ({ speakArabic: tts.speak, stopSpeaking: tts.stop }));
+vi.mock("@/lib/tts/player", () => ({ speakArabic: tts.speak, speakLocal: tts.speak, stopSpeaking: tts.stop }));
 
 import { SoundWordsStep } from "@/components/a1/sound-words-step";
 import { A1_LEVEL, a1LessonExercises, a1StepHref, a1Unit1, getA1Lesson } from "@/data/a1";
@@ -224,7 +224,7 @@ describe("A1 Wörter: each vowel with its three word cards", () => {
     expect(screen.getByTestId("exercise-alif-fatha-record")).toBeDisabled();
     await act(() => wait(450));
     fireEvent.click(screen.getByTestId("exercise-ab-record"));
-    await waitFor(() => expect(screen.getByTestId("exercise-ab-feedback-headline")).toHaveTextContent("مُمْتَاز! 👏"));
+    await waitFor(() => expect(screen.getByTestId("exercise-ab-feedback-headline")).toHaveTextContent("Ausgezeichnet! 👏"));
     expect(screen.getByTestId("exercise-umm-record")).toBeEnabled();
     expect(screen.getByTestId("vocab-card-ab")).toHaveTextContent("Geschafft");
   });

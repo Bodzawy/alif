@@ -11,7 +11,7 @@ import type { GapsClips, GapsContent } from "@/data/types";
 import { gapTask, type GapTask } from "@/lib/arabic/gap";
 import { playChime, unlockChime } from "@/lib/audio/chime";
 import { narrateWithFallback, sayWithFallback } from "@/lib/audio/narrate";
-import { useLocale, useT } from "@/i18n/use-locale";
+import { T, useLocale, useT } from "@/i18n/use-locale";
 import { localNarration } from "@/lib/audio/local-narration";
 import { createNarrator, readMuted, type Narrator } from "@/lib/audio/narration";
 import { getLessonProgress, markLessonCompleted, subscribeProgress } from "@/lib/progress";
@@ -436,8 +436,8 @@ function ResultScreen({ items, results, onRestart }: { items: Array<{ item: Gaps
       <span className="mt-4 inline-flex items-center gap-1 rounded-full bg-success px-2.5 py-1 text-xs font-semibold text-success-foreground shadow">
         <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> {t("Geschafft")}
       </span>
-      <p lang="ar" className="mt-3 font-arabic text-4xl font-bold text-success">
-        مُمْتَاز! 👏
+      <p className="mt-3 text-4xl font-bold text-success">
+        <T>Ausgezeichnet!</T> 👏
       </p>
       <Button variant="secondary" size="lg" onClick={onRestart} className="mt-5" data-testid="gap-restart">
         <RotateCcw className="h-5 w-5" aria-hidden /> {t("Nochmal")}

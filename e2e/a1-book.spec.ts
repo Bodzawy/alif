@@ -94,7 +94,7 @@ async function solve(page: Page, step: A1Step): Promise<boolean> {
       await openButtonMode(page);
       const first = step.kind === "sound-words" ? step.groups[0]!.sound : step.groups[0]!.words[0]!;
       await recordExercise(page, first.id, 700);
-      await expect(page.getByTestId(`exercise-${first.id}-feedback-headline`)).toHaveText("مُمْتَاز! 👏");
+      await expect(page.getByTestId(`exercise-${first.id}-feedback-headline`)).toHaveText("Ausgezeichnet! 👏");
       return false;
     }
     case "positions":

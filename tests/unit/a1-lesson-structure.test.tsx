@@ -5,7 +5,7 @@ import path from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const tts = vi.hoisted(() => ({ speechUrl: vi.fn(async (text: string) => `blob:tts/${encodeURIComponent(text)}`) }));
-vi.mock("@/lib/tts/player", () => ({ speechUrl: tts.speechUrl, speakArabic: vi.fn(async () => undefined), stopSpeaking: vi.fn() }));
+vi.mock("@/lib/tts/player", () => ({ speechUrl: tts.speechUrl, speakArabic: vi.fn(async () => undefined), speakLocal: vi.fn(async () => undefined), stopSpeaking: vi.fn() }));
 
 import A1LessonPage from "@/app/a1/[unit]/[lesson]/page";
 import A1UnitPage from "@/app/a1/[unit]/page";

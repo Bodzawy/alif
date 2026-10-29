@@ -14,7 +14,7 @@ import { debugEnabled, demoTotal, evaluateStroke, starsFor, WRITING_BOX, type Fa
 import { AR_NUM, arrowFor, baseline, drawDemo, poly, readPalette, startDot, strokeStart, strokeWidth, type Palette } from "./draw";
 import { sampleLetterSet } from "./sample-path";
 import { useWritingNarration } from "./writing-narration";
-import { useT } from "@/i18n/use-locale";
+import { T, useT } from "@/i18n/use-locale";
 
 // "Schreiben" – trace the forms of a letter (workbook "تدريب (١)", "Fahr die
 // Linie nach"). Ported from the prototype docs/reference/alif-uebung1.html:
@@ -498,8 +498,8 @@ export function WritingStep({
               <span className="inline-flex items-center gap-1 rounded-full bg-success px-2.5 py-1 text-xs font-semibold text-success-foreground shadow">
                 <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> {t("Geschafft")}
               </span>
-              <p lang="ar" className="mt-3 font-arabic text-4xl font-bold text-success">
-                مُمْتَاز! 👏
+              <p className="mt-3 text-4xl font-bold text-success">
+                <T>Ausgezeichnet!</T> 👏
               </p>
             </div>
           )}

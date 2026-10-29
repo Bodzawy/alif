@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import type { MatchContent, MatchPrompt } from "@/data/types";
 import { getLessonProgress, markLessonCompleted, subscribeProgress } from "@/lib/progress";
 import { cn } from "@/lib/utils";
+import { T } from "@/i18n/use-locale";
 
 // Step type "match" – the book's matching exercises: "write the number of the
 // picture next to the right word" and "connect the letters, then match them
@@ -167,8 +168,8 @@ export function MatchStep({ match, progressKey }: { match: MatchContent; progres
           </p>
         )}
         {done && (
-          <p role="status" lang="ar" className="font-arabic text-3xl font-bold text-success" data-testid="match-done">
-            مُمْتَاز! 👏
+          <p role="status" className="text-3xl font-bold text-success" data-testid="match-done">
+            <T>Ausgezeichnet!</T> 👏
           </p>
         )}
         <div className="flex flex-wrap justify-center gap-3">

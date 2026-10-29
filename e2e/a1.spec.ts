@@ -104,7 +104,7 @@ test("Wörter: three vowel sections (the former Laute), nine word cards (image, 
     await section.getByTestId(`exercise-${soundId}-listen`).click();
     await expect.poll(() => stub.tts).toContain(glyph);
     await recordExercise(page, soundId, 600);
-    await expect(section.getByTestId(`exercise-${soundId}-feedback-headline`)).toHaveText("مُمْتَاز! 👏");
+    await expect(section.getByTestId(`exercise-${soundId}-feedback-headline`)).toHaveText("Ausgezeichnet! 👏");
 
     const cards = section.locator('[data-testid^="vocab-card-"]');
     expect(await cards.evaluateAll((els) => els.map((el) => el.getAttribute("data-testid")))).toEqual(words.map(([id]) => `vocab-card-${id}`));
@@ -122,7 +122,7 @@ test("Wörter: three vowel sections (the former Laute), nine word cards (image, 
       // "Anhören" speaks the word with Tanwin (أَنَا takes none); the card keeps the pausal word.
       await expect.poll(() => stub.tts).toContain(spoken);
       await recordExercise(page, id, 500);
-      await expect(card.getByTestId(`exercise-${id}-feedback-headline`)).toHaveText("مُمْتَاز! 👏");
+      await expect(card.getByTestId(`exercise-${id}-feedback-headline`)).toHaveText("Ausgezeichnet! 👏");
       await expect(card).toContainText("Geschafft");
       expect(stub.uploads.at(-1)!.target).toBe(target);
     }

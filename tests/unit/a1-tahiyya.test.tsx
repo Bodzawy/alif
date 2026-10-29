@@ -9,7 +9,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 vi.mock("@/lib/audio/wav", () => ({ blobTo16KhzMonoWav: vi.fn(async () => new Blob(["RIFF"], { type: "audio/wav" })) }));
 const tts = vi.hoisted(() => ({ speak: vi.fn(async (_text: string) => undefined) }));
-vi.mock("@/lib/tts/player", () => ({ speakArabic: tts.speak, stopSpeaking: vi.fn(), speechUrl: vi.fn(async () => "blob:x") }));
+vi.mock("@/lib/tts/player", () => ({ speakArabic: tts.speak, speakLocal: tts.speak, stopSpeaking: vi.fn(), speechUrl: vi.fn(async () => "blob:x") }));
 
 import A1StepPage from "@/app/a1/[unit]/[lesson]/[step]/page";
 import A1UnitPage from "@/app/a1/[unit]/page";

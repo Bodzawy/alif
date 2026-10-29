@@ -440,7 +440,7 @@ describe("A1 · Schritt 3 Formen – the four parts", () => {
     }
     expect(seen.sort()).toEqual(["ana", "qaraa", "ras", "saala", "saba"]);
     const done = await screen.findByTestId("sort-done");
-    expect(within(done).getByText("مُمْتَاز! 👏")).toBeInTheDocument();
+    expect(within(done).getByText("Ausgezeichnet! 👏")).toBeInTheDocument();
     await waitFor(() => expect(played).toContain("s_done"));
     expect(getLessonProgress("a1/lesson-1/alif/step-2").completedAt).toBeTruthy();
     expect(created).toBe(1);

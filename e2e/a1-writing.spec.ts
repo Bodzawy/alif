@@ -106,7 +106,7 @@ test("trace with mouse and finger, get hints for wrong strokes, finish → Gesch
   await expect(step(page)).toHaveAttribute("data-complete", "true");
   await expect(instruction(page)).toHaveText("Super! Du hast alle vier Formen nachgefahren. Übung 1 geschafft!");
   await expect(page.getByTestId("writing-done")).toContainText("Geschafft");
-  await expect(page.getByTestId("writing-done")).toContainText("مُمْتَاز! 👏");
+  await expect(page.getByTestId("writing-done")).toContainText("Ausgezeichnet! 👏");
   await expect(page.getByTestId("step-completed")).toBeVisible();
   await expect(page.getByTestId("writing-skip")).toBeDisabled();
   const progress = await page.evaluate(() => JSON.parse(localStorage.getItem("alif:progress:v1") ?? "{}"));

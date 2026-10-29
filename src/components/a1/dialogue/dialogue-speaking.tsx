@@ -19,7 +19,7 @@ import { cn } from "@/lib/utils";
 
 import { AddresseeBadge, DialogueBubble, DialogueToggles, splitAddressee } from "./dialogue-bubble";
 import { speakLine } from "./speak";
-import { useT } from "@/i18n/use-locale";
+import { T, useT } from "@/i18n/use-locale";
 
 // Stage 2 "Nachsprechen" (every line) and stage 3 "Rollenspiel" (the
 // learner's role only; the app speaks the other role). Both run on the guided
@@ -360,8 +360,8 @@ export function DialogueSpeaking({ dialogue, mode, progressKey }: { dialogue: Di
           <span className="inline-flex items-center gap-1 rounded-full bg-success px-2.5 py-1 text-xs font-semibold text-success-foreground shadow">
             <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> {t("Geschafft")}
           </span>
-          <p lang="ar" className="mt-3 font-arabic text-4xl font-bold text-success">
-            مُمْتَاز! 👏
+          <p className="mt-3 text-4xl font-bold text-success">
+            <T>Ausgezeichnet!</T> 👏
           </p>
           <p className="mt-2 text-muted-foreground">
             {mode === "repeat" ? t("Du hast alle Sätze nachgesprochen.") : t("Du hast das Gespräch als {name} geführt.", { name: t(learnerSpeaker?.name ?? "") })}

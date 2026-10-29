@@ -6,8 +6,8 @@ import { AlertTriangle } from "lucide-react";
 import { ListenButton } from "@/components/audio/listen-button";
 import type { PronunciationExercise as Exercise } from "@/data/types";
 import type { StudentFeedback } from "@/lib/pronunciation/client";
-import { FEEDBACK_CUES } from "@/lib/pronunciation/cues";
-import { speakArabic } from "@/lib/tts/player";
+import { GERMAN_CUES } from "@/lib/pronunciation/cues";
+import { speakLocal } from "@/lib/tts/player";
 import { cn } from "@/lib/utils";
 
 import { FeedbackPanel } from "./feedback-panel";
@@ -41,8 +41,8 @@ export function PronunciationExercise({
     target: exercise.target,
     onResult: (result) => {
       onResult?.(result);
-      // Spoken cue after each evaluation, as in the original learn page.
-      speakArabic(result.passed ? FEEDBACK_CUES.success : FEEDBACK_CUES.retry).catch(() => undefined);
+      // Spoken cue after each evaluation, in the learner's language.
+      speakLocal(result.passed ? GERMAN_CUES.super : GERMAN_CUES.retry).catch(() => undefined);
     },
   });
 

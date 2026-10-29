@@ -129,7 +129,15 @@ export function localSpeechUrl(text: string): Promise<string> {
 
 /** Resolves when playback has finished (or was interrupted). `voice` / `line`: as for speechUrl. */
 export async function speakArabic(text: string, voice?: SpeechVoice, line?: string): Promise<void> {
-  const url = await audioUrl(text, voice, line);
+  await playSpeech(await audioUrl(text, voice, line));
+}
+
+/** Alif's own words (a German text, e.g. "Super!") spoken in the learner's language; resolves like speakArabic. */
+export async function speakLocal(text: string): Promise<void> {
+  await playSpeech(await localSpeechUrl(text));
+}
+
+async function playSpeech(url: string): Promise<void> {
   stopSpeaking();
   const audio = new Audio(url);
   current = audio;

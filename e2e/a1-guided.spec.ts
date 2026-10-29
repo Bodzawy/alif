@@ -188,7 +188,7 @@ test("fallback: microphone not available → today's page with buttons and a not
   await expect(page.getByTestId("guided-note")).toHaveText("Das Mikrofon ist nicht verfügbar. Du kannst die Knöpfe benutzen.");
   await expect(page.getByTestId("exercise-ab-record")).toBeVisible();
   await recordExercise(page, "ab");
-  await expect(page.getByTestId("exercise-ab-feedback-headline")).toHaveText("مُمْتَاز! 👏");
+  await expect(page.getByTestId("exercise-ab-feedback-headline")).toHaveText("Ausgezeichnet! 👏");
   expect(calls.evaluate).toBe(1);
 });
 

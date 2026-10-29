@@ -12,6 +12,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const tts = vi.hoisted(() => ({ spoken: [] as string[] }));
 vi.mock("@/lib/tts/player", () => ({
+  speakLocal: vi.fn(async () => undefined),
   speakArabic: vi.fn(async (text: string) => void tts.spoken.push(text)),
   speechUrl: vi.fn(async (text: string) => `blob:${text}`),
   stopSpeaking: vi.fn(),
