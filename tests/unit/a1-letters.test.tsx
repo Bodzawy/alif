@@ -334,7 +334,7 @@ describe("Ba – Formen, the four parts", () => {
     fireEvent.click(screen.getByTestId("tile-طَ"));
     fireEvent.click(screen.getByTestId("slot-0"));
     await waitFor(() => expect(played).toEqual(["b_wrong"]));
-    const labels = ["في أول الكلمة", "في المنتصف", "في آخر الكلمة", "منفصلة"];
+    const labels = ["am Wortanfang", "in der Mitte", "am Wortende", "getrennt"]; // in the learner's language (German here)
     const positions = ["start", "middle", "end", "separate"];
     for (const [w, word] of forms.build.entries()) {
       played.length = 0;

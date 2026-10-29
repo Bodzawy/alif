@@ -222,7 +222,7 @@ describe("Zuschauen – scene state machine", () => {
       await at(FALLBACK_MS.word);
       expect(section()).toHaveAttribute("data-stage", "explain");
       expect(screen.getByTestId("explain-caption")).toHaveTextContent(EXPLAIN_TEXT[`e_${position}_b`]!);
-      expect(screen.getByTestId("explain-label")).toHaveTextContent(POSITION_LABEL[position]);
+      expect(screen.getByTestId("explain-label")).toHaveTextContent(POSITION_LABEL_GERMAN[position]);
       expect(screen.getByTestId("explain-meaning")).toHaveTextContent(word.german);
       await at(FALLBACK_MS.explain);
       if (i < 3) {
@@ -357,7 +357,7 @@ describe("A1 · Schritt 3 Formen – the four parts", () => {
       else expect(picture).toBeNull();
       for (const [i, tile] of splitTiles(word.arabic).entries()) await tapTile(tile, i);
       await waitFor(() => expect(screen.getByTestId(`build-word-${word.id}`)).toHaveAttribute("data-phase", "done"));
-      expect(screen.getByTestId("build-position")).toHaveTextContent(Object.values(POSITION_LABEL)[w]!);
+      expect(screen.getByTestId("build-position")).toHaveTextContent(Object.values(POSITION_LABEL_GERMAN)[w]!);
       expect(screen.getByTestId(`built-word-${word.id}`)).toHaveTextContent(word.arabic);
       // Word recording missing → only the narration plays, nothing breaks.
       await waitFor(() => expect(played).toEqual([`b_done_${positions[w]}`]));

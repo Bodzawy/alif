@@ -9,7 +9,7 @@ import type { FormsLetter, FormsWord } from "@/data/types";
 import type { Narrator } from "@/lib/audio/narration";
 import { cn } from "@/lib/utils";
 
-import { isLongWord, LONG_ROW, LONG_TILE, NARRATION, POSITION_LABEL } from "./content";
+import { isLongWord, LONG_ROW, LONG_TILE, NARRATION, POSITION_LABEL_GERMAN } from "./content";
 import { ShapedWord } from "./shaped-word";
 import { shuffled, usePickAndDrop } from "./use-pick-and-drop";
 import { wordShape } from "./word-shape";
@@ -199,8 +199,8 @@ function BuildWord({
         </>
       ) : (
         <div className="mt-4 flex animate-fade-in flex-col items-center gap-3" data-testid="build-result">
-          <p lang="ar" dir="rtl" className="font-arabic text-2xl font-bold text-primary" data-testid="build-position">
-            {POSITION_LABEL[position]}
+          <p className="text-2xl font-bold text-primary" data-testid="build-position">
+            {t(POSITION_LABEL_GERMAN[position])}
           </p>
           <p className="text-lg font-semibold">{t(word.german)}</p>
           <span className="inline-flex items-center gap-1 rounded-full bg-success px-2.5 py-1 text-xs font-semibold text-success-foreground shadow">
@@ -224,7 +224,7 @@ function BuildWord({
           </div>
         </div>
       )}
-      <span className="sr-only" aria-live="polite">{done ? `${t(word.german)}: ${POSITION_LABEL[position]}` : ""}</span>
+      <span className="sr-only" aria-live="polite">{done ? `${t(word.german)}: ${t(POSITION_LABEL_GERMAN[position])}` : ""}</span>
     </section>
   );
 }

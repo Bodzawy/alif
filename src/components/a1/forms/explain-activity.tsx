@@ -9,7 +9,7 @@ import type { HamzaPosition } from "@/lib/arabic/hamza-alif";
 import type { Narrator } from "@/lib/audio/narration";
 import { cn } from "@/lib/utils";
 
-import { EXPLAIN_TEXT, isLongWord, LETTER_TILE, LONG_ROW, LONG_TILE, NARRATION, POSITION_LABEL, POSITION_LABEL_GERMAN } from "./content";
+import { EXPLAIN_TEXT, isLongWord, LETTER_TILE, LONG_ROW, LONG_TILE, NARRATION, POSITION_LABEL_GERMAN } from "./content";
 import { ShapedWord } from "./shaped-word";
 import { wordShape } from "./word-shape";
 import { useT } from "@/i18n/use-locale";
@@ -246,11 +246,8 @@ export function ExplainActivity({
         {explained && (
           <div className="flex animate-fade-in flex-col items-center gap-1">
             <p className="text-lg font-semibold">{t(scene.word.german)}</p>
-            <p className="text-sm text-muted-foreground">
-              <span lang="ar" dir="rtl" className="font-arabic text-xl font-bold text-primary" data-testid="explain-label">
-                {POSITION_LABEL[scene.position]}
-              </span>{" "}
-              · {t(POSITION_LABEL_GERMAN[scene.position])}
+            <p className="text-xl font-bold text-primary" data-testid="explain-label">
+              {t(POSITION_LABEL_GERMAN[scene.position])}
             </p>
           </div>
         )}

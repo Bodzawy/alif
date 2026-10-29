@@ -79,7 +79,7 @@ test("Zuschauen, then all three activities on a phone: narration chain, touch dr
   await expect(page.getByTestId("explain-caption")).toContainText("Das erste Wort bedeutet: ich.");
   await expect(explain).toHaveAttribute("data-stage", "explain", { timeout: 30_000 });
   await expect(page.getByTestId("explain-word-ana")).toHaveAttribute("data-highlighted", "true");
-  await expect(page.getByTestId("explain-label")).toHaveText("في أول الكلمة");
+  await expect(page.getByTestId("explain-label")).toHaveText("am Wortanfang");
   await expect(page.getByTestId("explain-caption")).toContainText("Die Hamza steht am Anfang vom Wort.");
   await expect(explain).toHaveAttribute("data-stage", "ready", { timeout: 20_000 });
   expect(played.slice(2)).toEqual(["e_start_a", "e_start_b"]); // the word recording is missing: skipped
@@ -91,7 +91,7 @@ test("Zuschauen, then all three activities on a phone: narration chain, touch dr
   await expect(explain).toHaveAttribute("data-scene", "4");
   await expect(explain).toHaveAttribute("data-stage", "explain", { timeout: 30_000 });
   await expect(page.getByTestId("explain-word-qaraa")).toHaveAttribute("data-gap", "true");
-  await expect(page.getByTestId("explain-label")).toHaveText("منفصلة");
+  await expect(page.getByTestId("explain-label")).toHaveText("getrennt");
   await page.getByTestId("explain-next").tap(); // "Weiter zur Übung" – early: cancels the audio
   await expect(page.getByTestId("build-activity")).toBeVisible();
   await expect.poll(() => played.at(-1)).toBe("b_intro");
@@ -109,10 +109,10 @@ test("Zuschauen, then all three activities on a phone: narration chain, touch dr
   for (const [i, tile] of ["أَ", "نَ", "ا"].entries()) await touchDrag(page, page.getByTestId(`tile-${tile}`), page.getByTestId(`slot-${i}`));
 
   const build: Array<[string, string[], string, string]> = [
-    ["ana", ["أَ", "نَ", "ا"], "في أول الكلمة", "start"],
-    ["saala", ["سَ", "أَ", "لَ"], "في المنتصف", "middle"],
-    ["saba", ["سَ", "بَ", "أَ"], "في آخر الكلمة", "end"],
-    ["qaraa", ["قَ", "رَ", "أَ"], "منفصلة", "separate"],
+    ["ana", ["أَ", "نَ", "ا"], "am Wortanfang", "start"],
+    ["saala", ["سَ", "أَ", "لَ"], "in der Mitte", "middle"],
+    ["saba", ["سَ", "بَ", "أَ"], "am Wortende", "end"],
+    ["qaraa", ["قَ", "رَ", "أَ"], "getrennt", "separate"],
   ];
   for (const [n, [id, tiles, label, position]] of build.entries()) {
     if (n > 0) for (const [i, tile] of tiles.entries()) { await page.getByTestId(`tile-${tile}`).tap(); await page.getByTestId(`slot-${i}`).tap(); }
