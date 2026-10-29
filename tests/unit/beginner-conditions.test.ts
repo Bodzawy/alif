@@ -1,15 +1,17 @@
 import { describe, expect, it } from "vitest";
 
+import { allExercises } from "@/data/curriculum";
+import { beginnerLetterTokens, spokenLetters, type RuleFile } from "@/lib/pronunciation/beginner-letters";
+import { ARABIC_LETTERS } from "@/lib/pronunciation/letters";
 import { BEGINNER_RULES, CONDITION_RULES } from "@/lib/pronunciation/rules";
 
 // beginner_conditions.json (ALIF Speaking): one entry per target of the
 // ALIF Pronunciation rules, gentle conditions only, in the engine's syntax:
-// at most the word's two easiest letters (with the sounds a beginner says
-// instead), never ر, and nothing at all for the vowels أَ إِ أُ (Azure alone).
+// every spoken letter, each with the sounds agreed for that letter (the
+// condition of the letter's name, e.g. باء: b or p), written by
+// scripts/beginner-conditions.ts; nothing at all for the vowels أَ إِ أُ (Azure alone).
 
 const KNOWN = [/^iqra_phonemes contains \[('[^']+',?)+\]$/, /^iqra_phonemes is not empty$/];
-// جمل and جبل also check their ج (with the sounds a beginner says instead).
-const THREE_LETTERS = new Set(["جمل", "جبل"]);
 
 describe("beginner_conditions.json", () => {
   it("covers the targets of the ALIF Pronunciation rules and nothing else", () => {
@@ -17,13 +19,32 @@ describe("beginner_conditions.json", () => {
     expect(Object.keys(BEGINNER_RULES).length).toBeGreaterThan(1000);
   });
 
-  it("at most two letters per word; أَ إِ أُ have no IQRA condition", () => {
-    for (const [target, rules] of Object.entries(BEGINNER_RULES)) {
-      const letters = rules.excellent!.conditions.flatMap((c) => c.match(/'[^']+'/g) ?? []);
-      expect(letters.length, target).toBeLessThanOrEqual(THREE_LETTERS.has(target) ? 3 : 2);
+  it("every spoken letter of the word, each with the sounds agreed for that letter; أَ إِ أُ have no IQRA condition", () => {
+    const rules = BEGINNER_RULES as unknown as RuleFile;
+    const spoken = new Map<string, string>();
+    for (const exercise of allExercises()) if (!spoken.has(exercise.target)) spoken.set(exercise.target, exercise.modelText);
+    const letterNames = new Set(ARABIC_LETTERS.map((letter) => letter.referenceText));
+    let words = 0;
+    for (const [target, rule] of Object.entries(BEGINNER_RULES)) {
+      if (letterNames.has(target) || ["أَ", "إِ", "أُ"].includes(target)) continue;
+      const tokens = rule.excellent!.conditions.flatMap((c) => (/\[(.+)\]$/.exec(c)?.[1] ?? "").replace(/['\s]/g, "").split(",").filter(Boolean));
+      const letters = beginnerLetterTokens(spoken.get(target) ?? target, rules);
+      expect(tokens.length, target).toBe(letters.length);
+      letters.forEach(({ alternatives }, i) => {
+        for (const alt of alternatives) expect(tokens[i]!.split("|"), `${target}: ${alternatives[0]}`).toContain(alt);
+      });
+      words++;
     }
+    expect(words).toBeGreaterThan(1000);
     for (const sound of ["أَ", "إِ", "أُ"]) expect(BEGINNER_RULES[sound]!.excellent!.conditions).toEqual([]);
-    expect(BEGINNER_RULES["بيت"]!.excellent!.conditions).toEqual(["iqra_phonemes contains ['b|bb','t|tt|T|TT']"]);
+    expect(BEGINNER_RULES["بيت"]!.excellent!.conditions).toEqual(["iqra_phonemes contains ['b|bb|p|pp','y|yy','t|tt|T|TT|s']"]);
+    // Sounds added by hand stay (تين: t or d, f, s, k; its n or m).
+    expect(BEGINNER_RULES["تين"]!.excellent!.conditions).toEqual(["iqra_phonemes contains ['t|tt|T|TT|s|d|dd|f|ff|k','n|nn|m|mm']"]);
+    // Not checked: the Hamza, long vowels, the ل of ال before a sun letter; ث and ف are two letters.
+    expect(spokenLetters("أَمِيرٌ")).toEqual(["م", "ر"]);
+    expect(spokenLetters("الشَّمْسُ")).toEqual(["ش", "م", "س"]);
+    expect(spokenLetters("صَبَاحُ الْخَيْرِ")).toEqual(["ص", "ب", "ح", "ل", "خ", "ي", "ر"]);
+    expect(BEGINNER_RULES["ثلاثة آلاف"]!.excellent!.conditions).toEqual(["iqra_phonemes contains ['f|ff|v|vv|s|ss|t|tt','l|ll','f|ff|v|vv']"]);
     // The letters: the sounds a beginner says instead count too (ب p, ت s, ج g, ذ z, ر g / x, غ j).
     const letter = (name: string) => BEGINNER_RULES[name]!.excellent!.conditions;
     expect(letter("باء")).toEqual(["iqra_phonemes contains ['b|bb|p|pp']"]);
@@ -41,8 +62,6 @@ describe("beginner_conditions.json", () => {
         expect(rule.message, target).toBeTruthy();
         for (const condition of rule.conditions) {
           expect(KNOWN.some((pattern) => pattern.test(condition)), `${target}: ${condition}`).toBe(true);
-          // ر is not checked – except in the letter راء itself (r, or the g / x a beginner says instead).
-          if (target !== "راء") expect(condition, target).not.toMatch(/'r'|\|r\||'r\||\|r'|rr/);
         }
       }
     }
