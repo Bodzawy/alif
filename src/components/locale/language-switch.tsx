@@ -3,7 +3,7 @@
 import { useEffect, useRef, useSyncExternalStore } from "react";
 import { Check, ChevronDown, Globe, X } from "lucide-react";
 
-import { chooseLocale, LOCALE_ORDER, LOCALES, readLocale, subscribeLocale, type Locale } from "@/lib/locale";
+import { chooseLocale, LOCALE_ORDER, LOCALES, readLocale, showLocale, subscribeLocale, type Locale } from "@/lib/locale";
 import { cn } from "@/lib/utils";
 
 // The learner's language: LanguageSwitch (in the headers) shows it and opens
@@ -21,6 +21,9 @@ const HEADING: Record<Locale, string> = {
   tr: "Dilini seç",
   sq: "Zgjidh gjuhën tënde",
   fr: "Choisis ta langue",
+  it: "Scegli la tua lingua",
+  es: "Elige tu idioma",
+  ar: "اختر لغتك",
 };
 
 function useLocaleChoice() {
@@ -72,9 +75,9 @@ export function LanguageDialog() {
     if (firstChoice) openers.forEach((open) => open());
   }, [firstChoice]);
 
-  // The page's language for screen readers (the server renders German).
+  // The page's language for screen readers and its direction (the server renders German).
   useEffect(() => {
-    if (locale) document.documentElement.lang = LOCALES[locale].htmlLang;
+    if (locale) showLocale(locale);
   }, [locale]);
 
   function choose(value: Locale) {
@@ -118,7 +121,7 @@ export function LanguageDialog() {
             </button>
           )}
         </div>
-        <ul className="mt-5 grid gap-2">
+        <ul className="mt-5 grid gap-2 sm:grid-cols-2">
           {LOCALE_ORDER.map((value) => {
             const selected = value === locale;
             return (
@@ -126,11 +129,12 @@ export function LanguageDialog() {
                 <button
                   type="button"
                   lang={LOCALES[value].htmlLang}
+                  dir={LOCALES[value].dir ?? "ltr"}
                   onClick={() => choose(value)}
                   aria-pressed={selected}
                   data-testid={`language-option-${value}`}
                   className={cn(
-                    "flex min-h-14 w-full items-center justify-between gap-3 rounded-2xl border-2 bg-card px-4 py-3 text-left text-lg font-semibold transition hover:border-primary/60 focus-ring",
+                    "flex min-h-14 w-full items-center justify-between gap-3 rounded-2xl border-2 bg-card px-4 py-3 text-start text-lg font-semibold transition hover:border-primary/60 focus-ring",
                     selected ? "border-primary" : "border-border"
                   )}
                 >

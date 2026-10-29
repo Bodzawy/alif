@@ -14,10 +14,10 @@ import { ALLOWED_TTS_TEXTS } from "@/lib/pronunciation/targets";
 import { TRACKS } from "@/lib/track";
 import { buildSsml } from "@/lib/tts/ssml";
 
-// Alif in German, English, Turkish, Albanian and French: every text of the interface and of
+// Alif in German, English, Turkish, Albanian, French, Italian, Spanish and Arabic: every text of the interface and of
 // Lektion 1 has a translation; anything else falls back to German.
 
-const LOCALES = ["en", "tr", "sq", "fr"] as const;
+const LOCALES = ["en", "tr", "sq", "fr", "it", "es", "ar"] as const;
 /** Names stay as they are (the learner reads them in the Arabic dialogue as well). */
 const NAMES = new Set(["Ahmad", "Ali", "Nabila", "Fatima", "Majid"]);
 /** Keys of the lesson data that are not German text. */
@@ -113,6 +113,9 @@ describe("translations", () => {
     expect(translate("Wo steht das {name}?", "fr", { name: "Dschim" })).toBe("Où est le Jim ?");
     expect(translate("Fahr das Alif am Wortende nach. Fang beim grünen Punkt an.", "tr")).toBe("Kelime sonundaki Elif'i çiz. Yeşil noktadan başla.");
     expect(translate("Wörter mit بَ · بِ · بُ", "sq")).toBe("Fjalë me بَ · بِ · بُ");
+    expect(translate("Wo steht das {name}?", "es", { name: "Dschim" })).toBe("¿Dónde está la Yim?");
+    expect(translate("Wo steht das {name}?", "ar", { name: "Dschim" })).toBe("أين تقع الجيم؟");
+    expect(translate("Schritt {n} von {total}", "it", { n: 2, total: 6 })).toBe("Passo 2 di 6");
   });
 
   it("German is the source; a text without translation stays German", () => {
@@ -130,6 +133,11 @@ describe("spoken in the learner's language", () => {
     expect(buildSsml("Süper!", undefined, "tr")).toContain('xml:lang="tr-TR"');
     expect(buildSsml("Shumë mirë!", undefined, "sq")).toContain("sq-AL-AnilaNeural");
     expect(buildSsml("Super !", undefined, "fr")).toContain("fr-FR-DeniseNeural");
+    expect(buildSsml("Ottimo!", undefined, "it")).toContain("it-IT-ElsaNeural");
+    expect(buildSsml("¡Genial!", undefined, "es")).toContain("es-ES-ElviraNeural");
+    expect(buildSsml("رائع!", undefined, "ar")).toContain('xml:lang="ar-SA"');
+    // Arabic without a translation: the German text in the German voice.
+    expect(buildSsml("Super!", undefined, "ar")).toContain("de-DE-KatjaNeural");
     expect(buildSsml("Super!")).toContain("de-DE-KatjaNeural");
     // Arabic is always Arabic.
     expect(buildSsml("بَيْتٌ", undefined, "en")).toContain('xml:lang="ar-SA"');

@@ -13,6 +13,10 @@ export const TTS_LOCALE_VOICES = {
   tr: { lang: "tr-TR", voice: "tr-TR-EmelNeural" },
   sq: { lang: "sq-AL", voice: "sq-AL-AnilaNeural" },
   fr: { lang: "fr-FR", voice: "fr-FR-DeniseNeural" },
+  it: { lang: "it-IT", voice: "it-IT-ElsaNeural" },
+  es: { lang: "es-ES", voice: "es-ES-ElviraNeural" },
+  // Arabic translations are in Arabic script: the Arabic voice speaks them (see buildSsml).
+  ar: { lang: "ar-SA", voice: TTS_VOICE },
 } as const;
 export type TtsLocale = keyof typeof TTS_LOCALE_VOICES;
 
@@ -99,7 +103,8 @@ function speechText(text: string) {
 
 /** `lang`: the learner's language for a text without Arabic script (default German). */
 export function buildSsml(text: string, voice?: TtsVoiceKey, lang: TtsLocale = "de"): string {
-  const local = isGermanText(text) ? TTS_LOCALE_VOICES[lang] : null;
+  // A text without Arabic script in Arabic is one without translation: German speaks it.
+  const local = isGermanText(text) ? TTS_LOCALE_VOICES[lang === "ar" ? "de" : lang] : null;
   return `
       <speak version="1.0"
              xmlns="http://www.w3.org/2001/10/synthesis"

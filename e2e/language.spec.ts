@@ -33,5 +33,16 @@ test("first visit: the language first, then the programme – both in the chosen
   await page.reload();
   await expect(page.getByTestId("language-dialog")).toBeHidden();
   await expect(page.getByTestId("step-position")).toHaveText("Étape 1 sur 6");
+
+  // Arabic: the whole page right to left.
+  await page.getByTestId("language-switch").first().tap();
+  await page.getByTestId("language-option-ar").tap();
+  await expect(page.getByTestId("step-position")).toHaveText("الخطوة 1 من 6");
+  expect(await page.evaluate(() => [document.documentElement.lang, document.documentElement.dir])).toEqual(["ar", "rtl"]);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  await page.getByTestId("language-switch").first().tap();
+  await page.getByTestId("language-option-it").tap();
+  await expect(page.getByTestId("step-position")).toHaveText("Passo 1 di 6");
+  expect(await page.evaluate(() => document.documentElement.dir)).toBe("ltr");
   expect(errors).toEqual([]);
 });

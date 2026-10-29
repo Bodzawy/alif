@@ -54,6 +54,16 @@
   }
 }
 
+/* Interface in Arabic (html dir="rtl"): a text not yet translated stays German, left to right
+   with its punctuation in place; the forward / back arrows point the Arabic way. (Outside the
+   layers: the icon classes are not in the sources, Tailwind would drop the rule.) */
+html[dir="rtl"] :is(p, h1, h2, h3, h4, h5, h6, li, label, dt, dd, figcaption) {
+  unicode-bidi: plaintext;
+}
+html[dir="rtl"] :is(.lucide-arrow-left, .lucide-arrow-right) {
+  scale: -1 1;
+}
+
 @layer utilities {
   .focus-ring {
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
