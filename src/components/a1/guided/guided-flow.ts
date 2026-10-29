@@ -4,6 +4,7 @@ import { useEffect, useReducer, useRef } from "react";
 
 import type { Utterance } from "@/lib/audio/guided-mic";
 import { sleep } from "@/lib/audio/narrate";
+import type { SpeechVoice } from "@/lib/tts/player";
 
 import type { Verdict } from "./evaluate";
 
@@ -23,7 +24,8 @@ import type { Verdict } from "./evaluate";
 //              block is marked "needs practice" unless it was passed
 //   restart  – every block from the first one, without any marks
 
-export type GuidedBlock = { id: string; text: string; target: string };
+/** `voice` / `line`: the speaker's voice and recording of the model audio (as in "Anhören"). */
+export type GuidedBlock = { id: string; text: string; target: string; voice?: SpeechVoice; line?: string };
 export type BlockMark = "done" | "practice";
 export type Stage = "idle" | "focus" | "play" | "listen" | "check" | "right" | "paused" | "finished" | "fallback";
 

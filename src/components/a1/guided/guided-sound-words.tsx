@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import { CheckCircle2, ChevronLeft, ChevronRight, Loader2, Mic, Play, RotateCcw, Volume2, VolumeX } from "lucide-react";
 
-import { SoundWordsStep, type WordRow } from "@/components/a1/sound-words-step";
+import { SoundWordsStep, type GuidedView, type WordRow } from "@/components/a1/sound-words-step";
 import { Button } from "@/components/ui/button";
 import { openGuidedMic, type GuidedMic } from "@/lib/audio/guided-mic";
 import { sleep } from "@/lib/audio/narrate";
@@ -17,11 +17,13 @@ import { cn } from "@/lib/utils";
 import { evaluateUtterance } from "./evaluate";
 import { useGuidedFlow, type BlockMark, type GuidedBlock, type GuidedDeps } from "./guided-flow";
 
-// Guided mode for A1 · Schritt 2 "Wörter mit أَ · إِ · أُ": after one tap the
-// page runs by itself, block by block (right to left, row by row): the block
-// is played (the same audio as "Anhören"), the child repeats, the recording is
+// Guided mode (A1 · Schritt 2 "Wörter mit أَ · إِ · أُ", the expressions of
+// "Begrüßen und sich vorstellen"): after one tap the page runs by itself, block
+// by block: the block is played (the same audio as "Anhören", a recording in the
+// speaker's voice where there is one), the child repeats, the recording is
 // checked by the same evaluation as "Aufnehmen". Without a microphone, or when
 // the evaluation keeps failing, the page falls back to the buttons.
+// GuidedSteps is the flow; the page (`children`) draws the blocks.
 //
 // Quiet controls below the words (sticky, so they stay reachable on a phone):
 // "Vorheriges Wort", "Von vorn" (after a small inline question) and, once a
@@ -62,6 +64,25 @@ const noop = () => () => undefined;
 
 export function GuidedSoundWords({ groups, progressKey }: { groups: Groups; progressKey: string }) {
   const blocks = useMemo(() => guidedBlocks(groups), [groups]);
+  return (
+    <GuidedSteps blocks={blocks} progressKey={progressKey} intro="Hör zu und sprich nach – Wort für Wort. Das Mikrofon hört dir zu.">
+      {(guided) => <SoundWordsStep groups={groups} guided={guided} />}
+    </GuidedSteps>
+  );
+}
+
+type GuidedStepsProps = {
+  blocks: GuidedBlock[];
+  progressKey: string;
+  /** The start card's text (German; shown translated). */
+  intro: string;
+  /** Where the arrows sit on the active block: centred on its picture (4:3), or along its bottom edge. */
+  arrows?: "picture" | "bottom";
+  /** The blocks: framed while guided; without `guided` the button page. */
+  children: (guided?: GuidedView) => ReactNode;
+};
+
+export function GuidedSteps({ blocks, progressKey, intro, arrows = "picture", children: render }: GuidedStepsProps) {
   const t = useT();
   const hydrated = useSyncExternalStore(noop, () => true, () => false);
   const completed = useSyncExternalStore(subscribeProgress, () => Boolean(getLessonProgress(progressKey).completedAt), () => false);
@@ -90,7 +111,7 @@ export function GuidedSoundWords({ groups, progressKey }: { groups: Groups; prog
 
   const deps: GuidedDeps = useMemo(() => {
     /** Speaks a text through /api/tts on the one audio element; resolves when it ended (or could not play). */
-    async function speak(text: string, signal: AbortSignal, local = false) {
+    async function speak(text: string, signal: AbortSignal, local = false, voice?: GuidedBlock["voice"], line?: string) {
       const n = narrator.current;
       let result: "ended" | "skipped" | "interrupted" = "skipped";
       if (n) {
@@ -98,7 +119,7 @@ export function GuidedSoundWords({ groups, progressKey }: { groups: Groups; prog
         signal.addEventListener("abort", onAbort);
         const cap = new AbortController();
         const playing = (async () => {
-          const url = await (local ? localSpeechUrl(text) : speechUrl(text));
+          const url = await (local ? localSpeechUrl(text) : speechUrl(text, voice, line));
           if (signal.aborted || cap.signal.aborted) return "interrupted" as const;
           return n.playUrl(url);
         })().catch(() => "skipped" as const); // text-to-speech not reachable: go on without the audio
@@ -111,7 +132,7 @@ export function GuidedSoundWords({ groups, progressKey }: { groups: Groups; prog
     }
     return {
       async play(block, signal) {
-        if ((await speak(block.text, signal)) !== "ended") await sleep(SILENT_PLAY_MS, signal);
+        if ((await speak(block.text, signal, false, block.voice, block.line)) !== "ended") await sleep(SILENT_PLAY_MS, signal);
       },
       // A right answer: "Super!" – the next block follows when it has finished.
       async praise(signal) {
@@ -122,7 +143,7 @@ export function GuidedSoundWords({ groups, progressKey }: { groups: Groups; prog
         // While the server evaluates: load what plays after the verdict ("Super!", the next block), so it starts at once.
         const next = blocks[blocks.findIndex((b) => b.id === block.id) + 1];
         void localSpeechUrl(GERMAN_CUES.super).catch(() => undefined);
-        if (next) void speechUrl(next.text).catch(() => undefined);
+        if (next) void speechUrl(next.text, next.voice, next.line).catch(() => undefined);
         return evaluateUtterance(utterance, block.target, signal);
       },
     };
@@ -266,7 +287,11 @@ export function GuidedSoundWords({ groups, progressKey }: { groups: Groups; prog
         )}
         {isActive && mode === "guided" && !confirmRestart && (
           // Over the picture (an overlay with the picture's 4:3 shape), vertically centred on it.
-          <div dir="ltr" data-testid="guided-arrows" className="pointer-events-none absolute inset-x-0 top-0 flex aspect-[4/3] max-h-full items-center justify-between px-2">
+          <div
+            dir="ltr"
+            data-testid="guided-arrows"
+            className={cn("pointer-events-none absolute inset-x-0 flex items-center justify-between px-2", arrows === "picture" ? "top-0 aspect-[4/3] max-h-full" : "bottom-3")}
+          >
             <Button
               variant="secondary"
               onClick={flow.forward}
@@ -307,7 +332,7 @@ export function GuidedSoundWords({ groups, progressKey }: { groups: Groups; prog
             {t(note)}
           </p>
         )}
-        <SoundWordsStep groups={groups} />
+        {render()}
       </div>
     );
   }
@@ -336,7 +361,7 @@ export function GuidedSoundWords({ groups, progressKey }: { groups: Groups; prog
 
       {mode === "start" && (
         <div className="mb-6 flex flex-col items-center justify-center gap-4 rounded-3xl border bg-card p-8 text-center shadow-card" data-testid="start-overlay">
-          <p className="max-w-sm text-muted-foreground">{t("Hör zu und sprich nach – Wort für Wort. Das Mikrofon hört dir zu.")}</p>
+          <p className="max-w-sm text-muted-foreground">{t(intro)}</p>
           <Button size="lg" onClick={() => void start()} disabled={!narrator.current} data-testid="start-button" className="min-h-14">
             <Play className="h-5 w-5" aria-hidden /> {t("Los geht's!")}
           </Button>
@@ -358,7 +383,7 @@ export function GuidedSoundWords({ groups, progressKey }: { groups: Groups; prog
         {t(caption).replace(" …", "").replace("!", "")}
       </p>
 
-      <SoundWordsStep groups={groups} guided={{ frame, passed: (id) => marks[id] === "done" }} />
+      {render({ frame, passed: (id) => marks[id] === "done" })}
 
       {mode === "guided" && (
         // Stays at the bottom of the screen while the words scroll. "Überspringen" (only after two

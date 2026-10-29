@@ -12,7 +12,7 @@ import { WritingStep } from "@/components/a1/writing/writing-step";
 import { GuidedSoundWords } from "@/components/a1/guided/guided-sound-words";
 import { DialogueStep } from "@/components/a1/dialogue/dialogue-step";
 import { LetterFindStep } from "@/components/a1/letter-find/letter-find-step";
-import { PhrasesStep } from "@/components/a1/phrases/phrases-step";
+import { GuidedPhrases, PhrasesStep } from "@/components/a1/phrases/phrases-step";
 import { ClozeStep } from "@/components/a1/cloze/cloze-step";
 import { CompareStep } from "@/components/a1/compare/compare-step";
 import { OrderStep } from "@/components/a1/order/order-step";
@@ -153,7 +153,11 @@ export default async function A1StepPage({ params }: { params: Promise<Params> }
       ) : step.kind === "dialogue" ? (
         <DialogueStep dialogue={step.dialogue} mode={step.mode} progressKey={progressKey} />
       ) : step.kind === "phrases" ? (
-        <PhrasesStep groups={step.groups} progressKey={progressKey} />
+        step.guided ? (
+          <GuidedPhrases groups={step.groups} progressKey={progressKey} />
+        ) : (
+          <PhrasesStep groups={step.groups} progressKey={progressKey} />
+        )
       ) : step.kind === "letter-find" ? (
         <LetterFindStep find={step.find} progressKey={progressKey} />
       ) : step.kind === "positions" ? (

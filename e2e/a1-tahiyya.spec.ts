@@ -36,10 +36,11 @@ async function tapLetter(page: Page, letter: Locator) {
 test.describe("phone", () => {
   test.use({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true });
 
-  test("from the end of صَبَاحُ الْخَيْر to the new entry; Begrüßung and Sich vorstellen with listen and pronunciation", async ({ page }) => {
-    test.setTimeout(180_000);
+  test("from the end of صَبَاحُ الْخَيْر to the new entry; Begrüßung and Sich vorstellen guided: played, repeated, checked – no buttons", async ({ page }) => {
+    test.setTimeout(240_000);
     const errors = collectPageErrors(page);
     const calls = await mockServices(page);
+    await syntheticVoice(page);
 
     await page.goto("/a1/lesson-1/sabah-al-khayr/step-7");
     await page.getByTestId("next-entry").tap();
@@ -57,17 +58,21 @@ test.describe("phone", () => {
     await expect(page.getByTestId("phrase-german-p-bi-khayr")).toContainText("Gut, Gott sei Dank.");
     expect(await noHorizontalScroll(page)).toBe(true);
 
-    // In Majid's voice: his recording of the line (or /api/tts in his voice without it).
-    const heard = page.waitForRequest((r) => r.url().includes(`/audio/ar/${recorded["t-kayfa-haluki"]!.file}.mp3`) || (r.url().endsWith("/api/tts") && (r.postData() ?? "").includes("حَالُكِ")));
-    await page.getByTestId("exercise-p-kayfa-haluki-listen").tap();
+    // One tap, then every expression by itself: played (in the speaker's voice – Majid's recording of
+    // حَالُكِ, or /api/tts in his voice without it), repeated, checked, tinted; no listen / record buttons.
+    const heard = page.waitForRequest(
+      (r) => r.url().includes(`/audio/ar/${recorded["t-kayfa-haluki"]!.file}.mp3`) || (r.url().endsWith("/api/tts") && (r.postData() ?? "").includes("حَالُكِ")),
+      { timeout: 120_000 }
+    );
+    await expect(page.getByTestId("start-overlay")).toBeVisible();
+    await expect(page.getByTestId("exercise-p-kayfa-haluki-listen")).toHaveCount(0);
+    await page.getByTestId("start-button").tap();
+    await expect(page.getByTestId("guided-step")).toHaveAttribute("data-mode", "guided");
     await heard;
-
     const step1 = a1Tahiyya.steps[0]!;
     if (step1.kind !== "phrases") throw new Error("step-1 must be phrases");
-    for (const item of step1.groups.flatMap((g) => g.items)) {
-      await recordExercise(page, item.id);
-      await expect(page.getByTestId(`phrase-passed-${item.id}`)).toBeVisible({ timeout: 15_000 });
-    }
+    await expect(page.getByTestId("guided-step")).toHaveAttribute("data-stage", "finished", { timeout: 150_000 });
+    for (const item of step1.groups.flatMap((g) => g.items)) await expect(page.getByTestId(`block-${item.id}`)).toHaveAttribute("data-state", "done");
     expect(calls.uploads).toEqual(["صباح الخير", "صباح النور", "كيف حالك", "كيف حالك", "بخير الحمد لله"]);
     await expect(page.getByTestId("step-completed")).toBeVisible();
 
@@ -75,10 +80,8 @@ test.describe("phone", () => {
     await expect(page).toHaveURL(new RegExp(`${BASE}/step-2$`));
     await expect(page.getByTestId("phrase-arabic-p-ana-majid")).toHaveText("أَنَا مَاجِدٌ.");
     await expect(page.getByTestId("phrase-arabic-p-wa-ana-fatima")).toHaveText("وَأَنَا فَاطِمَةُ.");
-    for (const id of ["p-ana-majid", "p-wa-ana-fatima"]) {
-      await recordExercise(page, id);
-      await expect(page.getByTestId(`phrase-passed-${id}`)).toBeVisible({ timeout: 15_000 });
-    }
+    await page.getByTestId("start-button").tap();
+    await expect(page.getByTestId("guided-step")).toHaveAttribute("data-stage", "finished", { timeout: 60_000 });
     expect(calls.uploads.slice(-2)).toEqual(["أنا ماجد", "وأنا فاطمة"]);
     const p = await progress(page);
     for (const n of [1, 2]) expect(p[`a1/lesson-1/tahiyya-wa-taqdim/step-${n}`]?.completedAt, `step-${n}`).toBeTruthy();

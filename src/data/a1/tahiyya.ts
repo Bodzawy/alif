@@ -71,6 +71,7 @@ export const a1Tahiyya: A1Lesson = {
       slug: "step-1",
       title: "Begrüßung am Morgen",
       navLabel: "Begrüßung",
+      guided: true,
       instruction: { arabic: "التَّحِيَّةُ فِي الصَّبَاحِ", german: "Hör jeden Ausdruck an und sprich ihn nach. Achte darauf, ob du mit einem Mann oder einer Frau sprichst." },
       groups: [
         {
@@ -97,6 +98,7 @@ export const a1Tahiyya: A1Lesson = {
       kind: "phrases",
       slug: "step-2",
       title: "Sich vorstellen",
+      guided: true,
       instruction: { arabic: "تَقْدِيمُ النَّفْسِ", german: "So sagst du, wie du heißt. Hör zu und sprich nach." },
       groups: [
         {

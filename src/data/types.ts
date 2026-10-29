@@ -193,6 +193,8 @@ export type A1Step =
       kind: "phrases";
       /** Expressions to listen to and practise, in book order (e.g. a greeting and its answer). */
       groups: PhraseGroup[];
+      /** Guided: after one tap each expression is played and repeated by itself (no buttons). */
+      guided?: boolean;
     })
   | (A1StepBase & {
       kind: "letter-find";
