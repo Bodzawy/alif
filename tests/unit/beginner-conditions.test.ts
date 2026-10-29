@@ -24,6 +24,14 @@ describe("beginner_conditions.json", () => {
     }
     for (const sound of ["أَ", "إِ", "أُ"]) expect(BEGINNER_RULES[sound]!.excellent!.conditions).toEqual([]);
     expect(BEGINNER_RULES["بيت"]!.excellent!.conditions).toEqual(["iqra_phonemes contains ['b|bb','t|tt|T|TT']"]);
+    // The letters: the sounds a beginner says instead count too (ب p, ت s, ج g, ذ z, ر g / x, غ j).
+    const letter = (name: string) => BEGINNER_RULES[name]!.excellent!.conditions;
+    expect(letter("باء")).toEqual(["iqra_phonemes contains ['b|bb|p|pp']"]);
+    expect(letter("تاء")).toEqual(["iqra_phonemes contains ['t|tt|T|TT|s']"]);
+    expect(letter("جيم")).toEqual(["iqra_phonemes contains ['j|jj|g|gg','m|mm']"]);
+    expect(letter("ذال")).toEqual(["iqra_phonemes contains ['*|z|Z']"]);
+    expect(letter("راء")).toEqual(["iqra_phonemes contains ['r|rr|g|gg|x|xx']"]);
+    expect(letter("غين")).toEqual(["iqra_phonemes contains ['g|gg|x|xx|j','y|yy']"]);
   });
 
   it("every target: excellent first, then needs_improvement; only gentle conditions the engine knows", () => {
@@ -33,7 +41,8 @@ describe("beginner_conditions.json", () => {
         expect(rule.message, target).toBeTruthy();
         for (const condition of rule.conditions) {
           expect(KNOWN.some((pattern) => pattern.test(condition)), `${target}: ${condition}`).toBe(true);
-          expect(condition, target).not.toMatch(/'r'|\|r\||'r\||\|r'|rr/); // ر is not checked
+          // ر is not checked – except in the letter راء itself (r, or the g / x a beginner says instead).
+          if (target !== "راء") expect(condition, target).not.toMatch(/'r'|\|r\||'r\||\|r'|rr/);
         }
       }
     }

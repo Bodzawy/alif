@@ -14,7 +14,7 @@
   "باء": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['b|bb']"
+        "iqra_phonemes contains ['b|bb|p|pp']"
       ],
       "message": "ممتاز 👏 نطقت حرف الباء بشكل صحيح"
     },
@@ -28,7 +28,7 @@
   "تاء": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['t|tt|T|TT']"
+        "iqra_phonemes contains ['t|tt|T|TT|s']"
       ],
       "message": "ممتاز 👏 نطقت حرف التاء بشكل صحيح"
     },
@@ -56,7 +56,7 @@
   "جيم": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['j|jj','m|mm']"
+        "iqra_phonemes contains ['j|jj|g|gg','m|mm']"
       ],
       "message": "ممتاز 👏 نطقت حرف الجيم بشكل صحيح"
     },
@@ -111,7 +111,9 @@
   },
   "ذال": {
     "excellent": {
-      "conditions": [],
+      "conditions": [
+        "iqra_phonemes contains ['*|z|Z']"
+      ],
       "message": "ممتاز 👏 نطقت حرف الذال بشكل صحيح"
     },
     "needs_improvement": {
@@ -123,7 +125,9 @@
   },
   "راء": {
     "excellent": {
-      "conditions": [],
+      "conditions": [
+        "iqra_phonemes contains ['r|rr|g|gg|x|xx']"
+      ],
       "message": "ممتاز 👏 نطقت حرف الراء بشكل صحيح"
     },
     "needs_improvement": {
@@ -248,7 +252,7 @@
   "غين": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['g|gg|x|xx','y|yy']"
+        "iqra_phonemes contains ['g|gg|x|xx|j','y|yy']"
       ],
       "message": "ممتاز 👏 نطقت حرف الغين بشكل صحيح"
     },
