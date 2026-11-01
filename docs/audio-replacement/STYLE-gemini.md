@@ -31,3 +31,22 @@ A word without a final vowel mark ends in sukun. A single letter with a vowel (�
 Each line is one separate item: say it once, at a natural, brisk teaching pace, then pause for about 1 second before the next line.
 Do not add, repeat, explain or translate anything.
 ```
+
+## Lektion 2 on (`_batch-l2-NN`, `_batch-l2s-NN`, `_batch-l2p-NN`)
+
+`scripts/audio/batches-from-lessons.ts -- --from=2` writes the texts of Lektion 2 … 20 without a
+recording, in lesson order: words (`_batch-l2-NN`, style above), sentences (`_batch-l2s-NN`) and
+texts of several sentences (`_batch-l2p-NN`). Dialogue lines are not in them (speakers' voices).
+Record the sentences with the style below: `split_batch.py` finds the borders between the texts
+only when the pause between two texts is clearly longer than every pause inside one.
+Install: `python3 scripts/audio/install_clips.py l2` (sentences `l2s`, several sentences `l2p`).
+
+```
+Read in Modern Standard Arabic (Fusha) as an adult male teacher with a clear, deep voice, like a Quran or Arabic-language teacher.
+Use classical Fusha pronunciation, never a dialect: ق as a true qaf, ج as jīm, ث and ذ as interdental sounds, ض and ظ and ص and ط fully emphatic, ع and ح from the throat, and every hamza clearly as a glottal stop.
+Pronounce every word exactly as it is vowelled: every fatha, kasra, damma, sukun, shadda, hamza and madda, and every case ending that is written. Where tanwin is written, pronounce it fully.
+A word without a final vowel mark ends in sukun.
+Read each item as one connected utterance with natural sentence intonation (a question as a question). Inside an item, pause only briefly at a comma or full stop – never longer than half a second.
+Each item is separated by a blank line: after each item, stay completely silent for about 3 seconds before the next one.
+Do not add, repeat, explain or translate anything.
+```

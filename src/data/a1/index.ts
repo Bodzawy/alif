@@ -132,7 +132,7 @@ export function a1FormsFallbackTexts(): string[] {
 
 const PUNCT = /[.،؟!:]+$/;
 
-function stepSpokenTexts(step: A1Lesson["steps"][number]): string[] {
+export function stepSpokenTexts(step: A1Lesson["steps"][number]): string[] {
   switch (step.kind) {
     case "gaps":
       return step.gaps.items.map((item) => item.spoken ?? item.arabic);

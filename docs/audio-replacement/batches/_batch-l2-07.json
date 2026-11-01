@@ -1,0 +1,505 @@
+{
+ "batch": "batch-l2-07",
+ "items": [
+  {
+   "id": "w1186",
+   "kind": "word",
+   "text": "الْبُرْتُغَالْ"
+  },
+  {
+   "id": "w1187",
+   "kind": "word",
+   "text": "لُو"
+  },
+  {
+   "id": "w1188",
+   "kind": "word",
+   "text": "لَا"
+  },
+  {
+   "id": "w1189",
+   "kind": "word",
+   "text": "لِي"
+  },
+  {
+   "id": "w1190",
+   "kind": "word",
+   "text": "خَلَقَ"
+  },
+  {
+   "id": "w1191",
+   "kind": "word",
+   "text": "جَلَسَ"
+  },
+  {
+   "id": "w1192",
+   "kind": "word",
+   "text": "نَضَجَ"
+  },
+  {
+   "id": "w1193",
+   "kind": "word",
+   "text": "خَجَلْ"
+  },
+  {
+   "id": "w1194",
+   "kind": "word",
+   "text": "رِجْلْ"
+  },
+  {
+   "id": "w1195",
+   "kind": "word",
+   "text": "فَرِحَ"
+  },
+  {
+   "id": "w1196",
+   "kind": "word",
+   "text": "لَصَقَ"
+  },
+  {
+   "id": "w1197",
+   "kind": "word",
+   "text": "بَخِلَ"
+  },
+  {
+   "id": "w1198",
+   "kind": "word",
+   "text": "جَادَلَ"
+  },
+  {
+   "id": "w1199",
+   "kind": "word",
+   "text": "نَزَلَ"
+  },
+  {
+   "id": "w0363",
+   "kind": "letter-sound",
+   "text": "مَ"
+  },
+  {
+   "id": "w0364",
+   "kind": "word",
+   "text": "مَكْتَبٌ"
+  },
+  {
+   "id": "w0365",
+   "kind": "word",
+   "text": "مَوْزٌ"
+  },
+  {
+   "id": "w0366",
+   "kind": "word",
+   "text": "مَقْلَمَةٌ"
+  },
+  {
+   "id": "w0367",
+   "kind": "letter-sound",
+   "text": "مِ"
+  },
+  {
+   "id": "w0368",
+   "kind": "word",
+   "text": "مِيكَانِيكِيٌّ"
+  },
+  {
+   "id": "w0369",
+   "kind": "word",
+   "text": "مِمْحَاةٌ"
+  },
+  {
+   "id": "w0370",
+   "kind": "word",
+   "text": "مِفْتَاحٌ"
+  },
+  {
+   "id": "w0371",
+   "kind": "letter-sound",
+   "text": "مُ"
+  },
+  {
+   "id": "w0372",
+   "kind": "word",
+   "text": "مُدِيرٌ"
+  },
+  {
+   "id": "w0373",
+   "kind": "word",
+   "text": "مُسْتَشْفًى"
+  },
+  {
+   "id": "w0374",
+   "kind": "word",
+   "text": "مُشْطٌ"
+  },
+  {
+   "id": "w1202",
+   "kind": "word",
+   "text": "أَمْشَاط"
+  },
+  {
+   "id": "w1203",
+   "kind": "word",
+   "text": "مِيكَانِيكِيّ"
+  },
+  {
+   "id": "w1204",
+   "kind": "word",
+   "text": "مَوْز"
+  },
+  {
+   "id": "w1205",
+   "kind": "word",
+   "text": "مَقْلَمَة"
+  },
+  {
+   "id": "w1200",
+   "kind": "word",
+   "text": "مِمْحَاة"
+  },
+  {
+   "id": "w1206",
+   "kind": "word",
+   "text": "مُشْط"
+  },
+  {
+   "id": "w0517",
+   "kind": "word",
+   "text": "مَكْتَب"
+  },
+  {
+   "id": "w1207",
+   "kind": "word",
+   "text": "مُدِير"
+  },
+  {
+   "id": "w1208",
+   "kind": "word",
+   "text": "مُسْتَشْفَى"
+  },
+  {
+   "id": "w1209",
+   "kind": "word",
+   "text": "مُحْسِن"
+  },
+  {
+   "id": "w1210",
+   "kind": "word",
+   "text": "مَاجِد"
+  },
+  {
+   "id": "w1211",
+   "kind": "word",
+   "text": "مِيرْنَا"
+  },
+  {
+   "id": "w1212",
+   "kind": "word",
+   "text": "مُفِيدَة"
+  },
+  {
+   "id": "w1213",
+   "kind": "word",
+   "text": "مُصْطَفَى"
+  },
+  {
+   "id": "w1214",
+   "kind": "word",
+   "text": "مَشْهُور"
+  },
+  {
+   "id": "w1215",
+   "kind": "word",
+   "text": "مِيرِي"
+  },
+  {
+   "id": "w1216",
+   "kind": "word",
+   "text": "حَمِيدْ"
+  },
+  {
+   "id": "w1217",
+   "kind": "word",
+   "text": "أَمِينَة"
+  },
+  {
+   "id": "w1218",
+   "kind": "word",
+   "text": "حَاتِمْ"
+  },
+  {
+   "id": "w0507",
+   "kind": "word",
+   "text": "أُمَيْمَة"
+  },
+  {
+   "id": "w1219",
+   "kind": "word",
+   "text": "أَمْجَاد"
+  },
+  {
+   "id": "w1220",
+   "kind": "word",
+   "text": "مُحَمَّدْ"
+  },
+  {
+   "id": "w1221",
+   "kind": "word",
+   "text": "أَمِير"
+  },
+  {
+   "id": "w1222",
+   "kind": "word",
+   "text": "مُو"
+  },
+  {
+   "id": "w1223",
+   "kind": "word",
+   "text": "مَا"
+  },
+  {
+   "id": "w1224",
+   "kind": "word",
+   "text": "مِي"
+  },
+  {
+   "id": "w1225",
+   "kind": "word",
+   "text": "مَشْبَكْ"
+  },
+  {
+   "id": "w1226",
+   "kind": "word",
+   "text": "أَمْثَالْ"
+  },
+  {
+   "id": "w1227",
+   "kind": "word",
+   "text": "مَوْكِبْ"
+  },
+  {
+   "id": "w1228",
+   "kind": "word",
+   "text": "يَوْمْ"
+  },
+  {
+   "id": "w1229",
+   "kind": "word",
+   "text": "فُولْ"
+  },
+  {
+   "id": "w1230",
+   "kind": "word",
+   "text": "وَلَدْ"
+  },
+  {
+   "id": "w1231",
+   "kind": "word",
+   "text": "رَقْمْ"
+  },
+  {
+   "id": "w1232",
+   "kind": "word",
+   "text": "مَرِيضْ"
+  },
+  {
+   "id": "w1233",
+   "kind": "word",
+   "text": "آمَالْ"
+  },
+  {
+   "id": "w1234",
+   "kind": "word",
+   "text": "صَوْمْ"
+  },
+  {
+   "id": "w0375",
+   "kind": "letter-sound",
+   "text": "نَ"
+  },
+  {
+   "id": "w0376",
+   "kind": "word",
+   "text": "نَاسٌ"
+  },
+  {
+   "id": "w0377",
+   "kind": "word",
+   "text": "نَخْلَةٌ"
+  },
+  {
+   "id": "w0378",
+   "kind": "word",
+   "text": "نَجْمٌ"
+  },
+  {
+   "id": "w0379",
+   "kind": "letter-sound",
+   "text": "نِ"
+  },
+  {
+   "id": "w0380",
+   "kind": "word",
+   "text": "نِمْرَةٌ"
+  },
+  {
+   "id": "w0381",
+   "kind": "word",
+   "text": "نِمْرٌ"
+  },
+  {
+   "id": "w0382",
+   "kind": "word",
+   "text": "نِسْنَاسٌ"
+  },
+  {
+   "id": "w0383",
+   "kind": "letter-sound",
+   "text": "نُ"
+  },
+  {
+   "id": "w0384",
+   "kind": "word",
+   "text": "نُورٌ"
+  },
+  {
+   "id": "w0385",
+   "kind": "word",
+   "text": "نُجُومٌ"
+  },
+  {
+   "id": "w0386",
+   "kind": "word",
+   "text": "نُوتَةٌ"
+  },
+  {
+   "id": "w0479",
+   "kind": "word",
+   "text": "النَّاس"
+  },
+  {
+   "id": "w1236",
+   "kind": "word",
+   "text": "مِنْ"
+  },
+  {
+   "id": "w1237",
+   "kind": "word",
+   "text": "أَنْتَ"
+  },
+  {
+   "id": "w1238",
+   "kind": "word",
+   "text": "نَخْلَة"
+  },
+  {
+   "id": "w1239",
+   "kind": "word",
+   "text": "نُور"
+  },
+  {
+   "id": "w1240",
+   "kind": "word",
+   "text": "نُجُوم"
+  },
+  {
+   "id": "w1235",
+   "kind": "word",
+   "text": "نَاس"
+  },
+  {
+   "id": "w1241",
+   "kind": "word",
+   "text": "نِسْنَاس"
+  },
+  {
+   "id": "w1242",
+   "kind": "word",
+   "text": "نُوتَة"
+  },
+  {
+   "id": "w1243",
+   "kind": "word",
+   "text": "نِمْرَة"
+  },
+  {
+   "id": "w1244",
+   "kind": "word",
+   "text": "نَجْم"
+  },
+  {
+   "id": "w1245",
+   "kind": "word",
+   "text": "نِمْر"
+  },
+  {
+   "id": "w1246",
+   "kind": "word",
+   "text": "نَصْرْ"
+  },
+  {
+   "id": "w1247",
+   "kind": "word",
+   "text": "مَنْصُور"
+  },
+  {
+   "id": "w1248",
+   "kind": "word",
+   "text": "فُرْنْ"
+  },
+  {
+   "id": "w1249",
+   "kind": "word",
+   "text": "نَوَالْ"
+  },
+  {
+   "id": "w1250",
+   "kind": "word",
+   "text": "نَاجِي"
+  },
+  {
+   "id": "w1251",
+   "kind": "word",
+   "text": "حَنَانْ"
+  },
+  {
+   "id": "w1252",
+   "kind": "word",
+   "text": "أَنْتِ"
+  },
+  {
+   "id": "w1253",
+   "kind": "word",
+   "text": "أَنْتُمَا"
+  },
+  {
+   "id": "w1254",
+   "kind": "word",
+   "text": "أَنْتُنَّ"
+  },
+  {
+   "id": "w1255",
+   "kind": "word",
+   "text": "أَنْتُمْ"
+  },
+  {
+   "id": "w1256",
+   "kind": "word",
+   "text": "نُصْحِي"
+  },
+  {
+   "id": "w1257",
+   "kind": "word",
+   "text": "نَفَرْ"
+  },
+  {
+   "id": "w1258",
+   "kind": "word",
+   "text": "نِفِرْتِيتِي"
+  },
+  {
+   "id": "w1259",
+   "kind": "word",
+   "text": "نَحْنُ"
+  }
+ ]
+}
