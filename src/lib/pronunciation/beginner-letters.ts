@@ -3,6 +3,7 @@ import { ARABIC_LETTERS } from "./letters";
 // ALIF Speaking (Beginner): which letters of a target IQRA must hear, and the sounds each may be
 // heard as – the condition of the letter's own name in beginner_conditions.json (e.g. باء: b or p).
 // A single letter with a short vowel (بَ بِ بُ, أَ إِ أُ) also needs its vowel, in any of its forms.
+// أُ is checked in every word too: as u, as o (a beginner's oh) or as the Hamza itself.
 // Used by scripts/beginner-conditions.ts (which writes the file) and by its tests.
 
 export const BEGINNER_FILE = "src/lib/pronunciation/beginner_conditions.json";
@@ -25,9 +26,14 @@ export const VOWEL_SOUNDS: Readonly<Record<string, readonly string[]>> = {
   "\u064F": ["u", "uu", "U", "UU"],
 };
 
+/** أُ – the Hamza with Damma, alone or in a word: its Damma in any form, an o, or the Hamza ("<"). */
+export const HAMZA_DAMMA = "\u0623\u064F";
+export const HAMZA_DAMMA_SOUNDS: readonly string[] = [...VOWEL_SOUNDS["\u064F"]!, "o", "oo", "oh", "<"];
+
 /** The vowel sounds of a single letter with one short vowel (بَ, إِ …), else null. */
 export function syllableVowel(text: string): readonly string[] | null {
   const chars = [...text.trim()];
+  if (text.trim() === HAMZA_DAMMA) return HAMZA_DAMMA_SOUNDS;
   return chars.length === 2 && LETTER.test(chars[0]!) ? (VOWEL_SOUNDS[chars[1]!] ?? null) : null;
 }
 
@@ -60,12 +66,20 @@ export function spokenLetters(text: string): string[] {
   return out;
 }
 
-/** The tokens of a target's Beginner condition: every spoken letter with its agreed sounds (and a syllable's vowel). */
+/**
+ * The tokens of a target's Beginner condition: every spoken letter with its agreed sounds (and a syllable's
+ * vowel). A word with أُ (أُمٌّ, أُذُنٌ …) needs it too, once, where it first stands among the letters.
+ */
 export function beginnerLetterTokens(text: string, rules: RuleFile): Array<{ letter: string; alternatives: string[] }> {
   const letters = spokenLetters(text).flatMap((letter) => {
     const alternatives = letterSounds(letter, rules);
     return alternatives ? [{ letter, alternatives }] : [];
   });
   const vowel = syllableVowel(text);
-  return vowel ? [...letters, { letter: [...text.trim()][1]!, alternatives: [...vowel] }] : letters;
+  if (vowel) return [...letters, { letter: [...text.trim()][1]!, alternatives: [...vowel] }];
+  const at = text.indexOf(HAMZA_DAMMA);
+  if (at < 0) return letters;
+  const before = new Set(spokenLetters(text.slice(0, at)));
+  const index = letters.filter(({ letter }) => before.has(letter)).length;
+  return [...letters.slice(0, index), { letter: HAMZA_DAMMA, alternatives: [...HAMZA_DAMMA_SOUNDS] }, ...letters.slice(index)];
 }

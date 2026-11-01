@@ -40,7 +40,7 @@ describe("beginner_conditions.json", () => {
     const syllable = (target: string) => BEGINNER_RULES[target]!.excellent!.conditions;
     expect(syllable("أَ")).toEqual(["iqra_phonemes contains ['a|aa|A|AA|aah|Aah']"]);
     expect(syllable("إِ")).toEqual(["iqra_phonemes contains ['i|ii|I|II|iey|Iey']"]);
-    expect(syllable("أُ")).toEqual(["iqra_phonemes contains ['u|uu|U|UU']"]);
+    expect(syllable("أُ")).toEqual(["iqra_phonemes contains ['u|uu|U|UU|o|oo|oh|<']"]);
     expect(syllable("بَ")).toEqual(["iqra_phonemes contains ['b|bb|p|pp','a|aa|A|AA|aah|Aah']"]);
     expect(syllable("خُ")).toEqual(["iqra_phonemes contains ['x|xx|H|HH|h|hh','u|uu|U|UU']"]);
     const syllables = Object.keys(BEGINNER_RULES).filter((target) => syllableVowel(target));
@@ -49,7 +49,11 @@ describe("beginner_conditions.json", () => {
     expect(BEGINNER_RULES["بيت"]!.excellent!.conditions).toEqual(["iqra_phonemes contains ['b|bb|p|pp','y|yy','t|tt|T|TT|s']"]);
     // Sounds added by hand stay (تين: t or d, f, s, k; its n or m).
     expect(BEGINNER_RULES["تين"]!.excellent!.conditions).toEqual(["iqra_phonemes contains ['t|tt|T|TT|s|d|dd|f|ff|k','n|nn|m|mm']"]);
-    // Not checked: the Hamza, long vowels, the ل of ال before a sun letter; ث and ف are two letters.
+    // أُ in a word: as u, o or the Hamza, where it stands (أُمٌّ, أُذُنٌ; تَقْرَأُ at the end).
+    expect(BEGINNER_RULES["أم"]!.excellent!.conditions).toEqual(["iqra_phonemes contains ['u|uu|U|UU|o|oo|oh|<','m|mm']"]);
+    expect(BEGINNER_RULES["أذن"]!.excellent!.conditions).toEqual(["iqra_phonemes contains ['u|uu|U|UU|o|oo|oh|<','*|z|Z|**|zz|ZZ|d|dd','n|nn']"]);
+    expect(beginnerLetterTokens("تَقْرَأُ", BEGINNER_RULES as unknown as RuleFile).map(({ letter }) => letter)).toEqual(["ت", "ق", "ر", "أُ"]);
+    // Not checked: the Hamza (but أُ), long vowels, the ل of ال before a sun letter; ث and ف are two letters.
     expect(spokenLetters("أَمِيرٌ")).toEqual(["م", "ر"]);
     expect(spokenLetters("الشَّمْسُ")).toEqual(["ش", "م", "س"]);
     expect(spokenLetters("صَبَاحُ الْخَيْرِ")).toEqual(["ص", "ب", "ح", "ل", "خ", "ي", "ر"]);

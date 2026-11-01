@@ -1652,7 +1652,7 @@
   "أذن": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['*|z|Z|**|zz|ZZ|d|dd','n|nn']"
+        "iqra_phonemes contains ['u|uu|U|UU|o|oo|oh|<','*|z|Z|**|zz|ZZ|d|dd','n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة أذن بشكل صحيح"
     },
@@ -1666,7 +1666,7 @@
   "أم": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['m|mm']"
+        "iqra_phonemes contains ['u|uu|U|UU|o|oo|oh|<','m|mm']"
       ],
       "message": "ممتاز 👏 نطقت كلمة أم بشكل صحيح"
     },
@@ -1680,7 +1680,7 @@
   "أسرة": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['s|ss|S|SS','r|rr|g|gg|x|xx']"
+        "iqra_phonemes contains ['u|uu|U|UU|o|oo|oh|<','s|ss|S|SS','r|rr|g|gg|x|xx']"
       ],
       "message": "ممتاز 👏 نطقت كلمة أسرة بشكل صحيح"
     },
@@ -6076,7 +6076,7 @@
   "أميمة": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['m|mm','y|yy']"
+        "iqra_phonemes contains ['u|uu|U|UU|o|oo|oh|<','m|mm','y|yy']"
       ],
       "message": "ممتاز 👏 نطقت كلمة أميمة بشكل صحيح"
     },
@@ -7350,7 +7350,7 @@
   "هذه صورة أسرتي": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['h|hh|H|HH','*|z|Z','S|SS|s|ss','r|rr|g|gg|x|xx','s|ss|S|SS','t|tt|T|TT|s']"
+        "iqra_phonemes contains ['h|hh|H|HH','*|z|Z','S|SS|s|ss','r|rr|g|gg|x|xx','u|uu|U|UU|o|oo|oh|<','s|ss|S|SS','t|tt|T|TT|s']"
       ],
       "message": "ممتاز 👏 نطقت كلمة هذه صورة أسرتي بشكل صحيح"
     },
@@ -7378,7 +7378,7 @@
   "أمي اسمها سلوى هي ليست لبنانية هي سورية": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['m|mm','s|ss|S|SS','h|hh|H|HH','l|ll','w|ww','y|yy','t|tt|T|TT|s','b|bb|p|pp','n|nn','r|rr|g|gg|x|xx']"
+        "iqra_phonemes contains ['u|uu|U|UU|o|oo|oh|<','m|mm','s|ss|S|SS','h|hh|H|HH','l|ll','w|ww','y|yy','t|tt|T|TT|s','b|bb|p|pp','n|nn','r|rr|g|gg|x|xx']"
       ],
       "message": "ممتاز 👏 نطقت كلمة أمي اسمها سلوى هي ليست لبنانية هي سورية بشكل صحيح"
     },
@@ -7420,7 +7420,7 @@
   "هي ليست لبنانية هي سورية أيضا وهذه أسرتها": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['h|hh|H|HH','y|yy','l|ll','s|ss|S|SS','t|tt|T|TT|s','b|bb|p|pp','n|nn','r|rr|g|gg|x|xx','D|DD|d|dd|Z|ZZ','w|ww','*|z|Z']"
+        "iqra_phonemes contains ['h|hh|H|HH','y|yy','l|ll','s|ss|S|SS','t|tt|T|TT|s','b|bb|p|pp','n|nn','r|rr|g|gg|x|xx','D|DD|d|dd|Z|ZZ','w|ww','*|z|Z','u|uu|U|UU|o|oo|oh|<']"
       ],
       "message": "ممتاز 👏 نطقت كلمة هي ليست لبنانية هي سورية أيضا وهذه أسرتها بشكل صحيح"
     },
@@ -8680,7 +8680,7 @@
   "أسبوع": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['s|ss|S|SS','b|bb|p|pp','E|EE|<']"
+        "iqra_phonemes contains ['u|uu|U|UU|o|oo|oh|<','s|ss|S|SS','b|bb|p|pp','E|EE|<']"
       ],
       "message": "ممتاز 👏 نطقت كلمة أسبوع بشكل صحيح"
     },
@@ -9744,7 +9744,7 @@
   "أريد ثلاثة جوارب من فضلك": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['r|rr|g|gg|x|xx','d|dd|D|DD','f|ff|v|vv|s|ss|t|tt','l|ll','j|jj|g|gg','w|ww','b|bb|p|pp','m|mm','n|nn','f|ff|v|vv','D|DD|d|dd|Z|ZZ','k|kk|q|qq']"
+        "iqra_phonemes contains ['u|uu|U|UU|o|oo|oh|<','r|rr|g|gg|x|xx','d|dd|D|DD','f|ff|v|vv|s|ss|t|tt','l|ll','j|jj|g|gg','w|ww','b|bb|p|pp','m|mm','n|nn','f|ff|v|vv','D|DD|d|dd|Z|ZZ','k|kk|q|qq']"
       ],
       "message": "ممتاز 👏 نطقت كلمة أريد ثلاثة جوارب من فضلك بشكل صحيح"
     },
@@ -11032,7 +11032,7 @@
   "الكافتيريا خلف قسم الكمبيوترات أي خدمة أخرى": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['l|ll','k|kk|q|qq','f|ff|v|vv','t|tt|T|TT|s','r|rr|g|gg|x|xx','y|yy','x|xx|H|HH|h|hh','q|qq|k|kk','s|ss|S|SS','m|mm','b|bb|p|pp','d|dd|D|DD']"
+        "iqra_phonemes contains ['l|ll','k|kk|q|qq','f|ff|v|vv','t|tt|T|TT|s','r|rr|g|gg|x|xx','y|yy','x|xx|H|HH|h|hh','q|qq|k|kk','s|ss|S|SS','m|mm','b|bb|p|pp','d|dd|D|DD','u|uu|U|UU|o|oo|oh|<']"
       ],
       "message": "ممتاز 👏 نطقت كلمة الكافتيريا خلف قسم الكمبيوترات أي خدمة أخرى بشكل صحيح"
     },
@@ -11046,7 +11046,7 @@
   "لا شكرا أنا أريد حمام السيدات": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['l|ll','$|$$','k|kk|q|qq','r|rr|g|gg|x|xx','n|nn','d|dd|D|DD','H|HH|h|hh','m|mm','s|ss|S|SS','y|yy','t|tt|T|TT|s']"
+        "iqra_phonemes contains ['l|ll','$|$$','k|kk|q|qq','r|rr|g|gg|x|xx','n|nn','u|uu|U|UU|o|oo|oh|<','d|dd|D|DD','H|HH|h|hh','m|mm','s|ss|S|SS','y|yy','t|tt|T|TT|s']"
       ],
       "message": "ممتاز 👏 نطقت كلمة لا شكرا أنا أريد حمام السيدات بشكل صحيح"
     },
@@ -11746,7 +11746,7 @@
   "يشرب القهوة ويقرأ الجريدة الساعة السادسة والربع": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['y|yy','$|$$','r|rr|g|gg|x|xx','b|bb|p|pp','l|ll','q|qq|k|kk','h|hh|H|HH','w|ww','j|jj|g|gg','d|dd|D|DD','s|ss|S|SS','E|EE|<']"
+        "iqra_phonemes contains ['y|yy','$|$$','r|rr|g|gg|x|xx','b|bb|p|pp','l|ll','q|qq|k|kk','h|hh|H|HH','w|ww','u|uu|U|UU|o|oo|oh|<','j|jj|g|gg','d|dd|D|DD','s|ss|S|SS','E|EE|<']"
       ],
       "message": "ممتاز 👏 نطقت كلمة يشرب القهوة ويقرأ الجريدة الساعة السادسة والربع بشكل صحيح"
     },
@@ -12054,7 +12054,7 @@
   "أنا أقرأ": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['n|nn','q|qq|k|kk','r|rr|g|gg|x|xx']"
+        "iqra_phonemes contains ['n|nn','q|qq|k|kk','r|rr|g|gg|x|xx','u|uu|U|UU|o|oo|oh|<']"
       ],
       "message": "ممتاز 👏 نطقت كلمة أنا أقرأ بشكل صحيح"
     },
@@ -12068,7 +12068,7 @@
   "أنت تقرأ": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['n|nn','t|tt|T|TT|s','q|qq|k|kk','r|rr|g|gg|x|xx']"
+        "iqra_phonemes contains ['n|nn','t|tt|T|TT|s','q|qq|k|kk','r|rr|g|gg|x|xx','u|uu|U|UU|o|oo|oh|<']"
       ],
       "message": "ممتاز 👏 نطقت كلمة أنت تقرأ بشكل صحيح"
     },
@@ -12096,7 +12096,7 @@
   "هي تقرأ": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['h|hh|H|HH','y|yy','t|tt|T|TT|s','q|qq|k|kk','r|rr|g|gg|x|xx']"
+        "iqra_phonemes contains ['h|hh|H|HH','y|yy','t|tt|T|TT|s','q|qq|k|kk','r|rr|g|gg|x|xx','u|uu|U|UU|o|oo|oh|<']"
       ],
       "message": "ممتاز 👏 نطقت كلمة هي تقرأ بشكل صحيح"
     },
@@ -12110,7 +12110,7 @@
   "أنا أفطر": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['n|nn','f|ff|v|vv','T|TT|t|tt','r|rr|g|gg|x|xx']"
+        "iqra_phonemes contains ['n|nn','u|uu|U|UU|o|oo|oh|<','f|ff|v|vv','T|TT|t|tt','r|rr|g|gg|x|xx']"
       ],
       "message": "ممتاز 👏 نطقت كلمة أنا أفطر بشكل صحيح"
     },
@@ -12348,7 +12348,7 @@
   "أشاهد فيلما جميلا بعد العشاء": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['$|$$','h|hh|H|HH','d|dd|D|DD','f|ff|v|vv','l|ll','m|mm','j|jj|g|gg','b|bb|p|pp','E|EE|<']"
+        "iqra_phonemes contains ['u|uu|U|UU|o|oo|oh|<','$|$$','h|hh|H|HH','d|dd|D|DD','f|ff|v|vv','l|ll','m|mm','j|jj|g|gg','b|bb|p|pp','E|EE|<']"
       ],
       "message": "ممتاز 👏 نطقت كلمة أشاهد فيلما جميلا بعد العشاء بشكل صحيح"
     },
@@ -12404,7 +12404,7 @@
   "أتغدى ثم أشاهد التليفزيون وأقرأ الأخبار في الجريدة ثم أنام الساعة العاشرة مساء": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['t|tt|T|TT|s','g|gg|x|xx|j','d|dd|D|DD','f|ff|v|vv|s|ss|t|tt','m|mm','$|$$','h|hh|H|HH','l|ll','f|ff|v|vv','z|zz|Z|ZZ','y|yy','n|nn','w|ww','q|qq|k|kk','r|rr|g|gg|x|xx','x|xx|H|HH|h|hh','b|bb|p|pp','j|jj|g|gg','s|ss|S|SS','E|EE|<']"
+        "iqra_phonemes contains ['t|tt|T|TT|s','g|gg|x|xx|j','d|dd|D|DD','f|ff|v|vv|s|ss|t|tt','m|mm','u|uu|U|UU|o|oo|oh|<','$|$$','h|hh|H|HH','l|ll','f|ff|v|vv','z|zz|Z|ZZ','y|yy','n|nn','w|ww','q|qq|k|kk','r|rr|g|gg|x|xx','x|xx|H|HH|h|hh','b|bb|p|pp','j|jj|g|gg','s|ss|S|SS','E|EE|<']"
       ],
       "message": "ممتاز 👏 نطقت كلمة أتغدى ثم أشاهد التليفزيون وأقرأ الأخبار في الجريدة ثم أنام الساعة العاشرة مساء بشكل صحيح"
     },
@@ -12446,7 +12446,7 @@
   "أستيقظ الساعة السابعة وأفطر الساعة السابعة والنصف وأشرب القهوة الساعة الثانية عشرة": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['s|ss|S|SS','t|tt|T|TT|s','y|yy','q|qq|k|kk','Z|ZZ|z|zz|*|**|D|DD','E|EE|<','b|bb|p|pp','w|ww','f|ff|v|vv','T|TT|t|tt','r|rr|g|gg|x|xx','n|nn','S|SS|s|ss','$|$$','l|ll','h|hh|H|HH','f|ff|v|vv|s|ss|t|tt']"
+        "iqra_phonemes contains ['s|ss|S|SS','t|tt|T|TT|s','y|yy','q|qq|k|kk','Z|ZZ|z|zz|*|**|D|DD','E|EE|<','b|bb|p|pp','w|ww','u|uu|U|UU|o|oo|oh|<','f|ff|v|vv','T|TT|t|tt','r|rr|g|gg|x|xx','n|nn','S|SS|s|ss','$|$$','l|ll','h|hh|H|HH','f|ff|v|vv|s|ss|t|tt']"
       ],
       "message": "ممتاز 👏 نطقت كلمة أستيقظ الساعة السابعة وأفطر الساعة السابعة والنصف وأشرب القهوة الساعة الثانية عشرة بشكل صحيح"
     },
@@ -12502,7 +12502,7 @@
   "يوم الجمعة أنا أنظف البيت أقرأ كتابا أدرس قليلا ثم ألعب التنس بعد الظهر يوم السبت أنا أزور أبي وأمي": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['y|yy','w|ww','m|mm','l|ll','j|jj|g|gg','E|EE|<','n|nn','Z|ZZ|z|zz|*|**|D|DD','f|ff|v|vv','b|bb|p|pp','t|tt|T|TT|s','q|qq|k|kk','r|rr|g|gg|x|xx','k|kk|q|qq','d|dd|D|DD','s|ss|S|SS','f|ff|v|vv|s|ss|t|tt','h|hh|H|HH','z|zz|Z|ZZ']"
+        "iqra_phonemes contains ['y|yy','w|ww','m|mm','l|ll','j|jj|g|gg','E|EE|<','n|nn','u|uu|U|UU|o|oo|oh|<','Z|ZZ|z|zz|*|**|D|DD','f|ff|v|vv','b|bb|p|pp','t|tt|T|TT|s','q|qq|k|kk','r|rr|g|gg|x|xx','k|kk|q|qq','d|dd|D|DD','s|ss|S|SS','f|ff|v|vv|s|ss|t|tt','h|hh|H|HH','z|zz|Z|ZZ']"
       ],
       "message": "ممتاز 👏 نطقت كلمة يوم الجمعة أنا أنظف البيت أقرأ كتابا أدرس قليلا ثم ألعب التنس بعد الظهر يوم السبت أنا أزور أبي وأمي بشكل صحيح"
     },
@@ -12516,7 +12516,7 @@
   "وأنت ماذا تفعل في الإجازة الأسبوعية يا حسين": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['w|ww','n|nn','t|tt|T|TT|s','m|mm','*|z|Z','f|ff|v|vv','E|EE|<','l|ll','j|jj|g|gg','z|zz|Z|ZZ','s|ss|S|SS','b|bb|p|pp','y|yy','H|HH|h|hh']"
+        "iqra_phonemes contains ['w|ww','n|nn','t|tt|T|TT|s','m|mm','*|z|Z','f|ff|v|vv','E|EE|<','l|ll','j|jj|g|gg','z|zz|Z|ZZ','u|uu|U|UU|o|oo|oh|<','s|ss|S|SS','b|bb|p|pp','y|yy','H|HH|h|hh']"
       ],
       "message": "ممتاز 👏 نطقت كلمة وأنت ماذا تفعل في الإجازة الأسبوعية يا حسين بشكل صحيح"
     },
@@ -12530,7 +12530,7 @@
   "يوم الجمعة أنا لا أنظف البيت ولا أدرس ولكن أذهب إلى السينما وأسمع موسيقى ويوم السبت أتعشى في مطعم جميل ثم أشاهد التليفزيون في البيت": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['y|yy','w|ww','m|mm','l|ll','j|jj|g|gg','E|EE|<','n|nn','Z|ZZ|z|zz|*|**|D|DD','f|ff|v|vv','b|bb|p|pp','t|tt|T|TT|s','d|dd|D|DD','r|rr|g|gg|x|xx','s|ss|S|SS','k|kk|q|qq','*|z|Z','h|hh|H|HH','q|qq|k|kk','$|$$','T|TT|t|tt','f|ff|v|vv|s|ss|t|tt','z|zz|Z|ZZ']"
+        "iqra_phonemes contains ['y|yy','w|ww','m|mm','l|ll','j|jj|g|gg','E|EE|<','n|nn','u|uu|U|UU|o|oo|oh|<','Z|ZZ|z|zz|*|**|D|DD','f|ff|v|vv','b|bb|p|pp','t|tt|T|TT|s','d|dd|D|DD','r|rr|g|gg|x|xx','s|ss|S|SS','k|kk|q|qq','*|z|Z','h|hh|H|HH','q|qq|k|kk','$|$$','T|TT|t|tt','f|ff|v|vv|s|ss|t|tt','z|zz|Z|ZZ']"
       ],
       "message": "ممتاز 👏 نطقت كلمة يوم الجمعة أنا لا أنظف البيت ولا أدرس ولكن أذهب إلى السينما وأسمع موسيقى ويوم السبت أتعشى في مطعم جميل ثم أشاهد التليفزيون في البيت بشكل صحيح"
     },
@@ -12572,7 +12572,7 @@
   "في الحقيقة أنا أستيقظ متأخرا أجلس في سريري أقرأ وأسمع موسيقى وأنت": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['f|ff|v|vv','l|ll','H|HH|h|hh','q|qq|k|kk','n|nn','s|ss|S|SS','t|tt|T|TT|s','y|yy','Z|ZZ|z|zz|*|**|D|DD','m|mm','x|xx|H|HH|h|hh','r|rr|g|gg|x|xx','j|jj|g|gg','w|ww','E|EE|<']"
+        "iqra_phonemes contains ['f|ff|v|vv','l|ll','H|HH|h|hh','q|qq|k|kk','n|nn','s|ss|S|SS','t|tt|T|TT|s','y|yy','Z|ZZ|z|zz|*|**|D|DD','m|mm','x|xx|H|HH|h|hh','r|rr|g|gg|x|xx','j|jj|g|gg','u|uu|U|UU|o|oo|oh|<','w|ww','E|EE|<']"
       ],
       "message": "ممتاز 👏 نطقت كلمة في الحقيقة أنا أستيقظ متأخرا أجلس في سريري أقرأ وأسمع موسيقى وأنت بشكل صحيح"
     },
@@ -12586,7 +12586,7 @@
   "أم في الحقيقة أنا لا أقرأ ولا أسمع موسيقى أنا أحب النادي أنا أذهب إلى النادي ألعب رياضة وأجري وأقابل أصدقائي": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['m|mm','f|ff|v|vv','l|ll','H|HH|h|hh','q|qq|k|kk','n|nn','r|rr|g|gg|x|xx','w|ww','s|ss|S|SS','E|EE|<','b|bb|p|pp','d|dd|D|DD','*|z|Z','h|hh|H|HH','y|yy','D|DD|d|dd|Z|ZZ','j|jj|g|gg','S|SS|s|ss']"
+        "iqra_phonemes contains ['m|mm','f|ff|v|vv','l|ll','H|HH|h|hh','q|qq|k|kk','n|nn','r|rr|g|gg|x|xx','u|uu|U|UU|o|oo|oh|<','w|ww','s|ss|S|SS','E|EE|<','b|bb|p|pp','d|dd|D|DD','*|z|Z','h|hh|H|HH','y|yy','D|DD|d|dd|Z|ZZ','j|jj|g|gg','S|SS|s|ss']"
       ],
       "message": "ممتاز 👏 نطقت كلمة أم في الحقيقة أنا لا أقرأ ولا أسمع موسيقى أنا أحب النادي أنا أذهب إلى النادي ألعب رياضة وأجري وأقابل أصدقائي بشكل صحيح"
     },
@@ -12600,7 +12600,7 @@
   "جارتي السيدة أسماء سيدة نشيطة طوال الأسبوع ولكن هي كسلانة جدا في إجازتها الأسبوعية": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['j|jj|g|gg','r|rr|g|gg|x|xx','t|tt|T|TT|s','s|ss|S|SS','y|yy','d|dd|D|DD','m|mm','n|nn','$|$$','T|TT|t|tt','w|ww','l|ll','b|bb|p|pp','E|EE|<','k|kk|q|qq','h|hh|H|HH','f|ff|v|vv','z|zz|Z|ZZ']"
+        "iqra_phonemes contains ['j|jj|g|gg','r|rr|g|gg|x|xx','t|tt|T|TT|s','s|ss|S|SS','y|yy','d|dd|D|DD','m|mm','n|nn','$|$$','T|TT|t|tt','w|ww','l|ll','u|uu|U|UU|o|oo|oh|<','b|bb|p|pp','E|EE|<','k|kk|q|qq','h|hh|H|HH','f|ff|v|vv','z|zz|Z|ZZ']"
       ],
       "message": "ممتاز 👏 نطقت كلمة جارتي السيدة أسماء سيدة نشيطة طوال الأسبوع ولكن هي كسلانة جدا في إجازتها الأسبوعية بشكل صحيح"
     },
@@ -12684,7 +12684,7 @@
   "أسرتي جميلة هذه هي صورة أسرتي": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['s|ss|S|SS','r|rr|g|gg|x|xx','t|tt|T|TT|s','j|jj|g|gg','m|mm','l|ll','h|hh|H|HH','*|z|Z','y|yy','S|SS|s|ss']"
+        "iqra_phonemes contains ['u|uu|U|UU|o|oo|oh|<','s|ss|S|SS','r|rr|g|gg|x|xx','t|tt|T|TT|s','j|jj|g|gg','m|mm','l|ll','h|hh|H|HH','*|z|Z','y|yy','S|SS|s|ss']"
       ],
       "message": "ممتاز 👏 نطقت كلمة أسرتي جميلة هذه هي صورة أسرتي بشكل صحيح"
     },
@@ -12698,7 +12698,7 @@
   "أنا اسمي عصام وأبي اسمه محمود وأمي اسمها فاطمة خديجة هي أختي طارق أخي الكبير": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['n|nn','s|ss|S|SS','m|mm','E|EE|<','S|SS|s|ss','w|ww','b|bb|p|pp','h|hh|H|HH','H|HH|h|hh','d|dd|D|DD','f|ff|v|vv','T|TT|t|tt','x|xx|H|HH|h|hh','j|jj|g|gg','y|yy','t|tt|T|TT|s','r|rr|g|gg|x|xx','q|qq|k|kk','l|ll','k|kk|q|qq']"
+        "iqra_phonemes contains ['n|nn','s|ss|S|SS','m|mm','E|EE|<','S|SS|s|ss','w|ww','b|bb|p|pp','h|hh|H|HH','H|HH|h|hh','d|dd|D|DD','u|uu|U|UU|o|oo|oh|<','f|ff|v|vv','T|TT|t|tt','x|xx|H|HH|h|hh','j|jj|g|gg','y|yy','t|tt|T|TT|s','r|rr|g|gg|x|xx','q|qq|k|kk','l|ll','k|kk|q|qq']"
       ],
       "message": "ممتاز 👏 نطقت كلمة أنا اسمي عصام وأبي اسمه محمود وأمي اسمها فاطمة خديجة هي أختي طارق أخي الكبير بشكل صحيح"
     },
@@ -12726,7 +12726,7 @@
   "أبي محمود ابن زينب زينب أمه": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['b|bb|p|pp','m|mm','H|HH|h|hh','d|dd|D|DD','n|nn','z|zz|Z|ZZ','y|yy','h|hh|H|HH']"
+        "iqra_phonemes contains ['b|bb|p|pp','m|mm','H|HH|h|hh','d|dd|D|DD','n|nn','z|zz|Z|ZZ','y|yy','u|uu|U|UU|o|oo|oh|<','h|hh|H|HH']"
       ],
       "message": "ممتاز 👏 نطقت كلمة أبي محمود ابن زينب زينب أمه بشكل صحيح"
     },
@@ -12740,7 +12740,7 @@
   "صالح ليس أبي هو جدي وزينب ليست أمي هي جدتي": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['S|SS|s|ss','l|ll','H|HH|h|hh','y|yy','s|ss|S|SS','b|bb|p|pp','h|hh|H|HH','w|ww','j|jj|g|gg','d|dd|D|DD','z|zz|Z|ZZ','n|nn','t|tt|T|TT|s','m|mm']"
+        "iqra_phonemes contains ['S|SS|s|ss','l|ll','H|HH|h|hh','y|yy','s|ss|S|SS','b|bb|p|pp','h|hh|H|HH','w|ww','j|jj|g|gg','d|dd|D|DD','z|zz|Z|ZZ','n|nn','t|tt|T|TT|s','u|uu|U|UU|o|oo|oh|<','m|mm']"
       ],
       "message": "ممتاز 👏 نطقت كلمة صالح ليس أبي هو جدي وزينب ليست أمي هي جدتي بشكل صحيح"
     },
@@ -12824,7 +12824,7 @@
   "أختي خديجة ممرضة": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['x|xx|H|HH|h|hh','t|tt|T|TT|s','d|dd|D|DD','j|jj|g|gg','m|mm','r|rr|g|gg|x|xx','D|DD|d|dd|Z|ZZ']"
+        "iqra_phonemes contains ['u|uu|U|UU|o|oo|oh|<','x|xx|H|HH|h|hh','t|tt|T|TT|s','d|dd|D|DD','j|jj|g|gg','m|mm','r|rr|g|gg|x|xx','D|DD|d|dd|Z|ZZ']"
       ],
       "message": "ممتاز 👏 نطقت كلمة أختي خديجة ممرضة بشكل صحيح"
     },
@@ -13048,7 +13048,7 @@
   "وأخي إبراهيم محاسب ويعمل في أبو ظبي إجازتي الأسبوعية يوم الجمعة": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['w|ww','x|xx|H|HH|h|hh','b|bb|p|pp','r|rr|g|gg|x|xx','h|hh|H|HH','m|mm','H|HH|h|hh','s|ss|S|SS','y|yy','E|EE|<','l|ll','f|ff|v|vv','Z|ZZ|z|zz|*|**|D|DD','j|jj|g|gg','z|zz|Z|ZZ','t|tt|T|TT|s']"
+        "iqra_phonemes contains ['w|ww','x|xx|H|HH|h|hh','b|bb|p|pp','r|rr|g|gg|x|xx','h|hh|H|HH','m|mm','H|HH|h|hh','s|ss|S|SS','y|yy','E|EE|<','l|ll','f|ff|v|vv','Z|ZZ|z|zz|*|**|D|DD','j|jj|g|gg','z|zz|Z|ZZ','t|tt|T|TT|s','u|uu|U|UU|o|oo|oh|<']"
       ],
       "message": "ممتاز 👏 نطقت كلمة وأخي إبراهيم محاسب ويعمل في أبو ظبي إجازتي الأسبوعية يوم الجمعة بشكل صحيح"
     },
@@ -13076,7 +13076,7 @@
   "أبي يزور أخي الآن في أبو ظبي ولكن أمي وجدي هنا معي في دبي في زيارة قصيرة أيضا": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['b|bb|p|pp','y|yy','z|zz|Z|ZZ','r|rr|g|gg|x|xx','x|xx|H|HH|h|hh','l|ll','n|nn','f|ff|v|vv','Z|ZZ|z|zz|*|**|D|DD','w|ww','k|kk|q|qq','m|mm','j|jj|g|gg','d|dd|D|DD','h|hh|H|HH','E|EE|<','q|qq|k|kk','S|SS|s|ss','D|DD|d|dd|Z|ZZ']"
+        "iqra_phonemes contains ['b|bb|p|pp','y|yy','z|zz|Z|ZZ','r|rr|g|gg|x|xx','x|xx|H|HH|h|hh','l|ll','n|nn','f|ff|v|vv','Z|ZZ|z|zz|*|**|D|DD','w|ww','k|kk|q|qq','u|uu|U|UU|o|oo|oh|<','m|mm','j|jj|g|gg','d|dd|D|DD','h|hh|H|HH','E|EE|<','q|qq|k|kk','S|SS|s|ss','D|DD|d|dd|Z|ZZ']"
       ],
       "message": "ممتاز 👏 نطقت كلمة أبي يزور أخي الآن في أبو ظبي ولكن أمي وجدي هنا معي في دبي في زيارة قصيرة أيضا بشكل صحيح"
     },
@@ -13440,7 +13440,7 @@
   "أغسطس": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['g|gg|x|xx|j','s|ss|S|SS','T|TT|t|tt']"
+        "iqra_phonemes contains ['u|uu|U|UU|o|oo|oh|<','g|gg|x|xx|j','s|ss|S|SS','T|TT|t|tt']"
       ],
       "message": "ممتاز 👏 نطقت كلمة أغسطس بشكل صحيح"
     },
@@ -13468,7 +13468,7 @@
   "أكتوبر": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['k|kk|q|qq','t|tt|T|TT|s','b|bb|p|pp','r|rr|g|gg|x|xx']"
+        "iqra_phonemes contains ['u|uu|U|UU|o|oo|oh|<','k|kk|q|qq','t|tt|T|TT|s','b|bb|p|pp','r|rr|g|gg|x|xx']"
       ],
       "message": "ممتاز 👏 نطقت كلمة أكتوبر بشكل صحيح"
     },
@@ -13524,7 +13524,7 @@
   "أنا أسافر إلى اليابان": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['n|nn','s|ss|S|SS','f|ff|v|vv','r|rr|g|gg|x|xx','l|ll','y|yy','b|bb|p|pp']"
+        "iqra_phonemes contains ['n|nn','u|uu|U|UU|o|oo|oh|<','s|ss|S|SS','f|ff|v|vv','r|rr|g|gg|x|xx','l|ll','y|yy','b|bb|p|pp']"
       ],
       "message": "ممتاز 👏 نطقت كلمة أنا أسافر إلى اليابان بشكل صحيح"
     },
@@ -13580,7 +13580,7 @@
   "أسافر في شهر ديسمبر ويناير في الشتاء": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['s|ss|S|SS','f|ff|v|vv','r|rr|g|gg|x|xx','$|$$','h|hh|H|HH','d|dd|D|DD','m|mm','b|bb|p|pp','w|ww','y|yy','n|nn','t|tt|T|TT|s']"
+        "iqra_phonemes contains ['u|uu|U|UU|o|oo|oh|<','s|ss|S|SS','f|ff|v|vv','r|rr|g|gg|x|xx','$|$$','h|hh|H|HH','d|dd|D|DD','m|mm','b|bb|p|pp','w|ww','y|yy','n|nn','t|tt|T|TT|s']"
       ],
       "message": "ممتاز 👏 نطقت كلمة أسافر في شهر ديسمبر ويناير في الشتاء بشكل صحيح"
     },
@@ -13664,7 +13664,7 @@
   "أهلا وسهلا بك في الشتاء أختك مديحة": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['h|hh|H|HH','l|ll','w|ww','s|ss|S|SS','b|bb|p|pp','k|kk|q|qq','f|ff|v|vv','$|$$','t|tt|T|TT|s','x|xx|H|HH|h|hh','m|mm','d|dd|D|DD','H|HH|h|hh']"
+        "iqra_phonemes contains ['h|hh|H|HH','l|ll','w|ww','s|ss|S|SS','b|bb|p|pp','k|kk|q|qq','f|ff|v|vv','$|$$','t|tt|T|TT|s','u|uu|U|UU|o|oo|oh|<','x|xx|H|HH|h|hh','m|mm','d|dd|D|DD','H|HH|h|hh']"
       ],
       "message": "ممتاز 👏 نطقت كلمة أهلا وسهلا بك في الشتاء أختك مديحة بشكل صحيح"
     },
@@ -13706,7 +13706,7 @@
   "أُ": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['u|uu|U|UU']"
+        "iqra_phonemes contains ['u|uu|U|UU|o|oo|oh|<']"
       ],
       "message": "ممتاز 👏 نطقت أُ بشكل صحيح"
     },
