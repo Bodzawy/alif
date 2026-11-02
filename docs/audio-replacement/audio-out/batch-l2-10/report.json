@@ -1,0 +1,1014 @@
+{
+ "batch": "batch-l2-10",
+ "texts": 100,
+ "audio_seconds": 160.76,
+ "detect": [
+  -45,
+  0.3
+ ],
+ "min_border_gap": 0.3,
+ "speed_scale": 0.93,
+ "warnings": [],
+ "clips": [
+  {
+   "id": "w1529",
+   "text": "فَصْلُنَا",
+   "start": 0.0,
+   "end": 1.25,
+   "speech": 1.15,
+   "expected": 0.76,
+   "gain_db": -2.0,
+   "flag": ""
+  },
+  {
+   "id": "w1530",
+   "text": "فَصْلُهُ",
+   "start": 2.08,
+   "end": 3.02,
+   "speech": 0.76,
+   "expected": 0.65,
+   "gain_db": -2.0,
+   "flag": ""
+  },
+  {
+   "id": "w1531",
+   "text": "فَصْلُهَا",
+   "start": 3.81,
+   "end": 4.77,
+   "speech": 0.76,
+   "expected": 0.76,
+   "gain_db": -1.0,
+   "flag": ""
+  },
+  {
+   "id": "w1532",
+   "text": "فَصْلُهُمَا",
+   "start": 5.45,
+   "end": 6.51,
+   "speech": 0.88,
+   "expected": 0.86,
+   "gain_db": -3.5,
+   "flag": ""
+  },
+  {
+   "id": "w1533",
+   "text": "فَصْلُهُمْ",
+   "start": 7.19,
+   "end": 8.24,
+   "speech": 0.85,
+   "expected": 0.76,
+   "gain_db": -1.2,
+   "flag": ""
+  },
+  {
+   "id": "w1534",
+   "text": "فَصْلُهُنَّ",
+   "start": 8.88,
+   "end": 9.96,
+   "speech": 0.9,
+   "expected": 0.76,
+   "gain_db": -4.5,
+   "flag": ""
+  },
+  {
+   "id": "w1535",
+   "text": "مَدْرَسَتِي",
+   "start": 10.67,
+   "end": 11.73,
+   "speech": 0.87,
+   "expected": 0.86,
+   "gain_db": -3.6,
+   "flag": ""
+  },
+  {
+   "id": "w1536",
+   "text": "مَدْرَسَتُنَا",
+   "start": 12.3,
+   "end": 13.46,
+   "speech": 0.94,
+   "expected": 0.96,
+   "gain_db": -2.6,
+   "flag": ""
+  },
+  {
+   "id": "w1537",
+   "text": "مَدْرَسَتُهُ",
+   "start": 14.11,
+   "end": 15.19,
+   "speech": 0.87,
+   "expected": 0.86,
+   "gain_db": -2.2,
+   "flag": ""
+  },
+  {
+   "id": "w1538",
+   "text": "مَدْرَسَتُهَا",
+   "start": 15.83,
+   "end": 16.95,
+   "speech": 0.94,
+   "expected": 0.96,
+   "gain_db": -2.3,
+   "flag": ""
+  },
+  {
+   "id": "w1539",
+   "text": "مَدْرَسَتُهُمَا",
+   "start": 17.55,
+   "end": 18.8,
+   "speech": 1.06,
+   "expected": 1.06,
+   "gain_db": -4.8,
+   "flag": ""
+  },
+  {
+   "id": "w1540",
+   "text": "مَدْرَسَتُهُمْ",
+   "start": 19.41,
+   "end": 20.64,
+   "speech": 1.05,
+   "expected": 0.96,
+   "gain_db": -1.4,
+   "flag": ""
+  },
+  {
+   "id": "w1541",
+   "text": "مَدْرَسَتُهُنَّ",
+   "start": 21.25,
+   "end": 22.49,
+   "speech": 1.05,
+   "expected": 0.96,
+   "gain_db": -3.1,
+   "flag": ""
+  },
+  {
+   "id": "w1542",
+   "text": "كِتَابُكَ؟",
+   "start": 23.14,
+   "end": 23.99,
+   "speech": 0.67,
+   "expected": 0.86,
+   "gain_db": -4.7,
+   "flag": ""
+  },
+  {
+   "id": "w1543",
+   "text": "حَقِيبَتُكَ؟",
+   "start": 24.68,
+   "end": 25.79,
+   "speech": 0.92,
+   "expected": 0.96,
+   "gain_db": -2.1,
+   "flag": ""
+  },
+  {
+   "id": "w1544",
+   "text": "كِتَابُكِ؟",
+   "start": 26.47,
+   "end": 27.36,
+   "speech": 0.71,
+   "expected": 0.86,
+   "gain_db": -2.2,
+   "flag": ""
+  },
+  {
+   "id": "w1545",
+   "text": "حَقِيبَتُكِ؟",
+   "start": 28.0,
+   "end": 29.19,
+   "speech": 1.01,
+   "expected": 0.96,
+   "gain_db": -3.5,
+   "flag": ""
+  },
+  {
+   "id": "w1546",
+   "text": "كِتَابُكُمَا؟",
+   "start": 29.81,
+   "end": 30.9,
+   "speech": 0.91,
+   "expected": 1.06,
+   "gain_db": -3.8,
+   "flag": ""
+  },
+  {
+   "id": "w1547",
+   "text": "حَقِيبَتُكُمَا؟",
+   "start": 31.51,
+   "end": 32.75,
+   "speech": 1.07,
+   "expected": 1.16,
+   "gain_db": -2.5,
+   "flag": ""
+  },
+  {
+   "id": "w1548",
+   "text": "كِتَابُكُمْ؟",
+   "start": 33.36,
+   "end": 34.27,
+   "speech": 0.75,
+   "expected": 0.96,
+   "gain_db": -1.4,
+   "flag": ""
+  },
+  {
+   "id": "w1549",
+   "text": "حَقِيبَتُكُمْ؟",
+   "start": 34.9,
+   "end": 36.06,
+   "speech": 0.96,
+   "expected": 1.06,
+   "gain_db": -1.0,
+   "flag": ""
+  },
+  {
+   "id": "w1550",
+   "text": "كِتَابُكُنَّ؟",
+   "start": 36.68,
+   "end": 37.71,
+   "speech": 0.84,
+   "expected": 0.96,
+   "gain_db": -1.1,
+   "flag": ""
+  },
+  {
+   "id": "w1551",
+   "text": "حَقِيبَتُكُنَّ؟",
+   "start": 38.34,
+   "end": 39.57,
+   "speech": 1.05,
+   "expected": 1.06,
+   "gain_db": -1.4,
+   "flag": ""
+  },
+  {
+   "id": "w1552",
+   "text": "كِتَابُهُ؟",
+   "start": 40.19,
+   "end": 41.04,
+   "speech": 0.68,
+   "expected": 0.86,
+   "gain_db": -3.6,
+   "flag": ""
+  },
+  {
+   "id": "w1553",
+   "text": "حَقِيبَتُهُ؟",
+   "start": 41.67,
+   "end": 42.77,
+   "speech": 0.92,
+   "expected": 0.96,
+   "gain_db": -0.8,
+   "flag": ""
+  },
+  {
+   "id": "w1554",
+   "text": "كِتَابُهَا؟",
+   "start": 43.37,
+   "end": 44.27,
+   "speech": 0.71,
+   "expected": 0.96,
+   "gain_db": -3.4,
+   "flag": ""
+  },
+  {
+   "id": "w1555",
+   "text": "حَقِيبَتُهَا؟",
+   "start": 44.85,
+   "end": 45.99,
+   "speech": 0.95,
+   "expected": 1.06,
+   "gain_db": -2.0,
+   "flag": ""
+  },
+  {
+   "id": "w1556",
+   "text": "كِتَابُهُمَا؟",
+   "start": 46.64,
+   "end": 47.71,
+   "speech": 0.87,
+   "expected": 1.06,
+   "gain_db": -4.4,
+   "flag": ""
+  },
+  {
+   "id": "w1557",
+   "text": "حَقِيبَتُهُمَا؟",
+   "start": 48.28,
+   "end": 49.51,
+   "speech": 1.04,
+   "expected": 1.16,
+   "gain_db": -1.9,
+   "flag": ""
+  },
+  {
+   "id": "w1558",
+   "text": "كِتَابُهُمْ؟",
+   "start": 50.08,
+   "end": 50.98,
+   "speech": 0.72,
+   "expected": 0.96,
+   "gain_db": -2.9,
+   "flag": ""
+  },
+  {
+   "id": "w1559",
+   "text": "حَقِيبَتُهُمْ؟",
+   "start": 51.57,
+   "end": 52.66,
+   "speech": 0.91,
+   "expected": 1.06,
+   "gain_db": -3.6,
+   "flag": ""
+  },
+  {
+   "id": "w1560",
+   "text": "كِتَابُهُنَّ؟",
+   "start": 53.31,
+   "end": 54.28,
+   "speech": 0.8,
+   "expected": 0.96,
+   "gain_db": -2.8,
+   "flag": ""
+  },
+  {
+   "id": "w1561",
+   "text": "حَقِيبَتُهُنَّ؟",
+   "start": 54.85,
+   "end": 56.03,
+   "speech": 0.98,
+   "expected": 1.06,
+   "gain_db": -1.5,
+   "flag": ""
+  },
+  {
+   "id": "w2162",
+   "text": "جِنْسِيَّاتٌ",
+   "start": 56.66,
+   "end": 57.99,
+   "speech": 1.14,
+   "expected": 0.86,
+   "gain_db": -0.4,
+   "flag": ""
+  },
+  {
+   "id": "w1563",
+   "text": "ضَمَائِر",
+   "start": 58.56,
+   "end": 59.56,
+   "speech": 0.78,
+   "expected": 0.76,
+   "gain_db": -3.5,
+   "flag": ""
+  },
+  {
+   "id": "w2163",
+   "text": "تَحِيَّاتٌ",
+   "start": 60.18,
+   "end": 61.36,
+   "speech": 1.0,
+   "expected": 0.76,
+   "gain_db": -0.8,
+   "flag": ""
+  },
+  {
+   "id": "w1565",
+   "text": "اسْمُهُمَا",
+   "start": 61.98,
+   "end": 63.05,
+   "speech": 0.89,
+   "expected": 0.86,
+   "gain_db": -2.9,
+   "flag": ""
+  },
+  {
+   "id": "w1566",
+   "text": "سَعِيد",
+   "start": 63.65,
+   "end": 64.65,
+   "speech": 0.82,
+   "expected": 0.65,
+   "gain_db": -4.5,
+   "flag": ""
+  },
+  {
+   "id": "w1567",
+   "text": "هَلْ",
+   "start": 65.23,
+   "end": 65.89,
+   "speech": 0.48,
+   "expected": 0.45,
+   "gain_db": -1.7,
+   "flag": ""
+  },
+  {
+   "id": "w1325",
+   "text": "طَارِق",
+   "start": 66.53,
+   "end": 67.48,
+   "speech": 0.78,
+   "expected": 0.65,
+   "gain_db": -3.7,
+   "flag": ""
+  },
+  {
+   "id": "w1568",
+   "text": "حَقِيبَتِكَ",
+   "start": 68.03,
+   "end": 69.16,
+   "speech": 0.91,
+   "expected": 0.86,
+   "gain_db": -2.3,
+   "flag": ""
+  },
+  {
+   "id": "w1569",
+   "text": "الْقَلَمُ",
+   "start": 69.74,
+   "end": 70.61,
+   "speech": 0.67,
+   "expected": 0.76,
+   "gain_db": -2.8,
+   "flag": ""
+  },
+  {
+   "id": "w1570",
+   "text": "شِكْسْبِير",
+   "start": 71.23,
+   "end": 72.28,
+   "speech": 0.87,
+   "expected": 0.86,
+   "gain_db": 0.3,
+   "flag": ""
+  },
+  {
+   "id": "w1572",
+   "text": "اسْمُكُمْ",
+   "start": 72.89,
+   "end": 73.74,
+   "speech": 0.67,
+   "expected": 0.76,
+   "gain_db": -2.5,
+   "flag": ""
+  },
+  {
+   "id": "w1910",
+   "text": "شَقَّةٌ",
+   "start": 74.3,
+   "end": 75.32,
+   "speech": 0.84,
+   "expected": 0.55,
+   "gain_db": 1.4,
+   "flag": ""
+  },
+  {
+   "id": "w1911",
+   "text": "مَحْمُولٌ",
+   "start": 75.93,
+   "end": 77.01,
+   "speech": 0.9,
+   "expected": 0.76,
+   "gain_db": -4.3,
+   "flag": ""
+  },
+  {
+   "id": "w1912",
+   "text": "صِفْرٌ",
+   "start": 77.61,
+   "end": 78.53,
+   "speech": 0.73,
+   "expected": 0.55,
+   "gain_db": -1.7,
+   "flag": ""
+  },
+  {
+   "id": "w1913",
+   "text": "وَاحِدٌ",
+   "start": 79.12,
+   "end": 80.17,
+   "speech": 0.87,
+   "expected": 0.65,
+   "gain_db": -3.2,
+   "flag": ""
+  },
+  {
+   "id": "w0535",
+   "text": "اثْنَان",
+   "start": 80.81,
+   "end": 81.68,
+   "speech": 0.69,
+   "expected": 0.76,
+   "gain_db": 1.2,
+   "flag": ""
+  },
+  {
+   "id": "w1914",
+   "text": "أَرْبَعَةٌ",
+   "start": 82.28,
+   "end": 83.35,
+   "speech": 0.89,
+   "expected": 0.76,
+   "gain_db": -0.5,
+   "flag": ""
+  },
+  {
+   "id": "w1915",
+   "text": "سِتَّةٌ",
+   "start": 83.88,
+   "end": 84.91,
+   "speech": 0.85,
+   "expected": 0.55,
+   "gain_db": 1.9,
+   "flag": ""
+  },
+  {
+   "id": "w1916",
+   "text": "سَبْعَةٌ",
+   "start": 85.47,
+   "end": 86.57,
+   "speech": 0.91,
+   "expected": 0.65,
+   "gain_db": -1.0,
+   "flag": ""
+  },
+  {
+   "id": "w1917",
+   "text": "ثَمَانِيَةٌ",
+   "start": 87.17,
+   "end": 88.4,
+   "speech": 1.04,
+   "expected": 0.86,
+   "gain_db": -3.4,
+   "flag": ""
+  },
+  {
+   "id": "w1918",
+   "text": "تِسْعَةٌ",
+   "start": 89.03,
+   "end": 90.02,
+   "speech": 0.82,
+   "expected": 0.65,
+   "gain_db": -2.1,
+   "flag": ""
+  },
+  {
+   "id": "w0544",
+   "text": "عِشْرُون",
+   "start": 90.56,
+   "end": 91.61,
+   "speech": 0.86,
+   "expected": 0.76,
+   "gain_db": -3.6,
+   "flag": ""
+  },
+  {
+   "id": "w0545",
+   "text": "الْأَوَّل",
+   "start": 92.23,
+   "end": 93.12,
+   "speech": 0.71,
+   "expected": 0.76,
+   "gain_db": -2.7,
+   "flag": ""
+  },
+  {
+   "id": "w0546",
+   "text": "الثَّانِي",
+   "start": 93.72,
+   "end": 94.64,
+   "speech": 0.73,
+   "expected": 0.86,
+   "gain_db": -3.1,
+   "flag": ""
+  },
+  {
+   "id": "w0547",
+   "text": "الثَّالِث",
+   "start": 95.25,
+   "end": 96.18,
+   "speech": 0.76,
+   "expected": 0.86,
+   "gain_db": -0.9,
+   "flag": ""
+  },
+  {
+   "id": "w0548",
+   "text": "الرَّابِع",
+   "start": 96.79,
+   "end": 97.74,
+   "speech": 0.77,
+   "expected": 0.86,
+   "gain_db": -4.3,
+   "flag": ""
+  },
+  {
+   "id": "w0549",
+   "text": "الْخَامِس",
+   "start": 98.36,
+   "end": 99.36,
+   "speech": 0.81,
+   "expected": 0.86,
+   "gain_db": -3.3,
+   "flag": ""
+  },
+  {
+   "id": "w0550",
+   "text": "السَّادِس",
+   "start": 99.98,
+   "end": 100.93,
+   "speech": 0.77,
+   "expected": 0.86,
+   "gain_db": -4.5,
+   "flag": ""
+  },
+  {
+   "id": "w0551",
+   "text": "السَّابِع",
+   "start": 101.54,
+   "end": 102.49,
+   "speech": 0.77,
+   "expected": 0.86,
+   "gain_db": -5.0,
+   "flag": ""
+  },
+  {
+   "id": "w0552",
+   "text": "الثَّامِن",
+   "start": 103.12,
+   "end": 104.12,
+   "speech": 0.82,
+   "expected": 0.86,
+   "gain_db": -2.4,
+   "flag": ""
+  },
+  {
+   "id": "w0553",
+   "text": "التَّاسِع",
+   "start": 104.71,
+   "end": 105.73,
+   "speech": 0.84,
+   "expected": 0.86,
+   "gain_db": -1.9,
+   "flag": ""
+  },
+  {
+   "id": "w0554",
+   "text": "الْعَاشِر",
+   "start": 106.33,
+   "end": 107.35,
+   "speech": 0.84,
+   "expected": 0.86,
+   "gain_db": -2.9,
+   "flag": ""
+  },
+  {
+   "id": "w1573",
+   "text": "مَرْحَبًا.",
+   "start": 107.84,
+   "end": 108.86,
+   "speech": 0.84,
+   "expected": 0.86,
+   "gain_db": -3.7,
+   "flag": ""
+  },
+  {
+   "id": "w1574",
+   "text": "الْعُنْوَانُ",
+   "start": 108.98,
+   "end": 110.14,
+   "speech": 0.98,
+   "expected": 0.96,
+   "gain_db": -5.6,
+   "flag": ""
+  },
+  {
+   "id": "w0556",
+   "text": "الْأَحَد",
+   "start": 110.72,
+   "end": 111.83,
+   "speech": 0.93,
+   "expected": 0.76,
+   "gain_db": -1.0,
+   "flag": ""
+  },
+  {
+   "id": "w0557",
+   "text": "الِاثْنَيْن",
+   "start": 112.5,
+   "end": 113.43,
+   "speech": 0.75,
+   "expected": 0.96,
+   "gain_db": -2.2,
+   "flag": ""
+  },
+  {
+   "id": "w0558",
+   "text": "الثُّلَاثَاء",
+   "start": 114.1,
+   "end": 115.15,
+   "speech": 0.87,
+   "expected": 1.06,
+   "gain_db": -4.2,
+   "flag": ""
+  },
+  {
+   "id": "w0559",
+   "text": "الْأَرْبِعَاء",
+   "start": 115.79,
+   "end": 116.92,
+   "speech": 0.95,
+   "expected": 1.06,
+   "gain_db": -4.9,
+   "flag": ""
+  },
+  {
+   "id": "w0560",
+   "text": "الْخَمِيس",
+   "start": 117.42,
+   "end": 118.4,
+   "speech": 0.8,
+   "expected": 0.86,
+   "gain_db": -0.6,
+   "flag": ""
+  },
+  {
+   "id": "w0561",
+   "text": "الْجُمْعَة",
+   "start": 119.08,
+   "end": 119.89,
+   "speech": 0.62,
+   "expected": 0.86,
+   "gain_db": -4.8,
+   "flag": ""
+  },
+  {
+   "id": "w0562",
+   "text": "السَّبْت",
+   "start": 120.57,
+   "end": 121.41,
+   "speech": 0.65,
+   "expected": 0.76,
+   "gain_db": -1.7,
+   "flag": ""
+  },
+  {
+   "id": "w1920",
+   "text": "أَيَّامٌ",
+   "start": 122.1,
+   "end": 123.09,
+   "speech": 0.82,
+   "expected": 0.65,
+   "gain_db": -2.4,
+   "flag": ""
+  },
+  {
+   "id": "w1921",
+   "text": "شَهْرٌ",
+   "start": 123.68,
+   "end": 124.48,
+   "speech": 0.62,
+   "expected": 0.55,
+   "gain_db": -1.1,
+   "flag": ""
+  },
+  {
+   "id": "w1922",
+   "text": "سَنَةٌ",
+   "start": 125.15,
+   "end": 125.76,
+   "speech": 0.43,
+   "expected": 0.55,
+   "gain_db": -4.4,
+   "flag": ""
+  },
+  {
+   "id": "w1923",
+   "text": "أُسْبُوعٌ",
+   "start": 126.54,
+   "end": 127.58,
+   "speech": 0.87,
+   "expected": 0.76,
+   "gain_db": -5.6,
+   "flag": ""
+  },
+  {
+   "id": "w0568",
+   "text": "أَرْبَعُون",
+   "start": 128.12,
+   "end": 129.11,
+   "speech": 0.82,
+   "expected": 0.86,
+   "gain_db": -5.1,
+   "flag": ""
+  },
+  {
+   "id": "w0569",
+   "text": "خَمْسُون",
+   "start": 129.55,
+   "end": 130.63,
+   "speech": 0.88,
+   "expected": 0.76,
+   "gain_db": -4.6,
+   "flag": ""
+  },
+  {
+   "id": "w0570",
+   "text": "سِتُّون",
+   "start": 131.09,
+   "end": 132.11,
+   "speech": 0.84,
+   "expected": 0.65,
+   "gain_db": -4.0,
+   "flag": ""
+  },
+  {
+   "id": "w0571",
+   "text": "سَبْعُون",
+   "start": 132.59,
+   "end": 133.6,
+   "speech": 0.84,
+   "expected": 0.76,
+   "gain_db": -5.5,
+   "flag": ""
+  },
+  {
+   "id": "w0572",
+   "text": "ثَمَانُون",
+   "start": 133.93,
+   "end": 135.06,
+   "speech": 0.93,
+   "expected": 0.86,
+   "gain_db": -2.7,
+   "flag": ""
+  },
+  {
+   "id": "w0573",
+   "text": "تِسْعُون",
+   "start": 135.63,
+   "end": 136.54,
+   "speech": 0.73,
+   "expected": 0.76,
+   "gain_db": -2.9,
+   "flag": ""
+  },
+  {
+   "id": "w1924",
+   "text": "مِائَةٌ",
+   "start": 137.05,
+   "end": 138.01,
+   "speech": 0.75,
+   "expected": 0.65,
+   "gain_db": -0.9,
+   "flag": ""
+  },
+  {
+   "id": "w1575",
+   "text": "ثَلَاثُون",
+   "start": 138.54,
+   "end": 139.61,
+   "speech": 0.88,
+   "expected": 0.86,
+   "gain_db": -3.8,
+   "flag": ""
+  },
+  {
+   "id": "w1576",
+   "text": "الْعِشْرُون",
+   "start": 140.1,
+   "end": 141.3,
+   "speech": 1.02,
+   "expected": 0.96,
+   "gain_db": -3.9,
+   "flag": ""
+  },
+  {
+   "id": "w0576",
+   "text": "جُنَيْهَان",
+   "start": 141.79,
+   "end": 142.9,
+   "speech": 0.93,
+   "expected": 0.86,
+   "gain_db": -3.1,
+   "flag": ""
+  },
+  {
+   "id": "w0574",
+   "text": "مِائَة",
+   "start": 143.42,
+   "end": 144.05,
+   "speech": 0.44,
+   "expected": 0.65,
+   "gain_db": -2.8,
+   "flag": ""
+  },
+  {
+   "id": "w0577",
+   "text": "مِائَتَان",
+   "start": 144.65,
+   "end": 145.72,
+   "speech": 0.89,
+   "expected": 0.86,
+   "gain_db": -3.2,
+   "flag": ""
+  },
+  {
+   "id": "w0578",
+   "text": "ثَلَاثُمِائَة",
+   "start": 146.25,
+   "end": 147.29,
+   "speech": 0.86,
+   "expected": 1.06,
+   "gain_db": -5.0,
+   "flag": ""
+  },
+  {
+   "id": "w0579",
+   "text": "أَلْف",
+   "start": 147.94,
+   "end": 148.61,
+   "speech": 0.48,
+   "expected": 0.55,
+   "gain_db": -5.2,
+   "flag": ""
+  },
+  {
+   "id": "w0580",
+   "text": "أَلْفَان",
+   "start": 149.17,
+   "end": 150.05,
+   "speech": 0.69,
+   "expected": 0.76,
+   "gain_db": -3.6,
+   "flag": ""
+  },
+  {
+   "id": "w1813",
+   "text": "بَدْلَةٌ",
+   "start": 150.6,
+   "end": 151.58,
+   "speech": 0.8,
+   "expected": 0.65,
+   "gain_db": -5.7,
+   "flag": ""
+  },
+  {
+   "id": "w1814",
+   "text": "جَاكِتٌ",
+   "start": 152.13,
+   "end": 153.11,
+   "speech": 0.79,
+   "expected": 0.65,
+   "gain_db": -2.8,
+   "flag": ""
+  },
+  {
+   "id": "w1816",
+   "text": "بَنْطَلُونٌ",
+   "start": 153.61,
+   "end": 154.73,
+   "speech": 0.95,
+   "expected": 0.86,
+   "gain_db": -5.5,
+   "flag": ""
+  },
+  {
+   "id": "w1817",
+   "text": "جَوْرَبٌ",
+   "start": 155.32,
+   "end": 156.1,
+   "speech": 0.61,
+   "expected": 0.65,
+   "gain_db": -1.7,
+   "flag": ""
+  },
+  {
+   "id": "w1818",
+   "text": "فُسْتَانٌ",
+   "start": 156.73,
+   "end": 157.68,
+   "speech": 0.78,
+   "expected": 0.76,
+   "gain_db": -2.9,
+   "flag": ""
+  },
+  {
+   "id": "w1577",
+   "text": "كِتَابَان",
+   "start": 158.26,
+   "end": 159.27,
+   "speech": 0.83,
+   "expected": 0.86,
+   "gain_db": -6.0,
+   "flag": ""
+  },
+  {
+   "id": "w0591",
+   "text": "أَبْيَض",
+   "start": 159.8,
+   "end": 160.76,
+   "speech": 0.87,
+   "expected": 0.65,
+   "gain_db": -4.8,
+   "flag": ""
+  }
+ ]
+}

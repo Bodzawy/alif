@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 
@@ -137,9 +137,9 @@ describe("recordings and batches made from the code", () => {
   });
 
   it("batch-rerecord: the new form of each recording that no longer matches (e.g. أَسَدٌ for أَسَد)", () => {
-    const texts = batch("batch-rerecord.json").map((i) => i.text);
-    // خَسٌّ (w9001) is recorded now (_batch-a8), so it left batch-rerecord.
-    expect(texts).toEqual(expect.arrayContaining(["أَسَدٌ", "نَمِرٌ"]));
+    // The first one is recorded (_batch-rerecord-01): أَسَدٌ and نَمِرٌ have their clips, batch-rerecord is gone until a clip is stale again.
+    expect(Object.keys(manifest.clips)).toEqual(expect.arrayContaining(["أَسَدٌ", "نَمِرٌ"]));
+    const texts = existsSync(path.join(BATCHES, "batch-rerecord.json")) ? batch("batch-rerecord.json").map((i) => i.text) : [];
     for (const text of texts) expect(TANWIN.test(text), text).toBe(true);
   });
 });

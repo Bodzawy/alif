@@ -4,7 +4,7 @@ The batches in `batches/` are made from the code (`scripts/audio/batches-from-co
 text is exactly what the app shows and speaks, with its harakat and Tanwin. Record it as written.
 
 1. **Voice:** one male voice for every batch (the same one each time), e.g. Charon or Iapetus.
-   Speaker settings: `Adult male teacher, deep and warm voice, Modern Standard Arabic (Fusha), clear.`
+   Speaker settings: `Adult male teacher, very deep, low-pitched and full voice, Modern Standard Arabic (Fusha), crisp and clear, confident, speaks at a lively pace.`
 2. **Style:** paste the block below.
 3. **Text:** paste `batches/batch-NN.txt` as it is (one text per line, a blank line between texts).
    Long batches: split into several speech blocks if the model drifts, but keep the order.
@@ -15,6 +15,10 @@ text is exactly what the app shows and speaks, with its harakat and Tanwin. Reco
 
 `batch-rerecord` holds the words whose earlier recording no longer matches the app (they are
 spoken with Tanwin now) and the replacement of a rejected clip. Record it like any other batch.
+Once recorded it is kept as `_batch-rerecord-NN` (clips in `audio-out/batch-rerecord`), and
+`batch-rerecord` is only written again when a recording no longer matches.
+`_batch-l2-fix` holds the Lektion 2+ words whose clip lost its Tanwin (IQRA heard no -n): record it
+like `_batch-l2-NN`.
 
 `batch-tanwin` re-records the words of ب ت ج (Lektion 1): their texts have Tanwin, but in the
 installed clips the voice dropped it. The ids are the same, and install_clips.py installs this
@@ -23,12 +27,13 @@ folder after batch-01 … 03, so the new clip replaces the old one.
 ## Style
 
 ```
-Read in Modern Standard Arabic (Fusha) as an adult male teacher with a clear, deep voice, like a Quran or Arabic-language teacher.
+Read in Modern Standard Arabic (Fusha) as an adult male teacher with a very deep, low, full voice and crisp, clear articulation, like a Quran or Arabic-language teacher.
 Use classical Fusha pronunciation, never a dialect: ق as a true qaf, ج as jīm, ث and ذ as interdental sounds, ض and ظ and ص and ط fully emphatic, ع and ح from the throat, and every hamza clearly as a glottal stop.
 Pronounce every word exactly as it is vowelled: every fatha, kasra, damma, sukun, shadda, hamza and madda.
 Where tanwin is written, pronounce it fully and clearly (ـٌ = -un, ـً = -an, ـٍ = -in); do NOT drop it in pause.
 A word without a final vowel mark ends in sukun. A single letter with a vowel (بَ) is said as written, short.
-Each line is one separate item: say it once, at a natural, brisk teaching pace, then pause for about 1 second before the next line.
+Keep a brisk, lively pace – never slow, drawn-out or sleepy – but every sound stays crisp and clear.
+Each line is one separate item: say it once, then pause for about 1 second before the next line.
 Do not add, repeat, explain or translate anything.
 ```
 
@@ -42,11 +47,11 @@ only when the pause between two texts is clearly longer than every pause inside 
 Install: `python3 scripts/audio/install_clips.py l2` (sentences `l2s`, several sentences `l2p`).
 
 ```
-Read in Modern Standard Arabic (Fusha) as an adult male teacher with a clear, deep voice, like a Quran or Arabic-language teacher.
+Read in Modern Standard Arabic (Fusha) as an adult male teacher with a very deep, low, full voice and crisp, clear articulation, like a Quran or Arabic-language teacher.
 Use classical Fusha pronunciation, never a dialect: ق as a true qaf, ج as jīm, ث and ذ as interdental sounds, ض and ظ and ص and ط fully emphatic, ع and ح from the throat, and every hamza clearly as a glottal stop.
 Pronounce every word exactly as it is vowelled: every fatha, kasra, damma, sukun, shadda, hamza and madda, and every case ending that is written. Where tanwin is written, pronounce it fully.
 A word without a final vowel mark ends in sukun.
-Read each item as one connected utterance with natural sentence intonation (a question as a question). Inside an item, pause only briefly at a comma or full stop – never longer than half a second.
+Read each item as one connected utterance at a brisk, lively, natural pace – never slow or drawn-out – with natural sentence intonation (a question as a question). Inside an item, pause only briefly at a comma or full stop – never longer than half a second.
 Each item is separated by a blank line: after each item, stay completely silent for about 3 seconds before the next one.
 Do not add, repeat, explain or translate anything.
 ```

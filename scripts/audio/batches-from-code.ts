@@ -109,7 +109,8 @@ const write = (name: string, items: Item[]) => {
   writeFileSync(path.join(BATCHES, `${name}.json`), JSON.stringify({ batch: name, items }, null, 1) + "\n");
   writeFileSync(path.join(BATCHES, `${name}.txt`), items.map((item) => item.text).join("\n\n") + "\n");
 };
-write("batch-rerecord", rerecord);
+// Recorded re-record batches are kept as _batch-rerecord-NN (their clips are in audio-out/batch-rerecord).
+if (rerecord.length) write("batch-rerecord", rerecord);
 const batches: string[] = [];
 for (let i = 0; i < todo.length; i += SIZE) {
   const name = `batch-${String(4 + i / SIZE).padStart(2, "0")}`;
