@@ -76,7 +76,9 @@ describe("vocabulary words with Tanwin", () => {
       unit.lessons.forEach((lesson, l) =>
         lesson.steps.forEach((step, s) => {
           const shown = A1_LEVEL.units[u]!.lessons[l]!.steps[s]!;
-          if (!["words", "sound-words", "match", "positions"].includes(step.kind)) {
+          // From Lektion 2 on, Ergänzen, Buchstabieren, Quiz, tables, Wörter finden and the expressions get the Tanwin too.
+          const later = unit.number >= 2 && ["gaps", "spell", "quiz", "table", "word-pick", "phrases"].includes(step.kind);
+          if (!["words", "sound-words", "match", "positions"].includes(step.kind) && !later) {
             expect(shown, `${unit.slug}/${lesson.slug}/${step.slug}`).toBe(step);
             checked++;
           }
@@ -84,7 +86,28 @@ describe("vocabulary words with Tanwin", () => {
         })
       )
     );
-    expect(checked).toBeGreaterThan(300);
+    expect(checked).toBeGreaterThan(200);
+  });
+});
+
+describe("from Lektion 2 on, more steps speak and show the Tanwin", () => {
+  it("Ergänzen, Buchstaben ordnen, tables and the expressions; a written final vowel, a name or a dual stays", () => {
+    const step = (unit: string, entry: string, slug: string) => getA1Lesson(unit, entry)!.steps.find((s) => s.slug === slug)!;
+    const gaps = step("lesson-2", "dal", "step-4");
+    if (gaps.kind !== "gaps") throw new Error();
+    expect(gaps.gaps.items.slice(0, 3).map((i) => i.arabic)).toEqual(["دَوَاءٌ", "دَرَّاجَةٌ", "دُولَابٌ"]);
+    // Buchstaben ordnen: the letters stay unvocalised, only the voice says the Tanwin.
+    const arrange = step("lesson-2", "huruf-al-madd", "step-8");
+    if (arrange.kind !== "gaps") throw new Error();
+    expect(arrange.gaps.items[0]).toMatchObject({ arabic: "تاج", spoken: "تَاجٌ" });
+    const hamza = step("lesson-7", "al-hamza", "step-1");
+    if (hamza.kind !== "table") throw new Error();
+    expect(hamza.tables[0]!.rows[0]!.slice(1, 4).map((c) => c.arabic)).toEqual(["أَحْمَد", "سَأَلَ", "بَدَأَ"]);
+    const numbers = step("lesson-11", "ma-ar-raqm", "step-1");
+    if (numbers.kind !== "phrases") throw new Error();
+    const shown = numbers.groups.flatMap((g) => g.items.map((i) => i.arabic));
+    expect(shown).toEqual(expect.arrayContaining(["شَارِعٌ", "شَقَّةٌ", "مَحْمُولٌ"]));
+    for (const word of ["زَيْنَب", "يَنَايِر", "مِصْر", "اثْنَان", "أَفْضَل", "يَكْتُب", "هَلْ"]) expect(NO_TANWIN.has(word), word).toBe(true);
   });
 });
 

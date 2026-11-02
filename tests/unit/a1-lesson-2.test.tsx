@@ -54,6 +54,9 @@ const stepOf = <K extends A1Step["kind"]>(lesson: A1Lesson, slug: string, kind: 
   if (step.kind !== kind) throw new Error(`${lesson.slug}/${slug} must be ${kind}, is ${step.kind}`);
   return step as Extract<A1Step, { kind: K }>;
 };
+
+/** The book's spelling of a word the app shows with Tanwin from Lektion 2 on (دَوَاءٌ → دَوَاء, ظِلٌّ → ظِلّ, قُرًى → قُرَى). */
+const book = (word: string) => word.replace(/ٌ(ّ?)([.،؟!]?)$/, "$1$2").replace(/ًى$/, "َى");
 const KEY = "a1/lesson-2/test/step-x";
 
 class FakeAudio {
@@ -220,7 +223,7 @@ describe.each(["dal", "dhal", "waw", "ya"])("the letter %s", (slug) => {
 });
 
 describe("the exercises of each letter page, exactly as in the book", () => {
-  const items = (slug: string, step: string) => stepOf(entry(slug), step, "gaps").gaps.items.map((i) => i.arabic);
+  const items = (slug: string, step: string) => stepOf(entry(slug), step, "gaps").gaps.items.map((i) => book(i.arabic));
 
   it("د: تدريب ٢، ٣، ٤، ٩", () => {
     expect(items("dal", "step-4")).toEqual(["دَوَاء", "دَرَّاجَة", "دُولَاب", "دِهَان", "دَقِيق", "دِيك", "دُرْج", "دِينَا", "دُبّ"]);
@@ -228,7 +231,7 @@ describe("the exercises of each letter page, exactly as in the book", () => {
     expect(items("dal", "step-6").map((w) => w.replace(/ْ$/, ""))).toEqual(["دَرْس", "مَدْفَأَة", "دَجَاجَة", "تَدُقّ", "مَسْجِد", "مَدْرَسَة", "شَاهِد", "جَدِيدَة", "جَدّ", "دَار", "حَدِيد", "دِيَارِي", "دُبّ", "الدُّنْيَا", "وَرْدَة", "الْأَحَد", "مَدِيحَة", "حَدِيقَة", "عِيدِي"]);
     // تدريب ٩: the book's patterns and its solution ("حل تدريب ٩").
     const dictation = stepOf(entry("dal"), "step-8", "gaps").gaps.items;
-    expect(dictation.map((i) => [i.pattern, i.arabic])).toEqual([
+    expect(dictation.map((i) => [book(i.pattern!), book(i.arabic)])).toEqual([
       ["_امِر", "تَامِر"], ["_وْم", "ثَوْم"], ["_بْرِيق", "إِبْرِيق"], ["_رْتُقَال", "بُرْتُقَال"], ["_يَار", "خِيَار"], ["_رْج", "بُرْج"],
       ["_فَّاحَة", "تُفَّاحَة"], ["تَمَا_يل", "تَمَاثِيل"], ["_صَان", "حِصَان"], ["_رُوف", "خَرُوف"], ["_رْج", "دُرْج"], ["__يقَة", "حَدِيقَة"],
     ]);
@@ -390,13 +393,13 @@ describe("حروف المد – long and short vowels", () => {
 
   it("تدريب ١ and ٢: the book's words, gaps and pictures; ٢ offers ا و ي", () => {
     const one = stepOf(madd, "step-4", "gaps").gaps.items;
-    expect(one.map((i) => [i.pattern, i.arabic.replace(/ْ$/, "")])).toEqual([
+    expect(one.map((i) => [book(i.pattern!), book(i.arabic).replace(/ْ$/, "")])).toEqual([
       ["__ك", "دِيك"], ["صُ_رَة", "صُورَة"], ["___", "بَاب"], ["عَ_مِل", "عَامِل"], ["طُ_ور", "طُيُور"], ["__سَمِ_نُ", "يَاسَمِينُ"], ["كِ___", "كِتَاب"], ["فِ_ل", "فِيل"],
     ]);
     for (const item of one) expect(existsSync(path.join(PUBLIC, item.image!.src)), item.id).toBe(true);
     const two = stepOf(madd, "step-5", "gaps");
     expect(two.gaps.mode).toBe("listen");
-    expect(two.gaps.items.map((i) => i.arabic)).toEqual(["صُورَة", "كِتَاب", "عَامِل", "دِيك", "سَبُّورَة", "بَابَا", "طُيُور", "يَاسَمِين", "بَاب", "سُوق"]);
+    expect(two.gaps.items.map((i) => book(i.arabic))).toEqual(["صُورَة", "كِتَاب", "عَامِل", "دِيك", "سَبُّورَة", "بَابَا", "طُيُور", "يَاسَمِين", "بَاب", "سُوق"]);
     for (const item of two.gaps.items) {
       expect(item.choices).toEqual(["ا", "و", "ي"]);
       for (const gap of gapTask(item).gaps) expect(["ا", "و", "ي"]).toContain(gap.answer);
@@ -406,7 +409,7 @@ describe("حروف المد – long and short vowels", () => {
   it("تدريب ٣: the 16 words – repeat, then write the whole word with its signs", () => {
     const three = stepOf(madd, "step-6", "gaps").gaps;
     expect(three.repeat).toBe(true);
-    expect(three.items.map((i) => i.arabic.replace(/ْ$/, ""))).toEqual(["فِيل", "وُصُول", "جَمِيل", "سَفِينَة", "بُيُوت", "كِتَاب", "سَبُّورَة", "وُرُود", "تِين", "خَوْخ", "أَخِي", "أُخْتِي", "بَاتَ", "مَجْدِي", "جَابِي", "مُنَى"]);
+    expect(three.items.map((i) => book(i.arabic).replace(/ْ$/, ""))).toEqual(["فِيل", "وُصُول", "جَمِيل", "سَفِينَة", "بُيُوت", "كِتَاب", "سَبُّورَة", "وُرُود", "تِين", "خَوْخ", "أَخِي", "أُخْتِي", "بَاتَ", "مَجْدِي", "جَابِي", "مُنَى"]);
   });
 
   it("تدريب ٥: the nine words and the book's pictures (أ) … (ط); تاج = أ is the model", () => {
@@ -421,7 +424,7 @@ describe("حروف المد – long and short vowels", () => {
 
   it("تدريب ٦: the book's letters give exactly the solution words", () => {
     const six = stepOf(madd, "step-8", "gaps").gaps.items;
-    expect(six.map((i) => [i.spoken, i.choices!.join("")])).toEqual([
+    expect(six.map((i) => [book(i.spoken!), i.choices!.join("")])).toEqual([
       ["تَاج", "جات"], ["فِيل", "فلي"], ["بَاب", "اب"], ["كِتَاب", "بكات"], ["عَامِل", "علام"], ["يَاسَمِين", "يسمنا"], ["دِيك", "كدي"],
     ]);
     for (const item of six) expect(item.arabic).toBe(item.spoken!.replace(/[ً-ْ]/g, ""));
@@ -430,7 +433,7 @@ describe("حروف المد – long and short vowels", () => {
   it("تدريب ٧: 24 words to read; the words WITHOUT a Dehnungsbuchstabe are بَيْت، أَخَذَ، بَخْت", () => {
     const pick = stepOf(madd, "step-9", "word-pick").pick;
     expect(pick.words).toHaveLength(24);
-    expect(pickTokens(pick).filter((t) => t.target).map((t) => t.word)).toEqual(["بَيْت", "أَخَذَ", "بَخْت"]);
+    expect(pickTokens(pick).filter((t) => t.target).map((t) => t.word)).toEqual(["بَيْتٌ", "أَخَذَ", "بَخْتٌ"]);
   });
 
   it("تدريب ٨: separated letters → the book's word column (ر – ض – ا = رِضَا is the model)", () => {
@@ -445,8 +448,8 @@ describe("حروف المد – long and short vowels", () => {
   });
 
   it("تدريب ٩: a dictation of words from تدريب ٧ only", () => {
-    const read = new Set(stepOf(madd, "step-9", "word-pick").pick.words!.map((w) => w.arabic));
-    for (const item of stepOf(madd, "step-11", "gaps").gaps.items) expect(read.has(item.arabic.replace(/ْ$/, "")), item.arabic).toBe(true);
+    const read = new Set(stepOf(madd, "step-9", "word-pick").pick.words!.map((w) => book(w.arabic)));
+    for (const item of stepOf(madd, "step-11", "gaps").gaps.items) expect(read.has(book(item.arabic).replace(/ْ$/, "")), item.arabic).toBe(true);
   });
 
   it("the Dehnungsbuchstabe is computed from the vocalised word", () => {
@@ -586,15 +589,15 @@ describe("the new step types", () => {
     const pick = stepOf(entry("huruf-al-madd"), "step-9", "word-pick").pick;
     render(<WordPickStep pick={pick} progressKey={KEY} />);
     const word = (arabic: string) => screen.getAllByTestId(/^pick-word-/).find((b) => b.textContent === arabic)!;
-    fireEvent.click(word("بَيْت"));
-    fireEvent.click(word("بَاب")); // has an ā
+    fireEvent.click(word("بَيْتٌ"));
+    fireEvent.click(word("بَابٌ")); // has an ā
     fireEvent.click(screen.getByTestId("pick-check"));
     expect(screen.getByTestId("pick-feedback")).toHaveTextContent("1 von 3 richtig. Es fehlen noch 2.");
     expect(screen.getByTestId("pick-wrong")).toHaveTextContent("diese Wörter haben einen Dehnungsbuchstaben");
-    expect(word("بَاب")).toHaveAttribute("data-tone", "wrong");
-    fireEvent.click(word("بَاب"));
+    expect(word("بَابٌ")).toHaveAttribute("data-tone", "wrong");
+    fireEvent.click(word("بَابٌ"));
     fireEvent.click(word("أَخَذَ"));
-    fireEvent.click(word("بَخْت"));
+    fireEvent.click(word("بَخْتٌ"));
     fireEvent.click(screen.getByTestId("pick-check"));
     expect(screen.getByTestId("pick-done")).toBeInTheDocument();
     expect(getLessonProgress(KEY).completedAt).toBeTruthy();
@@ -682,7 +685,7 @@ describe("audio texts", () => {
     for (const lesson of a1Unit2.lessons) {
       for (const exercise of a1LessonExercises(lesson)) expect(isAllowedTtsText(exercise.modelText), exercise.modelText).toBe(true);
     }
-    for (const text of ["دُولَاب", "مَدْرَسَة", "بَب", "يَاسَمِنُ", "تُوت", "مَسَاءُ الْخَيْرِ", "بِي", "تَاج"]) expect(texts, text).toContain(text);
+    for (const text of ["دُولَابٌ", "مَدْرَسَة", "بَب", "يَاسَمِنُ", "تُوتٌ", "مَسَاءُ الْخَيْرِ", "بِي", "تَاجٌ"]) expect(texts, text).toContain(text);
     expect(isAllowedTtsText("ein beliebiger Text")).toBe(false);
   });
 });

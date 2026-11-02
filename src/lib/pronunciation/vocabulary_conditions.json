@@ -1660,7 +1660,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['Z','f','r|rr']"
+        "iqra_phonemes contains ['Z','f','r|rr']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة ظفر بشكل صحيح"
     },
@@ -1671,6 +1672,14 @@
         "iqra_phonemes does not contain ['Z','f','r|rr']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة ظفر"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة ظفر"
     },
     "needs_improvement": {
       "conditions": [
@@ -3742,7 +3751,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['l']"
+        "iqra_phonemes contains ['l']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة ثلاثة بشكل صحيح"
     },
@@ -3753,6 +3763,14 @@
         "iqra_phonemes does not contain ['l']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة ثلاثة"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة ثلاثة"
     },
     "needs_improvement": {
       "conditions": [
@@ -4508,7 +4526,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['x','m','s']"
+        "iqra_phonemes contains ['x','m','s']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة خمسة بشكل صحيح"
     },
@@ -4519,6 +4538,14 @@
         "iqra_phonemes does not contain ['x','m','s']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة خمسة"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة خمسة"
     },
     "needs_improvement": {
       "conditions": [
@@ -5539,7 +5566,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['w','j']"
+        "iqra_phonemes contains ['w','j']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة وجوه بشكل صحيح"
     },
@@ -5550,6 +5578,14 @@
         "iqra_phonemes does not contain ['w','j']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة وجوه"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة وجوه"
     },
     "needs_improvement": {
       "conditions": [
@@ -5562,7 +5598,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['y','m','n']"
+        "iqra_phonemes contains ['y','m','n|nn']",
+        "iqra_phonemes ends with ['n|nn','u|U','n|nn'] or ['n|nn','n|nn'] or ['nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة يمين بشكل صحيح"
     },
@@ -5570,9 +5607,17 @@
       "conditions": [
         "azure_accuracy >= 70",
         "iqra_phonemes is not empty",
-        "iqra_phonemes does not contain ['y','m','n']"
+        "iqra_phonemes does not contain ['y','m','n|nn']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة يمين"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn','u|U','n|nn'] or ['n|nn','n|nn'] or ['nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة يمين"
     },
     "needs_improvement": {
       "conditions": [
@@ -5585,7 +5630,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['y','w','m']"
+        "iqra_phonemes contains ['y','w','m']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة يوم بشكل صحيح"
     },
@@ -5596,6 +5642,14 @@
         "iqra_phonemes does not contain ['y','w','m']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة يوم"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة يوم"
     },
     "needs_improvement": {
       "conditions": [
@@ -6550,7 +6604,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['$','r|rr','E']"
+        "iqra_phonemes contains ['$','r|rr','E']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة شارع بشكل صحيح"
     },
@@ -6561,6 +6616,14 @@
         "iqra_phonemes does not contain ['$','r|rr','E']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة شارع"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة شارع"
     },
     "needs_improvement": {
       "conditions": [
@@ -9564,7 +9627,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['h','$','m']"
+        "iqra_phonemes contains ['h','$','m']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة هشام بشكل صحيح"
     },
@@ -9575,6 +9639,14 @@
         "iqra_phonemes does not contain ['h','$','m']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة هشام"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة هشام"
     },
     "needs_improvement": {
       "conditions": [
@@ -9612,7 +9684,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['m|mm','h']"
+        "iqra_phonemes contains ['m|mm','h']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة مهم بشكل صحيح"
     },
@@ -9623,6 +9696,14 @@
         "iqra_phonemes does not contain ['m|mm','h']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة مهم"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة مهم"
     },
     "needs_improvement": {
       "conditions": [
@@ -10110,7 +10191,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['Z','r|rr','f']"
+        "iqra_phonemes contains ['Z','r|rr','f']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة ظروف بشكل صحيح"
     },
@@ -10121,6 +10203,14 @@
         "iqra_phonemes does not contain ['Z','r|rr','f']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة ظروف"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة ظروف"
     },
     "needs_improvement": {
       "conditions": [
@@ -10134,7 +10224,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['Z','h','r|rr']"
+        "iqra_phonemes contains ['Z','h','r|rr']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة ظهور بشكل صحيح"
     },
@@ -10145,6 +10236,14 @@
         "iqra_phonemes does not contain ['Z','h','r|rr']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة ظهور"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة ظهور"
     },
     "needs_improvement": {
       "conditions": [
@@ -10158,7 +10257,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['Z','r|rr','f']"
+        "iqra_phonemes contains ['Z','r|rr','f']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة ظريف بشكل صحيح"
     },
@@ -10169,6 +10269,14 @@
         "iqra_phonemes does not contain ['Z','r|rr','f']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة ظريف"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة ظريف"
     },
     "needs_improvement": {
       "conditions": [
@@ -10182,7 +10290,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['E','Z','m']"
+        "iqra_phonemes contains ['E','Z','m']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة عظم بشكل صحيح"
     },
@@ -10193,6 +10302,14 @@
         "iqra_phonemes does not contain ['E','Z','m']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة عظم"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة عظم"
     },
     "needs_improvement": {
       "conditions": [
@@ -10206,7 +10323,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['w','E','Z']"
+        "iqra_phonemes contains ['w','E','Z']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة وعظ بشكل صحيح"
     },
@@ -10217,6 +10335,14 @@
         "iqra_phonemes does not contain ['w','E','Z']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة وعظ"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة وعظ"
     },
     "needs_improvement": {
       "conditions": [
@@ -10230,7 +10356,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['Z','h','r|rr']"
+        "iqra_phonemes contains ['Z','h','r|rr']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة ظاهر بشكل صحيح"
     },
@@ -10241,6 +10368,14 @@
         "iqra_phonemes does not contain ['Z','h','r|rr']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة ظاهر"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة ظاهر"
     },
     "needs_improvement": {
       "conditions": [
@@ -10254,7 +10389,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['Z','b']"
+        "iqra_phonemes contains ['Z','b']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة ظباء بشكل صحيح"
     },
@@ -10265,6 +10401,14 @@
         "iqra_phonemes does not contain ['Z','b']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة ظباء"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة ظباء"
     },
     "needs_improvement": {
       "conditions": [
@@ -10278,7 +10422,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['E','Z','m']"
+        "iqra_phonemes contains ['E','Z','m']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة عظيم بشكل صحيح"
     },
@@ -10289,6 +10434,14 @@
         "iqra_phonemes does not contain ['E','Z','m']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة عظيم"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة عظيم"
     },
     "needs_improvement": {
       "conditions": [
@@ -10302,7 +10455,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['E','Z','m']"
+        "iqra_phonemes contains ['E','Z','m']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة عظمة بشكل صحيح"
     },
@@ -10313,6 +10467,14 @@
         "iqra_phonemes does not contain ['E','Z','m']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة عظمة"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة عظمة"
     },
     "needs_improvement": {
       "conditions": [
@@ -12305,7 +12467,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['H','s','n']"
+        "iqra_phonemes contains ['H','s','n|nn']",
+        "iqra_phonemes ends with ['n|nn','u|U','n|nn'] or ['n|nn','n|nn'] or ['nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة إحسان بشكل صحيح"
     },
@@ -12313,9 +12476,17 @@
       "conditions": [
         "azure_accuracy >= 70",
         "iqra_phonemes is not empty",
-        "iqra_phonemes does not contain ['H','s','n']"
+        "iqra_phonemes does not contain ['H','s','n|nn']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة إحسان"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn','u|U','n|nn'] or ['n|nn','n|nn'] or ['nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة إحسان"
     },
     "needs_improvement": {
       "conditions": [
@@ -12329,7 +12500,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['s','l']"
+        "iqra_phonemes contains ['s','l']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة أسئلة بشكل صحيح"
     },
@@ -12340,6 +12512,14 @@
         "iqra_phonemes does not contain ['s','l']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة أسئلة"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة أسئلة"
     },
     "needs_improvement": {
       "conditions": [
@@ -12353,7 +12533,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['b','T']"
+        "iqra_phonemes contains ['b','T']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة بطيء بشكل صحيح"
     },
@@ -12364,6 +12545,14 @@
         "iqra_phonemes does not contain ['b','T']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة بطيء"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة بطيء"
     },
     "needs_improvement": {
       "conditions": [
@@ -12401,7 +12590,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['s','l']"
+        "iqra_phonemes contains ['s','l']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة سؤال بشكل صحيح"
     },
@@ -12412,6 +12602,14 @@
         "iqra_phonemes does not contain ['s','l']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة سؤال"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة سؤال"
     },
     "needs_improvement": {
       "conditions": [
@@ -12425,7 +12623,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['t','b','T']"
+        "iqra_phonemes contains ['t','b','T']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة تباطؤ بشكل صحيح"
     },
@@ -12436,6 +12635,14 @@
         "iqra_phonemes does not contain ['t','b','T']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة تباطؤ"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة تباطؤ"
     },
     "needs_improvement": {
       "conditions": [
@@ -12449,7 +12656,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['s','r|rr']"
+        "iqra_phonemes contains ['s','r|rr']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة آسر بشكل صحيح"
     },
@@ -12460,6 +12668,14 @@
         "iqra_phonemes does not contain ['s','r|rr']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة آسر"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة آسر"
     },
     "needs_improvement": {
       "conditions": [
@@ -12473,7 +12689,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['q','r|rr','n']"
+        "iqra_phonemes contains ['q','r|rr','n|nn']",
+        "iqra_phonemes ends with ['n|nn','u|U','n|nn'] or ['n|nn','n|nn'] or ['nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة قرآن بشكل صحيح"
     },
@@ -12481,9 +12698,17 @@
       "conditions": [
         "azure_accuracy >= 70",
         "iqra_phonemes is not empty",
-        "iqra_phonemes does not contain ['q','r|rr','n']"
+        "iqra_phonemes does not contain ['q','r|rr','n|nn']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة قرآن"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn','u|U','n|nn'] or ['n|nn','n|nn'] or ['nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة قرآن"
     },
     "needs_improvement": {
       "conditions": [
@@ -12497,7 +12722,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['b','d']"
+        "iqra_phonemes contains ['b','d']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة بدء بشكل صحيح"
     },
@@ -12508,6 +12734,14 @@
         "iqra_phonemes does not contain ['b','d']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة بدء"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة بدء"
     },
     "needs_improvement": {
       "conditions": [
@@ -12521,7 +12755,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['D','w']"
+        "iqra_phonemes contains ['D','w']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة ضوء بشكل صحيح"
     },
@@ -12532,6 +12767,14 @@
         "iqra_phonemes does not contain ['D','w']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة ضوء"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة ضوء"
     },
     "needs_improvement": {
       "conditions": [
@@ -12545,7 +12788,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['h','n']"
+        "iqra_phonemes contains ['h','n','n|nn']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة هناء بشكل صحيح"
     },
@@ -12554,6 +12798,22 @@
         "azure_accuracy >= 70",
         "iqra_phonemes is not empty",
         "iqra_phonemes does not contain ['h','n']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة هناء"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة هناء"
+    },
+    "said_wrong_sound_n": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['h','n','n|nn']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة هناء"
     },
@@ -14956,7 +15216,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['$','q|qq']"
+        "iqra_phonemes contains ['$','q|qq']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة شقة بشكل صحيح"
     },
@@ -14967,6 +15228,14 @@
         "iqra_phonemes does not contain ['$','q|qq']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة شقة"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة شقة"
     },
     "needs_improvement": {
       "conditions": [
@@ -15028,7 +15297,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['m','H','l']"
+        "iqra_phonemes contains ['m','H','l']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة محمول بشكل صحيح"
     },
@@ -15039,6 +15309,14 @@
         "iqra_phonemes does not contain ['m','H','l']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة محمول"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة محمول"
     },
     "needs_improvement": {
       "conditions": [
@@ -15052,7 +15330,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['S','f','r|rr']"
+        "iqra_phonemes contains ['S','f','r|rr']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة صفر بشكل صحيح"
     },
@@ -15063,6 +15342,14 @@
         "iqra_phonemes does not contain ['S','f','r|rr']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة صفر"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة صفر"
     },
     "needs_improvement": {
       "conditions": [
@@ -15076,7 +15363,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['w','H','d']"
+        "iqra_phonemes contains ['w','H','d']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة واحد بشكل صحيح"
     },
@@ -15087,6 +15375,14 @@
         "iqra_phonemes does not contain ['w','H','d']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة واحد"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة واحد"
     },
     "needs_improvement": {
       "conditions": [
@@ -15124,7 +15420,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['r|rr','b','E']"
+        "iqra_phonemes contains ['r|rr','b','E']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة أربعة بشكل صحيح"
     },
@@ -15135,6 +15432,14 @@
         "iqra_phonemes does not contain ['r|rr','b','E']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة أربعة"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة أربعة"
     },
     "needs_improvement": {
       "conditions": [
@@ -15148,7 +15453,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['s','t|tt']"
+        "iqra_phonemes contains ['s','t|tt']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة ستة بشكل صحيح"
     },
@@ -15159,6 +15465,14 @@
         "iqra_phonemes does not contain ['s','t|tt']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة ستة"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة ستة"
     },
     "needs_improvement": {
       "conditions": [
@@ -15172,7 +15486,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['s','b','E']"
+        "iqra_phonemes contains ['s','b','E']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة سبعة بشكل صحيح"
     },
@@ -15183,6 +15498,14 @@
         "iqra_phonemes does not contain ['s','b','E']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة سبعة"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة سبعة"
     },
     "needs_improvement": {
       "conditions": [
@@ -15196,7 +15519,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['m','n','y']"
+        "iqra_phonemes contains ['m','n','y','n|nn']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة ثمانية بشكل صحيح"
     },
@@ -15205,6 +15529,22 @@
         "azure_accuracy >= 70",
         "iqra_phonemes is not empty",
         "iqra_phonemes does not contain ['m','n','y']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة ثمانية"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة ثمانية"
+    },
+    "said_wrong_sound_n": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['m','n','y','n|nn']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة ثمانية"
     },
@@ -15220,7 +15560,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['t','s','E']"
+        "iqra_phonemes contains ['t','s','E']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة تسعة بشكل صحيح"
     },
@@ -15231,6 +15572,14 @@
         "iqra_phonemes does not contain ['t','s','E']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة تسعة"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة تسعة"
     },
     "needs_improvement": {
       "conditions": [
@@ -15244,7 +15593,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['E','$','r|rr']"
+        "iqra_phonemes contains ['E','$','r|rr']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة عشرة بشكل صحيح"
     },
@@ -15255,6 +15605,14 @@
         "iqra_phonemes does not contain ['E','$','r|rr']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة عشرة"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة عشرة"
     },
     "needs_improvement": {
       "conditions": [
@@ -16876,7 +17234,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['y|yy','m']"
+        "iqra_phonemes contains ['y|yy','m']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة أيام بشكل صحيح"
     },
@@ -16887,6 +17246,14 @@
         "iqra_phonemes does not contain ['y|yy','m']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة أيام"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة أيام"
     },
     "needs_improvement": {
       "conditions": [
@@ -16900,7 +17267,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['$','h','r|rr']"
+        "iqra_phonemes contains ['$','h','r|rr']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة شهر بشكل صحيح"
     },
@@ -16911,6 +17279,14 @@
         "iqra_phonemes does not contain ['$','h','r|rr']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة شهر"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة شهر"
     },
     "needs_improvement": {
       "conditions": [
@@ -16924,7 +17300,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['s','n']"
+        "iqra_phonemes contains ['s','n','n|nn']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة سنة بشكل صحيح"
     },
@@ -16933,6 +17310,22 @@
         "azure_accuracy >= 70",
         "iqra_phonemes is not empty",
         "iqra_phonemes does not contain ['s','n']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة سنة"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة سنة"
+    },
+    "said_wrong_sound_n": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['s','n','n|nn']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة سنة"
     },
@@ -16948,7 +17341,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['s','b','E']"
+        "iqra_phonemes contains ['s','b','E']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة أسبوع بشكل صحيح"
     },
@@ -16959,6 +17353,14 @@
         "iqra_phonemes does not contain ['s','b','E']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة أسبوع"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة أسبوع"
     },
     "needs_improvement": {
       "conditions": [
@@ -17596,7 +17998,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['j','n','y']"
+        "iqra_phonemes contains ['j','n','y','n|nn']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة جنيه بشكل صحيح"
     },
@@ -17605,6 +18008,22 @@
         "azure_accuracy >= 70",
         "iqra_phonemes is not empty",
         "iqra_phonemes does not contain ['j','n','y']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة جنيه"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة جنيه"
+    },
+    "said_wrong_sound_n": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['j','n','y','n|nn']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة جنيه"
     },
@@ -21315,7 +21734,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['b','w|ww']"
+        "iqra_phonemes contains ['b','w|ww']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة بوابة بشكل صحيح"
     },
@@ -21326,6 +21746,14 @@
         "iqra_phonemes does not contain ['b','w|ww']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة بوابة"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة بوابة"
     },
     "needs_improvement": {
       "conditions": [
@@ -21962,7 +22390,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['m','y','d','n']"
+        "iqra_phonemes contains ['m','y','d','n|nn']",
+        "iqra_phonemes ends with ['n|nn','u|U','n|nn'] or ['n|nn','n|nn'] or ['nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة ميدان بشكل صحيح"
     },
@@ -21970,9 +22399,17 @@
       "conditions": [
         "azure_accuracy >= 70",
         "iqra_phonemes is not empty",
-        "iqra_phonemes does not contain ['m','y','d','n']"
+        "iqra_phonemes does not contain ['m','y','d','n|nn']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة ميدان"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn','u|U','n|nn'] or ['n|nn','n|nn'] or ['nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة ميدان"
     },
     "needs_improvement": {
       "conditions": [
@@ -22010,7 +22447,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['$','m','l']"
+        "iqra_phonemes contains ['$','m','l']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة شمال بشكل صحيح"
     },
@@ -22021,6 +22459,14 @@
         "iqra_phonemes does not contain ['$','m','l']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة شمال"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة شمال"
     },
     "needs_improvement": {
       "conditions": [
@@ -22058,7 +22504,8 @@
     "excellent": {
       "conditions": [
         "azure_accuracy >= 70",
-        "iqra_phonemes contains ['n','S','y']"
+        "iqra_phonemes contains ['n','S','y','n|nn']",
+        "iqra_phonemes ends with ['n|nn']"
       ],
       "message": "ممتاز 👏 نطقت كلمة ناصية بشكل صحيح"
     },
@@ -22067,6 +22514,22 @@
         "azure_accuracy >= 70",
         "iqra_phonemes is not empty",
         "iqra_phonemes does not contain ['n','S','y']"
+      ],
+      "message": "حاول مرة أخرى، انتبه لأصوات كلمة ناصية"
+    },
+    "said_without_tanwin": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not end with ['n|nn']"
+      ],
+      "message": "حاول مرة أخرى، لا تنسَ التنوين في آخر كلمة ناصية"
+    },
+    "said_wrong_sound_n": {
+      "conditions": [
+        "azure_accuracy >= 70",
+        "iqra_phonemes is not empty",
+        "iqra_phonemes does not contain ['n','S','y','n|nn']"
       ],
       "message": "حاول مرة أخرى، انتبه لأصوات كلمة ناصية"
     },

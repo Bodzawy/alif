@@ -1197,7 +1197,9 @@ describe("the Tanwin at the end (ALIF Pronunciation only)", () => {
       expect(check, target).toBe(ending ? `iqra_phonemes ends with ${ending}` : undefined);
       expect(Boolean(rules.said_without_tanwin), target).toBe(Boolean(ending));
     }
-    for (const mixed of ["يوم", "شارع", "ثلاثة", "يمين"]) expect(TANWIN_END[mixed], mixed).toBeUndefined();
+    // مِائَةٌ in the list of numbers, مِائَة in "١٠٠ – مِائَة" (يوم, شارع, ثلاثة, يمين have their Tanwin everywhere since Lektion 2 speaks it).
+    for (const mixed of ["مائة"]) expect(TANWIN_END[mixed], mixed).toBeUndefined();
+    for (const now of ["يوم", "شارع", "ثلاثة", "يمين"]) expect(TANWIN_END[now], now).toBeDefined();
     expect(TANWIN_END["شكرا"]).toBe("['n|nn']");
     expect(TANWIN_END["تين"]).toBe(N_FINAL_END);
   });

@@ -46,6 +46,9 @@ const stepOf = <K extends A1Step["kind"]>(lesson: A1Lesson, slug: string, kind: 
   if (step.kind !== kind) throw new Error(`${lesson.slug}/${slug} must be ${kind}, is ${step.kind}`);
   return step as Extract<A1Step, { kind: K }>;
 };
+
+/** The book's spelling of a word the app shows with Tanwin from Lektion 2 on (دَوَاءٌ → دَوَاء, ظِلٌّ → ظِلّ, قُرًى → قُرَى). */
+const book = (word: string) => word.replace(/ٌ(ّ?)([.،؟!]?)$/, "$1$2").replace(/ًى$/, "َى");
 const entry = (unit: string, slug: string) => getA1Lesson(unit, slug)!;
 const letters = [...a1Unit3.lessons, ...a1Unit4.lessons].filter((l) => l.kind === "letter");
 
@@ -171,7 +174,8 @@ describe.each(letters.map((l) => [l.slug, l] as const))("the letter %s", (slug, 
   it("تدريب ٩ and ١٠: the dictation words of „حل تدريب ٩“, then the same words in separate letters", () => {
     const dictation = stepOf(lesson, "step-9", "gaps").gaps.items;
     const spell = stepOf(lesson, "step-10", "spell").words;
-    expect(spell.map((w) => w.arabic)).toEqual(dictation.map((i) => i.arabic));
+    // The same words, spoken alike (the dictation shows a word pausal where its last letter is the gap).
+    expect(spell.map((w) => w.arabic)).toEqual(dictation.map((i) => i.spoken ?? i.arabic));
     expect(dictation.length).toBeGreaterThanOrEqual(9);
   });
 
@@ -183,13 +187,13 @@ describe.each(letters.map((l) => [l.slug, l] as const))("the letter %s", (slug, 
 });
 
 describe("exercise lists exactly as in the book (samples)", () => {
-  const items = (unit: string, slug: string, step: string) => stepOf(entry(unit, slug), step, "gaps").gaps.items.map((i) => i.arabic.replace(/ْ$/, ""));
+  const items = (unit: string, slug: string, step: string) => stepOf(entry(unit, slug), step, "gaps").gaps.items.map((i) => book(i.arabic).replace(/ْ$/, ""));
   it("ر: تدريب ٢ and ٣ (with the Sukun word حَرْب) and the dictation with the book's printed letters", () => {
     expect(items("lesson-3", "ra", "step-4")).toEqual(["رَجُل", "رِجْل", "رُمَّان", "رَأْس", "رَادْيُو", "رُخْصَة", "رِئَة", "رُبْع", "رِسَالَة"]);
     expect(items("lesson-3", "ra", "step-5").at(-1)).toBe("حَرْب");
     const d = stepOf(entry("lesson-3", "ra"), "step-9", "gaps").gaps.items;
-    expect(d.map((i) => i.arabic.replace(/ْ$/, ""))).toEqual(["رَصَاص", "سَرِير", "شَجَرَة", "بُرْج", "خَرُوف", "أَحْمَد", "تَامِر", "ثَابِت", "رَادْيُو", "ذُرَة"]);
-    expect(d[0]!.pattern).toBe("_صَاص");
+    expect(d.map((i) => book(i.arabic).replace(/ْ$/, ""))).toEqual(["رَصَاص", "سَرِير", "شَجَرَة", "بُرْج", "خَرُوف", "أَحْمَد", "تَامِر", "ثَابِت", "رَادْيُو", "ذُرَة"]);
+    expect(book(d[0]!.pattern!)).toBe("_صَاص");
   });
   it("ض: تدريب ٣ as printed (ضُرُوس twice)", () => {
     expect(items("lesson-3", "dad", "step-5")).toEqual(["ضِلْع", "ضَرْب", "ضُرُوس", "ضِيَاء", "ضَيْف", "ضَابِط", "ضِرْس", "ضُرُوس", "ضُيُوف", "مِضْرَب"]);
@@ -253,8 +257,8 @@ describe("the conversations of the book", () => {
     const review = entry("lesson-4", "muraja-amma");
     const match = stepOf(review, "step-1", "match").match;
     for (const p of match.prompts) expect(p.arabic.split(" – ").join(""), p.id).toBe(p.result!.arabic.replace(/[ً-ْ]/g, ""));
-    expect(stepOf(review, "step-2", "gaps").gaps.items.map((i) => i.arabic)).toEqual(["سَمَك", "صَبَاح", "قَمِيصْ", "صِينِيَّة", "عُصْفُور", "اسْمَك", "سُبُّورَة", "صُوَر", "صُنْدُوق", "سِتَارَة"]);
-    expect(stepOf(review, "step-3", "gaps").gaps.items.map((i) => i.arabic)).toEqual(["دُولَاب", "ضَيْف", "دَوَاء", "ضُبَّاط", "دِيك", "ضُيُوف", "ضِلْع", "حَدِيدْ", "مَدْرَسَة", "ضِرْس"]);
+    expect(stepOf(review, "step-2", "gaps").gaps.items.map((i) => book(i.arabic))).toEqual(["سَمَك", "صَبَاح", "قَمِيصْ", "صِينِيَّة", "عُصْفُور", "اسْمَك", "سُبُّورَة", "صُوَر", "صُنْدُوق", "سِتَارَة"]);
+    expect(stepOf(review, "step-3", "gaps").gaps.items.map((i) => book(i.arabic))).toEqual(["دُولَاب", "ضَيْف", "دَوَاء", "ضُبَّاط", "دِيك", "ضُيُوف", "ضِلْع", "حَدِيدْ", "مَدْرَسَة", "ضِرْس"]);
   });
 });
 
@@ -278,7 +282,7 @@ describe("the new step types", () => {
   it("QuizStep (Übung 3): first and last letter of each name; wrong answers can be changed", () => {
     const step = stepOf(entry("lesson-3", "hal-anta-wajdi"), "step-8", "quiz");
     render(<QuizStep items={step.items} progressKey={KEY} />);
-    expect(step.items.map((i) => i.arabic)).toEqual(["يَحْيَى", "جِرْجِس", "حَبِيب", "سِيزَا", "جُورْج", "سَيِّد", "صَابِر", "رَابِح", "آسِر", "صُبْحِي", "سَارَة"]);
+    expect(step.items.map((i) => book(i.arabic))).toEqual(["يَحْيَى", "جِرْجِس", "حَبِيب", "سِيزَا", "جُورْج", "سَيِّد", "صَابِر", "رَابِح", "آسِر", "صُبْحِي", "سَارَة"]);
     const first = step.items[0]!.questions[0]!;
     const wrong = first.options.findIndex((_, i) => i !== first.answer);
     fireEvent.click(screen.getByTestId(`quiz-name-1-0-option-${wrong}`));

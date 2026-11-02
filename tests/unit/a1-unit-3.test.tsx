@@ -32,11 +32,14 @@ const stepOf = <K extends A1Step["kind"]>(lesson: A1Lesson, slug: string, kind: 
   if (step.kind !== kind) throw new Error(`${lesson.slug}/${slug} must be ${kind}, is ${step.kind}`);
   return step as Extract<A1Step, { kind: K }>;
 };
+
+/** The book's spelling of a word the app shows with Tanwin from Lektion 2 on (دَوَاءٌ → دَوَاء, ظِلٌّ → ظِلّ, قُرًى → قُرَى). */
+const book = (word: string) => word.replace(/ٌ(ّ?)([.،؟!]?)$/, "$1$2").replace(/ًى$/, "َى");
 const entry = (unit: string, slug: string) => getA1Lesson(unit, slug)!;
 const words = (unit: string, slug: string, step: string) => {
   const s = entry(unit, slug).steps.find((x) => x.slug === step)!;
   if (s.kind !== "gaps") throw new Error("gaps expected");
-  return s.gaps.items.map((i) => i.arabic);
+  return s.gaps.items.map((i) => book(i.arabic));
 };
 
 beforeEach(() => window.localStorage.clear());
@@ -105,7 +108,7 @@ describe.each(Object.keys(WORDS))("the letter %s", (slug) => {
     it("تدريب ٩: the pairs of „حل تدريب ٩“; both letters are offered for every gap", () => {
       const step = lesson.steps.at(-1)!;
       if (step.kind !== "gaps") throw new Error("gaps");
-      expect(step.gaps.items.map((i) => i.arabic)).toEqual(PAIRS[slug]);
+      expect(step.gaps.items.map((i) => book(i.arabic))).toEqual(PAIRS[slug]);
       for (const item of step.gaps.items) expect(item.gapChoices!.flat().join("")).toMatch(new RegExp(`${letter}`));
     });
   }
@@ -116,13 +119,13 @@ describe("exercise lists exactly as in the book (samples)", () => {
     expect(words("lesson-5", "ha", "step-6")).toEqual(["هِشَام", "هَانِم", "مُهَاب", "هِبَة", "إِلْهَام", "سِهَام", "هَانِي", "أَهْلاً وَسَهْلاً", "مُهِمّ", "هُمُوم", "هُوَ", "هِيَ", "هُمْ", "هُمَا", "هَنَاء"]);
     expect(words("lesson-5", "ha", "step-5").at(-1)).toBe("أَهْلاً");
     // تدريب ٨ (ب): read the words again and pronounce them (evaluated)
-    expect(stepOf(entry("lesson-5", "ha"), "step-8", "phrases").groups[0]!.items.map((i) => i.arabic)).toEqual(DICTATION.ha!.map((w) => w.replace(/ْ$/, "")));
+    expect(stepOf(entry("lesson-5", "ha"), "step-8", "phrases").groups[0]!.items.map((i) => book(i.arabic))).toEqual(DICTATION.ha!.map((w) => w.replace(/ْ$/, "")));
   });
 
   it("ظ: تدريب ٢ in the book's order; تدريب ٤ only asks to repeat (no writing): an evaluated phrase step", () => {
     expect(words("lesson-5", "zza", "step-4")).toEqual(["ظِلّ", "ظَرْف", "ظَبْي", "ظَهْر", "ظُرُوف", "ظُفْر", "ظِلْف", "ظِلَال", "ظُهْر"]);
     expect(words("lesson-5", "zza", "step-5")).toEqual(["ظُرُوف", "ظِلّ", "ظَهْر", "ظِلَال", "ظُهْر", "ظِلْف", "ظَبْي", "ظُفْر", "ظَرْف", "أَظْهَر"]);
-    expect(stepOf(entry("lesson-5", "zza"), "step-6", "phrases").groups[0]!.items.map((i) => i.arabic)).toEqual(["ظُهُور", "ظَرِيف", "عَظْم", "وَعْظ", "ظَاهِر", "ظُرُوف", "ظِبَاء", "عَظِيم", "عَظَمَة", "ظُفْر"]);
+    expect(stepOf(entry("lesson-5", "zza"), "step-6", "phrases").groups[0]!.items.map((i) => book(i.arabic))).toEqual(["ظُهُور", "ظَرِيف", "عَظْم", "وَعْظ", "ظَاهِر", "ظُرُوف", "ظِبَاء", "عَظِيم", "عَظَمَة", "ظُفْر"]);
   });
 
   it("ع and غ: تدريب ٣ with the Sukun word أَعْلَم / أَغْصَان; غ ends with the general drill on all letters (16 words)", () => {

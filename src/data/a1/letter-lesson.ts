@@ -71,8 +71,7 @@ export const unvocalised = (arabic: string) => arabic.replace(HARAKAT, "");
  * tile (بَابْ "_ا_", أَبْ "أَ_", ثُلُثْ "_لُ_"), the word stays pausal – the
  * answer is the letter with Sukun – and only the voice says the Tanwin.
  */
-export function shownGap(pausal: string, pattern: string): { arabic: string; pattern: string; spoken: string } {
-  const spoken = withTanwin(pausal);
+export function shownGap(pausal: string, pattern: string, spoken = withTanwin(pausal)): { arabic: string; pattern: string; spoken: string } {
   const parts = splitTiles(pattern);
   const tiles = splitTiles(pausal);
   const shown = splitTiles(spoken);

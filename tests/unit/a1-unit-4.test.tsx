@@ -20,6 +20,9 @@ const stepOf = <K extends A1Step["kind"]>(lesson: A1Lesson, slug: string, kind: 
   if (step.kind !== kind) throw new Error(`${lesson.slug}/${slug} must be ${kind}, is ${step.kind}`);
   return step as Extract<A1Step, { kind: K }>;
 };
+
+/** The book's spelling of a word the app shows with Tanwin from Lektion 2 on (دَوَاءٌ → دَوَاء, ظِلٌّ → ظِلّ, قُرًى → قُرَى). */
+const book = (word: string) => word.replace(/ٌ(ّ?)([.،؟!]?)$/, "$1$2").replace(/ًى$/, "َى");
 const entry = (unit: string, slug: string) => getA1Lesson(unit, slug)!;
 const answers = (lesson: A1Lesson, slug: string) => stepOf(lesson, slug, "gaps").gaps.items.map((i) => [i.spoken ?? i.arabic, gapTask(i).gaps.map((g) => g.answer).join("")]);
 
@@ -38,14 +41,14 @@ describe("Lektion 7 – the Hamza", () => {
 
   it("the book's table: start, middle and end, with the shapes", () => {
     const table = stepOf(lesson, "step-1", "table").tables[0]!;
-    expect(table.rows.map((r) => r.slice(1, 4).map((c) => c.arabic))).toEqual([
+    expect(table.rows.map((r) => r.slice(1, 4).map((c) => book(c.arabic)))).toEqual([
       ["أَحْمَد", "سَأَلَ", "بَدَأَ"], ["إِحْسَان", "أَسْئِلَة", "بَطِيء"], ["أُمَيْمَة", "سُؤَال", "تَبَاطُؤ"], ["آسِر", "قُرْآن", "بَدْء"], ["", "", "ضَوْء"], ["", "", "هَنَاء"],
     ]);
     expect(stepOf(lesson, "step-2", "phrases").groups[0]!.items).toHaveLength(14);
   });
 
   it("تدريب ١: the letters build the names of the right column", () => {
-    expect(stepOf(lesson, "step-3", "gaps").gaps.items.map((i) => i.spoken)).toEqual(["أَمْجَد", "إِسْرَائِيل", "إِيمَان", "مُؤْنِس", "هَيْفَاء", "مَأْمُون", "أَيْمَن", "دُعَاء", "جِبْرَائِيل", "شَيْمَاء"]);
+    expect(stepOf(lesson, "step-3", "gaps").gaps.items.map((i) => book(i.spoken!))).toEqual(["أَمْجَد", "إِسْرَائِيل", "إِيمَان", "مُؤْنِس", "هَيْفَاء", "مَأْمُون", "أَيْمَن", "دُعَاء", "جِبْرَائِيل", "شَيْمَاء"]);
     for (const item of stepOf(lesson, "step-3", "gaps").gaps.items) expect([...item.choices!].sort()).toEqual([...new Set(Array.from(item.arabic))].sort());
   });
 
@@ -64,8 +67,8 @@ describe("Lektion 7 – the Hamza", () => {
 describe("Lektion 7 – drills and the conversation", () => {
   it("the general drills: ذ / ز / ظ and ق / ك with the book's solutions", () => {
     const drills = entry("lesson-7", "tadribat-amma");
-    expect(stepOf(drills, "step-1", "gaps").gaps.items.map((i) => i.arabic)).toEqual(["حِذَاء", "أُرْزْ", "غَزَال", "وَاعِظْ", "مُوزْ", "ذَقْن", "ظَبْي", "زَهْرَة", "ذَيْل", "ظُهْر", "زِرّ"]);
-    expect(stepOf(drills, "step-2", "gaps").gaps.items.map((i) => i.arabic)).toEqual(["كِتَاب", "قِطَّة", "كَلْب", "قَلَم", "دِيكْ", "كُرَة", "قِرْد", "صُنْدُوقْ", "قَلْب", "قَنَاة", "كُرَّاسَة", "قَصْر"]);
+    expect(stepOf(drills, "step-1", "gaps").gaps.items.map((i) => book(i.arabic))).toEqual(["حِذَاء", "أُرْزْ", "غَزَال", "وَاعِظْ", "مُوزْ", "ذَقْن", "ظَبْي", "زَهْرَة", "ذَيْل", "ظُهْر", "زِرّ"]);
+    expect(stepOf(drills, "step-2", "gaps").gaps.items.map((i) => book(i.arabic))).toEqual(["كِتَاب", "قِطَّة", "كَلْب", "قَلَم", "دِيكْ", "كُرَة", "قِرْد", "صُنْدُوقْ", "قَلْب", "قَنَاة", "كُرَّاسَة", "قَصْر"]);
     const names = stepOf(drills, "step-4", "quiz").items.map((i) => i.questions[0]!.options[i.questions[0]!.answer]);
     expect(names).toEqual(["مَأْمُون", "غَسَّان", "إِسْرَاء", "وَائِل", "شَيْمَاء", "عَلَاء", "عَبَّاس", "عَلِيَّة"]);
   });
@@ -79,7 +82,7 @@ describe("Lektion 7 – drills and the conversation", () => {
   it("the Nisba table: eight countries, four forms each (with the book's irregular plurals)", () => {
     const table = stepOf(entry("lesson-7", "ana-misri"), "step-3", "table").tables[0]!;
     expect(table.rows).toHaveLength(8);
-    expect(table.rows.map((r) => r[2]!.arabic)).toEqual(["مِصْرِيُّون", "فَرَنْسِيُّون", "إِيطَالِيُّون", "كَنَدِيُّون", "أَلْمَان", "صُومَالِيُّون", "مَغَارِبَة", "إِنْجِلِيز"]);
+    expect(table.rows.map((r) => book(r[2]!.arabic))).toEqual(["مِصْرِيُّون", "فَرَنْسِيُّون", "إِيطَالِيُّون", "كَنَدِيُّون", "أَلْمَان", "صُومَالِيُّون", "مَغَارِبَة", "إِنْجِلِيز"]);
   });
 
   it("تدريب ٥: nine flags – the form depends on who holds the flag", () => {
@@ -108,7 +111,7 @@ describe("Lektion 8 – هَذِهِ حُجْرَتِي", () => {
   });
 
   it("تدريب ٢: the letters as printed build the word", () => {
-    expect(stepOf(lesson, "step-7", "gaps").gaps.items.map((i) => i.spoken)).toEqual(["مِصْبَاح", "سَجَّادَة", "كِتَاب", "سَلَّة", "طَالِب", "كُرَّاسَة", "سَيَّارَة", "مَكْتَب"]);
+    expect(stepOf(lesson, "step-7", "gaps").gaps.items.map((i) => book(i.spoken!))).toEqual(["مِصْبَاح", "سَجَّادَة", "كِتَاب", "سَلَّة", "طَالِب", "كُرَّاسَة", "سَيَّارَة", "مَكْتَب"]);
   });
 
   it("تدريب ٣: 15 pictures; the answer says نَعَمْ only when the picture shows the thing asked about", () => {
