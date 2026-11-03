@@ -2,504 +2,84 @@
  "batch": "batch-06",
  "items": [
   {
-   "id": "w2218",
+   "id": "w2335",
    "kind": "word",
-   "text": "الجيران"
+   "text": "خيام"
   },
   {
-   "id": "w2219",
+   "id": "w2336",
    "kind": "word",
-   "text": "الجار"
+   "text": "خضار"
   },
   {
-   "id": "w2220",
+   "id": "w2337",
    "kind": "word",
-   "text": "وحدها"
+   "text": "خوذة"
   },
   {
-   "id": "w2221",
+   "id": "w2338",
    "kind": "word",
-   "text": "ممسوكة"
+   "text": "خبز"
   },
   {
-   "id": "w2222",
+   "id": "w2339",
    "kind": "word",
-   "text": "منفصلة"
+   "text": "الخبز"
   },
   {
-   "id": "w2223",
+   "id": "w2340",
    "kind": "word",
-   "text": "اعرض"
+   "text": "طبخ"
   },
   {
-   "id": "w2224",
+   "id": "w2341",
    "kind": "word",
-   "text": "تتبَّع"
+   "text": "كتكوت"
   },
   {
-   "id": "w2225",
+   "id": "w2342",
    "kind": "word",
-   "text": "التتبُّع"
+   "text": "نخلة"
   },
   {
-   "id": "w2226",
+   "id": "w2343",
    "kind": "word",
-   "text": "الفراغ"
+   "text": "القوس"
   },
   {
-   "id": "w2227",
+   "id": "w2344",
    "kind": "word",
-   "text": "الحروف"
+   "text": "النقطة"
   },
   {
-   "id": "w2228",
+   "id": "w2345",
    "kind": "word",
-   "text": "حرف"
+   "text": "لرجل"
   },
   {
-   "id": "w2229",
+   "id": "w2346",
    "kind": "word",
-   "text": "الصحيح"
+   "text": "لامرأة"
   },
   {
-   "id": "w2230",
+   "id": "w2347",
    "kind": "word",
-   "text": "التصحيح"
+   "text": "لرجلين"
   },
   {
-   "id": "w2231",
+   "id": "w2348",
    "kind": "word",
-   "text": "بمساعدة"
+   "text": "لامرأتين"
   },
   {
-   "id": "w2232",
+   "id": "w2349",
    "kind": "word",
-   "text": "العرض"
+   "text": "الرد"
   },
   {
-   "id": "w2233",
+   "id": "w2350",
    "kind": "word",
-   "text": "الحوار"
-  },
-  {
-   "id": "w2234",
-   "kind": "word",
-   "text": "المحادثة"
-  },
-  {
-   "id": "w2235",
-   "kind": "word",
-   "text": "الجمل"
-  },
-  {
-   "id": "w2236",
-   "kind": "word",
-   "text": "سؤال"
-  },
-  {
-   "id": "w2237",
-   "kind": "word",
-   "text": "أحسنت!"
-  },
-  {
-   "id": "w2238",
-   "kind": "word",
-   "text": "الآخرون"
-  },
-  {
-   "id": "w2239",
-   "kind": "word",
-   "text": "الحرف:"
-  },
-  {
-   "id": "w2240",
-   "kind": "word",
-   "text": "اختياري"
-  },
-  {
-   "id": "w2241",
-   "kind": "word",
-   "text": "تحقَّق"
-  },
-  {
-   "id": "w2242",
-   "kind": "word",
-   "text": "البداية"
-  },
-  {
-   "id": "w2243",
-   "kind": "word",
-   "text": "الألف"
-  },
-  {
-   "id": "w2244",
-   "kind": "word",
-   "text": "الباء"
-  },
-  {
-   "id": "w2245",
-   "kind": "word",
-   "text": "التاء"
-  },
-  {
-   "id": "w2246",
-   "kind": "word",
-   "text": "الثاء"
-  },
-  {
-   "id": "w2247",
-   "kind": "word",
-   "text": "الجيم"
-  },
-  {
-   "id": "w2248",
-   "kind": "word",
-   "text": "الحاء"
-  },
-  {
-   "id": "w2249",
-   "kind": "word",
-   "text": "الخاء"
-  },
-  {
-   "id": "w2250",
-   "kind": "word",
-   "text": "مراجعة"
-  },
-  {
-   "id": "w2251",
-   "kind": "word",
-   "text": "الفتحة"
-  },
-  {
-   "id": "w2252",
-   "kind": "word",
-   "text": "الكسرة"
-  },
-  {
-   "id": "w2253",
-   "kind": "word",
-   "text": "الضمة"
-  },
-  {
-   "id": "w2254",
-   "kind": "word",
-   "text": "الأشكال"
-  },
-  {
-   "id": "w2255",
-   "kind": "word",
-   "text": "الكتابة"
-  },
-  {
-   "id": "w2256",
-   "kind": "word",
-   "text": "أكمل"
-  },
-  {
-   "id": "w2257",
-   "kind": "word",
-   "text": "الاستماع"
-  },
-  {
-   "id": "w2258",
-   "kind": "word",
-   "text": "التحية"
-  },
-  {
-   "id": "w2259",
-   "kind": "word",
-   "text": "أب"
-  },
-  {
-   "id": "w2260",
-   "kind": "word",
-   "text": "أمير"
-  },
-  {
-   "id": "w2261",
-   "kind": "word",
-   "text": "إبرة"
-  },
-  {
-   "id": "w2262",
-   "kind": "word",
-   "text": "إصبع"
-  },
-  {
-   "id": "w2263",
-   "kind": "word",
-   "text": "إبريق"
-  },
-  {
-   "id": "w2264",
-   "kind": "word",
-   "text": "أذن"
-  },
-  {
-   "id": "w2265",
-   "kind": "word",
-   "text": "أم"
-  },
-  {
-   "id": "w2266",
-   "kind": "word",
-   "text": "أسرة"
-  },
-  {
-   "id": "w2267",
-   "kind": "word",
-   "text": "أنا"
-  },
-  {
-   "id": "w2268",
-   "kind": "word",
-   "text": "سأل"
-  },
-  {
-   "id": "w2269",
-   "kind": "word",
-   "text": "قرأ"
-  },
-  {
-   "id": "w2270",
-   "kind": "word",
-   "text": "رأس"
-  },
-  {
-   "id": "w2271",
-   "kind": "word",
-   "text": "بنات"
-  },
-  {
-   "id": "w2272",
-   "kind": "word",
-   "text": "بنتان"
-  },
-  {
-   "id": "w2273",
-   "kind": "word",
-   "text": "بيت"
-  },
-  {
-   "id": "w2274",
-   "kind": "word",
-   "text": "باب"
-  },
-  {
-   "id": "w2275",
-   "kind": "word",
-   "text": "بنت"
-  },
-  {
-   "id": "w2276",
-   "kind": "word",
-   "text": "بئر"
-  },
-  {
-   "id": "w2277",
-   "kind": "word",
-   "text": "بطاقة"
-  },
-  {
-   "id": "w2278",
-   "kind": "word",
-   "text": "بندقية"
-  },
-  {
-   "id": "w2279",
-   "kind": "word",
-   "text": "برتقال"
-  },
-  {
-   "id": "w2280",
-   "kind": "word",
-   "text": "برج"
-  },
-  {
-   "id": "w2281",
-   "kind": "word",
-   "text": "نافذة"
-  },
-  {
-   "id": "w2282",
-   "kind": "word",
-   "text": "كلب"
-  },
-  {
-   "id": "w2283",
-   "kind": "word",
-   "text": "كتاب"
-  },
-  {
-   "id": "w2284",
-   "kind": "word",
-   "text": "تاج"
-  },
-  {
-   "id": "w2285",
-   "kind": "word",
-   "text": "تمر"
-  },
-  {
-   "id": "w2286",
-   "kind": "word",
-   "text": "تل"
-  },
-  {
-   "id": "w2287",
-   "kind": "word",
-   "text": "هاتف"
-  },
-  {
-   "id": "w2288",
-   "kind": "word",
-   "text": "تمثال"
-  },
-  {
-   "id": "w2289",
-   "kind": "word",
-   "text": "تين"
-  },
-  {
-   "id": "w2290",
-   "kind": "word",
-   "text": "تفاحة"
-  },
-  {
-   "id": "w2291",
-   "kind": "word",
-   "text": "توت"
-  },
-  {
-   "id": "w2292",
-   "kind": "word",
-   "text": "تونة"
-  },
-  {
-   "id": "w2293",
-   "kind": "word",
-   "text": "شق"
-  },
-  {
-   "id": "w2294",
-   "kind": "word",
-   "text": "ثوب"
-  },
-  {
-   "id": "w2295",
-   "kind": "word",
-   "text": "ثوم"
-  },
-  {
-   "id": "w2296",
-   "kind": "word",
-   "text": "ثلاثة"
-  },
-  {
-   "id": "w2297",
-   "kind": "word",
-   "text": "ثياب"
-  },
-  {
-   "id": "w2298",
-   "kind": "word",
-   "text": "ثمار"
-  },
-  {
-   "id": "w2299",
-   "kind": "word",
-   "text": "كبريت"
-  },
-  {
-   "id": "w2300",
-   "kind": "word",
-   "text": "ثلث"
-  },
-  {
-   "id": "w2301",
-   "kind": "word",
-   "text": "ثعبان"
-  },
-  {
-   "id": "w2302",
-   "kind": "word",
-   "text": "ثقب"
-  },
-  {
-   "id": "w2303",
-   "kind": "word",
-   "text": "الثلاثاء"
-  },
-  {
-   "id": "w2304",
-   "kind": "word",
-   "text": "أثاث"
-  },
-  {
-   "id": "w2305",
-   "kind": "word",
-   "text": "بينما"
-  },
-  {
-   "id": "w2306",
-   "kind": "word",
-   "text": "جمل"
-  },
-  {
-   "id": "w2307",
-   "kind": "word",
-   "text": "جريدة"
-  },
-  {
-   "id": "w2308",
-   "kind": "word",
-   "text": "جرس"
-  },
-  {
-   "id": "w2309",
-   "kind": "word",
-   "text": "جبال"
-  },
-  {
-   "id": "w2310",
-   "kind": "word",
-   "text": "جمال"
-  },
-  {
-   "id": "w2311",
-   "kind": "word",
-   "text": "جنود"
-  },
-  {
-   "id": "w2312",
-   "kind": "word",
-   "text": "جبن"
-  },
-  {
-   "id": "w2313",
-   "kind": "word",
-   "text": "جندي"
-  },
-  {
-   "id": "w2314",
-   "kind": "word",
-   "text": "الجندي"
-  },
-  {
-   "id": "w2315",
-   "kind": "word",
-   "text": "نُضج"
-  },
-  {
-   "id": "w2316",
-   "kind": "word",
-   "text": "فرج"
-  },
-  {
-   "id": "w2317",
-   "kind": "word",
-   "text": "أجمل"
+   "text": "اسمي…"
   }
  ]
 }
