@@ -1,0 +1,391 @@
+{
+ "batch": "_dialogue-l2-female-1-01",
+ "voice": "female-1",
+ "speakers": [
+  "Nazik (nazik-dina)",
+  "Teresa (teriz-suzi)",
+  "Nirmin (man-anta-a)",
+  "Nirmin (man-anta-b)",
+  "Nisma, Nura und Nisrin (man-anta-a)",
+  "Nisma, Nura und Nisrin (man-anta-b)",
+  "Die Fragende (man-huwa-a)",
+  "Die Fragende (man-hiya-b)",
+  "Farida (farida-hana)",
+  "Erste Frau (plane)",
+  "Die Angestellte (spelling)",
+  "Schaimaa (khalid-shaimaa)",
+  "Die Schülerin (hal-hadhihi-a)",
+  "Die Schülerin (hal-hadhihi-b)",
+  "Die Krankenschwester (patient-nurse)",
+  "Die Krankenschwester (call-clinic)",
+  "Muna (raif-muna)",
+  "Die Verkäuferin (seller-buyer)",
+  "Die Kundin (store)"
+ ],
+ "items": [
+  {
+   "id": "d2-f1-001",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "مَسَاءُ الْخَيْرِ.",
+   "lines": [
+    "e-w-masa-al-khayr"
+   ]
+  },
+  {
+   "id": "d2-f1-002",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "كَيْفَ حَالُكِ؟",
+   "lines": [
+    "e-w-kayfa-haluki"
+   ]
+  },
+  {
+   "id": "d2-f1-003",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "مَا اسْمُكِ؟",
+   "lines": [
+    "e-w-ma-smuki"
+   ]
+  },
+  {
+   "id": "d2-f1-004",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "اسْمِي نَازِك.",
+   "lines": [
+    "e-w-ismi-nazik"
+   ]
+  },
+  {
+   "id": "d2-f1-005",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "هَلْ أَنْتِ سُوزِي؟",
+   "lines": [
+    "u2-2-teriz-1",
+    "u2-2-teriz-2"
+   ]
+  },
+  {
+   "id": "d2-f1-006",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "أَنَا نِرْمِين.",
+   "lines": [
+    "man-a-a2",
+    "man-b-a2"
+   ]
+  },
+  {
+   "id": "d2-f1-007",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "نَحْنُ نِسْمَة وَنُورَا وَنِسْرِين.",
+   "lines": [
+    "man-a-a6",
+    "man-b-a6"
+   ]
+  },
+  {
+   "id": "d2-f1-008",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "مَنْ هُوَ؟ مَا اسْمُهُ؟",
+   "lines": [
+    "u3-a-q1"
+   ]
+  },
+  {
+   "id": "d2-f1-009",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "مَنْ هُمَا؟ مَا اسْمَاهُمَا؟",
+   "lines": [
+    "u3-a-q2",
+    "u3-b-q2"
+   ]
+  },
+  {
+   "id": "d2-f1-010",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "مَنْ هُمْ؟ مَا أَسْمَاؤُهُمْ؟",
+   "lines": [
+    "u3-a-q3"
+   ]
+  },
+  {
+   "id": "d2-f1-011",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "مَنْ هِيَ؟ مَا اسْمُهَا؟",
+   "lines": [
+    "u3-b-q1"
+   ]
+  },
+  {
+   "id": "d2-f1-012",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "مَنْ هُنَّ؟ مَا أَسْمَاؤُهُنَّ؟",
+   "lines": [
+    "u3-b-q3"
+   ]
+  },
+  {
+   "id": "d2-f1-013",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "مَسَاءُ الْخَيْر. أَنَا اسْمِي فَرِيدَة. وَأَنْتِ مَا اسْمُكِ؟",
+   "lines": [
+    "u3-fh-1"
+   ]
+  },
+  {
+   "id": "d2-f1-014",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "مِنْ أَيْنَ أَنْتِ يَا هَنَا؟",
+   "lines": [
+    "u3-fh-3"
+   ]
+  },
+  {
+   "id": "d2-f1-015",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "وَأَنَا مِنَ الْجَزَائِرِ. أَهْلًا وَسَهْلًا.",
+   "lines": [
+    "u3-fh-5"
+   ]
+  },
+  {
+   "id": "d2-f1-016",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "هَلْ أَنْتِ أَمْرِيكِيَّةٌ؟",
+   "lines": [
+    "u4-pl-1"
+   ]
+  },
+  {
+   "id": "d2-f1-017",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "أَنَا لُبْنَانِيَّةٌ. هَلْ أَنْتِ فِي إِجَازَةٍ؟",
+   "lines": [
+    "u4-pl-3"
+   ]
+  },
+  {
+   "id": "d2-f1-018",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "هَذِهِ دَبَّاسَةٌ.",
+   "lines": [
+    "u4-sp-2"
+   ]
+  },
+  {
+   "id": "d2-f1-019",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "دَال – بَاء – أَلِف – سِين – تَاء مَرْبُوطَة.",
+   "lines": [
+    "u4-sp-4"
+   ]
+  },
+  {
+   "id": "d2-f1-020",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "عَفْوًا.",
+   "lines": [
+    "u4-sp-6"
+   ]
+  },
+  {
+   "id": "d2-f1-021",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "هَذِهِ مِحْفَظَةُ زَيْد. هَذِهِ مِحْفَظَتُهُ.",
+   "lines": [
+    "u5-ks-2"
+   ]
+  },
+  {
+   "id": "d2-f1-022",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "هَذِهِ أَوْرَاقُ طَلَال وَعَلِيّ.",
+   "lines": [
+    "u5-ks-4"
+   ]
+  },
+  {
+   "id": "d2-f1-023",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "هَذِهِ نَظَّارَتِي.",
+   "lines": [
+    "u5-ks-6"
+   ]
+  },
+  {
+   "id": "d2-f1-024",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "هَذِهِ كَامِيرَا سَمَر.",
+   "lines": [
+    "u5-ks-8"
+   ]
+  },
+  {
+   "id": "d2-f1-025",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "لَا، هَذَا لَيْسَ كِتَابًا. هَذَا قَلَمٌ.",
+   "lines": [
+    "u5-a-4"
+   ]
+  },
+  {
+   "id": "d2-f1-026",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "لَا، هَذَا لَيْسَ قَلَمِي. هَذَا قَلَمُ زَيْنَب. هَذَا قَلَمُهَا.",
+   "lines": [
+    "u5-b-4"
+   ]
+  },
+  {
+   "id": "d2-f1-027",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "نَعَمْ.",
+   "lines": [
+    "u6-pn-2"
+   ]
+  },
+  {
+   "id": "d2-f1-028",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "رَقْمُ تِلِيفُونِهِ الْمَحْمُولِ صِفْر وَاحِد ثَمَانِيَة سِتَّة تِسْعَة ثَلَاثَة خَمْسَة اثْنَان وَاحِد أَرْبَعَة.",
+   "lines": [
+    "u6-pn-4"
+   ]
+  },
+  {
+   "id": "d2-f1-029",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "مَرْحَبًا. أَهْلًا وَسَهْلًا يَا أَفَنْدِم.",
+   "lines": [
+    "u6-c1-2"
+   ]
+  },
+  {
+   "id": "d2-f1-030",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "نَعَمْ. هَذَا صَحِيحٌ.",
+   "lines": [
+    "u6-c1-4"
+   ]
+  },
+  {
+   "id": "d2-f1-031",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "خَمْسَةَ عَشَرَ شَارِعُ الْبَرَازِيلِ، الدَّوْرُ الرَّابِعُ، شَقَّةُ تِسْعَةَ عَشَرَ.",
+   "lines": [
+    "u6-c1-6"
+   ]
+  },
+  {
+   "id": "d2-f1-032",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "رَقْمُ تِلِيفُونِهِ صِفْر وَاحِد اثْنَان أَرْبَعَة خَمْسَة سِتَّة ثَمَانِيَة تِسْعَة وَاحِد وَاحِد.",
+   "lines": [
+    "u6-c1-8"
+   ]
+  },
+  {
+   "id": "d2-f1-033",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "عَفْوًا، أَيَّ خِدْمَةٍ!",
+   "lines": [
+    "u6-c1-10"
+   ]
+  },
+  {
+   "id": "d2-f1-034",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "مَوْعِدُ قِيَامِ الْقِطَارِ السَّاعَةُ السَّابِعَةُ مَسَاءً.",
+   "lines": [
+    "u6-rm-2"
+   ]
+  },
+  {
+   "id": "d2-f1-035",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "أَنَا فِي الْخِدْمَةِ.",
+   "lines": [
+    "u7-b-1"
+   ]
+  },
+  {
+   "id": "d2-f1-036",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "سِعْرُ هَذَا الْقَمِيصِ مِائَةٌ وَعِشْرُونَ جُنَيْهًا.",
+   "lines": [
+    "u7-b-3"
+   ]
+  },
+  {
+   "id": "d2-f1-037",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "سِعْرُ الْجَوْرَبِ خَمْسَةَ عَشَرَ جُنَيْهًا وَسِتُّونَ قِرْشًا.",
+   "lines": [
+    "u7-b-5"
+   ]
+  },
+  {
+   "id": "d2-f1-038",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "لَوْ سَمَحْتَ، أَيْنَ قِسْمُ الْكَامِيرَاتِ؟",
+   "lines": [
+    "u8-st-2"
+   ]
+  },
+  {
+   "id": "d2-f1-039",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "وَأَيْنَ قِسْمُ الثَّلَّاجَاتِ؟ أَمَامَ الْمِصْعَدِ؟",
+   "lines": [
+    "u8-st-4"
+   ]
+  },
+  {
+   "id": "d2-f1-040",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "وَأَيْنَ قِسْمُ التِّلِفِزْيُونَاتِ؟",
+   "lines": [
+    "u8-st-6"
+   ]
+  }
+ ]
+}

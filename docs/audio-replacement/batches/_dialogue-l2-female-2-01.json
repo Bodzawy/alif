@@ -1,0 +1,264 @@
+{
+ "batch": "_dialogue-l2-female-2-01",
+ "voice": "female-2",
+ "speakers": [
+  "Dina (nazik-dina)",
+  "Esther (teriz-suzi)",
+  "Susi (teriz-suzi)",
+  "Nivin und Schirin (man-anta-a)",
+  "Nivin und Schirin (man-anta-b)",
+  "Hana (farida-hana)",
+  "Zweite Frau (plane)",
+  "Aliya (nadim-aliya)",
+  "Die Anruferin (call-clinic)",
+  "Die Angestellte (call-hospital)",
+  "Die Reisende (airport-info)",
+  "Schirin (hana-shirin)"
+ ],
+ "items": [
+  {
+   "id": "d2-f2-001",
+   "kind": "dialogue",
+   "voice": "female-2",
+   "text": "مَسَاءُ النُّورِ.",
+   "lines": [
+    "e-w-masa-an-nur"
+   ]
+  },
+  {
+   "id": "d2-f2-002",
+   "kind": "dialogue",
+   "voice": "female-2",
+   "text": "بِخَيْرٍ، الْحَمْدُ لِلَّهِ.",
+   "lines": [
+    "e-w-bi-khayr"
+   ]
+  },
+  {
+   "id": "d2-f2-003",
+   "kind": "dialogue",
+   "voice": "female-2",
+   "text": "اسْمِي دِينَا، وَأَنْتِ؟",
+   "lines": [
+    "e-w-ismi-dina"
+   ]
+  },
+  {
+   "id": "d2-f2-004",
+   "kind": "dialogue",
+   "voice": "female-2",
+   "text": "لَا. أَنَا إِسْتَر.",
+   "lines": [
+    "u2-2-ester"
+   ]
+  },
+  {
+   "id": "d2-f2-005",
+   "kind": "dialogue",
+   "voice": "female-2",
+   "text": "نَعَمْ. أَنَا سُوزِي.",
+   "lines": [
+    "u2-2-suzi"
+   ]
+  },
+  {
+   "id": "d2-f2-006",
+   "kind": "dialogue",
+   "voice": "female-2",
+   "text": "نَحْنُ نِيفِين وَشِيرِين.",
+   "lines": [
+    "man-a-a4",
+    "man-b-a4"
+   ]
+  },
+  {
+   "id": "d2-f2-007",
+   "kind": "dialogue",
+   "voice": "female-2",
+   "text": "مَسَاءُ النُّور. أَنَا اسْمِي هَنَا.",
+   "lines": [
+    "u3-fh-2"
+   ]
+  },
+  {
+   "id": "d2-f2-008",
+   "kind": "dialogue",
+   "voice": "female-2",
+   "text": "أَنَا مِنَ الْمَغْرِبِ.",
+   "lines": [
+    "u3-fh-4"
+   ]
+  },
+  {
+   "id": "d2-f2-009",
+   "kind": "dialogue",
+   "voice": "female-2",
+   "text": "أَهْلًا بِكِ.",
+   "lines": [
+    "u3-fh-6"
+   ]
+  },
+  {
+   "id": "d2-f2-010",
+   "kind": "dialogue",
+   "voice": "female-2",
+   "text": "لَا، أَنَا كَنَدِيَّةٌ. وَأَنْتِ؟",
+   "lines": [
+    "u4-pl-2"
+   ]
+  },
+  {
+   "id": "d2-f2-011",
+   "kind": "dialogue",
+   "voice": "female-2",
+   "text": "نَعَمْ، أَنَا فِي إِجَازَةٍ.",
+   "lines": [
+    "u4-pl-4"
+   ]
+  },
+  {
+   "id": "d2-f2-012",
+   "kind": "dialogue",
+   "voice": "female-2",
+   "text": "نَعَمْ، هَذِهِ شَمْسِيَّتُنَا.",
+   "lines": [
+    "u5-na-2"
+   ]
+  },
+  {
+   "id": "d2-f2-013",
+   "kind": "dialogue",
+   "voice": "female-2",
+   "text": "لَا، هَذِهِ لَيْسَتْ لُعْبَتِي. هَذِهِ لُعْبَةُ فَاطِمَة. هَذِهِ لُعْبَتُهَا.",
+   "lines": [
+    "u5-na-4"
+   ]
+  },
+  {
+   "id": "d2-f2-014",
+   "kind": "dialogue",
+   "voice": "female-2",
+   "text": "أَلُو، مَرْحَبًا.",
+   "lines": [
+    "u6-c1-1"
+   ]
+  },
+  {
+   "id": "d2-f2-015",
+   "kind": "dialogue",
+   "voice": "female-2",
+   "text": "هَلْ هَذِهِ عِيَادَةُ دُكْتُور أَدْهَم النَّدِيم؟",
+   "lines": [
+    "u6-c1-3"
+   ]
+  },
+  {
+   "id": "d2-f2-016",
+   "kind": "dialogue",
+   "voice": "female-2",
+   "text": "مَا الْعُنْوَانُ وَرَقْمُ الشَّقَّةِ لَوْ سَمَحْتِ؟",
+   "lines": [
+    "u6-c1-5"
+   ]
+  },
+  {
+   "id": "d2-f2-017",
+   "kind": "dialogue",
+   "voice": "female-2",
+   "text": "وَمَا رَقْمُ تِلِيفُونِهِ الْمَحْمُولِ؟",
+   "lines": [
+    "u6-c1-7"
+   ]
+  },
+  {
+   "id": "d2-f2-018",
+   "kind": "dialogue",
+   "voice": "female-2",
+   "text": "شُكْرًا.",
+   "lines": [
+    "u6-c1-9"
+   ]
+  },
+  {
+   "id": "d2-f2-019",
+   "kind": "dialogue",
+   "voice": "female-2",
+   "text": "وَعَلَيْكُمُ السَّلَامُ. أَيَّ خِدْمَةٍ؟",
+   "lines": [
+    "u6-c2-2"
+   ]
+  },
+  {
+   "id": "d2-f2-020",
+   "kind": "dialogue",
+   "voice": "female-2",
+   "text": "رَقْمُ تِلِيفُونِهَا اثْنَان ثَلَاثَة أَرْبَعَة ثَمَانِيَة سَبْعَة سِتَّة خَمْسَة اثْنَان.",
+   "lines": [
+    "u6-c2-4"
+   ]
+  },
+  {
+   "id": "d2-f2-021",
+   "kind": "dialogue",
+   "voice": "female-2",
+   "text": "رَقْمُ الْفَاكْسِ ثَلَاثَة اثْنَان خَمْسَة سِتَّة أَرْبَعَة أَرْبَعَة صِفْر وَاحِد.",
+   "lines": [
+    "u6-c2-6"
+   ]
+  },
+  {
+   "id": "d2-f2-022",
+   "kind": "dialogue",
+   "voice": "female-2",
+   "text": "عَفْوًا، مَعَ السَّلَامَةِ.",
+   "lines": [
+    "u6-c2-8"
+   ]
+  },
+  {
+   "id": "d2-f2-023",
+   "kind": "dialogue",
+   "voice": "female-2",
+   "text": "لَوْ سَمَحْتَ، أَيْنَ السُّوقُ الْحُرَّةُ؟",
+   "lines": [
+    "u8-a-1"
+   ]
+  },
+  {
+   "id": "d2-f2-024",
+   "kind": "dialogue",
+   "voice": "female-2",
+   "text": "مَنْ يَقِفُ خَلْفَكِ فِي الصُّورَةِ يَا هَنَاء؟",
+   "lines": [
+    "u10-h-1"
+   ]
+  },
+  {
+   "id": "d2-f2-025",
+   "kind": "dialogue",
+   "voice": "female-2",
+   "text": "أَمْ … هُوَ رَجُلٌ طَوِيلٌ. وَمَا عَمَلُهُ؟",
+   "lines": [
+    "u10-h-3"
+   ]
+  },
+  {
+   "id": "d2-f2-026",
+   "kind": "dialogue",
+   "voice": "female-2",
+   "text": "وَهَلْ هَذَا أَخُوكِ؟",
+   "lines": [
+    "u10-h-5"
+   ]
+  },
+  {
+   "id": "d2-f2-027",
+   "kind": "dialogue",
+   "voice": "female-2",
+   "text": "وَهَلْ يَعْمَلُ ابْنُكِ؟",
+   "lines": [
+    "u10-h-7"
+   ]
+  }
+ ]
+}

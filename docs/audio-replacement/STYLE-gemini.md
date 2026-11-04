@@ -55,3 +55,30 @@ Read each item as one connected utterance at a brisk, lively, natural pace – n
 Each item is separated by a blank line: after each item, stay completely silent for about 3 seconds before the next one.
 Do not add, repeat, explain or translate anything.
 ```
+
+## Dialogues (`_dialogue-l2-<voice>-NN`)
+
+`scripts/audio/dialogue-batches.ts -- --from=2` writes the dialogue lines of Lektion 2 … 20, one
+batch per speaker voice. Record each batch with **its own** Gemini voice – the same as in Lektion 1,
+so a speaker keeps the voice he or she had there:
+
+| batch | Gemini voice | speaker settings |
+|---|---|---|
+| `male-1` | Achird | `Adult man, warm and friendly, Modern Standard Arabic (Fusha), clear, natural conversational pace.` |
+| `male-2` | Algieba | `Adult man, calm and polite, Modern Standard Arabic (Fusha), clear, natural conversational pace.` |
+| `female-1` | Sulafat | `Adult woman, warm and friendly, Modern Standard Arabic (Fusha), clear, natural conversational pace.` |
+| `female-2` | Leda | `Young woman, bright and polite, Modern Standard Arabic (Fusha), clear, natural conversational pace.` |
+
+Style (all four):
+
+```
+Read in Modern Standard Arabic (Fusha) as a person speaking in an everyday conversation: natural, friendly, with crisp and clear articulation.
+Use classical Fusha pronunciation, never a dialect: ق as a true qaf, ج as jīm, ث and ذ as interdental sounds, ض and ظ and ص and ط fully emphatic, ع and ح from the throat, and every hamza clearly as a glottal stop.
+Pronounce every word exactly as it is vowelled: every fatha, kasra, damma, sukun, shadda, hamza and madda, and every case ending that is written. Where tanwin is written, pronounce it fully.
+A word without a final vowel mark ends in sukun.
+Say each item as one connected utterance with natural intonation (a question as a question), at a natural, lively pace – never slow. Inside an item, pause only briefly at a comma or full stop – never longer than half a second.
+Each item is separated by a blank line: after each item, stay completely silent for about 3 seconds before the next one.
+Do not add, repeat, explain or translate anything.
+```
+
+Then `split_batch.py` with the batch's `.json` and `python3 scripts/audio/install_dialogue_clips.py`.

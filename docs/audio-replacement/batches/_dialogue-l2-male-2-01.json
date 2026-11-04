@@ -1,0 +1,366 @@
+{
+ "batch": "_dialogue-l2-male-2-01",
+ "voice": "male-2",
+ "speakers": [
+  "Khalid (adnan-khalid)",
+  "Walid (shadi-wajdi)",
+  "Wagdi (shadi-wajdi)",
+  "Nagi (man-anta-a)",
+  "Nagi (man-anta-b)",
+  "Nasim und Nushi (man-anta-a)",
+  "Nasim und Nushi (man-anta-b)",
+  "Nadi, Husni und Nasir (man-anta-a)",
+  "Nadi, Husni und Nasir (man-anta-b)",
+  "Abdullah (ahmad-abdullah)",
+  "Yamahu (mustafa-yamahu)",
+  "Der Verkäufer (shop)",
+  "Der Schüler (hal-hadhihi-a)",
+  "Der Schüler (hal-hadhihi-b)",
+  "Nadim (nadim-aliya)",
+  "Der Kunde (shop-prices)",
+  "Der Käufer (seller-buyer)",
+  "Scharif (samir-sharif)",
+  "Hamid (party)",
+  "Said (said-basim)",
+  "Husain (hala-husain)",
+  "Emad (emad-fawwaz)"
+ ],
+ "items": [
+  {
+   "id": "d2-m2-001",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "مَسَاءُ النُّورِ.",
+   "lines": [
+    "e-m-masa-an-nur"
+   ]
+  },
+  {
+   "id": "d2-m2-002",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "بِخَيْرٍ، الْحَمْدُ لِلَّهِ.",
+   "lines": [
+    "e-m-bi-khayr"
+   ]
+  },
+  {
+   "id": "d2-m2-003",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "اسْمِي خَالِد، وَأَنْتَ؟",
+   "lines": [
+    "e-m-ismi-khalid"
+   ]
+  },
+  {
+   "id": "d2-m2-004",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "لَا. أَنَا وَلِيد.",
+   "lines": [
+    "u2-1-walid"
+   ]
+  },
+  {
+   "id": "d2-m2-005",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "نَعَمْ. أَنَا وَجْدِي.",
+   "lines": [
+    "u2-1-wajdi"
+   ]
+  },
+  {
+   "id": "d2-m2-006",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "أَنَا نَاجِي.",
+   "lines": [
+    "man-a-a1",
+    "man-b-a1"
+   ]
+  },
+  {
+   "id": "d2-m2-007",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "نَحْنُ نَسِيم وَنُصْحِي.",
+   "lines": [
+    "man-a-a3",
+    "man-b-a3"
+   ]
+  },
+  {
+   "id": "d2-m2-008",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "نَحْنُ نَادِي وَحُسْنِي وَنَاصِر.",
+   "lines": [
+    "man-a-a5",
+    "man-b-a5"
+   ]
+  },
+  {
+   "id": "d2-m2-009",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "صَبَاحُ النُّور. أَنَا اسْمِي عَبْدُ اللهِ.",
+   "lines": [
+    "u3-ah-2"
+   ]
+  },
+  {
+   "id": "d2-m2-010",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "أَنَا مِنَ السُّعُودِيَّةِ.",
+   "lines": [
+    "u3-ah-4"
+   ]
+  },
+  {
+   "id": "d2-m2-011",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "أَهْلًا بِكَ.",
+   "lines": [
+    "u3-ah-6"
+   ]
+  },
+  {
+   "id": "d2-m2-012",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "لَا مُشْكِلَةَ. هَلْ أَنْتَ مِنْ مِصْرَ؟",
+   "lines": [
+    "u4-my-2"
+   ]
+  },
+  {
+   "id": "d2-m2-013",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "أَنَا مِنَ الْيَابَانِ. أَنَا يَابَانِيٌّ.",
+   "lines": [
+    "u4-my-4"
+   ]
+  },
+  {
+   "id": "d2-m2-014",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "شُكْرًا. مَعَ السَّلَامَةِ.",
+   "lines": [
+    "u4-my-6"
+   ]
+  },
+  {
+   "id": "d2-m2-015",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "هَذِهِ الدَّرَّاجَةُ مِنْ أَلْمَانْيَا، هَذِهِ دَرَّاجَةٌ أَلْمَانِيَّةٌ.",
+   "lines": [
+    "u4-sh-2"
+   ]
+  },
+  {
+   "id": "d2-m2-016",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "لَا، هَذِهِ لَيْسَتْ نَظَّارَةً. هَذِهِ حَقِيبَةٌ.",
+   "lines": [
+    "u5-a-2"
+   ]
+  },
+  {
+   "id": "d2-m2-017",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "لَا، هَذِهِ لَيْسَتْ حَقِيبَتِي. هَذِهِ حَقِيبَةُ أَحْمَد. هَذِهِ حَقِيبَتُهُ.",
+   "lines": [
+    "u5-b-2"
+   ]
+  },
+  {
+   "id": "d2-m2-018",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "يَا عَالِيَةُ! هَلْ هَذِهِ شَمْسِيَّتُكُمْ؟",
+   "lines": [
+    "u5-na-1"
+   ]
+  },
+  {
+   "id": "d2-m2-019",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "وَهَلْ هَذِهِ لُعْبَتُكِ؟",
+   "lines": [
+    "u5-na-3"
+   ]
+  },
+  {
+   "id": "d2-m2-020",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "لَوْ سَمَحْتَ، مَا سِعْرُ هَذِهِ الْبَدْلَةِ؟",
+   "lines": [
+    "u7-s-1"
+   ]
+  },
+  {
+   "id": "d2-m2-021",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "وَمَا سِعْرُ هَذَا الْقَلَمِ؟",
+   "lines": [
+    "u7-s-3"
+   ]
+  },
+  {
+   "id": "d2-m2-022",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "وَمَا سِعْرُ هَذِهِ اللُّعْبَةِ؟",
+   "lines": [
+    "u7-s-5"
+   ]
+  },
+  {
+   "id": "d2-m2-023",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "مَا سِعْرُ هَذَا الْقَمِيصِ لَوْ سَمَحْتِ؟",
+   "lines": [
+    "u7-b-2"
+   ]
+  },
+  {
+   "id": "d2-m2-024",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "وَمَا سِعْرُ هَذَا الْجَوْرَبِ؟",
+   "lines": [
+    "u7-b-4"
+   ]
+  },
+  {
+   "id": "d2-m2-025",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "أُرِيدُ ثَلَاثَةَ جَوَارِبَ مِنْ فَضْلِكِ.",
+   "lines": [
+    "u7-b-6"
+   ]
+  },
+  {
+   "id": "d2-m2-026",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "حُجْرَةُ النَّوْمِ لَوْنُهَا أَخْضَرُ. حُجْرَةُ نَوْمِي خَضْرَاءُ.",
+   "lines": [
+    "u7-ss-2"
+   ]
+  },
+  {
+   "id": "d2-m2-027",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "لَوْنُ سَرِيرِي أَبْيَضُ.",
+   "lines": [
+    "u7-ss-4"
+   ]
+  },
+  {
+   "id": "d2-m2-028",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "لَا، مَكْتَبِي لَيْسَ لَوْنُهُ أَخْضَرَ، مَكْتَبِي لَوْنُهُ أَبْيَضُ.",
+   "lines": [
+    "u7-ss-6"
+   ]
+  },
+  {
+   "id": "d2-m2-029",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "مَنْ بَيْنَ سَلْوَى وَعَبْلَة؟",
+   "lines": [
+    "u8-p-1"
+   ]
+  },
+  {
+   "id": "d2-m2-030",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "وَمَنْ أَمَامَ سَمِيح؟",
+   "lines": [
+    "u8-p-3"
+   ]
+  },
+  {
+   "id": "d2-m2-031",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "وَمَنْ فَوْقَ الْكُرْسِيِّ؟",
+   "lines": [
+    "u8-p-5"
+   ]
+  },
+  {
+   "id": "d2-m2-032",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "وَمَنْ خَلْفَ زِيَاد؟",
+   "lines": [
+    "u8-p-7"
+   ]
+  },
+  {
+   "id": "d2-m2-033",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "أَلُو، بَاسِم هَلْ تَذْهَبُ مَعِي إِلَى الْكَافِتِيرْيَا الْآنَ؟",
+   "lines": [
+    "u9-sb-1"
+   ]
+  },
+  {
+   "id": "d2-m2-034",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "مَاذَا تَفْعَلِينَ فِي الْإِجَازَةِ يَا هَالَة؟",
+   "lines": [
+    "u9-hh-1"
+   ]
+  },
+  {
+   "id": "d2-m2-035",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "يَوْمَ الْجُمْعَةِ أَنَا لَا أُنَظِّفُ الْبَيْتَ وَلَا أَدْرُسُ، وَلَكِنْ أَذْهَبُ إِلَى السِّينِمَا وَأَسْمَعُ مُوسِيقَى. وَيَوْمَ السَّبْتِ أَتَعَشَّى فِي مَطْعَمٍ جَمِيلٍ ثُمَّ أُشَاهِدُ التِّلِيفِزْيُونَ فِي الْبَيْتِ.",
+   "lines": [
+    "u9-hh-4"
+   ]
+  },
+  {
+   "id": "d2-m2-036",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "وَعَلَيْكُمُ السَّلَامُ. لَا، أَنَا لَا أَذْهَبُ إِلَى النَّادِي يَوْمَ السَّبْتِ.",
+   "lines": [
+    "u9-ef-2"
+   ]
+  },
+  {
+   "id": "d2-m2-037",
+   "kind": "dialogue",
+   "voice": "male-2",
+   "text": "فِي الْحَقِيقَةِ. أَنَا أَسْتَيْقِظُ مُتَأَخِّرًا. أَجْلِسُ فِي سَرِيرِي أَقْرَأُ، وَأَسْمَعُ مُوسِيقَى، وَأَنْتَ؟",
+   "lines": [
+    "u9-ef-4"
+   ]
+  }
+ ]
+}
