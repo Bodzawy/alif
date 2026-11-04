@@ -37,14 +37,16 @@ Each line is one separate item: say it once, then pause for about 1 second befor
 Do not add, repeat, explain or translate anything.
 ```
 
-## Lektion 2 on (`_batch-l2-NN`, `_batch-l2s-NN`, `_batch-l2p-NN`)
+## Lektion 2 on (`_batch-l2-NN`, `_batch-l2s`)
 
 `scripts/audio/batches-from-lessons.ts -- --from=2` writes the texts of Lektion 2 … 20 without a
-recording, in lesson order: words (`_batch-l2-NN`, style above), sentences (`_batch-l2s-NN`) and
-texts of several sentences (`_batch-l2p-NN`). Dialogue lines are not in them (speakers' voices).
+recording, in lesson order: words (`_batch-l2-NN`, style above) and every sentence in one batch,
+`_batch-l2s` (the single sentences, then the texts of several sentences). Dialogue lines are not in
+it (speakers' voices). It is long: record it in parts, in order, and join the parts into one
+`audio-in/batch-l2s` recording before `split_batch.py`.
 Record the sentences with the style below: `split_batch.py` finds the borders between the texts
 only when the pause between two texts is clearly longer than every pause inside one.
-Install: `python3 scripts/audio/install_clips.py l2` (sentences `l2s`, several sentences `l2p`).
+Install: `python3 scripts/audio/install_clips.py l2` (sentences `l2s`).
 
 ```
 Read in Modern Standard Arabic (Fusha) as an adult male teacher with a very deep, low, full voice and crisp, clear articulation, like a Quran or Arabic-language teacher.
@@ -56,10 +58,10 @@ Each item is separated by a blank line: after each item, stay completely silent 
 Do not add, repeat, explain or translate anything.
 ```
 
-## Dialogues (`_dialogue-l2-<voice>-NN`)
+## Dialogues (`_dialogue-l2-<voice>`)
 
 `scripts/audio/dialogue-batches.ts -- --from=2` writes the dialogue lines of Lektion 2 … 20, one
-batch per speaker voice. Record each batch with **its own** Gemini voice – the same as in Lektion 1,
+batch per speaker voice (male-1, male-2, female-1, female-2). Record each batch with **its own** Gemini voice – the same as in Lektion 1,
 so a speaker keeps the voice he or she had there:
 
 | batch | Gemini voice | speaker settings |

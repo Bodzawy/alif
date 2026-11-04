@@ -1,5 +1,5 @@
 {
- "batch": "_dialogue-l2-female-1-01",
+ "batch": "_dialogue-l2-female-1",
  "voice": "female-1",
  "speakers": [
   "Nazik (nazik-dina)",
@@ -20,7 +20,12 @@
   "Die Krankenschwester (call-clinic)",
   "Muna (raif-muna)",
   "Die Verkäuferin (seller-buyer)",
-  "Die Kundin (store)"
+  "Die Kundin (store)",
+  "Die Touristin (tourist)",
+  "Hala (hala-husain)",
+  "Die Fragende (essam-family)",
+  "Hanaa (hana-shirin)",
+  "Salwa (salwa-imad)"
  ],
  "items": [
   {
@@ -385,6 +390,168 @@
    "text": "وَأَيْنَ قِسْمُ التِّلِفِزْيُونَاتِ؟",
    "lines": [
     "u8-st-6"
+   ]
+  },
+  {
+   "id": "d2-f1-041",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "وَأَيْنَ قِسْمُ الْغَسَّالَاتِ؟",
+   "lines": [
+    "u8-st-8"
+   ]
+  },
+  {
+   "id": "d2-f1-042",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "وَأَيْنَ الْكَافِتِيرْيَا؟",
+   "lines": [
+    "u8-st-10"
+   ]
+  },
+  {
+   "id": "d2-f1-043",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "لَا، شُكْرًا. أَنَا أُرِيدُ حَمَّامَ السَّيِّدَاتِ.",
+   "lines": [
+    "u8-st-12"
+   ]
+  },
+  {
+   "id": "d2-f1-044",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "لَوْ سَمَحْتَ، أَيْنَ مَكْتَبُ الْبَرِيدِ؟",
+   "lines": [
+    "u8-t-1"
+   ]
+  },
+  {
+   "id": "d2-f1-045",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "يَمِينًا فِي شَارِعِ كِلْيُوبَاتْرَا. حَسَنًا.",
+   "lines": [
+    "u8-t-3"
+   ]
+  },
+  {
+   "id": "d2-f1-046",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "الصَّيْدَلِيَّةُ عَلَى الْيَمِينِ. عَلَى النَّاصِيَةِ. شُكْرًا.",
+   "lines": [
+    "u8-t-5"
+   ]
+  },
+  {
+   "id": "d2-f1-047",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "يَوْمَ الْجُمْعَةِ أَنَا أُنَظِّفُ الْبَيْتَ، أَقْرَأُ كِتَابًا، أَدْرُسُ قَلِيلًا ثُمَّ أَلْعَبُ التِّنِسَ بَعْدَ الظُّهْرِ. يَوْمَ السَّبْتِ أَنَا أَزُورُ أَبِي وَأُمِّي.",
+   "lines": [
+    "u9-hh-2"
+   ]
+  },
+  {
+   "id": "d2-f1-048",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "وَأَنْتَ مَاذَا تَفْعَلُ فِي الْإِجَازَةِ الْأُسْبُوعِيَّةِ يَا حُسَيْن؟",
+   "lines": [
+    "u9-hh-3"
+   ]
+  },
+  {
+   "id": "d2-f1-049",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "هَلْ وَالِدَةُ عِصَام تَعْمَلُ؟",
+   "lines": [
+    "u10-e-1"
+   ]
+  },
+  {
+   "id": "d2-f1-050",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "هَلْ جَدُّ عِصَام يَعْمَلُ؟",
+   "lines": [
+    "u10-e-3"
+   ]
+  },
+  {
+   "id": "d2-f1-051",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "هَذَا زَوْجِي عِمَاد.",
+   "lines": [
+    "u10-h-2"
+   ]
+  },
+  {
+   "id": "d2-f1-052",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "هُوَ مُحَاسِبٌ فِي الْبَنْكِ الْعَرَبِيِّ.",
+   "lines": [
+    "u10-h-4"
+   ]
+  },
+  {
+   "id": "d2-f1-053",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "لَا، هَذَا لَيْسَ أَخِي، هَذَا ابْنِي سَمِير.",
+   "lines": [
+    "u10-h-6"
+   ]
+  },
+  {
+   "id": "d2-f1-054",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "لَا، هُوَ لَا يَعْمَلُ. هُوَ طَالِبٌ، يَدْرُسُ فِي الْجَامِعَةِ.",
+   "lines": [
+    "u10-h-8"
+   ]
+  },
+  {
+   "id": "d2-f1-055",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "إِلَى أَيْنَ تُسَافِرُ فِي رِحْلَتِكَ يَا عِمَاد؟",
+   "lines": [
+    "u10-s-1"
+   ]
+  },
+  {
+   "id": "d2-f1-056",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "الْيَابَانُ! أَيْنَ فِي الْيَابَانِ؟",
+   "lines": [
+    "u10-s-3"
+   ]
+  },
+  {
+   "id": "d2-f1-057",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "طُوكْيُو! الْيَابَانُ! مَتَى تُسَافِرُ؟",
+   "lines": [
+    "u10-s-5"
+   ]
+  },
+  {
+   "id": "d2-f1-058",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "وَكَيْفَ حَالَةُ الطَّقْسِ هُنَاكَ فِي الشِّتَاءِ؟ وَمَاذَا تَلْبَسُ؟",
+   "lines": [
+    "u10-s-7"
    ]
   }
  ]

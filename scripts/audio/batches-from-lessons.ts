@@ -10,11 +10,11 @@
 // lesson order, apart from the w ids batches-from-code.ts hands out.
 // Writes, in lesson order, like _batch-l1-formen:
 //   words:     _batch-lN-01.json / .txt, _batch-lN-02 … (100 texts each)
-//   sentences: _batch-lNs-01.json / .txt, … (50 texts each; a longer pause, see STYLE-gemini.md)
-//   texts of several sentences (they pause inside, at . or ؟): _batch-lNp-01 … (25 each)
+//   sentences: one batch, _batch-lNs.json / .txt – the single sentences first, then the texts of several
+//   sentences (they pause inside, at . or ؟); a longer pause between texts, see STYLE-gemini.md
 // Record each .txt in Google AI Studio (STYLE-gemini.md), then
 //   python3 scripts/audio/split_batch.py docs/audio-replacement/batches/_batch-lN-01.json docs/audio-replacement/audio-in/batch-lN-01.mp3
-//   python3 scripts/audio/install_clips.py lN      (sentences: lNs, several sentences: lNp)
+//   python3 scripts/audio/install_clips.py lN      (sentences: lNs)
 // The leading _ keeps them apart from batch-04 … (where the same words wait in another order).
 import { readdirSync, readFileSync, unlinkSync, writeFileSync } from "node:fs";
 import path from "node:path";
@@ -27,7 +27,7 @@ const AR = path.join(ROOT, "docs", "audio-replacement");
 const BATCHES = path.join(AR, "batches");
 const SCOPE = path.join(AR, "scope-words-letters.csv");
 const MANIFEST = path.join(ROOT, "src", "lib", "tts", "recorded-manifest.json");
-const SIZE = { word: 100, sentence: 50, passage: 25 };
+const SIZE = { word: 100 };
 
 const from = Number(/--from=(\d+)/.exec(process.argv.join(" "))?.[1] ?? 2);
 
@@ -73,9 +73,9 @@ for (const unit of A1_LEVEL.units.filter((unit) => unit.number >= from)) {
 }
 
 const write = (prefix: string, items: Item[], size: number) => {
-  for (const file of readdirSync(BATCHES)) if (file.startsWith(`_${prefix}-`)) unlinkSync(path.join(BATCHES, file));
+  for (const file of readdirSync(BATCHES)) if (file.startsWith(`_${prefix}-`) || file.startsWith(`_${prefix}.`)) unlinkSync(path.join(BATCHES, file));
   for (let i = 0; i < items.length; i += size) {
-    const name = `${prefix}-${String(1 + i / size).padStart(2, "0")}`;
+    const name = size === Infinity ? prefix : `${prefix}-${String(1 + i / size).padStart(2, "0")}`;
     const slice = items.slice(i, i + size);
     writeFileSync(path.join(BATCHES, `_${name}.json`), JSON.stringify({ batch: name, items: slice.map(({ id, kind, text }) => ({ id, kind, text })) }, null, 1) + "\n");
     writeFileSync(path.join(BATCHES, `_${name}.txt`), slice.map((item) => item.text).join("\n\n") + "\n");
@@ -88,5 +88,4 @@ console.log(`Lektion ${from} on: ${seen.size} Arabic texts spoken; already recor
 const passages = sentences.filter((item) => INNER_END.test(item.text));
 console.log(`without a recording: ${words.length} words, ${sentences.length - passages.length} sentences, ${passages.length} texts of several sentences (${newIds} new ids)`);
 write(`batch-l${from}`, words, SIZE.word);
-write(`batch-l${from}s`, sentences.filter((item) => !passages.includes(item)), SIZE.sentence);
-write(`batch-l${from}p`, passages, SIZE.passage);
+write(`batch-l${from}s`, [...sentences.filter((item) => !passages.includes(item)), ...passages], Infinity);
