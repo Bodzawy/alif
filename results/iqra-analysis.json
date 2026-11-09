@@ -1,0 +1,693 @@
+{
+ "clips": 1882,
+ "perToken": {
+  "yy": {
+   "n": 8,
+   "match": 0,
+   "deleted": 7,
+   "subs": {
+    "y": 1
+   }
+  },
+  "ll": {
+   "n": 5,
+   "match": 0,
+   "deleted": 2,
+   "subs": {
+    "l": 3
+   }
+  },
+  "bb": {
+   "n": 6,
+   "match": 1,
+   "deleted": 1,
+   "subs": {
+    "b": 4
+   }
+  },
+  "g": {
+   "n": 7,
+   "match": 2,
+   "deleted": 1,
+   "subs": {
+    "r": 1,
+    "a": 1,
+    "*": 2
+   }
+  },
+  "T": {
+   "n": 20,
+   "match": 8,
+   "deleted": 2,
+   "subs": {
+    "d": 1,
+    "<": 1,
+    "t": 3,
+    "^": 3,
+    "S": 1,
+    "TT": 1
+   }
+  },
+  "rr": {
+   "n": 5,
+   "match": 2,
+   "deleted": 1,
+   "subs": {
+    "r": 1,
+    "w": 1
+   }
+  },
+  "D": {
+   "n": 16,
+   "match": 8,
+   "deleted": 1,
+   "subs": {
+    "d": 4,
+    "*": 2,
+    "b": 1
+   }
+  },
+  "h": {
+   "n": 52,
+   "match": 27,
+   "deleted": 12,
+   "subs": {
+    "H": 1,
+    "aa": 5,
+    "n": 1,
+    "ii": 2,
+    "y": 1,
+    "r": 1,
+    "l": 1,
+    "f": 1
+   }
+  },
+  "Z": {
+   "n": 13,
+   "match": 7,
+   "deleted": 0,
+   "subs": {
+    "*": 2,
+    "a": 1,
+    "l": 1,
+    "y": 1,
+    "D": 1
+   }
+  },
+  "u": {
+   "n": 158,
+   "match": 93,
+   "deleted": 38,
+   "subs": {
+    "i": 5,
+    "w": 3,
+    "s": 1,
+    "aa": 1,
+    "a": 11,
+    "ii": 3,
+    "m": 1,
+    "d": 1,
+    "uu": 1
+   }
+  },
+  "^": {
+   "n": 34,
+   "match": 21,
+   "deleted": 2,
+   "subs": {
+    "y": 1,
+    "h": 1,
+    "s": 6,
+    "f": 1,
+    "a": 2
+   }
+  },
+  "S": {
+   "n": 27,
+   "match": 17,
+   "deleted": 0,
+   "subs": {
+    "s": 9,
+    "SS": 1
+   }
+  },
+  "x": {
+   "n": 14,
+   "match": 9,
+   "deleted": 1,
+   "subs": {
+    "a": 1,
+    "f": 1,
+    "h": 2
+   }
+  },
+  "ii": {
+   "n": 62,
+   "match": 41,
+   "deleted": 7,
+   "subs": {
+    "a": 4,
+    "k": 1,
+    "i": 5,
+    "n": 1,
+    "aa": 1,
+    "y": 1,
+    "u": 1
+   }
+  },
+  "H": {
+   "n": 15,
+   "match": 10,
+   "deleted": 0,
+   "subs": {
+    "h": 4,
+    "x": 1
+   }
+  },
+  "aa": {
+   "n": 126,
+   "match": 85,
+   "deleted": 3,
+   "subs": {
+    "s": 1,
+    "a": 14,
+    "E": 2,
+    "r": 3,
+    "k": 3,
+    "l": 1,
+    "i": 6,
+    "uu": 2,
+    "ii": 2,
+    "h": 1,
+    "t": 1,
+    "*": 1,
+    "b": 1
+   }
+  },
+  "uu": {
+   "n": 67,
+   "match": 47,
+   "deleted": 2,
+   "subs": {
+    "aa": 1,
+    "w": 4,
+    "h": 1,
+    "m": 2,
+    "a": 4,
+    "t": 2,
+    "u": 2,
+    "i": 1,
+    "ii": 1
+   }
+  },
+  "w": {
+   "n": 21,
+   "match": 15,
+   "deleted": 4,
+   "subs": {
+    "a": 1,
+    "uu": 1
+   }
+  },
+  "n": {
+   "n": 127,
+   "match": 91,
+   "deleted": 23,
+   "subs": {
+    "nn": 1,
+    "m": 3,
+    "<unk>": 1,
+    "y": 2,
+    "ii": 1,
+    "r": 1,
+    "k": 1,
+    "l": 2,
+    "t": 1
+   }
+  },
+  "a": {
+   "n": 157,
+   "match": 115,
+   "deleted": 24,
+   "subs": {
+    "aa": 8,
+    "d": 1,
+    "i": 6,
+    "k": 1,
+    "ii": 1,
+    "l": 1
+   }
+  },
+  "<": {
+   "n": 74,
+   "match": 58,
+   "deleted": 5,
+   "subs": {
+    "b": 3,
+    "a": 1,
+    "h": 4,
+    "k": 1,
+    "aa": 1,
+    "E": 1
+   }
+  },
+  "i": {
+   "n": 78,
+   "match": 62,
+   "deleted": 7,
+   "subs": {
+    "ii": 2,
+    "a": 5,
+    "aa": 1,
+    "*": 1
+   }
+  },
+  "q": {
+   "n": 31,
+   "match": 26,
+   "deleted": 2,
+   "subs": {
+    "T": 1,
+    "x": 2
+   }
+  },
+  "y": {
+   "n": 21,
+   "match": 18,
+   "deleted": 0,
+   "subs": {
+    "ii": 2,
+    "<": 1
+   }
+  },
+  "$": {
+   "n": 10,
+   "match": 9,
+   "deleted": 0,
+   "subs": {
+    "w": 1
+   }
+  },
+  "r": {
+   "n": 62,
+   "match": 56,
+   "deleted": 2,
+   "subs": {
+    "w": 1,
+    "a": 2,
+    "aa": 1
+   }
+  },
+  "E": {
+   "n": 21,
+   "match": 19,
+   "deleted": 0,
+   "subs": {
+    "y": 1,
+    "a": 1
+   }
+  },
+  "b": {
+   "n": 65,
+   "match": 60,
+   "deleted": 0,
+   "subs": {
+    "h": 1,
+    "a": 1,
+    "d": 1,
+    "bb": 1,
+    "D": 1
+   }
+  },
+  "t": {
+   "n": 28,
+   "match": 26,
+   "deleted": 2,
+   "subs": {}
+  },
+  "z": {
+   "n": 14,
+   "match": 13,
+   "deleted": 1,
+   "subs": {}
+  },
+  "m": {
+   "n": 47,
+   "match": 44,
+   "deleted": 0,
+   "subs": {
+    "a": 1,
+    "h": 1,
+    "mm": 1
+   }
+  },
+  "d": {
+   "n": 35,
+   "match": 33,
+   "deleted": 0,
+   "subs": {
+    "l": 1,
+    "j": 1
+   }
+  },
+  "l": {
+   "n": 43,
+   "match": 41,
+   "deleted": 2,
+   "subs": {}
+  },
+  "*": {
+   "n": 28,
+   "match": 27,
+   "deleted": 0,
+   "subs": {
+    "z": 1
+   }
+  },
+  "f": {
+   "n": 29,
+   "match": 29,
+   "deleted": 0,
+   "subs": {}
+  },
+  "j": {
+   "n": 22,
+   "match": 22,
+   "deleted": 0,
+   "subs": {}
+  },
+  "s": {
+   "n": 32,
+   "match": 32,
+   "deleted": 0,
+   "subs": {}
+  },
+  "k": {
+   "n": 15,
+   "match": 15,
+   "deleted": 0,
+   "subs": {}
+  }
+ },
+ "detection": {
+  "letter · short vowel swapped": {
+   "n": 58,
+   "heard": 25,
+   "tie": 32
+  },
+  "letter · short → long": {
+   "n": 3,
+   "heard": 1,
+   "tie": 1
+  },
+  "letter · last syllable dropped": {
+   "n": 1,
+   "heard": 0,
+   "tie": 0
+  },
+  "letter · consonant swapped": {
+   "n": 32,
+   "heard": 27,
+   "tie": 3
+  },
+  "letter · long → short": {
+   "n": 25,
+   "heard": 14,
+   "tie": 4
+  },
+  "sound · short vowel swapped": {
+   "n": 168,
+   "heard": 95,
+   "tie": 69
+  },
+  "sound · consonant swapped": {
+   "n": 84,
+   "heard": 51,
+   "tie": 26
+  },
+  "word · short vowel swapped": {
+   "n": 530,
+   "heard": 285,
+   "tie": 131
+  },
+  "word · short → long": {
+   "n": 133,
+   "heard": 31,
+   "tie": 29
+  },
+  "word · consonant swapped": {
+   "n": 296,
+   "heard": 206,
+   "tie": 47
+  },
+  "word · long → short": {
+   "n": 86,
+   "heard": 49,
+   "tie": 30
+  },
+  "word · last syllable dropped": {
+   "n": 119,
+   "heard": 110,
+   "tie": 4
+  }
+ },
+ "perChange": {
+  "a→i": {
+   "n": 189,
+   "heard": 85,
+   "tie": 50
+  },
+  "a→u": {
+   "n": 189,
+   "heard": 85,
+   "tie": 54
+  },
+  "i→a": {
+   "n": 95,
+   "heard": 65,
+   "tie": 26
+  },
+  "i→u": {
+   "n": 95,
+   "heard": 53,
+   "tie": 37
+  },
+  "ب→م": {
+   "n": 21,
+   "heard": 17,
+   "tie": 4
+  },
+  "ت→ط": {
+   "n": 9,
+   "heard": 2,
+   "tie": 4
+  },
+  "ث→س": {
+   "n": 19,
+   "heard": 19,
+   "tie": 0
+  },
+  "ث→ت": {
+   "n": 1,
+   "heard": 1,
+   "tie": 0
+  },
+  "ج→ش": {
+   "n": 10,
+   "heard": 8,
+   "tie": 2
+  },
+  "ح→ه": {
+   "n": 10,
+   "heard": 7,
+   "tie": 1
+  },
+  "ح→خ": {
+   "n": 1,
+   "heard": 1,
+   "tie": 0
+  },
+  "خ→ح": {
+   "n": 9,
+   "heard": 4,
+   "tie": 5
+  },
+  "د→ض": {
+   "n": 11,
+   "heard": 4,
+   "tie": 3
+  },
+  "د→ذ": {
+   "n": 1,
+   "heard": 1,
+   "tie": 0
+  },
+  "ذ→د": {
+   "n": 1,
+   "heard": 1,
+   "tie": 0
+  },
+  "ذ→ز": {
+   "n": 17,
+   "heard": 16,
+   "tie": 1
+  },
+  "ر→ل": {
+   "n": 24,
+   "heard": 20,
+   "tie": 2
+  },
+  "ز→ذ": {
+   "n": 8,
+   "heard": 8,
+   "tie": 0
+  },
+  "س→ص": {
+   "n": 21,
+   "heard": 12,
+   "tie": 2
+  },
+  "س→ث": {
+   "n": 1,
+   "heard": 0,
+   "tie": 0
+  },
+  "ش→س": {
+   "n": 7,
+   "heard": 6,
+   "tie": 1
+  },
+  "ص→س": {
+   "n": 19,
+   "heard": 10,
+   "tie": 1
+  },
+  "ض→د": {
+   "n": 10,
+   "heard": 8,
+   "tie": 2
+  },
+  "ط→ت": {
+   "n": 12,
+   "heard": 9,
+   "tie": 3
+  },
+  "ظ→ز": {
+   "n": 1,
+   "heard": 1,
+   "tie": 0
+  },
+  "ظ→ذ": {
+   "n": 13,
+   "heard": 9,
+   "tie": 4
+  },
+  "غ→خ": {
+   "n": 6,
+   "heard": 2,
+   "tie": 4
+  },
+  "ف→ث": {
+   "n": 11,
+   "heard": 1,
+   "tie": 7
+  },
+  "ق→ك": {
+   "n": 15,
+   "heard": 14,
+   "tie": 1
+  },
+  "ك→ق": {
+   "n": 10,
+   "heard": 4,
+   "tie": 5
+  },
+  "ل→ر": {
+   "n": 31,
+   "heard": 13,
+   "tie": 7
+  },
+  "م→ب": {
+   "n": 22,
+   "heard": 18,
+   "tie": 4
+  },
+  "ن→م": {
+   "n": 21,
+   "heard": 15,
+   "tie": 4
+  },
+  "u→a": {
+   "n": 94,
+   "heard": 60,
+   "tie": 31
+  },
+  "u→i": {
+   "n": 94,
+   "heard": 57,
+   "tie": 34
+  },
+  "ه→ح": {
+   "n": 12,
+   "heard": 7,
+   "tie": 1
+  },
+  "و→ي": {
+   "n": 14,
+   "heard": 11,
+   "tie": 3
+  },
+  "ي→و": {
+   "n": 10,
+   "heard": 7,
+   "tie": 3
+  },
+  "أ→ع": {
+   "n": 21,
+   "heard": 17,
+   "tie": 0
+  },
+  "إ→ع": {
+   "n": 3,
+   "heard": 3,
+   "tie": 0
+  },
+  "ع→أ": {
+   "n": 10,
+   "heard": 8,
+   "tie": 2
+  }
+ },
+ "rules": {
+  "letter": {
+   "correct": 28,
+   "falseReject": 8,
+   "wrong": 119,
+   "falseAccept": 51,
+   "noSpeechCorrect": 0,
+   "noSpeechWrong": 4,
+   "azureOnlyFR": 0,
+   "azureOnlyFA": 100
+  },
+  "sound": {
+   "correct": 84,
+   "falseReject": 56,
+   "wrong": 252,
+   "falseAccept": 10,
+   "noSpeechCorrect": 4,
+   "noSpeechWrong": 22,
+   "azureOnlyFR": 20,
+   "azureOnlyFA": 163
+  },
+  "word": {
+   "correct": 226,
+   "falseReject": 56,
+   "wrong": 1173,
+   "falseAccept": 615,
+   "noSpeechCorrect": 0,
+   "noSpeechWrong": 10,
+   "azureOnlyFR": 1,
+   "azureOnlyFA": 1140
+  }
+ }
+}

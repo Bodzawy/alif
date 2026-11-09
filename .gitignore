@@ -25,6 +25,11 @@ playwright-report/
 # videos: mp4 files are served from outside the repo in production (see DEPLOY-VIDEOS.md); posters stay in git
 public/videos/**/*.mp4
 
+# IQRA study (scripts/measure-iqra.ts): generated clips and the raw log; the json/csv results are committed
+results/clips/
+results/*.jsonl
+results/*.log
+
 # recorded Arabic clips: served from outside the repo in production (see DEPLOY-AUDIO.md)
 public/audio/ar/
 # working audio of docs/audio-replacement (ElevenLabs input, cut clips, tests): local only, the approved clips go to public/audio/ar/
