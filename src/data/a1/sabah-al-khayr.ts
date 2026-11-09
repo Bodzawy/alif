@@ -36,10 +36,12 @@ const speaker = (id: string, name: string, voice: DialogueSpeaker["voice"], alt:
 export const menDialogue: Dialogue = {
   id: "ahmad-ali",
   intro: "Zwei Männer begrüßen sich: Ahmad und Ali.",
+  // Portraits (webp, cut from the illustration of the two men): Ahmad on the right, Ali on the left, facing him.
   speakers: [
-    speaker("ahmad", "Ahmad", "male-1", "Ahmad, ein Mann mit Bart und blauem Hemd"),
-    speaker("ali", "Ali", "male-2", "Ali, ein Mann mit Brille und grünem Hemd"),
+    { ...speaker("ahmad", "Ahmad", "male-1", "Ahmad, ein Mann mit weißem Turban und grauem Bart"), avatar: { src: `${IMG}/ahmad.webp`, alt: "Ahmad, ein Mann mit weißem Turban und grauem Bart" } },
+    { ...speaker("ali", "Ali", "male-2", "Ali, ein Mann mit hellem Turban und dunklem Bart"), avatar: { src: `${IMG}/ali.webp`, alt: "Ali, ein Mann mit hellem Turban und dunklem Bart" } },
   ],
+  scene: { src: `${IMG}/men-scene.webp`, alt: "Ahmad und Ali stehen sich gegenüber und sprechen miteinander." },
   lines: lines([
     ["m-sabah-al-khayr", "ahmad", "صَبَاحُ الْخَيْرِ.", "صباح الخير", "Ṣabāḥu l-khayri.", "Guten Morgen!"],
     ["m-sabah-an-nur", "ali", "صَبَاحُ النُّورِ.", "صباح النور", "Ṣabāḥu n-nūri.", "Guten Morgen!", "Morgen des Lichts"],

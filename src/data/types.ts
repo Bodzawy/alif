@@ -592,6 +592,8 @@ export type Dialogue = {
   intro: string;
   /** Two or more speakers; the first one is shown on the right. */
   speakers: [DialogueSpeaker, DialogueSpeaker, ...DialogueSpeaker[]];
+  /** A picture of the speakers talking to each other, above the conversation (every step of it). */
+  scene?: { src: string; alt: string };
   /** Role-play roles (default: one per speaker). */
   roles?: DialogueRole[];
   lines: DialogueLine[];
