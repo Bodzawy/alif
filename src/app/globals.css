@@ -44,6 +44,17 @@
     @apply min-h-dvh bg-background text-foreground font-sans;
   }
 
+  .arabic-letter-pattern {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.1;
+    background-color: hsl(var(--background));
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='280' viewBox='0 0 320 280'%3E%3Cg fill='%2317766b' font-family='serif' font-weight='600'%3E%3Ctext x='24' y='54' font-size='34' transform='rotate(-12 24 54)'%3E%D8%A8%3C/text%3E%3Ctext x='104' y='34' font-size='25' transform='rotate(14 104 34)'%3E%D8%B3%3C/text%3E%3Ctext x='228' y='70' font-size='39' transform='rotate(-8 228 70)'%3E%D9%85%3C/text%3E%3Ctext x='65' y='150' font-size='40' transform='rotate(9 65 150)'%3E%D8%B9%3C/text%3E%3Ctext x='174' y='137' font-size='27' transform='rotate(-16 174 137)'%3E%D9%86%3C/text%3E%3Ctext x='266' y='177' font-size='32' transform='rotate(12 266 177)'%3E%D9%84%3C/text%3E%3Ctext x='15' y='239' font-size='28' transform='rotate(8 15 239)'%3E%D9%82%3C/text%3E%3Ctext x='126' y='230' font-size='38' transform='rotate(-10 126 230)'%3E%D8%B1%3C/text%3E%3Ctext x='226' y='268' font-size='25' transform='rotate(15 226 268)'%3E%D9%87%3C/text%3E%3C/g%3E%3C/svg%3E");
+    background-size: 320px 280px;
+  }
+
   ::selection {
     background: hsl(var(--primary) / 0.16);
   }

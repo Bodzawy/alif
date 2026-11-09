@@ -28,6 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="de">
       <body className="flex min-h-dvh flex-col">
+        <div className="arabic-letter-pattern" aria-hidden="true" />
         <HideOnHome>
           <SiteHeader />
         </HideOnHome>
