@@ -174,8 +174,12 @@ describe.each(letters.map((l) => [l.slug, l] as const))("the letter %s", (slug, 
   it("تدريب ٩ and ١٠: the dictation words of „حل تدريب ٩“, then the same words in separate letters", () => {
     const dictation = stepOf(lesson, "step-9", "gaps").gaps.items;
     const spell = stepOf(lesson, "step-10", "spell").words;
-    // The same words, spoken alike (the dictation shows a word pausal where its last letter is the gap).
-    expect(spell.map((w) => w.arabic)).toEqual(dictation.map((i) => i.spoken ?? i.arabic));
+    // The same words. Their ending may differ: where the last letter is a gap, the dictation is written
+    // AND spoken in pause (سَرِيرْ – the answer carries the Sukun), the spelling says the Tanwin (سَرِيرٌ).
+    // Compared without harakat: the pausal dictation also drops a final Shadda (ضَارْ / ضَارٌّ) and turns قُرًى into قُرَى.
+    const stem = (word: string) => word.replace(/[\u064B-\u0652]/g, "");
+    expect(spell.map((w) => stem(w.arabic))).toEqual(dictation.map((i) => stem(i.spoken ?? i.arabic)));
+    for (const item of dictation) expect(item.spoken ?? item.arabic).toBe(item.pattern?.endsWith("_") ? item.arabic : item.spoken ?? item.arabic);
     expect(dictation.length).toBeGreaterThanOrEqual(9);
   });
 

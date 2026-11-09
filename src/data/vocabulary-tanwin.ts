@@ -1,6 +1,7 @@
 import type { A1Lesson, A1Step, A1Unit, A1Word, Lesson, PhraseItem } from "@/data/types";
 import { shownGap } from "@/data/a1/letter-lesson";
 import { gapTask } from "@/lib/arabic/gap";
+import { splitTiles } from "@/lib/arabic/hamza-alif";
 import { tanwinTransliteration, tanwinWord, withTanwin } from "@/lib/arabic/tanwin";
 
 // The vocabulary words are shown and spoken with Tanwin al-Damm (سَرِيرٌ, نَافِذَةٌ,
@@ -86,6 +87,8 @@ function laterStep(s: A1Step): A1Step {
     case "gaps": {
       // An unvocalised word (Buchstaben ordnen: تاج, spoken تَاج) keeps its spelling; only the voice says the Tanwin.
       const items = mapped(s.gaps.items, (item) => {
+        // The last tile is a gap (أَبْ "أَ_", a dictation): the answer carries the Sukun, so the voice says the word in pause too.
+        if (item.pattern && !item.spoken && splitTiles(item.pattern).at(-1) === "_") return item;
         if (item.spoken) return pausalTanwin(item.spoken) === item.spoken ? item : { ...item, spoken: pausalTanwin(item.spoken) };
         if (!item.pattern) return item;
         const spoken = pausalTanwin(item.arabic);

@@ -7,6 +7,7 @@ import { ArrowRight, CheckCircle2, Volume2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { FormsLetter, FormsWord } from "@/data/types";
 import type { Narrator } from "@/lib/audio/narration";
+import { baseLetter } from "@/lib/arabic/letter-form";
 import { cn } from "@/lib/utils";
 
 import { isLongWord, LONG_ROW, LONG_TILE, NARRATION, POSITION_LABEL_GERMAN } from "./content";
@@ -17,6 +18,11 @@ import { useT } from "@/i18n/use-locale";
 
 type BankTile = { key: string; tile: string };
 const JOIN_MS = 450;
+
+const BUILD_HINT = {
+  sign: "Der Buchstabe stimmt – aber schau auf sein Zeichen: Fatha, Kasra, Damma oder Sukun?",
+  order: "Der Reihe nach, von rechts: Leg den Stein in das grün umrandete Feld.",
+} as const;
 
 // Activity 1 "Baue das Wort": the word as empty slots (right to left) and a
 // shuffled tile bank. Tiles go in from the right; a wrong tile shakes back to
@@ -90,17 +96,29 @@ function BuildWord({
   const t = useT();
   const [phase, setPhase] = useState<"building" | "joining" | "done">("building");
   const [leaving, setLeaving] = useState(false);
+  /** Why the last tile was not taken, when the plain "doesn't fit" does not say enough. */
+  const [hint, setHint] = useState<keyof typeof BUILD_HINT | null>(null);
   const active = placed.indexOf(null);
 
   const { itemProps, targetProps, selectedKey } = usePickAndDrop<BankTile>({
     onDrop(item, target) {
       const slot = Number(target.replace("slot-", ""));
-      if (slot !== active) return; // only the next slot (from the right) takes a tile
+      if (slot !== active) {
+        // Only the next slot (from the right) takes a tile – say so instead of doing nothing.
+        if (slot > active) {
+          setShake(item.key);
+          setHint("order");
+        }
+        return;
+      }
       if (item.tile !== tiles[slot]) {
         setShake(item.key);
+        // The same letter with another sign (لَ for the لْ of الْحَفْلَة): the letter was right.
+        setHint(baseLetter(item.tile) === baseLetter(tiles[slot]!) ? "sign" : null);
         void narrator.play([NARRATION.build.wrong]);
         return;
       }
+      setHint(null);
       setBank((current) => current.filter((t) => t.key !== item.key));
       setPlaced((current) => current.map((value, i) => (i === slot ? item.tile : value)));
     },
@@ -175,7 +193,13 @@ function BuildWord({
 
       {!done ? (
         <>
-          <p className="mt-4 text-sm text-muted-foreground">{t("Ziehe die Steine von rechts nach links in die Felder – oder tippe erst einen Stein und dann das Feld.")}</p>
+          {hint ? (
+            <p role="status" data-testid="build-hint" data-hint={hint} className="mx-auto mt-4 max-w-md rounded-2xl border border-warning/30 bg-warning-soft px-3 py-2 text-sm font-semibold">
+              {t(BUILD_HINT[hint])}
+            </p>
+          ) : (
+            <p className="mt-4 text-sm text-muted-foreground">{t("Ziehe die Steine von rechts nach links in die Felder – oder tippe erst einen Stein und dann das Feld.")}</p>
+          )}
           <ul className="mt-5 flex flex-wrap justify-center gap-3" aria-label={t("Steine")}>
             {bank.map((item) => (
               <li key={item.key}>

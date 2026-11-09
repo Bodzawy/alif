@@ -71,16 +71,34 @@ function initialToken(phonemes: string[]): string | null {
  * e.g. أَرْنَبٌ "< a r n a b u n", whose Tanwin n must not stand in for the n of the word.
  */
 function hasPhonemes(phonemes: string[], expected: string[]) {
+  return foundPhonemes(phonemes, expected) === expected.length;
+}
+
+/** How many of the expected tokens are found, each in a token of its own (see hasPhonemes). */
+function foundPhonemes(phonemes: string[], expected: string[]): number {
   const used = new Set<number>();
   // The narrowest alternatives first, so that n|nn does not take the only n a plain n needs.
   const ordered = [...expected].sort((a, b) => a.split("|").length - b.split("|").length);
-  return ordered.every((phoneme) => {
+  let found = 0;
+  for (const phoneme of ordered) {
     const alternatives = phoneme.split("|");
     const index = phonemes.findIndex((token, i) => !used.has(i) && alternatives.includes(token));
-    if (index < 0) return false;
+    if (index < 0) continue;
     used.add(index);
-    return true;
-  });
+    found++;
+  }
+  return found;
+}
+
+/**
+ * For a `iqra_phonemes contains [...]` condition: how many of its tokens IQRA heard, of how many
+ * (null for any other condition). Used for sentences, where one missed sound must not fail the whole line.
+ */
+export function containsShare(condition: string, phonemes: string[]): { found: number; total: number } | null {
+  const match = condition.match(/^iqra_phonemes\s*contains\s*(.+)$/);
+  if (!match) return null;
+  const expected = (match[1] ?? "").replace(/[\[\]'\s]/g, "").split(",").filter(Boolean);
+  return { found: foundPhonemes(phonemes, expected), total: expected.length };
 }
 
 export function matchesCondition(condition: string, context: ConditionContext) {

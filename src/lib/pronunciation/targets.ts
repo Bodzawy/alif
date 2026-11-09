@@ -1,4 +1,5 @@
-import { allTranslations } from "@/i18n/translate";
+import { allTranslations, translate } from "@/i18n/translate";
+import { LOCALE_ORDER } from "@/lib/locale";
 import { a1FormsFallbackTexts, a1SpokenTexts } from "@/data/a1";
 import { allExercises } from "@/data/curriculum";
 import { ARABIC_LETTERS } from "./letters";
@@ -21,7 +22,7 @@ export function isAllowedTarget(target: unknown): target is string {
 
 // /api/tts only synthesises known lesson texts, so the public endpoint cannot
 // be used as a free general-purpose Azure TTS proxy.
-export const ALLOWED_TTS_TEXTS: ReadonlySet<string> = new Set([
+const LESSON_TTS_TEXTS = [
   ...ARABIC_LETTERS.map((letter) => letter.modelText),
   ...allExercises().map((exercise) => exercise.modelText),
   // The words of A1 "Ergänzen" / "Hören" without a recording (e.g. بَابْ).
@@ -30,8 +31,18 @@ export const ALLOWED_TTS_TEXTS: ReadonlySet<string> = new Set([
   ...a1FormsFallbackTexts(),
   ...Object.values(FEEDBACK_CUES),
   ...Object.values(GERMAN_CUES),
-  // The same texts in the learner's language (src/i18n/): instructions and cues spoken in en, tr, sq, fr.
+];
+
+const ARABIC_SCRIPT = /[؀-ۿ]/;
+
+export const ALLOWED_TTS_TEXTS: ReadonlySet<string> = new Set([
+  ...LESSON_TTS_TEXTS,
+  // The same texts in the learner's language (src/i18n/): instructions and cues spoken in en, tr, sq, fr …
   ...allTranslations(),
+  // … and each German text as the player translates it (localSpeechUrl → translate()): a text made from a
+  // template ("Der Nachbar hat eine Hand. Er hält das Ba fest.") is in no dictionary as it is spoken
+  // ("… ويمسك الباء."), so without this the narration of every letter lesson stayed silent outside German.
+  ...LESSON_TTS_TEXTS.filter((text) => !ARABIC_SCRIPT.test(text)).flatMap((text) => LOCALE_ORDER.map((locale) => translate(text, locale))),
 ]);
 
 export function isAllowedTtsText(text: unknown): text is string {

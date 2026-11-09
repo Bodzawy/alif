@@ -1,0 +1,31 @@
+{
+  "note": "Recordings whose text the app no longer speaks (review 11/2026): these gap and dictation words now end in pause (Sukun), their pausal forms are queued in batches/_batch-review-fix. The clips stay on the server; put a line back into src/lib/tts/recorded-manifest.json if a step speaks the Tanwin form again.",
+  "clips": {
+    "جَدٌّ": "w1934.0b1bc0c8",
+    "حَدِيدٌ": "w1936.79d1e5aa",
+    "لَذِيذٌ": "w1941.d8bd2d49",
+    "ثَوَابٌ": "w1943.1cf9fa08",
+    "دَلْوٌ": "w1951.faa9329f",
+    "وُجُودٌ": "w1954.fe4eb765",
+    "خَبَرٌ": "w1955.b5e9234d",
+    "مَفْدِيٌّ": "w1961.2fc00ef4",
+    "جَيْبٌ": "w1963.a70c613c",
+    "خُرُوجٌ": "w1964.688b2560",
+    "بُيُوتٌ": "w1967.c3647aa7",
+    "خَوْخٌ": "w1968.efd29f2c",
+    "بَعْضٌ": "w2010.e013eee0",
+    "جَفَافٌ": "w2017.b9074301",
+    "سَلَفٌ": "w2018.65675ee0",
+    "أَلْفٌ": "w2019.83f5b3a0",
+    "فَرِيقٌ": "w2031.b0a8a3cd",
+    "حَاتِمٌ": "w2061.1540ef2c",
+    "فُرْنٌ": "w2074.8386b3f4",
+    "إِفْطَارٌ": "w2098.e54cfaf9",
+    "قَيْظٌ": "w2099.c59e5a13",
+    "حُجُرَاتٌ": "w2111.49183860",
+    "أَسْمَاكٌ": "w2112.34bed161",
+    "ضَبْعٌ": "w2113.6c3653d9",
+    "أُرْزٌ": "w2122.fcc5a54c",
+    "مُوزٌ": "w2123.25ec23da"
+  }
+}

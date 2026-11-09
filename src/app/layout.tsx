@@ -24,9 +24,22 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+/**
+ * Before the first paint: the language the learner chose (localStorage, see src/lib/locale.ts) on <html>,
+ * so the browser never sees a German page with Arabic or Turkish text in it (that mismatch makes Chrome
+ * offer – or run – its page translation).
+ */
+const LOCALE_SCRIPT = `try{var l=localStorage.getItem("alif:lang");var m={de:"de",en:"en",tr:"tr",sq:"sq",fr:"fr",it:"it",es:"es",ar:"ar"};if(m[l]){document.documentElement.lang=m[l];document.documentElement.dir=l==="ar"?"rtl":"ltr"}}catch(e){}`;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  // translate="no" + notranslate: Alif translates itself (src/i18n/). A browser's machine translation would
+  // also "translate" the Arabic being taught – letters, their names and harakat (ث → "الـ", الجيم → "السام").
   return (
-    <html lang="de">
+    <html lang="de" translate="no" className="notranslate" suppressHydrationWarning>
+      <head>
+        <meta name="google" content="notranslate" />
+        <script dangerouslySetInnerHTML={{ __html: LOCALE_SCRIPT }} />
+      </head>
       <body className="flex min-h-dvh flex-col">
         <div className="arabic-letter-pattern" aria-hidden="true" />
         <HideOnHome>

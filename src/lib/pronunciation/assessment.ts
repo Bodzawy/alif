@@ -1,6 +1,6 @@
 import type { Track } from "@/lib/track";
 
-import { evaluateLetterConditions, normalizedText } from "./condition-engine";
+import { containsShare, evaluateLetterConditions, normalizedText } from "./condition-engine";
 import { BEGINNER_RULES } from "./rules";
 import { NO_MATCHING_RULE } from "./types";
 import type { AzureAssessment, FailureReason, IqraResult, PronunciationResponse } from "./types";
@@ -20,6 +20,9 @@ export const MIN_FIRST_SOUND_SCORE = 30;
  */
 export function recognizedTarget(recognized: string, target: string): boolean {
   const expected = normalizedText(target);
+  // A sentence (صباح الخير): the recognised words together are the target (normalizedText drops the spaces,
+  // so comparing word by word could never match).
+  if (isSentence(target)) return expected !== "" && normalizedText(recognized) === expected;
   const words = recognized.split(/\s+/).map(normalizedText).filter(Boolean);
   return expected !== "" && words.length > 0 && words.every((word) => word === expected);
 }
@@ -29,6 +32,34 @@ export function speakingAzurePassed(primary: Pick<AzureAssessment, "accuracy" | 
   const accuracyPassed = primary.accuracy !== null && primary.accuracy >= MIN_ACCURACY;
   const firstSoundPassed = primary.firstSoundScore === null || primary.firstSoundScore >= MIN_FIRST_SOUND_SCORE;
   return recognizedTarget(primary.recognized, target) || (accuracyPassed && firstSoundPassed);
+}
+
+/** A target of several words: a dialogue line or an expression (صباح الخير). */
+export function isSentence(target: string): boolean {
+  return /\s/.test(target.trim());
+}
+
+/**
+ * ALIF Speaking, a sentence: the share of its sounds IQRA must hear. The beginner rule lists EVERY
+ * spoken letter; on a sentence of 7–14 letters a single miss of IQRA (ص ح خ are heard in only
+ * ~2 of 3 clean clips, docs/iqra-reliability.md) failed the whole line again and again – the
+ * learner heard "Fast geschafft" whatever they said, and the partner never answered.
+ */
+export const SENTENCE_SOUND_SHARE = 2 / 3;
+
+/** A sentence whose beginner rule failed: enough of its sounds were heard anyway (Azure already passed it). */
+export function sentenceSoundsHeard(target: string, phonemes: string[]): boolean {
+  if (!isSentence(target)) return false;
+  const conditions = BEGINNER_RULES[target]?.excellent?.conditions ?? [];
+  const shares = conditions.map((condition) => containsShare(condition, phonemes));
+  // Only rules made of "contains" conditions (every beginner rule today); anything else stays strict.
+  if (shares.length === 0 || shares.some((share) => share === null)) return false;
+  return shares.every((share) => share!.found >= Math.ceil(share!.total * SENTENCE_SOUND_SHARE));
+}
+
+function beginnerExcellent(target: string) {
+  const rule = BEGINNER_RULES[target]!.excellent!;
+  return { rule: "excellent", message: rule.message, conditions: rule.conditions };
 }
 
 /** ALIF Speaking asks IQRA only when the target's beginner rule checks sounds. */
@@ -87,10 +118,11 @@ export function buildAssessment({ target, primary, iqra, track = "pronunciation"
 
   // ALIF Speaking: once Azure passed it, the gentle beginner rule checks the sounds IQRA heard.
   // Without such a rule or without IQRA's phonemes, Azure's verdict stands.
-  const beginner =
+  const strictBeginner =
     track === "speaking" && azurePassed && iqraPhonemes.length > 0
       ? evaluateLetterConditions({ target, azureAccuracy: primary.accuracy, azureRecognized: primary.recognized, iqraPhonemes }, BEGINNER_RULES)
       : null;
+  const beginner = strictBeginner && strictBeginner.rule !== "excellent" && sentenceSoundsHeard(target, iqraPhonemes) ? beginnerExcellent(target) : strictBeginner;
   const speakingRule = passed ? "excellent" : "needs_improvement";
   const feedback =
     track === "speaking"

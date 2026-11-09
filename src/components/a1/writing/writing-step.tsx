@@ -9,7 +9,7 @@ import type { WritingLetterSet } from "@/data/types";
 import { playChime, unlockChime } from "@/lib/audio/chime";
 import { getLessonProgress, markLessonCompleted, subscribeProgress } from "@/lib/progress";
 import { cn } from "@/lib/utils";
-import { debugEnabled, demoTotal, evaluateStroke, starsFor, WRITING_BOX, type FailReason, type Point, type StrokeTemplate, type TraceResult } from "@/lib/writing/trace";
+import { debugEnabled, demoTotal, evaluateTrace, starsFor, WRITING_BOX, type FailReason, type Point, type StrokeTemplate, type TraceResult } from "@/lib/writing/trace";
 
 import { AR_NUM, arrowFor, baseline, drawDemo, poly, readPalette, startDot, strokeStart, strokeWidth, type Palette } from "./draw";
 import { sampleLetterSet } from "./sample-path";
@@ -297,13 +297,20 @@ export function WritingStep({
     s.drawing = false;
     const f = forms[s.cur]!;
     const tpl = tpls.current[s.cur]!;
-    const r = evaluateStroke(s.user, tpl, s.stroke, f.strokes.map((stroke) => Boolean(stroke.dot)));
+    // Two strokes that meet drawn in one line (the head of ج and its curve) count as both.
+    const { result: r, strokes: traced } = evaluateTrace(s.user, tpl, s.stroke, f.strokes.map((stroke) => Boolean(stroke.dot)));
     const now = performance.now();
     if (debugRef.current) setLastEval(r);
     if (r.ok) {
       s.committed.push(s.user);
       s.user = [];
       s.scores = s.scores.concat(r.score);
+      if (traced === 2) {
+        // The second stroke is in the same line: an empty placeholder keeps committed[i] ↔ stroke i.
+        s.committed.push([]);
+        s.scores = s.scores.concat(r.score);
+        s.stroke++;
+      }
       if (s.stroke < tpl.length - 1) {
         s.stroke++;
         const next = f.strokes[s.stroke]!;

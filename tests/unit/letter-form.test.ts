@@ -16,7 +16,7 @@ const FORMEN: Record<string, { letter: string; words: Case[]; sukun: Case }> = {
   tha: { letter: "ث", words: [["ثَوْب", "start"], ["الثُّلَاثَاءُ", "middle"], ["ثُلُث", "end", -1], ["أَثَاث", "separate", -1]], sukun: ["أَثْنَاءَ", "start"] },
   jim: { letter: "ج", words: [["جِمَال", "start"], ["الْجُنْدِي", "middle"], ["نُضْج", "end"], ["فَرَج", "separate"]], sukun: ["أَجْمَل", "start"] },
   hha: { letter: "ح", words: [["حِمَار", "start"], ["الْحَفْلَة", "middle"], ["نَصَحَ", "end"], ["فَرِح", "separate"]], sukun: ["أَحْمَر", "start"] },
-  kha: { letter: "خ", words: [["خِيَار", "start"], ["الْخُبْز", "middle"], ["طَبَخ", "end"], ["فَرْخ", "separate"]], sukun: ["نَخْلَة", "middle"] },
+  kha: { letter: "خ", words: [["خِيَار", "start"], ["الْخُبْز", "middle"], ["طَبَخَ", "end"], ["فَرْخ", "separate"]], sukun: ["نَخْلَة", "middle"] },
 };
 
 describe("letter form: start, middle, end, separate", () => {

@@ -135,7 +135,7 @@ Leave about 2 seconds of silence between lines. Do not add anything.
 ```
 خِيَار
 الْخُبْز
-طَبَخ
+طَبَخَ
 فَرْخ
 نَخْلَة
 ```
@@ -144,7 +144,7 @@ Leave about 2 seconds of silence between lines. Do not add anything.
 
 1. `khiyar.wav` – خِيَار (Gurke)
 2. `alkhubz.wav` – الْخُبْز (das Brot)
-3. `tabakh.wav` – طَبَخ (er kochte)
+3. `tabakh.wav` – طَبَخَ (er kochte)
 4. `farkh.wav` – فَرْخ (Küken)
 5. `nakhla.wav` – نَخْلَة (Palme)
 

@@ -138,6 +138,9 @@ export const UI: Translations = table([
   ["hier ablegen", "drop here", "buraya bırak", "lëre këtu", "dépose ici", "lascia qui", "suéltala aquí", "ضعه هنا"],
   ["leer", "empty", "boş", "bosh", "vide", "vuota", "vacía", "فارغة"],
   ["Ziehe die Steine von rechts nach links in die Felder – oder tippe erst einen Stein und dann das Feld.", "Drag the tiles into the boxes from right to left – or tap a tile first and then the box.", "Taşları sağdan sola kutulara sürükle – ya da önce bir taşa, sonra kutuya dokun.", "Tërhiq gurët në kuti nga e djathta në të majtë – ose prek fillimisht një gur dhe pastaj kutinë.", "Fais glisser les pièces dans les cases de droite à gauche – ou touche d'abord une pièce, puis la case.", "Trascina le tessere nelle caselle da destra a sinistra – oppure tocca prima una tessera e poi la casella.", "Arrastra las fichas a las casillas de derecha a izquierda, o toca primero una ficha y luego la casilla.", "اسحب الأحجار إلى الخانات من اليمين إلى اليسار، أو اضغط على حجر ثم على الخانة."],
+  // Baue das Wort: the right letter with another sign (لَ for لْ), and a tile put on a later field.
+  ["Der Buchstabe stimmt – aber schau auf sein Zeichen: Fatha, Kasra, Damma oder Sukun?", "Right letter – but look at its sign: Fatha, Kasra, Damma or Sukun?", "Harf doğru – ama işaretine bak: Fetha, Kesra, Damme mi yoksa Sükûn mu?", "Shkronja është e saktë – por shiko shenjën e saj: Fatha, Kasra, Damma apo Sukun?", "La lettre est bonne – mais regarde son signe : Fatha, Kasra, Damma ou Soukoun ?", "La lettera è giusta – ma guarda il suo segno: Fatha, Kasra, Damma o Sukun?", "La letra es correcta, pero mira su signo: ¿Fatha, Kasra, Damma o Sukun?", "الحرف صحيح، لكن انظر إلى علامته: فتحة أم كسرة أم ضمة أم سكون؟"],
+  ["Der Reihe nach, von rechts: Leg den Stein in das grün umrandete Feld.", "In order, from the right: put the tile in the field with the green outline.", "Sırayla, sağdan: Taşı yeşil çerçeveli kutuya koy.", "Me radhë, nga e djathta: vendose gurin në kutinë me kornizë të gjelbër.", "Dans l'ordre, depuis la droite : pose la pièce dans la case entourée de vert.", "In ordine, da destra: metti la tessera nella casella con il bordo verde.", "En orden, desde la derecha: pon la ficha en la casilla con el borde verde.", "بالترتيب من اليمين: ضع الحجر في الخانة ذات الإطار الأخضر."],
   ["Steine", "Tiles", "Taşlar", "Gurët", "Pièces", "Tessere", "Fichas", "الأحجار"],
   ["Stein", "Tile", "Taş", "Guri", "Pièce", "Tessera", "Ficha", "حجر"],
   ["Nachbarn", "Neighbours", "Komşular", "Fqinjët", "Voisins", "Vicini", "Vecinas", "الجيران"],
@@ -248,6 +251,12 @@ export const UI: Translations = table([
   ["Satz vorsprechen", "Say the sentence for me", "Cümleyi bana söyle", "Ma thuaj fjalinë", "Dis-moi la phrase", "Dimmi la frase", "Dime la frase", "قل لي الجملة"],
   ["Du sprichst {name}. {partner} antwortet erst, wenn dein Satz richtig war.", "You speak {name}. {partner} only answers when your sentence was right.", "Sen {name} rolünü konuşuyorsun. {partner} ancak cümlen doğru olunca cevap verir.", "Ti flet si {name}. {partner} përgjigjet vetëm kur fjalia jote ishte e saktë.", "Tu joues {name}. {partner} ne répond que lorsque ta phrase est juste.", "Interpreti {name}. {partner} risponde solo quando la tua frase è giusta.", "Haces de {name}. {partner} solo responde cuando tu frase es correcta.", "أنت تتكلَّم بدور {name}. لا يجيب {partner} إلا عندما تكون جملتك صحيحة."],
   ["Die anderen", "The others", "Diğerleri", "Të tjerët", "Les autres", "Gli altri", "Los demás", "الآخرون"],
+  // The speakers of Lektion 1: their names in Arabic script in the Arabic interface ("أنت (أحمد)").
+  ["Ahmad", "Ahmad", "Ahmad", "Ahmad", "Ahmad", "Ahmad", "Ahmad", "أحمد"],
+  ["Ali", "Ali", "Ali", "Ali", "Ali", "Ali", "Ali", "علي"],
+  ["Nabila", "Nabila", "Nabila", "Nabila", "Nabila", "Nabila", "Nabila", "نبيلة"],
+  ["Fatima", "Fatima", "Fatima", "Fatima", "Fatima", "Fatima", "Fatima", "فاطمة"],
+  ["Majid", "Majid", "Majid", "Majid", "Majid", "Majid", "Majid", "ماجد"],
 
   // --- Expressions ------------------------------------------------------------------------
   ["{n} von {total} richtig gesprochen", "{n} of {total} spoken correctly", "{total} ifadeden {n} tanesi doğru söylendi", "{n} nga {total} të thëna saktë", "{n} sur {total} bien prononcées", "{n} di {total} pronunciate correttamente", "{n} de {total} dichas correctamente", "{n} من {total} نُطقت صحيحة"],

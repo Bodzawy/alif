@@ -56,7 +56,12 @@ describe("buildAssessment", () => {
     expect(speaking("بيت", ["b", "a", "t"]).passed).toBe(false); // no ي
     // صباح الخير: ص (or س), ب, ح (or ه), ل, خ, ي, ر (or g / x).
     expect(speaking("صباح الخير", ["s", "a", "b", "aa", "h", "a", "l", "x", "a", "y", "g"]).passed).toBe(true);
-    expect(speaking("صباح الخير", ["s", "a", "m", "aa", "h", "a", "l", "x", "a", "y", "r"]).passed).toBe(false); // no ب
+    // A sentence: one sound IQRA did not hear does not fail the line (review 11/2026: the partner never answered) …
+    expect(speaking("صباح الخير", ["s", "a", "m", "aa", "h", "a", "l", "x", "a", "y", "r"]).passed).toBe(true); // no ب
+    // … but at least two thirds of its sounds must be there.
+    expect(speaking("صباح الخير", ["s", "a", "m", "aa", "h", "a", "l"]).passed).toBe(false); // no ب خ ي ر
+    // A single word stays strict.
+    expect(speaking("بيت", ["b", "a", "t"]).passed).toBe(false);
     // A letter with a short vowel: the letter and its vowel, in any form (short, long, emphatic); the three apart.
     expect(speaking("أُ", ["<", "uu"]).passed).toBe(true);
     expect(speaking("أُ", ["U"]).passed).toBe(true);

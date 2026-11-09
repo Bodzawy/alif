@@ -1,28 +1,36 @@
 import type { WritingLetterSet } from "@/data/types";
 
 // Ha (ح) – the four forms of "تدريب (١)" (Lesson1.pdf, page 14), in book order
-// (right to left): حـ ، ـحـ ، ـح ، ح. Two strokes, as the book numbers them
-// for ج (same body): 1 the top part from right to left, 2 the curve down.
-// The joining strokes of ـحـ and ـح come in from the right edge.
-// Approximations: the teacher still has to confirm them (?debug=1).
+// (right to left): حـ ، ـحـ ، ـح ، ح. Two strokes: 1 the head (the slanted
+// top part), 2 the curve down – for حـ and ـحـ back along the line, for ـح
+// and ح round into the bowl. The joining strokes of ـحـ and ـح come in from
+// the right edge and run straight into the head.
+// The shapes follow the glyphs of the lesson font (Noto Naskh Arabic) laid
+// over the 240 × 320 box (baseline 262): the head starts at its small hook
+// on the left and runs down to the right, as it is written in Naskh. The
+// earlier approximations looked like a bent line, not like حـ / جـ, and their
+// head was so short that the scaled tolerances left almost no room
+// (review 11/2026: "initial Jim always wrong").
+// A child who draws head and curve in ONE line is accepted as well
+// (src/lib/writing/trace.ts, evaluateJoined).
 
 /** The body of each form, in writing order; ج and خ have the same body with a dot. */
 export const HAA_BODY = {
   start: [
-    { d: "M176 192 C154 186 128 188 104 200", arrow: { a: 0.1, b: 0.8, off: -20 } },
-    { d: "M104 200 C122 224 146 244 150 254 C152 262 140 262 128 262 L30 262", arrow: { a: 0.08, b: 0.5, off: 24 }, label: "den Bogen" },
+    { d: "M94 215 C92 199 108 193 122 197 C150 205 178 221 202 231", arrow: { a: 0.1, b: 0.8, off: -20 } },
+    { d: "M202 231 C176 239 148 251 122 259 C98 265 60 264 26 264", arrow: { a: 0.08, b: 0.6, off: -22 }, label: "den Bogen" },
   ],
   middle: [
-    { d: "M214 262 L178 262 C168 248 170 222 180 200 C156 192 130 194 106 206", arrow: { a: 0.04, b: 0.4, off: 24 } },
-    { d: "M106 206 C124 228 146 246 150 254 C152 262 140 262 128 262 L26 262", arrow: { a: 0.08, b: 0.5, off: 24 }, label: "den Bogen" },
+    { d: "M214 262 L192 262 C170 260 154 251 140 241 C116 227 84 221 62 215 C56 207 60 195 74 195 C110 197 148 213 174 229", arrow: { a: 0.04, b: 0.4, off: 24 } },
+    { d: "M174 229 C150 235 122 243 98 251 C76 259 44 262 10 262", arrow: { a: 0.08, b: 0.6, off: -22 }, label: "den Bogen" },
   ],
   end: [
-    { d: "M214 262 L190 262 C182 240 186 214 196 200 C170 192 140 194 112 206", arrow: { a: 0.04, b: 0.4, off: 24 } },
-    { d: "M112 206 C74 222 56 252 64 280 C72 306 120 312 176 300", arrow: { a: 0.08, b: 0.6, off: 24 }, label: "den Bogen" },
+    { d: "M214 262 L170 262 C150 259 132 245 118 233 C96 221 60 213 40 211 C34 203 40 193 50 193 C90 195 126 207 150 219", arrow: { a: 0.04, b: 0.4, off: 24 } },
+    { d: "M150 219 C118 221 86 233 64 255 C44 277 50 307 72 317 C94 320 124 320 146 313", arrow: { a: 0.08, b: 0.6, off: 24 }, label: "den Bogen" },
   ],
   separate: [
-    { d: "M172 186 C150 182 124 186 100 198", arrow: { a: 0.1, b: 0.8, off: -20 } },
-    { d: "M100 198 C70 214 54 246 62 276 C70 304 120 312 176 300", arrow: { a: 0.08, b: 0.6, off: 24 }, label: "den Bogen" },
+    { d: "M70 209 C66 197 74 189 86 191 C116 193 150 199 180 205", arrow: { a: 0.1, b: 0.8, off: -20 } },
+    { d: "M180 205 C150 211 116 221 96 239 C76 259 76 293 94 309 C112 320 150 319 186 311", arrow: { a: 0.08, b: 0.6, off: 24 }, label: "den Bogen" },
   ],
 };
 

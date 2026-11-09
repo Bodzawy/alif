@@ -68,14 +68,16 @@ export const unvocalised = (arabic: string) => arabic.replace(HARAKAT, "");
 /**
  * A gap item of "Ergänzen" / "Hören", shown as it is spoken (with Tanwin): the
  * book pattern's last tile follows the word. When the book's gap IS the last
- * tile (بَابْ "_ا_", أَبْ "أَ_", ثُلُثْ "_لُ_"), the word stays pausal – the
- * answer is the letter with Sukun – and only the voice says the Tanwin.
+ * tile (بَابْ "_ا_", أَبْ "أَ_", ثُلُثْ "_لُ_"), the answer is the letter with
+ * Sukun ("Hier hörst du keinen Vokal"): the word is shown AND spoken pausal, so
+ * the voice never says a vowel the answer denies (أَبٌ with the answer بْ).
  */
 export function shownGap(pausal: string, pattern: string, spoken = withTanwin(pausal)): { arabic: string; pattern: string; spoken: string } {
   const parts = splitTiles(pattern);
   const tiles = splitTiles(pausal);
   const shown = splitTiles(spoken);
-  if (spoken === pausal || parts.at(-1) === "_" || shown.length !== tiles.length) return { arabic: pausal, pattern, spoken };
+  if (parts.at(-1) === "_") return { arabic: pausal, pattern, spoken: pausal };
+  if (spoken === pausal || shown.length !== tiles.length) return { arabic: pausal, pattern, spoken };
   return { arabic: spoken, pattern: parts.at(-1) === tiles.at(-1) ? [...parts.slice(0, -1), shown.at(-1)!].join("") : pattern, spoken };
 }
 

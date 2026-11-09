@@ -101,7 +101,7 @@ const LETTERS: Record<string, Expected> = {
       [["khiyar", "خِيَار", "Gurke"], ["khitab", "خِطَاب", "Brief"], ["khiyam", "خِيَام", "Zelte"]],
       [["khudar", "خُضَار", "Gemüse"], ["khudha", "خُوذَة", "Helm"], ["khubz", "خُبْز", "Brot"]],
     ],
-    forms: [["khiyar", "خِيَار", "Gurke"], ["alkhubz", "الْخُبْز", "das Brot"], ["tabakh", "طَبَخ", "er kochte"], ["farkh", "فَرْخ", "Küken"], ["nakhla", "نَخْلَة", "Palme"]],
+    forms: [["khiyar", "خِيَار", "Gurke"], ["alkhubz", "الْخُبْز", "das Brot"], ["tabakh", "طَبَخَ", "er kochte"], ["farkh", "فَرْخ", "Küken"], ["nakhla", "نَخْلَة", "Palme"]],
     neighbors: ["ي", "ل", "ب", "ط", "ا"],
     strokes: "--d",
     orderHint: "Zuerst den Strich oben, dann den Bogen, dann den Punkt.",
@@ -258,8 +258,9 @@ describe.each(Object.entries(LETTERS))("%s – lesson data", (slug, x) => {
           expect(p.y, form.id).toBeGreaterThanOrEqual(0);
           expect(p.y, form.id).toBeLessThanOrEqual(WRITING_BOX.H);
         }
-        // Lines are written from right to left (start right of the end), except the bowl of ح ج خ, which turns back to the right.
-        if (!stroke.dot && stroke.label !== "den Bogen") expect(points(stroke.d)[0]!.x, `${form.id} ${i}`).toBeGreaterThan(points(stroke.d).at(-1)!.x);
+        // Lines are written from right to left (start right of the end), except the body of ح ج خ: its head starts at
+        // the little hook on the left and runs down to the right (Naskh), its bowl turns back to the right.
+        if (!stroke.dot && stroke.label !== "den Bogen" && !(["hha", "jim", "kha"].includes(slug) && i === 0)) expect(points(stroke.d)[0]!.x, `${form.id} ${i}`).toBeGreaterThan(points(stroke.d).at(-1)!.x);
       }
       // Dots: the right one before the left one; for ث the top one first.
       const dots = form.strokes.filter((s) => s.dot).map((s) => points(s.d)[0]!);

@@ -24,10 +24,15 @@ export const TRACE_TOL = {
   accTol: 36,
   /** Share of template points that must be covered. */
   cover: 0.85,
-  /** Share of trace points that must be accurate. */
-  acc: 0.8,
-  /** Short strokes get tighter distances: factor = clamp(length / ref, min, max). */
-  scale: { ref: 200, min: 0.6, max: 1 },
+  /** Share of trace points that must be accurate (prototype 0.8: a child's curve leaves the guide a little). */
+  acc: 0.75,
+  /**
+   * Short strokes get tighter distances: factor = clamp(length / ref, min, max). The prototype's min 0.6
+   * left a short head (حـ / جـ) a start circle of 28 px – on a phone about the width of a finger.
+   */
+  scale: { ref: 200, min: 0.75, max: 1 },
+  /** Two strokes count as one line (evaluateJoined) when the first ends this close to where the second starts. */
+  joinGap: 12,
   /** "tooShort": fewer points than this … */
   minPoints: 4,
   /** … or shorter than this share of the stroke length. */
@@ -191,6 +196,35 @@ export function evaluateStroke(user: readonly Point[], strokes: readonly StrokeT
   if (result.ok) return result;
   const tappedLaterDot = strokes.some((tpl, j) => j > idx && dots[j] && evaluateDot(user, tpl, tol).ok);
   return tappedLaterDot ? { ok: false, msg: "order", debug: result.debug } : result;
+}
+
+/**
+ * A child often draws two strokes that meet (the head of ج and its curve) in ONE line. When stroke `idx`
+ * failed, this checks the trace against strokes idx and idx + 1 joined – both lines, the second starting
+ * where the first ends. ok → the trace covers both strokes; null when they cannot be joined.
+ */
+export function evaluateJoined(user: readonly Point[], strokes: readonly StrokeTemplate[], idx: number, dots: readonly boolean[], tol: TraceTolerances = TRACE_TOL): TraceResult | null {
+  const a = strokes[idx];
+  const b = strokes[idx + 1];
+  if (!a || !b || dots[idx] || dots[idx + 1]) return null;
+  if (dist(a.pts[a.pts.length - 1]!, b.pts[0]!) > tol.joinGap) return null;
+  const joined = toTemplate([...a.pts, ...b.pts.slice(1)]);
+  return evaluate(user, [joined], 0, tol);
+}
+
+/**
+ * Checks stroke `idx` like evaluateStroke, and also as one line with the next stroke (evaluateJoined).
+ * The joined reading wins when the single one failed, or when the line is clearly longer than stroke
+ * `idx` alone (ـحـ: its curve runs back over the head, so a one-line trace can pass as the head too).
+ * `strokes`: how many strokes the trace completed (1 or 2).
+ */
+export function evaluateTrace(user: readonly Point[], strokes: readonly StrokeTemplate[], idx: number, dots: readonly boolean[], tol: TraceTolerances = TRACE_TOL): { result: TraceResult; strokes: 1 | 2 } {
+  const single = evaluateStroke(user, strokes, idx, dots, tol);
+  const longer = pathLen(user) > strokes[idx]!.len * 1.25;
+  if (single.ok && !longer) return { result: single, strokes: 1 };
+  const joined = evaluateJoined(user, strokes, idx, dots, tol);
+  if (joined?.ok) return { result: joined, strokes: 2 };
+  return { result: single, strokes: 1 };
 }
 
 /** Stars for a form from the average score of its strokes (prototype thresholds). */

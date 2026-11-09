@@ -121,7 +121,8 @@ describe("pattern gaps", () => {
 
   it("words without a recording may be spoken by /api/tts (allow-list), e.g. بَابْ, أَبْ, ثُلُثْ", () => {
     for (const text of ["بَابْ", "أَبْ", "ثُلُثْ", "تِلِيفُونُ", "رَأْس", "صَبَاحُ الْخَيْر"]) expect(isAllowedTtsText(text), text).toBe(true);
-    expect(a1SpokenTexts()).toContain("نَبْق");
+    // A gap inside the word: shown and spoken with Tanwin (نَ_قٌ → نَبْقٌ); a gap at the end: in pause (أَ_ → أَبْ).
+    expect(a1SpokenTexts()).toContain("نَبْقٌ");
   });
 });
 

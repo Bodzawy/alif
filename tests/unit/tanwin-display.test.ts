@@ -15,12 +15,11 @@ import { hasRulesFor } from "@/lib/pronunciation/rules";
 // answer, a number written in digits).
 
 /** Gap items whose gap is the last tile, a letter with Sukun: shown pausal, only the voice says the Tanwin. */
-const SUKUN_GAPS = new Set(["lesson-1/ba/step-4/bab", "lesson-1/ba/step-5/ab", "lesson-1/ba/step-5/bab", "lesson-1/tha/step-5/thuluth"]);
 /**
- * From Lektion 2 on (vocabularyTanwin) the same for every gap word whose book spelling stays on screen: its gap is
- * the last tile, it is written without signs (Buchstaben ordnen: تاج), or the Tanwin would change a tile the
- * pattern prints (قُرَى "_رَى").
+ * Lektion 1 had four exceptions (بَابْ, أَبْ twice, ثُلُثْ: pausal on screen, Tanwin in the voice). Review 11/2026 ("the
+ * audio says أَبٌ, the answer is أَبْ"): a word whose gap is its LAST tile is now spoken in pause as well.
  */
+const SUKUN_GAPS = new Set(["lesson-1/ba/step-4/bab", "lesson-1/ba/step-5/ab", "lesson-1/ba/step-5/bab", "lesson-1/tha/step-5/thuluth"]);
 const LATER_GAPS = new Set(
   a1Entries()
     .filter(({ unit }) => unit.number >= 2)
@@ -104,11 +103,11 @@ function mismatches() {
 describe("Tanwin: what is spoken is what is shown", () => {
   const { spokenOnly, shownOnly } = mismatches();
 
-  it("every word spoken with Tanwin is shown with it – except the Sukun gaps", () => {
-    expect(spokenOnly.filter((m) => !SUKUN_GAPS.has(m.key) && !LATER_GAPS.has(m.key))).toEqual([]);
-    // the exceptions are still what they are: pausal on screen, Tanwin in the voice
-    expect(new Set(spokenOnly.filter((m) => !LATER_GAPS.has(m.key)).map((m) => m.key))).toEqual(SUKUN_GAPS);
-    expect(spokenOnly.filter((m) => LATER_GAPS.has(m.key)).length).toBeGreaterThan(100);
+  it("every word spoken with Tanwin is shown with it – except the unvocalised / book-printed gap words", () => {
+    expect(spokenOnly.filter((m) => !LATER_GAPS.has(m.key))).toEqual([]);
+    // the former Sukun gaps of Lektion 1 are heard as they are written
+    expect(spokenOnly.filter((m) => SUKUN_GAPS.has(m.key))).toEqual([]);
+    expect(spokenOnly.filter((m) => LATER_GAPS.has(m.key)).length).toBeGreaterThan(0);
   });
 
   it("no word is shown with Tanwin but spoken without it", () => {

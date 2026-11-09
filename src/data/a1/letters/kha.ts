@@ -28,7 +28,7 @@ export const a1Kha = letterLesson({
   forms: {
     start: ["khiyar", "خِيَار", "Gurke"],
     middle: ["alkhubz", "الْخُبْز", "das Brot"],
-    end: ["tabakh", "طَبَخ", "er kochte"],
+    end: ["tabakh", "طَبَخَ", "er kochte"],
     separate: ["farkh", "فَرْخ", "Küken"],
     sukun: ["nakhla", "نَخْلَة", "Palme"],
   },
