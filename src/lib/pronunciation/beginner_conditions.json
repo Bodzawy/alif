@@ -14350,7 +14350,7 @@
   "ضَ": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['D|DD|d|dd|Z|ZZ','a|aa|A|AA|aah|Aah']"
+        "iqra_phonemes contains ['D|DD|d|dd|Z|ZZ']"
       ],
       "message": "ممتاز 👏 نطقت ضَ بشكل صحيح"
     },
