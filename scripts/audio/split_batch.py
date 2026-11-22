@@ -42,15 +42,27 @@ def speech_regions(path, total):
 def clear_pauses(path, total, n):
     """Recordings with clear pauses between the texts (Google AI Studio with [long pause]): their pauses are quiet but
     not digital silence. When some threshold finds exactly n speech regions apart by at least 0.3 s, that is the cut."""
-    for noise in (-50, -45, -40, -35):
+    forced = os.environ.get("ALIF_DETECT")  # e.g. "-40,0.25": use these settings even when the count is not exactly n (the DP merges the extra regions)
+    if forced:
+        noise, dmin = (float(x) for x in forced.split(","))
         regions, pos = [], 0.0
-        for s, e in silences(path, noise, 0.3):
+        for s, e in silences(path, int(noise), dmin):
+            s = max(s, 0.0)
+            if s - pos >= 0.06: regions.append([pos, s])
+            pos = max(pos, e)
+        if total - pos >= 0.06: regions.append([pos, total])
+        return (int(noise), dmin), regions
+    # Gemini sometimes leaves only 0.25-0.4 s between words (not the 1 s asked for): after 0.3 s, also try 0.25 s.
+    for dmin in (0.3, 0.25):
+      for noise in (-50, -47, -45, -43, -40, -35):
+        regions, pos = [], 0.0
+        for s, e in silences(path, noise, dmin):
             s = max(s, 0.0)
             if s - pos >= 0.06: regions.append([pos, s])
             pos = max(pos, e)
         if total - pos >= 0.06: regions.append([pos, total])
         if len(regions) == n:
-            return (noise, 0.3), regions
+            return (noise, dmin), regions
     # Sentences (dialogue lines) pause inside, at a comma: more regions than texts. When the n-1 longest gaps are
     # clearly longer than every other one, they are the pauses between the texts; the shorter ones stay inside.
     for noise in (-50, -45, -40, -35):

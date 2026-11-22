@@ -1,0 +1,14 @@
+{
+ "batch": "_dialogue-l1-male-1b",
+ "items": [
+  {
+   "id": "d-m1-08",
+   "kind": "dialogue",
+   "voice": "male-1",
+   "text": "أَنَا مَاجِدٌ.",
+   "lines": [
+    "p-ana-majid"
+   ]
+  }
+ ]
+}

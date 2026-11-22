@@ -27,7 +27,7 @@ def main():
     old = json.load(open(MANIFEST, encoding="utf-8"))["lines"] if os.path.exists(MANIFEST) else {}
     os.makedirs(DEST, exist_ok=True)
     lines, installed = {}, 0
-    for spec_path in sorted(glob.glob(os.path.join(AR, "batches", "_dialogue-*.json"))):
+    for spec_path in sorted(glob.glob(os.path.join(AR, "batches", "_dialogue-*.json")) + glob.glob(os.path.join(AR, "gemini-plan", "*dialogue-*.json"))):
         spec = json.load(open(spec_path, encoding="utf-8"))
         out_dir = os.path.join(AR, "audio-out", spec["batch"])
         for item in spec["items"]:

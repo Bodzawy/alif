@@ -7,7 +7,7 @@ describe("recorded Arabic audio", () => {
   it("maps every text to a file name <id>.<8 hex chars>", () => {
     for (const [text, file] of Object.entries(manifest.clips)) {
       expect(text.length).toBeGreaterThan(0);
-      expect(file).toMatch(/^w\d{4}\.[0-9a-f]{8}$/);
+      expect(file).toMatch(/^[a-z]\d{3,4}\.[0-9a-f]{8}$/);
     }
   });
 
