@@ -4,7 +4,7 @@ import { ChevronRight, Lock } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 // "Dein Lernweg": the seven levels A0 – C2. Only levels that exist in the app
-// are links (A0, A1); the others say "Bald verfügbar" and lead nowhere.
+// are links (A0, A1, A2); the others say "Bald verfügbar" and lead nowhere.
 
 export type LearningLevel = {
   code: string;

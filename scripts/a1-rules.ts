@@ -10,7 +10,7 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { a1Entries } from "@/data/a1";
 import { VOCABULARY_RULES, SOUND_RULES, LETTER_RULES } from "@/lib/pronunciation/rules";
-import { a1Words } from "../tests/support/a1-words";
+import { a1Words, a2Words } from "../tests/support/a1-words";
 
 const ROOT = process.cwd();
 const MAP: Record<string, string> = { ب: "b", ت: "t", ج: "j", ح: "H", خ: "x", د: "d", ر: "r", ز: "z", س: "s", ش: "$", ص: "S", ض: "D", ط: "T", ظ: "Z", ع: "E", غ: "g", ف: "f", ق: "q", ك: "k", ل: "l", م: "m", ن: "n", ه: "h", و: "w", ي: "y" };
@@ -84,7 +84,7 @@ function vocabRule(target: string, tokens: string[]) {
 }
 
 const newVocab = new Map<string, string[]>();
-for (const w of a1Words()) {
+for (const w of [...a1Words(), ...a2Words()]) {
   const t = w.exercise.target;
   if (VOCABULARY_RULES[t] || LETTER_RULES[t] || newVocab.has(t)) continue;
   newVocab.set(t, tokensOf(w.exercise.modelText));

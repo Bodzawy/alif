@@ -35,3 +35,7 @@ public/audio/ar/
 # working audio of docs/audio-replacement (ElevenLabs input, cut clips, tests): local only, the approved clips go to public/audio/ar/
 docs/audio-replacement/**/*.mp3
 docs/audio-replacement/**/*.wav
+
+# Raw ChatGPT illustration exports (the app uses the cropped copies in public/images/a2/)
+arabic-adjective-illustrations/
+a2-scenes.zip

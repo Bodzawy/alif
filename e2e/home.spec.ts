@@ -28,7 +28,8 @@ test.describe("desktop 1536", () => {
     await expect(cards[0]!).toHaveAttribute("href", "/a0");
     await expect(cards[0]!).toContainText("28 Lektionen");
     await expect(cards[1]!).toHaveAttribute("href", "/a1");
-    for (const code of LEVELS.slice(2)) {
+    await expect(cards[2]!).toHaveAttribute("href", "/a2");
+    for (const code of LEVELS.slice(3)) {
       await expect(page.getByTestId(`level-card-${code}`)).not.toHaveAttribute("href", /.*/);
       await expect(page.getByTestId(`level-soon-${code}`)).toBeVisible();
     }

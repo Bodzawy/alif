@@ -1,4 +1,5 @@
 import { a1Exercises } from "@/data/a1";
+import { a2Exercises } from "@/data/a2";
 import type { Lesson, Level, PronunciationExercise } from "@/data/types";
 import { lessonVocabularyTanwin } from "@/data/vocabulary-tanwin";
 import { lesson1 } from "@/data/lessons/words/lesson-1";
@@ -79,7 +80,7 @@ export function lessonExercises(lesson: Lesson): PronunciationExercise[] {
 
 /** Every exercise of every level: decides which targets /api/pronunciation and /api/tts accept. */
 export function allExercises(): PronunciationExercise[] {
-  return [...LEVELS.flatMap((level) => level.lessons.flatMap(lessonExercises)), ...a1Exercises()];
+  return [...LEVELS.flatMap((level) => level.lessons.flatMap(lessonExercises)), ...a1Exercises(), ...a2Exercises()];
 }
 
 export function nextLesson(levelSlug: string, lessonSlug: string): Lesson | undefined {

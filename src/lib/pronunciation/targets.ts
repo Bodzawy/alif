@@ -1,6 +1,7 @@
 import { allTranslations, translate } from "@/i18n/translate";
 import { LOCALE_ORDER } from "@/lib/locale";
 import { a1FormsFallbackTexts, a1SpokenTexts } from "@/data/a1";
+import { a2SpokenTexts } from "@/data/a2";
 import { allExercises } from "@/data/curriculum";
 import { ARABIC_LETTERS } from "./letters";
 import { FEEDBACK_CUES, GERMAN_CUES } from "./cues";
@@ -27,6 +28,8 @@ const LESSON_TTS_TEXTS = [
   ...allExercises().map((exercise) => exercise.modelText),
   // The words of A1 "Ergänzen" / "Hören" without a recording (e.g. بَابْ).
   ...a1SpokenTexts(),
+  // A2 lessons: every spoken text of their steps (words, table cells, quiz sentences, dialogue lines).
+  ...a2SpokenTexts(),
   // A letter lesson's Formen narration (German) and words until they are recorded.
   ...a1FormsFallbackTexts(),
   ...Object.values(FEEDBACK_CUES),

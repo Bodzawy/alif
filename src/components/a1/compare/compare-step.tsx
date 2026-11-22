@@ -106,6 +106,7 @@ export function CompareStep({ sections, progressKey }: { sections: CompareSectio
                     <ul dir="rtl" className={cn("grid gap-3", row.length === 2 ? "grid-cols-2" : row.length > 2 ? "grid-cols-2 sm:grid-cols-4" : "grid-cols-1")}>
                       {row.map((item) => (
                         <li key={item.id} className={cn("flex flex-col items-center rounded-2xl border bg-background/60 px-2 py-3 text-center", hydrated && isHeard(item) && "border-success/50")} data-testid={`compare-item-${item.id}`} data-heard={hydrated && isHeard(item) ? "true" : "false"}>
+                          {item.image && <Image src={item.image.src} alt={item.image.alt} width={280} height={280} unoptimized className="mb-2 h-auto w-full max-w-[220px] rounded-2xl border bg-card" data-testid={`compare-image-${item.id}`} />}
                           {item.label && (
                             <span lang="ar" className="font-arabic text-lg font-bold leading-[1.8] text-muted-foreground" data-testid={`compare-label-${item.id}`}>
                               {item.label}

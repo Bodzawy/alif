@@ -64,8 +64,20 @@ const noop = () => () => undefined;
 
 export function GuidedSoundWords({ groups, progressKey }: { groups: Groups; progressKey: string }) {
   const blocks = useMemo(() => guidedBlocks(groups), [groups]);
+  // A paired group (opposites): the two words of a pair are open together.
+  const partners = useMemo(() => {
+    const map: Record<string, string> = {};
+    for (const { paired, words } of groups) {
+      if (!paired) continue;
+      for (let i = 0; i + 1 < words.length; i += 2) {
+        map[words[i]!.id] = words[i + 1]!.id;
+        map[words[i + 1]!.id] = words[i]!.id;
+      }
+    }
+    return map;
+  }, [groups]);
   return (
-    <GuidedSteps blocks={blocks} progressKey={progressKey} intro="Hör zu und sprich nach – Wort für Wort. Das Mikrofon hört dir zu.">
+    <GuidedSteps blocks={blocks} partners={partners} progressKey={progressKey} intro="Hör zu und sprich nach – Wort für Wort. Das Mikrofon hört dir zu.">
       {(guided) => <SoundWordsStep groups={groups} guided={guided} />}
     </GuidedSteps>
   );
@@ -78,11 +90,13 @@ type GuidedStepsProps = {
   intro: string;
   /** Where the arrows sit on the active block: centred on its picture (4:3), or along its bottom edge. */
   arrows?: "picture" | "bottom";
+  /** Blocks that are open together with another one (id → the other block's id), e.g. a pair of opposites. */
+  partners?: Record<string, string>;
   /** The blocks: framed while guided; without `guided` the button page. */
   children: (guided?: GuidedView) => ReactNode;
 };
 
-export function GuidedSteps({ blocks, progressKey, intro, arrows = "picture", children: render }: GuidedStepsProps) {
+export function GuidedSteps({ blocks, progressKey, intro, partners, arrows = "picture", children: render }: GuidedStepsProps) {
   const t = useT();
   const hydrated = useSyncExternalStore(noop, () => true, () => false);
   const completed = useSyncExternalStore(subscribeProgress, () => Boolean(getLessonProgress(progressKey).completedAt), () => false);
@@ -250,7 +264,9 @@ export function GuidedSteps({ blocks, progressKey, intro, arrows = "picture", ch
     const mark = marks[id];
     const isActive = id === active;
     // Before the start (and on the start card) only the first open block is sharp.
-    const sharp = isActive || mark !== undefined || finished || (mode === "start" && id === firstOpen);
+    const focus = active ?? (mode === "start" ? firstOpen : null);
+    const partner = focus !== null && partners?.[focus] === id;
+    const sharp = isActive || mark !== undefined || finished || (mode === "start" && id === firstOpen) || partner;
     const state = isActive ? "active" : mark === "done" ? "done" : mark === "practice" ? "practice" : sharp ? "next" : "waiting";
     return (
       <div

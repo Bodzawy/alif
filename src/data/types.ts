@@ -283,6 +283,8 @@ export type CompareItem = {
   arabic: string;
   transliteration?: string;
   german?: string;
+  /** A picture of the meaning (shown above the word). */
+  image?: { src: string; alt: string };
   /** The book's label of this example, e.g. "يَاءُ الْمَدِّ". */
   label?: string;
   /** What the item shows: a long vowel (Dehnungsbuchstabe), a short vowel, a Hamza, a consonant. */
@@ -416,6 +418,8 @@ export type PhraseGroup = {
   titleArabic?: string;
   /** A short German explanation below the expressions. */
   note?: string;
+  /** A picture of the text (e.g. the flat plan), above the expressions. */
+  image?: { src: string; alt: string };
   items: PhraseItem[];
 };
 
@@ -663,8 +667,8 @@ export type QuizItem = {
   show?: boolean;
   /** What "Anhören" speaks when it differs from `arabic` (e.g. a phone number read digit by digit). */
   spoken?: string;
-  /** A picture above the questions (e.g. a clock). */
-  image?: { src: string; alt: string };
+  /** A picture above the questions (e.g. a clock). `wide`: a scene shown large instead of a small icon. */
+  image?: { src: string; alt: string; wide?: boolean };
   /** Options may be pictures: an option starting with "/images/" is shown as an image. */
   questions: Array<{ prompt: string; options: string[]; answer: number }>;
 };
@@ -696,4 +700,11 @@ export type OrderContent = {
 };
 
 /** A group of picture words of the step "words" (optional heading as in the book). */
-export type WordGroup = { id: string; title?: string; titleArabic?: string; words: A1Word[] };
+export type WordGroup = {
+  id: string;
+  title?: string;
+  titleArabic?: string;
+  /** Two words after each other are a pair (opposites): both cards are open together, and the child says one after the other. */
+  paired?: boolean;
+  words: A1Word[];
+};

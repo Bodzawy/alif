@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useSyncExternalStore } from "react";
+import Image from "next/image";
 import { CheckCircle2 } from "lucide-react";
 
 import { GuidedSteps } from "@/components/a1/guided/guided-sound-words";
@@ -78,6 +79,7 @@ export function PhrasesStep({ groups, progressKey, guided }: { groups: PhraseGro
             <h2 id={`group-${group.id}`} className="mb-3 text-lg font-bold">
               {t(group.title)}
             </h2>
+            {group.image && <Image src={group.image.src} alt={t(group.image.alt)} width={1200} height={800} unoptimized className="mx-auto mb-4 h-auto w-full max-w-xl rounded-3xl border bg-card" data-testid={`phrase-group-image-${group.id}`} />}
             <ul className="grid gap-4 sm:grid-cols-2">
               {group.items.map((item) => {
                 const card = (

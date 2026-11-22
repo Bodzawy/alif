@@ -25,29 +25,47 @@ export type GuidedView = {
 };
 
 /** A row of "Wörter": the sound and its words – or (step "words") a titled group of picture words. */
-export type WordRow = { sound?: SoundItem; id?: string; title?: string; titleArabic?: string; words: A1Word[] };
+export type WordRow = { sound?: SoundItem; id?: string; title?: string; titleArabic?: string; paired?: boolean; words: A1Word[] };
 
 export function SoundWordsStep({ groups, guided }: { groups: WordRow[]; guided?: GuidedView }) {
   const session = usePracticeSession();
   const t = useT();
   const passed = (id: string) => (guided ? guided.passed(id) : session.passed.has(id));
 
+  const wordCard = (word: A1Word) =>
+    guided ? (
+      guided.frame(
+        word.id,
+        <VocabularyCard item={word} passed={passed(word.id)} locked onBusyChange={session.busyHandler(word.exercise.id)} onResult={session.resultHandler(word.exercise.id)} simpleFeedback hideControls />
+      )
+    ) : (
+      <VocabularyCard
+        item={word}
+        passed={passed(word.exercise.id)}
+        locked={session.isLocked(word.exercise.id)}
+        onBusyChange={session.busyHandler(word.exercise.id)}
+        onResult={session.resultHandler(word.exercise.id)}
+        simpleFeedback
+      />
+    );
+
   return (
     <div className="space-y-6 lg:space-y-8" data-testid="sound-words-step">
-      {groups.map(({ sound, words, id, title, titleArabic }) => (
+      {groups.map(({ sound, words, id, title, titleArabic, paired }) => (
         <section
           key={sound?.id ?? id}
           dir="rtl"
           aria-label={sound ? t("Wörter mit {glyph}", { glyph: sound.glyph }) : t(title ?? "Wörter")}
           data-testid={`word-group-${sound?.id ?? id}`}
           className={cn(
-            "grid gap-4 rounded-[2rem] border border-primary/10 bg-card/60 p-3 sm:grid-cols-2 lg:grid-cols-3 xl:p-4 [&_svg]:shrink-0",
-            sound ? "xl:grid-cols-[13rem_repeat(3,minmax(0,1fr))]" : "xl:grid-cols-4"
+            "grid gap-4 rounded-[2rem] border border-primary/10 bg-card/60 p-3 xl:p-4 [&_svg]:shrink-0",
+            paired ? "lg:grid-cols-2" : "sm:grid-cols-2 lg:grid-cols-3",
+            sound ? "xl:grid-cols-[13rem_repeat(3,minmax(0,1fr))]" : !paired && "xl:grid-cols-4"
           )}
         >
           {!sound ? (
             (title || titleArabic) && (
-              <header className="text-center sm:col-span-2 lg:col-span-3 xl:col-span-4" data-testid={`word-group-title-${id}`}>
+              <header className={cn("text-center", paired ? "lg:col-span-2" : "sm:col-span-2 lg:col-span-3 xl:col-span-4")} data-testid={`word-group-title-${id}`}>
                 {titleArabic && (
                   <p lang="ar" className="font-arabic text-2xl font-bold leading-[1.8] text-primary">
                     {titleArabic}
@@ -88,33 +106,22 @@ export function SoundWordsStep({ groups, guided }: { groups: WordRow[]; guided?:
             />
           )}
           <ol className="contents" aria-label={sound ? t("Wörter mit {glyph}", { glyph: sound.glyph }) : t(title ?? "Wörter")}>
-            {words.map((word) => (
-              <li key={word.id} dir="ltr" className="grid" data-testid={`word-slot-${word.id}`}>
-                {guided ? (
-                  guided.frame(
-                    word.id,
-                    <VocabularyCard
-                      item={word}
-                      passed={passed(word.id)}
-                      locked
-                      onBusyChange={session.busyHandler(word.exercise.id)}
-                      onResult={session.resultHandler(word.exercise.id)}
-                      simpleFeedback
-                      hideControls
-                    />
-                  )
-                ) : (
-                  <VocabularyCard
-                    item={word}
-                    passed={passed(word.exercise.id)}
-                    locked={session.isLocked(word.exercise.id)}
-                    onBusyChange={session.busyHandler(word.exercise.id)}
-                    onResult={session.resultHandler(word.exercise.id)}
-                    simpleFeedback
-                  />
-                )}
-              </li>
-            ))}
+            {paired
+              ? // Opposites: every two words are one block, side by side.
+                Array.from({ length: Math.ceil(words.length / 2) }, (_, n) => words.slice(n * 2, n * 2 + 2)).map((pair) => (
+                  <li key={pair[0]!.id} dir="ltr" data-testid={`word-pair-${pair[0]!.id}`} className="grid grid-cols-2 gap-3 rounded-[1.75rem] border-2 border-primary/20 bg-background/70 p-2.5 shadow-sm">
+                    {pair.map((word) => (
+                      <div key={word.id} className="grid" data-testid={`word-slot-${word.id}`}>
+                        {wordCard(word)}
+                      </div>
+                    ))}
+                  </li>
+                ))
+              : words.map((word) => (
+                  <li key={word.id} dir="ltr" className="grid" data-testid={`word-slot-${word.id}`}>
+                    {wordCard(word)}
+                  </li>
+                ))}
           </ol>
         </section>
       ))}

@@ -54,7 +54,7 @@ export function QuizStep({ items, progressKey }: { items: QuizItem[]; progressKe
               <ListenButton text={item.spoken ?? item.arabic} compact label={`Anhören: ${item.german ?? item.arabic}`} testId={`quiz-listen-${item.id}`} />
             </div>
             {item.image && (
-              <Image src={item.image.src} alt={item.image.alt} width={160} height={120} unoptimized className="mx-auto mt-2 rounded-2xl" data-testid={`quiz-image-${item.id}`} />
+              <Image src={item.image.src} alt={item.image.alt} width={item.image.wide ? 1200 : 160} height={item.image.wide ? 800 : 120} unoptimized className={item.image.wide ? "mx-auto mt-2 h-auto w-full max-w-md rounded-2xl" : "mx-auto mt-2 rounded-2xl"} data-testid={`quiz-image-${item.id}`} />
             )}
             {item.german && <p className="text-right text-sm text-muted-foreground">{item.german}</p>}
             {item.questions.map((q, n) => {

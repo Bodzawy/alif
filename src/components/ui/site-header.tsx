@@ -20,6 +20,9 @@ export function SiteHeader() {
           <Link href="/a1" className="rounded-lg px-2 py-2 text-muted-foreground sm:px-3 transition hover:bg-muted hover:text-foreground focus-ring">
             A1
           </Link>
+          <Link href="/a2" className="rounded-lg px-2 py-2 text-muted-foreground sm:px-3 transition hover:bg-muted hover:text-foreground focus-ring">
+            A2
+          </Link>
           <TrackSwitch className="ml-1" />
           <LanguageSwitch />
         </nav>

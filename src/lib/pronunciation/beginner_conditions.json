@@ -14850,5 +14850,1363 @@
       ],
       "message": "حاول مرة أخرى، نريد غُ"
     }
+  },
+  "جديد": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['j|jj|g|gg','d|dd|D|DD']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة جديد بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة جديد"
+    }
+  },
+  "قديم": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['q|qq|k|kk|<|<<','d|dd|D|DD','m|mm']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة قديم بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة قديم"
+    }
+  },
+  "عال": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['E|EE|<','l|ll']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة عال بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة عال"
+    }
+  },
+  "منخفض": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['m|mm','n|nn','x|xx|H|HH|h|hh','f|ff|v|vv','D|DD|d|dd|Z|ZZ']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة منخفض بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة منخفض"
+    }
+  },
+  "واسع": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['w|ww','s|ss|S|SS','E|EE|<']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة واسع بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة واسع"
+    }
+  },
+  "ضيق": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['D|DD|d|dd|Z|ZZ','y|yy','q|qq|k|kk|<|<<']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة ضيق بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة ضيق"
+    }
+  },
+  "عريض": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['E|EE|<','r|rr|g|gg|x|xx','D|DD|d|dd|Z|ZZ']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة عريض بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة عريض"
+    }
+  },
+  "مضيء": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['m|mm','D|DD|d|dd|Z|ZZ']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة مضيء بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة مضيء"
+    }
+  },
+  "مظلم": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['m|mm','Z|ZZ|z|zz|*|**|D|DD','l|ll']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة مظلم بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة مظلم"
+    }
+  },
+  "نظيف": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['n|nn','Z|ZZ|z|zz|*|**|D|DD','f|ff|v|vv']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة نظيف بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة نظيف"
+    }
+  },
+  "قذر": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['q|qq|k|kk|<|<<','*|z|Z','r|rr|g|gg|x|xx']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة قذر بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة قذر"
+    }
+  },
+  "مريح": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['m|mm','r|rr|g|gg|x|xx','H|HH|h|hh']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة مريح بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة مريح"
+    }
+  },
+  "متعب": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['m|mm','t|tt|T|TT|s','E|EE|<','b|bb|p|pp']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة متعب بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة متعب"
+    }
+  },
+  "رفيع": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['r|rr|g|gg|x|xx','f|ff|v|vv','E|EE|<']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة رفيع بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة رفيع"
+    }
+  },
+  "سمين": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['s|ss|S|SS','m|mm','n|nn']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة سمين بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة سمين"
+    }
+  },
+  "لطيف": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['l|ll','T|TT|t|tt','f|ff|v|vv']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة لطيف بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة لطيف"
+    }
+  },
+  "فظ": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['f|ff|v|vv','Z|ZZ|z|zz|*|**|D|DD']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة فظ بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة فظ"
+    }
+  },
+  "نشيط": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['n|nn','$|$$','T|TT|t|tt']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة نشيط بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة نشيط"
+    }
+  },
+  "كسلان": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['k|kk|q|qq','s|ss|S|SS','l|ll','n|nn']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة كسلان بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة كسلان"
+    }
+  },
+  "غني": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['g|gg|x|xx|j','n|nn','y|yy']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة غني بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة غني"
+    }
+  },
+  "فقير": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['f|ff|v|vv','q|qq|k|kk|<|<<','r|rr|g|gg|x|xx']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة فقير بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة فقير"
+    }
+  },
+  "طويل": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['T|TT|t|tt','w|ww','l|ll']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة طويل بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة طويل"
+    }
+  },
+  "قصير": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['q|qq|k|kk|<|<<','S|SS|s|ss','r|rr|g|gg|x|xx']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة قصير بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة قصير"
+    }
+  },
+  "كثير": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['k|kk|q|qq','f|ff|v|vv|s|ss|t|tt','r|rr|g|gg|x|xx']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة كثير بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة كثير"
+    }
+  },
+  "قليل": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['q|qq|k|kk|<|<<','l|ll']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة قليل بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة قليل"
+    }
+  },
+  "كبير": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['k|kk|q|qq','b|bb|p|pp','r|rr|g|gg|x|xx']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة كبير بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة كبير"
+    }
+  },
+  "صغير": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['S|SS|s|ss','g|gg|x|xx|j','r|rr|g|gg|x|xx']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة صغير بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة صغير"
+    }
+  },
+  "جميل": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['j|jj|g|gg','m|mm','l|ll']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة جميل بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة جميل"
+    }
+  },
+  "قبيح": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['q|qq|k|kk|<|<<','b|bb|p|pp','H|HH|h|hh']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة قبيح بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة قبيح"
+    }
+  },
+  "غال": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['g|gg|x|xx|j','l|ll']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة غال بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة غال"
+    }
+  },
+  "رخيص": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['r|rr|g|gg|x|xx','x|xx|H|HH|h|hh','S|SS|s|ss']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة رخيص بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة رخيص"
+    }
+  },
+  "مزدحم": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['m|mm','z|zz|Z|ZZ','d|dd|D|DD','H|HH|h|hh']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة مزدحم بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة مزدحم"
+    }
+  },
+  "هادئ": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['h|hh|H|HH','d|dd|D|DD']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة هادئ بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة هادئ"
+    }
+  },
+  "الشقة": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['$|$$','q|qq|k|kk|<|<<']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة الشقة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة الشقة"
+    }
+  },
+  "الحديقة": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['l|ll','H|HH|h|hh','d|dd|D|DD','q|qq|k|kk|<|<<']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة الحديقة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة الحديقة"
+    }
+  },
+  "الفصل": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['l|ll','f|ff|v|vv','S|SS|s|ss']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة الفصل بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة الفصل"
+    }
+  },
+  "المكتبة": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['l|ll','m|mm','k|kk|q|qq','t|tt|T|TT|s','b|bb|p|pp']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة المكتبة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة المكتبة"
+    }
+  },
+  "السرير": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['s|ss|S|SS','r|rr|g|gg|x|xx']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة السرير بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة السرير"
+    }
+  },
+  "الدولاب": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['d|dd|D|DD','l|ll','b|bb|p|pp']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة الدولاب بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة الدولاب"
+    }
+  },
+  "الطاولة": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['T|TT|t|tt','w|ww','l|ll']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة الطاولة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة الطاولة"
+    }
+  },
+  "الكنبة": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['l|ll','k|kk|q|qq','n|nn','b|bb|p|pp']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة الكنبة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة الكنبة"
+    }
+  },
+  "السخان": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['s|ss|S|SS','x|xx|H|HH|h|hh','n|nn']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة السخان بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة السخان"
+    }
+  },
+  "النافذة": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['n|nn','f|ff|v|vv','*|z|Z']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة النافذة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة النافذة"
+    }
+  },
+  "الباب": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['l|ll','b|bb|p|pp']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة الباب بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة الباب"
+    }
+  },
+  "السور": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['s|ss|S|SS','r|rr|g|gg|x|xx']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة السور بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة السور"
+    }
+  },
+  "المدينة": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['l|ll','m|mm','d|dd|D|DD','n|nn']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة المدينة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة المدينة"
+    }
+  },
+  "المنطقة": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['l|ll','m|mm','n|nn','T|TT|t|tt','q|qq|k|kk|<|<<']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة المنطقة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة المنطقة"
+    }
+  },
+  "الشارع": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['$|$$','r|rr|g|gg|x|xx','E|EE|<']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة الشارع بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة الشارع"
+    }
+  },
+  "المتحف": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['l|ll','m|mm','t|tt|T|TT|s','H|HH|h|hh','f|ff|v|vv']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة المتحف بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة المتحف"
+    }
+  },
+  "الجامعة": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['l|ll','j|jj|g|gg','m|mm','E|EE|<']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة الجامعة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة الجامعة"
+    }
+  },
+  "النهر": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['n|nn','h|hh|H|HH','r|rr|g|gg|x|xx']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة النهر بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة النهر"
+    }
+  },
+  "أنا اسمي علاء": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['n|nn','s|ss|S|SS','m|mm','E|EE|<','l|ll']"
+      ],
+      "message": "ممتاز 👏 نطقت أنا اسمي علاء بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد أنا اسمي علاء"
+    }
+  },
+  "أنا أردني وأنا أسكن في القاهرة الآن": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['n|nn','u|uu|U|UU|o|oo|oh|<','r|rr|g|gg|x|xx','d|dd|D|DD','y|yy','w|ww','s|ss|S|SS','k|kk|q|qq','f|ff|v|vv','l|ll','q|qq|k|kk|<|<<','h|hh|H|HH']"
+      ],
+      "message": "ممتاز 👏 نطقت أنا أردني وأنا أسكن في القاهرة الآن بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد أنا أردني وأنا أسكن في القاهرة الآن"
+    }
+  },
+  "أنا أدرس الطب في جامعة القاهرة": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['n|nn','d|dd|D|DD','r|rr|g|gg|x|xx','s|ss|S|SS','T|TT|t|tt','b|bb|p|pp','f|ff|v|vv','j|jj|g|gg','m|mm','E|EE|<','l|ll','q|qq|k|kk|<|<<','h|hh|H|HH']"
+      ],
+      "message": "ممتاز 👏 نطقت أنا أدرس الطب في جامعة القاهرة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد أنا أدرس الطب في جامعة القاهرة"
+    }
+  },
+  "هذه شقتي في منطقة المهندسين": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['h|hh|H|HH','*|z|Z','$|$$','q|qq|k|kk|<|<<','t|tt|T|TT|s','f|ff|v|vv','m|mm','n|nn','T|TT|t|tt','l|ll','d|dd|D|DD','s|ss|S|SS']"
+      ],
+      "message": "ممتاز 👏 نطقت هذه شقتي في منطقة المهندسين بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد هذه شقتي في منطقة المهندسين"
+    }
+  },
+  "الشقة بها ثلاث حجرات وهي واسعة نظيفة ومضيئة": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['$|$$','q|qq|k|kk|<|<<','b|bb|p|pp','h|hh|H|HH','f|ff|v|vv|s|ss|t|tt','l|ll','H|HH|h|hh','j|jj|g|gg','r|rr|g|gg|x|xx','t|tt|T|TT|s','w|ww','y|yy','s|ss|S|SS','E|EE|<','n|nn','Z|ZZ|z|zz|*|**|D|DD','f|ff|v|vv','m|mm','D|DD|d|dd|Z|ZZ']"
+      ],
+      "message": "ممتاز 👏 نطقت الشقة بها ثلاث حجرات وهي واسعة نظيفة ومضيئة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد الشقة بها ثلاث حجرات وهي واسعة نظيفة ومضيئة"
+    }
+  },
+  "حجرة النوم فيها مكتب كبير ودولابان طويلان وسرير عريض": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['H|HH|h|hh','j|jj|g|gg','r|rr|g|gg|x|xx','n|nn','w|ww','m|mm','f|ff|v|vv','h|hh|H|HH','k|kk|q|qq','t|tt|T|TT|s','b|bb|p|pp','d|dd|D|DD','l|ll','T|TT|t|tt','s|ss|S|SS','E|EE|<','D|DD|d|dd|Z|ZZ']"
+      ],
+      "message": "ممتاز 👏 نطقت حجرة النوم فيها مكتب كبير ودولابان طويلان وسرير عريض بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد حجرة النوم فيها مكتب كبير ودولابان طويلان وسرير عريض"
+    }
+  },
+  "بجانب السرير طاولتان صغيرتان": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['b|bb|p|pp','j|jj|g|gg','n|nn','s|ss|S|SS','r|rr|g|gg|x|xx','T|TT|t|tt','w|ww','l|ll','t|tt|T|TT|s','S|SS|s|ss','g|gg|x|xx|j']"
+      ],
+      "message": "ممتاز 👏 نطقت بجانب السرير طاولتان صغيرتان بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد بجانب السرير طاولتان صغيرتان"
+    }
+  },
+  "حجرة النوم ليس فيها حمام": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['H|HH|h|hh','j|jj|g|gg','r|rr|g|gg|x|xx','n|nn','w|ww','m|mm','l|ll','y|yy','s|ss|S|SS','f|ff|v|vv','h|hh|H|HH']"
+      ],
+      "message": "ممتاز 👏 نطقت حجرة النوم ليس فيها حمام بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد حجرة النوم ليس فيها حمام"
+    }
+  },
+  "الحمام خارج الغرفة وفيه سخان كبير": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['l|ll','H|HH|h|hh','m|mm','x|xx|H|HH|h|hh','r|rr|g|gg|x|xx','j|jj|g|gg','g|gg|x|xx|j','f|ff|v|vv','w|ww','h|hh|H|HH','s|ss|S|SS','n|nn','k|kk|q|qq','b|bb|p|pp']"
+      ],
+      "message": "ممتاز 👏 نطقت الحمام خارج الغرفة وفيه سخان كبير بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد الحمام خارج الغرفة وفيه سخان كبير"
+    }
+  },
+  "المطبخ فيه دولاب به أدوات مطبخ كثيرة": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['l|ll','m|mm','T|TT|t|tt','b|bb|p|pp','x|xx|H|HH|h|hh','f|ff|v|vv','h|hh|H|HH','d|dd|D|DD','w|ww','t|tt|T|TT|s','k|kk|q|qq','f|ff|v|vv|s|ss|t|tt','r|rr|g|gg|x|xx']"
+      ],
+      "message": "ممتاز 👏 نطقت المطبخ فيه دولاب به أدوات مطبخ كثيرة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد المطبخ فيه دولاب به أدوات مطبخ كثيرة"
+    }
+  },
+  "المطبخ به ثلاجة جديدة أيضا": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['l|ll','m|mm','T|TT|t|tt','b|bb|p|pp','x|xx|H|HH|h|hh','h|hh|H|HH','f|ff|v|vv|s|ss|t|tt','j|jj|g|gg','d|dd|D|DD','y|yy','D|DD|d|dd|Z|ZZ']"
+      ],
+      "message": "ممتاز 👏 نطقت المطبخ به ثلاجة جديدة أيضا بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد المطبخ به ثلاجة جديدة أيضا"
+    }
+  },
+  "حجرة المعيشة ضيقة وليس فيها نافذة كبيرة لكنها حجرة مريحة وفيها كنبتان كبيرتان": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['H|HH|h|hh','j|jj|g|gg','r|rr|g|gg|x|xx','l|ll','m|mm','E|EE|<','$|$$','D|DD|d|dd|Z|ZZ','y|yy','q|qq|k|kk|<|<<','w|ww','s|ss|S|SS','f|ff|v|vv','h|hh|H|HH','n|nn','*|z|Z','k|kk|q|qq','b|bb|p|pp','t|tt|T|TT|s']"
+      ],
+      "message": "ممتاز 👏 نطقت حجرة المعيشة ضيقة وليس فيها نافذة كبيرة لكنها حجرة مريحة وفيها كنبتان كبيرتان بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد حجرة المعيشة ضيقة وليس فيها نافذة كبيرة لكنها حجرة مريحة وفيها كنبتان كبيرتان"
+    }
+  },
+  "هل نوال أختك كبيرة يا سلوى": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['h|hh|H|HH','l|ll','n|nn','w|ww','u|uu|U|UU|o|oo|oh|<','x|xx|H|HH|h|hh','t|tt|T|TT|s','k|kk|q|qq','b|bb|p|pp','r|rr|g|gg|x|xx','y|yy','s|ss|S|SS']"
+      ],
+      "message": "ممتاز 👏 نطقت هل نوال أختك كبيرة يا سلوى بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد هل نوال أختك كبيرة يا سلوى"
+    }
+  },
+  "لا هي ليست كبيرة هي طفلة صغيرة عمرها سبع سنوات": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['l|ll','h|hh|H|HH','y|yy','s|ss|S|SS','t|tt|T|TT|s','k|kk|q|qq','b|bb|p|pp','r|rr|g|gg|x|xx','T|TT|t|tt','f|ff|v|vv','S|SS|s|ss','g|gg|x|xx|j','E|EE|<','m|mm','n|nn','w|ww']"
+      ],
+      "message": "ممتاز 👏 نطقت لا هي ليست كبيرة هي طفلة صغيرة عمرها سبع سنوات بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد لا هي ليست كبيرة هي طفلة صغيرة عمرها سبع سنوات"
+    }
+  },
+  "إم وما شكلها": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['m|mm','w|ww','$|$$','k|kk|q|qq','l|ll','h|hh|H|HH']"
+      ],
+      "message": "ممتاز 👏 نطقت إم وما شكلها بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد إم وما شكلها"
+    }
+  },
+  "هي قصيرة سمينة وشعرها طويل وما شكل صديقتك ريهام": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['h|hh|H|HH','y|yy','q|qq|k|kk|<|<<','S|SS|s|ss','r|rr|g|gg|x|xx','s|ss|S|SS','m|mm','n|nn','w|ww','$|$$','E|EE|<','T|TT|t|tt','l|ll','k|kk|q|qq','d|dd|D|DD','t|tt|T|TT|s']"
+      ],
+      "message": "ممتاز 👏 نطقت هي قصيرة سمينة وشعرها طويل وما شكل صديقتك ريهام بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد هي قصيرة سمينة وشعرها طويل وما شكل صديقتك ريهام"
+    }
+  },
+  "صديقتي ريهام رفيعة قصيرة أيضا شعرها طويل عمرها حوالي عشرين سنة": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['S|SS|s|ss','d|dd|D|DD','q|qq|k|kk|<|<<','t|tt|T|TT|s','r|rr|g|gg|x|xx','h|hh|H|HH','m|mm','f|ff|v|vv','E|EE|<','y|yy','D|DD|d|dd|Z|ZZ','$|$$','T|TT|t|tt','w|ww','l|ll','H|HH|h|hh','n|nn','s|ss|S|SS']"
+      ],
+      "message": "ممتاز 👏 نطقت صديقتي ريهام رفيعة قصيرة أيضا شعرها طويل عمرها حوالي عشرين سنة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد صديقتي ريهام رفيعة قصيرة أيضا شعرها طويل عمرها حوالي عشرين سنة"
+    }
+  },
+  "كيف حال صديقتك الجديدة يا نوال": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['k|kk|q|qq','y|yy','f|ff|v|vv','H|HH|h|hh','l|ll','S|SS|s|ss','d|dd|D|DD','q|qq|k|kk|<|<<','t|tt|T|TT|s','j|jj|g|gg','n|nn','w|ww']"
+      ],
+      "message": "ممتاز 👏 نطقت كيف حال صديقتك الجديدة يا نوال بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كيف حال صديقتك الجديدة يا نوال"
+    }
+  },
+  "صديقتي الجديدة بخير اسمها هناء": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['S|SS|s|ss','d|dd|D|DD','q|qq|k|kk|<|<<','t|tt|T|TT|s','l|ll','j|jj|g|gg','b|bb|p|pp','x|xx|H|HH|h|hh','y|yy','r|rr|g|gg|x|xx','s|ss|S|SS','m|mm','h|hh|H|HH','n|nn']"
+      ],
+      "message": "ممتاز 👏 نطقت صديقتي الجديدة بخير اسمها هناء بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد صديقتي الجديدة بخير اسمها هناء"
+    }
+  },
+  "هل تسكن في شقة صغيرة": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['h|hh|H|HH','l|ll','t|tt|T|TT|s','s|ss|S|SS','k|kk|q|qq','n|nn','f|ff|v|vv','$|$$','q|qq|k|kk|<|<<','S|SS|s|ss','g|gg|x|xx|j','r|rr|g|gg|x|xx']"
+      ],
+      "message": "ممتاز 👏 نطقت هل تسكن في شقة صغيرة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد هل تسكن في شقة صغيرة"
+    }
+  },
+  "لا هي لا تسكن في شقة صغيرة هي غنية وتسكن في بيت غال كبير واسع ولها أختان صغيرتان": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['l|ll','h|hh|H|HH','y|yy','t|tt|T|TT|s','s|ss|S|SS','k|kk|q|qq','n|nn','f|ff|v|vv','$|$$','q|qq|k|kk|<|<<','S|SS|s|ss','g|gg|x|xx|j','r|rr|g|gg|x|xx','w|ww','b|bb|p|pp','E|EE|<','u|uu|U|UU|o|oo|oh|<','x|xx|H|HH|h|hh']"
+      ],
+      "message": "ممتاز 👏 نطقت لا هي لا تسكن في شقة صغيرة هي غنية وتسكن في بيت غال كبير واسع ولها أختان صغيرتان بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد لا هي لا تسكن في شقة صغيرة هي غنية وتسكن في بيت غال كبير واسع ولها أختان صغيرتان"
+    }
+  },
+  "وما شكلها طويلة قصيرة": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['w|ww','m|mm','$|$$','k|kk|q|qq','l|ll','h|hh|H|HH','T|TT|t|tt','q|qq|k|kk|<|<<','S|SS|s|ss','r|rr|g|gg|x|xx']"
+      ],
+      "message": "ممتاز 👏 نطقت وما شكلها طويلة قصيرة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد وما شكلها طويلة قصيرة"
+    }
+  },
+  "هناء جميلة شعرها طويل وهي أيضا رفيعة وعيناها سوداوان": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['h|hh|H|HH','n|nn','j|jj|g|gg','m|mm','l|ll','$|$$','E|EE|<','r|rr|g|gg|x|xx','T|TT|t|tt','w|ww','y|yy','D|DD|d|dd|Z|ZZ','f|ff|v|vv','s|ss|S|SS','d|dd|D|DD']"
+      ],
+      "message": "ممتاز 👏 نطقت هناء جميلة شعرها طويل وهي أيضا رفيعة وعيناها سوداوان بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد هناء جميلة شعرها طويل وهي أيضا رفيعة وعيناها سوداوان"
+    }
+  },
+  "وهل هي نشيطة": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['w|ww','h|hh|H|HH','l|ll','y|yy','n|nn','$|$$','T|TT|t|tt']"
+      ],
+      "message": "ممتاز 👏 نطقت وهل هي نشيطة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد وهل هي نشيطة"
+    }
+  },
+  "نعم هي نشيطة جدا هي تجري كيلومترين كل يوم ولكن نادية أخت هناء كسلانة": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['n|nn','E|EE|<','m|mm','h|hh|H|HH','y|yy','$|$$','T|TT|t|tt','j|jj|g|gg','d|dd|D|DD','t|tt|T|TT|s','r|rr|g|gg|x|xx','k|kk|q|qq','l|ll','w|ww','u|uu|U|UU|o|oo|oh|<','x|xx|H|HH|h|hh','s|ss|S|SS']"
+      ],
+      "message": "ممتاز 👏 نطقت نعم هي نشيطة جدا هي تجري كيلومترين كل يوم ولكن نادية أخت هناء كسلانة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد نعم هي نشيطة جدا هي تجري كيلومترين كل يوم ولكن نادية أخت هناء كسلانة"
+    }
+  },
+  "وما شكل نادية أخت هناء": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['w|ww','m|mm','$|$$','k|kk|q|qq','l|ll','n|nn','d|dd|D|DD','y|yy','u|uu|U|UU|o|oo|oh|<','x|xx|H|HH|h|hh','t|tt|T|TT|s','h|hh|H|HH']"
+      ],
+      "message": "ممتاز 👏 نطقت وما شكل نادية أخت هناء بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد وما شكل نادية أخت هناء"
+    }
+  },
+  "نادية صغيرة قصيرة وبدينة أيضا": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['n|nn','d|dd|D|DD','y|yy','S|SS|s|ss','g|gg|x|xx|j','r|rr|g|gg|x|xx','q|qq|k|kk|<|<<','w|ww','b|bb|p|pp','D|DD|d|dd|Z|ZZ']"
+      ],
+      "message": "ممتاز 👏 نطقت نادية صغيرة قصيرة وبدينة أيضا بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد نادية صغيرة قصيرة وبدينة أيضا"
+    }
+  },
+  "وما شكل بيت هناء": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['w|ww','m|mm','$|$$','k|kk|q|qq','l|ll','b|bb|p|pp','y|yy','t|tt|T|TT|s','h|hh|H|HH','n|nn']"
+      ],
+      "message": "ممتاز 👏 نطقت وما شكل بيت هناء بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد وما شكل بيت هناء"
+    }
+  },
+  "بيتها به حديقة صغيرة وضيقة ليست كبيرة الحديقة بها أشجار فاكهة وفيها زهور ملونة أيضا وحول البيت سور عال وعريض": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['b|bb|p|pp','y|yy','t|tt|T|TT|s','h|hh|H|HH','H|HH|h|hh','d|dd|D|DD','q|qq|k|kk|<|<<','S|SS|s|ss','g|gg|x|xx|j','r|rr|g|gg|x|xx','w|ww','D|DD|d|dd|Z|ZZ','l|ll','s|ss|S|SS','k|kk|q|qq','$|$$','j|jj|g|gg','f|ff|v|vv','z|zz|Z|ZZ','m|mm','n|nn','E|EE|<']"
+      ],
+      "message": "ممتاز 👏 نطقت بيتها به حديقة صغيرة وضيقة ليست كبيرة الحديقة بها أشجار فاكهة وفيها زهور ملونة أيضا وحول البيت سور عال وعريض بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد بيتها به حديقة صغيرة وضيقة ليست كبيرة الحديقة بها أشجار فاكهة وفيها زهور ملونة أيضا وحول البيت سور عال وعريض"
+    }
+  },
+  "أسرتي العزيزة بعد التحية": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['u|uu|U|UU|o|oo|oh|<','s|ss|S|SS','r|rr|g|gg|x|xx','t|tt|T|TT|s','l|ll','E|EE|<','z|zz|Z|ZZ','b|bb|p|pp','d|dd|D|DD','H|HH|h|hh','y|yy']"
+      ],
+      "message": "ممتاز 👏 نطقت أسرتي العزيزة بعد التحية بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد أسرتي العزيزة بعد التحية"
+    }
+  },
+  "أنا في مصر الآن": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['n|nn','f|ff|v|vv','m|mm','S|SS|s|ss','r|rr|g|gg|x|xx','l|ll']"
+      ],
+      "message": "ممتاز 👏 نطقت أنا في مصر الآن بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد أنا في مصر الآن"
+    }
+  },
+  "القاهرة مدينة كبيرة وضخمة": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['l|ll','q|qq|k|kk|<|<<','h|hh|H|HH','r|rr|g|gg|x|xx','m|mm','d|dd|D|DD','n|nn','k|kk|q|qq','b|bb|p|pp','w|ww','D|DD|d|dd|Z|ZZ','x|xx|H|HH|h|hh']"
+      ],
+      "message": "ممتاز 👏 نطقت القاهرة مدينة كبيرة وضخمة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد القاهرة مدينة كبيرة وضخمة"
+    }
+  },
+  "بها مناطق كثيرة مثل المهندسين وشبرا ومصر الجديدة والنزهة والدقي وغيرها": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['b|bb|p|pp','h|hh|H|HH','m|mm','n|nn','T|TT|t|tt','q|qq|k|kk|<|<<','k|kk|q|qq','f|ff|v|vv|s|ss|t|tt','r|rr|g|gg|x|xx','l|ll','d|dd|D|DD','s|ss|S|SS','w|ww','$|$$','S|SS|s|ss','j|jj|g|gg','z|zz|Z|ZZ','g|gg|x|xx|j','y|yy']"
+      ],
+      "message": "ممتاز 👏 نطقت بها مناطق كثيرة مثل المهندسين وشبرا ومصر الجديدة والنزهة والدقي وغيرها بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد بها مناطق كثيرة مثل المهندسين وشبرا ومصر الجديدة والنزهة والدقي وغيرها"
+    }
+  },
+  "المدينة بها نهر طويل اسمه نهر النيل": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['l|ll','m|mm','d|dd|D|DD','n|nn','b|bb|p|pp','h|hh|H|HH','r|rr|g|gg|x|xx','T|TT|t|tt','w|ww','s|ss|S|SS']"
+      ],
+      "message": "ممتاز 👏 نطقت المدينة بها نهر طويل اسمه نهر النيل بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد المدينة بها نهر طويل اسمه نهر النيل"
+    }
+  },
+  "القاهرة فيها آثار فرعونية مثل الأهرام وأبي الهول في منطقة الجيزة والمتحف المصري في ميدان التحرير": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['l|ll','q|qq|k|kk|<|<<','h|hh|H|HH','r|rr|g|gg|x|xx','f|ff|v|vv','f|ff|v|vv|s|ss|t|tt','E|EE|<','w|ww','n|nn','y|yy','m|mm','b|bb|p|pp','T|TT|t|tt','j|jj|g|gg','z|zz|Z|ZZ','t|tt|T|TT|s','H|HH|h|hh','S|SS|s|ss','d|dd|D|DD']"
+      ],
+      "message": "ممتاز 👏 نطقت القاهرة فيها آثار فرعونية مثل الأهرام وأبي الهول في منطقة الجيزة والمتحف المصري في ميدان التحرير بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد القاهرة فيها آثار فرعونية مثل الأهرام وأبي الهول في منطقة الجيزة والمتحف المصري في ميدان التحرير"
+    }
+  },
+  "القاهرة بها آثار إسلامية رائعة في منطقة الأزهر وخان الخليلي": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['l|ll','q|qq|k|kk|<|<<','h|hh|H|HH','r|rr|g|gg|x|xx','b|bb|p|pp','f|ff|v|vv|s|ss|t|tt','s|ss|S|SS','m|mm','y|yy','E|EE|<','f|ff|v|vv','n|nn','T|TT|t|tt','z|zz|Z|ZZ','w|ww','x|xx|H|HH|h|hh']"
+      ],
+      "message": "ممتاز 👏 نطقت القاهرة بها آثار إسلامية رائعة في منطقة الأزهر وخان الخليلي بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد القاهرة بها آثار إسلامية رائعة في منطقة الأزهر وخان الخليلي"
+    }
+  },
+  "منطقة مصر القديمة بها آثار قبطية مثل الكنيسة المعلقة والمتحف القبطي": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['m|mm','n|nn','T|TT|t|tt','q|qq|k|kk|<|<<','S|SS|s|ss','r|rr|g|gg|x|xx','l|ll','d|dd|D|DD','b|bb|p|pp','h|hh|H|HH','f|ff|v|vv|s|ss|t|tt','y|yy','k|kk|q|qq','s|ss|S|SS','E|EE|<','w|ww','t|tt|T|TT|s','H|HH|h|hh','f|ff|v|vv']"
+      ],
+      "message": "ممتاز 👏 نطقت منطقة مصر القديمة بها آثار قبطية مثل الكنيسة المعلقة والمتحف القبطي بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد منطقة مصر القديمة بها آثار قبطية مثل الكنيسة المعلقة والمتحف القبطي"
+    }
+  },
+  "الجو معتدل في الخريف": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['l|ll','j|jj|g|gg','w|ww','m|mm','E|EE|<','t|tt|T|TT|s','d|dd|D|DD','f|ff|v|vv','x|xx|H|HH|h|hh','r|rr|g|gg|x|xx']"
+      ],
+      "message": "ممتاز 👏 نطقت الجو معتدل في الخريف بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد الجو معتدل في الخريف"
+    }
+  },
+  "أنا سعيد بدراسة اللغة العربية هنا": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['n|nn','s|ss|S|SS','E|EE|<','d|dd|D|DD','b|bb|p|pp','r|rr|g|gg|x|xx','l|ll','g|gg|x|xx|j','y|yy','h|hh|H|HH']"
+      ],
+      "message": "ممتاز 👏 نطقت أنا سعيد بدراسة اللغة العربية هنا بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد أنا سعيد بدراسة اللغة العربية هنا"
+    }
+  },
+  "المصريون يحبون الضيوف والسياح ابنكم مارك": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['l|ll','m|mm','S|SS|s|ss','r|rr|g|gg|x|xx','y|yy','n|nn','H|HH|h|hh','b|bb|p|pp','D|DD|d|dd|Z|ZZ','f|ff|v|vv','w|ww','s|ss|S|SS','k|kk|q|qq']"
+      ],
+      "message": "ممتاز 👏 نطقت المصريون يحبون الضيوف والسياح ابنكم مارك بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد المصريون يحبون الضيوف والسياح ابنكم مارك"
+    }
+  },
+  "شقتي فيها ثلاث حجرات": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['$|$$','q|qq|k|kk|<|<<','t|tt|T|TT|s','f|ff|v|vv','h|hh|H|HH','f|ff|v|vv|s|ss|t|tt','l|ll','H|HH|h|hh','j|jj|g|gg','r|rr|g|gg|x|xx']"
+      ],
+      "message": "ممتاز 👏 نطقت شقتي فيها ثلاث حجرات بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد شقتي فيها ثلاث حجرات"
+    }
+  },
+  "حجرة النوم واسعة ومضيئة": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['H|HH|h|hh','j|jj|g|gg','r|rr|g|gg|x|xx','n|nn','w|ww','m|mm','s|ss|S|SS','E|EE|<','D|DD|d|dd|Z|ZZ']"
+      ],
+      "message": "ممتاز 👏 نطقت حجرة النوم واسعة ومضيئة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد حجرة النوم واسعة ومضيئة"
+    }
+  },
+  "المطبخ فيه ثلاجة جديدة": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['l|ll','m|mm','T|TT|t|tt','b|bb|p|pp','x|xx|H|HH|h|hh','f|ff|v|vv','h|hh|H|HH','f|ff|v|vv|s|ss|t|tt','j|jj|g|gg','d|dd|D|DD']"
+      ],
+      "message": "ممتاز 👏 نطقت المطبخ فيه ثلاجة جديدة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد المطبخ فيه ثلاجة جديدة"
+    }
+  },
+  "حجرة المعيشة ليست كبيرة لكنها مريحة": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['H|HH|h|hh','j|jj|g|gg','r|rr|g|gg|x|xx','l|ll','m|mm','E|EE|<','$|$$','y|yy','s|ss|S|SS','t|tt|T|TT|s','k|kk|q|qq','b|bb|p|pp','n|nn','h|hh|H|HH']"
+      ],
+      "message": "ممتاز 👏 نطقت حجرة المعيشة ليست كبيرة لكنها مريحة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد حجرة المعيشة ليست كبيرة لكنها مريحة"
+    }
+  },
+  "الحمام نظيف وليس فيه نافذة": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['l|ll','H|HH|h|hh','m|mm','n|nn','Z|ZZ|z|zz|*|**|D|DD','f|ff|v|vv','w|ww','y|yy','s|ss|S|SS','h|hh|H|HH','*|z|Z']"
+      ],
+      "message": "ممتاز 👏 نطقت الحمام نظيف وليس فيه نافذة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد الحمام نظيف وليس فيه نافذة"
+    }
+  },
+  "الحديقة بها أشجار عالية وزهور ملونة": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['l|ll','H|HH|h|hh','d|dd|D|DD','q|qq|k|kk|<|<<','b|bb|p|pp','h|hh|H|HH','$|$$','j|jj|g|gg','r|rr|g|gg|x|xx','E|EE|<','y|yy','w|ww','z|zz|Z|ZZ','m|mm','n|nn']"
+      ],
+      "message": "ممتاز 👏 نطقت الحديقة بها أشجار عالية وزهور ملونة بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد الحديقة بها أشجار عالية وزهور ملونة"
+    }
   }
 }
