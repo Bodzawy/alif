@@ -505,6 +505,7 @@ export const a1Alphabet: A1Lesson = {
             { arabic: "فِي الْآخِرِ", german: "am Ende" },
           ],
           rows: ALPHABET.map((forms) => forms.map((arabic) => ({ arabic, listen: false }))),
+          keepTable: true, // single letters: four columns fit on a phone
           note: "ا د ذ ر ز و verbinden sich nicht mit dem nächsten Buchstaben: Sie haben am Anfang und in der Mitte keine eigene Form.",
         },
       ],

@@ -374,6 +374,12 @@ export type TableBlock = {
   columns: Array<{ arabic: string; german: string }>;
   rows: TableCell[][];
   note?: string;
+  /**
+   * Stay a table on phones too. By default a table of three or more columns is
+   * shown as one card per column on small screens; this is for tables whose
+   * cells are so short (single letters) that they fit side by side anyway.
+   */
+  keepTable?: boolean;
 };
 
 export type TableQuiz = {

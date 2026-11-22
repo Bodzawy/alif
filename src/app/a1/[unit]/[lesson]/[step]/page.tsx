@@ -20,6 +20,7 @@ import { QuizStep } from "@/components/a1/quiz/quiz-step";
 import { SpellStep } from "@/components/a1/spell/spell-step";
 import { MatchStep } from "@/components/a1/match/match-step";
 import { PositionsStep } from "@/components/a1/positions/positions-step";
+import { hasWideTable } from "@/components/a1/table/layout";
 import { TableStep } from "@/components/a1/table/table-step";
 import { WordPickStep } from "@/components/a1/word-pick/word-pick-step";
 import { buttonClasses } from "@/components/ui/button";
@@ -79,6 +80,8 @@ export default async function A1StepPage({ params }: { params: Promise<Params> }
         "container py-6 sm:py-10",
         step.kind === "dialogue" || step.kind === "letter-find" || step.kind === "word-pick" || step.kind === "spell"
           ? "max-w-3xl"
+          : step.kind === "table" && hasWideTable(step.tables)
+            ? "max-w-5xl"
           : step.kind === "phrases" || step.kind === "positions" || step.kind === "compare" || step.kind === "table" || step.kind === "quiz" || step.kind === "cloze" || step.kind === "order"
             ? "max-w-4xl"
             : step.kind === "forms" || step.kind === "gaps"
