@@ -345,7 +345,7 @@ export const a1Nun = unit2Letter({
   words: {
     fatha: [
       ["nas", "نَاس", "Leute", "Nās", "Eine Gruppe von Menschen"],
-      ["nakhla", "نَخْلَة", "Palme", "Nakhla", [`${V}/nahla.svg`, "Eine Palme"]],
+      ["nakhla", "نَخْلَة", "Palme", "Nakhla", [`${V}/nakhla.svg`, "Eine Palme"]],
       ["najm", "نَجْم", "Stern", "Najm", [`${V}/najma.svg`, "Ein Stern"]],
     ],
     kasra: [

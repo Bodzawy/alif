@@ -94,10 +94,10 @@ export const kafWriting: WritingLetterSet = {
   id: "kaf",
   orderHint: "Zuerst das Kaf, dann das kleine Zeichen.",
   forms: bookOrder([
-    form("kaf-start", "كـ", "das Kaf am Wortanfang", [body("M190 150 L110 214 C150 230 166 244 166 254 C166 262 156 262 140 262 L30 262", A(0.03, 0.4)), { d: "M146 200 C138 190 152 182 156 192 L132 204", arrow: A(0, 0.4, 16), thin: true, label: "das kleine Zeichen" }]),
-    form("kaf-middle", "ـكـ", "das Kaf in der Wortmitte", [body("M214 262 L176 262 C186 254 182 240 150 226 L200 156 L130 214", A(0.03, 0.25)), { d: "M162 210 C154 200 168 192 172 202 L148 214", arrow: A(0, 0.4, 16), thin: true, label: "das kleine Zeichen" }]),
-    form("kaf-end", "ـك", "das Kaf am Wortende", [body("M214 262 L190 262 L190 140 L190 262 L70 262 C54 262 46 250 48 234", A(0.03, 0.3)), { d: "M136 230 C130 220 144 214 148 224 L126 236", arrow: A(0, 0.4, 16), thin: true, label: "das kleine Zeichen" }]),
-    form("kaf", "ك", "das Kaf allein", [body("M180 140 L180 262 L70 262 C54 262 46 250 48 234", A(0.03, 0.35)), { d: "M130 228 C124 218 138 212 142 222 L120 234", arrow: A(0, 0.4, 16), thin: true, label: "das kleine Zeichen" }]),
+    form("kaf-start", "كـ", "das Kaf am Wortanfang", [body("M184 140 L184 244 C184 256 176 262 162 262 L30 262", A(0.03, 0.4)), { d: "M134 184 L108 201 L136 218", arrow: A(0, 0.4, 16), thin: true, label: "das kleine Zeichen" }]),
+    form("kaf-middle", "ـكـ", "das Kaf in der Wortmitte", [body("M214 262 L26 262", A(0.04, 0.3)), { d: "M176 140 L176 258", arrow: A(0.04, 0.4) }, { d: "M134 184 L108 201 L136 218", arrow: A(0, 0.4, 16), thin: true, label: "das kleine Zeichen" }]),
+    form("kaf-end", "ـك", "das Kaf am Wortende", [body("M214 262 L70 262 C54 262 46 250 48 234", A(0.04, 0.4)), { d: "M184 140 L184 258", arrow: A(0.04, 0.4) }, { d: "M134 184 L108 201 L136 218", arrow: A(0, 0.4, 16), thin: true, label: "das kleine Zeichen" }]),
+    form("kaf", "ك", "das Kaf allein", [body("M184 140 L184 244 C184 256 176 262 162 262 L72 262 C54 262 46 250 48 234", A(0.03, 0.35)), { d: "M134 184 L108 201 L136 218", arrow: A(0, 0.4, 16), thin: true, label: "das kleine Zeichen" }]),
   ]),
 };
 
