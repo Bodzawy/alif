@@ -163,6 +163,9 @@ export function stepSpokenTexts(step: A1Lesson["steps"][number]): string[] {
       return step.words.map((word) => word.arabic);
     case "quiz":
       return step.items.map((item) => item.spoken ?? item.arabic);
+    case "dialogue":
+      // The lines are spoken through the dialogue's own exercises; a quiz under the dialogue (QuizList) has listen buttons.
+      return (step.quiz ?? []).map((item) => item.spoken ?? item.arabic);
     case "cloze":
       return step.items.flatMap((item) => item.lines.map((line) => clozeLineText(line.parts)));
     case "order":
