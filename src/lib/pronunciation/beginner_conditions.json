@@ -14893,6 +14893,20 @@
       "message": "حاول مرة أخرى، نريد كلمة عال"
     }
   },
+  "مرتفع": {
+    "excellent": {
+      "conditions": [
+        "iqra_phonemes contains ['m|mm','r|rr|g|gg|x|xx','t|tt|T|TT|s','f|ff|v|vv','E|EE|<']"
+      ],
+      "message": "ممتاز 👏 نطقت كلمة مرتفع بشكل صحيح"
+    },
+    "needs_improvement": {
+      "conditions": [
+        "iqra_phonemes is not empty"
+      ],
+      "message": "حاول مرة أخرى، نريد كلمة مرتفع"
+    }
+  },
   "منخفض": {
     "excellent": {
       "conditions": [
@@ -15033,34 +15047,6 @@
       "message": "حاول مرة أخرى، نريد كلمة متعب"
     }
   },
-  "رفيع": {
-    "excellent": {
-      "conditions": [
-        "iqra_phonemes contains ['r|rr|g|gg|x|xx','f|ff|v|vv','E|EE|<']"
-      ],
-      "message": "ممتاز 👏 نطقت كلمة رفيع بشكل صحيح"
-    },
-    "needs_improvement": {
-      "conditions": [
-        "iqra_phonemes is not empty"
-      ],
-      "message": "حاول مرة أخرى، نريد كلمة رفيع"
-    }
-  },
-  "سمين": {
-    "excellent": {
-      "conditions": [
-        "iqra_phonemes contains ['s|ss|S|SS','m|mm','n|nn']"
-      ],
-      "message": "ممتاز 👏 نطقت كلمة سمين بشكل صحيح"
-    },
-    "needs_improvement": {
-      "conditions": [
-        "iqra_phonemes is not empty"
-      ],
-      "message": "حاول مرة أخرى، نريد كلمة سمين"
-    }
-  },
   "لطيف": {
     "excellent": {
       "conditions": [
@@ -15087,62 +15073,6 @@
         "iqra_phonemes is not empty"
       ],
       "message": "حاول مرة أخرى، نريد كلمة فظ"
-    }
-  },
-  "نشيط": {
-    "excellent": {
-      "conditions": [
-        "iqra_phonemes contains ['n|nn','$|$$','T|TT|t|tt']"
-      ],
-      "message": "ممتاز 👏 نطقت كلمة نشيط بشكل صحيح"
-    },
-    "needs_improvement": {
-      "conditions": [
-        "iqra_phonemes is not empty"
-      ],
-      "message": "حاول مرة أخرى، نريد كلمة نشيط"
-    }
-  },
-  "كسلان": {
-    "excellent": {
-      "conditions": [
-        "iqra_phonemes contains ['k|kk|q|qq','s|ss|S|SS','l|ll','n|nn']"
-      ],
-      "message": "ممتاز 👏 نطقت كلمة كسلان بشكل صحيح"
-    },
-    "needs_improvement": {
-      "conditions": [
-        "iqra_phonemes is not empty"
-      ],
-      "message": "حاول مرة أخرى، نريد كلمة كسلان"
-    }
-  },
-  "غني": {
-    "excellent": {
-      "conditions": [
-        "iqra_phonemes contains ['g|gg|x|xx|j','n|nn','y|yy']"
-      ],
-      "message": "ممتاز 👏 نطقت كلمة غني بشكل صحيح"
-    },
-    "needs_improvement": {
-      "conditions": [
-        "iqra_phonemes is not empty"
-      ],
-      "message": "حاول مرة أخرى، نريد كلمة غني"
-    }
-  },
-  "فقير": {
-    "excellent": {
-      "conditions": [
-        "iqra_phonemes contains ['f|ff|v|vv','q|qq|k|kk|<|<<','r|rr|g|gg|x|xx']"
-      ],
-      "message": "ممتاز 👏 نطقت كلمة فقير بشكل صحيح"
-    },
-    "needs_improvement": {
-      "conditions": [
-        "iqra_phonemes is not empty"
-      ],
-      "message": "حاول مرة أخرى، نريد كلمة فقير"
     }
   },
   "طويل": {
@@ -15243,48 +15173,6 @@
       "message": "حاول مرة أخرى، نريد كلمة جميل"
     }
   },
-  "قبيح": {
-    "excellent": {
-      "conditions": [
-        "iqra_phonemes contains ['q|qq|k|kk|<|<<','b|bb|p|pp','H|HH|h|hh']"
-      ],
-      "message": "ممتاز 👏 نطقت كلمة قبيح بشكل صحيح"
-    },
-    "needs_improvement": {
-      "conditions": [
-        "iqra_phonemes is not empty"
-      ],
-      "message": "حاول مرة أخرى، نريد كلمة قبيح"
-    }
-  },
-  "غال": {
-    "excellent": {
-      "conditions": [
-        "iqra_phonemes contains ['g|gg|x|xx|j','l|ll']"
-      ],
-      "message": "ممتاز 👏 نطقت كلمة غال بشكل صحيح"
-    },
-    "needs_improvement": {
-      "conditions": [
-        "iqra_phonemes is not empty"
-      ],
-      "message": "حاول مرة أخرى، نريد كلمة غال"
-    }
-  },
-  "رخيص": {
-    "excellent": {
-      "conditions": [
-        "iqra_phonemes contains ['r|rr|g|gg|x|xx','x|xx|H|HH|h|hh','S|SS|s|ss']"
-      ],
-      "message": "ممتاز 👏 نطقت كلمة رخيص بشكل صحيح"
-    },
-    "needs_improvement": {
-      "conditions": [
-        "iqra_phonemes is not empty"
-      ],
-      "message": "حاول مرة أخرى، نريد كلمة رخيص"
-    }
-  },
   "مزدحم": {
     "excellent": {
       "conditions": [
@@ -15311,258 +15199,6 @@
         "iqra_phonemes is not empty"
       ],
       "message": "حاول مرة أخرى، نريد كلمة هادئ"
-    }
-  },
-  "الشقة": {
-    "excellent": {
-      "conditions": [
-        "iqra_phonemes contains ['$|$$','q|qq|k|kk|<|<<']"
-      ],
-      "message": "ممتاز 👏 نطقت كلمة الشقة بشكل صحيح"
-    },
-    "needs_improvement": {
-      "conditions": [
-        "iqra_phonemes is not empty"
-      ],
-      "message": "حاول مرة أخرى، نريد كلمة الشقة"
-    }
-  },
-  "الحديقة": {
-    "excellent": {
-      "conditions": [
-        "iqra_phonemes contains ['l|ll','H|HH|h|hh','d|dd|D|DD','q|qq|k|kk|<|<<']"
-      ],
-      "message": "ممتاز 👏 نطقت كلمة الحديقة بشكل صحيح"
-    },
-    "needs_improvement": {
-      "conditions": [
-        "iqra_phonemes is not empty"
-      ],
-      "message": "حاول مرة أخرى، نريد كلمة الحديقة"
-    }
-  },
-  "الفصل": {
-    "excellent": {
-      "conditions": [
-        "iqra_phonemes contains ['l|ll','f|ff|v|vv','S|SS|s|ss']"
-      ],
-      "message": "ممتاز 👏 نطقت كلمة الفصل بشكل صحيح"
-    },
-    "needs_improvement": {
-      "conditions": [
-        "iqra_phonemes is not empty"
-      ],
-      "message": "حاول مرة أخرى، نريد كلمة الفصل"
-    }
-  },
-  "المكتبة": {
-    "excellent": {
-      "conditions": [
-        "iqra_phonemes contains ['l|ll','m|mm','k|kk|q|qq','t|tt|T|TT|s','b|bb|p|pp']"
-      ],
-      "message": "ممتاز 👏 نطقت كلمة المكتبة بشكل صحيح"
-    },
-    "needs_improvement": {
-      "conditions": [
-        "iqra_phonemes is not empty"
-      ],
-      "message": "حاول مرة أخرى، نريد كلمة المكتبة"
-    }
-  },
-  "السرير": {
-    "excellent": {
-      "conditions": [
-        "iqra_phonemes contains ['s|ss|S|SS','r|rr|g|gg|x|xx']"
-      ],
-      "message": "ممتاز 👏 نطقت كلمة السرير بشكل صحيح"
-    },
-    "needs_improvement": {
-      "conditions": [
-        "iqra_phonemes is not empty"
-      ],
-      "message": "حاول مرة أخرى، نريد كلمة السرير"
-    }
-  },
-  "الدولاب": {
-    "excellent": {
-      "conditions": [
-        "iqra_phonemes contains ['d|dd|D|DD','l|ll','b|bb|p|pp']"
-      ],
-      "message": "ممتاز 👏 نطقت كلمة الدولاب بشكل صحيح"
-    },
-    "needs_improvement": {
-      "conditions": [
-        "iqra_phonemes is not empty"
-      ],
-      "message": "حاول مرة أخرى، نريد كلمة الدولاب"
-    }
-  },
-  "الطاولة": {
-    "excellent": {
-      "conditions": [
-        "iqra_phonemes contains ['T|TT|t|tt','w|ww','l|ll']"
-      ],
-      "message": "ممتاز 👏 نطقت كلمة الطاولة بشكل صحيح"
-    },
-    "needs_improvement": {
-      "conditions": [
-        "iqra_phonemes is not empty"
-      ],
-      "message": "حاول مرة أخرى، نريد كلمة الطاولة"
-    }
-  },
-  "الكنبة": {
-    "excellent": {
-      "conditions": [
-        "iqra_phonemes contains ['l|ll','k|kk|q|qq','n|nn','b|bb|p|pp']"
-      ],
-      "message": "ممتاز 👏 نطقت كلمة الكنبة بشكل صحيح"
-    },
-    "needs_improvement": {
-      "conditions": [
-        "iqra_phonemes is not empty"
-      ],
-      "message": "حاول مرة أخرى، نريد كلمة الكنبة"
-    }
-  },
-  "السخان": {
-    "excellent": {
-      "conditions": [
-        "iqra_phonemes contains ['s|ss|S|SS','x|xx|H|HH|h|hh','n|nn']"
-      ],
-      "message": "ممتاز 👏 نطقت كلمة السخان بشكل صحيح"
-    },
-    "needs_improvement": {
-      "conditions": [
-        "iqra_phonemes is not empty"
-      ],
-      "message": "حاول مرة أخرى، نريد كلمة السخان"
-    }
-  },
-  "النافذة": {
-    "excellent": {
-      "conditions": [
-        "iqra_phonemes contains ['n|nn','f|ff|v|vv','*|z|Z']"
-      ],
-      "message": "ممتاز 👏 نطقت كلمة النافذة بشكل صحيح"
-    },
-    "needs_improvement": {
-      "conditions": [
-        "iqra_phonemes is not empty"
-      ],
-      "message": "حاول مرة أخرى، نريد كلمة النافذة"
-    }
-  },
-  "الباب": {
-    "excellent": {
-      "conditions": [
-        "iqra_phonemes contains ['l|ll','b|bb|p|pp']"
-      ],
-      "message": "ممتاز 👏 نطقت كلمة الباب بشكل صحيح"
-    },
-    "needs_improvement": {
-      "conditions": [
-        "iqra_phonemes is not empty"
-      ],
-      "message": "حاول مرة أخرى، نريد كلمة الباب"
-    }
-  },
-  "السور": {
-    "excellent": {
-      "conditions": [
-        "iqra_phonemes contains ['s|ss|S|SS','r|rr|g|gg|x|xx']"
-      ],
-      "message": "ممتاز 👏 نطقت كلمة السور بشكل صحيح"
-    },
-    "needs_improvement": {
-      "conditions": [
-        "iqra_phonemes is not empty"
-      ],
-      "message": "حاول مرة أخرى، نريد كلمة السور"
-    }
-  },
-  "المدينة": {
-    "excellent": {
-      "conditions": [
-        "iqra_phonemes contains ['l|ll','m|mm','d|dd|D|DD','n|nn']"
-      ],
-      "message": "ممتاز 👏 نطقت كلمة المدينة بشكل صحيح"
-    },
-    "needs_improvement": {
-      "conditions": [
-        "iqra_phonemes is not empty"
-      ],
-      "message": "حاول مرة أخرى، نريد كلمة المدينة"
-    }
-  },
-  "المنطقة": {
-    "excellent": {
-      "conditions": [
-        "iqra_phonemes contains ['l|ll','m|mm','n|nn','T|TT|t|tt','q|qq|k|kk|<|<<']"
-      ],
-      "message": "ممتاز 👏 نطقت كلمة المنطقة بشكل صحيح"
-    },
-    "needs_improvement": {
-      "conditions": [
-        "iqra_phonemes is not empty"
-      ],
-      "message": "حاول مرة أخرى، نريد كلمة المنطقة"
-    }
-  },
-  "الشارع": {
-    "excellent": {
-      "conditions": [
-        "iqra_phonemes contains ['$|$$','r|rr|g|gg|x|xx','E|EE|<']"
-      ],
-      "message": "ممتاز 👏 نطقت كلمة الشارع بشكل صحيح"
-    },
-    "needs_improvement": {
-      "conditions": [
-        "iqra_phonemes is not empty"
-      ],
-      "message": "حاول مرة أخرى، نريد كلمة الشارع"
-    }
-  },
-  "المتحف": {
-    "excellent": {
-      "conditions": [
-        "iqra_phonemes contains ['l|ll','m|mm','t|tt|T|TT|s','H|HH|h|hh','f|ff|v|vv']"
-      ],
-      "message": "ممتاز 👏 نطقت كلمة المتحف بشكل صحيح"
-    },
-    "needs_improvement": {
-      "conditions": [
-        "iqra_phonemes is not empty"
-      ],
-      "message": "حاول مرة أخرى، نريد كلمة المتحف"
-    }
-  },
-  "الجامعة": {
-    "excellent": {
-      "conditions": [
-        "iqra_phonemes contains ['l|ll','j|jj|g|gg','m|mm','E|EE|<']"
-      ],
-      "message": "ممتاز 👏 نطقت كلمة الجامعة بشكل صحيح"
-    },
-    "needs_improvement": {
-      "conditions": [
-        "iqra_phonemes is not empty"
-      ],
-      "message": "حاول مرة أخرى، نريد كلمة الجامعة"
-    }
-  },
-  "النهر": {
-    "excellent": {
-      "conditions": [
-        "iqra_phonemes contains ['n|nn','h|hh|H|HH','r|rr|g|gg|x|xx']"
-      ],
-      "message": "ممتاز 👏 نطقت كلمة النهر بشكل صحيح"
-    },
-    "needs_improvement": {
-      "conditions": [
-        "iqra_phonemes is not empty"
-      ],
-      "message": "حاول مرة أخرى، نريد كلمة النهر"
     }
   },
   "أنا اسمي علاء": {
@@ -16125,88 +15761,18 @@
       "message": "حاول مرة أخرى، نريد المصريون يحبون الضيوف والسياح ابنكم مارك"
     }
   },
-  "شقتي فيها ثلاث حجرات": {
+  "سيئ قبيح": {
     "excellent": {
       "conditions": [
-        "iqra_phonemes contains ['$|$$','q|qq|k|kk|<|<<','t|tt|T|TT|s','f|ff|v|vv','h|hh|H|HH','f|ff|v|vv|s|ss|t|tt','l|ll','H|HH|h|hh','j|jj|g|gg','r|rr|g|gg|x|xx']"
+        "iqra_phonemes contains ['s|ss|S|SS','y|yy','q|qq|k|kk|<|<<','b|bb|p|pp','H|HH|h|hh']"
       ],
-      "message": "ممتاز 👏 نطقت شقتي فيها ثلاث حجرات بشكل صحيح"
+      "message": "ممتاز 👏 نطقت سيئ قبيح بشكل صحيح"
     },
     "needs_improvement": {
       "conditions": [
         "iqra_phonemes is not empty"
       ],
-      "message": "حاول مرة أخرى، نريد شقتي فيها ثلاث حجرات"
-    }
-  },
-  "حجرة النوم واسعة ومضيئة": {
-    "excellent": {
-      "conditions": [
-        "iqra_phonemes contains ['H|HH|h|hh','j|jj|g|gg','r|rr|g|gg|x|xx','n|nn','w|ww','m|mm','s|ss|S|SS','E|EE|<','D|DD|d|dd|Z|ZZ']"
-      ],
-      "message": "ممتاز 👏 نطقت حجرة النوم واسعة ومضيئة بشكل صحيح"
-    },
-    "needs_improvement": {
-      "conditions": [
-        "iqra_phonemes is not empty"
-      ],
-      "message": "حاول مرة أخرى، نريد حجرة النوم واسعة ومضيئة"
-    }
-  },
-  "المطبخ فيه ثلاجة جديدة": {
-    "excellent": {
-      "conditions": [
-        "iqra_phonemes contains ['l|ll','m|mm','T|TT|t|tt','b|bb|p|pp','x|xx|H|HH|h|hh','f|ff|v|vv','h|hh|H|HH','f|ff|v|vv|s|ss|t|tt','j|jj|g|gg','d|dd|D|DD']"
-      ],
-      "message": "ممتاز 👏 نطقت المطبخ فيه ثلاجة جديدة بشكل صحيح"
-    },
-    "needs_improvement": {
-      "conditions": [
-        "iqra_phonemes is not empty"
-      ],
-      "message": "حاول مرة أخرى، نريد المطبخ فيه ثلاجة جديدة"
-    }
-  },
-  "حجرة المعيشة ليست كبيرة لكنها مريحة": {
-    "excellent": {
-      "conditions": [
-        "iqra_phonemes contains ['H|HH|h|hh','j|jj|g|gg','r|rr|g|gg|x|xx','l|ll','m|mm','E|EE|<','$|$$','y|yy','s|ss|S|SS','t|tt|T|TT|s','k|kk|q|qq','b|bb|p|pp','n|nn','h|hh|H|HH']"
-      ],
-      "message": "ممتاز 👏 نطقت حجرة المعيشة ليست كبيرة لكنها مريحة بشكل صحيح"
-    },
-    "needs_improvement": {
-      "conditions": [
-        "iqra_phonemes is not empty"
-      ],
-      "message": "حاول مرة أخرى، نريد حجرة المعيشة ليست كبيرة لكنها مريحة"
-    }
-  },
-  "الحمام نظيف وليس فيه نافذة": {
-    "excellent": {
-      "conditions": [
-        "iqra_phonemes contains ['l|ll','H|HH|h|hh','m|mm','n|nn','Z|ZZ|z|zz|*|**|D|DD','f|ff|v|vv','w|ww','y|yy','s|ss|S|SS','h|hh|H|HH','*|z|Z']"
-      ],
-      "message": "ممتاز 👏 نطقت الحمام نظيف وليس فيه نافذة بشكل صحيح"
-    },
-    "needs_improvement": {
-      "conditions": [
-        "iqra_phonemes is not empty"
-      ],
-      "message": "حاول مرة أخرى، نريد الحمام نظيف وليس فيه نافذة"
-    }
-  },
-  "الحديقة بها أشجار عالية وزهور ملونة": {
-    "excellent": {
-      "conditions": [
-        "iqra_phonemes contains ['l|ll','H|HH|h|hh','d|dd|D|DD','q|qq|k|kk|<|<<','b|bb|p|pp','h|hh|H|HH','$|$$','j|jj|g|gg','r|rr|g|gg|x|xx','E|EE|<','y|yy','w|ww','z|zz|Z|ZZ','m|mm','n|nn']"
-      ],
-      "message": "ممتاز 👏 نطقت الحديقة بها أشجار عالية وزهور ملونة بشكل صحيح"
-    },
-    "needs_improvement": {
-      "conditions": [
-        "iqra_phonemes is not empty"
-      ],
-      "message": "حاول مرة أخرى، نريد الحديقة بها أشجار عالية وزهور ملونة"
+      "message": "حاول مرة أخرى، نريد سيئ قبيح"
     }
   }
 }

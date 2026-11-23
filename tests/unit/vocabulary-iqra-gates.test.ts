@@ -1020,12 +1020,6 @@ const EXPECTED_TOKENS: Record<string, string[]> = {
   "الجو معتدل في الخريف": ["l","j","w|ww","m","E","t","d","f","x","r|rr"],
   "أنا سعيد بدراسة اللغة العربية هنا": ["n","s","E","d","b","r|rr","l|ll","g","y|yy","h"],
   "المصريون يحبون الضيوف والسياح ابنكم مارك": ["l","m","S","r|rr","y|yy","n","H","b|bb","D|DD","f","w","s|ss"],
-  "شقتي فيها ثلاث حجرات": ["$","q|qq","t","f","l","H","j","r|rr"],
-  "حجرة النوم واسعة ومضيئة": ["H","j","r|rr","n|nn","w","m","s","E","D"],
-  "المطبخ فيه ثلاجة جديدة": ["l|ll","m","T","b","x","f","j","d"],
-  "حجرة المعيشة ليست كبيرة لكنها مريحة": ["H","j","r|rr","l","m","E","$","y","s","k","b","n|nn"],
-  "الحمام نظيف وليس فيه نافذة": ["l","H","m|mm","n","Z","f","w","y","s"],
-  "الحديقة بها أشجار عالية وزهور ملونة": ["l","H","d","q","b","h","$","j","r|rr","E","y","w|ww","z","m","n"],
   "جديد": ["j","d"],
   "قديم": ["q","d","m"],
   "عال": ["E","l"],
@@ -1039,14 +1033,8 @@ const EXPECTED_TOKENS: Record<string, string[]> = {
   "قذر": ["q","r|rr"],
   "مريح": ["m","r|rr","H"],
   "متعب": ["m","t","E","b"],
-  "رفيع": ["r|rr","f","E"],
-  "سمين": ["s","m","n"],
   "لطيف": ["l","T","f"],
   "فظ": ["f","Z|ZZ"],
-  "نشيط": ["n","$","T"],
-  "كسلان": ["k","s","l","n"],
-  "غني": ["g","n"],
-  "فقير": ["f","q","r|rr"],
   "طويل": ["T","w","l"],
   "قصير": ["q","S","r|rr"],
   "كثير": ["k","r|rr"],
@@ -1054,29 +1042,10 @@ const EXPECTED_TOKENS: Record<string, string[]> = {
   "كبير": ["k","b","r|rr"],
   "صغير": ["S","g","r|rr"],
   "جميل": ["j","m","l"],
-  "قبيح": ["q","b","H"],
-  "غال": ["g","l"],
-  "رخيص": ["r|rr","x","S"],
   "مزدحم": ["m","z","d","H"],
   "هادئ": ["h","d"],
-  "الشقة": ["$|$$","q|qq"],
-  "الحديقة": ["l","H","d","q"],
-  "الفصل": ["l","f","S"],
-  "المكتبة": ["l","m","k","t","b"],
-  "السرير": ["s|ss","r|rr"],
-  "الدولاب": ["d|dd","l","b"],
-  "الطاولة": ["T|TT","w","l"],
-  "الكنبة": ["l","k","n","b"],
-  "السخان": ["s|ss","x|xx","n"],
-  "النافذة": ["n|nn","f"],
-  "الباب": ["l","b"],
-  "السور": ["s|ss","r|rr"],
-  "المدينة": ["l","m","d","n"],
-  "المنطقة": ["l","m","n","T","q"],
-  "الشارع": ["$|$$","r|rr","E"],
-  "المتحف": ["l","m","t","H","f"],
-  "الجامعة": ["l","j","m","E"],
-  "النهر": ["n|nn","h","r|rr"],
+  "سيئ قبيح": ["s","y|yy","q","b","H"],
+  "مرتفع": ["m","r|rr","t","f","E"],
 };
 
 // IQRA's token inventory (sws_arabic.txt of the IqraEval phoneme model).
@@ -1141,8 +1110,8 @@ function spoken(tokens: string[], pick: (alternatives: string[]) => string = (al
 // Lektion 15 and 16 (Unit 8): 81 evaluated items – prepositions, places, directions, dialogues, texts.
 // Lektion 17 and 18 (Unit 9): 69 evaluated items – Basim's day, verb forms, texts, dialogues.
 // Lektion 19 and 20 (Unit 10): 72 evaluated items – family, jobs, weather, seasons, months, texts, dialogues.
-const WORD_COUNT = 365 + 123 + 65 + 49 + 115 + 134 + 81 + 69 + 72 + 104;
-// Lektion 1 of A2 (Unit 1 · شَقَّتِي الْجَدِيدَةُ): 104 evaluated items – the adjective, room, furniture and place words, Alaa's text, the two dialogues, Mark's letter, the flat sentences.
+const WORD_COUNT = 365 + 123 + 65 + 49 + 115 + 134 + 81 + 69 + 72 + 80;
+// Lektion 1 of A2 (Unit 1 · شَقَّتِي الْجَدِيدَةُ): 80 evaluated items – the book's picture pairs and adjective tables, Alaa's text, the two dialogues and Mark's letter.
 
 // A word that is also the name of a letter (Lektion 5: عَيْن "Auge" = the letter name عين) is
 // evaluated by the letter's own rule (same sounds: E, a, y) – it has no vocabulary rule.

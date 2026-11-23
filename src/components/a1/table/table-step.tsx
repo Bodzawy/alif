@@ -97,6 +97,12 @@ export function TableStep({ tables, quiz, progressKey }: { tables: TableBlock[];
   const [answers, setAnswers] = useState<Record<string, number>>({});
   const right = quiz.filter((q) => answers[q.id] === q.answer).length;
   const done = right === quiz.length;
+  const [read, setRead] = useState(false);
+
+  function understood() {
+    setRead(true);
+    markLessonCompleted(progressKey);
+  }
 
   function answer(q: TableQuiz, option: number) {
     const next = { ...answers, [q.id]: option };
@@ -186,6 +192,20 @@ export function TableStep({ tables, quiz, progressKey }: { tables: TableBlock[];
         })}
       </div>
 
+      {quiz.length === 0 ? (
+        <section className="mt-8 flex flex-wrap items-center justify-between gap-3" data-testid="table-read">
+          <p className="text-sm text-muted-foreground">Lies die Tabellen und hör die Beispiele an. Wenn du sie verstanden hast, tippe auf „Verstanden“.</p>
+          {hydrated && (read || completedBefore) ? (
+            <p className="inline-flex items-center gap-1 rounded-full bg-success px-2.5 py-1 text-xs font-semibold text-success-foreground shadow" data-testid="step-completed">
+              <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> Geschafft
+            </p>
+          ) : (
+            <button type="button" onClick={understood} data-testid="table-understood" className="min-h-12 rounded-2xl border bg-card px-5 font-semibold transition focus-ring hover:bg-muted">
+              Verstanden
+            </button>
+          )}
+        </section>
+      ) : (
       <section className="mt-10 rounded-3xl border bg-card p-4 shadow-card sm:p-6" aria-labelledby="table-quiz" data-testid="table-quiz">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <h2 id="table-quiz" className="text-lg font-bold">
@@ -236,6 +256,7 @@ export function TableStep({ tables, quiz, progressKey }: { tables: TableBlock[];
           </p>
         )}
       </section>
+      )}
     </div>
   );
 }

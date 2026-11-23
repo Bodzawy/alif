@@ -16,6 +16,9 @@ import { GuidedPhrases, PhrasesStep } from "@/components/a1/phrases/phrases-step
 import { ClozeStep } from "@/components/a1/cloze/cloze-step";
 import { CompareStep } from "@/components/a1/compare/compare-step";
 import { OrderStep } from "@/components/a1/order/order-step";
+import { ReadingStep } from "@/components/a1/reading/reading-step";
+import { writingContext } from "@/components/a1/reading/writing-check";
+import { SentencesStep } from "@/components/a1/sentences/sentences-step";
 import { QuizStep } from "@/components/a1/quiz/quiz-step";
 import { SpellStep } from "@/components/a1/spell/spell-step";
 import { MatchStep } from "@/components/a1/match/match-step";
@@ -73,6 +76,8 @@ export default async function A1StepPage({ params }: { params: Promise<Params> }
   const progressKey = a1StepKey(unit, lesson, step.slug);
   const previous = lesson.steps[index - 1];
   const next = lesson.steps[index + 1];
+  /** Words and adjectives of the lesson: what the worksheet pages check the learner's writing against. */
+  const writing = step.kind === "worksheet" || (step.kind === "phrases" && step.reading) ? writingContext(lesson) : { lexicon: [], adjectives: [] };
 
   return (
     <div
@@ -82,7 +87,7 @@ export default async function A1StepPage({ params }: { params: Promise<Params> }
           ? "max-w-3xl"
           : step.kind === "table" && hasWideTable(step.tables)
             ? "max-w-5xl"
-          : step.kind === "phrases" || step.kind === "positions" || step.kind === "compare" || step.kind === "table" || step.kind === "quiz" || step.kind === "cloze" || step.kind === "order"
+          : step.kind === "phrases" || step.kind === "positions" || step.kind === "compare" || step.kind === "table" || step.kind === "quiz" || step.kind === "cloze" || step.kind === "order" || step.kind === "sentences" || step.kind === "worksheet"
             ? "max-w-4xl"
             : step.kind === "forms" || step.kind === "gaps"
               ? "max-w-3xl"
@@ -154,7 +159,7 @@ export default async function A1StepPage({ params }: { params: Promise<Params> }
       ) : step.kind === "writing" ? (
         <WritingStep letterSet={step.letterSet} progressKey={progressKey} nextHref={next ? a1StepHref(unit, lesson, next.slug) : undefined} />
       ) : step.kind === "dialogue" ? (
-        <DialogueStep dialogue={step.dialogue} mode={step.mode} progressKey={progressKey} />
+        <DialogueStep dialogue={step.dialogue} mode={step.mode} progressKey={progressKey} quiz={step.quiz} />
       ) : step.kind === "phrases" ? (
         step.guided ? (
           <GuidedPhrases groups={step.groups} progressKey={progressKey} />
@@ -178,9 +183,13 @@ export default async function A1StepPage({ params }: { params: Promise<Params> }
       ) : step.kind === "quiz" ? (
         <QuizStep items={step.items} progressKey={progressKey} />
       ) : step.kind === "cloze" ? (
-        <ClozeStep items={step.items} progressKey={progressKey} />
+        <ClozeStep items={step.items} bank={step.bank} progressKey={progressKey} />
       ) : step.kind === "order" ? (
         <OrderStep order={step.order} progressKey={progressKey} />
+      ) : step.kind === "worksheet" ? (
+        <ReadingStep parts={step.parts} {...writing} progressKey={progressKey} />
+      ) : step.kind === "sentences" ? (
+        <SentencesStep items={step.items} progressKey={progressKey} />
       ) : (
         <GapsStep gaps={step.gaps} availableAudio={availableAudio(step.gaps.audioBase)} progressKey={progressKey} />
       )}

@@ -57,7 +57,7 @@ const NOTE = {
 
 const noop = () => () => undefined;
 
-export function DialogueSpeaking({ dialogue, mode, progressKey }: { dialogue: Dialogue; mode: Mode; progressKey: string }) {
+export function DialogueSpeaking({ dialogue, mode, progressKey, translation = true }: { dialogue: Dialogue; mode: Mode; progressKey: string; /** false: no German translation under the lines. */ translation?: boolean }) {
   const hydrated = useSyncExternalStore(noop, () => true, () => false);
   const completed = useSyncExternalStore(subscribeProgress, () => Boolean(getLessonProgress(progressKey).completedAt), () => false);
   const stored = useSyncExternalStore(subscribeProgress, () => getLessonProgress(progressKey), () => null);
@@ -66,7 +66,7 @@ export function DialogueSpeaking({ dialogue, mode, progressKey }: { dialogue: Di
   const [role, setRole] = useState<string | null>(null);
   const [note, setNote] = useState<string | null>(null);
   const [muted, setMuted] = useState(false);
-  const [showGerman, setShowGerman] = useState(true);
+  const [showGerman, setShowGerman] = useState(translation);
   const [showTransliteration, setShowTransliteration] = useState(true);
   const [feedback, setFeedback] = useState<{ id: string; feedback: StudentFeedback } | null>(null);
   /** Role-play: the partner line being spoken right now. */
@@ -292,7 +292,7 @@ export function DialogueSpeaking({ dialogue, mode, progressKey }: { dialogue: Di
           <span />
         )}
         <div className="flex flex-wrap items-center gap-2">
-          <DialogueToggles showGerman={showGerman} showTransliteration={showTransliteration} onGerman={() => setShowGerman((v) => !v)} onTransliteration={() => setShowTransliteration((v) => !v)} />
+          <DialogueToggles withGerman={translation} showGerman={showGerman} showTransliteration={showTransliteration} onGerman={() => setShowGerman((v) => !v)} onTransliteration={() => setShowTransliteration((v) => !v)} />
           <Button variant="secondary" onClick={toggleMute} aria-pressed={muted} aria-label={muted ? t("Ton einschalten") : t("Ton ausschalten")} className="min-h-12 min-w-12" data-testid="mute-toggle">
             {muted ? <VolumeX className="h-5 w-5" aria-hidden /> : <Volume2 className="h-5 w-5" aria-hidden />}
           </Button>

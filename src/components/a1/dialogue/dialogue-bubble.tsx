@@ -137,7 +137,10 @@ export function DialogueToggles({
   showTransliteration,
   onGerman,
   onTransliteration,
+  withGerman = true,
 }: {
+  /** false: the step has no translation at all, so there is no button for it. */
+  withGerman?: boolean;
   showGerman: boolean;
   showTransliteration: boolean;
   onGerman: () => void;
@@ -148,9 +151,11 @@ export function DialogueToggles({
     cn("min-h-11 rounded-full border px-4 text-sm font-medium transition focus-ring", on ? "border-primary bg-primary text-primary-foreground" : "bg-card text-muted-foreground hover:bg-muted");
   return (
     <div className="flex flex-wrap gap-2" role="group" aria-label={t("Anzeige")}>
-      <button type="button" aria-pressed={showGerman} onClick={onGerman} className={chip(showGerman)} data-testid="toggle-german">
-        {showGerman ? t("Übersetzung ausblenden") : t("Übersetzung anzeigen")}
-      </button>
+      {withGerman && (
+        <button type="button" aria-pressed={showGerman} onClick={onGerman} className={chip(showGerman)} data-testid="toggle-german">
+          {showGerman ? t("Übersetzung ausblenden") : t("Übersetzung anzeigen")}
+        </button>
+      )}
       <button type="button" aria-pressed={showTransliteration} onClick={onTransliteration} className={chip(showTransliteration)} data-testid="toggle-translit">
         {showTransliteration ? t("Umschrift ausblenden") : t("Umschrift anzeigen")}
       </button>

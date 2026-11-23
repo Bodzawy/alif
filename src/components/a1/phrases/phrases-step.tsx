@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useSyncExternalStore } from "react";
+import { useEffect, useMemo, useRef, useSyncExternalStore } from "react";
 import Image from "next/image";
 import { CheckCircle2 } from "lucide-react";
 
@@ -80,6 +80,9 @@ export function PhrasesStep({ groups, progressKey, guided }: { groups: PhraseGro
               {t(group.title)}
             </h2>
             {group.image && <Image src={group.image.src} alt={t(group.image.alt)} width={1200} height={800} unoptimized className="mx-auto mb-4 h-auto w-full max-w-xl rounded-3xl border bg-card" data-testid={`phrase-group-image-${group.id}`} />}
+            {group.flow && guided ? (
+              <FlowText group={group} guided={guided} />
+            ) : (
             <ul className="grid gap-4 sm:grid-cols-2">
               {group.items.map((item) => {
                 const card = (
@@ -148,6 +151,7 @@ export function PhrasesStep({ groups, progressKey, guided }: { groups: PhraseGro
                 );
               })}
             </ul>
+            )}
             {group.note && (
               <p className="mt-3 rounded-2xl border border-primary/15 bg-primary-soft px-4 py-3 text-sm" data-testid={`phrase-note-${group.id}`}>
                 <MixedText text={t(group.note)} />
@@ -158,4 +162,67 @@ export function PhrasesStep({ groups, progressKey, guided }: { groups: PhraseGro
       </div>
     </div>
   );
+}
+
+/**
+ * A running text (group.flow) in guided mode: all sentences as ONE passage. The sentence whose turn it is
+ * is larger and coloured (and scrolled into view); the ones already said turn green. Below it the
+ * transliteration and the German of that sentence.
+ */
+function FlowText({ group, guided }: { group: PhraseGroup; guided: GuidedView }) {
+  const t = useT();
+  const spans = useRef(new Map<string, HTMLSpanElement>());
+  const firstOpen = group.items.find((item) => guided.mark(item.exercise.id) !== "done") ?? group.items[0]!;
+  const current = group.items.find((item) => item.exercise.id === guided.active);
+  const shown = current ?? null;
+
+  useEffect(() => {
+    if (!guided.active) return;
+    const el = spans.current.get(guided.active);
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    if (r.top >= 80 && r.bottom <= window.innerHeight - 120) return;
+    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    el.scrollIntoView({ block: "center", behavior: reduce ? "auto" : "smooth" });
+  }, [guided.active]);
+
+  const card = (
+    <div className="rounded-3xl border bg-card p-5 pb-16 pt-14 shadow-card sm:p-8 sm:pb-16 sm:pt-14" data-testid={`flow-${group.id}`}>
+      <p lang="ar" dir="rtl" className="text-right font-arabic text-2xl font-bold leading-[2.4] sm:text-3xl sm:leading-[2.4]">
+        {group.items.map((item) => {
+          const id = item.exercise.id;
+          const mark = guided.mark(id);
+          const isActive = id === guided.active;
+          return (
+            <span key={item.id}>
+              <span
+                ref={(el) => {
+                  if (el) spans.current.set(id, el);
+                  else spans.current.delete(id);
+                }}
+                data-testid={`flow-${item.id}`}
+                data-state={isActive ? "active" : (mark ?? "waiting")}
+                className={cn(
+                  "rounded-xl px-1 transition-[font-size,color,background-color] duration-300",
+                  isActive && "bg-primary-soft text-[1.35em] text-primary",
+                  !isActive && mark === "done" && "text-success",
+                  !isActive && mark === "practice" && "text-accent-foreground",
+                  !isActive && !mark && (guided.active ? "text-foreground/70" : "text-foreground")
+                )}
+              >
+                {item.arabic}
+              </span>{" "}
+            </span>
+          );
+        })}
+      </p>
+      {shown && (
+        <div className="mt-4 border-t pt-3" data-testid="flow-current">
+          <p className="text-sm font-medium italic text-muted-foreground">{shown.transliteration}</p>
+          <p className="font-semibold">{t(shown.german)}</p>
+        </div>
+      )}
+    </div>
+  );
+  return <div>{guided.frame((guided.active ?? firstOpen.exercise.id), card, true)}</div>;
 }

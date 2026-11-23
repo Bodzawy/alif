@@ -14,8 +14,11 @@ import { DialogueStep } from "@/components/a1/dialogue/dialogue-step";
 import { LetterFindStep } from "@/components/a1/letter-find/letter-find-step";
 import { GuidedPhrases, PhrasesStep } from "@/components/a1/phrases/phrases-step";
 import { ClozeStep } from "@/components/a1/cloze/cloze-step";
+import { ReadingStep } from "@/components/a1/reading/reading-step";
+import { writingContext } from "@/components/a1/reading/writing-check";
 import { CompareStep } from "@/components/a1/compare/compare-step";
 import { OrderStep } from "@/components/a1/order/order-step";
+import { SentencesStep } from "@/components/a1/sentences/sentences-step";
 import { QuizStep } from "@/components/a1/quiz/quiz-step";
 import { SpellStep } from "@/components/a1/spell/spell-step";
 import { MatchStep } from "@/components/a1/match/match-step";
@@ -72,6 +75,8 @@ export default async function A2StepPage({ params }: { params: Promise<Params> }
   const progressKey = a2StepKey(unit, lesson, step.slug);
   const previous = lesson.steps[index - 1];
   const next = lesson.steps[index + 1];
+  /** Words and adjectives of the lesson: what the worksheet pages check the learner's writing against. */
+  const writing = step.kind === "worksheet" || (step.kind === "phrases" && step.reading) ? writingContext(lesson) : { lexicon: [], adjectives: [] };
 
   return (
     <div
@@ -79,7 +84,7 @@ export default async function A2StepPage({ params }: { params: Promise<Params> }
         "container py-6 sm:py-10",
         step.kind === "dialogue" || step.kind === "letter-find" || step.kind === "word-pick" || step.kind === "spell"
           ? "max-w-3xl"
-          : step.kind === "phrases" || step.kind === "positions" || step.kind === "compare" || step.kind === "table" || step.kind === "quiz" || step.kind === "cloze" || step.kind === "order"
+          : step.kind === "phrases" || step.kind === "positions" || step.kind === "compare" || step.kind === "table" || step.kind === "quiz" || step.kind === "cloze" || step.kind === "order" || step.kind === "sentences" || step.kind === "worksheet"
             ? "max-w-4xl"
             : step.kind === "forms" || step.kind === "gaps"
               ? "max-w-3xl"
@@ -107,23 +112,29 @@ export default async function A2StepPage({ params }: { params: Promise<Params> }
         <p className="mt-1 inline-flex items-center gap-2 rounded-full bg-primary-soft px-4 py-1 font-semibold text-primary" data-testid="entry-title">
           <span lang="ar" dir="rtl" className="font-arabic text-2xl leading-[1.6]">{lesson.label}</span> <T>{lesson.labelGerman}</T>
         </p>
-        <ol className="mt-4 flex flex-wrap justify-center gap-2" aria-label="Schritte">
+        {/* One quiet rail of numbers (21 titled pills made a wall); the title of the open step stands under it. */}
+        <ol className="mt-4 flex flex-wrap justify-center gap-1.5" aria-label="Schritte">
           {lesson.steps.map((item, i) => (
             <li key={item.slug}>
               <Link
                 href={a2StepHref(unit, lesson, item.slug)}
                 aria-current={i === index ? "step" : undefined}
+                aria-label={`${i + 1}: ${item.title}`}
+                title={item.title}
                 data-testid={`step-tab-${item.slug}`}
                 className={cn(
-                  "inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm font-medium transition focus-ring",
-                  i === index ? "border-primary bg-primary text-primary-foreground" : "bg-card text-muted-foreground hover:bg-muted hover:text-foreground"
+                  "flex h-9 min-w-9 items-center justify-center rounded-full border text-sm font-bold transition focus-ring",
+                  i === index ? "border-primary bg-primary px-3.5 text-primary-foreground" : "bg-card text-muted-foreground hover:border-primary/50 hover:text-foreground"
                 )}
               >
-                <span className="font-bold">{i + 1}</span> <TPillTitle title={item.title} />
+                {i + 1}
               </Link>
             </li>
           ))}
         </ol>
+        <p className="mt-3 text-sm font-semibold text-foreground/80" data-testid="step-current-title">
+          <TPillTitle title={step.title} />
+        </p>
       </header>
 
       {step.instruction && (
@@ -151,9 +162,11 @@ export default async function A2StepPage({ params }: { params: Promise<Params> }
       ) : step.kind === "writing" ? (
         <WritingStep letterSet={step.letterSet} progressKey={progressKey} nextHref={next ? a2StepHref(unit, lesson, next.slug) : undefined} />
       ) : step.kind === "dialogue" ? (
-        <DialogueStep dialogue={step.dialogue} mode={step.mode} progressKey={progressKey} />
+        <DialogueStep dialogue={step.dialogue} mode={step.mode} progressKey={progressKey} quiz={step.quiz} />
       ) : step.kind === "phrases" ? (
-        step.guided ? (
+        step.reading ? (
+          <ReadingStep group={step.groups[0]!} parts={step.reading} {...writing} progressKey={progressKey} />
+        ) : step.guided ? (
           <GuidedPhrases groups={step.groups} progressKey={progressKey} />
         ) : (
           <PhrasesStep groups={step.groups} progressKey={progressKey} />
@@ -175,9 +188,13 @@ export default async function A2StepPage({ params }: { params: Promise<Params> }
       ) : step.kind === "quiz" ? (
         <QuizStep items={step.items} progressKey={progressKey} />
       ) : step.kind === "cloze" ? (
-        <ClozeStep items={step.items} progressKey={progressKey} />
+        <ClozeStep items={step.items} bank={step.bank} progressKey={progressKey} />
       ) : step.kind === "order" ? (
         <OrderStep order={step.order} progressKey={progressKey} />
+      ) : step.kind === "worksheet" ? (
+        <ReadingStep parts={step.parts} {...writing} progressKey={progressKey} />
+      ) : step.kind === "sentences" ? (
+        <SentencesStep items={step.items} progressKey={progressKey} />
       ) : (
         <GapsStep gaps={step.gaps} availableAudio={availableAudio(step.gaps.audioBase)} progressKey={progressKey} />
       )}

@@ -20,8 +20,13 @@ import { useT } from "@/i18n/use-locale";
 // wrapped in a block frame and its listen / record buttons are hidden. Without
 // it the page is exactly the button page.
 export type GuidedView = {
-  frame: (id: string, card: ReactNode) => ReactNode;
+  /** `inline`: a card that holds several blocks (a running text) – no blur, no zoom; only the signs (microphone, arrows, caption). */
+  frame: (id: string, card: ReactNode, inline?: boolean) => ReactNode;
   passed: (id: string) => boolean;
+  /** The block whose turn it is (null before the start and when finished). */
+  active: string | null;
+  /** "done" / "practice" (skipped) once a block was answered. */
+  mark: (id: string) => "done" | "practice" | undefined;
 };
 
 /** A row of "Wörter": the sound and its words – or (step "words") a titled group of picture words. */

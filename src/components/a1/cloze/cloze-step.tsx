@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useState, useSyncExternalStore } from "react";
+import { Fragment, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import { CheckCircle2, SearchCheck } from "lucide-react";
 
@@ -26,11 +26,15 @@ const isGap = (part: ClozePart): part is Gap => typeof part !== "string";
 
 
 
-export function ClozeStep({ items, progressKey }: { items: ClozeItem[]; progressKey: string }) {
+export function ClozeStep({ items, bank, progressKey }: { items: ClozeItem[]; bank?: string[]; progressKey: string }) {
   const hydrated = useSyncExternalStore(noop, () => true, () => false);
   const stored = useSyncExternalStore(subscribeProgress, () => getLessonProgress(progressKey), () => null);
   const [filled, setFilled] = useState<Record<string, string>>({});
-  const [active, setActive] = useState<string | null>(null);
+  const gapKeys = items.flatMap((item) => item.lines.flatMap((line) => line.parts.filter(isGap)).map((_, n) => `${item.id}:${n}`));
+  // With a word bank the first empty gap is taken at once: its question lights up.
+  const [active, setActive] = useState<string | null>(bank ? (gapKeys[0] ?? null) : null);
+  const currentRef = useRef<HTMLLIElement | null>(null);
+  const bankRef = useRef<HTMLDivElement | null>(null);
   const [checked, setChecked] = useState<Record<string, boolean>>({});
   const gapsOf = (item: ClozeItem) => item.lines.flatMap((line) => line.parts.filter(isGap));
   const isRight = (item: ClozeItem) => gapsOf(item).every((gap, n) => gap.accept.includes(filled[`${item.id}:${n}`] ?? ""));
@@ -38,7 +42,14 @@ export function ClozeStep({ items, progressKey }: { items: ClozeItem[]; progress
   const doneCount = items.filter(passed).length;
 
   function choose(key: string, option: string) {
-    setFilled((current) => ({ ...current, [key]: option }));
+    const next = { ...filled, [key]: option };
+    setFilled(next);
+    // Bank mode: on to the next empty gap.
+    if (bank) {
+      const start = gapKeys.indexOf(key);
+      const following = [...gapKeys.slice(start + 1), ...gapKeys.slice(0, start)].find((k) => !next[k]);
+      setActive(following ?? null);
+    }
     const itemId = key.split(":")[0]!;
     setChecked((current) => Object.fromEntries(Object.entries(current).filter(([id]) => id !== itemId)));
   }
@@ -52,10 +63,22 @@ export function ClozeStep({ items, progressKey }: { items: ClozeItem[]; progress
     }
   }
 
+  const currentItem = active?.split(":")[0] ?? null;
+  useEffect(() => {
+    const el = currentRef.current;
+    if (!bank || !el) return;
+    // The sticky word bank covers the top of the page: keep the current question below it.
+    const covered = (bankRef.current?.getBoundingClientRect().bottom ?? 72) + 12;
+    const r = el.getBoundingClientRect();
+    if (r.top >= covered && r.bottom <= window.innerHeight - 24) return;
+    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: window.scrollY + r.top - covered, behavior: reduce ? "auto" : "smooth" });
+  }, [bank, currentItem]);
+
   return (
     <div data-testid="cloze-step">
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <p className="text-sm text-muted-foreground">Tippe auf eine Lücke und dann auf das passende Wort.</p>
+        <p className="text-sm text-muted-foreground">{bank ? "Die leuchtende Aufgabe ist dran: tippe in der Box oben das passende Wort an." : "Tippe auf eine Lücke und dann auf das passende Wort."}</p>
         <p className="text-sm font-semibold text-muted-foreground" aria-live="polite" data-testid="cloze-count">
           {hydrated ? `${doneCount} von ${items.length} richtig` : `${items.length} Aufgaben`}
         </p>
@@ -64,6 +87,25 @@ export function ClozeStep({ items, progressKey }: { items: ClozeItem[]; progress
         <p className="mb-4 inline-flex items-center gap-1 rounded-full bg-success px-2.5 py-1 text-xs font-semibold text-success-foreground shadow" data-testid="step-completed">
           <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> Geschafft
         </p>
+      )}
+      {bank && (
+        <div ref={bankRef} className="sticky top-[4.5rem] z-20 mb-5 rounded-3xl border bg-card/95 p-3 shadow-lift backdrop-blur" data-testid="cloze-bank">
+          <p className="mb-2 text-xs font-bold text-muted-foreground">Wörter zur Auswahl</p>
+          <div dir="rtl" className="flex max-h-[38vh] flex-wrap gap-1.5 overflow-y-auto sm:max-h-none sm:overflow-visible">
+            {bank.map((word) => (
+              <button
+                key={word}
+                type="button"
+                disabled={!active}
+                onClick={() => active && choose(active, word)}
+                data-testid={`cloze-bank-${word}`}
+                className="min-h-9 rounded-lg border bg-card px-2.5 font-arabic text-lg font-bold leading-tight transition focus-ring enabled:hover:border-primary enabled:hover:bg-primary-soft disabled:opacity-60"
+              >
+                <span lang="ar">{word}</span>
+              </button>
+            ))}
+          </div>
+        </div>
       )}
       <ol className="flex flex-col gap-4">
         {items.map((item, i) => {
@@ -75,7 +117,16 @@ export function ClozeStep({ items, progressKey }: { items: ClozeItem[]; progress
           const complete = gaps.every((_, n) => filled[`${item.id}:${n}`]);
           const activeGap = active?.startsWith(`${item.id}:`) ? gaps[Number(active.split(":")[1])] : undefined;
           return (
-            <li key={item.id} className={cn("rounded-3xl border bg-card p-4 shadow-card sm:p-5", verdict === "right" && "border-success/50", verdict === "wrong" && "border-destructive/50")} data-testid={`cloze-${item.id}`} data-verdict={verdict ?? ""}>
+            <li
+              key={item.id}
+              ref={bank && currentItem === item.id ? currentRef : undefined}
+              className={cn(
+                "rounded-3xl border bg-card p-4 shadow-card transition-[transform,box-shadow,opacity] duration-300 sm:p-5",
+                verdict === "right" && "border-success/50",
+                verdict === "wrong" && "border-destructive/50",
+                bank && currentItem === item.id && "z-10 border-primary shadow-lift ring-2 ring-primary motion-safe:scale-[1.03]",
+                bank && currentItem !== null && currentItem !== item.id && verdict !== "right" && "opacity-75"
+              )} data-testid={`cloze-${item.id}`} data-verdict={verdict ?? ""}>
               <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
                 <span className="text-sm font-bold text-muted-foreground">{i + 1}</span>
                 {item.image && <Image src={item.image.src} alt={item.image.alt} width={200} height={150} unoptimized className="mx-auto rounded-2xl border bg-card sm:mx-0" data-testid={`cloze-image-${item.id}`} />}
@@ -118,7 +169,7 @@ export function ClozeStep({ items, progressKey }: { items: ClozeItem[]; progress
                       </div>
                     );
                   })}
-                  {activeGap && (
+                  {activeGap && !bank && (
                     <div dir="rtl" className="mt-3 flex flex-wrap gap-2 rounded-2xl bg-muted/50 p-2" data-testid={`cloze-options-${item.id}`}>
                       {activeGap.options.map((option) => (
                         <button

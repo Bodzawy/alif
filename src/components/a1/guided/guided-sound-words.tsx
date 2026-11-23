@@ -260,7 +260,7 @@ export function GuidedSteps({ blocks, progressKey, intro, partners, arrows = "pi
   const caption =
     stage === "play" || stage === "focus" ? (flow.state.retry ? CAPTION.retry : CAPTION.play) : stage === "listen" ? CAPTION.listen : stage === "check" ? CAPTION.check : stage === "right" ? CAPTION.right : "";
 
-  const frame = (id: string, card: ReactNode) => {
+  const frame = (id: string, card: ReactNode, inline = false) => {
     const mark = marks[id];
     const isActive = id === active;
     // Before the start (and on the start card) only the first open block is sharp.
@@ -271,6 +271,7 @@ export function GuidedSteps({ blocks, progressKey, intro, partners, arrows = "pi
     return (
       <div
         ref={(el) => {
+          if (inline) return;
           if (el) frames.current.set(id, el);
           else frames.current.delete(id);
         }}
@@ -279,13 +280,13 @@ export function GuidedSteps({ blocks, progressKey, intro, partners, arrows = "pi
         aria-current={isActive ? "step" : undefined}
         className={cn(
           "crossfade relative grid rounded-3xl transition-[filter,opacity,transform,box-shadow] duration-[400ms] ease-out",
-          !sharp && "pointer-events-none opacity-60 blur-[6px]",
+          !inline && !sharp && "pointer-events-none opacity-60 blur-[6px]",
           sharp && !isActive && "pointer-events-none",
-          isActive && "z-10 shadow-lift motion-safe:scale-[1.05]"
+          isActive && !inline && "z-10 shadow-lift motion-safe:scale-[1.05]"
         )}
       >
         {card}
-        {(mark === "done" || mark === "practice") && (
+        {!inline && (mark === "done" || mark === "practice") && (
           <span aria-hidden data-testid={`tint-${id}`} className={cn("pointer-events-none absolute inset-0 rounded-3xl", mark === "done" ? "bg-success/10" : "bg-accent/10")} />
         )}
         {isActive && stage === "listen" && (
@@ -399,7 +400,7 @@ export function GuidedSteps({ blocks, progressKey, intro, partners, arrows = "pi
         {t(caption).replace(" …", "").replace("!", "")}
       </p>
 
-      {render({ frame, passed: (id) => marks[id] === "done" })}
+      {render({ frame, passed: (id) => marks[id] === "done", active, mark: (id) => marks[id] })}
 
       {mode === "guided" && (
         // Stays at the bottom of the screen while the words scroll. "Überspringen" (only after two

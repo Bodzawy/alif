@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import Image from "next/image";
 import { CheckCircle2, Pause, Play, RotateCcw, Volume2, VolumeX } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -26,7 +27,8 @@ const TURN_GAP_MS = 400;
 
 const noop = () => () => undefined;
 
-export function DialogueListen({ dialogue, progressKey }: { dialogue: Dialogue; progressKey: string }) {
+export function DialogueListen({ dialogue, progressKey, translation = true, silent = false, textHidden = false, completes = true }: { /** false: hearing/answering does not complete the step (other parts of the page do). */ completes?: boolean; dialogue: Dialogue; progressKey: string; /** true: only the sound – the lines are not shown (listening exercise). */ textHidden?: boolean; /** false: no German translation under the lines. */ translation?: boolean; /** true: the dialogue is only read (no sound, no play buttons); the question is open at once. */ silent?: boolean }) {
+  const pictures = dialogue.question?.images;
   const hydrated = useSyncExternalStore(noop, () => true, () => false);
   const completed = useSyncExternalStore(subscribeProgress, () => Boolean(getLessonProgress(progressKey).completedAt), () => false);
   const narrator = useRef<Narrator | null>(null);
@@ -36,14 +38,14 @@ export function DialogueListen({ dialogue, progressKey }: { dialogue: Dialogue; 
   const [current, setCurrent] = useState<number | null>(null);
   const [status, setStatus] = useState<"idle" | "playing" | "paused">("idle");
   const [heard, setHeard] = useState<ReadonlySet<string>>(() => new Set());
-  const [showGerman, setShowGerman] = useState(true);
+  const [showGerman, setShowGerman] = useState(translation);
   const [showTransliteration, setShowTransliteration] = useState(true);
   const [note, setNote] = useState<string | null>(null);
   const [answer, setAnswer] = useState<number | null>(null);
   const t = useT();
   const [muted, setMuted] = useState(false);
 
-  if (!narrator.current && hydrated) narrator.current = createNarrator({ baseUrl: "", available: [] });
+  if (!silent && !narrator.current && hydrated) narrator.current = createNarrator({ baseUrl: "", available: [] });
 
   useEffect(() => {
     setMuted(readMuted());
@@ -54,12 +56,12 @@ export function DialogueListen({ dialogue, progressKey }: { dialogue: Dialogue; 
   }, []);
 
   const speakerOf = (id: string) => dialogue.speakers.find((s) => s.id === id)!;
-  const allHeard = dialogue.lines.every((line) => heard.has(line.id));
+  const allHeard = silent || dialogue.lines.every((line) => heard.has(line.id));
 
   // Without a question, hearing every line completes the step.
   useEffect(() => {
-    if (allHeard && !dialogue.question) markLessonCompleted(progressKey);
-  }, [allHeard, dialogue.question, progressKey]);
+    if (completes && allHeard && !dialogue.question) markLessonCompleted(progressKey);
+  }, [completes, allHeard, dialogue.question, progressKey]);
 
   async function play(from: number, to: number) {
     const n = narrator.current;
@@ -101,13 +103,53 @@ export function DialogueListen({ dialogue, progressKey }: { dialogue: Dialogue; 
 
   function choose(i: number) {
     setAnswer(i);
-    if (dialogue.question && i === dialogue.question.answer) markLessonCompleted(progressKey);
+    if (completes && dialogue.question && i === dialogue.question.answer) markLessonCompleted(progressKey);
   }
 
   const last = dialogue.lines.length - 1;
 
+  /** Like the book page: with pictures that are read (not heard), the question stands above the dialogue. */
+  const questionFirst = silent && Boolean(pictures);
+  const questionSection = dialogue.question && (allHeard || pictures) && (
+        <section className={cn("animate-fade-in rounded-3xl border bg-card p-5 shadow-card sm:p-6", questionFirst ? "mb-6" : "mt-6")} aria-label={t("Frage")} data-testid="dialogue-question">
+          <p className="text-lg font-semibold">
+            <MixedText text={t(dialogue.question.prompt)} />
+          </p>
+          <ul className={cn("mt-4 gap-2", pictures ? "grid grid-cols-2 gap-4" : "flex flex-col")}>
+            {dialogue.question.options.map((option, i) => {
+              const chosen = answer === i;
+              const right = i === dialogue.question!.answer;
+              return (
+                <li key={option}>
+                  <button
+                    type="button"
+                    disabled={!allHeard}
+                    onClick={() => choose(i)}
+                    data-testid={`answer-${i}`}
+                    data-chosen={chosen}
+                    className={cn(
+                      "min-h-12 w-full rounded-2xl border px-4 py-3 text-left font-medium transition focus-ring disabled:cursor-not-allowed disabled:opacity-70",
+                      pictures && "flex h-full flex-col items-center gap-2 text-center",
+                      chosen && right ? "border-success bg-success-soft" : chosen ? "border-destructive/50 bg-destructive/5" : "bg-background hover:bg-muted"
+                    )}
+                  >
+                    {pictures?.[i] && <Image src={pictures[i].src} alt={pictures[i].alt} width={210} height={457} unoptimized className="h-56 w-auto rounded-xl border bg-white sm:h-64" data-testid={`answer-image-${i}`} />}
+                    {t(option)}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+          <p aria-live="polite" className="mt-3 min-h-6 text-sm font-semibold" data-testid="answer-feedback">
+            {!allHeard ? <span className="text-muted-foreground">{t("Hör zuerst den ganzen Dialog an, dann wähl das Bild.")}</span> : answer === null ? "" : answer === dialogue.question.answer ? <span className="text-success">{t("Sehr gut! Genau das sagen sie.")}</span> : <span className="text-muted-foreground">{t("Nicht ganz. Hör noch einmal zu und versuch es nochmal.")}</span>}
+          </p>
+        </section>
+      );
+
   return (
     <div data-testid="dialogue-listen" data-status={status} data-current={current ?? ""}>
+      {questionFirst && questionSection}
+
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
         {hydrated && completed ? (
           <p className="inline-flex items-center gap-1 rounded-full bg-success px-2.5 py-1 text-xs font-semibold text-success-foreground shadow" data-testid="step-completed">
@@ -115,16 +157,16 @@ export function DialogueListen({ dialogue, progressKey }: { dialogue: Dialogue; 
           </p>
         ) : (
           <p className="text-sm text-muted-foreground" data-testid="dialogue-intro">
-            {t("Hör dir das Gespräch an.")} {t(dialogue.intro)}
+            {!silent && `${t("Hör dir das Gespräch an.")} `}{t(dialogue.intro)}
           </p>
         )}
-        <Button variant="secondary" onClick={toggleMute} aria-pressed={muted} aria-label={muted ? t("Ton einschalten") : t("Ton ausschalten")} className="min-h-12 min-w-12" data-testid="mute-toggle">
+        {!silent && <Button variant="secondary" onClick={toggleMute} aria-pressed={muted} aria-label={muted ? t("Ton einschalten") : t("Ton ausschalten")} className="min-h-12 min-w-12" data-testid="mute-toggle">
           {muted ? <VolumeX className="h-5 w-5" aria-hidden /> : <Volume2 className="h-5 w-5" aria-hidden />}
-        </Button>
+        </Button>}
       </div>
 
       <div className="mb-5 flex flex-wrap items-center gap-3">
-        {status === "playing" ? (
+        {!silent && (status === "playing" ? (
           <Button size="lg" variant="secondary" onClick={pause} data-testid="dialogue-pause" className="min-h-12">
             <Pause className="h-5 w-5" aria-hidden /> {t("Pause")}
           </Button>
@@ -136,13 +178,13 @@ export function DialogueListen({ dialogue, progressKey }: { dialogue: Dialogue; 
           <Button size="lg" onClick={() => void play(0, last)} disabled={!narrator.current} data-testid="dialogue-play-all" className="min-h-12">
             <Play className="h-5 w-5" aria-hidden /> {t("Dialog anhören")}
           </Button>
-        )}
-        {(status === "paused" || heard.size > 0) && (
+        ))}
+        {!silent && (status === "paused" || heard.size > 0) && (
           <Button size="lg" variant="secondary" onClick={() => void play(0, last)} data-testid="dialogue-replay" className="min-h-12">
             <RotateCcw className="h-5 w-5" aria-hidden /> {t("Nochmal")}
           </Button>
         )}
-        <DialogueToggles showGerman={showGerman} showTransliteration={showTransliteration} onGerman={() => setShowGerman((v) => !v)} onTransliteration={() => setShowTransliteration((v) => !v)} />
+        {!textHidden && <DialogueToggles withGerman={translation} showGerman={showGerman} showTransliteration={showTransliteration} onGerman={() => setShowGerman((v) => !v)} onTransliteration={() => setShowTransliteration((v) => !v)} />}
       </div>
 
       {note && (
@@ -151,7 +193,7 @@ export function DialogueListen({ dialogue, progressKey }: { dialogue: Dialogue; 
         </p>
       )}
 
-      <ol className="flex flex-col gap-4 rounded-[2rem] border border-primary/10 bg-card/60 p-3 sm:p-5" aria-label={t("Gespräch")} data-testid="dialogue-lines">
+      {!textHidden && <ol className="flex flex-col gap-4 rounded-[2rem] border border-primary/10 bg-card/60 p-3 sm:p-5" aria-label={t("Gespräch")} data-testid="dialogue-lines">
         {dialogue.lines.map((line, i) => {
           const speaker = speakerOf(line.speaker);
           return (
@@ -163,48 +205,17 @@ export function DialogueListen({ dialogue, progressKey }: { dialogue: Dialogue; 
               showGerman={showGerman}
               showTransliteration={showTransliteration}
               state={current === i ? "playing" : heard.has(line.id) ? "done" : "idle"}
-              actions={
+              actions={silent ? undefined : (
                 <Button variant="secondary" size="sm" onClick={() => void play(i, i)} disabled={!narrator.current} data-testid={`play-line-${line.id}`} aria-label={`${t("Anhören")}: ${t(line.german)}`}>
                   <Volume2 className="h-4 w-4" aria-hidden /> {t("Anhören")}
                 </Button>
-              }
+              )}
             />
           );
         })}
-      </ol>
+      </ol>}
 
-      {dialogue.question && allHeard && (
-        <section className="mt-6 animate-fade-in rounded-3xl border bg-card p-5 shadow-card sm:p-6" aria-label={t("Frage")} data-testid="dialogue-question">
-          <p className="text-lg font-semibold">
-            <MixedText text={t(dialogue.question.prompt)} />
-          </p>
-          <ul className="mt-4 flex flex-col gap-2">
-            {dialogue.question.options.map((option, i) => {
-              const chosen = answer === i;
-              const right = i === dialogue.question!.answer;
-              return (
-                <li key={option}>
-                  <button
-                    type="button"
-                    onClick={() => choose(i)}
-                    data-testid={`answer-${i}`}
-                    data-chosen={chosen}
-                    className={cn(
-                      "min-h-12 w-full rounded-2xl border px-4 py-3 text-left font-medium transition focus-ring",
-                      chosen && right ? "border-success bg-success-soft" : chosen ? "border-destructive/50 bg-destructive/5" : "bg-background hover:bg-muted"
-                    )}
-                  >
-                    {t(option)}
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-          <p aria-live="polite" className="mt-3 min-h-6 text-sm font-semibold" data-testid="answer-feedback">
-            {answer === null ? "" : answer === dialogue.question.answer ? <span className="text-success">{t("Sehr gut! Genau das sagen sie.")}</span> : <span className="text-muted-foreground">{t("Nicht ganz. Hör noch einmal zu und versuch es nochmal.")}</span>}
-          </p>
-        </section>
-      )}
+      {!questionFirst && questionSection}
     </div>
   );
 }

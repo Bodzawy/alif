@@ -132,6 +132,19 @@ export function a1FormsFallbackTexts(): string[] {
 
 const PUNCT = /[.،؟!:]+$/;
 
+/** The "Anhören" texts of the parts of a worksheet page (only quizzes, clozes and matches speak). */
+function partsSpokenTexts(parts: NonNullable<Extract<A1Lesson["steps"][number], { kind: "worksheet" }>["parts"]>): string[] {
+  return parts.flatMap((part) =>
+    part.kind === "quiz"
+      ? part.items.map((item) => item.spoken ?? item.arabic)
+      : part.kind === "cloze"
+        ? part.items.flatMap((item) => item.lines.map((line) => clozeLineText(line.parts)))
+        : part.kind === "match"
+          ? part.match.prompts.flatMap((prompt) => (prompt.result ? [prompt.result.arabic] : []))
+          : [] // the other parts speak nothing
+  );
+}
+
 export function stepSpokenTexts(step: A1Lesson["steps"][number]): string[] {
   switch (step.kind) {
     case "gaps":
@@ -154,6 +167,10 @@ export function stepSpokenTexts(step: A1Lesson["steps"][number]): string[] {
       return step.items.flatMap((item) => item.lines.map((line) => clozeLineText(line.parts)));
     case "order":
       return step.order.items.map((item) => item.arabic);
+    case "phrases":
+      return partsSpokenTexts(step.reading ?? []);
+    case "worksheet":
+      return partsSpokenTexts(step.parts);
     default:
       return [];
   }

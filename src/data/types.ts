@@ -185,9 +185,11 @@ export type A1Step =
     })
   | (A1StepBase & {
       kind: "dialogue";
-      /** listen: the whole dialogue (both voices); repeat: every line, one after another; roleplay: the learner speaks one role. */
-      mode: "listen" | "repeat" | "roleplay";
+      /** listen: the whole dialogue (both voices); repeat: every line, one after another; roleplay: the learner speaks one role; read: only read the dialogue (no sound, no microphone) and answer its question; audio: only hear the dialogue (the text is hidden, it can be repeated) and answer its question. */
+      mode: "listen" | "repeat" | "roleplay" | "read" | "audio";
       dialogue: Dialogue;
+      /** Questions below the dialogue, on the same page; the step is done when all are answered right. */
+      quiz?: QuizItem[];
     })
   | (A1StepBase & {
       kind: "phrases";
@@ -195,6 +197,8 @@ export type A1Step =
       groups: PhraseGroup[];
       /** Guided: after one tap each expression is played and repeated by itself (no buttons). */
       guided?: boolean;
+      /** A text that is only read (the first group), with all its questions below it on one page, in book order. */
+      reading?: ReadingPart[];
     })
   | (A1StepBase & {
       kind: "letter-find";
@@ -229,10 +233,22 @@ export type A1Step =
   | (A1StepBase & {
       kind: "cloze";
       items: ClozeItem[];
+      /** A word bank (the book's list of words): shown in one box; the question whose turn it is lights up and the learner picks from the box. */
+      bank?: string[];
     })
   | (A1StepBase & {
       kind: "order";
       order: OrderContent;
+    })
+  | (A1StepBase & {
+      kind: "worksheet";
+      /** Several tasks of the book on one page, in book order. */
+      parts: ReadingPart[];
+    })
+  | (A1StepBase & {
+      kind: "sentences";
+      /** Several "put the words in order" exercises on one page. */
+      items: SentenceItem[];
     })
   | (A1StepBase & {
       kind: "table";
@@ -327,6 +343,8 @@ export type MatchPrompt = {
   accept?: string[];
   /** The book's model answer: shown solved from the start. */
   example?: boolean;
+  /** With `MatchContent.pronouns`: the pronoun words that are right for this row (e.g. فِيهِ and بِهِ). */
+  pronoun?: string[];
   /** Shown once matched, e.g. the joined word "تُوت" (with its German meaning). */
   result?: { arabic: string; german: string };
 };
@@ -335,6 +353,8 @@ export type MatchContent = {
   /** German heading of the prompt column and the option column. */
   promptTitle: string;
   optionTitle: string;
+  /** A third column to choose from (the book's "الحرف + الضمير"): every row gets a pronoun word AND an option. */
+  pronouns?: { title: string; options: string[] };
   prompts: MatchPrompt[];
   options: MatchOption[];
 };
@@ -420,8 +440,41 @@ export type PhraseGroup = {
   note?: string;
   /** A picture of the text (e.g. the flat plan), above the expressions. */
   image?: { src: string; alt: string };
+  /** A running text: in guided mode the items are shown as ONE passage; the sentence whose turn it is grows and is coloured. */
+  flow?: boolean;
   items: PhraseItem[];
 };
+
+/** A noun of a read text for the "singular or plural?" task: the word as it is in the text, whether it is singular or plural, and its counterpart. */
+export type NumberWord = { arabic: string; number: "singular" | "plural"; other: string; /** Shown in the table from the start (the book's example). */ example?: boolean };
+
+/** A sentence with gaps the learner fills with own words (the book's "أكمل الجمل بكلمات من عندك"): text parts, `null` = a gap. */
+export type FreeGapItem = {
+  id: string;
+  /** The book's number, e.g. "١". */
+  number: string;
+  parts: Array<string | null>;
+  /** Per gap, in order: a model answer (shown after the check) and, for an adjective, which form it must have ("f" = feminine, "m" = masculine). */
+  gaps?: Array<{ model: string; agrees?: "f" | "m" }>;
+};
+
+/** One task of a worksheet page: a heading (the book's task line) and a text, a quiz, a cloze, a match or a free task. */
+export type ReadingPart = { heading?: { arabic: string; german: string } } & (
+  | { kind: "quiz"; items: QuizItem[] }
+  | { kind: "cloze"; items: ClozeItem[]; bank?: string[] }
+  | { kind: "match"; match: MatchContent }
+  /** Tap a noun of the text and say singular or plural; `lines` = the text (default: the page's reading text). */
+  | { kind: "number"; words: NumberWord[]; lines?: string[] }
+  /** Write `count` texts of their own; `words` = helper words, `example` = the book's example, `rows` = height, `noun` = what is written (German, plural), `minWords` = shortest accepted text. */
+  | { kind: "write"; count: number; words: string[]; example?: string; rows?: number; noun?: string; minWords?: number; /** "describing": sentences with هُوَ / هِيَ whose adjectives must agree. */ describing?: boolean; /** A model text shown after the check. */ model?: string }
+  /** Text that is only shown (e.g. the advertisements): boxes of lines, each with an optional picture. */
+  | { kind: "text"; blocks: Array<{ lines: string[]; image?: { src: string; alt: string } }> }
+  /** Tap the words of `words` (e.g. the adjectives) in the text `lines`; `label` = what they are (German, plural). */
+  | { kind: "mark"; lines: string[]; words: string[]; label: string }
+  | { kind: "free-gaps"; items: FreeGapItem[] }
+  /** A table to fill in (e.g. what the partner says): the first column is the row number, the others are `columns`. */
+  | { kind: "fill-table"; first: string; columns: string[]; rows: number }
+);
 
 // ---------------------------------------------------------------------------
 // "letter-find": read a dialogue and underline every occurrence of one letter.
@@ -549,6 +602,8 @@ export type A1Lesson = {
   labelGerman: string;
   /** The letter of a letter entry. */
   letter?: A1LessonLetter;
+  /** The adjectives of the lesson (masculine form): to check that what the learner writes agrees. */
+  adjectives?: string[];
   steps: A1Step[];
 };
 
@@ -608,7 +663,13 @@ export type Dialogue = {
   roles?: DialogueRole[];
   lines: DialogueLine[];
   /** A comprehension question after listening (German). */
-  question?: { prompt: string; options: string[]; answer: number };
+  question?: {
+    prompt: string;
+    options: string[];
+    answer: number;
+    /** Pictures to choose from instead of text answers (one per option, same order; the option text is the picture's short label). */
+    images?: Array<{ src: string; alt: string }>;
+  };
 };
 
 /** An A1 lesson of the book ("الدرس الأول – صَبَاحُ الْخَيْر"): its entries in book order. */
@@ -660,6 +721,8 @@ export type SpellWord = {
 
 export type QuizItem = {
   id: string;
+  /** A heading above this item (the book's task line); the numbering of the items starts again with 1 here. */
+  section?: { arabic: string; german: string };
   /** Vocalised Arabic, spoken by "Anhören". */
   arabic: string;
   german?: string;
@@ -691,6 +754,15 @@ export type ClozeItem = {
 // ---------------------------------------------------------------------------
 // "order": the book's "اقرأ ورتب الحوار" – lines printed out of order, to be
 // put in the order of the conversation.
+
+/** One exercise "رتب الكلمات لتكون جملا": the words as the book prints them (scrambled) and the right orders (indexes of `words`). */
+export type SentenceItem = {
+  id: string;
+  /** The book's number, e.g. "١". */
+  number: string;
+  words: string[];
+  solutions: number[][];
+};
 
 export type OrderContent = {
   /** The lines as the book prints them (its numbering). */

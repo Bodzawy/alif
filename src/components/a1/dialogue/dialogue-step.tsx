@@ -2,14 +2,15 @@
 
 import Image from "next/image";
 
-import type { Dialogue } from "@/data/types";
+import { QuizList } from "@/components/a1/quiz/quiz-list";
+import type { Dialogue, QuizItem } from "@/data/types";
 import { useT } from "@/i18n/use-locale";
 
 import { DialogueListen } from "./dialogue-listen";
 import { DialogueSpeaking } from "./dialogue-speaking";
 
 /** Step type "dialogue": listen to it, repeat it line by line, or speak one role. */
-export function DialogueStep({ dialogue, mode, progressKey }: { dialogue: Dialogue; mode: "listen" | "repeat" | "roleplay"; progressKey: string }) {
+export function DialogueStep({ dialogue, mode, progressKey, quiz }: { dialogue: Dialogue; quiz?: QuizItem[]; mode: "listen" | "repeat" | "roleplay" | "read" | "audio"; progressKey: string }) {
   const t = useT();
   return (
     <>
@@ -26,7 +27,21 @@ export function DialogueStep({ dialogue, mode, progressKey }: { dialogue: Dialog
           data-testid="dialogue-scene"
         />
       )}
-      {mode === "listen" ? <DialogueListen dialogue={dialogue} progressKey={progressKey} /> : <DialogueSpeaking dialogue={dialogue} mode={mode} progressKey={progressKey} />}
+      {mode === "listen" && <DialogueListen dialogue={dialogue} progressKey={progressKey} />}
+      {/* Only read (no sound, no microphone), then answer the question about the pictures. */}
+      {/* Only the sound: the picture shows who talks, the learner can repeat it, the questions come below. */}
+      {mode === "audio" && (
+        <>
+          <DialogueListen dialogue={dialogue} progressKey={progressKey} textHidden translation={false} completes={!quiz} />
+          {quiz && (
+            <div className="mt-8" data-testid="dialogue-quiz">
+              <QuizList items={quiz} progressKey={progressKey} />
+            </div>
+          )}
+        </>
+      )}
+      {mode === "read" && <DialogueListen dialogue={dialogue} progressKey={progressKey} silent translation={false} />}
+      {(mode === "repeat" || mode === "roleplay") && <DialogueSpeaking dialogue={dialogue} mode={mode} progressKey={progressKey} />}
     </>
   );
 }
