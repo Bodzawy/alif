@@ -4,10 +4,10 @@ import manifest from "@/lib/tts/recorded-manifest.json";
 // The recorded Arabic clips (public/audio/ar/, installed by scripts/audio/install_clips.py)
 // are used by the player when the text has one; everything else is spoken by /api/tts.
 describe("recorded Arabic audio", () => {
-  it("maps every text to a file name <id>.<8 hex chars>", () => {
+  it("maps every text to a file name <id>.<8 hex chars> (A2 ids: a2l<unit>w/s<nnn>)", () => {
     for (const [text, file] of Object.entries(manifest.clips)) {
       expect(text.length).toBeGreaterThan(0);
-      expect(file).toMatch(/^[a-z]\d{3,4}\.[0-9a-f]{8}$/);
+      expect(file).toMatch(/^(?:[a-z]\d{3,4}|a2l\d+[ws]\d{3})\.[0-9a-f]{8}$/);
     }
   });
 

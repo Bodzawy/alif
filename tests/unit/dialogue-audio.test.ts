@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { splitAddressee } from "@/components/a1/dialogue/dialogue-bubble";
 import { A1_LEVEL } from "@/data/a1";
+import { A2_LEVEL } from "@/data/a2";
 import { a1Tahiyya } from "@/data/a1/tahiyya";
 import type { Dialogue } from "@/data/types";
 import dialogueManifest from "@/lib/tts/dialogue-manifest.json";
@@ -12,7 +13,7 @@ import dialogueManifest from "@/lib/tts/dialogue-manifest.json";
 
 const lines: Record<string, { voice: string; text: string; file: string }> = dialogueManifest.lines;
 
-/** Every dialogue of A1, wherever a step keeps it. */
+/** Every dialogue of A1 and A2, wherever a step keeps it. */
 function dialogues(): Dialogue[] {
   const found = new Map<string, Dialogue>();
   const walk = (o: unknown) => {
@@ -22,6 +23,7 @@ function dialogues(): Dialogue[] {
     for (const v of Object.values(o)) walk(v);
   };
   walk(A1_LEVEL);
+  walk(A2_LEVEL);
   return [...found.values()];
 }
 
@@ -35,7 +37,7 @@ describe("dialogue recordings", () => {
     expect(Object.keys(lines).length).toBeGreaterThan(0);
     for (const [id, entry] of Object.entries(lines)) {
       expect(app.get(id), id).toEqual({ voice: entry.voice, text: entry.text });
-      expect(entry.file).toMatch(/^d-[mf][12]-\d{2}\.[0-9a-f]{8}$/);
+      expect(entry.file).toMatch(/^(?:d-[mf][12]-\d{2}|a2d-[a-z]+-[a-z0-9-]+-\d{2})\.[0-9a-f]{8}$/);
     }
   });
 
