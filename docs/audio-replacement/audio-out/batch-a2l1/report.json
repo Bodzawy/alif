@@ -1,0 +1,374 @@
+{
+ "batch": "batch-a2l1",
+ "texts": 36,
+ "audio_seconds": 61.68,
+ "detect": [
+  -47,
+  0.3
+ ],
+ "min_border_gap": 0.3,
+ "speed_scale": 1.4,
+ "warnings": [],
+ "clips": [
+  {
+   "id": "a2l1w001",
+   "text": "قَدِيمٌ",
+   "start": 0.0,
+   "end": 1.47,
+   "speech": 1.29,
+   "expected": 0.98,
+   "gain_db": -3.0,
+   "flag": ""
+  },
+  {
+   "id": "a2l1w002",
+   "text": "جَدِيدٌ",
+   "start": 1.57,
+   "end": 3.23,
+   "speech": 0.98,
+   "expected": 0.98,
+   "gain_db": 0.9,
+   "flag": ""
+  },
+  {
+   "id": "a2l1w003",
+   "text": "عَرِيضٌ",
+   "start": 3.98,
+   "end": 5.45,
+   "speech": 0.96,
+   "expected": 0.98,
+   "gain_db": -2.5,
+   "flag": ""
+  },
+  {
+   "id": "a2l1w004",
+   "text": "ضَيِّقٌ",
+   "start": 5.5,
+   "end": 6.9,
+   "speech": 1.01,
+   "expected": 0.83,
+   "gain_db": -2.7,
+   "flag": ""
+  },
+  {
+   "id": "a2l1w005",
+   "text": "مُرْتَفِعٌ",
+   "start": 7.14,
+   "end": 8.83,
+   "speech": 1.14,
+   "expected": 1.13,
+   "gain_db": -3.2,
+   "flag": ""
+  },
+  {
+   "id": "a2l1w006",
+   "text": "مُنْخَفِضٌ",
+   "start": 8.89,
+   "end": 10.45,
+   "speech": 1.05,
+   "expected": 1.13,
+   "gain_db": 0.8,
+   "flag": ""
+  },
+  {
+   "id": "a2l1w007",
+   "text": "وَاسِعٌ",
+   "start": 10.78,
+   "end": 12.18,
+   "speech": 1.01,
+   "expected": 0.98,
+   "gain_db": -4.4,
+   "flag": ""
+  },
+  {
+   "id": "a2l1w008",
+   "text": "مُضِيءٌ",
+   "start": 12.18,
+   "end": 13.85,
+   "speech": 1.36,
+   "expected": 0.98,
+   "gain_db": 0.5,
+   "flag": ""
+  },
+  {
+   "id": "a2l1w009",
+   "text": "مُظْلِمٌ",
+   "start": 13.9,
+   "end": 15.73,
+   "speech": 0.93,
+   "expected": 0.98,
+   "gain_db": -0.4,
+   "flag": ""
+  },
+  {
+   "id": "a2l1w010",
+   "text": "نَظِيفٌ",
+   "start": 15.93,
+   "end": 17.5,
+   "speech": 1.25,
+   "expected": 0.98,
+   "gain_db": -2.0,
+   "flag": ""
+  },
+  {
+   "id": "a2l1w011",
+   "text": "قَذِرٌ",
+   "start": 17.53,
+   "end": 18.91,
+   "speech": 0.91,
+   "expected": 0.83,
+   "gain_db": -2.4,
+   "flag": ""
+  },
+  {
+   "id": "a2l1w012",
+   "text": "طَوِيلٌ",
+   "start": 18.98,
+   "end": 20.61,
+   "speech": 1.12,
+   "expected": 0.98,
+   "gain_db": 0.9,
+   "flag": ""
+  },
+  {
+   "id": "a2l1w013",
+   "text": "قَصِيرٌ",
+   "start": 20.78,
+   "end": 22.19,
+   "speech": 0.91,
+   "expected": 0.98,
+   "gain_db": -3.8,
+   "flag": ""
+  },
+  {
+   "id": "a2l1w014",
+   "text": "عَالٍ",
+   "start": 22.19,
+   "end": 24.0,
+   "speech": 1.2,
+   "expected": 0.83,
+   "gain_db": -0.6,
+   "flag": ""
+  },
+  {
+   "id": "a2l1w015",
+   "text": "مُرِيحٌ",
+   "start": 24.08,
+   "end": 25.97,
+   "speech": 1.01,
+   "expected": 0.98,
+   "gain_db": 0.7,
+   "flag": ""
+  },
+  {
+   "id": "a2l1w016",
+   "text": "مُتْعِبٌ",
+   "start": 26.04,
+   "end": 27.28,
+   "speech": 0.85,
+   "expected": 0.98,
+   "gain_db": -4.3,
+   "flag": ""
+  },
+  {
+   "id": "a2l1w017",
+   "text": "كَثِيرٌ",
+   "start": 27.3,
+   "end": 28.76,
+   "speech": 0.93,
+   "expected": 0.98,
+   "gain_db": -0.7,
+   "flag": ""
+  },
+  {
+   "id": "a2l1w018",
+   "text": "قَلِيلٌ",
+   "start": 29.26,
+   "end": 30.82,
+   "speech": 0.89,
+   "expected": 0.98,
+   "gain_db": 0.4,
+   "flag": ""
+  },
+  {
+   "id": "a2l1w019",
+   "text": "كَبِيرٌ",
+   "start": 30.95,
+   "end": 32.02,
+   "speech": 0.89,
+   "expected": 0.98,
+   "gain_db": -1.0,
+   "flag": ""
+  },
+  {
+   "id": "a2l1w020",
+   "text": "صَغِيرٌ",
+   "start": 32.35,
+   "end": 33.7,
+   "speech": 1.02,
+   "expected": 0.98,
+   "gain_db": 0.6,
+   "flag": ""
+  },
+  {
+   "id": "a2l1w021",
+   "text": "جَمِيلٌ",
+   "start": 33.8,
+   "end": 35.47,
+   "speech": 1.01,
+   "expected": 0.98,
+   "gain_db": -1.6,
+   "flag": ""
+  },
+  {
+   "id": "a2l1w022",
+   "text": "لَطِيفٌ",
+   "start": 35.7,
+   "end": 37.32,
+   "speech": 1.06,
+   "expected": 0.98,
+   "gain_db": 0.2,
+   "flag": ""
+  },
+  {
+   "id": "a2l1w023",
+   "text": "فَظٌّ",
+   "start": 37.5,
+   "end": 38.63,
+   "speech": 0.81,
+   "expected": 0.68,
+   "gain_db": -1.8,
+   "flag": ""
+  },
+  {
+   "id": "a2l1w024",
+   "text": "مُزْدَحِمٌ",
+   "start": 38.66,
+   "end": 40.63,
+   "speech": 1.16,
+   "expected": 1.13,
+   "gain_db": -0.6,
+   "flag": ""
+  },
+  {
+   "id": "a2l1w025",
+   "text": "هَادِئٌ",
+   "start": 40.73,
+   "end": 41.86,
+   "speech": 0.82,
+   "expected": 0.98,
+   "gain_db": -1.8,
+   "flag": ""
+  },
+  {
+   "id": "a2l1w026",
+   "text": "الْمَطْبَخُ",
+   "start": 41.94,
+   "end": 43.79,
+   "speech": 1.04,
+   "expected": 1.28,
+   "gain_db": -0.3,
+   "flag": ""
+  },
+  {
+   "id": "a2l1w027",
+   "text": "ثَلَّاجَةٌ",
+   "start": 44.02,
+   "end": 45.63,
+   "speech": 1.11,
+   "expected": 1.13,
+   "gain_db": -1.7,
+   "flag": ""
+  },
+  {
+   "id": "a2l1w028",
+   "text": "الْمَطْبَخَانِ",
+   "start": 45.79,
+   "end": 47.49,
+   "speech": 1.4,
+   "expected": 1.59,
+   "gain_db": -3.1,
+   "flag": ""
+  },
+  {
+   "id": "a2l1w029",
+   "text": "ثَلَّاجَتَانِ",
+   "start": 47.57,
+   "end": 49.61,
+   "speech": 1.57,
+   "expected": 1.43,
+   "gain_db": -3.9,
+   "flag": ""
+  },
+  {
+   "id": "a2l1w030",
+   "text": "الشَّقَّةُ",
+   "start": 49.67,
+   "end": 51.44,
+   "speech": 0.79,
+   "expected": 1.13,
+   "gain_db": 2.7,
+   "flag": ""
+  },
+  {
+   "id": "a2l1w031",
+   "text": "الشَّقَّتَانِ",
+   "start": 51.53,
+   "end": 53.22,
+   "speech": 1.36,
+   "expected": 1.43,
+   "gain_db": -1.0,
+   "flag": ""
+  },
+  {
+   "id": "a2l1w032",
+   "text": "كِتَابٌ",
+   "start": 53.32,
+   "end": 54.74,
+   "speech": 0.98,
+   "expected": 0.98,
+   "gain_db": 1.7,
+   "flag": ""
+  },
+  {
+   "id": "a2l1w033",
+   "text": "كِتَابَانِ",
+   "start": 54.79,
+   "end": 56.58,
+   "speech": 1.26,
+   "expected": 1.28,
+   "gain_db": 0.4,
+   "flag": ""
+  },
+  {
+   "id": "a2l1w034",
+   "text": "كَبِيرَانِ",
+   "start": 57.06,
+   "end": 58.84,
+   "speech": 1.31,
+   "expected": 1.28,
+   "gain_db": -1.9,
+   "flag": ""
+  },
+  {
+   "id": "a2l1w035",
+   "text": "حَقِيبَةٌ",
+   "start": 58.84,
+   "end": 60.28,
+   "speech": 1.12,
+   "expected": 1.13,
+   "gain_db": -0.8,
+   "flag": ""
+  },
+  {
+   "id": "a2l1w036",
+   "text": "كَبِيرَةٌ",
+   "start": 60.28,
+   "end": 61.68,
+   "speech": 1.07,
+   "expected": 1.13,
+   "gain_db": 0.4,
+   "flag": ""
+  }
+ ]
+}

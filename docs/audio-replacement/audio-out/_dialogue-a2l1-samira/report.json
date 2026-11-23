@@ -1,0 +1,44 @@
+{
+ "batch": "_dialogue-a2l1-samira",
+ "texts": 3,
+ "audio_seconds": 12.2,
+ "detect": [
+  "-40",
+  "prose"
+ ],
+ "min_border_gap": 0.73,
+ "speed_scale": 1.0,
+ "warnings": [],
+ "clips": [
+  {
+   "id": "a2d-samira-a2-1-samira-salwa-01",
+   "text": "هَلْ نَوَالُ أُخْتُكِ كَبِيرَةٌ يَا سَلْوَى؟",
+   "start": 0.19,
+   "end": 2.58,
+   "speech": 2.22,
+   "expected": 2.22,
+   "gain_db": -6.0,
+   "flag": ""
+  },
+  {
+   "id": "a2d-samira-a2-1-samira-salwa-02",
+   "text": "إِمْ، وَمَا شَكْلُهَا؟",
+   "start": 3.24,
+   "end": 4.93,
+   "speech": 1.51,
+   "expected": 1.51,
+   "gain_db": -2.0,
+   "flag": ""
+  },
+  {
+   "id": "a2d-samira-a2-1-samira-salwa-03",
+   "text": "صَدِيقَتِي رِيهَام رَفِيعَةٌ، قَصِيرَةٌ أَيْضًا، شَعْرُهَا طَوِيلٌ، عُمْرُهَا حَوَالَيْ عِشْرِينَ سَنَةً.",
+   "start": 5.48,
+   "end": 11.98,
+   "speech": 6.32,
+   "expected": 6.32,
+   "gain_db": -5.8,
+   "flag": ""
+  }
+ ]
+}

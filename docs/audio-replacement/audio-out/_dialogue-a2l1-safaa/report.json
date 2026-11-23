@@ -1,0 +1,74 @@
+{
+ "batch": "_dialogue-a2l1-safaa",
+ "texts": 6,
+ "audio_seconds": 15.76,
+ "detect": [
+  "-40",
+  "prose"
+ ],
+ "min_border_gap": 0.69,
+ "speed_scale": 1.0,
+ "warnings": [],
+ "clips": [
+  {
+   "id": "a2d-safaa-a2-1-safaa-nawal-01",
+   "text": "كَيْفَ حَالُ صَدِيقَتِكِ الْجَدِيدَةِ يَا نَوَالُ؟",
+   "start": 0.21,
+   "end": 2.99,
+   "speech": 2.6,
+   "expected": 2.59,
+   "gain_db": -1.2,
+   "flag": ""
+  },
+  {
+   "id": "a2d-safaa-a2-1-safaa-nawal-02",
+   "text": "هَلْ تَسْكُنُ فِي شَقَّةٍ صَغِيرَةٍ؟",
+   "start": 3.67,
+   "end": 5.65,
+   "speech": 1.79,
+   "expected": 1.68,
+   "gain_db": -1.4,
+   "flag": ""
+  },
+  {
+   "id": "a2d-safaa-a2-1-safaa-nawal-03",
+   "text": "وَمَا شَكْلُهَا؟ طَوِيلَةٌ؟ قَصِيرَةٌ؟",
+   "start": 6.31,
+   "end": 9.18,
+   "speech": 2.68,
+   "expected": 2.68,
+   "gain_db": -2.6,
+   "flag": ""
+  },
+  {
+   "id": "a2d-safaa-a2-1-safaa-nawal-04",
+   "text": "وَهَلْ هِيَ نَشِيطَةٌ؟",
+   "start": 9.69,
+   "end": 11.0,
+   "speech": 1.13,
+   "expected": 1.08,
+   "gain_db": -5.0,
+   "flag": ""
+  },
+  {
+   "id": "a2d-safaa-a2-1-safaa-nawal-05",
+   "text": "وَمَا شَكْلُ نَادِيَةَ أُخْتِ هَنَاء؟",
+   "start": 11.52,
+   "end": 13.53,
+   "speech": 1.83,
+   "expected": 1.89,
+   "gain_db": -2.9,
+   "flag": ""
+  },
+  {
+   "id": "a2d-safaa-a2-1-safaa-nawal-06",
+   "text": "وَمَا شَكْلُ بَيْتِ هَنَاء؟",
+   "start": 14.14,
+   "end": 15.59,
+   "speech": 1.27,
+   "expected": 1.38,
+   "gain_db": -6.0,
+   "flag": ""
+  }
+ ]
+}

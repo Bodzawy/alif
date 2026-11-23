@@ -1,0 +1,185 @@
+{
+ "batch": "batch-a2l1",
+ "items": [
+  {
+   "id": "a2l1w001",
+   "kind": "word",
+   "text": "قَدِيمٌ"
+  },
+  {
+   "id": "a2l1w002",
+   "kind": "word",
+   "text": "جَدِيدٌ"
+  },
+  {
+   "id": "a2l1w003",
+   "kind": "word",
+   "text": "عَرِيضٌ"
+  },
+  {
+   "id": "a2l1w004",
+   "kind": "word",
+   "text": "ضَيِّقٌ"
+  },
+  {
+   "id": "a2l1w005",
+   "kind": "word",
+   "text": "مُرْتَفِعٌ"
+  },
+  {
+   "id": "a2l1w006",
+   "kind": "word",
+   "text": "مُنْخَفِضٌ"
+  },
+  {
+   "id": "a2l1w007",
+   "kind": "word",
+   "text": "وَاسِعٌ"
+  },
+  {
+   "id": "a2l1w008",
+   "kind": "word",
+   "text": "مُضِيءٌ"
+  },
+  {
+   "id": "a2l1w009",
+   "kind": "word",
+   "text": "مُظْلِمٌ"
+  },
+  {
+   "id": "a2l1w010",
+   "kind": "word",
+   "text": "نَظِيفٌ"
+  },
+  {
+   "id": "a2l1w011",
+   "kind": "word",
+   "text": "قَذِرٌ"
+  },
+  {
+   "id": "a2l1w012",
+   "kind": "word",
+   "text": "طَوِيلٌ"
+  },
+  {
+   "id": "a2l1w013",
+   "kind": "word",
+   "text": "قَصِيرٌ"
+  },
+  {
+   "id": "a2l1w014",
+   "kind": "word",
+   "text": "عَالٍ"
+  },
+  {
+   "id": "a2l1w015",
+   "kind": "word",
+   "text": "مُرِيحٌ"
+  },
+  {
+   "id": "a2l1w016",
+   "kind": "word",
+   "text": "مُتْعِبٌ"
+  },
+  {
+   "id": "a2l1w017",
+   "kind": "word",
+   "text": "كَثِيرٌ"
+  },
+  {
+   "id": "a2l1w018",
+   "kind": "word",
+   "text": "قَلِيلٌ"
+  },
+  {
+   "id": "a2l1w019",
+   "kind": "word",
+   "text": "كَبِيرٌ"
+  },
+  {
+   "id": "a2l1w020",
+   "kind": "word",
+   "text": "صَغِيرٌ"
+  },
+  {
+   "id": "a2l1w021",
+   "kind": "word",
+   "text": "جَمِيلٌ"
+  },
+  {
+   "id": "a2l1w022",
+   "kind": "word",
+   "text": "لَطِيفٌ"
+  },
+  {
+   "id": "a2l1w023",
+   "kind": "word",
+   "text": "فَظٌّ"
+  },
+  {
+   "id": "a2l1w024",
+   "kind": "word",
+   "text": "مُزْدَحِمٌ"
+  },
+  {
+   "id": "a2l1w025",
+   "kind": "word",
+   "text": "هَادِئٌ"
+  },
+  {
+   "id": "a2l1w026",
+   "kind": "word",
+   "text": "الْمَطْبَخُ"
+  },
+  {
+   "id": "a2l1w027",
+   "kind": "word",
+   "text": "ثَلَّاجَةٌ"
+  },
+  {
+   "id": "a2l1w028",
+   "kind": "word",
+   "text": "الْمَطْبَخَانِ"
+  },
+  {
+   "id": "a2l1w029",
+   "kind": "word",
+   "text": "ثَلَّاجَتَانِ"
+  },
+  {
+   "id": "a2l1w030",
+   "kind": "word",
+   "text": "الشَّقَّةُ"
+  },
+  {
+   "id": "a2l1w031",
+   "kind": "word",
+   "text": "الشَّقَّتَانِ"
+  },
+  {
+   "id": "a2l1w032",
+   "kind": "word",
+   "text": "كِتَابٌ"
+  },
+  {
+   "id": "a2l1w033",
+   "kind": "word",
+   "text": "كِتَابَانِ"
+  },
+  {
+   "id": "a2l1w034",
+   "kind": "word",
+   "text": "كَبِيرَانِ"
+  },
+  {
+   "id": "a2l1w035",
+   "kind": "word",
+   "text": "حَقِيبَةٌ"
+  },
+  {
+   "id": "a2l1w036",
+   "kind": "word",
+   "text": "كَبِيرَةٌ"
+  }
+ ]
+}

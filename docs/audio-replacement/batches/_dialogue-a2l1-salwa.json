@@ -1,0 +1,27 @@
+{
+ "batch": "_dialogue-a2l1-salwa",
+ "voice": "female-2",
+ "speakers": [
+  "Salwa (a2-1-samira-salwa)"
+ ],
+ "items": [
+  {
+   "id": "a2d-salwa-a2-1-samira-salwa-01",
+   "kind": "dialogue",
+   "voice": "female-2",
+   "text": "لَا، هِيَ لَيْسَتْ كَبِيرَةً، هِيَ طِفْلَةٌ صَغِيرَةٌ عُمْرُهَا سَبْعُ سَنَوَاتٍ.",
+   "lines": [
+    "a2-1-d1-2"
+   ]
+  },
+  {
+   "id": "a2d-salwa-a2-1-samira-salwa-02",
+   "kind": "dialogue",
+   "voice": "female-2",
+   "text": "هِيَ قَصِيرَةٌ، سَمِينَةٌ، وَشَعْرُهَا طَوِيلٌ. وَمَا شَكْلُ صَدِيقَتِكِ رِيهَام؟",
+   "lines": [
+    "a2-1-d1-4"
+   ]
+  }
+ ]
+}

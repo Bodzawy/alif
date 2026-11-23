@@ -162,6 +162,82 @@ def volume(path):
     m = re.search(r"mean_volume: (-?[\d.]+) dB", err); x = re.search(r"max_volume: (-?[\d.]+) dB", err)
     return (float(m.group(1)) if m else TARGET_MEAN_DB, float(x.group(1)) if x else -3.0)
 
+# ---- Prose mode (ALIF_PROSE=1): dialogue lines and sentences -------------------------------------------------------
+# Gemini does not keep a long pause between the texts: it leaves 0.3-0.8 s, about as much as a comma inside a sentence,
+# so the gaps alone cannot tell a border from a comma. Here the LENGTH of every text decides: expected seconds =
+# a * letters + b + p * inner punctuation marks (a, b, p are fitted on the recording itself, a few rounds), and the
+# gaps only break ties (a wide gap is a little more likely a border than a narrow one).
+PROSE = bool(os.environ.get("ALIF_PROSE"))
+PUNCT = re.compile("[،,؛:.؟?!]")
+LETTER = re.compile("[\u0621-\u064A]")
+
+def prose_features(text):
+    t = HARAKAT.sub("", text)
+    return len(LETTER.findall(t)), len(PUNCT.findall(t.rstrip(" .؟?!؛،,:")))
+
+def prose_regions(path, total, texts):
+    sil = silences(path, int(os.environ.get("ALIF_PROSE_DB", "-40")), 0.12)
+    regions, pos = [], 0.0
+    for s, e in sil:
+        s = max(s, 0.0)
+        if s - pos >= 0.06: regions.append([pos, s])
+        pos = max(pos, e)
+    if total - pos >= 0.06: regions.append([pos, total])
+    R, N, INF = len(regions), len(texts), 1e18
+    feats = [prose_features(t) for t in texts]
+    gap = lambda i: regions[i + 1][0] - regions[i][1]
+    a, b0, p = 0.12, 0.4, 0.3
+    best = None
+    for _ in range(4):
+        pred = [max(0.3, a * L + b0 + p * P) for L, P in feats]
+        dp = [[INF] * (R + 1) for _ in range(N + 1)]
+        bp = [[None] * (R + 1) for _ in range(N + 1)]
+        dp[0][0] = 0.0
+        for k in range(1, N + 1):
+            for j in range(k, R + 1):
+                for i in range(max(k - 1, j - 25), j):
+                    if dp[k - 1][i] >= INF: continue
+                    dur = regions[j - 1][1] - regions[i][0]
+                    z = (math.log(dur) - math.log(pred[k - 1])) / 0.25
+                    c = dp[k - 1][i] + z * z / 2
+                    if i > 0:
+                        w = gap(i - 1); pb = 1.0 / (1.0 + math.exp(-(w - 0.30) / 0.15))
+                        c += -0.5 * math.log(max(pb, 1e-6))
+                    for t in range(i, j - 1):
+                        w = gap(t); pb = 1.0 / (1.0 + math.exp(-(w - 0.30) / 0.15))
+                        c += -0.5 * math.log(max(1.0 - pb, 1e-6))
+                    if c < dp[k][j]: dp[k][j], bp[k][j] = c, i
+        if dp[N][R] >= INF: return None, None
+        groups, j = [], R
+        for k in range(N, 0, -1):
+            i = bp[k][j]; groups.append((i, j)); j = i
+        groups.reverse()
+        cut = [[regions[i][0], regions[j - 1][1]] for i, j in groups]
+        best = cut
+        # refit a, b, p by least squares on the cut
+        import itertools
+        rows = [(L, 1.0, P, c[1] - c[0]) for (L, P), c in zip(feats, cut)]
+        def solve(rows):
+            n = 3; A = [[0.0] * n for _ in range(n)]; y = [0.0] * n
+            for L, one, P, d in rows:
+                v = (L, one, P)
+                for r in range(n):
+                    y[r] += v[r] * d
+                    for c in range(n): A[r][c] += v[r] * v[c]
+            for r in range(n): A[r][r] += 1e-6
+            for col in range(n):
+                piv = max(range(col, n), key=lambda r: abs(A[r][col])); A[col], A[piv] = A[piv], A[col]; y[col], y[piv] = y[piv], y[col]
+                for r in range(col + 1, n):
+                    f = A[r][col] / A[col][col]
+                    for c in range(col, n): A[r][c] -= f * A[col][c]
+                    y[r] -= f * y[col]
+            x = [0.0] * n
+            for r in range(n - 1, -1, -1): x[r] = (y[r] - sum(A[r][c] * x[c] for c in range(r + 1, n))) / A[r][r]
+            return x
+        a, b0, p = solve(rows)
+        a, b0, p = max(a, 0.05), max(b0, 0.0), max(p, 0.0)
+    return best, (a, b0, p)
+
 TMPDIR = tempfile.mkdtemp()
 
 def main():
@@ -170,20 +246,30 @@ def main():
     items, name = spec["items"], spec["batch"]
     n = len(items)
     total = duration(audio_path)
-    chosen = clear_pauses(audio_path, total, n)
+    chosen = None if PROSE else clear_pauses(audio_path, total, n)
     clear = chosen is not None
     pad_before, pad_after = (CLEAR_PAD_BEFORE, CLEAR_PAD_AFTER) if clear else (PAD_BEFORE, PAD_AFTER)
-    for setting, regions in ([] if chosen else speech_regions(audio_path, total)):
+    for setting, regions in ([] if (chosen or PROSE) else speech_regions(audio_path, total)):
         if len(regions) >= n:
             chosen = (setting, regions); break
         last = (setting, regions)
-    if chosen is None:
+    if chosen is None and not PROSE:
         print(f"FAIL: only {len(last[1])} speech regions found for {n} texts (even at the most sensitive setting). "
               f"The recording is missing words or the pauses are too short. Nothing was cut."); sys.exit(2)
-    setting, regions = chosen
     texts = [it["text"] for it in items]
     scale = 1.0
-    for _ in range(4):
+    global pred_dur
+    if PROSE:
+        setting = (os.environ.get("ALIF_PROSE_DB", "-40"), "prose")
+        cut, fit = prose_regions(audio_path, total, texts)
+        if cut is None:
+            print("FAIL: could not assign the speech to the texts."); sys.exit(2)
+        a_, b_, p_ = fit
+        pred_dur = lambda text, scale, a_=a_, b_=b_, p_=p_: a_ * prose_features(text)[0] + b_ + p_ * prose_features(text)[1]
+        print(f"prose fit: {a_:.3f} s/letter + {b_:.2f} s + {p_:.2f} s/punctuation")
+    else:
+        setting, regions = chosen
+    for _ in range(0 if PROSE else 4):
         cut = segment(regions, texts, scale)
         if cut is None:
             print("FAIL: could not assign the speech to the texts."); sys.exit(2)
@@ -228,7 +314,7 @@ def main():
         os.remove(tmp)
         dur = b - a
         z = (math.log(dur) - math.log(pred_dur(it["text"], scale))) / 0.30
-        flag = "SHORT" if dur < 0.15 else "LONG" if dur > 3.0 else "CHECK-LENGTH" if abs(z) > 1.8 else ""
+        flag = "SHORT" if dur < 0.15 else "LONG" if dur > (3.0 if not PROSE else 60.0) else "CHECK-LENGTH" if abs(z) > 1.8 else ""
         gap_before = (a - regions[i - 1][1]) if i else None
         if not flag and gap_before is not None and gap_before < 0.09: flag = "TIGHT-GAP"
         report.append({"id": it["id"], "text": it["text"], "start": round(s, 2), "end": round(e, 2), "speech": round(dur, 2), "expected": round(pred_dur(it["text"], scale), 2), "gain_db": round(gain, 1), "flag": flag})

@@ -1,0 +1,63 @@
+{
+ "batch": "_dialogue-a2l1-safaa",
+ "voice": "female-1",
+ "speakers": [
+  "Safaa (a2-1-safaa-nawal)"
+ ],
+ "items": [
+  {
+   "id": "a2d-safaa-a2-1-safaa-nawal-01",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "كَيْفَ حَالُ صَدِيقَتِكِ الْجَدِيدَةِ يَا نَوَالُ؟",
+   "lines": [
+    "a2-1-d2-1"
+   ]
+  },
+  {
+   "id": "a2d-safaa-a2-1-safaa-nawal-02",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "هَلْ تَسْكُنُ فِي شَقَّةٍ صَغِيرَةٍ؟",
+   "lines": [
+    "a2-1-d2-3"
+   ]
+  },
+  {
+   "id": "a2d-safaa-a2-1-safaa-nawal-03",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "وَمَا شَكْلُهَا؟ طَوِيلَةٌ؟ قَصِيرَةٌ؟",
+   "lines": [
+    "a2-1-d2-5"
+   ]
+  },
+  {
+   "id": "a2d-safaa-a2-1-safaa-nawal-04",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "وَهَلْ هِيَ نَشِيطَةٌ؟",
+   "lines": [
+    "a2-1-d2-7"
+   ]
+  },
+  {
+   "id": "a2d-safaa-a2-1-safaa-nawal-05",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "وَمَا شَكْلُ نَادِيَةَ أُخْتِ هَنَاء؟",
+   "lines": [
+    "a2-1-d2-9"
+   ]
+  },
+  {
+   "id": "a2d-safaa-a2-1-safaa-nawal-06",
+   "kind": "dialogue",
+   "voice": "female-1",
+   "text": "وَمَا شَكْلُ بَيْتِ هَنَاء؟",
+   "lines": [
+    "a2-1-d2-11"
+   ]
+  }
+ ]
+}
